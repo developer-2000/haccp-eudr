@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+// ============================================
+// Base Styles
+// ============================================
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    color: $text-color;
+    background-color: $bg-gray;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// ============================================
+// Vue App Container
+// ============================================
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vue-greeting {
+    text-align: center;
+    padding: $spacing-2xl;
+    
+    h1 {
+        font-size: $font-size-2xl;
+        color: $primary-color;
+        margin-bottom: $spacing-md;
+    }
+}
+
