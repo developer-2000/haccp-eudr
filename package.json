@@ -2,16 +2,31 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write \"**/*.{js,jsx,vue,json,css,scss,md}\"",
+        "format:check": "prettier --check \"**/*.{js,jsx,vue,json,css,scss,md}\"",
+        "lint:format": "npm run lint:fix && npm run format"
     },
     "dependencies": {
-        "vue": "^3.4.0"
+        "@heroicons/vue": "^2.2.0",
+        "vue": "^3.4.0",
+        "vue-router": "^4.6.4"
     },
     "devDependencies": {
+        "@babel/eslint-parser": "^7.28.5",
+        "@eslint/js": "^9.39.2",
         "@vitejs/plugin-vue": "^4.5.0",
+        "@vue/eslint-config-prettier": "^10.2.0",
         "axios": "^1.1.2",
-        "laravel-vite-plugin": "^0.7.2",
+        "eslint": "^9.39.2",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.4",
+        "eslint-plugin-vue": "^10.6.2",
+        "laravel-vite-plugin": "^1.0.0",
+        "prettier": "^3.7.4",
         "sass": "^1.69.0",
-        "vite": "^4.0.0"
+        "vite": "^5.4.0"
     }
 }

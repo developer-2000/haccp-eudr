@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// SPA catch-all route - все маршруты обрабатываются Vue Router
+Route::get('/{any}', function () {
+    return view('index-client');
+})->where('any', '.*');

@@ -7,45 +7,39 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
         <!-- Styles -->
-        @if(app()->environment('local'))
-            @vite(['resources/css/app.scss', 'resources/js/app.js'])
+        @php
+            $isViteDev = file_exists(public_path('hot'));
+            $manifestPath = public_path('build/manifest.json');
+            $manifest = null;
+            if (!$isViteDev && file_exists($manifestPath)) {
+                $manifest = json_decode(file_get_contents($manifestPath), true);
+            }
+            $useManifest = !$isViteDev && $manifest && isset($manifest['resources/scss/app.scss']) && isset($manifest['resources/js/app.js']);
+        @endphp
+
+        @if($useManifest)
+            <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/scss/app.scss']['file']) }}">
+            @if(isset($manifest['resources/js/app.js']['css']))
+                @foreach($manifest['resources/js/app.js']['css'] as $cssFile)
+                    <link rel="stylesheet" href="{{ asset('build/' . $cssFile) }}">
+                @endforeach
+            @endif
+            <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
         @else
-            @php
-                $manifestPath = public_path('build/manifest.json');
-                if (file_exists($manifestPath)) {
-                    $manifest = json_decode(file_get_contents($manifestPath), true);
-                } else {
-                    $manifest = null;
-                }
-            @endphp
-            @if($manifest && isset($manifest['resources/css/app.scss']))
-                <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.scss']['file']) }}">
-            @endif
-            @if($manifest && isset($manifest['resources/js/app.js']))
-                <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
-            @endif
+            @vite(['resources/scss/app.scss', 'resources/js/app.js'])
         @endif
     </head>
     <body class="antialiased">
-        <script>
-            // Удаляем старые куки с флагом secure для HTTP
-            if (location.protocol === 'http:') {
-                ['XSRF-TOKEN', '{{ config('session.cookie') }}'].forEach(function(cookieName) {
-                    // Удаляем для текущего домена
-                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                    // Удаляем для домена с точкой
-                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.safe-batch.local;';
-                    // Удаляем для домена без точки
-                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=safe-batch.local;';
-                });
-            }
-        </script>
-        @yield('content')
+        <div id="app"></div>
     </body>
 </html>
 

@@ -1,23 +1,37 @@
 // ============================================
-// Variables
+// Общие цвета (зарезервированные)
 // ============================================
-
-// Colors
 $primary-color: #FF2D20;
 $secondary-color: #6366f1;
-$text-color: #1f2937;
+
+// ============================================
+// Стилевые цвета сайта
+// ============================================
+// Акцентные цвета
+$accent-color: #1062b9;
+$accent-color-dark: #1058a4;
+$bg-mobile-menu: #f2f7fd;
+
+// Цвета текста
+$text-color: #273a55;
 $text-light: #6b7280;
+
+// Цвета фона
 $bg-color: #ffffff;
 $bg-gray: #f3f4f6;
+
+
+// Цвета границ
 $border-color: #e5e7eb;
 
 // Typography
-$font-family-base: 'Figtree', sans-serif;
-$font-size-base: 16px;
-$font-size-sm: 14px;
-$font-size-lg: 18px;
-$font-size-xl: 20px;
-$font-size-2xl: 24px;
+$font-family-base: 'Rubik', sans-serif;
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
 
 // Spacing
 $spacing-xs: 4px;
