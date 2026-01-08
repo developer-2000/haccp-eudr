@@ -1,41 +1,50 @@
 // ============================================
-// Общие цвета (зарезервированные)
-// ============================================
-$primary-color: #FF2D20;
-$secondary-color: #6366f1;
-
-// ============================================
 // Стилевые цвета сайта
 // ============================================
 // Акцентные цвета
-$accent-color: #1062b9;
-$accent-color-dark: #1058a4;
-$bg-mobile-menu: #f2f7fd;
+$primary-color: #1062b9;
+$primary-color-dark: #1058a4;
+$success-color: #22c55e;
+$success-color-dark: #16a34a;
+$color-points: #4f8fd8;
 
 // Цвета текста
 $text-color: #273a55;
-$text-light: #6b7280;
+$text-light-w-grey: #9ca3af;
+$text-light-grey: #6b7280;
+$text-dark-grey: #4b5563;
+$text-logo: #249969;
 
 // Цвета фона
-$bg-color: #ffffff;
-$bg-gray: #f3f4f6;
-
+$white-color: #ffffff;
+$bg-gray: #fbfbfb;
+$color-orange-light: #fde6c0;
+$bg-light-primary: #f2f7fd;
+$naive-bg-color: rgba(237, 247, 242, 1);
 
 // Цвета границ
 $border-color: #e5e7eb;
+$border-dark-color: #c3c3c3;
 
 // Typography
-$font-family-base: 'Rubik', sans-serif;
+$font-family-rubik: "Rubik", sans-serif;
 $font-size-xs: 0.75rem; // 12px
 $font-size-sm: 0.875rem; // 14px
 $font-size-base: 1rem; // 16px
+$font-size-base-m: 1.0625rem; // 17px
 $font-size-lg: 1.125rem; // 18px
 $font-size-xl: 1.25rem; // 20px
 $font-size-2xl: 1.5rem; // 24px
+$font-size-2-25xl: 1.875rem; // 30px
+$font-size-2-5xl: 2.125rem; // 34px
+$font-size-3xl: 3rem; // 48px
+$font-size-4xl: 3.75rem; // 60px
 
 // Spacing
 $spacing-xs: 4px;
 $spacing-sm: 8px;
+$spacing-sm-m: 12px;
+$spacing-sm-m-m: 14px;
 $spacing-md: 16px;
 $spacing-lg: 24px;
 $spacing-xl: 32px;
@@ -49,12 +58,18 @@ $breakpoint-xl: 1280px;
 
 // Border radius
 $radius-sm: 4px;
+$radius-sm-sm: 5px;
 $radius-md: 8px;
 $radius-lg: 12px;
+$radius-xl: 16px;
+$radius-xxl: 24px;
+$radius-xxl-s: 25px;
+$radius-xxxl: 28px;
 $radius-full: 9999px;
 
 // Shadows
 $shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-sm-md: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 $shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 $shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 $shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -65,3 +80,29 @@ $transition-fast: 150ms;
 $transition-base: 250ms;
 $transition-slow: 350ms;
 
+// ============================================
+// Media Query Mixins
+// ============================================
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == sm {
+        @media (min-width: $breakpoint-sm) {
+            @content;
+        }
+    } @else if $breakpoint == md {
+        @media (min-width: $breakpoint-md) {
+            @content;
+        }
+    } @else if $breakpoint == lg {
+        @media (min-width: $breakpoint-lg) {
+            @content;
+        }
+    } @else if $breakpoint == xl {
+        @media (min-width: $breakpoint-xl) {
+            @content;
+        }
+    } @else if $breakpoint == max-lg {
+        @media (max-width: $breakpoint-lg) {
+            @content;
+        }
+    }
+}

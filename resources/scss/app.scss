@@ -1,22 +1,22 @@
-@use 'variables' as *;
+@use "variables" as *;
 
 // ============================================
 // Base Styles
 // ============================================
 
 body {
-    font-family: 'Rubik', sans-serif;
     font-size: $font-size-base;
     color: $text-color;
     background-color: $bg-gray;
     line-height: 1.5;
+    cursor: default;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 * {
-    font-family: 'Rubik', sans-serif;
     box-sizing: border-box;
+    font-family: $font-family-rubik !important;
     margin: 0;
     padding: 0;
 }
@@ -26,10 +26,14 @@ body {
 // ============================================
 
 .container {
-    max-width: 1380px;
+    max-width: 1440px;
     margin: 0 auto;
     padding: 0 $spacing-md;
     width: 100%;
+}
+
+.section-container {
+    margin-top: 60px;
 }
 
 // ============================================
@@ -47,19 +51,41 @@ body {
 
     .main-content {
         flex: 1;
-        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
     }
 }
 
 h1 {
-    font-size: 2.5rem;
     margin-bottom: 1rem;
+    font-weight: 400;
+    line-height: 1.2;
+
+    @media (min-width: $breakpoint-sm) {
+        // 640px
+        font-size: $font-size-3xl; // 48px
+    }
+
+    @media (min-width: $breakpoint-md) {
+        // 768px
+        font-size: $font-size-4xl; // 60px
+    }
+}
+
+a {
+    color: $primary-color-dark;
+    text-decoration: none;
+    font-size: $font-size-lg;
+    font-weight: 600;
+    &:hover {
+        text-decoration: underline;
+        color: $primary-color;
+    }
 }
 
 p {
     font-size: $font-size-lg;
-    color: $text-light;
-    text-align: center;
+    color: $text-light-grey;
 }
 
 .vue-greeting {
@@ -67,3 +93,102 @@ p {
     padding: $spacing-2xl;
 }
 
+// ============================================
+// Forms elements
+// ============================================
+
+// Icon info в label
+.label-svg {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+
+    .svg-icon {
+        width: $font-size-base-m;
+        height: $font-size-base-m;
+        stroke: $text-color;
+    }
+
+    .info-icon {
+        cursor: pointer;
+    }
+}
+
+// подсказка в label у select
+.box-search-select {
+    .n-form-item-label__text {
+        &::after {
+            content: " (Input characters)";
+            font-size: 0.75rem;
+            color: $text-light-grey;
+            font-weight: normal;
+            margin-left: 0.25rem;
+        }
+    }
+}
+
+.box-radio {
+    margin-bottom: 15px;
+    display: block;
+
+    // В глобальных стилях :deep() не нужен, используем обычный селектор
+    .n-form-item-label {
+        min-height: 0;
+        padding: 0 0 0 2px;
+    }
+
+    // Второй .box-radio (который идет после первого .box-radio)
+    & + .box-radio {
+        margin-bottom: 0;
+    }
+}
+
+// ============================================
+// Buttons
+// ============================================
+
+.btn-client {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-sm-m-m $spacing-lg;
+    text-decoration: none;
+    font-size: $font-size-base;
+    border-radius: $radius-xxl-s;
+    transition:
+        background-color $transition-fast,
+        color $transition-fast;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    color: $white-color;
+    letter-spacing: 0.01em;
+}
+
+.btn-primary {
+    background-color: $primary-color;
+
+    &:hover {
+        background-color: $primary-color-dark;
+    }
+}
+
+.btn-success {
+    background-color: $success-color;
+
+    &:hover {
+        background-color: $success-color-dark;
+    }
+}
+
+.btn-outline-primary {
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    background-color: transparent;
+
+    &:hover {
+        background-color: $bg-light-primary;
+    }
+}

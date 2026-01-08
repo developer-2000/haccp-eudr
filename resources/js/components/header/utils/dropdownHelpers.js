@@ -37,6 +37,5 @@ export const isDropdownLink = (dropdownItem) => {
  * @returns {boolean} true если элемент имеет валидную ссылку (не пустую и не '#')
  */
 export const hasValidLink = (dropdownItem) => {
-    return dropdownItem?.link && dropdownItem.link !== '#';
+    return dropdownItem?.link && dropdownItem.link !== "#";
 };
-

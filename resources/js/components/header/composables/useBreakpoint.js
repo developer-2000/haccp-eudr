@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 /**
  * Composable для отслеживания размера экрана
@@ -15,13 +15,12 @@ export function useBreakpoint(breakpoint = 1024) {
 
     onMounted(() => {
         checkBreakpoint();
-        window.addEventListener('resize', checkBreakpoint);
+        window.addEventListener("resize", checkBreakpoint);
     });
 
     onUnmounted(() => {
-        window.removeEventListener('resize', checkBreakpoint);
+        window.removeEventListener("resize", checkBreakpoint);
     });
 
     return { isMobile };
 }
-

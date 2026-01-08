@@ -12,15 +12,22 @@
                 :aria-label="`${itemLabel} menu`"
             >
                 {{ itemLabel }}
-                <Icon name="chevron-down" class="nav-arrow" aria-hidden="true" />
+                <Icon
+                    name="chevron-down"
+                    class="nav-arrow"
+                    aria-hidden="true"
+                />
             </router-link>
-            <DropdownMenu v-if="itemDropdown" :item="props.item" variant="desktop" />
+            <DropdownMenu
+                v-if="itemDropdown"
+                :item="props.item"
+                variant="desktop"
+            />
         </div>
         <router-link v-else :to="itemLink" class="nav-link">
             {{ itemLabel }}
         </router-link>
     </template>
-    <!-- Mobile версия -->
     <template v-else>
         <div
             v-if="hasDropdown"
@@ -29,16 +36,25 @@
         >
             <button
                 class="mobile-menu-item-header"
-                @click="handleToggle"
                 :aria-expanded="isOpen"
                 :aria-label="`Toggle ${itemLabel} submenu`"
                 role="menuitem"
+                @click="handleToggle"
             >
                 <span>{{ itemLabel }}</span>
-                <Icon name="chevron-down" class="mobile-menu-item-arrow" aria-hidden="true" />
+                <Icon
+                    name="chevron-down"
+                    class="mobile-menu-item-arrow"
+                    aria-hidden="true"
+                />
             </button>
             <div class="mobile-menu-item-content">
-                <DropdownMenu v-if="itemDropdown" :item="props.item" variant="mobile" :on-item-click="onItemClick" />
+                <DropdownMenu
+                    v-if="itemDropdown"
+                    :item="props.item"
+                    variant="mobile"
+                    :on-item-click="onItemClick"
+                />
             </div>
         </div>
         <router-link
@@ -57,9 +73,12 @@
  * @fileoverview Компонент для рендеринга одного пункта навигационного меню
  * @typedef {import('./types/nav.types.js').NavMenuItem} NavMenuItem
  */
-import { computed } from 'vue';
-import Icon from '../Icon.vue';
-import DropdownMenu from './DropdownMenu.vue';
+defineOptions({
+    name: "NavMenuItem",
+});
+import { computed } from "vue";
+import Icon from "../Icon.vue";
+import DropdownMenu from "./DropdownMenu.vue";
 
 /**
  * @typedef {Object} Props
@@ -76,34 +95,37 @@ const props = defineProps({
         type: Object,
         required: true,
         validator: (value) => {
-            return value && typeof value === 'object' && 
-                   typeof value.label === 'string' && 
-                   typeof value.link === 'string';
-        }
+            return (
+                value &&
+                typeof value === "object" &&
+                typeof value.label === "string" &&
+                typeof value.link === "string"
+            );
+        },
     },
     variant: {
         type: String,
-        default: 'desktop',
-        validator: (value) => ['desktop', 'mobile'].includes(value)
+        default: "desktop",
+        validator: (value) => ["desktop", "mobile"].includes(value),
     },
     isOpen: {
         type: Boolean,
-        default: false
+        default: false,
     },
     onToggle: {
         type: Function,
-        default: null
+        default: null,
     },
     onItemClick: {
         type: Function,
-        default: null
-    }
+        default: null,
+    },
 });
 
 // Computed свойства для доступа к полям item в шаблоне
 const hasDropdown = computed(() => Boolean(props.item?.hasDropdown));
-const itemLabel = computed(() => props.item?.label || '');
-const itemLink = computed(() => props.item?.link || '#');
+const itemLabel = computed(() => props.item?.label || "");
+const itemLink = computed(() => props.item?.link || "#");
 const itemDropdown = computed(() => props.item?.dropdown || null);
 
 const handleToggle = () => {
@@ -116,7 +138,7 @@ const handleItemClick = () => {
 </script>
 
 <style scoped lang="scss">
-@use '../../../scss/variables' as *;
+@use "../../../scss/variables" as *;
 
 // Desktop стили
 .nav-dropdown {
@@ -124,7 +146,7 @@ const handleItemClick = () => {
 
     // Невидимый мост между кнопкой и dropdown для плавного перехода курсора
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 100%;
         left: 0;
@@ -140,8 +162,8 @@ const handleItemClick = () => {
     }
 
     &:hover .nav-link {
-        color: $accent-color;
-        background-color: rgba($accent-color, 0.05);
+        background-color: rgba($primary-color, 0.05);
+        text-decoration: none;
     }
 
     &:hover :deep(.dropdown-menu) {
@@ -155,18 +177,17 @@ const handleItemClick = () => {
     display: flex;
     align-items: center;
     gap: 4px;
-    text-decoration: none;
-    color: $text-color;
-    font-size: $font-size-base;
-    font-weight: 400;
     padding: $spacing-sm $spacing-md;
     border-radius: $radius-md;
-    transition: color $transition-fast, background-color $transition-fast;
+    transition:
+        color $transition-fast,
+        background-color $transition-fast;
     position: relative;
 
     &:hover {
-        color: $accent-color;
-        background-color: rgba($accent-color, 0.05);
+        color: $primary-color;
+        background-color: rgba($primary-color, 0.05);
+        text-decoration: none;
     }
 }
 
@@ -196,11 +217,13 @@ const handleItemClick = () => {
         font-weight: 400;
         color: $text-color;
         cursor: pointer;
-        transition: color $transition-fast, background-color $transition-fast;
+        transition:
+            color $transition-fast,
+            background-color $transition-fast;
 
         &:hover {
-            color: $accent-color;
-            background-color: rgba($accent-color, 0.05);
+            color: $primary-color;
+            background-color: rgba($primary-color, 0.05);
         }
 
         .mobile-menu-item-arrow {
@@ -221,7 +244,10 @@ const handleItemClick = () => {
             max-height: 5000px;
             opacity: 1;
             padding: 0;
-            transition: max-height $transition-base, opacity $transition-base, padding $transition-base;
+            transition:
+                max-height $transition-base,
+                opacity $transition-base,
+                padding $transition-base;
         }
     }
 
@@ -229,7 +255,10 @@ const handleItemClick = () => {
         max-height: 0;
         overflow: hidden;
         opacity: 0;
-        transition: max-height 0s, opacity 0s, padding 0s;
+        transition:
+            max-height 0s,
+            opacity 0s,
+            padding 0s;
         padding: 0 $spacing-md;
         background-color: $bg-gray;
     }
@@ -244,12 +273,13 @@ const handleItemClick = () => {
     font-size: $font-size-base;
     font-weight: 400;
     border-bottom: 1px solid $border-color;
-    transition: color $transition-fast, background-color $transition-fast;
+    transition:
+        color $transition-fast,
+        background-color $transition-fast;
 
     &:hover {
-        color: $accent-color;
-        background-color: rgba($accent-color, 0.05);
+        color: $primary-color;
+        background-color: rgba($primary-color, 0.05);
     }
 }
 </style>
-

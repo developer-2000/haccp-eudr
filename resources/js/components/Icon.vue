@@ -1,33 +1,49 @@
 <template>
-    <component :is="iconComponent" v-bind="$attrs" />
+    <ViconsIcon v-if="isViconsIcon" v-bind="$attrs">
+        <component :is="iconComponent" />
+    </ViconsIcon>
+    <component :is="iconComponent" v-else v-bind="$attrs" />
 </template>
 
 <script setup>
-import { computed } from 'vue';
+defineOptions({
+    name: "Icon",
+});
+
+import { computed } from "vue";
 import {
     ChevronDownIcon,
     MagnifyingGlassIcon,
     Bars3Icon,
-    XMarkIcon
-} from '@heroicons/vue/24/outline';
+    XMarkIcon,
+    CheckIcon as CheckIconOutline,
+    InformationCircleIcon,
+} from "@heroicons/vue/24/outline";
+import { InfoCircleTwotone } from "@vicons/antd";
+import { Icon as ViconsIcon } from "@vicons/utils";
 
 // Статический объект иконок - не требует реактивности
 const icons = Object.freeze({
-    'chevron-down': ChevronDownIcon,
-    'search': MagnifyingGlassIcon,
-    'bars': Bars3Icon,
-    'close': XMarkIcon
+    "chevron-down": ChevronDownIcon,
+    search: MagnifyingGlassIcon,
+    bars: Bars3Icon,
+    close: XMarkIcon,
+    check: CheckIconOutline,
+    info: InformationCircleIcon,
+    "info-circle-twotone": InfoCircleTwotone,
 });
 
 const props = defineProps({
     name: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 });
 
 // Computed кеширует результат и пересчитывается только при изменении props.name
 // Object.freeze гарантирует, что icons не изменится, что оптимизирует проверки Vue
 const iconComponent = computed(() => icons[props.name] || null);
-</script>
 
+const viconsIcons = ["info-circle-twotone"];
+const isViconsIcon = computed(() => viconsIcons.includes(props.name));
+</script>

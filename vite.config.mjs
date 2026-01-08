@@ -14,22 +14,22 @@ const copyPublicImages = () => {
         writeBundle() {
             const publicImagesDir = path.resolve(__dirname, 'public/images');
             const buildImagesDir = path.resolve(__dirname, 'public/build/images');
-            
+
             if (!existsSync(publicImagesDir)) {
                 return;
             }
-            
+
             if (!existsSync(buildImagesDir)) {
                 mkdirSync(buildImagesDir, { recursive: true });
             }
-            
+
             const copyRecursive = (src, dest) => {
                 const entries = readdirSync(src, { withFileTypes: true });
-                
+
                 for (const entry of entries) {
                     const srcPath = path.join(src, entry.name);
                     const destPath = path.join(dest, entry.name);
-                    
+
                     if (entry.isDirectory()) {
                         if (!existsSync(destPath)) {
                             mkdirSync(destPath, { recursive: true });
@@ -40,7 +40,7 @@ const copyPublicImages = () => {
                     }
                 }
             };
-            
+
             copyRecursive(publicImagesDir, buildImagesDir);
         }
     };
@@ -57,13 +57,13 @@ export default defineConfig({
         copyPublicImages(),
     ],
     server: {
-        host: 'safe-batch.local',
+        host: 'haccp-eudr.local',
         port: 5179,
         https: false,
         strictPort: false,
         cors: true,
         hmr: {
-            host: 'safe-batch.local',
+            host: 'haccp-eudr.local',
         },
     },
     resolve: {

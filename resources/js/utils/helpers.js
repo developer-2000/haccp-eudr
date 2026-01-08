@@ -10,7 +10,7 @@
  * getBaseUrl() // '/'
  */
 export const getBaseUrl = () => {
-    return import.meta.env.BASE_URL || '/';
+    return import.meta.env.BASE_URL || "/";
 };
 
 /**
@@ -24,7 +24,7 @@ export const getBaseUrl = () => {
 export const getPublicPath = (path) => {
     const baseUrl = getBaseUrl();
     // Убираем начальный слеш из path если он есть
-    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
     return `${baseUrl}${cleanPath}`;
 };
 
@@ -37,10 +37,10 @@ export const getPublicPath = (path) => {
  * getDomainUrl() // 'http://localhost:5179'
  */
 export const getDomainUrl = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
         return `${window.location.protocol}//${window.location.host}`;
     }
-    return '';
+    return "";
 };
 
 /**
@@ -50,7 +50,25 @@ export const getDomainUrl = () => {
  */
 export const getFullUrl = (path) => {
     const domain = getDomainUrl();
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
     return `${domain}${cleanPath}`;
 };
 
+/**
+ * Создает debounced версию функции
+ * Откладывает выполнение функции до истечения указанного времени простоя
+ * @param {Function} func - Функция для debounce
+ * @param {number} wait - Время задержки в миллисекундах
+ * @returns {Function} Debounced функция
+ */
+export const debounce = (func, wait = 300) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};

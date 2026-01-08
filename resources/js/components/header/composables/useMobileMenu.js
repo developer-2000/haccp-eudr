@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue';
+import { ref, computed } from "vue";
 
 /**
  * Composable для управления состоянием мобильного меню
@@ -13,7 +13,7 @@ import { ref, computed } from 'vue';
 export function useMobileMenu() {
     /** @type {import('vue').Ref<boolean>} */
     const isOpen = ref(false);
-    
+
     // Используем Set для эффективного хранения уникальных идентификаторов
     /** @type {import('vue').Ref<Set<string>>} */
     const openedDropdownsSet = ref(new Set());
@@ -22,7 +22,9 @@ export function useMobileMenu() {
      * Computed массив для обратной совместимости с шаблоном
      * @type {import('vue').ComputedRef<string[]>}
      */
-    const openedDropdowns = computed(() => Array.from(openedDropdownsSet.value));
+    const openedDropdowns = computed(() =>
+        Array.from(openedDropdownsSet.value),
+    );
 
     /**
      * Проверяет, открыт ли dropdown с указанным идентификатором
@@ -75,7 +77,6 @@ export function useMobileMenu() {
         toggle,
         close,
         toggleDropdown,
-        hasDropdown
+        hasDropdown,
     };
 }
-
