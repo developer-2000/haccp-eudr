@@ -21,8 +21,16 @@ import {
     EyeIcon,
     EyeSlashIcon,
 } from "@heroicons/vue/24/outline";
-import { InfoCircleTwotone } from "@vicons/antd";
+import {
+    InfoCircleTwotone,
+    UserOutlined,
+    DashboardOutlined,
+    FileTextOutlined,
+    DatabaseOutlined,
+    LogoutOutlined,
+} from "@vicons/antd";
 import { IosMailUnread } from "@vicons/ionicons4";
+import { ExitOutline } from "@vicons/ionicons5";
 import { Icon as ViconsIcon } from "@vicons/utils";
 
 // Статический объект иконок - не требует реактивности
@@ -37,6 +45,12 @@ const icons = Object.freeze({
     eye: EyeIcon,
     "eye-slash": EyeSlashIcon,
     "ios-mail-unread": IosMailUnread,
+    "user-outlined": UserOutlined,
+    "dashboard-outlined": DashboardOutlined,
+    "file-text-outlined": FileTextOutlined,
+    "database-outlined": DatabaseOutlined,
+    "logout-outlined": LogoutOutlined,
+    "exit-outline": ExitOutline,
 });
 
 const props = defineProps({
@@ -50,6 +64,15 @@ const props = defineProps({
 // Object.freeze гарантирует, что icons не изменится, что оптимизирует проверки Vue
 const iconComponent = computed(() => icons[props.name] || null);
 
-const viconsIcons = ["info-circle-twotone", "ios-mail-unread"];
+const viconsIcons = [
+    "info-circle-twotone",
+    "ios-mail-unread",
+    "user-outlined",
+    "dashboard-outlined",
+    "file-text-outlined",
+    "database-outlined",
+    "logout-outlined",
+    "exit-outline",
+];
 const isViconsIcon = computed(() => viconsIcons.includes(props.name));
 </script>

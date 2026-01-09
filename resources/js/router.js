@@ -4,7 +4,7 @@ import About from "./pages/client/About.vue";
 import Registration from "./pages/client/Auth/Registration.vue";
 import Login from "./pages/client/Auth/Login.vue";
 import ResetPassword from "./pages/client/Auth/ResetPassword.vue";
-import PersonalPanelPage from "./pages/admin/PersonalPanelPage.vue";
+import Index from "./pages/admin/Index.vue";
 import { useAuthStore } from "./stores";
 
 const routes = [
@@ -36,7 +36,7 @@ const routes = [
     {
         path: "/personal-panel",
         name: "PersonalPanel",
-        component: PersonalPanelPage,
+        component: Index,
     },
 ];
 
