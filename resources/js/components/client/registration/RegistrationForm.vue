@@ -28,18 +28,46 @@
             <n-form-item label="Set password" path="password">
                 <n-input
                     v-model:value="formData.password"
-                    type="password"
+                    :type="showPassword ? 'text' : 'password'"
                     placeholder=""
                     @input="debouncedValidateField('password')"
-                />
+                >
+                    <template #suffix>
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            @click="togglePasswordVisibility"
+                            aria-label="Toggle password visibility"
+                        >
+                            <Icon
+                                :name="showPassword ? 'eye-slash' : 'eye'"
+                                class="eye-icon"
+                            />
+                        </button>
+                    </template>
+                </n-input>
             </n-form-item>
             <n-form-item label="Repeat password" path="repeatPassword">
                 <n-input
                     v-model:value="formData.repeatPassword"
-                    type="password"
+                    :type="showRepeatPassword ? 'text' : 'password'"
                     placeholder=""
                     @input="debouncedValidateField('repeatPassword')"
-                />
+                >
+                    <template #suffix>
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            @click="toggleRepeatPasswordVisibility"
+                            aria-label="Toggle repeat password visibility"
+                        >
+                            <Icon
+                                :name="showRepeatPassword ? 'eye-slash' : 'eye'"
+                                class="eye-icon"
+                            />
+                        </button>
+                    </template>
+                </n-input>
             </n-form-item>
             <div class="form-footer">
                 <p class="form-terms">
@@ -76,10 +104,12 @@ defineOptions({
 // ============================================
 import { ref, computed } from "vue";
 import { useMessage } from "naive-ui";
+import { v4 as uuidv4 } from "uuid";
 import apiAxios from "@/utils/apiAxios";
 import siteConfig from "@/config/site";
 import { useAuthStore } from "@/stores";
 import { debounce } from "@/utils/helpers";
+import Icon from "../../Icon.vue";
 
 // ============================================
 // State (Реактивное состояние)
@@ -92,6 +122,8 @@ const formData = ref({
     repeatPassword: "",
 });
 const loading = ref(false);
+const showPassword = ref(false);
+const showRepeatPassword = ref(false);
 const message = useMessage();
 
 // ============================================
@@ -188,7 +220,7 @@ const submitForm = async () => {
             email: formData.value.email,
             password: formData.value.password,
             password_confirmation: formData.value.repeatPassword,
-            device_name: "web",
+            device_name: `web_${navigator.userAgent}_${uuidv4()}`,
         };
 
         const { data } = await apiAxios.post("/api/auth/register", params);
@@ -226,4 +258,47 @@ const validateField = (fieldPath) => {
 };
 
 const debouncedValidateField = debounce(validateField, 300);
+
+/**
+ * Переключение видимости пароля
+ */
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value;
+};
+
+/**
+ * Переключение видимости повторного пароля
+ */
+const toggleRepeatPasswordVisibility = () => {
+    showRepeatPassword.value = !showRepeatPassword.value;
+};
 </script>
+
+<style scoped lang="scss">
+@use "../../../../scss/variables" as *;
+
+.registration-form {
+    :deep(.n-input) {
+        .password-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $text-light-grey;
+            transition: color $transition-fast;
+
+            &:hover {
+                color: $text-color;
+            }
+
+            .eye-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}
+</style>

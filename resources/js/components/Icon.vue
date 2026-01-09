@@ -18,8 +18,11 @@ import {
     XMarkIcon,
     CheckIcon as CheckIconOutline,
     InformationCircleIcon,
+    EyeIcon,
+    EyeSlashIcon,
 } from "@heroicons/vue/24/outline";
 import { InfoCircleTwotone } from "@vicons/antd";
+import { IosMailUnread } from "@vicons/ionicons4";
 import { Icon as ViconsIcon } from "@vicons/utils";
 
 // Статический объект иконок - не требует реактивности
@@ -31,6 +34,9 @@ const icons = Object.freeze({
     check: CheckIconOutline,
     info: InformationCircleIcon,
     "info-circle-twotone": InfoCircleTwotone,
+    eye: EyeIcon,
+    "eye-slash": EyeSlashIcon,
+    "ios-mail-unread": IosMailUnread,
 });
 
 const props = defineProps({
@@ -44,6 +50,6 @@ const props = defineProps({
 // Object.freeze гарантирует, что icons не изменится, что оптимизирует проверки Vue
 const iconComponent = computed(() => icons[props.name] || null);
 
-const viconsIcons = ["info-circle-twotone"];
+const viconsIcons = ["info-circle-twotone", "ios-mail-unread"];
 const isViconsIcon = computed(() => viconsIcons.includes(props.name));
 </script>

@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\RegisterCompanyRequest;
 use App\Http\Requests\Auth\RegisterPhoneRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\ForgotPassword;
 
 class AuthController extends BaseController
 {
@@ -33,11 +39,7 @@ class AuthController extends BaseController
             ->plainTextToken;
 
         return $this->getSuccessResponse('', [
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ],
+            'user' => $this->getUserData($user),
             'token' => $token,
             'profile_completion' => [
                 'account' => true,
@@ -109,6 +111,122 @@ class AuthController extends BaseController
     }
 
     /**
+     * Авторизация клиента
+     * @param LoginRequest $request
+     * @return JsonResponse
+     */
+    public function login(LoginRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+
+        // Проверяем учетные данные
+        if (!Auth::attempt([
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ])) {
+            return $this->getErrorResponse('The user credentials were incorrect.', [], 401);
+        }
+
+        /** @var User $user */
+        $user = Auth::user();
+
+        // 1 Удаляем старые токены для этого устройства (опционально)
+        $user->tokens()->where('name', $data['device_name'])->delete();
+
+        // 2 Создаем новый токен
+        $token = $user
+            ->createToken($data['device_name'])
+            ->plainTextToken;
+
+        // 3 Определяем статус завершения профиля
+        $hasCompany = Company::where('user_id', $user->id)->exists();
+        $hasPhone = !empty($user->phone);
+
+        $profileCompletion = [
+            'account' => true,
+            'company' => $hasCompany,
+            'phone' => $hasPhone,
+            'completed' => $hasCompany && $hasPhone,
+        ];
+
+        return $this->getSuccessResponse('', [
+            'user' => $this->getUserData($user),
+            'token' => $token,
+            'profile_completion' => $profileCompletion,
+        ]);
+    }
+
+    /**
+     * Восстановление пароля
+     * @param ForgotPasswordRequest $request
+     * @return JsonResponse
+     */
+    public function forgotPassword(ForgotPasswordRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+
+        // Проверяем существование пользователя
+        $user = User::where('email', $data['email'])->first();
+
+        if (!$user) {
+            // Для безопасности возвращаем успешный ответ даже если пользователь не найден
+            return $this->getSuccessResponse(
+                'If the email address exists in our system, we will send you a password reset link.',
+                []
+            );
+        }
+
+        // Генерируем токен
+        $token = Password::broker()->createToken($user);
+
+        // Отправляем кастомное уведомление
+        try {
+            $user->notify(new ForgotPassword($token, $user->email));
+
+            return $this->getSuccessResponse(
+                'Password reset link has been sent to your email address.',
+                []
+            );
+        } catch (\Exception $e) {
+            return $this->getErrorResponse(
+                'Unable to send password reset link. Please try again later.',
+                [],
+                500
+            );
+        }
+    }
+
+    /**
+     * Сброс пароля
+     * @param ResetPasswordRequest $request
+     * @return JsonResponse
+     */
+    public function resetPassword(ResetPasswordRequest $request): JsonResponse
+    {
+        // 1 Сбрасываем пароль используя стандартный функционал Laravel
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->password = Hash::make($password);
+                $user->save();
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            return $this->getSuccessResponse(
+                'Password has been reset successfully. You can now login with your new password.',
+                []
+            );
+        }
+
+        return $this->getErrorResponse(
+            'Unable to reset password. The token may be invalid or expired.',
+            [],
+            400
+        );
+    }
+
+    /**
      * Logout
      * @param Request $request
      * @return JsonResponse
@@ -116,9 +234,22 @@ class AuthController extends BaseController
     public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
-        // $request->user()->tokens()->delete(); // удаляет все токены пользователя
 
         return $this->getSuccessResponse('', []);
+    }
+
+    /**
+     * Формирует массив данных пользователя для ответа API
+     * @param User $user
+     * @return array
+     */
+    private function getUserData(User $user): array
+    {
+        return [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+        ];
     }
 }
 

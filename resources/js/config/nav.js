@@ -193,7 +193,7 @@ const navConfig = {
             },
             {
                 label: "Login",
-                link: "#",
+                link: "/auth/login",
                 type: "link",
             },
         ],

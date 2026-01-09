@@ -243,5 +243,20 @@ export const useAuthStore = defineStore("auth", {
                 JSON.stringify(profileCompletion),
             );
         },
+
+        /**
+         * Проверка завершенности регистрации профиля
+         * @returns {boolean} true если token !== null и все 4 свойства ProfileCompletion равны true
+         */
+        isProfileCompleted() {
+            return (
+                this.token !== null &&
+                this.profileCompletion !== null &&
+                this.profileCompletion.account === true &&
+                this.profileCompletion.company === true &&
+                this.profileCompletion.phone === true &&
+                this.profileCompletion.completed === true
+            );
+        },
     },
 });

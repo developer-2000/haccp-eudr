@@ -52,6 +52,7 @@ defineOptions({
 // ============================================
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
+import { useRouter } from "vue-router";
 import VueTelNumInput from "vue-tel-num-input";
 import "vue-tel-num-input/style.css";
 import "vue-tel-num-input/flags.css";
@@ -64,6 +65,7 @@ import { useAuthStore } from "@/stores";
 const formRef = ref(null);
 const loading = ref(false);
 const message = useMessage();
+const router = useRouter();
 
 const formData = ref({
     phoneNumber: "",
@@ -157,6 +159,10 @@ const submitForm = async () => {
         if (successMessage) {
             message.success(successMessage);
         }
+
+        // 3 Переход на страницу личного кабинета
+        await router.push("/personal-panel");
+
     } catch (error) {
         const errorMessage =
             error.response?.data?.message ||

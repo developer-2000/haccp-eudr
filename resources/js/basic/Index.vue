@@ -15,6 +15,6 @@ defineOptions({
     name: "Index",
 });
 
-import Header from "./header/Header.vue";
-import Footer from "./Footer.vue";
+import Header from "../components/client/header/Header.vue";
+import Footer from "../components/client/header/Footer.vue";
 </script>

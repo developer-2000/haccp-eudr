@@ -1,4 +1,4 @@
-# Safe Batch
+# HACCP-EUDR
 
 Laravel 10 проект с Vue.js 3.4.0 и SCSS.
 

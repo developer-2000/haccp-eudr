@@ -56,7 +56,7 @@ const goToRegistration = () => {
 </script>
 
 <style lang="scss" scoped>
-@use "../../scss/variables" as *;
+@use "../../../scss/variables" as *;
 
 .hero-section__content {
     display: flex;

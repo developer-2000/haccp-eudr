@@ -77,7 +77,7 @@ defineOptions({
     name: "NavMenuItem",
 });
 import { computed } from "vue";
-import Icon from "../Icon.vue";
+import Icon from "../../Icon.vue";
 import DropdownMenu from "./DropdownMenu.vue";
 
 /**
@@ -138,7 +138,7 @@ const handleItemClick = () => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../scss/variables" as *;
+@use "../../../../scss/variables" as *;
 
 // Desktop стили
 .nav-dropdown {

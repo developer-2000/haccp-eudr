@@ -295,7 +295,7 @@ const handleClick = () => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../scss/variables" as *;
+@use "../../../../scss/variables" as *;
 
 // ============================================
 // Desktop стили

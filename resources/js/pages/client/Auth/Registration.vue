@@ -87,26 +87,26 @@ defineOptions({
 // Импорты
 // ============================================
 import { computed } from "vue";
-import Icon from "../../components/Icon.vue";
+import Icon from "../../../components/Icon.vue";
 import { useAuthStore } from "@/stores";
 
 /**
  * RegistrationForm - компонент первого шага регистрации
  * Содержит поля: name, email, password
  */
-import RegistrationForm from "../../components/registration/RegistrationForm.vue";
+import RegistrationForm from "../../../components/client/registration/RegistrationForm.vue";
 
 /**
  * RegistrationCompanyForm - компонент второго шага регистрации
  * Содержит поля для данных компании
  */
-import RegistrationCompanyForm from "../../components/registration/RegistrationCompanyForm.vue";
+import RegistrationCompanyForm from "../../../components/client/registration/RegistrationCompanyForm.vue";
 
 /**
  * RegistrationPhoneForm - компонент третьего шага регистрации
  * Содержит: поле телефона (vue-tel-num-input) и чекбокс согласия на рассылку
  */
-import RegistrationPhoneForm from "../../components/registration/RegistrationPhoneForm.vue";
+import RegistrationPhoneForm from "../../../components/client/registration/RegistrationPhoneForm.vue";
 
 // ============================================
 // Константы
@@ -235,7 +235,7 @@ const stepStates = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../scss/variables" as *;
+@use "../../../../scss/variables" as *;
 
 .registration-page {
     flex: 1;

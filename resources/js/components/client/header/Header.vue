@@ -106,7 +106,7 @@
                                 'btn-client',
                                 button.type === 'primary'
                                     ? 'btn-primary'
-                                    : 'btn-login',
+                                    : 'btn-text',
                             ]"
                             @click="handleButtonClick(button)"
                         >
@@ -115,7 +115,7 @@
                         <button
                             v-else
                             type="button"
-                            class="btn-client btn-login"
+                            class="btn-client btn-text"
                             @click="handleLogout"
                         >
                             {{ button.label }}
@@ -139,7 +139,7 @@ defineOptions({
 // ============================================
 // Импорты
 // ============================================
-import Icon from "../Icon.vue";
+import Icon from "../../Icon.vue";
 /** @type {NavConfig} */
 import navConfig from "@/config/nav";
 import siteConfig from "@/config/site";
@@ -265,7 +265,7 @@ const handleLogout = () => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../scss/variables" as *;
+@use "../../../../scss/variables" as *;
 
 // ============================================
 // Header & Navigation
@@ -393,18 +393,6 @@ const handleLogout = () => {
     &.mobile-menu-open {
         opacity: 1;
         pointer-events: auto;
-    }
-}
-
-.btn-login {
-    background-color: transparent;
-    color: $primary-color-dark;
-    font-weight: 500;
-    padding: 0;
-    font-size: $font-size-lg;
-
-    &:hover {
-        color: $primary-color;
     }
 }
 
