@@ -292,17 +292,9 @@ const handleLogout = () => {
             z-index: 1002;
 
             .logo-link {
-                text-decoration: none;
-                display: flex;
-                align-items: center;
                 gap: 8px;
-                color: $text-logo;
-                &:hover {
-                    opacity: 0.8;
-                }
 
                 .logo-site {
-                    font-weight: 600;
                     font-size: 33px;
                 }
 
