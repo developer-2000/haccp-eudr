@@ -2,6 +2,26 @@
 
 Laravel 10 проект с Vue.js 3.4.0 и SCSS.
 
+## Адреса
+- Проект: [haccp-eudr.local](http://haccp-eudr.local/)
+- Mysql: [PhpMyAdmin](http://phpmyadmin/index.php?route=/database/structure&db=haccp-eudr&server=8)
+
+### Режим разработки
+
+Запустите Vite dev server:
+
+```bash
+npm run dev
+```
+
+Vite будет доступен по адресу: `http://haccp-eudr.local:5179/`
+
+### Сборка для продакшена
+
+```bash
+npm run build
+```
+
 ## Технологии
 
 - **Backend**: Laravel 10
@@ -149,26 +169,6 @@ SESSION_SECURE_COOKIE=false
 
 ```bash
 npm install
-```
-
-## Запуск проекта
-
-Проект будет доступен по адресу: `http://haccp-eudr.local/`
-
-### Режим разработки
-
-Запустите Vite dev server:
-
-```bash
-npm run dev
-```
-
-Vite будет доступен по адресу: `http://haccp-eudr.local:5179/`
-
-### Сборка для продакшена
-
-```bash
-npm run build
 ```
 
 ### Vue DevTools

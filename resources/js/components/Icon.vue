@@ -52,6 +52,8 @@ import {
     Bars3Icon,
     XMarkIcon,
     CheckIcon as CheckIconOutline,
+    XCircleIcon,
+    CheckCircleIcon,
     InformationCircleIcon,
     EyeIcon,
     EyeSlashIcon,
@@ -69,6 +71,8 @@ import {
     DatabaseOutlined,
     LogoutOutlined,
     SettingOutlined,
+    RightOutlined,
+    LeftOutlined,
 } from "@vicons/antd";
 
 /**
@@ -108,6 +112,8 @@ const icons = Object.freeze({
     bars: Bars3Icon,
     close: XMarkIcon,
     check: CheckIconOutline,
+    "x-circle": XCircleIcon,
+    "check-circle": CheckCircleIcon,
     info: InformationCircleIcon,
     eye: EyeIcon,
     "eye-slash": EyeSlashIcon,
@@ -120,6 +126,8 @@ const icons = Object.freeze({
     "database-outlined": DatabaseOutlined,
     "setting-outlined": SettingOutlined,
     "logout-outlined": LogoutOutlined,
+    "right-outlined": RightOutlined,
+    "left-outlined": LeftOutlined,
     "exit-outline": ExitOutline,
 });
 
@@ -179,6 +187,8 @@ const viconsIcons = [
     "database-outlined",        // @vicons/antd
     "setting-outlined",         // @vicons/antd
     "logout-outlined",          // @vicons/antd
+    "right-outlined",           // @vicons/antd
+    "left-outlined",            // @vicons/antd
     "exit-outline",             // @vicons/ionicons5
 ];
 

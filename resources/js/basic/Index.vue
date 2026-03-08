@@ -5,16 +5,21 @@
             <main class="main-content">
                 <router-view />
             </main>
-            <Footer />
+            <Footer v-if="!isAuthRoute" />
         </div>
     </n-message-provider>
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import Header from "../components/client/header/Header.vue";
+import Footer from "../components/client/header/Footer.vue";
+
 defineOptions({
     name: "Index",
 });
 
-import Header from "../components/client/header/Header.vue";
-import Footer from "../components/client/header/Footer.vue";
+const route = useRoute();
+const isAuthRoute = computed(() => route.path.startsWith("/auth/"));
 </script>

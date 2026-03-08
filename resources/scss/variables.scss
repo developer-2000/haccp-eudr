@@ -25,6 +25,14 @@ $naive-bg-color: rgba(237, 247, 242, 1);
 // Цвета границ
 $border-color: #e5e7eb;
 $border-dark-color: #c3c3c3;
+$text-red: #d03050;
+$text-green: #18a058;
+
+// Цвета для задач HACCP
+$task-incomplete-bg: rgba(239, 68, 68, 0.1);
+$task-incomplete-border: rgba(239, 68, 68, 0.3);
+$task-completed-bg: rgba(34, 197, 94, 0.1);
+$task-completed-border: rgba(34, 197, 94, 0.3);
 
 // Typography
 $font-family-rubik: "Rubik", sans-serif;

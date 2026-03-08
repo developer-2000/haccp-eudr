@@ -116,10 +116,10 @@ import Icon from "../../Icon.vue";
 // ============================================
 const formRef = ref(null);
 const formData = ref({
-    name: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
+    name: "shamil",
+    email: "asd@asd.asd",
+    password: "asdasdasd",
+    repeatPassword: "asdasdasd",
 });
 const loading = ref(false);
 const showPassword = ref(false);
