@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>
+            window.locale = "{{ $localeForFrontend ?? app()->getLocale() }}";
+            window.translations = @json($translationsForFrontend ?? []);
+        </script>
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -39,10 +43,6 @@
         @endif
     </head>
     <body class="antialiased">
-        <script>
-            window.locale = "{{ $localeForFrontend ?? app()->getLocale() }}";
-            window.translations = @json($translationsForFrontend ?? []);
-        </script>
         <div
             id="app"
             data-locale="{{ $localeForFrontend ?? app()->getLocale() }}"

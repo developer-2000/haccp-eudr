@@ -18,7 +18,7 @@ return [
 
     'locale' => env('APP_LOCALE', 'en'),
 
-    'fallback_locale' => 'at',
+    'fallback_locale' => 'en',
 
     'faker_locale' => 'en_US',
 

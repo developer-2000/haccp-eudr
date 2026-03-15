@@ -15,7 +15,17 @@ app.use(i18n);
 app.use(naive);
 app.use(router);
 
+// Синхронизация локали i18n с URL при каждой навигации и перед первым рендером
+router.beforeEach((to) => {
+    const locale = to.params.locale || window.locale || "en";
+    i18n.global.locale.value = locale;
+});
+
 const siteConfigStore = useSiteConfigStore();
 siteConfigStore.init();
 
-app.mount("#app");
+router.isReady().then(() => {
+    i18n.global.locale.value =
+        router.currentRoute.value.params.locale || window.locale || "en";
+    app.mount("#app");
+});

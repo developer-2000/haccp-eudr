@@ -7,13 +7,13 @@
 - Язык по умолчанию — `config('app.locale')`. Резерв — `config('app.fallback_locale')`.
 - Список допустимых локалей и подписи для переключателя — из `config('site.languages.countries')`.
     - Один массив.
-- «Вторая» локаль для списка во фронте — из `LocaleDetector::detect()`.
-    - Сейчас захардкожено `'ro'`; в проде предполагается IP/geo.
+- Текущая локаль (приоритет): **session → cookie → Accept-Language (браузер) → main**. Реализовано через хелпер `preferred_language_from_request()` в `app/Helpers/helpers.php`.
+- «Вторая» локаль для переключателя — из `LocaleDetector::detect()`: язык браузера (Accept-Language) из допустимых, иначе `fallback_locale` (резерв под IP/geo в `detectByIp()`).
 - Middleware `SetLocale`:
-    - выбор локали из session/cookie/main;
-    - установка `App::setLocale()`;
-    - формирование массива из двух языков и передача во view;
-    - загрузка PHP-словарей `lang/{locale}.php` и передача во view как `translationsForFrontend`;
+    - выбор локали: session → cookie → Accept-Language → main;
+    - установка `App::setLocale()`, запись в session;
+    - массив из **двух** языков для переключателя: 1) текущая локаль, 2) язык браузера (если совпадает — fallback из countries);
+    - загрузка PHP-словарей `lang/{locale}.php` → `translationsForFrontend`;
     - кеша нет.
 - `POST /locale`:
     - валидация по всем ключам `countries`;
@@ -21,10 +21,11 @@
     - ответ JSON.
 - Словари: только PHP — `lang/{locale}/messages.php` и агрегаты `lang/{locale}.php`.
     - Вывод в Blade через `__()`, `trans()`.
-    - Те же словари передаются во Vue через `window.translations`; вывод во Vue строкой `{{ $t('ключ') }}`.
-    - i18n подключён один раз в app через `app.use(i18n)`.
+    - Те же словари передаются во Vue через `window.translations` (скрипт в `<head>`); вывод во Vue строкой `{{ $t('ключ') }}`.
+    - i18n подключён один раз в app через `app.use(i18n)`; локаль синхронизируется с URL (router.beforeEach, установка перед mount после router.isReady).
 - Переключатель во фронте:
     - данные из `data-locale` и `data-languages`;
+    - **показывается только если во фронт передано больше одного языка** (`languagesList.length > 1`);
     - смена через `POST /locale` и переход на новый URL с нужным `{locale}`.
 
 ---
@@ -62,29 +63,21 @@
 **Класс:** `App\Services\LocaleDetector`
 
 - Метод `detect(Request $request): string`.
-- Сейчас в коде захардкожено значение `'ro'` как результат для подстановки (заглушка вместо IP/geo).
-- Если в будущем подставить вызов внешнего сервиса — логика в `detectByIp($request)`:
+- Возвращает язык браузера: первый код из заголовка Accept-Language, 
+- входящий в допустимые (`config('site.languages.countries')`), 
+- через хелпер `preferred_language_from_request($request, $available)`.
+- Если браузер не отдал подходящий язык — вызывается `detectByIp($request)`:
   - Сейчас возвращает `config('app.fallback_locale', 'en')`.
-- Заменить реализацию можно через свой класс и привязку в контейнере.
-  - Например, в `AppServiceProvider`.
-
-Итог:
-
-- «Вторая» локаль для формирования списка языков во фронте сейчас фактически всегда `ro`.
-- В проде сюда предполагается подставить определение по IP.
-
-**✅ Выполнено**
-
-Класс `App\Services\LocaleDetector` приведён к плану.
-
-- В `app/Services/LocaleDetector.php`:
-  - метод `detect(Request): string` возвращает захардкоженную заглушку `'ro'`;
-  - при пустом значении вызывает `detectByIp`.
-- Метод `detectByIp(Request): string` возвращает `config('app.fallback_locale', 'en')`.
   - Зарезервирован под будущий IP/geo-сервис.
-- Добавлены краткие PHPDoc для класса и обоих методов (назначение и использование).
-- Middleware `SetLocale` уже резолвит сервис через `app(LocaleDetector::class)`.
-  - Привязка в контейнере не обязательна по плану.
+
+**Хелпер:** `app/Helpers/helpers.php`
+
+- `preferred_language_from_request(Request $request, array $available): ?string` — парсит Accept-Language, возвращает первый код из `$available`; при наличии у Request метода `getPreferredLanguage()` использует его, иначе разбор заголовка вручную.
+
+**✅ Актуально**
+
+- В `app/Services/LocaleDetector.php`: `detect()` использует `preferred_language_from_request()`, при пустом — `detectByIp()`.
+- Middleware `SetLocale` резолвит сервис через `app(LocaleDetector::class)`.
 
 ---
 
@@ -95,45 +88,23 @@
 
 Что делает:
 
-- Список допустимых локалей: `array_keys(config('site.languages.countries'))`.
+- Список допустимых локалей: `available_locales()` (ключи `config('site.languages.countries')`).
 - Текущая локаль (по приоритету):
   1. Session: `$request->session()->get('locale')`
   2. Cookie: `$request->cookie('locale')`
-  3. Иначе: `config('app.locale')` (main).
-- Если выбранное значение не входит в список допустимых — подставляется main.
+  3. Accept-Language: `preferred_language_from_request($request, $available)`
+  4. Иначе: `config('app.locale')` (main).
+- При недопустимом значении подставляется main.
 - Пишет выбранную локаль в session, вызывает `App::setLocale($locale)`.
 
 Передача данных во фронт:
 
-- Формируется массив из **двух** языков: main + результат `LocaleDetector::detect($request)`.
-  - Если оба совпадают или второй пустой — добавляется fallback (`en` или `config('app.fallback_locale')`) из `countries`.
-- Для фронта собирается массив объектов: `code`, `prefix`, `name` по этим двум кодам из `config('site.languages.countries')`.
-- Для каждой допустимой локали подключается `lang/{locale}.php` (агрегат словарей).
-  - Результат по локалям передаётся как `translationsForFrontend`.
-- В view передаётся через:
-  - `View::share('localeForFrontend', $locale)`
-  - `View::share('languagesForFrontend', $languagesForFrontend)`
-  - `View::share('translationsForFrontend', $translationsForFrontend)`.
-
-Кеширование массива для фронта в текущей реализации **нет**.
-В коде нет `Cache::remember`.
+- Массив из **двух** языков для переключателя: 1) **текущая локаль** (`$locale`), 2) **язык браузера** (из `$fromBrowser` / `LocaleDetector::detect()`); если второй совпадает с первым или недопустим — подставляется fallback (en или main из countries).
+- Для фронта: массив объектов `code`, `prefix`, `name` по этим кодам из `config('site.languages.countries')` → `languagesForFrontend`.
+- Для каждой допустимой локали подключается `lang/{locale}.php` → `translationsForFrontend`.
+- В view: `View::share('localeForFrontend', …)`, `View::share('languagesForFrontend', …)`, `View::share('translationsForFrontend', …)`.
 
 **✅ Выполнено**
-
-Проверено и приведено к плану в `app/Http/Middleware/SetLocale.php`.
-
-- Список допустимых локалей: `array_keys(config('site.languages.countries'))`.
-- Текущая локаль по приоритету: session → cookie → config('app.locale').
-  - При недопустимом значении подставляется main.
-- Выбранная локаль пишется в session и устанавливается через `App::setLocale($locale)`.
-- Массив из двух языков: main + результат `LocaleDetector::detect($request)`.
-  - При совпадении или пустом втором добавляется fallback (en или config('app.fallback_locale')) из countries.
-  - Без дублирования.
-- Для фронта формируется массив объектов с полями code, prefix, name из config.
-  - Передаётся во view через `View::share('localeForFrontend', …)` и `View::share('languagesForFrontend', …)`.
-- Переводы для Vue загружаются из PHP-словарей `lang/{locale}.php`.
-  - Передаются через `View::share('translationsForFrontend', …)`.
-- Кеширование не используется.
 
 ---
 
@@ -144,7 +115,7 @@
 Корень:
 
 - `GET /` — редирект на `/{locale}`.
-  - Локаль берётся: session → cookie → `config('app.locale')`.
+  - Локаль берётся: session → cookie → Accept-Language (`preferred_language_from_request`) → `config('app.locale')`.
   - Должна входить в `config('site.languages.countries')`, иначе подставляется main.
 
 Смена локали с фронта:
@@ -174,8 +145,7 @@
 
 - **`routes/web.php`:**
   - `GET /` — редирект на `/{locale}` через `LocaleController::redirectToLocale`.
-    - Локаль из session → cookie → `config('app.locale')`.
-    - Проверка по `available_locales()`, иначе main.
+    - Локаль из session → cookie → Accept-Language → `config('app.locale')`; проверка по `available_locales()`, иначе main.
   - `POST /locale` (имя `locale.set`) — `LocaleController::set`.
     - Валидация `locale` по ключам конфига.
     - При успехе: запись в session, cookie на 60×24×365 минут, ответ JSON `{ "locale": "…" }`.
@@ -192,7 +162,7 @@
 
 **Файл:** `resources/views/layouts/app.blade.php`
 
-Перед `#app` в теле страницы скрипт (данные для Vue i18n):
+В `<head>` (сразу после meta csrf-token) инлайн-скрипт для Vue i18n — чтобы `window.locale` и `window.translations` были заданы до загрузки бандла:
 
 - `window.locale = "{{ $localeForFrontend ?? app()->getLocale() }}";`
 - `window.translations = @json($translationsForFrontend ?? []);`
@@ -203,7 +173,6 @@
 - `data-languages="{{ json_encode($languagesForFrontend ?? []) }}"`
 
 Переменные задаются в middleware `SetLocale`.
-В шаблоне только подстановка.
 
 Для доступности и SEO:
 
@@ -225,7 +194,7 @@
 
 Рендер:
 
-- Блок переключателя показывается только если `languagesList.length > 0`.
+- Блок переключателя показывается **только если во фронт передано больше одного языка** (`languagesList.length > 1`). При одном языке переключатель не отображается.
 - Кнопки по `languagesList`:
   - подпись из `lang.prefix`;
   - `title` из `lang.name`;
@@ -240,23 +209,14 @@
 
 Логика «какие языки показывать» и «какая локаль сейчас» приходит с бэка (middleware); фронт только отображает и отправляет выбранный код.
 
+**Синхронизация локали i18n с URL** (`resources/js/app.js`):
+
+- `router.beforeEach`: при каждой навигации выставляется `i18n.global.locale.value = to.params.locale || window.locale || "en"`.
+- Монтирование приложения выполняется после `router.isReady()`: устанавливается локаль i18n из текущего маршрута (или `window.locale`), затем `app.mount("#app")`. Так при загрузке страницы `/ro/survey` хедер сразу рендерится с переводами для `ro`.
+
 **✅ Выполнено**
 
-Проверено по плану: реализация совпадает.
-
-- **`resources/js/components/client/header/Header.vue`:**
-  - Инициализация: список языков из `data-languages` у `#app` (getLanguagesList).
-    - При ошибке/пустоте — запасной массив `[{ code: 'en', … }, { code: 'ro', … }]`.
-  - Текущая локаль из `data-locale` у `#app` (getInitialLocale в onMounted).
-    - При отсутствии в списке — первый из списка или `'en'`.
-  - В шапке: `currentLocale = route.params.locale ?? initialLocale`.
-  - Рендер:
-    - блок переключателя при `languagesList.length > 0`;
-    - кнопки по `languagesList` с подписью `lang.prefix`, `title` из `lang.name`;
-    - активное состояние по `currentLocale === lang.code`.
-  - Смена языка: `setLocale(locale)` отправляет `POST /locale` с телом `{ locale }` и заголовком `X-CSRF-TOKEN` из `<meta name="csrf-token">`.
-    - После запроса выполняется переход на `/{locale}/…` (текущий путь с заменой сегмента локали через `window.location.href`).
-- Дополнительных правок не потребовалось.
+- Header.vue: переключатель при `languagesList.length > 1`; текущая локаль из `route.params.locale ?? initialLocale` (getInitialLocale из `data-locale` в onMounted); смена через `POST /locale` и переход на `/{locale}/…`.
 
 ---
 
@@ -283,8 +243,7 @@
 - В `SetLocale`: для каждой локали из списка допустимых подключается `lang_path($locale . '.php')`.
   - Результат по локалям собирается в `$translationsForFrontend`: `[ 'en' => [...], 'ro' => [...] ]`.
 - `View::share('translationsForFrontend', $translationsForFrontend)`.
-- В Blade перед `#app`: `window.locale = "…"; window.translations = @json($translationsForFrontend ?? []);`
-  - Во Vue эти переменные использует только i18n.
+- В Blade в `<head>`: инлайн-скрипт с `window.locale` и `window.translations` (до загрузки бандла). Во Vue эти переменные использует i18n.
 
 **Вывод во Vue:**
 
@@ -306,8 +265,8 @@
   - агрегаты `lang/en.php`, `lang/ro.php`.
 - В `app/Http/Middleware/SetLocale.php`: для каждой локали из `$available` подключается `lang_path($locale . '.php')`.
   - Результат передаётся во view через `View::share('translationsForFrontend', …)`.
-- В `resources/views/layouts/app.blade.php`: перед `#app` скрипт с `window.locale` и `window.translations = @json($translationsForFrontend ?? [])`.
-- В `resources/js/app.js`: i18n подключается один раз через `app.use(i18n)`.
+- В `resources/views/layouts/app.blade.php`: в `<head>` скрипт с `window.locale` и `window.translations`; на `#app` — `data-locale`, `data-languages`.
+- В `resources/js/app.js`: i18n подключается через `app.use(i18n)`; локаль синхронизируется с URL в `router.beforeEach` и перед mount после `router.isReady()`.
 - В `resources/js/i18n.js`: `createI18n({ legacy: false, locale: window.locale || "en", fallbackLocale: "en", messages: window.translations || {} })`.
 - В `resources/js/config/nav.js`: у пунктов меню `label` — ключи `messages.nav.menu.how_it_works` и т.д.
 - В `resources/js/components/client/header/NavMenuItem.vue`: подпись выводится как `{{ $t(item.label) }}`.
@@ -353,41 +312,25 @@
 ## 9. Порядок выполнения при запросе
 
 1. Глобальные middleware (EncryptCookies, StartSession и т.д.), затем маршрут.
-2. Для `GET /`: выбор локали из session/cookie/main, редирект на `/{locale}`.
+2. Для `GET /`: выбор локали из session → cookie → Accept-Language → main, редирект на `/{locale}`.
 3. Для маршрутов с префиксом `{locale}`: middleware `SetLocale`:
    - допустимые локали из `config('site.languages.countries')`;
-   - текущая локаль из session → cookie → main;
+   - текущая локаль: session → cookie → Accept-Language (`preferred_language_from_request`) → main;
    - запись в session, `App::setLocale()`;
-   - формирование массива из двух языков (main + detected) и `languagesForFrontend`;
-   - загрузка PHP-словарей `lang/{locale}.php` для каждой допустимой локали;
-   - сбор в `translationsForFrontend`;
+   - формирование двух языков для переключателя: текущая локаль + язык браузера (при совпадении — fallback) → `languagesForFrontend`;
+   - загрузка PHP-словарей `lang/{locale}.php` → `translationsForFrontend`;
    - `View::share('localeForFrontend', …)`, `View::share('languagesForFrontend', …)`, `View::share('translationsForFrontend', …)`.
 4. Рендер view:
-   - в layout скрипт с `window.locale` и `window.translations`;
+   - в `<head>` layout скрипт с `window.locale` и `window.translations`;
    - на `#app` — атрибуты `data-locale` и `data-languages`.
 5. Фронт:
    - vue-i18n инициализируется из `window.locale` и `window.translations`;
+   - перед mount вызывается `router.isReady()`, выставляется `i18n.global.locale` из URL/`window.locale`, затем `app.mount("#app")`;
+   - при навигации `router.beforeEach` синхронизирует локаль i18n с `to.params.locale`;
    - переводы в шаблонах через `{{ $t('ключ') }}`;
-   - переключатель языков по `data-locale` и `data-languages`;
-   - по клику — `POST /locale`, затем переход на `/{locale}/…`.
+   - переключатель показывается только при `languagesList.length > 1`; по клику — `POST /locale`, переход на `/{locale}/…`.
 
 **✅ Выполнено**
-
-Проверено: порядок выполнения совпадает с разделом 9.
-
-- В `app/Providers/RouteServiceProvider.php` маршруты из `routes/web.php` идут с группой middleware `web`.
-  - EncryptCookies, StartSession и т.д.
-- В `routes/web.php`:
-  - GET / обрабатывается первым и редиректит через LocaleController::redirectToLocale на /{locale};
-  - группа с префиксом {locale} и middleware setLocale отдаёт view index-client.
-- SetLocale (app/Http/Middleware/SetLocale.php) выполняется для маршрутов группы:
-  - выбор локали из session → cookie → main;
-  - запись в session, App::setLocale();
-  - формирование languagesForFrontend и загрузка PHP-словарей в translationsForFrontend;
-  - три View::share.
-- Рендер: view index-client использует layout с окном и данными на #app по плану.
-  - Фронт (i18n, переключатель, POST /locale) ведёт себя как в п.5.
-- Изменений в коде не потребовалось.
 
 ---
 

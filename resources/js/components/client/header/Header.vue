@@ -60,7 +60,7 @@
                 <div class="nav-actions">
                     <!-- Кнопки локалей из data-languages, POST /locale и переход по URL -->
                     <div
-                        v-if="languagesList.length"
+                        v-if="languagesList.length > 1"
                         class="lang-switcher"
                         role="group"
                         aria-label="Language"

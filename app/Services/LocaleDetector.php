@@ -5,24 +5,25 @@ namespace App\Services;
 use Illuminate\Http\Request;
 
 /**
- * Определяет «вторую» локаль для списка языков во фронте (заглушка; в проде — IP/geo).
+ * Определяет «вторую» локаль для списка языков во фронте (браузер Accept-Language; резерв — fallback_locale).
  */
 class LocaleDetector
 {
     /**
-     * Возвращает код второй локали для переключателя. Сейчас заглушка 'ro'; в проде подставить вызов detectByIp или внешнего сервиса.
+     * Возвращает код второй локали для переключателя: язык браузера (Accept-Language) из допустимых, иначе fallback_locale.
      */
     public function detect(Request $request): string
     {
-        $fromConfig = 'ro';
-        if ($fromConfig !== null && $fromConfig !== '') {
-            return $fromConfig;
+        $available = array_keys(config('site.languages.countries', []));
+        $browser = preferred_language_from_request($request, $available);
+        if ($browser !== null && $browser !== '') {
+            return $browser;
         }
         return $this->detectByIp($request);
     }
 
     /**
-     * Резервное определение локали без geo (сейчас — fallback_locale из конфига; позже — вызов внешнего сервиса по IP).
+     * Резерв, когда браузер не отдал подходящий язык (fallback_locale; при необходимости позже — IP/geo).
      */
     protected function detectByIp(Request $request): string
     {

@@ -183,4 +183,14 @@
 
 ---
 
+## 7. Мультиязычность ✅ выполнено
+
+- Локаль: session → cookie → Accept-Language (браузер) → main. Хелпер `preferred_language_from_request`, конфиг `config('site.languages.countries')`.
+- Middleware `SetLocale`: выбор локали, два языка для переключателя (текущая + язык браузера), передача `localeForFrontend`, `languagesForFrontend`, `translationsForFrontend` во view.
+- Переключатель во фронте показывается только при двух и более языках; смена через `POST /locale` и переход на `/{locale}/…`.
+- Vue i18n синхронизирован с URL (router.beforeEach, mount после router.isReady); скрипт `window.locale` / `window.translations` в `<head>`.
+- Подробности: `Documents/developer/demo site/Multilanguage in project.md`.
+
+---
+
 Если нужно, дальше можно развернуть это в чек‑лист задач для разработки (по страницам: layout, тексты, формы, маршруты, мок‑данные).

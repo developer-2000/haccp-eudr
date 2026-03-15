@@ -18,13 +18,14 @@ class LocaleController extends Controller
     }
 
     /**
-     * Редирект с корня на /{locale}. Локаль из session → cookie → config; при недопустимой подставляется app.locale.
+     * Редирект с корня на /{locale}. Локаль из session → cookie → Accept-Language → config; при недопустимой подставляется app.locale.
      */
     public function redirectToLocale(): RedirectResponse
     {
         $main = config('app.locale');
         $locale = request()->session()->get('locale')
             ?? request()->cookie('locale')
+            ?? preferred_language_from_request(request(), $this->available)
             ?? $main;
         if (!in_array($locale, $this->available)) {
             $locale = $main;

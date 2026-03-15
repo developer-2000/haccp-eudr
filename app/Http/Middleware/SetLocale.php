@@ -27,10 +27,13 @@ class SetLocale
         // Язык по умолчанию
         $main = config('app.locale');
 
-        // session → cookie → main; при недопустимом подставляем main
-        $locale = $request->session()->get('locale')
-            ?? $request->cookie('locale')
-            ?? $main;
+        // session → cookie → Accept-Language → main; при недопустимом подставляем main
+        $fromSession = $request->session()->get('locale');
+        $fromCookie = $request->cookie('locale');
+        $fromBrowser = preferred_language_from_request($request, $available);
+
+        $locale = $fromSession ?? $fromCookie ?? $fromBrowser ?? $main;
+
         if (!in_array($locale, $available)) {
             $locale = $main;
         }
@@ -38,16 +41,15 @@ class SetLocale
         $request->session()->put('locale', $locale);
         App::setLocale($locale);
 
-        // два языка для переключателя: main + detected; при одном — fallback из countries
-        // $two: ['en', 'ro']
-        $detected = app(LocaleDetector::class)->detect($request);
-        $two = array_values(array_unique(array_filter([$main, $detected])));
-        if (count($two) < 2) {
-            $fallback = isset($countries['en']) ? 'en' : config('app.fallback_locale');
-            if (isset($countries[$fallback]) && $fallback !== ($two[0] ?? null)) {
-                $two[] = $fallback;
-            }
+        // два языка для переключателя: 1) текущая локаль, 2) всегда язык браузера (если совпадает — fallback)
+        $browserLang = $fromBrowser ?? app(LocaleDetector::class)->detect($request);
+        $second = ($browserLang !== null && $browserLang !== $locale)
+            ? $browserLang
+            : (isset($countries['en']) ? 'en' : config('app.fallback_locale'));
+        if ($second === $locale || !isset($countries[$second])) {
+            $second = $main !== $locale ? $main : config('app.fallback_locale');
         }
+        $two = array_values(array_unique(array_filter([$locale, $second])));
 
         // [['code' => 'en', 'prefix' => 'EN', 'name' => 'English'], ...]
         $codes = array_keys(array_intersect_key($countries, array_flip($two)));
