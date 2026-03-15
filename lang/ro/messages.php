@@ -2,6 +2,11 @@
 
 return [
     'nav' => [
+        'cta' => [
+            'leave_request' => 'Lăsați o cerere',
+            'tell_about_business' => 'Spuneți-ne despre afacerea dvs.',
+            'aria_icon_only' => 'Lăsați o cerere. Spuneți-ne despre afacerea dvs.',
+        ],
         'menu' => [
             'how_it_works' => 'Cum funcționează',
             'for_whom' => 'Pentru cine',

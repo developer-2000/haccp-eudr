@@ -39,6 +39,33 @@
                     role="menu"
                     :aria-hidden="!isMobileMenuOpen"
                 >
+                    <!-- Переключатель языков первым пунктом, когда в шапке он скрыт (≤580px) и языков 2+ -->
+                    <div class="box-switch-lang-mobile-menu">
+                        <div
+                            v-if="isLangSwitcherHidden && languagesList.length > 1"
+                            class="mobile-menu__lang"
+                            role="group"
+                            aria-label="Language"
+                        >
+                            <button
+                                v-for="lang in languagesList"
+                                :key="lang.code"
+                                type="button"
+                                :class="[
+                                                    'lang-switcher__btn',
+                                                    {
+                                                        'lang-switcher__btn--active':
+                                                            currentLocale === lang.code,
+                                                    },
+                                                ]"
+                                :aria-pressed="currentLocale === lang.code"
+                                :title="lang.name"
+                                @click="setLocale(lang.code); closeMobileMenu()"
+                            >
+                                {{ lang.prefix }}
+                            </button>
+                        </div>
+                    </div>
                     <NavMenuItem
                         v-for="item in safeMenu"
                         :key="`mobile-${item.label}-${item.link}`"
@@ -87,12 +114,25 @@
                     <button
                         type="button"
                         class="btn-client btn-primary nav-cta"
+                        :class="{ 'nav-cta--icon-only': isCtaIconOnly }"
+                        :aria-label="
+                            isCtaIconOnly
+                                ? $t('messages.nav.cta.aria_icon_only')
+                                : undefined
+                        "
                         @click="goToSurvey"
                     >
-                        <span class="nav-cta-line">Leave a request</span>
-                        <span class="nav-cta-line nav-cta-line--accent"
-                            >Tell us about your business</span
-                        >
+                        <Icon
+                            v-if="isCtaIconOnly"
+                            name="business-center-round"
+                            class="nav-cta-icon"
+                        />
+                        <template v-else>
+                            <span class="nav-cta-line">{{ $t('messages.nav.cta.leave_request') }}</span>
+                            <span class="nav-cta-line nav-cta-line--accent">{{
+                                $t('messages.nav.cta.tell_about_business')
+                            }}</span>
+                        </template>
                     </button>
                 </div>
             </div>
@@ -138,7 +178,11 @@ const {
     hasDropdown: hasMobileDropdown,
 } = useMobileMenu();
 
-const { isMobile } = useBreakpoint(1024);
+const { isMobile } = useBreakpoint(1101);
+    /** true при ширине <= 1280px — показываем только иконку в CTA */
+    const { isMobile: isCtaIconOnly } = useBreakpoint(1350);
+    /** true при ширине <= 580px — переключатель языков скрыт в шапке, показываем в моб. меню */
+    const { isMobile: isLangSwitcherHidden } = useBreakpoint(581);
 
 const router = useRouter();
 const route = useRoute();
@@ -146,7 +190,7 @@ const route = useRoute();
 // ============================================
 // Locale (из URL :locale или data-locale)
 // ============================================
-import { ref, onMounted, computed, shallowRef } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed, watch, shallowRef } from "vue";
 
 const initialLocale = ref("en");
 const defaultLanguages = [];
@@ -263,6 +307,22 @@ function getInitialLocale() {
 onMounted(() => {
     initialLocale.value = getInitialLocale();
 });
+
+// При открытом моб. меню — убираем скролл страницы и полосу прокрутки
+watch(isMobileMenuOpen, (open) => {
+    if (open) {
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+    } else {
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+    }
+});
+
+onBeforeUnmount(() => {
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+});
 </script>
 
 <style scoped lang="scss">
@@ -286,7 +346,7 @@ onMounted(() => {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: $spacing-lg;
+        gap: $spacing-md;
         .nav-logo {
             flex-shrink: 0;
             position: relative;
@@ -376,6 +436,20 @@ onMounted(() => {
                 color: #22c55e;
             }
         }
+
+        .nav-cta--icon-only {
+            padding: $spacing-sm $spacing-md;
+
+            :deep(.xicon) {
+                width: auto;
+                height: auto;
+            }
+
+            :deep(.xicon svg) {
+                min-width: 23px;
+                min-height: 23px;
+            }
+        }
     }
 }
 
@@ -393,26 +467,27 @@ onMounted(() => {
     z-index: 1002;
     flex-shrink: 0;
     margin-left: auto;
-    margin-right: $spacing-sm;
-
-    &:hover {
-        color: $primary-color;
-    }
 
     .mobile-menu-icon {
         width: 24px;
         height: 24px;
+    }
+
+    &[aria-expanded="true"] .mobile-menu-icon {
+        color: $text-red;
     }
 }
 
 // Мобильное меню (отдельная структура)
 .mobile-menu {
     position: fixed;
-    top: 76px;
+    top: 103px;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $white-color;
+    height: calc(100vh - 103px);
+    min-height: calc(100vh - 103px);
+    background-color: $bg-gray;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -429,10 +504,50 @@ onMounted(() => {
         opacity: 1;
         pointer-events: auto;
     }
+
+    .box-switch-lang-mobile-menu{
+        gap: 2px;
+        margin: 20px 0 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .mobile-menu__lang {
+            display: inline-flex;
+            background: $border-color;
+            border-radius: $radius-full;
+            padding: $spacing-xs;
+
+            .lang-switcher__btn {
+                padding: $spacing-sm $spacing-md;
+                border: none;
+                border-radius: $radius-full;
+                font-size: $font-size-sm;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                color: $text-light-grey;
+                background: transparent;
+                cursor: pointer;
+                transition:
+                    color $transition-fast,
+                    background-color $transition-fast;
+
+                &:hover {
+                    color: $text-color;
+                }
+
+                &--active {
+                    background: $white-color;
+                    color: $primary-color;
+                    box-shadow: $shadow-sm;
+                }
+            }
+        }
+    }
+
 }
 
-// Mobile styles
-@media (max-width: $breakpoint-lg) {
+// Mobile styles (бургер и мобильное меню показываются при ширине ≤1100px)
+@media (max-width: 1100px) {
     .nav-container {
         margin: 10px auto;
         justify-content: space-between;
@@ -443,6 +558,13 @@ onMounted(() => {
             font-size: $font-size-sm;
             padding: $spacing-sm $spacing-md;
         }
+    }
+}
+
+// Переключатель языков скрыт на ширине ≤580px
+@media (max-width: 580px) {
+    .lang-switcher {
+        display: none !important;
     }
 }
 </style>

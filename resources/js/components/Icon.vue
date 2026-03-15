@@ -88,6 +88,12 @@ import { IosMailUnread } from "@vicons/ionicons4";
 import { ExitOutline } from "@vicons/ionicons5";
 
 /**
+ * Иконки из библиотеки @vicons/material
+ * Требуют обертки в ViconsIcon для корректного отображения
+ */
+import { BusinessCenterRound } from "@vicons/material";
+
+/**
  * ViconsIcon - компонент-обертка из @vicons/utils
  * Используется для правильного рендеринга иконок из библиотек @vicons
  */
@@ -129,6 +135,7 @@ const icons = Object.freeze({
     "right-outlined": RightOutlined,
     "left-outlined": LeftOutlined,
     "exit-outline": ExitOutline,
+    "business-center-round": BusinessCenterRound,
 });
 
 // ============================================
@@ -190,6 +197,7 @@ const viconsIcons = [
     "right-outlined", // @vicons/antd
     "left-outlined", // @vicons/antd
     "exit-outline", // @vicons/ionicons5
+    "business-center-round", // @vicons/material
 ];
 
 /**

@@ -9,6 +9,7 @@
             <router-link
                 :to="itemLink"
                 class="nav-link"
+                :class="{ 'nav-link--exact-page': isExactPageLink }"
                 :aria-label="`${$t(item.label)} menu`"
             >
                 {{ $t(item.label) }}
@@ -24,7 +25,12 @@
                 variant="desktop"
             />
         </div>
-        <router-link v-else :to="itemLink" class="nav-link">
+        <router-link
+            v-else
+            :to="itemLink"
+            class="nav-link"
+            :class="{ 'nav-link--exact-page': isExactPageLink }"
+        >
             {{ $t(item.label) }}
         </router-link>
     </template>
@@ -61,6 +67,7 @@
             v-else
             :to="itemLink"
             class="mobile-menu-item-simple"
+            :class="{ 'mobile-menu-item-simple--exact-page': isExactPageLink }"
             @click="handleItemClick"
         >
             {{ $t(item.label) }}
@@ -77,8 +84,11 @@ defineOptions({
     name: "NavMenuItem",
 });
 import { computed } from "vue";
+import { useRoute } from "vue-router";
 import Icon from "../../Icon.vue";
 import DropdownMenu from "./DropdownMenu.vue";
+
+const route = useRoute();
 
 /**
  * @typedef {Object} Props
@@ -125,6 +135,13 @@ const props = defineProps({
 const hasDropdown = computed(() => Boolean(props.item?.hasDropdown));
 const itemLink = computed(() => props.item?.link || "#");
 const itemDropdown = computed(() => props.item?.dropdown || null);
+
+/** Активная страница без хеша: только тогда подсвечиваем и делаем некликабельной (на /en не подсвечиваем якоря /en#...) */
+const isExactPageLink = computed(() => {
+    const link = itemLink.value;
+    const pathname = link.includes("#") ? link.slice(0, link.indexOf("#")) : link;
+    return route.path === pathname && !link.includes("#");
+});
 
 const handleToggle = () => {
     props.onToggle?.();
@@ -175,6 +192,7 @@ const handleItemClick = () => {
     display: flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
     padding: $spacing-sm $spacing-md;
     border-radius: $radius-md;
     transition:
@@ -186,6 +204,15 @@ const handleItemClick = () => {
         color: $primary-color;
         background-color: rgba($primary-color, 0.05);
         text-decoration: none;
+    }
+
+    /* Только ссылка на текущую страницу без хеша (на /en не подсвечиваем /en#how-it-works) */
+    &.nav-link--exact-page {
+        color: $primary-color;
+        background-color: rgba($primary-color, 0.05);
+        text-decoration: none;
+        pointer-events: none;
+        cursor: default;
     }
 }
 
@@ -278,6 +305,13 @@ const handleItemClick = () => {
     &:hover {
         color: $primary-color;
         background-color: rgba($primary-color, 0.05);
+    }
+
+    &.mobile-menu-item-simple--exact-page {
+        color: $primary-color;
+        background-color: rgba($primary-color, 0.05);
+        pointer-events: none;
+        cursor: default;
     }
 }
 </style>

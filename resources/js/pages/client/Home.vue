@@ -21,7 +21,7 @@
                         class="btn-client btn-success btn-success-hero"
                         @click="goToSurvey"
                     >
-                        Tell us about your business
+                        {{ $t('messages.nav.cta.tell_about_business') }}
                     </button>
                     <button
                         class="btn-client btn-outline-primary"

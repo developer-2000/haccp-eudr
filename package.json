@@ -2,6 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "vite",
+        "serve:mobile": "php artisan serve --host=0.0.0.0",
         "build": "vite build",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
@@ -29,6 +30,7 @@
         "@vicons/antd": "^0.13.0",
         "@vicons/ionicons4": "^0.13.0",
         "@vicons/ionicons5": "^0.13.0",
+        "@vicons/material": "^0.13.0",
         "@vicons/utils": "^0.1.4",
         "@vitejs/plugin-vue": "^4.5.0",
         "@vue/eslint-config-prettier": "^10.2.0",

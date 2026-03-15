@@ -5,7 +5,22 @@ Laravel 10 проект с Vue.js 3.4.0 и SCSS.
 ## Адреса
 
 - Проект: [haccp-eudr.local](http://haccp-eudr.local/)
+- Смартфон: [http://192.168.101.11:8000](http://192.168.101.11:8000)
 - Mysql: [PhpMyAdmin](http://phpmyadmin/index.php?route=/database/structure&db=haccp-eudr&server=8)
+
+### Запуск на смартфоне (та же Wi‑Fi)
+
+1. **Терминал 1** — фронт:
+   ```bash
+   npm run dev
+   ```
+2. **Терминал 2** — Laravel на всех интерфейсах:
+   ```bash
+   npm run serve:mobile
+   ```
+3. На телефоне открой: [http://192.168.101.11:8000](http://192.168.101.11:8000)
+
+Подробнее: `Documents/developer/demo site/MOBILE-DEV.md` (брандмауэр, .env, сеть «Частная»).
 
 ### Режим разработки
 

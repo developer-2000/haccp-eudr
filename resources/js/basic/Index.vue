@@ -12,7 +12,7 @@
 
 <script setup>
 import Header from "../components/client/header/Header.vue";
-import Footer from "../components/client/header/Footer.vue";
+import Footer from "../components/client/Footer.vue";
 
 defineOptions({
     name: "Index",

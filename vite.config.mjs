@@ -57,13 +57,14 @@ export default defineConfig({
         copyPublicImages(),
     ],
     server: {
-        host: 'haccp-eudr.local',
+        host: '0.0.0.0',
         port: 5179,
         https: false,
         strictPort: false,
         cors: true,
         hmr: {
-            host: 'haccp-eudr.local',
+            host: '192.168.101.11',
+            port: 5179,
         },
     },
     resolve: {

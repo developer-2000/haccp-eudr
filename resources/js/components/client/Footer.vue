@@ -22,7 +22,7 @@ import siteConfig from "@/config/site";
 const currentYear = computed(() => new Date().getFullYear());
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 @use "../../../scss/variables" as *;
 
 .footer {
