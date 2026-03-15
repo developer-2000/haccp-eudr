@@ -39,7 +39,15 @@
         @endif
     </head>
     <body class="antialiased">
-        <div id="app"></div>
+        <script>
+            window.locale = "{{ $localeForFrontend ?? app()->getLocale() }}";
+            window.translations = @json($translationsForFrontend ?? []);
+        </script>
+        <div
+            id="app"
+            data-locale="{{ $localeForFrontend ?? app()->getLocale() }}"
+            data-languages="{{ json_encode($languagesForFrontend ?? []) }}"
+        ></div>
     </body>
 </html>
 

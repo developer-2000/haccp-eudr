@@ -1,7 +1,6 @@
 /**
  * Конфигурация сайта
  * @deprecated Используйте useSiteConfigStore() из @/stores вместо этого
- * Оставлено для обратной совместимости
  */
 import { getActivePinia } from "pinia";
 import { useSiteConfigStore } from "@/stores";
@@ -10,12 +9,8 @@ let siteStore = null;
 
 function getSiteStore() {
     if (!siteStore) {
-        // Проверяем, инициализирована ли Pinia
         if (!getActivePinia()) {
-            return {
-                name: "HACCP-EUDR",
-                company: { businessType: [] },
-            };
+            return { name: "HACCP-EUDR" };
         }
         siteStore = useSiteConfigStore();
     }
@@ -24,12 +19,7 @@ function getSiteStore() {
 
 const siteConfig = {
     get name() {
-        const store = getSiteStore();
-        return store.name || "HACCP-EUDR";
-    },
-    get company() {
-        const store = getSiteStore();
-        return store.company || { businessType: [] };
+        return getSiteStore().name || "HACCP-EUDR";
     },
 };
 

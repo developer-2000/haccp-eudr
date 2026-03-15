@@ -1,8 +1,8 @@
 <template>
     <n-layout-header bordered class="admin-header">
-        <div class="header-left"> </div>
+        <div class="header-left"></div>
 
-        <div class="header-center"> </div>
+        <div class="header-center"></div>
 
         <div class="header-right">
             <div ref="userButtonWrapperRef" class="user-button-wrapper">
@@ -38,17 +38,15 @@ defineOptions({
 // ============================================
 // Импорты
 // ============================================
-import { computed, ref, onMounted, nextTick, watch } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { NLayoutHeader, NButton, NDropdown } from "naive-ui";
-import { useAuthStore } from "@/stores";
 import Icon from "@/components/Icon.vue";
 
 // ============================================
 // State (Реактивное состояние)
 // ============================================
 const router = useRouter();
-const authStore = useAuthStore();
 
 /**
  * userButtonWrapperRef - ref для обертки кнопки пользователя
@@ -77,13 +75,7 @@ const userMenuOptions = [
 // ============================================
 // Computed (Вычисляемые свойства)
 // ============================================
-/**
- * userName - вычисляемое свойство имени пользователя
- * Получает имя из authStore, если пользователь не авторизован, возвращает "User"
- */
-const userName = computed(() => {
-    return authStore.user?.name || "User";
-});
+const userName = "User";
 
 // ============================================
 // Методы
@@ -96,7 +88,8 @@ const userName = computed(() => {
 const updateDropdownWidth = () => {
     nextTick(() => {
         if (userButtonWrapperRef.value) {
-            const button = userButtonWrapperRef.value.querySelector(".n-button");
+            const button =
+                userButtonWrapperRef.value.querySelector(".n-button");
             if (button) {
                 dropdownWidth.value = button.offsetWidth;
             }
@@ -111,7 +104,6 @@ const updateDropdownWidth = () => {
  */
 const handleMenuSelect = (key) => {
     if (key === "logout") {
-        authStore.logout();
         router.push("/");
     }
 };
@@ -126,19 +118,6 @@ const handleMenuSelect = (key) => {
 onMounted(() => {
     updateDropdownWidth();
 });
-
-// ============================================
-// Watchers
-// ============================================
-/**
- * watch userName - отслеживает изменение имени пользователя
- * При изменении имени пользователя обновляет ширину dropdown,
- * так как длина текста кнопки может измениться
- */
-watch(userName, () => {
-    updateDropdownWidth();
-});
-
 </script>
 
 <style scoped lang="scss">

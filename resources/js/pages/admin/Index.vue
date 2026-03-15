@@ -1,7 +1,5 @@
 <template>
-    <div class="admin-page">
-        Привет
-    </div>
+    <div class="admin-page">Привет</div>
 </template>
 
 <script setup>
@@ -12,6 +10,5 @@ defineOptions({
 
 <style scoped lang="scss">
 .admin-page {
-
 }
 </style>

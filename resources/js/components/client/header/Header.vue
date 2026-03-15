@@ -2,12 +2,14 @@
     <header class="header">
         <nav class="nav" role="navigation" aria-label="Main navigation">
             <div class="container nav-container">
+                <!-- Лого, ссылка на главную с учётом локали -->
                 <div class="nav-logo">
                     <router-link :to="safeLogo.link" class="logo-link">
                         <span class="logo-site">{{ siteConfig.name }}</span>
                         <span class="logo-app">App</span>
                     </router-link>
                 </div>
+                <!-- Пункты меню, десктоп -->
                 <div v-if="!isMobile" class="nav-menu">
                     <NavMenuItem
                         v-for="item in safeMenu"
@@ -16,6 +18,7 @@
                         variant="desktop"
                     />
                 </div>
+                <!-- Кнопка открытия/закрытия мобильного меню -->
                 <button
                     v-if="isMobile"
                     class="mobile-menu-toggle"
@@ -28,6 +31,7 @@
                         class="mobile-menu-icon"
                     />
                 </button>
+                <!-- Мобильное меню, те же пункты что в десктопе -->
                 <div
                     v-if="isMobile"
                     class="mobile-menu"
@@ -52,75 +56,44 @@
                         :on-item-click="closeMobileMenu"
                     />
                 </div>
+                <!-- Переключатель языка -->
                 <div class="nav-actions">
-                    <!-- Debug: Auth Store Data -->
+                    <!-- Кнопки локалей из data-languages, POST /locale и переход по URL -->
                     <div
-                        class="auth-debug"
-                        style="
-                            font-size: 10px;
-                            padding: 5px;
-                            background: #f0f0f0;
-                            border: 1px solid #ccc;
-                            margin-right: 10px;
-                            max-width: 300px;
-                        "
-                    >
-                        <div><strong>Auth Store:</strong></div>
-                        <div>initialized: {{ authStore.initialized }}</div>
-                        <div>
-                            user:
-                            {{
-                                authStore.user
-                                    ? JSON.stringify(authStore.user)
-                                    : "null"
-                            }}
-                        </div>
-                        <div>
-                            token:
-                            {{
-                                authStore.token
-                                    ? authStore.token.substring(0, 20) + "..."
-                                    : "null"
-                            }}
-                        </div>
-                        <div>
-                            profileCompletion:
-                            {{
-                                authStore.profileCompletion
-                                    ? JSON.stringify(
-                                          authStore.profileCompletion,
-                                      )
-                                    : "null"
-                            }}
-                        </div>
-                    </div>
-                    <!-- Кнопки для неавторизованных пользователей -->
-                    <template
-                        v-for="button in visibleButtons"
-                        :key="`${button.label}-${button.link}`"
+                        v-if="languagesList.length"
+                        class="lang-switcher"
+                        role="group"
+                        aria-label="Language"
                     >
                         <button
-                            v-if="button.action !== 'logout'"
+                            v-for="lang in languagesList"
+                            :key="lang.code"
                             type="button"
                             :class="[
-                                'btn-client',
-                                button.type === 'primary'
-                                    ? 'btn-primary'
-                                    : 'btn-text',
+                                'lang-switcher__btn',
+                                {
+                                    'lang-switcher__btn--active':
+                                        currentLocale === lang.code,
+                                },
                             ]"
-                            @click="handleButtonClick(button)"
+                            :aria-pressed="currentLocale === lang.code"
+                            :title="lang.name"
+                            @click="setLocale(lang.code)"
                         >
-                            {{ button.label }}
+                            {{ lang.prefix }}
                         </button>
-                        <button
-                            v-else
-                            type="button"
-                            class="btn-client btn-text"
-                            @click="handleLogout"
+                    </div>
+                    <!-- Переход на страницу опроса -->
+                    <button
+                        type="button"
+                        class="btn-client btn-primary nav-cta"
+                        @click="goToSurvey"
+                    >
+                        <span class="nav-cta-line">Leave a request</span>
+                        <span class="nav-cta-line nav-cta-line--accent"
+                            >Tell us about your business</span
                         >
-                            {{ button.label }}
-                        </button>
-                    </template>
+                    </button>
                 </div>
             </div>
         </nav>
@@ -146,8 +119,8 @@ import siteConfig from "@/config/site";
 import { useMobileMenu } from "./composables/useMobileMenu";
 import { useBreakpoint } from "./composables/useBreakpoint";
 import NavMenuItem from "./NavMenuItem.vue";
-import { useRouter } from "vue-router";
-import { useAuthStore } from "@/stores";
+import { useRouter, useRoute } from "vue-router";
+import axios from "axios";
 
 // ============================================
 // Composables
@@ -168,12 +141,24 @@ const {
 const { isMobile } = useBreakpoint(1024);
 
 const router = useRouter();
-const authStore = useAuthStore();
+const route = useRoute();
 
 // ============================================
-// Валидация и мемоизация конфигурации
+// Locale (из URL :locale или data-locale)
 // ============================================
-import { shallowRef, computed } from "vue";
+import { ref, onMounted, computed, shallowRef } from "vue";
+
+const initialLocale = ref("en");
+const defaultLanguages = [];
+
+const languagesList = ref(getLanguagesList());
+const currentLocale = computed(
+    () => route.params.locale ?? initialLocale.value,
+);
+
+const goToSurvey = () => {
+    router.push("/" + currentLocale.value + "/survey");
+};
 
 // Валидация navConfig выполняется один раз при инициализации
 const defaultConfig = {
@@ -193,75 +178,91 @@ const validatedNavConfig =
 /** @type {import('vue').ShallowRef<NavConfig>} */
 const navConfigRef = shallowRef(validatedNavConfig);
 
-// Computed свойства теперь зависят от одного shallowRef, пересчитываются только при изменении ссылки
 /** @type {import('vue').ComputedRef<NavConfig['logo']>} */
-const safeLogo = computed(() => navConfigRef.value?.logo || defaultConfig.logo);
-
-/** @type {import('vue').ComputedRef<NavConfig['menu']>} */
-const safeMenu = computed(() => {
-    const menu = navConfigRef.value?.menu;
-    return Array.isArray(menu) ? menu : defaultConfig.menu;
-});
-
-/** @type {import('vue').ComputedRef<NavConfig['actions']>} */
-const safeActions = computed(() => {
-    const actions = navConfigRef.value?.actions;
-    return {
-        buttons: Array.isArray(actions?.buttons) ? actions.buttons : [],
-    };
+const safeLogo = computed(() => {
+    const logo = navConfigRef.value?.logo || defaultConfig.logo;
+    const locale = currentLocale.value;
+    const link =
+        logo.link === "/"
+            ? "/" + locale
+            : "/" +
+              locale +
+              (logo.link.startsWith("/") ? logo.link : "/" + logo.link);
+    return { ...logo, link };
 });
 
 /**
- * visibleButtons - вычисляемое свойство для фильтрации кнопок в зависимости от авторизации
- * Если пользователь авторизован - скрываем Login, показываем Logout
- * Если не авторизован - показываем Login, скрываем Logout
+ * Меню для навигации: пункты из navConfig (nav.js), у каждого item.label — ключ i18n (напр. nav.menu.how_it_works).
+ * Строку перевода здесь не подставляем: NavMenuItem выводит подпись через {{ $t(item.label) }},
+ * словари берутся из vue-i18n (window.translations из lang/*.json, отдаёт SetLocale).
  */
-const isAuthenticated = computed(() => {
-    return authStore.user !== null && authStore.token !== null;
+/** @type {import('vue').ComputedRef<NavConfig['menu']>} */
+const safeMenu = computed(() => {
+    const menu = navConfigRef.value?.menu ?? defaultConfig.menu;
+    const locale = currentLocale.value;
+    return (Array.isArray(menu) ? menu : []).map((item) => ({
+        ...item,
+        link:
+            "/" +
+            locale +
+            (item.link.startsWith("/") ? item.link : "/" + item.link),
+    }));
 });
 
-const visibleButtons = computed(() => {
-    const buttons = safeActions.value.buttons || [];
-
-    if (isAuthenticated.value) {
-        // Если авторизован - фильтруем Login, добавляем Logout
-        const filtered = buttons.filter(
-            (btn) => btn.label.toLowerCase() !== "login",
-        );
-        return [
-            ...filtered,
+/**
+ * Смена языка: POST /locale (session, cookie, лог), затем переход на /{locale}/путь.
+ */
+async function setLocale(locale) {
+    if (locale === currentLocale.value) return;
+    const pathname = window.location.pathname;
+    const codes = languagesList.value.map((l) => l.code);
+    const segments = pathname.split("/").filter(Boolean);
+    const rest = (
+        codes.includes(segments[0]) ? segments.slice(1) : segments
+    ).join("/");
+    const url = "/" + locale + (rest ? "/" + rest : "");
+    const csrf = document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute("content");
+    try {
+        await axios.post(
+            "/locale",
+            { locale },
             {
-                label: "Logout",
-                link: "#",
-                type: "link",
-                action: "logout",
+                headers: {
+                    Accept: "application/json",
+                    ...(csrf && { "X-CSRF-TOKEN": csrf }),
+                },
             },
-        ];
-    } else {
-        // Если не авторизован - показываем все кнопки, кроме Logout
-        return buttons.filter((btn) => btn.label.toLowerCase() !== "logout");
+        );
+    } catch {
+        /* ignore */
     }
+    window.location.href = url;
+}
+
+function getLanguagesList() {
+    const el = document.getElementById("app");
+    const raw = el?.getAttribute("data-languages");
+    if (!raw) return defaultLanguages;
+    try {
+        const list = JSON.parse(raw);
+        return Array.isArray(list) && list.length ? list : defaultLanguages;
+    } catch {
+        return defaultLanguages;
+    }
+}
+
+function getInitialLocale() {
+    const el = document.getElementById("app");
+    const locale = (el?.getAttribute("data-locale") || "en").toLowerCase();
+    const codes = languagesList.value.map((l) => l.code);
+    return codes.includes(locale) ? locale : codes[0] || "en";
+}
+
+onMounted(() => {
+    initialLocale.value = getInitialLocale();
 });
-
-// ============================================
-// Handlers
-// ============================================
-
-const handleButtonClick = (button) => {
-    if (!button || !button.link) {
-        return;
-    }
-
-    if (button.link !== "#" && button.link !== "javascript:void(0)") {
-        router.push(button.link);
-    }
-};
-
-const handleLogout = () => {
-    authStore.logout();
-    // Перенаправляем на главную страницу после выхода
-    router.push("/");
-};
 </script>
 
 <style scoped lang="scss">
@@ -322,15 +323,57 @@ const handleLogout = () => {
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: $spacing-md;
+            gap: $spacing-lg;
             flex-shrink: 0;
             position: relative;
             z-index: 1002;
-            button {
-                margin-right: 20px;
-                &:last-child {
-                    margin-right: 0;
+        }
+
+        .lang-switcher {
+            display: inline-flex;
+            background: $border-color;
+            border-radius: $radius-full;
+            padding: $spacing-xs;
+            gap: 2px;
+
+            &__btn {
+                padding: $spacing-sm $spacing-md;
+                border: none;
+                border-radius: $radius-full;
+                font-size: $font-size-sm;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                color: $text-light-grey;
+                background: transparent;
+                cursor: pointer;
+                transition:
+                    color $transition-fast,
+                    background-color $transition-fast;
+
+                &:hover {
+                    color: $text-color;
                 }
+
+                &--active {
+                    background: $white-color;
+                    color: $primary-color;
+                    box-shadow: $shadow-sm;
+                }
+            }
+        }
+
+        .nav-actions .nav-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-right: 0;
+
+            .nav-cta-line {
+                display: block;
+            }
+            .nav-cta-line--accent {
+                color: #22c55e;
             }
         }
     }

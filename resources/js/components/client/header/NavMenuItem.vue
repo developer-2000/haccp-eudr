@@ -9,9 +9,9 @@
             <router-link
                 :to="itemLink"
                 class="nav-link"
-                :aria-label="`${itemLabel} menu`"
+                :aria-label="`${$t(item.label)} menu`"
             >
-                {{ itemLabel }}
+                {{ $t(item.label) }}
                 <Icon
                     name="chevron-down"
                     class="nav-arrow"
@@ -25,7 +25,7 @@
             />
         </div>
         <router-link v-else :to="itemLink" class="nav-link">
-            {{ itemLabel }}
+            {{ $t(item.label) }}
         </router-link>
     </template>
     <template v-else>
@@ -37,11 +37,11 @@
             <button
                 class="mobile-menu-item-header"
                 :aria-expanded="isOpen"
-                :aria-label="`Toggle ${itemLabel} submenu`"
+                :aria-label="`Toggle ${$t(item.label)} submenu`"
                 role="menuitem"
                 @click="handleToggle"
             >
-                <span>{{ itemLabel }}</span>
+                <span>{{ $t(item.label) }}</span>
                 <Icon
                     name="chevron-down"
                     class="mobile-menu-item-arrow"
@@ -63,7 +63,7 @@
             class="mobile-menu-item-simple"
             @click="handleItemClick"
         >
-            {{ itemLabel }}
+            {{ $t(item.label) }}
         </router-link>
     </template>
 </template>
@@ -122,9 +122,7 @@ const props = defineProps({
     },
 });
 
-// Computed свойства для доступа к полям item в шаблоне
 const hasDropdown = computed(() => Boolean(props.item?.hasDropdown));
-const itemLabel = computed(() => props.item?.label || "");
 const itemLink = computed(() => props.item?.link || "#");
 const itemDropdown = computed(() => props.item?.dropdown || null);
 

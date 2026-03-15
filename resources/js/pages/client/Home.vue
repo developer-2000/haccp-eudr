@@ -19,12 +19,15 @@
                 <div class="hero-section__buttons">
                     <button
                         class="btn-client btn-success btn-success-hero"
-                        @click="goToRegistration"
+                        @click="goToSurvey"
                     >
-                        TRY 14-DAY FREE TRIAL
+                        Tell us about your business
                     </button>
-                    <button class="btn-client btn-outline-primary">
-                        GET A CUSTOM DEMO
+                    <button
+                        class="btn-client btn-outline-primary"
+                        @click="goToDemo"
+                    >
+                        View Demo
                     </button>
                 </div>
             </div>
@@ -50,8 +53,12 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const goToRegistration = () => {
-    router.push("/auth/register/account");
+const goToSurvey = () => {
+    router.push("/survey");
+};
+
+const goToDemo = () => {
+    router.push("/demo");
 };
 </script>
 

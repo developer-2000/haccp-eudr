@@ -48,7 +48,7 @@ defineOptions({
         }
     }
 
-    :deep(.xicon){
+    :deep(.xicon) {
         width: 18px;
         height: 18px;
         margin-right: 5px;

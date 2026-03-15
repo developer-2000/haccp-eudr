@@ -3,10 +3,17 @@
         <h1 class="page-title">Creating your HACCP Plan</h1>
 
         <n-alert type="info" class="info-alert">
-            This is a HACCP plan builder. Answer the questions, follow each step, and the program will automatically generate your customizable HACCP plan template.
-            <strong>You can later modify the plan according to your needs or feedback.</strong>
+            This is a HACCP plan builder. Answer the questions, follow each
+            step, and the program will automatically generate your customizable
+            HACCP plan template.
+            <strong
+                >You can later modify the plan according to your needs or
+                feedback.</strong
+            >
             Need help? Read our article
-            <a href="javascript:void(0)">"How to get started with a HACCP plan?"</a>
+            <a href="javascript:void(0)"
+                >"How to get started with a HACCP plan?"</a
+            >
             <n-progress
                 type="line"
                 :percentage="completionPercentage"
@@ -23,32 +30,49 @@
                 <n-card
                     v-for="task in tasks"
                     :key="task.id"
-                    :class="['task-card', { 'task-card--completed': task.isComplete }]"
+                    :class="[
+                        'task-card',
+                        { 'task-card--completed': task.isComplete },
+                    ]"
                     hoverable
                     @click="handleTaskClick(task.id)"
                 >
                     <div class="task-content">
                         <div class="task-action-icon">
-                            <Icon name="left-outlined"/>
+                            <Icon name="left-outlined" />
                         </div>
                         <div class="task-main">
                             <div class="task-header">
-                                <h3 class="task-title" >
+                                <h3 class="task-title">
                                     {{ task.title }}
                                 </h3>
                                 <n-tag
-                                    :type="task.isComplete ? 'success' : 'error'"
+                                    :type="
+                                        task.isComplete ? 'success' : 'error'
+                                    "
                                     size="small"
                                     :bordered="false"
                                     class="task-status"
                                 >
-                                    {{ task.isComplete ? "Completed" : "Incomplete" }}
+                                    {{
+                                        task.isComplete
+                                            ? "Completed"
+                                            : "Incomplete"
+                                    }}
                                 </n-tag>
                             </div>
-                            <p class="task-description">{{ task.description }}</p>
+                            <p class="task-description">
+                                {{ task.description }}
+                            </p>
                         </div>
                         <div class="task-status-icon">
-                            <Icon :name="task.isComplete ? 'check-circle' : 'x-circle'"/>
+                            <Icon
+                                :name="
+                                    task.isComplete
+                                        ? 'check-circle'
+                                        : 'x-circle'
+                                "
+                            />
                         </div>
                     </div>
                 </n-card>
@@ -286,7 +310,7 @@ const handleTaskClick = (id) => {
                     width: 20px;
                     height: 20px;
 
-                    :deep(.xicon){
+                    :deep(.xicon) {
                         width: 20px;
                         height: 20px;
                         svg {
@@ -327,7 +351,7 @@ const handleTaskClick = (id) => {
                     }
                 }
 
-                .task-content{
+                .task-content {
                     .task-status-icon {
                         svg {
                             stroke: $text-green;

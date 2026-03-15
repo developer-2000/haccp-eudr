@@ -38,7 +38,9 @@ export default [
                 exports: 'readonly',
                 window: 'readonly',
                 localStorage: 'readonly',
-                document: 'readonly'
+                document: 'readonly',
+                setTimeout: 'readonly',
+                clearTimeout: 'readonly'
             }
         },
         plugins: {

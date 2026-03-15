@@ -3,6 +3,7 @@
 Laravel 10 проект с Vue.js 3.4.0 и SCSS.
 
 ## Адреса
+
 - Проект: [haccp-eudr.local](http://haccp-eudr.local/)
 - Mysql: [PhpMyAdmin](http://phpmyadmin/index.php?route=/database/structure&db=haccp-eudr&server=8)
 
@@ -20,6 +21,12 @@ Vite будет доступен по адресу: `http://haccp-eudr.local:517
 
 ```bash
 npm run build
+```
+
+### Перезапуск миграций и сидоров
+
+```bash
+php artisan migrate:fresh --seed
 ```
 
 ## Технологии

@@ -21,8 +21,13 @@
  * @property {boolean} [hasDropdown] - Есть ли у пункта dropdown
  * @property {NavDropdown} [dropdown] - Данные dropdown
  *
+ * @typedef {Object} NavActionButtonLabelLine
+ * @property {string} text - Текст строки
+ * @property {string} [color] - Цвет строки (CSS color)
+ *
  * @typedef {Object} NavActionButton
- * @property {string} label - Текст кнопки
+ * @property {string} [label] - Текст кнопки (одна строка)
+ * @property {NavActionButtonLabelLine[]} [labelLines] - Несколько строк с опциональным цветом (вместо label)
  * @property {string} link - Ссылка кнопки
  * @property {'primary'|'link'} type - Тип кнопки
  *

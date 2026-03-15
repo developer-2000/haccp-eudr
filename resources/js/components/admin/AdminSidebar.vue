@@ -15,8 +15,8 @@
             :value="activeKey"
             :options="menuOptions"
             :default-expanded-keys="defaultExpandedKeys"
-            @update:value="handleMenuUpdate"
             class="sidebar-menu"
+            @update:value="handleMenuUpdate"
         />
     </n-layout-sider>
 </template>
@@ -161,7 +161,6 @@ const findMenuItemByKey = (options, key) => {
     }
     return null;
 };
-
 </script>
 
 <style scoped lang="scss">

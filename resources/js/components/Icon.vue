@@ -179,17 +179,17 @@ const iconComponent = computed(() => icons[props.name] || null);
  * конкретную иконку в ViconsIcon или рендерить напрямую.
  */
 const viconsIcons = [
-    "info-circle-twotone",      // @vicons/antd
-    "ios-mail-unread",          // @vicons/ionicons4
-    "user-outlined",            // @vicons/antd
-    "dashboard-outlined",       // @vicons/antd
-    "file-text-outlined",       // @vicons/antd
-    "database-outlined",        // @vicons/antd
-    "setting-outlined",         // @vicons/antd
-    "logout-outlined",          // @vicons/antd
-    "right-outlined",           // @vicons/antd
-    "left-outlined",            // @vicons/antd
-    "exit-outline",             // @vicons/ionicons5
+    "info-circle-twotone", // @vicons/antd
+    "ios-mail-unread", // @vicons/ionicons4
+    "user-outlined", // @vicons/antd
+    "dashboard-outlined", // @vicons/antd
+    "file-text-outlined", // @vicons/antd
+    "database-outlined", // @vicons/antd
+    "setting-outlined", // @vicons/antd
+    "logout-outlined", // @vicons/antd
+    "right-outlined", // @vicons/antd
+    "left-outlined", // @vicons/antd
+    "exit-outline", // @vicons/ionicons5
 ];
 
 /**
