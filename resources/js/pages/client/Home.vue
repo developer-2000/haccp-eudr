@@ -6,15 +6,13 @@
                 <h1>
                     Comply Easily with
                     <br />
-                    Intuitive Food Safety Software
+                    HACCP + EUDR Software
                 </h1>
                 <p class="hero-section__description">
-                    Grow your business by cutting food safety labour and
-                    boosting efficiency.
-                    <strong
-                        >Built for hospitality, healthcare, and retail – fully
-                        adaptable for your needs.</strong
-                    >
+                    Grow your coffee shop, bakery, butcher shop
+                    <strong>
+                        or any small food production – fully adaptable.
+                    </strong>
                 </p>
                 <div class="hero-section__buttons">
                     <button

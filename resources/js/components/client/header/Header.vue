@@ -328,6 +328,33 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 @use "../../../../scss/variables" as *;
 
+// Общий плейсхолдер для кнопок переключения языка (десктоп + мобилка)
+%lang-switcher-btn {
+    padding: $spacing-sm $spacing-md;
+    border: none;
+    border-radius: $radius-full;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: $text-light-grey;
+    background: transparent;
+    cursor: pointer;
+    transition:
+        color $transition-fast,
+        background-color $transition-fast;
+
+    &:hover {
+        color: $text-color;
+        background-color: #f4f4f4;
+    }
+
+    &.lang-switcher__btn--active {
+        background: $white-color;
+        color: $primary-color;
+        box-shadow: $shadow-sm;
+    }
+}
+
 // ============================================
 // Header & Navigation
 // ============================================
@@ -400,29 +427,8 @@ onBeforeUnmount(() => {
             padding: $spacing-xs;
             gap: 2px;
 
-            &__btn {
-                padding: $spacing-sm $spacing-md;
-                border: none;
-                border-radius: $radius-full;
-                font-size: $font-size-sm;
-                font-weight: 600;
-                letter-spacing: 0.02em;
-                color: $text-light-grey;
-                background: transparent;
-                cursor: pointer;
-                transition:
-                    color $transition-fast,
-                    background-color $transition-fast;
-
-                &:hover {
-                    color: $text-color;
-                }
-
-                &--active {
-                    background: $white-color;
-                    color: $primary-color;
-                    box-shadow: $shadow-sm;
-                }
+            .lang-switcher__btn {
+                @extend %lang-switcher-btn;
             }
         }
 
@@ -522,28 +528,7 @@ onBeforeUnmount(() => {
             padding: $spacing-xs;
 
             .lang-switcher__btn {
-                padding: $spacing-sm $spacing-md;
-                border: none;
-                border-radius: $radius-full;
-                font-size: $font-size-sm;
-                font-weight: 600;
-                letter-spacing: 0.02em;
-                color: $text-light-grey;
-                background: transparent;
-                cursor: pointer;
-                transition:
-                    color $transition-fast,
-                    background-color $transition-fast;
-
-                &:hover {
-                    color: $text-color;
-                }
-
-                &--active {
-                    background: $white-color;
-                    color: $primary-color;
-                    box-shadow: $shadow-sm;
-                }
+                @extend %lang-switcher-btn;
             }
         }
     }
