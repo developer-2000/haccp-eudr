@@ -357,6 +357,10 @@ onBeforeUnmount(() => {
 
                 .logo-site {
                     font-size: 33px;
+
+                    @media (max-width: 420px) {
+                        font-size: 28px;
+                    }
                 }
 
                 .logo-app {
