@@ -65,6 +65,7 @@ import {
  */
 import {
     InfoCircleTwotone,
+    ScheduleTwotone,
     UserOutlined,
     DashboardOutlined,
     FileTextOutlined,
@@ -91,7 +92,12 @@ import { ExitOutline } from "@vicons/ionicons5";
  * Иконки из библиотеки @vicons/material
  * Требуют обертки в ViconsIcon для корректного отображения
  */
-import { BusinessCenterRound } from "@vicons/material";
+import {
+    BusinessCenterRound,
+    AccountBalanceWalletTwotone,
+    WatchLaterTwotone,
+    QrCodeTwotone,
+} from "@vicons/material";
 
 /**
  * ViconsIcon - компонент-обертка из @vicons/utils
@@ -125,6 +131,7 @@ const icons = Object.freeze({
     "eye-slash": EyeSlashIcon,
     // Иконки из @vicons (требуют обертки ViconsIcon)
     "info-circle-twotone": InfoCircleTwotone,
+    "schedule-twotone": ScheduleTwotone,
     "ios-mail-unread": IosMailUnread,
     "user-outlined": UserOutlined,
     "dashboard-outlined": DashboardOutlined,
@@ -136,6 +143,9 @@ const icons = Object.freeze({
     "left-outlined": LeftOutlined,
     "exit-outline": ExitOutline,
     "business-center-round": BusinessCenterRound,
+    "account-balance-wallet-twotone": AccountBalanceWalletTwotone,
+    "watch-later-twotone": WatchLaterTwotone,
+    "qr-code-twotone": QrCodeTwotone,
 });
 
 // ============================================
@@ -198,6 +208,8 @@ const viconsIcons = [
     "left-outlined", // @vicons/antd
     "exit-outline", // @vicons/ionicons5
     "business-center-round", // @vicons/material
+    "account-balance-wallet-twotone", // @vicons/material
+    "watch-later-twotone", // @vicons/material
 ];
 
 /**
