@@ -103,9 +103,6 @@ const metricCards = [
 @use "../../../../scss/variables" as *;
 
 .metrics-section {
-    padding-top: $spacing-2xl;
-    padding-bottom: $spacing-2xl;
-
     .metrics-grid {
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));

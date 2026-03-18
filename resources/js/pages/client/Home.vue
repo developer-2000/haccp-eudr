@@ -1,10 +1,19 @@
 <template>
-    <div class="container">
-        <div class="section-container">
+    <div class="section-container-home section-container--home-hero">
+        <div class="container">
             <HeroSection />
         </div>
-        <div class="section-container">
+    </div>
+
+    <div class="section-container-home section-container--home-metrics">
+        <div class="container">
             <MetricsSection />
+        </div>
+    </div>
+
+    <div class="section-container-home section-container--home-niches">
+        <div class="container">
+            <NichesSection />
         </div>
     </div>
 </template>
@@ -16,6 +25,25 @@ defineOptions({
 
 import HeroSection from "@/components/client/home/HeroSection.vue";
 import MetricsSection from "@/components/client/home/MetricsSection.vue";
+import NichesSection from "@/components/client/home/NichesSection.vue";
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../../../scss/variables" as *;
+
+.section-container-home {
+    padding: $font-size-4xl 0;
+}
+
+.section-container--home-hero {
+    background-color: $bg-gray;
+}
+
+.section-container--home-metrics {
+    background-color: $bg-light-primary;
+}
+
+.section-container--home-niches {
+    background-color: $bg-light-grey;
+}
+</style>
