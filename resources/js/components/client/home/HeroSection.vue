@@ -3,15 +3,13 @@
         <!-- Left Content -->
         <div class="hero-section__left">
             <h1>
-                Comply Easily with
+                {{ $t("home.hero.title_line1") }}
                 <br />
-                HACCP + EUDR Software
+                {{ $t("home.hero.title_line2") }}
             </h1>
             <p class="hero-section__description">
-                Grow your coffee shop, bakery, butcher shop
-                <strong>
-                    or any small food production – fully adaptable.
-                </strong>
+                {{ $t("home.hero.description_prefix") }}
+                <strong>{{ $t("home.hero.description_emphasis") }}</strong>
             </p>
             <div class="hero-section__buttons">
                 <button
@@ -24,7 +22,7 @@
                     class="btn-client btn-outline-primary"
                     @click="goToDemo"
                 >
-                    View Demo
+                    {{ $t("home.hero.view_demo") }}
                 </button>
             </div>
         </div>
@@ -33,7 +31,7 @@
         <div class="hero-section__right">
             <img
                 :src="'/images/devices.png'"
-                alt="Devices"
+                :alt="$t('home.hero.devices_alt')"
                 class="hero-image"
             />
         </div>

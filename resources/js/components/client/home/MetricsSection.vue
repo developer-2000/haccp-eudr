@@ -48,6 +48,9 @@ defineOptions({
 });
 
 import Icon from "@/components/Icon.vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 /**
  * Описывает набор карточек с метриками,
@@ -59,41 +62,65 @@ const metricCards = [
         id: "profit",
         iconName: "account-balance-wallet-twotone",
         iconClass: "metric-icon--wallet",
-        title: "Профит",
+        title: t("home.metrics.profit.title"),
         lines: [
-            { word: "Конкуренты → ", value: "€99+ /мес" },
-            { word: "Мы → ", value: "€49/мес" },
+            {
+                word: t("home.metrics.profit.line1.word"),
+                value: t("home.metrics.profit.line1.value"),
+            },
+            {
+                word: t("home.metrics.profit.line2.word"),
+                value: t("home.metrics.profit.line2.value"),
+            },
         ],
-        right: "€600/год",
+        right: t("home.metrics.profit.right"),
     },
     {
         id: "inspection",
         iconName: "schedule-twotone",
         iconClass: "metric-icon--inspection",
-        title: "Инспекция 100%",
+        title: t("home.metrics.inspection.title"),
         lines: [
-            { word: "Сканирует QR → ", value: "видит ВСЁ" },
-            { word: "Без → ", value: "логина/регистрации" },
+            {
+                word: t("home.metrics.inspection.line1.word"),
+                value: t("home.metrics.inspection.line1.value"),
+            },
+            {
+                word: t("home.metrics.inspection.line2.word"),
+                value: t("home.metrics.inspection.line2.value"),
+            },
         ],
     },
     {
         id: "time",
         iconName: "watch-later-twotone",
         iconClass: "metric-icon--time",
-        title: "Свободных +2ч в день",
+        title: t("home.metrics.time.title"),
         lines: [
-            { word: "Телефон → ", value: "2 мин/чек-лист" },
-            { word: "1 клик → ", value: "запись сохранена" },
+            {
+                word: t("home.metrics.time.line1.word"),
+                value: t("home.metrics.time.line1.value"),
+            },
+            {
+                word: t("home.metrics.time.line2.word"),
+                value: t("home.metrics.time.line2.value"),
+            },
         ],
     },
     {
         id: "eudr",
         iconName: "qr-code-twotone",
         iconClass: "metric-icon--eudr",
-        title: "EUDR QR",
+        title: t("home.metrics.eudr.title"),
         lines: [
-            { word: "Berlin → ", value: "Paris" },
-            { word: "Авто-QR → ", value: "на каждую партию" },
+            {
+                word: t("home.metrics.eudr.line1.word"),
+                value: t("home.metrics.eudr.line1.value"),
+            },
+            {
+                word: t("home.metrics.eudr.line2.word"),
+                value: t("home.metrics.eudr.line2.value"),
+            },
         ],
     },
 ];

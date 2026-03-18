@@ -2,19 +2,19 @@
     <section class="survey-cta" aria-label="Survey CTA">
         <div class="survey-cta__content">
             <h2 class="survey-cta__title">
-                Расскажите, как ведёте HACCP/EUDR
+                {{ $t("home.survey_cta.title") }}
                 <span class="survey-cta__title-secondary">
-                    настроим прототип под вас
+                    {{ $t("home.survey_cta.title_secondary") }}
                 </span>
             </h2>
 
             <button
                 type="button"
                 class="btn-client btn-success survey-cta__button"
-                aria-label="Заполнить опрос (5 минут)"
+                :aria-label="$t('home.survey_cta.button_aria_label')"
                 @click="goToSurvey"
             >
-                Заполнить опрос (5 минут)
+                {{ $t("home.survey_cta.button_text") }}
             </button>
         </div>
     </section>

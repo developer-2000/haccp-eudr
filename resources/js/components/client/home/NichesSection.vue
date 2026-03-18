@@ -58,9 +58,11 @@ defineOptions({
 });
 
 import { useRouter, useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 const route = useRoute();
+const { t } = useI18n();
 
 /**
  * Возвращает текущую локаль из параметров маршрута.
@@ -90,42 +92,54 @@ const niches = [
     {
         id: "coffee",
         emoji: "☕",
-        title: "COFFEE",
-        subtitle: "Roastery",
-        points: ["195°C ростер", "+15°C зерно", "EUDR QR"],
-        result: "Гигиена + экспорт без головной боли",
-        cta: "ДЕМО",
+        title: t("home.niches.coffee.title"),
+        subtitle: t("home.niches.coffee.subtitle"),
+        points: [
+            t("home.niches.coffee.points.roaster_195C"),
+            t("home.niches.coffee.points.grain_plus_15C"),
+            t("home.niches.coffee.points.eudr_qr"),
+        ],
+        result: t("home.niches.coffee.result"),
+        cta: t("home.niches.coffee.cta"),
     },
     {
         id: "bakery",
         emoji: "🍞",
-        title: "BAKERY",
-        subtitle: "Artisan",
-        points: ["26°C тесто", "core 95°C", "опара +21°C"],
-        result: "HACCP автоматически, без бумаги",
-        cta: "ДЕМО",
+        title: t("home.niches.bakery.title"),
+        subtitle: t("home.niches.bakery.subtitle"),
+        points: [
+            t("home.niches.bakery.points.dough_26C"),
+            t("home.niches.bakery.points.core_95C"),
+            t("home.niches.bakery.points.starter_plus21C"),
+        ],
+        result: t("home.niches.bakery.result"),
+        cta: t("home.niches.bakery.cta"),
     },
     {
         id: "meat",
         emoji: "🥩",
-        title: "MEAT",
-        subtitle: "Butcher",
-        points: ["−18°C замороз", "дезинфекция", "EUDR QR"],
-        result: "Температура + traceability",
-        cta: "ДЕМО",
+        title: t("home.niches.meat.title"),
+        subtitle: t("home.niches.meat.subtitle"),
+        points: [
+            t("home.niches.meat.points.frozen_minus18C"),
+            t("home.niches.meat.points.disinfection"),
+            t("home.niches.meat.points.eudr_qr"),
+        ],
+        result: t("home.niches.meat.result"),
+        cta: t("home.niches.meat.cta"),
     },
     {
         id: "other",
         emoji: "💼",
-        title: "ДРУГИЕ НИШИ",
-        subtitle: "Хочешь €29 вместо €49?",
+        title: t("home.niches.other.title"),
+        subtitle: t("home.niches.other.subtitle"),
         points: [
-            "Пройди опрос 1 минута",
-            "CCP под твой бизнес",
-            "30% скидка навсегда",
+            t("home.niches.other.points.survey_5_min"),
+            t("home.niches.other.points.ccp_for_your_business"),
+            t("home.niches.other.points.discount_30_forever"),
         ],
-        result: "Адаптируем под ТЕБЯ",
-        cta: "ПРОЙТИ ОПРОС",
+        result: t("home.niches.other.result"),
+        cta: t("home.niches.other.cta"),
     },
 ];
 </script>
@@ -175,7 +189,6 @@ const niches = [
 
     &:hover {
         box-shadow: $shadow-sm-md;
-        //border-color: rgba($accent-primary, 0.35);
     }
 
     .niche-card__header {
@@ -217,12 +230,14 @@ const niches = [
     .niche-card__result {
         margin: 0;
         font-size: $font-size-sm;
-        color: $text-dark-grey;
+        color: $text-color;
+        font-weight: 500;
     }
 
     .niche-card__cta {
         align-self: flex-end;
         margin-top: auto;
+        background: $bg-dark-grey;
     }
 
     .niche-card__other-title {
@@ -259,11 +274,11 @@ const niches = [
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url("/images/man1.jpg");
+    background-image: url("/images/man.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.25;
+    opacity: 0.15;
     pointer-events: none;
 }
 
