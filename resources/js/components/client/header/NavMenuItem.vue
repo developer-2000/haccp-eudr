@@ -177,7 +177,7 @@ const handleItemClick = () => {
     }
 
     &:hover .nav-link {
-        background-color: rgba($primary-color, 0.05);
+        background-color: rgba($accent-primary, 0.05);
         text-decoration: none;
     }
 
@@ -201,15 +201,15 @@ const handleItemClick = () => {
     position: relative;
 
     &:hover {
-        color: $primary-color;
-        background-color: rgba($primary-color, 0.05);
+        color: $accent-primary;
+        background-color: rgba($accent-primary, 0.05);
         text-decoration: none;
     }
 
     /* Только ссылка на текущую страницу без хеша (на /en не подсвечиваем /en#how-it-works) */
     &.nav-link--exact-page {
-        color: $primary-color;
-        background-color: rgba($primary-color, 0.05);
+        color: $accent-primary;
+        background-color: rgba($accent-primary, 0.05);
         text-decoration: none;
         pointer-events: none;
         cursor: default;
@@ -247,8 +247,8 @@ const handleItemClick = () => {
             background-color $transition-fast;
 
         &:hover {
-            color: $primary-color;
-            background-color: rgba($primary-color, 0.05);
+            color: $accent-primary;
+            background-color: rgba($accent-primary, 0.05);
         }
 
         .mobile-menu-item-arrow {
@@ -303,13 +303,13 @@ const handleItemClick = () => {
         background-color $transition-fast;
 
     &:hover {
-        color: $primary-color;
-        background-color: rgba($primary-color, 0.05);
+        color: $accent-primary;
+        background-color: rgba($accent-primary, 0.05);
     }
 
     &.mobile-menu-item-simple--exact-page {
-        color: $primary-color;
-        background-color: rgba($primary-color, 0.05);
+        color: $accent-primary;
+        background-color: rgba($accent-primary, 0.05);
         pointer-events: none;
         cursor: default;
     }

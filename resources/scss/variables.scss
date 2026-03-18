@@ -2,39 +2,29 @@
 // Стилевые цвета сайта
 // ============================================
 // Акцентные цвета
-$primary-color: #1062b9;
-$primary-color-dark: #1058a4;
-$success-color: #22c55e;
-$success-color-dark: #16a34a;
-$color-points: #4f8fd8;
-
+$accent-primary: #1062b9;
+$accent-primary-dark: #1058a4;
+$accent-success: #22c55e;
+$accent-success-dark: #16a34a;
+$accent-points: #4f8fd8;
 
 // Цвета текста
 $text-color: #273a55;
-$text-light-w-grey: #9ca3af;
 $text-light-grey: #6b7280;
 $text-dark-grey: #4b5563;
 $text-logo: #249969;
 
 // Цвета фона
-$white-color: #ffffff;
+$bg-white: #ffffff;
 $bg-gray: #fbfbfb;
-$color-orange-light: #fde6c0;
 $bg-light-primary: #f2f7fd;
 $bg-light-grey: #e9e9e9;
-$naive-bg-color: rgba(237, 247, 242, 1);
+$bg-dark-grey: #EFEFEF;
 
 // Цвета границ
 $border-color: #e5e7eb;
-$border-dark-color: #c3c3c3;
 $text-red: #d03050;
 $text-green: #18a058;
-
-// Цвета для задач HACCP
-$task-incomplete-bg: rgba(239, 68, 68, 0.1);
-$task-incomplete-border: rgba(239, 68, 68, 0.3);
-$task-completed-bg: rgba(34, 197, 94, 0.1);
-$task-completed-border: rgba(34, 197, 94, 0.3);
 
 // Typography
 $font-family-rubik: "Rubik", sans-serif;

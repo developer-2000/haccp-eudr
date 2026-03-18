@@ -349,8 +349,8 @@ onBeforeUnmount(() => {
     }
 
     &.lang-switcher__btn--active {
-        background: $white-color;
-        color: $primary-color;
+        background: $bg-white;
+        color: $accent-primary;
         box-shadow: $shadow-sm;
     }
 }

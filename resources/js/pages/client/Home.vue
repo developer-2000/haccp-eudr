@@ -43,7 +43,7 @@ import NichesSection from "@/components/client/home/NichesSection.vue";
     background-color: $bg-light-primary;
 }
 
-.section-container--home-niches {
-    background-color: $bg-light-grey;
-}
+//.section-container--home-niches {
+//    background-color: $bg-light-grey;
+//}
 </style>

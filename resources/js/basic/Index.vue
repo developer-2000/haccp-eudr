@@ -4,8 +4,8 @@
             <Header />
             <main class="main-content">
                 <router-view />
+                <Footer />
             </main>
-            <Footer />
         </div>
     </n-message-provider>
 </template>

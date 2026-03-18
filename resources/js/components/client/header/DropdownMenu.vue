@@ -306,7 +306,7 @@ const handleClick = () => {
     top: calc(100% + 25px);
     border: 1px solid $border-color;
     left: 0;
-    background-color: $white-color;
+    background-color: $bg-white;
     border-radius: $radius-lg;
     box-shadow: $shadow-xl;
     padding: $spacing-md;
@@ -335,22 +335,22 @@ const handleClick = () => {
     }
 
     &::-webkit-scrollbar-thumb {
-        background: rgba($primary-color, 0.3);
+        background: rgba($accent-primary, 0.3);
         border-radius: $radius-full;
         transition: background $transition-fast;
 
         &:hover {
-            background: rgba($primary-color, 0.5);
+            background: rgba($accent-primary, 0.5);
         }
 
         &:active {
-            background: $primary-color;
+            background: $accent-primary;
         }
     }
 
     // Стили для скроллбара (Firefox)
     scrollbar-width: thin;
-    scrollbar-color: rgba($primary-color, 0.3) $bg-gray;
+    scrollbar-color: rgba($accent-primary, 0.3) $bg-gray;
 
     &.dropdown-menu-columns {
         display: flex;
@@ -380,7 +380,7 @@ const handleClick = () => {
         font-weight: 600;
         margin-bottom: $spacing-md;
         padding-bottom: $spacing-sm;
-        border-bottom: 2px solid $primary-color;
+        border-bottom: 2px solid $accent-primary;
     }
 
     .dropdown-item {
@@ -392,7 +392,7 @@ const handleClick = () => {
         color: inherit;
 
         &:hover {
-            background-color: rgba($primary-color, 0.05);
+            background-color: rgba($accent-primary, 0.05);
         }
 
         &:not(:last-child) {
@@ -415,14 +415,14 @@ const handleClick = () => {
     .dropdown-link {
         display: inline-block;
         margin: 12px 0 12px 16px;
-        color: $primary-color;
+        color: $accent-primary;
         text-decoration: none;
         font-size: $font-size-sm;
         font-weight: 500;
         transition: color $transition-fast;
 
         &:hover {
-            color: $primary-color-dark;
+            color: $accent-primary-dark;
         }
     }
 }
@@ -436,7 +436,7 @@ const handleClick = () => {
         font-size: $font-size-sm;
         font-weight: 600;
         color: $text-color;
-        background: $white-color;
+        background: $bg-white;
         padding-top: 15px;
     }
     .mobile-menu-column-title:first-child {
@@ -454,7 +454,7 @@ const handleClick = () => {
     background-color: $bg-light-primary;
 
     &:hover {
-        background-color: rgba($primary-color, 0.05);
+        background-color: rgba($accent-primary, 0.05);
     }
 
     .mobile-menu-subitem-title {
@@ -473,18 +473,18 @@ const handleClick = () => {
 
 .mobile-menu-subitem-link {
     display: inline-block;
-    color: $primary-color;
+    color: $accent-primary;
     text-decoration: none;
     font-size: $font-size-sm;
     font-weight: 500;
     transition: color $transition-fast;
-    background: $white-color;
+    background: $bg-white;
     width: 100%;
     margin: 0;
     padding: 8px 0 8px 16px;
 
     &:hover {
-        color: $primary-color-dark;
+        color: $accent-primary-dark;
     }
 }
 </style>

@@ -95,13 +95,13 @@ h1 {
 }
 
 a {
-    color: $primary-color-dark;
+    color: $accent-primary-dark;
     text-decoration: none;
     font-size: $font-size-lg;
     font-weight: 600;
     &:hover {
         text-decoration: underline;
-        color: $primary-color;
+        color: $accent-primary;
     }
 }
 
@@ -185,29 +185,29 @@ p {
     cursor: pointer;
     border: none;
     font-weight: 500;
-    color: $white-color;
+    color: $bg-white;
     letter-spacing: 0.01em;
 }
 
 .btn-primary {
-    background-color: $primary-color;
+    background-color: $accent-primary;
 
     &:hover {
-        background-color: $primary-color-dark;
+        background-color: $accent-primary-dark;
     }
 }
 
 .btn-success {
-    background-color: $success-color;
+    background-color: $accent-success;
 
     &:hover {
-        background-color: $success-color-dark;
+        background-color: $accent-success-dark;
     }
 }
 
 .btn-outline-primary {
-    border: 1px solid $primary-color;
-    color: $primary-color;
+    border: 1px solid $accent-primary;
+    color: $accent-primary;
     background-color: transparent;
 
     &:hover {
@@ -217,12 +217,12 @@ p {
 
 .btn-text {
     background: none;
-    color: $primary-color-dark;
+    color: $accent-primary-dark;
     font-weight: 500;
     padding: 0;
     font-size: $font-size-lg;
 
     &:hover {
-        color: $primary-color;
+        color: $accent-primary;
     }
 }

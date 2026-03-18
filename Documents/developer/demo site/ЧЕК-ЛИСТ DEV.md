@@ -14,7 +14,7 @@
 
 - **Акценты:** `$primary-color: #1062b9`, `$success-color: #22c55e`, `$text-logo: #249969`
 - **Текст:** `$text-color: #273a55`, `$text-light-grey`, `$text-dark-grey`
-- **Фон:** `$bg-gray: #fbfbfb`, `$bg-light-primary`, `$white-color`
+- **Фон:** `$bg-gray: #fbfbfb`, `$bg-light-primary`, `$bg-white`
 - **HACCP-статусы:** `$task-incomplete-*` (красный оттенок), `$task-completed-*` (зелёный)
 - **Типографика:** `$font-family-rubik`, размеры от `$font-size-xs` до `$font-size-4xl`
 - **Spacing:** `$spacing-xs` … `$spacing-2xl`

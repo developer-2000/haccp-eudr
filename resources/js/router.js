@@ -4,9 +4,6 @@ import Home from "./pages/client/Home.vue";
 import About from "./pages/client/About.vue";
 import SurveyPlaceholder from "./pages/client/SurveyPlaceholder.vue";
 import DemoPlaceholder from "./pages/client/DemoPlaceholder.vue";
-import PersonalPanel from "./basic/PersonalPanel.vue";
-import AdminIndex from "./pages/admin/Index.vue";
-import SettingsHaccp from "./pages/admin/SettingsHaccp.vue";
 
 const routes = [
     { path: "/", redirect: "/en" },
@@ -33,22 +30,6 @@ const routes = [
                 path: "demo",
                 name: "Demo",
                 component: DemoPlaceholder,
-            },
-        ],
-    },
-    {
-        path: "/personal-panel",
-        component: PersonalPanel,
-        children: [
-            {
-                path: "",
-                name: "PersonalPanel",
-                component: AdminIndex,
-            },
-            {
-                path: "settings-haccp",
-                name: "SettingsHaccp",
-                component: SettingsHaccp,
             },
         ],
     },

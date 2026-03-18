@@ -160,7 +160,7 @@ const niches = [
 }
 
 .niche-card {
-    background-color: $white-color;
+    background-color: $bg-dark-grey;
     border: 1px solid $border-color;
     border-radius: $radius-xl;
     box-shadow: $shadow-sm;
@@ -175,7 +175,7 @@ const niches = [
 
     &:hover {
         box-shadow: $shadow-sm-md;
-        border-color: rgba($primary-color, 0.35);
+        //border-color: rgba($accent-primary, 0.35);
     }
 
     .niche-card__header {
@@ -193,7 +193,7 @@ const niches = [
         margin: 0;
         font-size: $font-size-2xl;
         font-weight: 700;
-        color: $text-color;
+        color: $text-logo;
         letter-spacing: 0.02em;
     }
 
@@ -201,7 +201,7 @@ const niches = [
         margin: 2px 0 0;
         font-size: $font-size-sm;
         font-weight: 600;
-        color: $text-light-grey;
+        color: $text-dark-grey;
     }
 
     .niche-card__points {
@@ -217,7 +217,7 @@ const niches = [
     .niche-card__result {
         margin: 0;
         font-size: $font-size-sm;
-        color: $text-light-grey;
+        color: $text-dark-grey;
     }
 
     .niche-card__cta {

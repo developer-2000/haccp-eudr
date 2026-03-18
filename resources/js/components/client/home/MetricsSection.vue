@@ -121,7 +121,7 @@ const metricCards = [
 
     .metric-card {
         min-height: 202px;
-        background-color: $white-color;
+        background-color: $bg-white;
         border: 1px solid $border-color;
         border-radius: $radius-xl;
         box-shadow: $shadow-sm;
@@ -229,7 +229,7 @@ const metricCards = [
     .metric-details--accent {
         font-size: 20px;
         font-weight: 600;
-        color: $primary-color-dark;
+        color: $accent-primary-dark;
         text-align: right;
     }
 }
