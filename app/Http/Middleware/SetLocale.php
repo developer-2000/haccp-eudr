@@ -41,14 +41,33 @@ class SetLocale
         $request->session()->put('locale', $locale);
         App::setLocale($locale);
 
-        // два языка для переключателя: 1) текущая локаль, 2) всегда язык браузера (если совпадает — fallback)
+        // два языка для переключателя: 1) текущая локаль, 2) detected/fallback из списка
+        // Важно: если fallback совпал с текущей локалью, берем "любой другой" из доступных.
         $browserLang = $fromBrowser ?? app(LocaleDetector::class)->detect($request);
-        $second = ($browserLang !== null && $browserLang !== $locale)
-            ? $browserLang
-            : (isset($countries['en']) ? 'en' : config('app.fallback_locale'));
-        if ($second === $locale || !isset($countries[$second])) {
-            $second = $main !== $locale ? $main : config('app.fallback_locale');
+        $fallbackLocale = config('app.fallback_locale');
+
+        $second = null;
+        if (
+            $browserLang !== null
+            && $browserLang !== $locale
+            && isset($countries[$browserLang])
+        ) {
+            $second = $browserLang;
+        } elseif (
+            $fallbackLocale
+            && $fallbackLocale !== $locale
+            && isset($countries[$fallbackLocale])
+        ) {
+            $second = $fallbackLocale;
+        } else {
+            foreach ($available as $candidate) {
+                if ($candidate !== $locale) {
+                    $second = $candidate;
+                    break;
+                }
+            }
         }
+
         $two = array_values(array_unique(array_filter([$locale, $second])));
 
         // [['code' => 'en', 'prefix' => 'EN', 'name' => 'English'], ...]
