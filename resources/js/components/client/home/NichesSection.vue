@@ -249,5 +249,28 @@ const niches = [
     }
 }
 
+.niche-card.niche-card--other {
+    position: relative;
+    overflow: hidden;
+}
+
+.niche-card.niche-card--other::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("/images/man1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.niche-card.niche-card--other > * {
+    position: relative;
+    z-index: 1;
+}
+
 </style>
 
