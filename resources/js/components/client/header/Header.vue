@@ -393,7 +393,7 @@ onBeforeUnmount(() => {
                 .logo-app {
                     font-weight: 500;
                     font-size: 14px;
-                    background-color: #fbec9c;
+                    background-color: $bg-yellow;
                     padding: 2px 6px;
                     border-radius: 4px;
                     text-transform: uppercase;

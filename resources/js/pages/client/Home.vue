@@ -16,6 +16,12 @@
             <NichesSection />
         </div>
     </div>
+
+    <div class="section-container-home section-container--home-survey-cta">
+        <div class="container">
+            <SurveyCtaSection />
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -26,6 +32,7 @@ defineOptions({
 import HeroSection from "@/components/client/home/HeroSection.vue";
 import MetricsSection from "@/components/client/home/MetricsSection.vue";
 import NichesSection from "@/components/client/home/NichesSection.vue";
+import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -39,11 +46,12 @@ import NichesSection from "@/components/client/home/NichesSection.vue";
     background-color: $bg-gray;
 }
 
-.section-container--home-metrics {
+.section-container--home-metrics{
     background-color: $bg-light-primary;
 }
 
-//.section-container--home-niches {
-//    background-color: $bg-light-grey;
-//}
+.section-container-home.section-container--home-survey-cta{
+    background-color: $bg-yellow;
+}
+
 </style>
