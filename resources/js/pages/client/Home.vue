@@ -1,7 +1,11 @@
 <template>
     <div class="container">
-        <HeroSection />
-        <MetricsSection />
+        <div class="section-container">
+            <HeroSection />
+        </div>
+        <div class="section-container">
+            <MetricsSection />
+        </div>
     </div>
 </template>
 

@@ -1,60 +1,13 @@
 <template>
-    <section class="section-container metrics-section">
+    <section class="metrics-section">
         <div class="metrics-grid">
-            <!-- Профит -->
-            <article class="metric-card">
-                <div class="metric-card-header">
-                    <div class="metric-icon metric-icon--wallet">
-                        <Icon
-                            name="account-balance-wallet-twotone"
-                            aria-hidden="true"
-                        />
-                    </div>
-                    <h2 class="metric-title metric-title--profit">
-                        Профит
-                    </h2>
-                </div>
-                <div class="metric-card-body metric-card-body--savings">
-                    <div class="metric-card-body-col metric-card-body-col--left">
-                        <p class="metric-line">
-                            <span class="metric-bold">
-                                Конкуренты:
-                            </span>
-                            <span class="metric-text">
-                                €99+ /мес
-                            </span>
-                        </p>
-                        <p class="metric-line">
-                            <span class="metric-bold">
-                                Мы:
-                            </span>
-                            <span class="metric-text">
-                                €49/мес
-                            </span>
-                        </p>
-                    </div>
-                    <div class="metric-card-body-col metric-card-body-col--right">
-                        <p class="metric-line metric-details--accent">
-                            €1,100/год × 3+ бизнесов
-                        </p>
-                    </div>
-                </div>
-            </article>
-
             <article
                 v-for="metric in metricCards"
                 :key="metric.id"
                 class="metric-card"
             >
                 <div class="metric-card-header">
-                    <div
-                        class="metric-icon"
-                        :class="{
-                            'metric-icon--time': metric.id === 'time',
-                            'metric-icon--inspection': metric.id === 'inspection',
-                            'metric-icon--eudr': metric.id === 'eudr',
-                        }"
-                    >
+                    <div class="metric-icon" :class="metric.iconClass">
                         <Icon
                             :name="metric.iconName"
                             aria-hidden="true"
@@ -64,13 +17,25 @@
                         {{ metric.title }}
                     </h2>
                 </div>
-                <div class="metric-card-body">
-                    <p class="metric-line">
-                        {{ metric.description }}
-                    </p>
-                    <p class="metric-details">
-                        {{ metric.details }}
-                    </p>
+                <div class="metric-card-body metric-card-body--savings">
+                    <div class="metric-card-body-col metric-card-body-col--left">
+                        <p v-for="(line, idx) in metric.lines" :key="idx" class="metric-line">
+                            <span class="metric-bold">
+                                {{ line.word }}
+                            </span>
+                            <span class="metric-text">
+                                {{ line.value }}
+                            </span>
+                        </p>
+                    </div>
+                    <div
+                        v-if="metric.right"
+                        class="metric-card-body-col metric-card-body-col--right"
+                    >
+                        <p class="metric-line metric-details--accent">
+                            {{ metric.right }}
+                        </p>
+                    </div>
                 </div>
             </article>
         </div>
@@ -91,25 +56,45 @@ import Icon from "@/components/Icon.vue";
  */
 const metricCards = [
     {
-        id: "time",
-        iconName: "watch-later-twotone",
-        title: "+2ч в день на человека",
-        description: "Чек-листы вместо бумаги",
-        details: "",
+        id: "profit",
+        iconName: "account-balance-wallet-twotone",
+        iconClass: "metric-icon--wallet",
+        title: "Профит",
+        lines: [
+            { word: "Конкуренты → ", value: "€99+ /мес" },
+            { word: "Мы → ", value: "€49/мес" },
+        ],
+        right: "€600/год",
     },
     {
         id: "inspection",
         iconName: "schedule-twotone",
-        title: "100% инспекционно ready",
-        description: "Ссылка инспектору без логина",
-        details: "",
+        iconClass: "metric-icon--inspection",
+        title: "Инспекция 100%",
+        lines: [
+            { word: "Сканирует QR → ", value: "видит ВСЁ" },
+            { word: "Без → ", value: "логина/регистрации" },
+        ],
+    },
+    {
+        id: "time",
+        iconName: "watch-later-twotone",
+        iconClass: "metric-icon--time",
+        title: "Свободных +2ч в день",
+        lines: [
+            { word: "Телефон → ", value: "2 мин/чек-лист" },
+            { word: "1 клик → ", value: "запись сохранена" },
+        ],
     },
     {
         id: "eudr",
         iconName: "qr-code-twotone",
-        title: "EUDR QR готов Berlin-Paris",
-        description: "По каждой партии",
-        details: "",
+        iconClass: "metric-icon--eudr",
+        title: "EUDR QR",
+        lines: [
+            { word: "Berlin → ", value: "Paris" },
+            { word: "Авто-QR → ", value: "на каждую партию" },
+        ],
     },
 ];
 </script>
@@ -174,14 +159,35 @@ const metricCards = [
             width: 50px;
             height: 50px;
         }
+
+        :deep(svg) {
+            width: 50px;
+            height: 50px;
+        }
+
+        @media (max-width: 500px) {
+            width: 45px;
+            :deep(.xicon svg) {
+                width: 45px;
+                height: 45px;
+            }
+            :deep(svg) {
+                width: 45px;
+                height: 45px;
+            }
+        }
     }
 
     .metric-title {
         font-size: $font-size-2-25xl;
-        line-height: 40px;
+        line-height: 28px;
         font-weight: 700;
-        color: $text-color;
         margin: 0;
+
+        @media (max-width: 500px) {
+            font-size: $font-size-2xl;
+            font-weight: 600;
+        }
     }
 
     .metric-card-body--savings {
@@ -189,6 +195,12 @@ const metricCards = [
         align-items: center;
         gap: $spacing-md;
         margin-top: 15px;
+        min-width: 100%;
+
+        @media (max-width: 900px) {
+            flex-flow: column nowrap;
+            align-items: flex-start;
+        }
     }
 
     .metric-card-body-col {
@@ -218,7 +230,9 @@ const metricCards = [
     }
 
     .metric-details--accent {
-        color: $primary-color;
+        font-size: 20px;
+        font-weight: 600;
+        color: $primary-color-dark;
         text-align: right;
     }
 }

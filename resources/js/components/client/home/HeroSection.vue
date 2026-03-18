@@ -1,5 +1,5 @@
 <template>
-    <div class="section-container hero-section__content">
+    <div class="hero-section__content">
         <!-- Left Content -->
         <div class="hero-section__left">
             <h1>
