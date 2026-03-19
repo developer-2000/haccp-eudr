@@ -8,7 +8,7 @@ const navConfig = {
     menu: [
         {
             label: "messages.nav.menu.how_it_works",
-            link: "/#how-it-works",
+            link: "/how-it-works",
             hasDropdown: false,
         },
         {

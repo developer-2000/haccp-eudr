@@ -87,6 +87,7 @@ import { IosMailUnread } from "@vicons/ionicons4";
  * Требуют обертки в ViconsIcon для корректного отображения
  */
 import { ExitOutline } from "@vicons/ionicons5";
+import { TagExport } from "@vicons/carbon";
 
 /**
  * Иконки из библиотеки @vicons/material
@@ -95,6 +96,10 @@ import { ExitOutline } from "@vicons/ionicons5";
 import {
     BusinessCenterRound,
     AccountBalanceWalletTwotone,
+    CoffeeMakerTwotone,
+    DashboardTwotone,
+    LaptopMacTwotone,
+    SmartphoneTwotone,
     WatchLaterTwotone,
     QrCodeTwotone,
 } from "@vicons/material";
@@ -142,8 +147,13 @@ const icons = Object.freeze({
     "right-outlined": RightOutlined,
     "left-outlined": LeftOutlined,
     "exit-outline": ExitOutline,
+    "tag-export": TagExport,
     "business-center-round": BusinessCenterRound,
     "account-balance-wallet-twotone": AccountBalanceWalletTwotone,
+    "coffee-maker-twotone": CoffeeMakerTwotone,
+    "dashboard-twotone": DashboardTwotone,
+    "laptop-mac-twotone": LaptopMacTwotone,
+    "smartphone-twotone": SmartphoneTwotone,
     "watch-later-twotone": WatchLaterTwotone,
     "qr-code-twotone": QrCodeTwotone,
 });
@@ -207,8 +217,13 @@ const viconsIcons = [
     "right-outlined", // @vicons/antd
     "left-outlined", // @vicons/antd
     "exit-outline", // @vicons/ionicons5
+    "tag-export", // @vicons/carbon
     "business-center-round", // @vicons/material
     "account-balance-wallet-twotone", // @vicons/material
+    "coffee-maker-twotone", // @vicons/material
+    "dashboard-twotone", // @vicons/material
+    "laptop-mac-twotone", // @vicons/material
+    "smartphone-twotone", // @vicons/material
     "watch-later-twotone", // @vicons/material
 ];
 

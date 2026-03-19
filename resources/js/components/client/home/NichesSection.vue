@@ -237,7 +237,6 @@ const niches = [
     .niche-card__cta {
         align-self: flex-end;
         margin-top: auto;
-        background: $bg-dark-grey;
     }
 
     .niche-card__other-title {

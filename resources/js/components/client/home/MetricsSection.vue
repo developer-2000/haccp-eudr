@@ -23,9 +23,7 @@
                             <span class="metric-bold">
                                 {{ line.word }}
                             </span>
-                            <span class="metric-text">
-                                {{ line.value }}
-                            </span>
+                            <span class="metric-text" v-html="formatMetricValue(line.value, line.highlight)" />
                         </p>
                     </div>
                     <div
@@ -52,6 +50,29 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
+/** Highlight classes for price amounts in metric lines */
+const PRICE_HIGHLIGHT_CLASS = {
+    competitor: "red-text",
+    ours: "green-text",
+};
+
+/**
+ * Wraps the first €-price in value with a highlight span.
+ * @param {string} value - Raw text (e.g. "€99+ /month")
+ * @param {'competitor'|'ours'} highlight - Which highlight class to use
+ * @returns {string} HTML string with wrapped price, or escaped value if no highlight
+ */
+function formatMetricValue(value, highlight) {
+    if (!highlight || !PRICE_HIGHLIGHT_CLASS[highlight]) {
+        return value;
+    }
+    const cssClass = PRICE_HIGHLIGHT_CLASS[highlight];
+    return value.replace(
+        /€[\d,]+(?:\+)?/,
+        (match) => `<span class="${cssClass}">${match}</span>`
+    );
+}
+
 /**
  * Описывает набор карточек с метриками,
  * используемых в секции METRICS на главной странице.
@@ -67,10 +88,12 @@ const metricCards = [
             {
                 word: t("home.metrics.profit.line1.word"),
                 value: t("home.metrics.profit.line1.value"),
+                highlight: "competitor",
             },
             {
                 word: t("home.metrics.profit.line2.word"),
                 value: t("home.metrics.profit.line2.value"),
+                highlight: "ours",
             },
         ],
         right: t("home.metrics.profit.right"),
@@ -177,6 +200,7 @@ const metricCards = [
         :deep(.xicon) {
             width: auto;
             height: auto;
+            margin-left: -5px;
         }
 
         :deep(.xicon svg) {
@@ -202,6 +226,10 @@ const metricCards = [
         }
     }
 
+    .metric-icon--inspection,
+    .metric-icon--eudr{
+        margin-left: -5px;
+    }
     .metric-title {
         font-size: $font-size-2-25xl;
         line-height: 28px;
@@ -258,6 +286,14 @@ const metricCards = [
         font-weight: 600;
         color: $accent-primary-dark;
         text-align: right;
+    }
+
+    .red-text {
+        font-weight: 500;
+    }
+
+    .green-text {
+        font-weight: 500;
     }
 }
 </style>

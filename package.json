@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@heroicons/vue": "^2.2.0",
+        "@vicons/carbon": "^0.13.0",
         "libphonenumber-js": "^1.12.33",
         "naive-ui": "^2.43.2",
         "pinia": "^3.0.4",
