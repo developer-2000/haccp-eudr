@@ -4,7 +4,7 @@
             <article
                 v-for="niche in niches"
                 :key="niche.id"
-                class="niche-card"
+                class="niche-card card-shadow"
                 :class="{ 'niche-card--other': niche.id === 'other' }"
             >
                 <div class="niche-card__header">
@@ -177,19 +177,14 @@ const niches = [
     background-color: $bg-dark-grey;
     border: 1px solid $border-color;
     border-radius: $radius-xl;
-    box-shadow: $shadow-sm;
     padding: $spacing-xl;
     display: flex;
     flex-direction: column;
     gap: $spacing-md;
     height: 100%;
     min-height: 320px;
-    transition: box-shadow $transition-base, border-color $transition-base;
+    transition: border-color $transition-base;
     width: 100%;
-
-    &:hover {
-        box-shadow: $shadow-sm-md;
-    }
 
     .niche-card__header {
         display: flex;

@@ -50,4 +50,8 @@ import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
     background-color: $bg-light-primary;
 }
 
+.section-container--home-survey-cta{
+    background-color: $accent-primary;
+}
+
 </style>

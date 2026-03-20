@@ -1,12 +1,12 @@
 <template>
     <section class="advantages-section">
         <div class="container">
-            <h2 class="advantages-section__heading">ЧТО ВЫ ПОЛУЧАЕТЕ</h2>
+            <h2 class="advantages-section__heading">WHAT YOU GET</h2>
             <div class="advantages-section__grid">
                 <article
                     v-for="cat in advantageCategories"
                     :key="cat.id"
-                    class="advantage-card"
+                    class="advantage-card card-shadow"
                 >
                     <h3 class="advantage-card__title">{{ cat.title }}</h3>
                     <ul class="advantage-card__list">
@@ -28,30 +28,59 @@ defineOptions({
  */
 const advantageCategories = [
     {
-        id: "time",
-        title: "⏰ Время + Эффективность",
-        points: ["+2ч/день на человека", "1 клик = запись сохранена", "Масштабирование без доп. персонала"],
+        id: "setup-speed",
+        title: "🚀 30 minutes = everything ready",
+        points: [
+            "Downloaded → chose niche → CCP auto",
+            "Notifications + recipes set up",
+            "System works without consultants"
+        ]
     },
     {
-        id: "accuracy",
-        title: "✅ Точность 0% ошибок",
-        points: ["Нет pencil whipping", "Bluetooth авто-фиксация температур", "Реал-тайм алерты отклонений"],
+        id: "full-control",
+        title: "🔍 Full control 24/7",
+        points: [
+            "All temperatures + tasks in 1 app",
+            "Fridges/cooking/sanitation",
+            "Bluetooth auto + AI risks"
+        ]
     },
     {
-        id: "inspection",
-        title: "📋 Инспекции",
-        points: ["100% готовность, QR без логина", "PDF экспорт 1 клик", "98% compliance dashboard"],
+        id: "smart-checklist",
+        title: "📱 Checklist like Instagram",
+        points: [
+            "1 click + photo/voice/GPS",
+            "Offline sync + audit trail",
+            "2 people confirm → no fraud"
+        ]
     },
     {
-        id: "eudr",
-        title: "🌍 EUDR 2026",
-        points: ["QR traceability на каждую партию", "Berlin→Paris compliance", "Штрафы €0"],
+        id: "inspector-proof",
+        title: "🔗 Inspector scans → OK",
+        points: [
+            "QR → dashboard without presence",
+            "PDF in 1 click instead of 3 days of panic",
+            "€0 fines (HACCP + EUDR)"
+        ]
     },
     {
-        id: "money",
-        title: "💰 Экономия",
-        points: ["€49/мес вместо €99+", "€600/год на бизнес", "Нет консультантов €800/год"],
+        id: "pro-dashboard",
+        title: "📊 Dashboard like Apple",
+        points: [
+            "All data 1 screen + cross-device",
+            "Push alerts + drag&drop widgets",
+            "Dark/Light + log search"
+        ]
     },
+    {
+        id: "eudr-safe",
+        title: "🌍 EUDR export without risk",
+        points: [
+            "QR + GPS + DDS for each batch",
+            "100% compliance → €0 fines",
+            "EU market open forever"
+        ]
+    }
 ];
 </script>
 
@@ -87,14 +116,9 @@ const advantageCategories = [
 
 .advantage-card {
     padding: $spacing-xl;
-    background-color: $bg-white;
+    background-color: $bg-style-white;
     border: 1px solid $border-color;
     border-radius: $radius-xl;
-    transition: box-shadow $transition-base;
-
-    &:hover {
-        box-shadow: $shadow-md;
-    }
 }
 
 .advantage-card__title {

@@ -1,7 +1,7 @@
 <template>
     <section class="steps-section">
         <div class="container">
-            <h2 class="steps-section__heading">ШАГИ</h2>
+            <h1 class="steps-section__heading">Steps</h1>
             <div class="steps-section__list">
                 <article
                     v-for="step in steps"
@@ -10,7 +10,7 @@
                 >
                     <div class="step-block__num" aria-hidden="true">{{ step.id }}</div>
                     <div class="step-block__content">
-                        <h3 class="step-block__title">
+                        <h2 class="step-block__title">
                             <Icon
                                 v-if="step.iconName"
                                 :name="step.iconName"
@@ -18,7 +18,7 @@
                                 aria-hidden="true"
                             />
                             <span class="step-block__title-text">{{ step.title }}</span>
-                        </h3>
+                        </h2>
                         <p class="step-block__desc" :class="{ 'step-block__desc--accent': step.accent }">
                             {{ step.desc }}
                         </p>
@@ -55,59 +55,104 @@ import Icon from "@/components/Icon.vue";
 const steps = [
     {
         id: 1,
-        title: "Скачай + Setup",
+        title: "Download + Setup",
         iconName: "laptop-mac-twotone",
-        desc: "Сайт в браузере без установки + приложение на смартфон",
+        desc: "Website in browser without installation + app on smartphone",
         accent: false,
         benefits: [
-            "30 минут = твоя система готова",
-            "Выбери нишу → CCP готово",
-            "Установи уведомления",
-            "Добавь рецепты/ингредиенты",
-            "Загрузи документы/фото"
+            "30 minutes = your system is ready",
+            "Choose a niche → CCP is ready",
+            "Set up notifications",
+            "Add recipes/ingredients",
+            "Upload documents/photos"
         ],
     },
     {
         id: 2,
-        title: "CCP auto",
-        iconName: "coffee-maker-twotone",
-        desc: "Bluetooth температуры auto + авто-лог CCP",
+        title: "Monitoring",
+        iconName: "control-twotone",
+        desc: "All CCP in 1 - 24/7 deviation alerts",
         accent: false,
-        benefits: ["Нет pencil whipping"],
+        benefits: [
+            "Hourly/daily staff tasks",
+            "Room/fridge temperatures",
+            "Goods receiving + storage",
+            "Facility sanitation",
+            "Cooking temperatures",
+            "Equipment calibration",
+        ],
     },
     {
         id: 3,
-        title: "Чек-лист",
-        iconName: "schedule-twotone",
-        iconClass: "metric-icon--inspection",
-        desc: "1 клик = запись сохранена, оффлайн синхронизация позже",
+        title: "CCP Automation",
+        iconName: "coffee-maker-twotone",
+        desc: "Bluetooth thermometers + alerts + auto-logs",
         accent: false,
-        benefits: ["Оффлайн режим без срывов"],
+        benefits: [
+            "Bluetooth thermometers auto-log",
+            "Push/SMS alerts to staff",
+            "Auto-corrections on deviations",
+            "Real-time AI risk analysis",
+            "Auto report generation"
+        ],
     },
     {
         id: 4,
-        title: "QR инспектору",
-        iconName: "qr-code-twotone",
-        iconClass: "metric-icon--eudr",
-        desc: "QR инспектору без логина Berlin→Paris",
+        title: "Checklist",
+        iconName: "schedule-twotone",
+        iconClass: "metric-icon--inspection",
+        desc: "1 click = record saved + photo/voice",
         accent: false,
-        benefits: ["PDF 1 клик вместо 3 дней паники"],
+        benefits: [
+            "Offline without failures",
+            "Before/after photo (195°C) in 1 click",
+            "Voice CCP input",
+            "Second person confirmation",
+            "GPS where it was done",
+            "Auto timestamp + who did it",
+            "Audit trail for inspector",
+        ],
     },
     {
         id: 5,
-        title: "Dashboard + алерты",
-        iconName: "dashboard-twotone",
-        desc: "Авто-алерты 24/7 при отклонениях (темп >195°C)",
+        title: "QR Inspector",
+        iconName: "qr-code-twotone",
+        iconClass: "metric-icon--eudr",
+        desc: "Inspector scans → online without your presence",
         accent: false,
-        benefits: ["98% compliance dashboard"],
+        benefits: [
+            "PDF in 1 click instead of 3 days of panic",
+            "€0 fines forever",
+            "EUDR export without blocks"
+        ],
     },
     {
         id: 6,
-        title: "EUDR экспорт",
+        title: "Dashboard + Alerts",
+        iconName: "dashboard-twotone",
+        desc: "Intuitive UX + sync across all devices",
+        accent: false,
+        benefits: [
+            "All data on 1 screen",
+            "Push alerts → 0 misses",
+            "Phone/tablet/PC sync",
+            "Search across all logs",
+            "Drag&drop widgets",
+            "Notification personalization",
+            "Dark/Light mode auto",
+        ],
+    },
+    {
+        id: 7,
+        title: "EUDR Export",
         iconName: "tag-export",
-        desc: "100% EUDR готовность и экспорт на каждую партию",
-        accent: true,
-        benefits: ["Штрафы €0 навсегда"],
+        desc: "Each batch = QR + GPS + DDS ready",
+        accent: false,
+        benefits: [
+            "100% EUDR compliance",
+            "€0 fines (4% turnover)",
+            "EU export without blocks"
+        ],
     },
 ];
 </script>
@@ -141,7 +186,7 @@ const steps = [
 .steps-section__list::before {
     content: "";
     position: absolute;
-    left: 53px;
+    left: 52px;
     top: 88px;
     bottom: 88px;
     width: 2px;
@@ -154,7 +199,7 @@ const steps = [
     display: flex;
     align-items: stretch;
     gap: $spacing-lg;
-    background-color: $bg-white;
+    background-color: $bg-style-white;
     border: 1px solid $border-color;
     border-radius: $radius-xl;
     padding: $spacing-lg;
@@ -177,9 +222,9 @@ const steps = [
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: -24px 0 -24px 0;
+    margin: -24px 0 -25px 0;
     background-color: $accent-primary;
-    color: $bg-white;
+    color: $bg-style-white;
     font-size: $font-size-2xl;
     font-weight: 700;
 }
@@ -199,13 +244,14 @@ const steps = [
     display: flex;
     align-items: center;
     gap: $spacing-sm;
+    min-width: 0;
+    line-height: 35px;
 
     .step-block__icon {
         width: 50px;
         display: flex;
         margin-bottom: 0;
     }
-
 
     :deep(.xicon) {
         width: auto;
@@ -222,8 +268,8 @@ const steps = [
         height: 50px;
     }
 
-    @media (max-width: 500px) {
-        width: 45px;
+    @media (max-width: 530px) {
+        font-size: 30px;
 
         :deep(.xicon svg) {
             width: 45px;
@@ -238,7 +284,10 @@ const steps = [
 }
 
 .step-block__title-text {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .step-block__desc {

@@ -349,7 +349,7 @@ onBeforeUnmount(() => {
     }
 
     &.lang-switcher__btn--active {
-        background: $bg-white;
+        background: $bg-style-white;
         color: $accent-primary;
         box-shadow: $shadow-sm;
     }

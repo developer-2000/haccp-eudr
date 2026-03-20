@@ -2,7 +2,11 @@
     <div class="how-works-page">
         <StepsSection />
         <AdvantagesSection />
-        <FinalCtaSection />
+        <div class="section-container-home section-container--home-survey-cta">
+            <div class="container">
+                <SurveyCtaSection />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -11,5 +15,17 @@ defineOptions({ name: "HowItWorks" });
 
 import StepsSection from "@/components/client/how-it-works/StepsSection.vue";
 import AdvantagesSection from "@/components/client/how-it-works/AdvantagesSection.vue";
-import FinalCtaSection from "@/components/client/how-it-works/FinalCtaSection.vue";
+import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
 </script>
+
+<style lang="scss" scoped>
+@use "../../../scss/variables" as *;
+
+.section-container-home {
+    padding: $font-size-4xl 0;
+}
+.section-container--home-survey-cta{
+    background-color: $accent-primary;
+}
+
+</style>

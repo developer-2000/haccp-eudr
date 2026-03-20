@@ -66,6 +66,7 @@ import {
 import {
     InfoCircleTwotone,
     ScheduleTwotone,
+    ControlTwotone,
     UserOutlined,
     DashboardOutlined,
     FileTextOutlined,
@@ -137,6 +138,7 @@ const icons = Object.freeze({
     // Иконки из @vicons (требуют обертки ViconsIcon)
     "info-circle-twotone": InfoCircleTwotone,
     "schedule-twotone": ScheduleTwotone,
+    "control-twotone": ControlTwotone,
     "ios-mail-unread": IosMailUnread,
     "user-outlined": UserOutlined,
     "dashboard-outlined": DashboardOutlined,
@@ -208,6 +210,7 @@ const iconComponent = computed(() => icons[props.name] || null);
 const viconsIcons = [
     "info-circle-twotone", // @vicons/antd
     "ios-mail-unread", // @vicons/ionicons4
+    "control-twotone", // @vicons/antd
     "user-outlined", // @vicons/antd
     "dashboard-outlined", // @vicons/antd
     "file-text-outlined", // @vicons/antd

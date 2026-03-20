@@ -70,12 +70,12 @@ function goToSurvey() {
     font-size: $font-size-2-25xl;
     line-height: 1.2;
     font-weight: 800;
-    color: $text-color;
+    color: $bg-style-white;
 }
 
 .survey-cta__title-secondary {
     display: block;
-    color: $text-dark-grey;
+    color: $text-light-w-grey;
     font-weight: 400;
 }
 

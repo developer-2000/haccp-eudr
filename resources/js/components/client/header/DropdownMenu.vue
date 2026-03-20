@@ -306,7 +306,7 @@ const handleClick = () => {
     top: calc(100% + 25px);
     border: 1px solid $border-color;
     left: 0;
-    background-color: $bg-white;
+    background-color: $bg-style-white;
     border-radius: $radius-lg;
     box-shadow: $shadow-xl;
     padding: $spacing-md;
@@ -436,7 +436,7 @@ const handleClick = () => {
         font-size: $font-size-sm;
         font-weight: 600;
         color: $text-color;
-        background: $bg-white;
+        background: $bg-style-white;
         padding-top: 15px;
     }
     .mobile-menu-column-title:first-child {
@@ -478,7 +478,7 @@ const handleClick = () => {
     font-size: $font-size-sm;
     font-weight: 500;
     transition: color $transition-fast;
-    background: $bg-white;
+    background: $bg-style-white;
     width: 100%;
     margin: 0;
     padding: 8px 0 8px 16px;

@@ -171,7 +171,7 @@ const metricCards = [
 
     .metric-card {
         min-height: 202px;
-        background-color: $bg-white;
+        background-color: $bg-style-white;
         border: 1px solid $border-color;
         border-radius: $radius-xl;
         box-shadow: $shadow-sm;

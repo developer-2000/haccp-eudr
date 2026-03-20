@@ -185,7 +185,7 @@ p {
     cursor: pointer;
     border: none;
     font-weight: 500;
-    color: $bg-white;
+    color: $bg-style-white;
     letter-spacing: 0.01em;
 }
 
@@ -233,4 +233,13 @@ p {
 
 .green-text {
     color: $text-green;
+}
+
+.card-shadow{
+    box-shadow: $shadow-sm;
+    transition: box-shadow $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-sm-md;
+    }
 }
