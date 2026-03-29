@@ -12,15 +12,18 @@
     },
     "dependencies": {
         "@heroicons/vue": "^2.2.0",
+        "@tabler/icons-vue": "^3.41.0",
         "@vicons/carbon": "^0.13.0",
         "libphonenumber-js": "^1.12.33",
         "naive-ui": "^2.43.2",
         "pinia": "^3.0.4",
+        "qrcode": "^1.5.4",
         "uuid": "^13.0.0",
         "vue": "^3.4.0",
         "vue-i18n": "^11.3.0",
         "vue-router": "^4.6.4",
-        "vue-tel-num-input": "^0.1.10"
+        "vue-tel-num-input": "^0.1.10",
+        "vue3-toastify": "^0.2.9"
     },
     "devDependencies": {
         "@babel/core": "^7.28.5",
@@ -29,6 +32,7 @@
         "@carbon/icons-vue": "^10.99.1",
         "@eslint/js": "^9.39.2",
         "@vicons/antd": "^0.13.0",
+        "@vicons/fluent": "^0.13.0",
         "@vicons/ionicons4": "^0.13.0",
         "@vicons/ionicons5": "^0.13.0",
         "@vicons/material": "^0.13.0",

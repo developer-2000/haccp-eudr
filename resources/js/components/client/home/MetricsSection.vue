@@ -8,22 +8,33 @@
             >
                 <div class="metric-card-header">
                     <div class="metric-icon" :class="metric.iconClass">
-                        <Icon
-                            :name="metric.iconName"
-                            aria-hidden="true"
-                        />
+                        <Icon :name="metric.iconName" aria-hidden="true" />
                     </div>
                     <h2 class="metric-title">
                         {{ metric.title }}
                     </h2>
                 </div>
                 <div class="metric-card-body metric-card-body--savings">
-                    <div class="metric-card-body-col metric-card-body-col--left">
-                        <p v-for="(line, idx) in metric.lines" :key="idx" class="metric-line">
+                    <div
+                        class="metric-card-body-col metric-card-body-col--left"
+                    >
+                        <p
+                            v-for="(line, idx) in metric.lines"
+                            :key="idx"
+                            class="metric-line"
+                        >
                             <span class="metric-bold">
                                 {{ line.word }}
                             </span>
-                            <span class="metric-text" v-html="formatMetricValue(line.value, line.highlight)" />
+                            <span
+                                class="metric-text"
+                                v-html="
+                                    formatMetricValue(
+                                        line.value,
+                                        line.highlight,
+                                    )
+                                "
+                            />
                         </p>
                     </div>
                     <div
@@ -69,7 +80,7 @@ function formatMetricValue(value, highlight) {
     const cssClass = PRICE_HIGHLIGHT_CLASS[highlight];
     return value.replace(
         /€[\d,]+(?:\+)?/,
-        (match) => `<span class="${cssClass}">${match}</span>`
+        (match) => `<span class="${cssClass}">${match}</span>`,
     );
 }
 
@@ -227,7 +238,7 @@ const metricCards = [
     }
 
     .metric-icon--inspection,
-    .metric-icon--eudr{
+    .metric-icon--eudr {
         margin-left: -5px;
     }
     .metric-title {
@@ -272,7 +283,7 @@ const metricCards = [
         color: $text-dark-grey;
         margin-bottom: 10px;
 
-        &:last-child{
+        &:last-child {
             margin: 0;
         }
 
@@ -297,4 +308,3 @@ const metricCards = [
     }
 }
 </style>
-

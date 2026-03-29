@@ -96,7 +96,6 @@ h1 {
 
 a {
     color: $accent-primary-dark;
-    text-decoration: none;
     font-size: $font-size-lg;
     font-weight: 600;
     &:hover {
@@ -108,6 +107,29 @@ a {
 p {
     font-size: $font-size-lg;
     color: $text-light-grey;
+}
+
+button {
+    cursor: pointer;
+}
+
+button,
+.n-button,
+a {
+    text-decoration: none;
+}
+
+/**
+ * Глобальный `a:hover { text-decoration: underline }` выше по каскаду сильнее простого `a { text-decoration: none }`
+ * для состояния :hover — без явного перебоя контролы (Naive n-button как <a>, кнопки) снова подчёркиваются.
+ */
+button:hover,
+button:focus-visible,
+.n-button:hover,
+.n-button:focus-visible,
+a.n-button:hover,
+a.n-button:focus-visible {
+    text-decoration: none;
 }
 
 .vue-greeting {
@@ -166,6 +188,15 @@ p {
     }
 }
 
+.label_for_element {
+    display: inline-block;
+    margin-bottom: 7px;
+    font-size: $font-size-xs;
+    font-weight: 500;
+    color: $text-dark-grey;
+    word-break: break-word;
+}
+
 // ============================================
 // Buttons
 // ============================================
@@ -187,6 +218,13 @@ p {
     font-weight: 500;
     color: $bg-style-white;
     letter-spacing: 0.01em;
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+        text-decoration: none;
+        color: $bg-style-white;
+    }
 }
 
 .btn-primary {
@@ -211,7 +249,8 @@ p {
     background-color: transparent;
 
     &:hover {
-        background-color: $bg-light-primary;
+        background-color: $bg-light-grey;
+        color: $accent-primary-dark;
     }
 }
 
@@ -235,11 +274,17 @@ p {
     color: $text-green;
 }
 
-.card-shadow{
+.card-shadow {
     box-shadow: $shadow-sm;
     transition: box-shadow $transition-base;
 
     &:hover {
         box-shadow: $shadow-sm-md;
     }
+}
+
+.n-modal .n-card__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
 }

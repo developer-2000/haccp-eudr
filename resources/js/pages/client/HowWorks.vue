@@ -24,8 +24,7 @@ import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
 .section-container-home {
     padding: $font-size-4xl 0;
 }
-.section-container--home-survey-cta{
+.section-container--home-survey-cta {
     background-color: $accent-primary;
 }
-
 </style>

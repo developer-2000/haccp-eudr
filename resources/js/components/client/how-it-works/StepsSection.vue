@@ -8,7 +8,9 @@
                     :key="step.id"
                     class="step-block"
                 >
-                    <div class="step-block__num" aria-hidden="true">{{ step.id }}</div>
+                    <div class="step-block__num" aria-hidden="true">
+                        {{ step.id }}
+                    </div>
                     <div class="step-block__content">
                         <h2 class="step-block__title">
                             <Icon
@@ -17,9 +19,14 @@
                                 :class="['step-block__icon', step.iconClass]"
                                 aria-hidden="true"
                             />
-                            <span class="step-block__title-text">{{ step.title }}</span>
+                            <span class="step-block__title-text">{{
+                                step.title
+                            }}</span>
                         </h2>
-                        <p class="step-block__desc" :class="{ 'step-block__desc--accent': step.accent }">
+                        <p
+                            class="step-block__desc"
+                            :class="{ 'step-block__desc--accent': step.accent }"
+                        >
                             {{ step.desc }}
                         </p>
                         <ul
@@ -64,7 +71,7 @@ const steps = [
             "Choose a niche → CCP is ready",
             "Set up notifications",
             "Add recipes/ingredients",
-            "Upload documents/photos"
+            "Upload documents/photos",
         ],
     },
     {
@@ -93,7 +100,7 @@ const steps = [
             "Push/SMS alerts to staff",
             "Auto-corrections on deviations",
             "Real-time AI risk analysis",
-            "Auto report generation"
+            "Auto report generation",
         ],
     },
     {
@@ -123,7 +130,7 @@ const steps = [
         benefits: [
             "PDF in 1 click instead of 3 days of panic",
             "€0 fines forever",
-            "EUDR export without blocks"
+            "EUDR export without blocks",
         ],
     },
     {
@@ -151,7 +158,7 @@ const steps = [
         benefits: [
             "100% EUDR compliance",
             "€0 fines (4% turnover)",
-            "EU export without blocks"
+            "EU export without blocks",
         ],
     },
 ];
@@ -163,7 +170,7 @@ const steps = [
 .steps-section {
     min-height: 1000px;
     padding: $spacing-2xl 0;
-    background-color: $bg-light-primary;
+    background-color: $bg-light-grey;
 }
 
 .steps-section__heading {
@@ -295,11 +302,11 @@ const steps = [
     font-weight: 500;
     color: $text-color;
     margin: 0;
+}
 
-    &--accent {
-        color: $accent-success;
-        font-weight: 700;
-    }
+.step-block__desc--accent {
+    color: $accent-success;
+    font-weight: 700;
 }
 
 .step-block__benefits {
@@ -329,5 +336,4 @@ const steps = [
         transform: translateY(-50%);
     }
 }
-
 </style>

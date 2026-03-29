@@ -42,7 +42,9 @@
                     <!-- Переключатель языков первым пунктом, когда в шапке он скрыт (≤580px) и языков 2+ -->
                     <div class="box-switch-lang-mobile-menu">
                         <div
-                            v-if="isLangSwitcherHidden && languagesList.length > 1"
+                            v-if="
+                                isLangSwitcherHidden && languagesList.length > 1
+                            "
                             class="mobile-menu__lang"
                             role="group"
                             aria-label="Language"
@@ -52,15 +54,18 @@
                                 :key="lang.code"
                                 type="button"
                                 :class="[
-                                                    'lang-switcher__btn',
-                                                    {
-                                                        'lang-switcher__btn--active':
-                                                            currentLocale === lang.code,
-                                                    },
-                                                ]"
+                                    'lang-switcher__btn',
+                                    {
+                                        'lang-switcher__btn--active':
+                                            currentLocale === lang.code,
+                                    },
+                                ]"
                                 :aria-pressed="currentLocale === lang.code"
                                 :title="lang.name"
-                                @click="setLocale(lang.code); closeMobileMenu()"
+                                @click="
+                                    setLocale(lang.code);
+                                    closeMobileMenu();
+                                "
                             >
                                 {{ lang.prefix }}
                             </button>
@@ -128,9 +133,11 @@
                             class="nav-cta-icon"
                         />
                         <template v-else>
-                            <span class="nav-cta-line">{{ $t('messages.nav.cta.leave_request') }}</span>
+                            <span class="nav-cta-line">{{
+                                $t("messages.nav.cta.leave_request")
+                            }}</span>
                             <span class="nav-cta-line nav-cta-line--accent">{{
-                                $t('messages.nav.cta.tell_about_business')
+                                $t("messages.nav.cta.tell_about_business")
                             }}</span>
                         </template>
                     </button>
@@ -179,10 +186,10 @@ const {
 } = useMobileMenu();
 
 const { isMobile } = useBreakpoint(1101);
-    /** true при ширине <= 1280px — показываем только иконку в CTA */
-    const { isMobile: isCtaIconOnly } = useBreakpoint(1350);
-    /** true при ширине <= 580px — переключатель языков скрыт в шапке, показываем в моб. меню */
-    const { isMobile: isLangSwitcherHidden } = useBreakpoint(581);
+/** true при ширине <= 1280px — показываем только иконку в CTA */
+const { isMobile: isCtaIconOnly } = useBreakpoint(1350);
+/** true при ширине <= 580px — переключатель языков скрыт в шапке, показываем в моб. меню */
+const { isMobile: isLangSwitcherHidden } = useBreakpoint(581);
 
 const router = useRouter();
 const route = useRoute();
@@ -190,7 +197,14 @@ const route = useRoute();
 // ============================================
 // Locale (из URL :locale или data-locale)
 // ============================================
-import { ref, onMounted, onBeforeUnmount, computed, watch, shallowRef } from "vue";
+import {
+    ref,
+    onMounted,
+    onBeforeUnmount,
+    computed,
+    watch,
+    shallowRef,
+} from "vue";
 
 const initialLocale = ref("en");
 const defaultLanguages = [];
@@ -250,6 +264,14 @@ const safeMenu = computed(() => {
             "/" +
             locale +
             (item.link.startsWith("/") ? item.link : "/" + item.link),
+        activePathPrefix:
+            item.activePathPrefix != null && item.activePathPrefix !== ""
+                ? "/" +
+                  locale +
+                  (String(item.activePathPrefix).startsWith("/")
+                      ? item.activePathPrefix
+                      : "/" + item.activePathPrefix)
+                : null,
     }));
 });
 
@@ -515,7 +537,7 @@ onBeforeUnmount(() => {
         pointer-events: auto;
     }
 
-    .box-switch-lang-mobile-menu{
+    .box-switch-lang-mobile-menu {
         gap: 2px;
         margin: 20px 0 0;
         display: flex;
@@ -532,7 +554,6 @@ onBeforeUnmount(() => {
             }
         }
     }
-
 }
 
 // Mobile styles (бургер и мобильное меню показываются при ширине ≤1100px)

@@ -3,11 +3,23 @@ import Index from "./basic/Index.vue";
 import Home from "./pages/client/Home.vue";
 import About from "./pages/client/About.vue";
 import SurveyPlaceholder from "./pages/client/SurveyPlaceholder.vue";
-import DemoPlaceholder from "./pages/client/DemoPlaceholder.vue";
+import DemoPlaceholder from "./pages/client/Demo.vue";
 import HowItWorks from "./pages/client/HowWorks.vue";
+import BatchPublic from "./pages/client/BatchPublic.vue";
+import DailyReportPublic from "./pages/client/DailyReportPublic.vue";
 
 const routes = [
     { path: "/", redirect: "/en" },
+    {
+        path: "/batch/:batchId",
+        name: "BatchPublic",
+        component: BatchPublic,
+    },
+    {
+        path: "/report/:date",
+        name: "DailyReportPublic",
+        component: DailyReportPublic,
+    },
     {
         path: "/:locale",
         component: Index,
@@ -34,6 +46,13 @@ const routes = [
             },
             {
                 path: "demo",
+                redirect: (to) => ({
+                    path: `/${to.params.locale}/demo/dashboard`,
+                    replace: true,
+                }),
+            },
+            {
+                path: "demo/:section",
                 name: "Demo",
                 component: DemoPlaceholder,
             },

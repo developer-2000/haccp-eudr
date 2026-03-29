@@ -6,22 +6,13 @@
 
 ---
 
-## Что реально подключено в коде **✅ Выполнено**
+## Что подключено в коде **✅ Выполнено**
 
 Страница `resources/js/pages/client/HowWorks.vue` сейчас рендерит только:
 
 1. `StepsSection`
 2. `AdvantagesSection`
 3. `SurveyCtaSection` (из home)
-
-Что было удалено и не используется:
-
-- `HeroIntroSection`
-- `ProblemSection`
-- `SolutionSection`
-- `MetricsSection` (how-it-works)
-- `TestimonialsSection`
-- `FinalCtaSection`
 
 ---
 
@@ -90,19 +81,12 @@
 ## Технические примечания **✅ Выполнено**
 
 - Для иконок в шагах добавлены и используются:
-  - `laptop-mac-twotone`
-  - `coffee-maker-twotone`
-  - `dashboard-twotone`
-  - `control-twotone`
-  - `tag-export`
+    - `laptop-mac-twotone`
+    - `coffee-maker-twotone`
+    - `dashboard-twotone`
+    - `control-twotone`
+    - `tag-export`
 - `@vicons/carbon` установлен (для `tag-export`)
 - `ControlTwotone` берётся из `@vicons/antd`
 
 ---
-
-## Что важно помнить при следующих правках
-
-1. Обновлять этот документ только по факту изменений в `HowWorks.vue` и `how-it-works/*`.
-2. Не возвращать старые удалённые секции без явной задачи.
-3. Если меняются тексты шагов, синхронно обновлять этот md.
-

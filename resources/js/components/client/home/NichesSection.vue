@@ -77,7 +77,7 @@ function getCurrentLocale() {
  * Используется в карточках ниш.
  */
 function goToDemo() {
-    router.push("/" + getCurrentLocale() + "/demo");
+    router.push("/" + getCurrentLocale() + "/demo/dashboard");
 }
 
 /**
@@ -280,6 +280,4 @@ const niches = [
     position: relative;
     z-index: 1;
 }
-
 </style>
-

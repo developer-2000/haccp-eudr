@@ -451,7 +451,7 @@ const handleClick = () => {
     text-decoration: none;
     color: inherit;
     transition: background-color $transition-fast;
-    background-color: $bg-light-primary;
+    background-color: $bg-light-grey;
 
     &:hover {
         background-color: rgba($accent-primary, 0.05);

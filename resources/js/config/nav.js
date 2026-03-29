@@ -12,13 +12,9 @@ const navConfig = {
             hasDropdown: false,
         },
         {
-            label: "messages.nav.menu.for_whom",
-            link: "/#for-whom",
-            hasDropdown: false,
-        },
-        {
             label: "messages.nav.menu.demo",
-            link: "/demo",
+            link: "/demo/dashboard",
+            activePathPrefix: "/demo",
             hasDropdown: false,
         },
         {

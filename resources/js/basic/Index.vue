@@ -1,7 +1,8 @@
 <template>
-    <n-message-provider placement="top-right">
+    <n-message-provider placement="top">
         <div class="app-wrapper">
             <Header />
+            <GrainCoolingNotificationBanner />
             <main class="main-content">
                 <router-view />
             </main>
@@ -11,6 +12,7 @@
 
 <script setup>
 import Header from "../components/client/header/Header.vue";
+import GrainCoolingNotificationBanner from "@/features/demo/task_grain_cooling/GrainCoolingNotificationBanner.vue";
 
 defineOptions({
     name: "Index",

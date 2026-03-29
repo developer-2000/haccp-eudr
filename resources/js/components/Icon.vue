@@ -11,7 +11,9 @@
  *
  * Компонент Icon предоставляет единый интерфейс для работы с иконками из разных библиотек:
  * - @heroicons/vue - иконки Heroicons (chevron-down, search, bars, close, check, info, eye, eye-slash)
+ * - @tabler/icons-vue - Tabler (report-search / IconReportSearch, …)
  * - @vicons/antd - иконки Ant Design (info-circle-twotone, user-outlined, dashboard-outlined, и т.д.)
+ * - @vicons/fluent - Fluent UI System Icons (people-community-24-filled, …)
  * - @vicons/ionicons4 - иконки Ionicons v4 (ios-mail-unread)
  * - @vicons/ionicons5 - иконки Ionicons v5 (exit-outline)
  *
@@ -59,6 +61,8 @@ import {
     EyeSlashIcon,
 } from "@heroicons/vue/24/outline";
 
+import { IconReportSearch } from "@tabler/icons-vue";
+
 /**
  * Иконки из библиотеки @vicons/antd
  * Требуют обертки в ViconsIcon для корректного отображения
@@ -88,7 +92,7 @@ import { IosMailUnread } from "@vicons/ionicons4";
  * Требуют обертки в ViconsIcon для корректного отображения
  */
 import { ExitOutline } from "@vicons/ionicons5";
-import { TagExport } from "@vicons/carbon";
+import { TagExport, TaskComplete } from "@vicons/carbon";
 
 /**
  * Иконки из библиотеки @vicons/material
@@ -96,6 +100,8 @@ import { TagExport } from "@vicons/carbon";
  */
 import {
     BusinessCenterRound,
+    BatteryCharging90Round,
+    AccountBalanceTwotone,
     AccountBalanceWalletTwotone,
     CoffeeMakerTwotone,
     DashboardTwotone,
@@ -103,7 +109,12 @@ import {
     SmartphoneTwotone,
     WatchLaterTwotone,
     QrCodeTwotone,
+    EventRepeatTwotone,
+    DeleteForeverTwotone,
 } from "@vicons/material";
+
+/** Fluent UI System Icons (Microsoft), через @vicons/fluent */
+import { PeopleCommunity24Filled } from "@vicons/fluent";
 
 /**
  * ViconsIcon - компонент-обертка из @vicons/utils
@@ -135,6 +146,8 @@ const icons = Object.freeze({
     info: InformationCircleIcon,
     eye: EyeIcon,
     "eye-slash": EyeSlashIcon,
+    // Tabler (@tabler/icons-vue), рендер напрямую
+    "report-search": IconReportSearch,
     // Иконки из @vicons (требуют обертки ViconsIcon)
     "info-circle-twotone": InfoCircleTwotone,
     "schedule-twotone": ScheduleTwotone,
@@ -150,7 +163,10 @@ const icons = Object.freeze({
     "left-outlined": LeftOutlined,
     "exit-outline": ExitOutline,
     "tag-export": TagExport,
+    "task-complete": TaskComplete,
     "business-center-round": BusinessCenterRound,
+    "battery-charging-90-round": BatteryCharging90Round,
+    "account-balance-twotone": AccountBalanceTwotone,
     "account-balance-wallet-twotone": AccountBalanceWalletTwotone,
     "coffee-maker-twotone": CoffeeMakerTwotone,
     "dashboard-twotone": DashboardTwotone,
@@ -158,6 +174,9 @@ const icons = Object.freeze({
     "smartphone-twotone": SmartphoneTwotone,
     "watch-later-twotone": WatchLaterTwotone,
     "qr-code-twotone": QrCodeTwotone,
+    "event-repeat-twotone": EventRepeatTwotone,
+    "delete-forever-twotone": DeleteForeverTwotone,
+    "people-community-24-filled": PeopleCommunity24Filled,
 });
 
 // ============================================
@@ -221,13 +240,19 @@ const viconsIcons = [
     "left-outlined", // @vicons/antd
     "exit-outline", // @vicons/ionicons5
     "tag-export", // @vicons/carbon
+    "task-complete", // @vicons/carbon
     "business-center-round", // @vicons/material
+    "battery-charging-90-round", // @vicons/material
+    "account-balance-twotone", // @vicons/material
     "account-balance-wallet-twotone", // @vicons/material
     "coffee-maker-twotone", // @vicons/material
     "dashboard-twotone", // @vicons/material
     "laptop-mac-twotone", // @vicons/material
     "smartphone-twotone", // @vicons/material
     "watch-later-twotone", // @vicons/material
+    "event-repeat-twotone", // @vicons/material
+    "delete-forever-twotone", // @vicons/material
+    "people-community-24-filled", // @vicons/fluent
 ];
 
 /**

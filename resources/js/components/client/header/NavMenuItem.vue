@@ -138,8 +138,16 @@ const itemDropdown = computed(() => props.item?.dropdown || null);
 
 /** Активная страница без хеша: только тогда подсвечиваем и делаем некликабельной (на /en не подсвечиваем якоря /en#...) */
 const isExactPageLink = computed(() => {
+    const prefix = props.item?.activePathPrefix;
+    if (prefix) {
+        return (
+            route.path === prefix || route.path.startsWith(`${prefix}/`)
+        );
+    }
     const link = itemLink.value;
-    const pathname = link.includes("#") ? link.slice(0, link.indexOf("#")) : link;
+    const pathname = link.includes("#")
+        ? link.slice(0, link.indexOf("#"))
+        : link;
     return route.path === pathname && !link.includes("#");
 });
 

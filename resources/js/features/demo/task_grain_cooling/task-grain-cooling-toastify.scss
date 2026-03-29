@@ -1,0 +1,28 @@
+@use "../../../../scss/variables" as *;
+
+.Toastify__toast-container.Toastify__toast-container--top-center,
+#top-center.Toastify__toast-container {
+    padding: 0;
+}
+
+/* Оформление обёртки vue3-toastify — тёмная тема (сценарий task_grain_cooling). */
+.Toastify__toast.global-task-reminder-toast-wrap {
+    cursor: default;
+    padding: $spacing-md $spacing-md-lg;
+    background: #1a1f2e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: $radius-lg;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    color: #e8eaef;
+}
+
+.Toastify__toast.global-task-reminder-toast-wrap .Toastify__toast-body {
+    padding: 0;
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.Toastify__toast.global-task-reminder-toast-wrap .Toastify__toast-text {
+    width: 100%;
+}

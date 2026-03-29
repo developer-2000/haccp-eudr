@@ -18,6 +18,7 @@
  * @typedef {Object} NavMenuItem
  * @property {string} label - Название пункта меню
  * @property {string} link - Ссылка пункта меню
+ * @property {string} [activePathPrefix] - без локали, напр. `/demo` — подсветка пункта для всех путей под этим префиксом
  * @property {boolean} [hasDropdown] - Есть ли у пункта dropdown
  * @property {NavDropdown} [dropdown] - Данные dropdown
  *

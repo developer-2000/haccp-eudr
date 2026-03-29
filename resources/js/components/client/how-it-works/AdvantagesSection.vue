@@ -10,7 +10,9 @@
                 >
                     <h3 class="advantage-card__title">{{ cat.title }}</h3>
                     <ul class="advantage-card__list">
-                        <li v-for="(point, i) in cat.points" :key="i">{{ point }}</li>
+                        <li v-for="(point, i) in cat.points" :key="i">
+                            {{ point }}
+                        </li>
                     </ul>
                 </article>
             </div>
@@ -33,8 +35,8 @@ const advantageCategories = [
         points: [
             "Downloaded → chose niche → CCP auto",
             "Notifications + recipes set up",
-            "System works without consultants"
-        ]
+            "System works without consultants",
+        ],
     },
     {
         id: "full-control",
@@ -42,8 +44,8 @@ const advantageCategories = [
         points: [
             "All temperatures + tasks in 1 app",
             "Fridges/cooking/sanitation",
-            "Bluetooth auto + AI risks"
-        ]
+            "Bluetooth auto + AI risks",
+        ],
     },
     {
         id: "smart-checklist",
@@ -51,8 +53,8 @@ const advantageCategories = [
         points: [
             "1 click + photo/voice/GPS",
             "Offline sync + audit trail",
-            "2 people confirm → no fraud"
-        ]
+            "2 people confirm → no fraud",
+        ],
     },
     {
         id: "inspector-proof",
@@ -60,8 +62,8 @@ const advantageCategories = [
         points: [
             "QR → dashboard without presence",
             "PDF in 1 click instead of 3 days of panic",
-            "€0 fines (HACCP + EUDR)"
-        ]
+            "€0 fines (HACCP + EUDR)",
+        ],
     },
     {
         id: "pro-dashboard",
@@ -69,8 +71,8 @@ const advantageCategories = [
         points: [
             "All data 1 screen + cross-device",
             "Push alerts + drag&drop widgets",
-            "Dark/Light + log search"
-        ]
+            "Dark/Light + log search",
+        ],
     },
     {
         id: "eudr-safe",
@@ -78,9 +80,9 @@ const advantageCategories = [
         points: [
             "QR + GPS + DDS for each batch",
             "100% compliance → €0 fines",
-            "EU market open forever"
-        ]
-    }
+            "EU market open forever",
+        ],
+    },
 ];
 </script>
 

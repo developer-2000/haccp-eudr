@@ -16,7 +16,7 @@
                     class="btn-client btn-success btn-success-hero"
                     @click="goToSurvey"
                 >
-                    {{ $t('messages.nav.cta.tell_about_business') }}
+                    {{ $t("messages.nav.cta.tell_about_business") }}
                 </button>
                 <button
                     class="btn-client btn-outline-primary"
@@ -55,7 +55,7 @@ const goToSurvey = () => {
 };
 
 const goToDemo = () => {
-    router.push("/" + getCurrentLocale() + "/demo");
+    router.push("/" + getCurrentLocale() + "/demo/dashboard");
 };
 </script>
 
@@ -140,4 +140,3 @@ const goToDemo = () => {
     display: block;
 }
 </style>
-
