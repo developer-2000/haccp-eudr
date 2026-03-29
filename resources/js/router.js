@@ -12,11 +12,21 @@ const routes = [
     { path: "/", redirect: "/en" },
     {
         path: "/batch/:batchId",
-        name: "BatchPublic",
+        name: "BatchPublicRoot",
         component: BatchPublic,
     },
     {
         path: "/report/:date",
+        name: "DailyReportPublicRoot",
+        component: DailyReportPublic,
+    },
+    {
+        path: "/:locale/batch/:batchId",
+        name: "BatchPublic",
+        component: BatchPublic,
+    },
+    {
+        path: "/:locale/report/:date",
         name: "DailyReportPublic",
         component: DailyReportPublic,
     },

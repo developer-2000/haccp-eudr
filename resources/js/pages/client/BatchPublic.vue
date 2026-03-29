@@ -4,9 +4,6 @@
         :class="{ 'batch-public--pdf-open': wantsAutoPrint }"
     >
         <div v-if="record" class="batch-public__toolbar no-print">
-            <RouterLink class="batch-public__back" :to="homePath"
-                >← На главную</RouterLink
-            >
             <button
                 type="button"
                 class="batch-public__print btn-client btn-outline-primary"
@@ -182,8 +179,7 @@
                 </div>
                 <p class="batch-public__disclaimer">{{ record.disclaimer }}</p>
                 <p class="batch-public__url no-print">
-                    Публичная ссылка:
-                    <a :href="canonicalUrl">{{ canonicalUrl }}</a>
+                    Публичная ссылка: {{ canonicalUrl }}
                 </p>
             </footer>
         </article>
@@ -206,7 +202,20 @@ const record = computed(() => getBatchPublicRecord(batchId.value));
 
 const homePath = "/en";
 
-const canonicalUrl = computed(() => buildBatchPublicUrl(batchId.value));
+const localeForCanonical = computed(() => {
+    const p = route.params.locale;
+    if (typeof p === "string" && p.length) {
+        return p;
+    }
+    if (typeof window !== "undefined" && typeof window.locale === "string") {
+        return window.locale;
+    }
+    return null;
+});
+
+const canonicalUrl = computed(() =>
+    buildBatchPublicUrl(batchId.value, localeForCanonical.value),
+);
 
 /** Открытие из модалки EUDR с ?print=1 — сразу готовим диалог печати / PDF. */
 const wantsAutoPrint = computed(() => route.query.print === "1");
@@ -264,19 +273,9 @@ watch(
     margin: 0 auto $spacing-md;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: $spacing-md;
     flex-wrap: wrap;
-}
-
-.batch-public__back {
-    color: $accent-primary;
-    font-weight: 600;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
 }
 
 .batch-public__missing {
@@ -502,10 +501,7 @@ watch(
     margin: $spacing-md 0 0;
     font-size: $font-size-xs;
     word-break: break-all;
-
-    a {
-        color: $accent-primary;
-    }
+    color: $text-dark-grey;
 }
 
 @media print {

@@ -9,6 +9,6 @@ defineOptions({
     name: "App",
 });
 
-/** Сценарий «Охлаждение зерна»: старт при любой загрузке SPA (любая страница). */
+/** START Сценария «Охлаждение зерна» */
 useGrainCoolingDemoEntry();
 </script>

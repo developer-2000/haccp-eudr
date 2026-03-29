@@ -1,7 +1,5 @@
 import { reactive } from "vue";
 
-
-
 export const task_grain_cooling = reactive({
     /** Уникальный id задачи в демо-чеклистах (`checklistsByNiche[niche]`), совпадает с карточкой CCP. */
     id: "coffee-2",
@@ -15,21 +13,20 @@ export const task_grain_cooling = reactive({
      * Таймер `problem` меняет статус только у этого индекса; сброс — `unlockGrainCoolingMeasurementIndex` → снова `null`.
      */
     measurementIndex: null,
-    /** Задержка после загрузки SPA: через столько мс показать оповещение (тост). */
+    /** Задержка после загрузки SPA: через столько мс показать глобальное оповещение. */
     // initialToastDelayMs: 60000,
-    initialToastDelayMs: 5000,
+    initialToastDelayMs: 1000,
     /**
      * После показа тоста: через столько мс выставить `problem` у замера с индексом `measurementIndex`, если он ещё `pending`.
      * При показе тоста значение копируется в Pinia (`notificationProblemWindowMs`) и в sessionStorage — полоса и таймер используют снимок.
      * После смены числа на проде нужен новый фронт-бандл; на телефоне сбросьте кэш Safari/Chrome, иначе возможен старый чанк с прежней константой.
      */
-    measurementProblemDelayMs: 30000000,
-    // measurementProblemDelayMs: 5000,
-    /** Первая строка текста в глобальном тосте (подзаголовок-сигнал). */
+    measurementProblemDelayMs: 300000,
+    /** Первая строка текста в глобальном оповещении (подзаголовок-сигнал). */
     toastTitle: "Время выполнить задачу",
-    /** Вторая строка в тосте — отображаемое имя задачи (как правило = `taskTitle`). */
+    /** Вторая строка в оповещении — отображаемое имя задачи (как правило = `taskTitle`). */
     toastTaskName: "Охлаждение зерна",
-    /** Подпись кнопки закрытия тоста без перехода. */
+    /** Подпись кнопки закрытия оповещения без перехода к задаче. */
     toastButtonCloseLabel: "Закрыть",
     /** Подпись кнопки перехода на демо-страницу в секцию чек-листов. */
     toastButtonNavigateLabel: "Перейти к задаче",
@@ -39,11 +36,11 @@ export const task_grain_cooling = reactive({
      * Для тестов - sessionStorageKey - true
      * В продакшене держать `false`.
      */
-    // clearGrainCoolingSessionStorageBeforeLoad: false,
-    clearGrainCoolingSessionStorageBeforeLoad: true,
+    // clearGrainCoolingSessionStorageBeforeLoad: true,
+    clearGrainCoolingSessionStorageBeforeLoad: false,
     /** Строковый id Pinia-store сценария (первый аргумент `defineStore`). */
     piniaStoreId: "taskGrainCooling",
-    /** Имя именованного роута Vue Router при переходе из тоста на демо. */
+    /** Имя именованного роута Vue Router при переходе из оповещения на демо. */
     demoRouteName: "Demo",
     /** Значение `params.section` при переходе: сегмент URL демо-секции с чек-листами. */
     demoRouteSection: "checklists",
@@ -52,7 +49,7 @@ export const task_grain_cooling = reactive({
     /** После перехода по диплинку: запросить автооткрытие drawer по первому `pending` в модалке задачи. */
     deepLinkAutoOpenPending: true,
     /**
-     * Заглушка полной схемы: флаг «тост уже показывали» хранится в Pinia + `sessionStorage`.
+     * Заглушка полной схемы: флаг «оповещение уже показывали» хранится в Pinia + `sessionStorage`.
      * В экспортируемом объекте остаётся `null` как признак «не дублировать сюда рантайм».
      */
     notificationLaunched: null,
@@ -77,7 +74,7 @@ export const task_grain_cooling = reactive({
      */
     notificationBannerActive: null,
     /**
-     * Завершился ли отсчёт `measurementProblemDelayMs` после тоста (таймер сработал); пишется в Pinia + `sessionStorage`.
+     * Завершился ли отсчёт `measurementProblemDelayMs` после оповещения (таймер сработал); пишется в Pinia + `sessionStorage`.
      */
     notificationCountdownCompleted: null,
     /**
@@ -85,6 +82,11 @@ export const task_grain_cooling = reactive({
      * Все проверки сначала смотрят сюда; при `false` Pinia store сценария не создают.
      */
     scenarioProcessAllowed: false,
+    /**
+     * Рантайм: `useGlobalTaskReminder` регистрирует сюда отмену таймеров и закрытие оповещения при `markGrainCoolingScenarioStoredCompleted()`.
+     * @type {null | (() => void)}
+     */
+    cancelGrainCoolingReminderTimers: null,
     /**
      * После перевода замера в `problem` таймером: индекс строки (пока `measurementIndex` уже `null`).
      * Сбрасывается при новом `lockGrainCoolingMeasurementIndex` или после обработки автооткрытия модалки.

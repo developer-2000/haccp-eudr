@@ -1,9 +1,7 @@
 import { onUnmounted, watch } from "vue";
+import { useRoute } from "vue-router";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
-import {
-    hasGrainCoolingPendingMeasurement,
-    syncGrainCoolingScenarioProcessAllowed,
-} from "./applyGrainCoolingMeasurement";
+import { syncGrainCoolingScenarioProcessAllowed } from "./applyGrainCoolingMeasurement";
 import { task_grain_cooling } from "./config";
 import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
 import { useGlobalTaskReminder } from "./useGlobalTaskReminder";
@@ -12,30 +10,13 @@ import { useGlobalTaskReminder } from "./useGlobalTaskReminder";
 let demoGrainCoolingEntryActive = false;
 
 /**
- * Реакция на изменение `hasGrainCoolingPendingMeasurement`: обновляет `task_grain_cooling.scenarioProcessAllowed`
- * и сбрасывает полосу оповещения при переходе «раньше был pending → сейчас нет» (не при отсутствии прошлого `true`).
- *
- * @param {boolean} hasPending
- * @param {boolean|undefined} hadPending
- * @returns {void}
- */
-function reactToGrainCoolingPendingPresenceChange(hasPending, hadPending) {
-    task_grain_cooling.scenarioProcessAllowed = hasPending;
-    if (hasPending) {
-        return;
-    }
-    if (hadPending !== true) {
-        return;
-    }
-    useTaskGrainCoolingStore().clearNotificationBanner();
-}
-
-/**
  * Единственная точка входа сценария «Охлаждение зерна».
  * Вызывать один раз из `App.vue` — процесс стартует при заходе на сайт с любой страницы.
  *
- * Сначала: `task_grain_cooling.scenarioProcessAllowed` из `demoState` (есть ли pending у целевой задачи).
- * Затем `useGlobalTaskReminder()` — при `scenarioProcessAllowed === false` store не подключается.
+ * `task_grain_cooling.scenarioProcessAllowed` — из `demoState` (pending у целевой задачи) **и** маршрута
+ * (публичные `/batch/…`, `/report/…` с локалью — без оповещения).
+ * Затем `useGlobalTaskReminder()` — при `scenarioProcessAllowed === false` цепочка не стартует;
+ * при SPA-переходе на демо-страницу с `true` — стартует.
  */
 export function useGrainCoolingDemoEntry() {
     if (demoGrainCoolingEntryActive) {
@@ -44,13 +25,25 @@ export function useGrainCoolingDemoEntry() {
     demoGrainCoolingEntryActive = true;
 
     const { demoState } = useDemoState();
-    syncGrainCoolingScenarioProcessAllowed(demoState);
-    if (!hasGrainCoolingPendingMeasurement(demoState)) {
-        useTaskGrainCoolingStore().clearNotificationBanner();
+    const route = useRoute();
+    const grainStore = useTaskGrainCoolingStore();
+
+    function syncAndReact() {
+        syncGrainCoolingScenarioProcessAllowed(demoState, route);
+        if (!task_grain_cooling.scenarioProcessAllowed) {
+            grainStore.clearNotificationBanner();
+            if (typeof task_grain_cooling.cancelGrainCoolingReminderTimers === "function") {
+                task_grain_cooling.cancelGrainCoolingReminderTimers();
+            }
+        }
     }
+
+    syncAndReact();
+
     watch(
-        () => hasGrainCoolingPendingMeasurement(demoState),
-        reactToGrainCoolingPendingPresenceChange,
+        () => [demoState.value, route.fullPath],
+        syncAndReact,
+        { deep: true, immediate: false },
     );
 
     useGlobalTaskReminder();

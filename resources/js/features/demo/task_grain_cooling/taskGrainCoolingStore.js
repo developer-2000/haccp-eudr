@@ -1,5 +1,10 @@
 import { defineStore } from "pinia";
 import { task_grain_cooling } from "./config";
+import {
+    finalizeGrainCoolingNotificationStorage,
+    mergeGrainCoolingSessionStorage,
+    readGrainCoolingSessionStorage,
+} from "./grainCoolingSessionStorage";
 
 const STORAGE_KEY = task_grain_cooling.sessionStorageKey;
 
@@ -19,8 +24,8 @@ const STORAGE_KEY = task_grain_cooling.sessionStorageKey;
  *   notificationProblemWindowMs: number | null,
  * } | null}
  *   Распарсенный объект или `null`, если данных нет / `sessionStorage` недоступен / ошибка парсинга.
- *   `notificationFlowLogicallyComplete` — оба: тост уже был **и** отсчёт после тоста доведён до конца (`notificationCountdownCompleted`);
- *   иначе после перезагрузки снова показываем полную цепочку (тост + новый отсчёт).
+ *   `notificationFlowLogicallyComplete` — оба: оповещение уже показывали **и** отсчёт после него доведён до конца (`notificationCountdownCompleted`);
+ *   иначе после перезагрузки снова полная цепочка (оповещение + новый отсчёт до смены статуса).
  *   Полоса (`notificationBannerActive`) из хранилища **не** восстанавливается — только через `useGlobalTaskReminder`.
  */
 function loadPersistedNotification() {
@@ -32,21 +37,22 @@ function loadPersistedNotification() {
         // Позволяет в тестовом режиме перезагружать страницу для отработки работы задачи
         if (task_grain_cooling.clearGrainCoolingSessionStorageBeforeLoad) {
             sessionStorage.removeItem(STORAGE_KEY);
-        }
-
-        const raw = sessionStorage.getItem(STORAGE_KEY);
-
-        if (!raw) {
             return null;
         }
-        const data = JSON.parse(raw);
-        if (!data || typeof data !== "object") {
+
+        const data = readGrainCoolingSessionStorage();
+        if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
             return null;
         }
         const launched = Boolean(data.notificationLaunched);
         const countdownDone = Boolean(data.notificationCountdownCompleted);
-        /** Не сырой `notificationLaunched`, а «сценарий оповещения довели до конца» — иначе при reload снова тост + таймеры. */
-        const flowComplete = launched && countdownDone;
+        const scenarioTaskDone = data.status === "completed";
+        /**
+         * Полный цикл оповещения: тост + отсчёт до конца **или** пользователь внёс замер раньше таймера
+         * (`status: "completed"` в storage через `finalizeGrainCoolingNotificationStorage`).
+         */
+        const flowComplete =
+            (launched && countdownDone) || scenarioTaskDone;
         const rawWindow = data.notificationProblemWindowMs;
         const notificationProblemWindowMs =
             typeof rawWindow === "number" && Number.isFinite(rawWindow) && rawWindow >= 0
@@ -61,27 +67,14 @@ function loadPersistedNotification() {
             notificationCountdownCompleted: countdownDone,
             notificationFlowLogicallyComplete: flowComplete,
             notificationProblemWindowMs,
+            notificationLogicalCycleCompletedAt:
+                typeof data.notificationLogicalCycleCompletedAt === "string"
+                    ? data.notificationLogicalCycleCompletedAt
+                    : null,
         };
         return out;
     } catch (e) {
         return null;
-    }
-}
-
-/**
- * Сохраняет в `sessionStorage` состояние оповещения (один раз за показ тоста).
- *
- * @param {{ notificationLaunched: boolean, notificationLaunchedAt: string | null, notificationBannerActive?: boolean, notificationCountdownCompleted?: boolean, notificationProblemWindowMs?: number | null }} payload
- * @returns {void}
- */
-function persistNotification(payload) {
-    try {
-        if (typeof sessionStorage === "undefined") {
-            return;
-        }
-        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-    } catch (e) {
-        void e;
     }
 }
 
@@ -101,24 +94,24 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
         task_grain_cooling.notificationCountdownCompleted = Boolean(
             persisted?.notificationCountdownCompleted,
         );
-        return {
+        const initial = {
             /**
-             * «Тост уже был» **для блокировки повторной цепочки** — только если полный цикл в storage завершён
-             * (`notificationLaunched` + `notificationCountdownCompleted`), иначе после reload снова тост и новый отсчёт.
+             * Оповещение уже было **для блокировки повторной цепочки** — только если полный цикл в storage завершён
+             * (`notificationLaunched` + `notificationCountdownCompleted`), иначе после reload снова оповещение и новый отсчёт.
              */
             notificationLaunched: logicalComplete ?? false,
             /** ISO-время запуска оповещения; только если логически завершённый цикл, иначе `null` (новый отсчёт с нуля). */
             notificationLaunchedAt: launchedAtForUi,
             /**
-             * Полоса: только `showNotificationBannerAfterToast()` из `useGlobalTaskReminder` (не из sessionStorage при init).
+             * Полоса: только `showNotificationBannerAfterToast()` из `useGlobalTaskReminder` сразу после оповещения (не из sessionStorage при init).
              */
             notificationBannerActive: false,
             /**
-             * Отсчёт `measurementProblemDelayMs` после тоста завершился (таймер `problem` отработал).
+             * Отсчёт `measurementProblemDelayMs` после оповещения завершился (попытка смены статуса замера на `problem`).
              */
             notificationCountdownCompleted: Boolean(persisted?.notificationCountdownCompleted),
             /**
-             * Запрос на открытие задачи из глобального тоста: после перехода на чек-листы
+             * Запрос на открытие задачи из оповещения или полосы: после перехода на чек-листы
              * `ChecklistsSection` находит задачу и открывает модалку, затем сбрасывает в `null`.
              * @type {PendingDeepLink}
              */
@@ -129,35 +122,53 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
              */
             autoOpenPendingAfterTaskModal: false,
             /**
-             * Окно до `problem` в мс, зафиксированное при показе тоста (как у `setTimeout` в `useGlobalTaskReminder`).
+             * Окно до смены статуса на `problem` в мс, зафиксированное при показе оповещения (как у `setTimeout` в `useGlobalTaskReminder`).
              * `null` — до первого показа; после reload подтягивается из sessionStorage.
              */
             notificationProblemWindowMs:
                 typeof persisted?.notificationProblemWindowMs === "number"
                     ? persisted.notificationProblemWindowMs
                     : null,
+            /**
+             * ISO-время срабатывания таймера после оповещения (единственное «логическое завершение» цикла); пишется только там.
+             */
+            notificationLogicalCycleCompletedAt:
+                typeof persisted?.notificationLogicalCycleCompletedAt === "string"
+                    ? persisted.notificationLogicalCycleCompletedAt
+                    : null,
         };
+        return initial;
     },
 
     actions: {
         /**
-         * Полный снимок сценария в `sessionStorage` (ключ `task_grain_cooling.sessionStorageKey`).
+         * Снимок полей уведомления для merge в sessionStorage (промежуточные записи — без лога «завершен»).
          *
-         * @returns {void}
+         * @returns {Record<string, unknown>}
          */
-        persistGrainCoolingSession() {
-            task_grain_cooling.notificationCountdownCompleted = this.notificationCountdownCompleted;
-            persistNotification({
+        notificationSnapshotForStorage() {
+            return {
                 notificationLaunched: this.notificationLaunched,
                 notificationLaunchedAt: this.notificationLaunchedAt,
                 notificationBannerActive: this.notificationBannerActive,
                 notificationCountdownCompleted: this.notificationCountdownCompleted,
                 notificationProblemWindowMs: this.notificationProblemWindowMs,
-            });
+                notificationLogicalCycleCompletedAt: this.notificationLogicalCycleCompletedAt,
+            };
         },
 
         /**
-         * Фиксирует факт показа глобального тоста: дальше `useGlobalTaskReminder` не запускает таймер.
+         * Промежуточный persist (тост, полоса, сброс до завершения). Только `mergeGrainCoolingSessionStorage`.
+         *
+         * @returns {void}
+         */
+        persistGrainCoolingSession() {
+            task_grain_cooling.notificationCountdownCompleted = this.notificationCountdownCompleted;
+            mergeGrainCoolingSessionStorage(this.notificationSnapshotForStorage());
+        },
+
+        /**
+         * Фиксирует факт показа глобального оповещения: дальше `useGlobalTaskReminder` не запускает повторно цепочку с нуля.
          * Пишет `notificationLaunched` и ISO-время в state и в `sessionStorage`.
          *
          * @returns {void}
@@ -171,7 +182,7 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
         },
 
         /**
-         * Показать полосу под шапкой сразу после показа тоста (не при старте SPA и не по таймеру отсчёта).
+         * Показать полосу под шапкой сразу после оповещения (не при старте SPA и не по отдельному таймеру полосы).
          *
          * @returns {void}
          */
@@ -185,7 +196,7 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
         },
 
         /**
-         * Скрыть полосу и убрать из sessionStorage (сценарий завершён или больше не актуален).
+         * Скрыть полосу и убрать из sessionStorage.
          *
          * @returns {void}
          */
@@ -199,19 +210,21 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
         },
 
         /**
-         * Отсчёт после тоста (`measurementProblemDelayMs`) дошёл до конца; вызывается из таймера в `useGlobalTaskReminder`
-         * после попытки `applyGrainCoolingProblemIfPending`.
+         * Отсчёт после оповещения (`measurementProblemDelayMs`) дошёл до конца; вызывается из таймера в `useGlobalTaskReminder`
+         * после попытки `applyGrainCoolingProblemIfPending` (смена статуса замера могла произойти или нет — не важно).
+         * Единственная точка логического завершения цикла: `notificationCountdownCompleted`, метка времени в storage.
          *
          * @returns {void}
          */
         markNotificationCountdownCompleted() {
             this.notificationCountdownCompleted = true;
             task_grain_cooling.notificationCountdownCompleted = true;
-            this.persistGrainCoolingSession();
+            this.notificationLogicalCycleCompletedAt = new Date().toISOString();
+            finalizeGrainCoolingNotificationStorage(this.notificationSnapshotForStorage());
         },
 
         /**
-         * Сохраняет намерение открыть задачу на секции чек-листов (например после клика «Перейти к задаче» в тосте).
+         * Сохраняет намерение открыть задачу на секции чек-листов (например после клика «Перейти к задаче» в оповещении или на полосе).
          * `ChecklistsSection` по `pendingDeepLink` переключает нишу и открывает модалку.
          *
          * @param {string} taskId — id задачи в `checklistsByNiche[niche]`.

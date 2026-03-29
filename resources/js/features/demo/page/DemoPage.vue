@@ -399,7 +399,7 @@ const todayFormatted = computed(() => {
     align-items: flex-start;
     gap: $spacing-xl;
     padding-top: $spacing-lg;
-    padding-bottom: calc($spacing-2xl * 2);
+    padding-bottom: 40px;
 }
 
 .demo-sidebar {

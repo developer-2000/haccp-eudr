@@ -210,9 +210,17 @@ const initialLocale = ref("en");
 const defaultLanguages = [];
 
 const languagesList = ref(getLanguagesList());
-const currentLocale = computed(
-    () => route.params.locale ?? initialLocale.value,
-);
+const currentLocale = computed(() => {
+    const fromRoute = route.params.locale;
+    const knownLocales = languagesList.value.map((l) => l.code);
+    if (typeof fromRoute === "string" && knownLocales.includes(fromRoute)) {
+        return fromRoute;
+    }
+    if (knownLocales.includes(initialLocale.value)) {
+        return initialLocale.value;
+    }
+    return knownLocales[0] || "en";
+});
 
 const goToSurvey = () => {
     router.push("/" + currentLocale.value + "/survey");

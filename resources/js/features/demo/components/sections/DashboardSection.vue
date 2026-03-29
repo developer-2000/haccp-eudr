@@ -137,85 +137,90 @@ const closeTaskModal = () => {
     display: flex;
     flex-direction: column;
     gap: $spacing-lg;
-}
 
-.dashboard-metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: $spacing-md;
+    .dashboard-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: $spacing-md;
 
-    @media (max-width: 500px) {
-        grid-template-columns: 1fr;
+        @media (max-width: 500px) {
+            grid-template-columns: 1fr;
+        }
+
+        .metric-card {
+            border: 1px solid $text-light-grey;
+            border-radius: $radius-xl;
+            padding: $radius-md $radius-xl;
+            background-color: $bg-style-white;
+            transition: box-shadow $transition-base ease;
+
+            &:hover {
+                box-shadow: $shadow-sm-md;
+            }
+
+            .metric-card__label {
+                margin: 0 0 $spacing-xs;
+                font-size: $font-size-sm;
+                color: $text-dark-grey;
+            }
+
+            .metric-card__label--success {
+                color: $text-green;
+                font-weight: 600;
+            }
+
+            .metric-card__value {
+                margin: 0;
+                font-size: $font-size-2xl;
+                font-weight: 600;
+                color: $text-color;
+
+                @media (max-width: 920px) {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .metric-card--success {
+            background-color: $bg-light-grey;
+        }
+
+        .metric-card--danger {
+            border-color: rgba($text-red, 0.35);
+        }
+
+        .metric-card--warn {
+            border-color: rgba($accent-primary, 0.35);
+            background-color: rgba($bg-light-grey, 0.5);
+        }
+
     }
-}
 
-.dashboard-metrics .metric-card {
-    border: 1px solid $text-light-grey;
-    border-radius: $radius-xl;
-    padding: $radius-md $radius-xl;
-    background-color: $bg-style-white;
-    transition: box-shadow $transition-base ease;
+    .hot-tasks {
+        border: 1px solid $text-light-grey;
+        border-radius: $radius-xl;
+        background-color: $bg-style-white;
+        padding: $spacing-sm-m-m $spacing-md-lg;
 
-    &:hover {
-        box-shadow: $shadow-sm-md;
+        .hot-tasks__header {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+
+            .hot-tasks__title {
+                white-space: nowrap;
+                font-size: $font-size-xl;
+                margin-right: 10px;
+            }
+        }
+
+        .hot-tasks__list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: $spacing-sm-w;
+            overflow: visible;
+        }
     }
-}
-
-.dashboard-metrics .metric-card.metric-card--success {
-    background-color: $bg-light-grey;
-}
-
-.dashboard-metrics .metric-card.metric-card--danger {
-    border-color: rgba($text-red, 0.35);
-}
-
-.dashboard-metrics .metric-card.metric-card--warn {
-    border-color: rgba($accent-primary, 0.35);
-    background-color: rgba($bg-light-grey, 0.5);
-}
-
-.dashboard-metrics .metric-card .metric-card__label {
-    margin: 0 0 $spacing-xs;
-    font-size: $font-size-sm;
-    color: $text-dark-grey;
-}
-
-.dashboard-metrics .metric-card .metric-card__label.metric-card__label--success {
-    color: $text-green;
-    font-weight: 600;
-}
-
-.dashboard-metrics .metric-card .metric-card__value {
-    margin: 0;
-    font-size: $font-size-2xl;
-    font-weight: 700;
-    color: $text-color;
-}
-
-.hot-tasks {
-    border: 1px solid $text-light-grey;
-    border-radius: $radius-xl;
-    background-color: $bg-style-white;
-    padding: $spacing-sm-m-m $spacing-md-lg;
-}
-
-.hot-tasks .hot-tasks__header {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.hot-tasks .hot-tasks__title {
-    white-space: nowrap;
-    font-size: $font-size-xl;
-    margin-right: 10px;
-}
-
-.hot-tasks .hot-tasks__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-sm-w;
-    overflow: visible;
 }
 
 </style>

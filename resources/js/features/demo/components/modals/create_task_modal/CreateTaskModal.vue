@@ -1406,8 +1406,6 @@ const submitAddTask = () => {
         border: 1px solid $text-light-grey;
         border-radius: $radius-md;
         background-color: $bg-style-white;
-        max-height: min(52vh, 420px);
-        overflow-y: auto;
 
         .checklists-details-heading {
             margin: 0 0 $spacing-sm;

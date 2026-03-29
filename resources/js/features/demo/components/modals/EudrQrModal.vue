@@ -44,13 +44,18 @@
                             <tr>
                                 <td>Ссылка</td>
                                 <td>
-                                    <a
-                                        :href="batch.url"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                    <RouterLink
+                                        class="eudr-qr-modal__batch-link"
+                                        :to="{
+                                            name: 'BatchPublic',
+                                            params: {
+                                                locale: batchPageLocale,
+                                                batchId: batch.id,
+                                            },
+                                        }"
                                     >
-                                        {{ batch.url }}
-                                    </a>
+                                        {{ displayedBatchUrl }}
+                                    </RouterLink>
                                 </td>
                             </tr>
                         </tbody>
@@ -84,6 +89,7 @@
 <script setup>
 import QRCode from "qrcode";
 import { computed, ref, watch } from "vue";
+import { useRoute } from "vue-router";
 import { NButton, NModal, useMessage } from "naive-ui";
 import { buildBatchPublicUrl } from "@/features/demo/data/eudrBatchPublic";
 
@@ -102,8 +108,27 @@ const props = defineProps({
 
 const emit = defineEmits(["close", "action"]);
 const message = useMessage();
+const route = useRoute();
 const qrImageUrl = ref("");
 const copyField = ref(null);
+
+/** Локаль из URL демо (`/ro/demo/...`) или `window.locale` / fallback. */
+const batchPageLocale = computed(() => {
+    const p = route.params.locale;
+    if (typeof p === "string" && p.length) {
+        return p;
+    }
+    if (typeof window !== "undefined" && typeof window.locale === "string") {
+        return window.locale;
+    }
+    return "en";
+});
+
+const displayedBatchUrl = computed(() =>
+    props.batch?.id
+        ? buildBatchPublicUrl(String(props.batch.id), batchPageLocale.value)
+        : "",
+);
 
 const showModel = computed({
     get: () => props.show,
@@ -115,13 +140,15 @@ const showModel = computed({
 });
 
 watch(
-    () => props.batch,
-    async (batch) => {
-        if (!batch?.url) {
+    () => [props.batch?.id, displayedBatchUrl.value],
+    async (tuple) => {
+        const id = tuple?.[0];
+        const url = tuple?.[1];
+        if (!id || !url) {
             qrImageUrl.value = "";
             return;
         }
-        qrImageUrl.value = await QRCode.toDataURL(batch.url, {
+        qrImageUrl.value = await QRCode.toDataURL(url, {
             width: 200,
             margin: 1,
         });
@@ -154,16 +181,7 @@ const resolveAbsoluteBatchUrl = () => {
     if (!props.batch?.id) {
         return "";
     }
-    const raw =
-        typeof props.batch.url === "string" ? props.batch.url.trim() : "";
-    if (raw) {
-        try {
-            return new URL(raw, window.location.origin).href;
-        } catch {
-            return raw;
-        }
-    }
-    return buildBatchPublicUrl(props.batch.id);
+    return displayedBatchUrl.value || buildBatchPublicUrl(props.batch.id, batchPageLocale.value);
 };
 
 /**
@@ -216,17 +234,17 @@ const copyPageUrl = async () => {
  * Открывает публичную страницу партии с print=1: в новой вкладке откроется документ и диалог печати (Сохранить как PDF).
  */
 const openBatchPdf = () => {
-    if (!props.batch?.url) {
+    const href = resolveAbsoluteBatchUrl().trim();
+    if (!href) {
         return;
     }
     try {
-        const url = new URL(props.batch.url, window.location.origin);
+        const url = new URL(href, window.location.origin);
         url.searchParams.set("print", "1");
         window.open(url.toString(), "_blank", "noopener,noreferrer");
     } catch {
-        const base = props.batch.url;
-        const sep = base.includes("?") ? "&" : "?";
-        window.open(`${base}${sep}print=1`, "_blank", "noopener,noreferrer");
+        const sep = href.includes("?") ? "&" : "?";
+        window.open(`${href}${sep}print=1`, "_blank", "noopener,noreferrer");
     }
 };
 </script>
@@ -266,6 +284,16 @@ const openBatchPdf = () => {
 .eudr-qr-modal__table-wrap {
     width: 100%;
     overflow-x: auto;
+}
+
+.eudr-qr-modal__batch-link {
+    color: $accent-primary;
+    word-break: break-all;
+    text-decoration: underline;
+
+    &:hover {
+        color: $accent-primary-dark;
+    }
 }
 
 .eudr-qr-modal__table {

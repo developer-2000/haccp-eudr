@@ -1,5 +1,5 @@
 /**
- * Публичные данные партии для страницы /batch/:id (демо, мок для инспекции).
+ * Публичные данные партии для страницы `/batch/:id` или `/{locale}/batch/:id` (демо, мок для инспекции).
  * Единый источник id / продукт / поставщик для демо EUDR и QR.
  */
 
@@ -19,8 +19,34 @@ const getTodayDateRu = () => formatDateToRu(new Date());
 
 /**
  * Абсолютный URL публичной карточки партии (для QR и ссылок).
+ *
+ * @param {string} batchId
+ * @param {string | null | undefined} [locale] — если задан, путь `/{locale}/batch/{id}`; иначе `/batch/{id}` (старые QR без префикса).
+ * @returns {string}
  */
-export const buildBatchPublicUrl = (batchId) => `${origin}/batch/${batchId}`;
+export const buildBatchPublicUrl = (batchId, locale = null) => {
+    if (!batchId) {
+        return origin;
+    }
+    if (locale && typeof locale === "string") {
+        return `${origin}/${locale}/batch/${batchId}`;
+    }
+    return `${origin}/batch/${batchId}`;
+};
+
+function resolveDemoLocaleForBatchUrls() {
+    if (typeof window === "undefined") {
+        return "en";
+    }
+    const fromApp = document.getElementById("app")?.getAttribute("data-locale");
+    if (typeof fromApp === "string" && fromApp.length) {
+        return fromApp.toLowerCase();
+    }
+    if (typeof window.locale === "string" && window.locale.length) {
+        return window.locale;
+    }
+    return "en";
+}
 
 /**
  * Короткие подписи для таблицы демо.
@@ -50,7 +76,7 @@ export const EUDR_BATCH_PUBLIC = {
         id: "AB123",
         ddsReference: "EU-EUDR-DDS-2026-AB123-01",
         status: "ok",
-        statusLabel: "EUDR OK",
+        statusLabel: "Satisfactory",
         statusDetail:
             "Due diligence information is complete for the purposes of this demo disclosure. No deforestation risk flags at default assessment tier.",
         operator: {
@@ -112,7 +138,7 @@ export const EUDR_BATCH_PUBLIC = {
         id: "CF762",
         ddsReference: "EU-EUDR-DDS-2026-CF762-PEND",
         status: "review",
-        statusLabel: "Проверка",
+        statusLabel: "Verification",
         statusDetail:
             "Due diligence dataset is under verification: additional geolocation evidence requested from upstream supplier. Placement on the EU market should follow your internal release procedure.",
         operator: {
@@ -170,7 +196,7 @@ export const EUDR_BATCH_PUBLIC = {
         id: "BR041",
         ddsReference: "EU-EUDR-DDS-2026-BR041-01",
         status: "ok",
-        statusLabel: "EUDR OK",
+        statusLabel: "Satisfactory",
         statusDetail:
             "Due diligence information is complete for the purposes of this demo disclosure. Default risk assessment: low (cereals / flour supply chain).",
         operator: {
@@ -239,6 +265,7 @@ export const buildDemoBatches = () =>
     Object.keys(EUDR_BATCH_PUBLIC).map((id) => {
         const r = EUDR_BATCH_PUBLIC[id];
         const meta = DEMO_LIST_META[id] ?? {};
+        const loc = resolveDemoLocaleForBatchUrls();
         return {
             id: r.id,
             product: meta.productShort ?? r.product.name.split("(")[0].trim(),
@@ -246,6 +273,6 @@ export const buildDemoBatches = () =>
             date: getTodayDateRu(),
             status: r.status,
             statusLabel: r.statusLabel,
-            url: buildBatchPublicUrl(id),
+            url: buildBatchPublicUrl(id, loc),
         };
     });

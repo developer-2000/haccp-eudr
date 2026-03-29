@@ -283,8 +283,15 @@ a.n-button:focus-visible {
     }
 }
 
-.n-modal .n-card__footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: $spacing-sm;
+.n-modal {
+
+    @media (max-width: 640px) {
+        margin: 13px;
+    }
+
+    .n-card__footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: $spacing-sm;
+    }
 }

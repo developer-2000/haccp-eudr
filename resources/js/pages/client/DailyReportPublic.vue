@@ -4,9 +4,6 @@
         :class="{ 'daily-report--pdf-open': wantsAutoPrint }"
     >
         <div v-if="snapshot" class="daily-report__toolbar no-print">
-            <RouterLink class="daily-report__back" :to="homePath"
-                >← Home</RouterLink
-            >
             <button
                 type="button"
                 class="daily-report__print btn-client btn-outline-primary"
@@ -24,8 +21,10 @@
                 Use a valid calendar date in the URL (YYYY-MM-DD), e.g.
                 <code>{{ reportReferenceIso }}</code> for the demo daily bundle.
             </p>
-            <RouterLink class="btn-client btn-outline-primary" :to="homePath"
-                >Home</RouterLink
+            <RouterLink
+                class="btn-client btn-outline-primary"
+                :to="fallbackDemoEudr"
+                >EUDR demo</RouterLink
             >
         </div>
 
@@ -52,7 +51,7 @@
                     </div>
                     <div>
                         <span class="daily-report__label"
-                            >Calendar date (UTC-neutral label)</span
+                            >Calendar date UTC</span
                         >
                         <strong>{{ snapshot.dateIso }}</strong>
                     </div>
@@ -137,43 +136,93 @@
                     <div
                         class="daily-report__table-wrap daily-report__table-wrap--mt"
                     >
-                        <table
-                            class="daily-report__table daily-report__table--compact"
-                        >
-                            <caption class="daily-report__caption">
-                                Consolidated register (summary)
-                            </caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Process / niche</th>
-                                    <th scope="col">Control point</th>
-                                    <th scope="col">
-                                        Recorded value / schedule
-                                    </th>
-                                    <th scope="col">Person responsible</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="row in snapshot.ccpRows"
-                                    :key="row.id"
+                        <p class="daily-report__register-caption-mobile">
+                            Consolidated register (summary)
+                        </p>
+                        <div class="daily-report__register-desktop">
+                            <table
+                                class="daily-report__table daily-report__table--compact"
+                            >
+                                <caption class="daily-report__caption">
+                                    Consolidated register (summary)
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Process / niche</th>
+                                        <th scope="col">Control point</th>
+                                        <th scope="col">
+                                            Recorded value / schedule
+                                        </th>
+                                        <th scope="col">Person responsible</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="row in snapshot.ccpRows"
+                                        :key="row.id"
+                                    >
+                                        <td>{{ row.niche }}</td>
+                                        <td>{{ row.ccp }}</td>
+                                        <td>{{ row.detail }}</td>
+                                        <td>{{ row.assigneeName }}</td>
+                                        <td>
+                                            <span
+                                                class="daily-report__pill"
+                                                :class="`daily-report__pill--${row.statusPillKey}`"
+                                            >
+                                                {{ row.statusLabel }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="daily-report__register-mobile">
+                            <article
+                                v-for="row in snapshot.ccpRows"
+                                :key="row.id"
+                                class="daily-report__register-card"
+                            >
+                                <p class="daily-report__register-line">
+                                    <span class="daily-report__register-label"
+                                        >Process / niche:</span
+                                    >
+                                    {{ row.niche }}
+                                </p>
+                                <p class="daily-report__register-line">
+                                    <span class="daily-report__register-label"
+                                        >Control point:</span
+                                    >
+                                    {{ row.ccp }}
+                                </p>
+                                <p class="daily-report__register-line">
+                                    <span class="daily-report__register-label"
+                                        >Recorded value / schedule:</span
+                                    >
+                                    {{ row.detail }}
+                                </p>
+                                <p class="daily-report__register-line">
+                                    <span class="daily-report__register-label"
+                                        >Person responsible:</span
+                                    >
+                                    {{ row.assigneeName }}
+                                </p>
+                                <p
+                                    class="daily-report__register-line daily-report__register-line--status"
                                 >
-                                    <td>{{ row.niche }}</td>
-                                    <td>{{ row.ccp }}</td>
-                                    <td>{{ row.detail }}</td>
-                                    <td>{{ row.assigneeName }}</td>
-                                    <td>
-                                        <span
-                                            class="daily-report__pill"
-                                            :class="`daily-report__pill--${row.statusPillKey}`"
-                                        >
-                                            {{ row.statusLabel }}
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <span class="daily-report__register-label"
+                                        >Status:</span
+                                    >
+                                    <span
+                                        class="daily-report__pill"
+                                        :class="`daily-report__pill--${row.statusPillKey}`"
+                                    >
+                                        {{ row.statusLabel }}
+                                    </span>
+                                </p>
+                            </article>
+                        </div>
                     </div>
                 </section>
 
@@ -241,35 +290,77 @@
                             <h4 class="daily-report__h4">
                                 Time-stamped verification (same operating day)
                             </h4>
-                            <div class="daily-report__table-wrap">
-                                <table class="daily-report__table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Time</th>
-                                            <th scope="col">Observed value</th>
-                                            <th scope="col">Result</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            v-for="(
-                                                m, idx
-                                            ) in task.measurements"
-                                            :key="idx"
+                            <div
+                                class="daily-report__table-wrap daily-report__table-wrap--meas"
+                            >
+                                <div class="daily-report__meas-desktop">
+                                    <table class="daily-report__table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">
+                                                    Observed value
+                                                </th>
+                                                <th scope="col">Result</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                v-for="(
+                                                    m, idx
+                                                ) in task.measurements"
+                                                :key="idx"
+                                            >
+                                                <td>{{ m.time }}</td>
+                                                <td>{{ m.value }}</td>
+                                                <td>
+                                                    <span
+                                                        class="daily-report__pill daily-report__pill--sm"
+                                                        :class="`daily-report__pill--${m.resultPillKey}`"
+                                                    >
+                                                        {{ m.resultLabel }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="daily-report__meas-mobile">
+                                    <article
+                                        v-for="(m, idx) in task.measurements"
+                                        :key="idx"
+                                        class="daily-report__meas-card"
+                                    >
+                                        <p class="daily-report__meas-line">
+                                            <span
+                                                class="daily-report__meas-label"
+                                                >Time:</span
+                                            >
+                                            {{ m.time }}
+                                        </p>
+                                        <p class="daily-report__meas-line">
+                                            <span
+                                                class="daily-report__meas-label"
+                                                >Observed value:</span
+                                            >
+                                            {{ m.value }}
+                                        </p>
+                                        <p
+                                            class="daily-report__meas-line daily-report__meas-line--result"
                                         >
-                                            <td>{{ m.time }}</td>
-                                            <td>{{ m.value }}</td>
-                                            <td>
-                                                <span
-                                                    class="daily-report__pill daily-report__pill--sm"
-                                                    :class="`daily-report__pill--${m.resultPillKey}`"
-                                                >
-                                                    {{ m.resultLabel }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <span
+                                                class="daily-report__meas-label"
+                                                >Result:</span
+                                            >
+                                            <span
+                                                class="daily-report__pill daily-report__pill--sm"
+                                                :class="`daily-report__pill--${m.resultPillKey}`"
+                                            >
+                                                {{ m.resultLabel }}
+                                            </span>
+                                        </p>
+                                    </article>
+                                </div>
                             </div>
                         </div>
 
@@ -318,41 +409,86 @@
                         dataset.
                     </p>
                     <template v-else>
-                        <div class="daily-report__table-wrap">
-                            <table class="daily-report__table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Batch ID</th>
-                                        <th scope="col">Product (list)</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">
-                                            Public disclosure (URL)
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        v-for="b in snapshot.supplyRows"
-                                        :key="b.id"
+                        <div
+                            class="daily-report__table-wrap daily-report__table-wrap--supply"
+                        >
+                            <div class="daily-report__supply-desktop">
+                                <table class="daily-report__table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Batch ID</th>
+                                            <th scope="col">Product (list)</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">
+                                                Public disclosure (URL)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            v-for="b in snapshot.supplyRows"
+                                            :key="b.id"
+                                        >
+                                            <td>
+                                                <strong>{{ b.id }}</strong>
+                                            </td>
+                                            <td>{{ b.product }}</td>
+                                            <td>{{ b.statusLabel }}</td>
+                                            <td>
+                                                <a
+                                                    class="daily-report__a"
+                                                    :href="b.url"
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                >
+                                                    {{ b.url }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="daily-report__supply-mobile">
+                                <article
+                                    v-for="b in snapshot.supplyRows"
+                                    :key="b.id"
+                                    class="daily-report__supply-card"
+                                >
+                                    <p class="daily-report__supply-line">
+                                        <span class="daily-report__supply-label"
+                                            >Batch ID:</span
+                                        >
+                                        <strong>{{ b.id }}</strong>
+                                    </p>
+                                    <p class="daily-report__supply-line">
+                                        <span class="daily-report__supply-label"
+                                            >Product (list):</span
+                                        >
+                                        {{ b.product }}
+                                    </p>
+                                    <p class="daily-report__supply-line">
+                                        <span class="daily-report__supply-label"
+                                            >Status:</span
+                                        >
+                                        {{ b.statusLabel }}
+                                    </p>
+                                    <p
+                                        class="daily-report__supply-line daily-report__supply-line--url"
                                     >
-                                        <td>
-                                            <strong>{{ b.id }}</strong>
-                                        </td>
-                                        <td>{{ b.product }}</td>
-                                        <td>{{ b.statusLabel }}</td>
-                                        <td>
-                                            <a
-                                                class="daily-report__a"
-                                                :href="b.url"
-                                                target="_blank"
-                                                rel="noopener"
-                                            >
-                                                {{ b.url }}
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        <span class="daily-report__supply-label"
+                                            >Public disclosure (URL):</span
+                                        >
+                                        <a
+                                            class="daily-report__a"
+                                            :href="b.url"
+                                            target="_blank"
+                                            rel="noopener"
+                                        >
+                                            {{ b.url }}
+                                        </a>
+                                    </p>
+                                </article>
+                            </div>
                         </div>
 
                         <div
@@ -441,8 +577,7 @@
                     {{ snapshot.disclaimer }}
                 </p>
                 <p class="daily-report__url no-print">
-                    Canonical URL:
-                    <a :href="canonicalUrl">{{ canonicalUrl }}</a>
+                    Публичная ссылка: {{ canonicalUrl }}
                 </p>
             </footer>
         </article>
@@ -473,9 +608,22 @@ const snapshot = computed(() => {
     return getDailyReportSnapshot(safe);
 });
 
-const homePath = "/en";
+const fallbackDemoEudr = "/en/demo/eudr";
 
-const canonicalUrl = computed(() => buildDailyReportPublicUrl(dateParam.value));
+const localeForCanonical = computed(() => {
+    const p = route.params.locale;
+    if (typeof p === "string" && p.length) {
+        return p;
+    }
+    if (typeof window !== "undefined" && typeof window.locale === "string") {
+        return window.locale;
+    }
+    return null;
+});
+
+const canonicalUrl = computed(() =>
+    buildDailyReportPublicUrl(dateParam.value, localeForCanonical.value),
+);
 
 const wantsAutoPrint = computed(() => route.query.print === "1");
 
@@ -532,19 +680,9 @@ watch(
     margin: 0 auto $spacing-md;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: $spacing-md;
     flex-wrap: wrap;
-}
-
-.daily-report__back {
-    color: $accent-primary;
-    font-weight: 600;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
 }
 
 .daily-report__missing {
@@ -578,6 +716,10 @@ watch(
     border-radius: $radius-xxl;
     box-shadow: $shadow-md;
     padding: $spacing-xl $spacing-xl $spacing-lg;
+
+    @media (max-width: 650px) {
+        padding: $spacing-xl $spacing-md $spacing-lg;
+    }
 }
 
 .daily-report__eu-band {
@@ -627,12 +769,20 @@ watch(
 
 .daily-report__refs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
     gap: $spacing-md;
     padding: $spacing-md;
     background: $bg-gray;
     border-radius: $radius-lg;
     border: 1px solid $text-light-grey;
+
+    > div {
+        min-width: 0;
+    }
+
+    @media (max-width: $breakpoint-md) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .daily-report__label {
@@ -670,6 +820,8 @@ watch(
     margin: 0;
     display: grid;
     gap: $spacing-sm;
+    background: $bg-gray;
+    padding: 0 20px;
 
     div {
         display: grid;
@@ -718,6 +870,8 @@ watch(
 
 .daily-report__table-wrap--mt {
     margin-top: $spacing-md;
+    background: #fbfbfb;
+    padding: 10px 20px 0;
 }
 
 .daily-report__caption {
@@ -731,6 +885,172 @@ watch(
 
 .daily-report__table--compact {
     min-width: 560px;
+}
+
+.daily-report__register-caption-mobile {
+    display: none;
+}
+
+.daily-report__register-desktop {
+    display: block;
+}
+
+.daily-report__register-mobile {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.daily-report__register-card {
+    border: 1px solid $text-light-grey;
+    border-radius: $radius-lg;
+    padding: $spacing-md;
+    background: $bg-gray;
+}
+
+.daily-report__register-line {
+    margin: 4px 0 0;
+    font-size: $font-size-sm;
+    word-break: break-word;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.daily-report__register-label {
+    color: $text-dark-grey;
+    margin-right: 4px;
+    font-weight: 500;
+}
+
+.daily-report__register-line--status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.daily-report__meas-desktop {
+    display: block;
+}
+
+.daily-report__meas-mobile {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.daily-report__meas-card {
+    border: 1px solid $text-light-grey;
+    border-radius: $radius-lg;
+    padding: $spacing-md;
+    background: $bg-gray;
+}
+
+.daily-report__meas-line {
+    margin: 4px 0 0;
+    font-size: $font-size-sm;
+    word-break: break-word;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.daily-report__meas-label {
+    color: $text-dark-grey;
+    margin-right: 4px;
+    font-weight: 500;
+}
+
+.daily-report__meas-line--result {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.daily-report__supply-desktop {
+    display: block;
+}
+
+.daily-report__supply-mobile {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.daily-report__supply-card {
+    border: 1px solid $text-light-grey;
+    border-radius: $radius-lg;
+    padding: $spacing-md;
+    background: $bg-gray;
+}
+
+.daily-report__supply-line {
+    margin: 4px 0 0;
+    font-size: $font-size-sm;
+    word-break: break-word;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.daily-report__supply-label {
+    color: $text-dark-grey;
+    margin-right: 4px;
+    font-weight: 500;
+}
+
+.daily-report__supply-line--url {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    .daily-report__a {
+        word-break: break-all;
+    }
+}
+
+@media (max-width: $breakpoint-lg) {
+    .daily-report__register-caption-mobile {
+        display: block;
+        margin: 0 0 $spacing-sm;
+        font-size: $font-size-xs;
+        font-weight: 600;
+        color: $text-dark-grey;
+    }
+
+    .daily-report__table-wrap--mt {
+        padding-bottom: $spacing-md;
+    }
+
+    .daily-report__register-desktop {
+        display: none;
+    }
+
+    .daily-report__register-mobile {
+        display: flex;
+    }
+
+    .daily-report__meas-desktop {
+        display: none;
+    }
+
+    .daily-report__meas-mobile {
+        display: flex;
+    }
+
+    .daily-report__supply-desktop {
+        display: none;
+    }
+
+    .daily-report__supply-mobile {
+        display: flex;
+    }
 }
 
 .daily-report__section--niche {
@@ -894,7 +1214,7 @@ watch(
     border-radius: $radius-md;
     font-size: $font-size-xs;
     font-weight: 600;
-    background: $bg-gray;
+    background: $bg-yellow-2;
     color: $text-color;
 }
 
@@ -950,10 +1270,7 @@ watch(
     margin: $spacing-sm 0 0;
     font-size: $font-size-xs;
     word-break: break-all;
-
-    a {
-        color: $accent-primary;
-    }
+    color: $text-dark-grey;
 }
 
 @media print {

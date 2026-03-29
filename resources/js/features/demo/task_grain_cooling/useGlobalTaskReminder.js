@@ -1,4 +1,4 @@
-import { h, onMounted, onUnmounted } from "vue";
+import { h, onUnmounted, watch } from "vue";
 import { toast } from "vue3-toastify";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
 import GlobalTaskReminderToast from "./GlobalTaskReminderToast.vue";
@@ -9,7 +9,7 @@ import {
 } from "./config";
 /**
  * На демо цепочка запускается только из `grainCoolingDemoEntry.js` (`useGrainCoolingDemoEntry`); store здесь — напрямую, чтобы не плодить циклы импорта с обёрткой.
- * Перед входом в `useGlobalTaskReminder` уже выставлен `task_grain_cooling.scenarioProcessAllowed` из demoState.
+ * Перед входом в `useGlobalTaskReminder` уже выставлен `task_grain_cooling.scenarioProcessAllowed` из demoState и маршрута.
  */
 import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
 import {
@@ -18,29 +18,44 @@ import {
     hasGrainCoolingPendingMeasurement,
     syncGrainCoolingPendingMeasurementTimeToUserLocal,
 } from "./applyGrainCoolingMeasurement";
+import { readGrainCoolingSessionStorage } from "./grainCoolingSessionStorage";
 
 /**
  * Один раз за сессию (пока не сработал sessionStorage): при наличии `pending` у целевой задачи —
- * задержка из конфига → тост; затем через `measurementProblemDelayMs` — `problem` у первого
+ * задержка из конфига → глобальное оповещение; затем через `measurementProblemDelayMs` — смена статуса на `problem` у первого
  * замера с **зафиксированным при старте** индексом в `task_grain_cooling.measurementIndex` — только если этот замер всё ещё `pending`.
  *
- * Сначала синхронная проверка `pending` по `demoState` (до Pinia store сценария и до любых таймеров);
- * затем `lockGrainCoolingMeasurementIndex` — индекс первого `pending` в `task_grain_cooling`. Если замеров `pending` нет —
- * composable выходит, хуки не вешаем.
- * Повторная проверка «есть ли ещё pending» — только в колбэке таймера тоста (перед показом); индекс для
- * `problem` не пересчитывается.
+ * Старт/стоп привязаны к `task_grain_cooling.scenarioProcessAllowed` (в т.ч. при SPA-переходе с публичной страницы на демо).
  */
 export function useGlobalTaskReminder() {
     const { demoState } = useDemoState();
 
-    if (!task_grain_cooling.scenarioProcessAllowed) {
-        return;
+    let toastTimerId = null;
+    let problemTimerId = null;
+    /** Id окна глобального оповещения («Время выполнить задачу») — закрываем по окончании отсчёта, если пользователь не закрыл раньше. */
+    let grainCoolingReminderToastId = null;
+
+    function cancelGrainCoolingReminderTimersRegistered() {
+        if (toastTimerId !== null) {
+            clearTimeout(toastTimerId);
+            toastTimerId = null;
+        }
+        if (problemTimerId !== null) {
+            clearTimeout(problemTimerId);
+            problemTimerId = null;
+        }
+        if (
+            grainCoolingReminderToastId != null &&
+            toast.isActive(grainCoolingReminderToastId)
+        ) {
+            toast.remove(grainCoolingReminderToastId);
+        }
+        grainCoolingReminderToastId = null;
+        unlockGrainCoolingMeasurementIndex();
     }
 
-    const grainStore = useTaskGrainCoolingStore();
-
     /**
-     * Полоса только в том же тике, что и показ тоста — после `toast(...)`; без тоста не вызывать.
+     * Полоса только в том же тике, что и показ оповещения — после `toast(...)`; без показа оповещения не вызывать.
      */
     function requestGrainCoolingBannerAfterNotificationSurface() {
         if (!task_grain_cooling.scenarioProcessAllowed) {
@@ -49,34 +64,48 @@ export function useGlobalTaskReminder() {
         if (!hasGrainCoolingPendingMeasurement(demoState)) {
             return;
         }
+        const grainStore = useTaskGrainCoolingStore();
         grainStore.showNotificationBannerAfterToast();
     }
 
-    if (grainStore.notificationLaunched) {
-        return;
-    }
-
-    const lockedIdx = getGrainCoolingFirstPendingMeasurementIndex(demoState);
-    if (lockedIdx < 0) {
-        return;
-    }
-    lockGrainCoolingMeasurementIndex(lockedIdx);
-
-    let toastTimerId = null;
-    let problemTimerId = null;
-    /** Id тоста «Время выполнить задачу» — закрываем по окончании отсчёта, если пользователь не закрыл раньше. */
-    let grainCoolingReminderToastId = null;
-
-    onMounted(() => {
-        if (grainStore.notificationLaunched) {
-            unlockGrainCoolingMeasurementIndex();
+    function scheduleReminderChain() {
+        if (!task_grain_cooling.scenarioProcessAllowed) {
             return;
         }
+        if (toastTimerId !== null || problemTimerId !== null) {
+            return;
+        }
+
+        const grainStore = useTaskGrainCoolingStore();
+
+        if (grainStore.notificationLaunched) {
+            return;
+        }
+
+        const lockedIdx = getGrainCoolingFirstPendingMeasurementIndex(demoState);
+        if (lockedIdx < 0) {
+            return;
+        }
+        lockGrainCoolingMeasurementIndex(lockedIdx);
+
+        task_grain_cooling.cancelGrainCoolingReminderTimers =
+            cancelGrainCoolingReminderTimersRegistered;
+
         toastTimerId = window.setTimeout(() => {
+            toastTimerId = null;
+            if (!task_grain_cooling.scenarioProcessAllowed) {
+                unlockGrainCoolingMeasurementIndex();
+                return;
+            }
             if (!hasGrainCoolingPendingMeasurement(demoState)) {
                 unlockGrainCoolingMeasurementIndex();
                 return;
             }
+            const storageSnapshotBeforeToast = readGrainCoolingSessionStorage();
+            console.log(
+                "Старая запись sessionStorage из прошлой сессии:",
+                storageSnapshotBeforeToast,
+            );
             syncGrainCoolingPendingMeasurementTimeToUserLocal(demoState);
             grainStore.markNotificationLaunched();
             const problemDelayMs =
@@ -100,6 +129,10 @@ export function useGlobalTaskReminder() {
             );
             requestGrainCoolingBannerAfterNotificationSurface();
             problemTimerId = window.setTimeout(() => {
+                problemTimerId = null;
+                if (!task_grain_cooling.scenarioProcessAllowed) {
+                    return;
+                }
                 applyGrainCoolingProblemIfPending(demoState);
                 if (
                     grainCoolingReminderToastId != null &&
@@ -111,15 +144,23 @@ export function useGlobalTaskReminder() {
                 grainStore.markNotificationCountdownCompleted();
             }, problemDelayMs);
         }, task_grain_cooling.initialToastDelayMs);
-    });
+    }
+
+    watch(
+        () => task_grain_cooling.scenarioProcessAllowed,
+        (allowed) => {
+            if (!allowed) {
+                task_grain_cooling.cancelGrainCoolingReminderTimers = null;
+                cancelGrainCoolingReminderTimersRegistered();
+                return;
+            }
+            scheduleReminderChain();
+        },
+        { immediate: true },
+    );
 
     onUnmounted(() => {
-        unlockGrainCoolingMeasurementIndex();
-        if (toastTimerId !== null) {
-            clearTimeout(toastTimerId);
-        }
-        if (problemTimerId !== null) {
-            clearTimeout(problemTimerId);
-        }
+        task_grain_cooling.cancelGrainCoolingReminderTimers = null;
+        cancelGrainCoolingReminderTimersRegistered();
     });
 }

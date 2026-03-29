@@ -1,5 +1,5 @@
 /**
- * Публичная страница ежедневного отчёта HACCP + приёмка EUDR за день: /report/YYYY-MM-DD
+ * Публичная страница ежедневного отчёта HACCP + приёмка EUDR за день: `/report/YYYY-MM-DD` или `/{locale}/report/YYYY-MM-DD`
  * (демо; не юридически обязательный документ).
  */
 
@@ -32,10 +32,20 @@ export const REPORT_REFERENCE_ISO = (() => {
 
 /**
  * Абсолютный URL публичного дневного отчёта.
+ *
  * @param {string} isoDate — YYYY-MM-DD
+ * @param {string | null | undefined} [locale] — если задан, путь `/{locale}/report/{date}`; иначе `/report/{date}` (старые ссылки без префикса).
+ * @returns {string}
  */
-export const buildDailyReportPublicUrl = (isoDate) =>
-    `${origin}/report/${isoDate}`;
+export const buildDailyReportPublicUrl = (isoDate, locale = null) => {
+    if (!isoDate) {
+        return origin;
+    }
+    if (locale && typeof locale === "string") {
+        return `${origin}/${locale}/report/${isoDate}`;
+    }
+    return `${origin}/report/${isoDate}`;
+};
 
 const ISO_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 

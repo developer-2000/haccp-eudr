@@ -21,6 +21,65 @@ export const DEFAULT_TASK_ACTIVE_WEEKDAYS = Object.freeze([
 
 export const DEFAULT_TASK_REPEAT_TIMES = Object.freeze(["00:00"]);
 
+const ALLOWED_MEASUREMENT_ROW_STATUSES = new Set([
+    "success",
+    "problem",
+    "pending",
+]);
+
+/**
+ * Статус строки замера в модалке «Детали задачи»: только success | problem | pending.
+ * Любое legacy-значение (`repeat` и т.д.) приводится к `pending`.
+ *
+ * @param {unknown} raw
+ * @returns {"success"|"problem"|"pending"}
+ */
+export function normalizeMeasurementRowStatus(raw) {
+    const s = typeof raw === "string" ? raw.trim() : "";
+    if (ALLOWED_MEASUREMENT_ROW_STATUSES.has(s)) {
+        return /** @type {"success"|"problem"|"pending"} */ (s);
+    }
+    return "pending";
+}
+
+/**
+ * Нормализует `task.measurements[].status` in-place.
+ *
+ * @param {object|null|undefined} task
+ * @returns {void}
+ */
+export function normalizeTaskMeasurementRowStatuses(task) {
+    if (!task?.measurements || !Array.isArray(task.measurements)) {
+        return;
+    }
+    for (const row of task.measurements) {
+        if (row && typeof row === "object") {
+            row.status = normalizeMeasurementRowStatus(row.status);
+        }
+    }
+}
+
+/**
+ * Все задачи во всех нишах чек-листов: нормализация статусов замеров.
+ *
+ * @param {Record<string, unknown>|null|undefined} checklistsByNiche
+ * @returns {void}
+ */
+export function normalizeAllChecklistTaskMeasurementStatuses(checklistsByNiche) {
+    if (!checklistsByNiche || typeof checklistsByNiche !== "object") {
+        return;
+    }
+    for (const niche of Object.keys(checklistsByNiche)) {
+        const list = checklistsByNiche[niche];
+        if (!Array.isArray(list)) {
+            continue;
+        }
+        for (const task of list) {
+            normalizeTaskMeasurementRowStatuses(task);
+        }
+    }
+}
+
 /**
  * Число повторов в сутки = число слотов в `measurements` (минимум 1).
  */

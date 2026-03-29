@@ -3,20 +3,16 @@
         <div class="reports-public-link">
             <h3>Публичный отчет</h3>
             <div class="reports-public-link__row">
-                <code class="reports-public-link__url">{{
-                    publicReportUrl
-                }}</code>
+                <code class="reports-public-link__url">
+                    <span class="reports-public-link__url-text">{{
+                        publicReportUrl
+                    }}</span>
+                </code>
                 <div class="reports-public-link__actions">
                     <n-button type="success" @click="handleCopyLink">
                         Копировать
                     </n-button>
-                    <n-button
-                        type="info"
-                        tag="a"
-                        :href="publicReportUrl"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <n-button type="info" @click="goToPublicReport">
                         Перейти
                     </n-button>
                 </div>
@@ -27,67 +23,147 @@
             <h2>Дневной подробный отчёт</h2>
 
             <h3 class="report-preview__category">Задачи</h3>
-            <div class="report-preview__table-wrap">
-                <table class="report-preview__table">
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Точка</th>
-                            <th>Значение</th>
-                            <th>Ответственный</th>
-                            <th>Фото</th>
-                            <th>Статус</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="row in taskPreviewRows" :key="row.id">
-                            <td>{{ row.date }}</td>
-                            <td>{{ row.point }}</td>
-                            <td>{{ row.value }}</td>
-                            <td>{{ row.assignee }}</td>
-                            <td>{{ row.photo }}</td>
-                            <td>
-                                <span
-                                    class="report-status"
-                                    :class="`report-status--${row.statusKey}`"
-                                >
-                                    {{ row.statusLabel }}
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="report-preview__desktop">
+                <div class="report-preview__table-wrap">
+                    <table class="report-preview__table">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Точка</th>
+                                <th>Значение</th>
+                                <th>Ответственный</th>
+                                <th>Фото</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="row in taskPreviewRows" :key="row.id">
+                                <td>{{ row.date }}</td>
+                                <td>{{ row.point }}</td>
+                                <td>{{ row.value }}</td>
+                                <td>{{ row.assignee }}</td>
+                                <td>{{ row.photo }}</td>
+                                <td>
+                                    <span
+                                        class="report-status"
+                                        :class="`report-status--${row.statusKey}`"
+                                    >
+                                        {{ row.statusLabel }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="report-preview__mobile">
+                <article
+                    v-for="row in taskPreviewRows"
+                    :key="row.id"
+                    class="report-preview-card"
+                >
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Дата:</span>
+                        {{ row.date }}
+                    </p>
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Точка:</span>
+                        {{ row.point }}
+                    </p>
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Значение:</span>
+                        {{ row.value }}
+                    </p>
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label"
+                            >Ответственный:</span
+                        >
+                        {{ row.assignee }}
+                    </p>
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Фото:</span>
+                        {{ row.photo }}
+                    </p>
+                    <p
+                        class="report-preview-card__line report-preview-card__line--status"
+                    >
+                        <span class="report-preview-card__label">Статус:</span>
+                        <span
+                            class="report-status"
+                            :class="`report-status--${row.statusKey}`"
+                        >
+                            {{ row.statusLabel }}
+                        </span>
+                    </p>
+                </article>
             </div>
 
             <h3 class="report-preview__category">Поставки сырья</h3>
-            <div class="report-preview__table-wrap">
-                <table class="report-preview__table">
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Точка</th>
-                            <th>Значение</th>
-                            <th>Фото</th>
-                            <th>Статус</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="row in batchPreviewRows" :key="row.id">
-                            <td>{{ row.date }}</td>
-                            <td>{{ row.point }}</td>
-                            <td>{{ row.value }}</td>
-                            <td>{{ row.photo }}</td>
-                            <td>
-                                <span
-                                    class="report-status"
-                                    :class="`report-status--${row.statusKey}`"
-                                >
-                                    {{ row.statusLabel }}
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="report-preview__desktop">
+                <div class="report-preview__table-wrap">
+                    <table class="report-preview__table">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Точка</th>
+                                <th>Значение</th>
+                                <th>Фото</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="row in batchPreviewRows" :key="row.id">
+                                <td>{{ row.date }}</td>
+                                <td>{{ row.point }}</td>
+                                <td>{{ row.value }}</td>
+                                <td>{{ row.photo }}</td>
+                                <td>
+                                    <span
+                                        class="report-status"
+                                        :class="`report-status--${row.statusKey}`"
+                                    >
+                                        {{ row.statusLabel }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="report-preview__mobile">
+                <article
+                    v-for="row in batchPreviewRows"
+                    :key="row.id"
+                    class="report-preview-card"
+                >
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Дата:</span>
+                        {{ row.date }}
+                    </p>
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Точка:</span>
+                        {{ row.point }}
+                    </p>
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Значение:</span>
+                        {{ row.value }}
+                    </p>
+                    <p class="report-preview-card__line">
+                        <span class="report-preview-card__label">Фото:</span>
+                        {{ row.photo }}
+                    </p>
+                    <p
+                        class="report-preview-card__line report-preview-card__line--status"
+                    >
+                        <span class="report-preview-card__label">Статус:</span>
+                        <span
+                            class="report-status"
+                            :class="`report-status--${row.statusKey}`"
+                        >
+                            {{ row.statusLabel }}
+                        </span>
+                    </p>
+                </article>
             </div>
         </div>
 
@@ -112,6 +188,7 @@
 
 <script setup>
 import { computed } from "vue";
+import { useRoute } from "vue-router";
 import { useMessage } from "naive-ui";
 import { buildDailyReportPublicUrl } from "@/features/demo/data/dailyReportPublic";
 import { taskDisplayStatusKey } from "@/features/demo/domain/checklistTaskModel";
@@ -120,6 +197,18 @@ import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
 defineOptions({ name: "ReportsSection" });
 
 const message = useMessage();
+const route = useRoute();
+
+const reportPageLocale = computed(() => {
+    const p = route.params.locale;
+    if (typeof p === "string" && p.length) {
+        return p;
+    }
+    if (typeof window !== "undefined" && typeof window.locale === "string") {
+        return window.locale;
+    }
+    return "en";
+});
 
 const props = defineProps({
     report: {
@@ -245,10 +334,20 @@ const batchPreviewRows = computed(() =>
     })),
 );
 
-/** URL из данных отчёта (дата → полный адрес). */
+/** URL из данных отчёта (дата → полный адрес с локалью из демо-роута). */
 const publicReportUrl = computed(() =>
-    buildDailyReportPublicUrl(props.report.reportDayIso ?? todayIso()),
+    buildDailyReportPublicUrl(
+        props.report.reportDayIso ?? todayIso(),
+        reportPageLocale.value,
+    ),
 );
+
+const goToPublicReport = () => {
+    const url = publicReportUrl.value;
+    if (typeof window !== "undefined" && url) {
+        window.open(url, "_blank", "noopener,noreferrer");
+    }
+};
 
 /** Буфер без Secure Context (http) — clipboard API часто недоступен. */
 function copyTextFallback(text) {
@@ -269,6 +368,7 @@ function copyTextFallback(text) {
 const handleCopyLink = async () => {
     const text = buildDailyReportPublicUrl(
         props.report.reportDayIso ?? todayIso(),
+        reportPageLocale.value,
     );
     try {
         if (
@@ -337,10 +437,16 @@ h3 {
     align-items: center;
     flex-wrap: wrap;
     gap: $spacing-sm;
+    min-width: 0;
+
+    @media (max-width: 750px) {
+        justify-content: flex-end;
+    }
 }
 
 .reports-public-link__url {
-    display: inline-flex;
+    display: flex;
+    min-width: 0;
     min-height: 44px;
     align-items: center;
     padding: 0 $spacing-md;
@@ -348,6 +454,14 @@ h3 {
     border: 1px solid $text-light-grey;
     background-color: $bg-gray;
     flex: 1 1 auto;
+}
+
+.reports-public-link__url-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .reports-public-link__actions {
@@ -368,6 +482,45 @@ h3 {
     color: $text-dark-grey;
     padding-bottom: $spacing-xs;
     border-bottom: 2px solid $accent-primary;
+}
+
+.report-preview__desktop {
+    display: block;
+}
+
+.report-preview__mobile {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.report-preview-card {
+    border: 1px solid $text-light-grey;
+    border-radius: $radius-lg;
+    padding: $spacing-md;
+    background-color: $bg-gray;
+}
+
+.report-preview-card__line {
+    margin: 4px 0 0;
+    font-size: $font-size-sm;
+    word-break: break-word;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.report-preview-card__label {
+    color: $text-dark-grey;
+    margin-right: 4px;
+}
+
+.report-preview-card__line--status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-xs;
 }
 
 .report-preview__table-wrap {
@@ -438,9 +591,14 @@ h3 {
     margin-top: 20px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .report-preview__table tbody tr {
-        transition: none;
+@media (max-width: $breakpoint-lg) {
+    .report-preview__desktop {
+        display: none;
+    }
+
+    .report-preview__mobile {
+        display: flex;
     }
 }
+
 </style>

@@ -1,9 +1,13 @@
 import { task_grain_cooling, unlockGrainCoolingMeasurementIndex } from "./config";
 import { getGrainCoolingTaskAndMeasurementByRowIndex } from "./grainCoolingIndexedAccess";
+import { isGrainCoolingScenarioSuppressedForRoute } from "./grainCoolingPublicRoutes";
+import { isGrainCoolingScenarioStorageCompleted } from "./grainCoolingStorageStatus";
 import { getGrainCoolingTaskFromDemoState } from "./resolveGrainCoolingTaskFromDemoState";
 
 /**
- * Первый индекс в `measurements`, где `status === 'pending'`, иначе -1.
+ * Обход `measurements` **по порядку с начала массива** (индекс 0, 1, …): первый элемент со
+ * `status === 'pending'` — его индекс; иначе `-1`. С этим индексом дальше работает сценарий (lock / оповещение / смена статуса).
+ *
  * @param {unknown[]} measurements
  * @returns {number}
  */
@@ -11,12 +15,17 @@ export function findFirstPendingMeasurementIndex(measurements) {
     if (!Array.isArray(measurements)) {
         return -1;
     }
-    return measurements.findIndex((m) => m?.status === "pending");
+    for (let i = 0; i < measurements.length; i++) {
+        if (measurements[i]?.status === "pending") {
+            return i;
+        }
+    }
+    return -1;
 }
 
 /**
  * Есть ли у демо-задачи из конфига хотя бы один замер со статусом `pending`.
- * Нужен до запуска глобального напоминания и сразу перед показом тоста.
+ * Нужен до запуска глобального напоминания и сразу перед показом оповещения.
  * Без логов в консоль — чистая проверка (повторные вызовы по времени — норма).
  *
  * @param {import('vue').Ref<object>} demoStateRef
@@ -27,19 +36,39 @@ export function hasGrainCoolingPendingMeasurement(demoStateRef) {
 }
 
 /**
- * Синхронизирует `task_grain_cooling.scenarioProcessAllowed` с фактом наличия `pending` у целевой задачи в `demoState`.
- * Вызывать до любого доступа к Pinia store сценария.
+ * Разрешение сценария (строгий порядок):
+ * `true` только если в `measurements` задачи есть `pending` (берётся **первый по порядку с начала массива**).
+ * Флаг `status: "completed"` из sessionStorage в этом решении не участвует.
  *
  * @param {import('vue').Ref<object>} demoStateRef
- * @returns {void}
+ * @returns {boolean}
  */
-export function syncGrainCoolingScenarioProcessAllowed(demoStateRef) {
-    task_grain_cooling.scenarioProcessAllowed =
-        hasGrainCoolingPendingMeasurement(demoStateRef);
+export function grainCoolingScenarioShouldRun(demoStateRef) {
+    const task = getGrainCoolingTaskFromDemoState(demoStateRef);
+    const measurements = Array.isArray(task?.measurements) ? task.measurements : [];
+    const firstPendingIndex = findFirstPendingMeasurementIndex(measurements);
+    return firstPendingIndex >= 0;
 }
 
 /**
- * Индекс первого замера со статусом `pending` у целевой задачи из конфига, иначе `-1`.
+ * `true` только если у целевой задачи в `demoState` есть хотя бы один замер со статусом `pending`
+ * (первый с начала массива), **и** текущий маршрут не публичная страница партии/отчёта (`grainCoolingPublicRoutes`).
+ * `false` — `useGlobalTaskReminder` не вешает оповещение и таймеры; `useGrainCoolingStore()` может вернуть `null`.
+ *
+ * @param {import('vue').Ref<object>} demoStateRef
+ * @param {import('vue-router').RouteLocationNormalizedLoaded | null | undefined} [route]
+ * @returns {void}
+ */
+export function syncGrainCoolingScenarioProcessAllowed(demoStateRef, route) {
+    const dataOk = grainCoolingScenarioShouldRun(demoStateRef);
+    const suppressed = route ? isGrainCoolingScenarioSuppressedForRoute(route) : false;
+    const storedDone = isGrainCoolingScenarioStorageCompleted();
+    task_grain_cooling.scenarioProcessAllowed =
+        dataOk && !suppressed && !storedDone;
+}
+
+/**
+ * Индекс **первого по порядку в массиве** замера со статусом `pending` у целевой задачи (`coffee-2`), иначе `-1`.
  *
  * @param {import('vue').Ref<object>} demoStateRef
  * @returns {number}

@@ -1,7 +1,9 @@
+import { task_grain_cooling } from "@/features/demo/task_grain_cooling/config";
 import {
     findMeasurementRowIndexByTime,
     isCurrentMeasurementRowPending,
 } from "@/features/demo/task_grain_cooling/grainCoolingMeasurementRow";
+import { markGrainCoolingScenarioStoredCompleted } from "@/features/demo/task_grain_cooling/grainCoolingStorageStatus";
 
 /**
  * Читает min/max °C из первого поля задачи типа `temperature` (как в drawer).
@@ -71,6 +73,9 @@ export function applyPendingMeasurementFromKeypadOk({
         const mins = Math.max(0, Math.trunc(n));
         m.value = `${mins} мин`;
         m.status = "success";
+        if (task?.id === task_grain_cooling.id) {
+            markGrainCoolingScenarioStoredCompleted();
+        }
         return true;
     }
 
@@ -90,5 +95,8 @@ export function applyPendingMeasurementFromKeypadOk({
     const statusOk = limits == null ? true : inRange;
     m.status = statusOk ? "success" : "problem";
 
+    if (task?.id === task_grain_cooling.id) {
+        markGrainCoolingScenarioStoredCompleted();
+    }
     return true;
 }

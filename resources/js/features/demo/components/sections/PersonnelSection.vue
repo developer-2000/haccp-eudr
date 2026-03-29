@@ -4,7 +4,7 @@
         <!-- Открывает модалку создания сотрудника -->
         <div class="personnel-section__toolbar">
             <n-button type="primary" @click="openCreateModal">
-                Добавить
+                {{ personnelSectionText.add }}
             </n-button>
         </div>
 
@@ -41,11 +41,11 @@
                         <table class="personnel-section__table">
                             <thead>
                                 <tr>
-                                    <th>ФИО</th>
-                                    <th>Должность</th>
-                                    <th>Телефон</th>
-                                    <th>Email</th>
-                                    <th>Статус</th>
+                                    <th>{{ personnelSectionText.colFullName }}</th>
+                                    <th>{{ personnelSectionText.colRole }}</th>
+                                    <th>{{ personnelSectionText.colPhone }}</th>
+                                    <th>{{ personnelSectionText.colEmail }}</th>
+                                    <th>{{ personnelSectionText.colStatus }}</th>
                                     <th />
                                 </tr>
                             </thead>
@@ -57,14 +57,23 @@
                                 >
                                     <td>{{ member.fullName }}</td>
                                     <td>{{ member.role }}</td>
-                                    <td>{{ member.phone || "—" }}</td>
-                                    <td>{{ member.email || "—" }}</td>
+                                    <td>{{ member.phone || personnelSectionText.empty }}</td>
+                                    <td>{{ member.email || personnelSectionText.empty }}</td>
                                     <td>
-                                        {{
-                                            member.active === false
-                                                ? "Не активен"
-                                                : "Активен"
-                                        }}
+                                        <span
+                                            class="personnel-section__status"
+                                            :class="
+                                                member.active === false
+                                                    ? 'personnel-section__status--inactive'
+                                                    : 'personnel-section__status--active'
+                                            "
+                                        >
+                                            {{
+                                                member.active === false
+                                                    ? personnelSectionText.statusInactive
+                                                    : personnelSectionText.statusActive
+                                            }}
+                                        </span>
                                     </td>
                                     <td class="personnel-section__actions">
                                         <!-- Действия строки: правка в общей модалке; удаление через NPopconfirm. -->
@@ -74,12 +83,12 @@
                                                 class="personnel-section__action-btn"
                                                 @click="openEditModal(member)"
                                             >
-                                                Изменить
+                                                {{ personnelSectionText.edit }}
                                             </n-button>
                                             <!-- Подтверждение удаления: текст предупреждает о задачах с этим ответственным. -->
                                             <n-popconfirm
-                                                :positive-text="'Удалить'"
-                                                :negative-text="'Отмена'"
+                                                :positive-text="personnelSectionText.delete"
+                                                :negative-text="personnelSectionText.cancel"
                                                 :positive-button-props="{
                                                     type: 'info',
                                                 }"
@@ -96,7 +105,7 @@
                                                         type="error"
                                                         class="personnel-section__action-btn"
                                                     >
-                                                        Удалить
+                                                        {{ personnelSectionText.delete }}
                                                     </n-button>
                                                 </template>
                                                 {{ removeConfirmText(member) }}
@@ -116,26 +125,50 @@
                         :key="member.id"
                         class="personnel-card"
                     >
-                        <div class="personnel-card__head">
-                            <p class="personnel-card__name">
-                                {{ member.fullName }}
-                            </p>
-                            <p class="personnel-card__role">
-                                {{ member.role }}
-                            </p>
-                        </div>
-                        <p v-if="member.phone" class="personnel-card__line">
-                            {{ member.phone }}
-                        </p>
-                        <p v-if="member.email" class="personnel-card__line">
-                            {{ member.email }}
+                        <p class="personnel-card__line">
+                            <span class="personnel-card__label">{{
+                                personnelSectionText.labelFullName
+                            }}</span>
+                            {{ member.fullName }}
                         </p>
                         <p class="personnel-card__line">
-                            {{
-                                member.active === false
-                                    ? "Не активен"
-                                    : "Активен"
-                            }}
+                            <span class="personnel-card__label">{{
+                                personnelSectionText.labelRole
+                            }}</span>
+                            {{ member.role }}
+                        </p>
+                        <p class="personnel-card__line">
+                            <span class="personnel-card__label">{{
+                                personnelSectionText.labelPhone
+                            }}</span>
+                            {{ member.phone || personnelSectionText.empty }}
+                        </p>
+                        <p class="personnel-card__line">
+                            <span class="personnel-card__label">{{
+                                personnelSectionText.labelEmail
+                            }}</span>
+                            {{ member.email || personnelSectionText.empty }}
+                        </p>
+                        <p
+                            class="personnel-card__line personnel-card__line--status"
+                        >
+                            <span class="personnel-card__label">{{
+                                personnelSectionText.labelStatus
+                            }}</span>
+                            <span
+                                class="personnel-section__status"
+                                :class="
+                                    member.active === false
+                                        ? 'personnel-section__status--inactive'
+                                        : 'personnel-section__status--active'
+                                "
+                            >
+                                {{
+                                    member.active === false
+                                        ? personnelSectionText.statusInactive
+                                        : personnelSectionText.statusActive
+                                }}
+                            </span>
                         </p>
                         <!-- Кнопки на всю ширину карточки — тот же сценарий, что в колонке действий таблицы. -->
                         <div class="personnel-card__actions">
@@ -145,11 +178,11 @@
                                 class="personnel-section__action-btn"
                                 @click="openEditModal(member)"
                             >
-                                Изменить
+                                {{ personnelSectionText.edit }}
                             </n-button>
                             <n-popconfirm
-                                :positive-text="'Удалить'"
-                                :negative-text="'Отмена'"
+                                :positive-text="personnelSectionText.delete"
+                                :negative-text="personnelSectionText.cancel"
                                 :positive-button-props="{ type: 'info' }"
                                 :negative-button-props="{ type: 'warning' }"
                                 @positive-click="() => onConfirmRemove(member)"
@@ -160,7 +193,7 @@
                                         block
                                         class="personnel-section__action-btn"
                                     >
-                                        Удалить
+                                        {{ personnelSectionText.delete }}
                                     </n-button>
                                 </template>
                                 {{ removeConfirmText(member) }}
@@ -187,6 +220,30 @@ import { siteEmojiForDemo } from "@/features/demo/data/demoPersonnel";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
 
 defineOptions({ name: "PersonnelSection" });
+
+/** Все пользовательские строки секции (шаблон + сообщения). */
+const personnelSectionText = {
+    add: "Добавить",
+    colFullName: "ФИО",
+    colRole: "Должность",
+    colPhone: "Телефон",
+    colEmail: "Email",
+    colStatus: "Статус",
+    labelFullName: "ФИО:",
+    labelRole: "Должность:",
+    labelPhone: "Телефон:",
+    labelEmail: "Email:",
+    labelStatus: "Статус:",
+    empty: "—",
+    statusActive: "On",
+    statusInactive: "Off",
+    edit: "Изменить",
+    delete: "Удалить",
+    cancel: "Отмена",
+    removeConfirmBase: "Удалить сотрудника «{name}»?",
+    removeConfirmWithTasks: "С {n} задач(и) будет убран этот сотрудник!",
+    removeSuccess: "Сотрудник удалён",
+};
 
 const message = useMessage();
 const { demoState, removeStaff } = useDemoState();
@@ -257,11 +314,17 @@ const countAssignedTasks = (staffId) => {
  */
 const removeConfirmText = (member) => {
     const n = countAssignedTasks(member.id);
-    const base = `Удалить сотрудника «${member.fullName}»?`;
+    const base = personnelSectionText.removeConfirmBase.replace(
+        "{name}",
+        member.fullName,
+    );
     if (n === 0) {
         return base;
     }
-    return `${base} С ${n} задач(и) будет убран этот сотрудник!`;
+    return `${base} ${personnelSectionText.removeConfirmWithTasks.replace(
+        "{n}",
+        String(n),
+    )}`;
 };
 
 /**
@@ -269,7 +332,7 @@ const removeConfirmText = (member) => {
  */
 const onConfirmRemove = (member) => {
     removeStaff(member.id);
-    message.success("Сотрудник удалён");
+    message.success(personnelSectionText.removeSuccess);
 };
 
 /**
@@ -358,24 +421,37 @@ const openEditModal = (member) => {
     background-color: $bg-gray;
 }
 
-.personnel-card__head {
-    margin-bottom: $spacing-sm;
-}
-
-.personnel-card__name {
-    font-weight: 600;
-    margin: 0 0 4px;
-}
-
-.personnel-card__role {
-    margin: 0;
-    font-size: $font-size-sm;
-    color: $text-dark-grey;
-}
-
 .personnel-card__line {
     margin: 4px 0 0;
     font-size: $font-size-sm;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.personnel-card__label {
+    color: $text-dark-grey;
+    margin-right: 4px;
+}
+
+.personnel-card__line--status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.personnel-section__status {
+    font-size: $font-size-sm;
+}
+
+.personnel-section__status--active {
+    color: $accent-success-dark;
+}
+
+.personnel-section__status--inactive {
+    color: $accent-orange;
 }
 
 .personnel-card__actions {

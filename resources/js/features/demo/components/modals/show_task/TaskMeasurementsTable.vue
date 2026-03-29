@@ -8,12 +8,22 @@
                     <th>Статус</th>
                 </tr>
             </thead>
-            <tbody>
-                <template v-for="item in task.measurements" :key="item.time">
-                    <tr>
-                        <td>{{ item.time }}</td>
-                        <td>{{ item.value }}</td>
-                        <td>
+            <tbody
+                v-for="item in task.measurements"
+                :key="item.time"
+                class="checklist-modal__measurement-group"
+            >
+                <tr>
+                    <td data-label="Время">
+                        <span class="checklist-modal__measurement-value">{{ item.time }}</span>
+                    </td>
+                    <td data-label="Решение">
+                        <span class="checklist-modal__measurement-value">{{ item.value }}</span>
+                    </td>
+                    <td data-label="Статус">
+                        <span
+                            class="checklist-modal__measurement-value checklist-modal__measurement-value--status"
+                        >
                             <button
                                 v-if="!isHotMode && item.status === 'problem'"
                                 type="button"
@@ -59,7 +69,8 @@
                             >
                                 {{ item.correctiveAction }}
                             </p>
-                        </td>
+                        </span>
+                    </td>
                     </tr>
                     <tr
                         v-if="
@@ -82,12 +93,11 @@
                             </div>
                         </td>
                     </tr>
-                    <tr v-if="String(item.comment ?? '').trim()">
-                        <td colspan="3" class="checklist-modal__comment-row">
-                            {{ item.comment }}
-                        </td>
-                    </tr>
-                </template>
+                <tr v-if="String(item.comment ?? '').trim()">
+                    <td colspan="3" class="checklist-modal__comment-row">
+                        {{ item.comment }}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -135,6 +145,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
     emit("update:expandedActionRowKey", null);
 };
 </script>
+
 <style scoped lang="scss">
 @use "../../../../../../scss/variables" as *;
 
@@ -175,16 +186,116 @@ const onCorrectiveActionSelect = (measurement, value) => {
     text-align: center;
 }
 
-@media (max-width: 640px) {
-    .checklist-modal__table {
-        min-width: 100%;
+@media (max-width: $breakpoint-sm) {
+    .checklist-modal__table-wrap {
+        overflow-x: visible;
+        padding: $spacing-sm;
+    }
+
+    .checklist-modal__table.checklist-modal__table--measurements {
+        min-width: 0;
+        width: 100%;
         table-layout: auto;
     }
 
-    .checklist-modal__table th,
-    .checklist-modal__table td {
+    .checklist-modal__table.checklist-modal__table--measurements thead {
+        display: none;
+    }
+
+    .checklist-modal__measurement-group {
+        display: block;
+        margin-bottom: $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $radius-md;
+        background-color: $bg-white;
+        box-shadow: $shadow-sm;
+        overflow: hidden;
+    }
+
+    .checklist-modal__measurement-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .checklist-modal__measurement-group > tr:first-child {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .checklist-modal__measurement-group > tr:first-child > td {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: $spacing-sm;
+        text-align: left;
+        padding: $spacing-sm-m;
+        border-bottom: 1px solid rgba($text-light-grey, 0.45);
+        min-width: 0;
+    }
+
+    .checklist-modal__measurement-group > tr:first-child > td:last-child {
+        border-bottom: none;
+    }
+
+    .checklist-modal__measurement-group > tr:first-child > td::before {
+        content: attr(data-label);
+        flex: 0 0 auto;
+        font-size: $font-size-xs;
+        font-weight: 600;
+        color: $text-dark-grey;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .checklist-modal__measurement-value {
+        flex: 1 1 auto;
+        min-width: 0;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .checklist-modal__measurement-value--status {
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: $spacing-xs;
         white-space: normal;
-        word-break: break-word;
+        overflow: visible;
+    }
+
+    .checklist-modal__measurement-value--status .checklist-modal__status-trigger {
+        flex-shrink: 0;
+    }
+
+    .checklist-modal__measurement-group .checklist-modal__selected-action {
+        flex: 1 0 100%;
+        margin: $spacing-xs 0 0;
+        max-width: none;
+        text-align: right;
+        white-space: normal;
+    }
+
+    .checklist-modal__measurement-group > tr:not(:first-child) {
+        display: block;
+    }
+
+    .checklist-modal__measurement-group > tr:not(:first-child) > td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .checklist-modal__measurement-group .checklist-modal__action-row {
+        border-bottom: 1px solid rgba($text-light-grey, 0.35);
+    }
+
+    .checklist-modal__measurement-group > tr:last-child > td {
+        border-bottom: none;
     }
 }
 
@@ -202,10 +313,6 @@ const onCorrectiveActionSelect = (measurement, value) => {
 
 .checklist-modal__badge--ok {
     color: $text-green;
-}
-
-.checklist-modal__badge--repeat {
-    color: $accent-primary-dark;
 }
 
 .checklist-modal__badge--problem {

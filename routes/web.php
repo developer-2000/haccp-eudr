@@ -15,12 +15,12 @@ Route::post('/locale', [LocaleController::class, 'set'])
 // Редирект корня на /{locale} по session, cookie или config(app.locale).
 Route::get('/', [LocaleController::class, 'redirectToLocale']);
 
-// Публичная карточка партии EUDR (SPA, без префикса локали — как в QR-ссылках /batch/{id}).
+// Публичная карточка партии EUDR (SPA): /batch/{id} без локали (старые QR) и /{locale}/batch/{id} — см. группу `{locale}/{any}` ниже.
 Route::get('/batch/{batchId}', function () {
     return view('index-client');
 })->where('batchId', '[A-Za-z0-9_-]+');
 
-// Публичный дневной отчёт HACCP + EUDR (SPA, без локали — как в ссылке из Reports).
+// Публичный дневной отчёт HACCP + EUDR (SPA): /report/{date} без локали и /{locale}/report/{date} — см. группу `{locale}/{any}` ниже.
 Route::get('/report/{date}', function () {
     return view('index-client');
 })->where('date', '[0-9]{4}-[0-9]{2}-[0-9]{2}');

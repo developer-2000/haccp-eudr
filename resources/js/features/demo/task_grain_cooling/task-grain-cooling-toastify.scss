@@ -3,6 +3,9 @@
 .Toastify__toast-container.Toastify__toast-container--top-center,
 #top-center.Toastify__toast-container {
     padding: 0;
+    @media (max-width: 480px) {
+        padding: 13px 13px;
+    }
 }
 
 /* Оформление обёртки vue3-toastify — тёмная тема (сценарий task_grain_cooling). */
@@ -26,3 +29,4 @@
 .Toastify__toast.global-task-reminder-toast-wrap .Toastify__toast-text {
     width: 100%;
 }
+

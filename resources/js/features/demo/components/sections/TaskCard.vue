@@ -275,7 +275,7 @@ const nicheAria = computed(() => {
     border: 2px solid $text-light-grey;
     border-radius: $radius-lg;
     padding: 8px 32px 8px 16px;
-    background-color: $bg-style-white;
+    background-color: $bg-gray;
     cursor: pointer;
     min-height: 150px;
     transition:

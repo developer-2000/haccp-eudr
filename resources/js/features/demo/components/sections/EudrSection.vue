@@ -1,39 +1,87 @@
 <template>
     <div class="eudr-section">
-        <div class="eudr-table-wrap">
-            <table class="eudr-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Продукт</th>
-                        <th>Поставщик</th>
-                        <th>Дата</th>
-                        <th>Статус</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="batch in props.batches" :key="batch.id">
-                        <td>{{ batch.id }}</td>
-                        <td>{{ batch.product }}</td>
-                        <td>{{ batch.supplier }}</td>
-                        <td>{{ batch.date }}</td>
-                        <td>
-                            <span
-                                class="eudr-status"
-                                :class="`eudr-status--${batch.status}`"
-                            >
-                                {{ batch.statusLabel }}
-                            </span>
-                        </td>
-                        <td>
-                            <n-button type="info" @click="openQrModal(batch)">
-                                Показать QR
-                            </n-button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="eudr-section__desktop">
+            <div class="eudr-table-wrap">
+                <table class="eudr-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Продукт</th>
+                            <th>Поставщик</th>
+                            <th>Дата</th>
+                            <th>Статус</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="batch in props.batches" :key="batch.id">
+                            <td>{{ batch.id }}</td>
+                            <td>{{ batch.product }}</td>
+                            <td>{{ batch.supplier }}</td>
+                            <td>{{ batch.date }}</td>
+                            <td>
+                                <span
+                                    class="eudr-status"
+                                    :class="`eudr-status--${batch.status}`"
+                                >
+                                    {{ batch.statusLabel }}
+                                </span>
+                            </td>
+                            <td>
+                                <n-button
+                                    type="info"
+                                    @click="openQrModal(batch)"
+                                >
+                                    Показать QR
+                                </n-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="eudr-section__mobile">
+            <article
+                v-for="batch in props.batches"
+                :key="batch.id"
+                class="eudr-card"
+            >
+                <p class="eudr-card__line">
+                    <span class="eudr-card__label">ID:</span>
+                    {{ batch.id }}
+                </p>
+                <p class="eudr-card__line">
+                    <span class="eudr-card__label">Продукт:</span>
+                    {{ batch.product }}
+                </p>
+                <p class="eudr-card__line">
+                    <span class="eudr-card__label">Поставщик:</span>
+                    {{ batch.supplier }}
+                </p>
+                <p class="eudr-card__line">
+                    <span class="eudr-card__label">Дата:</span>
+                    {{ batch.date }}
+                </p>
+                <p class="eudr-card__line eudr-card__line--status">
+                    <span class="eudr-card__label">Статус:</span>
+                    <span
+                        class="eudr-status"
+                        :class="`eudr-status--${batch.status}`"
+                    >
+                        {{ batch.statusLabel }}
+                    </span>
+                </p>
+                <div class="eudr-card__actions">
+                    <n-button
+                        type="info"
+                        block
+                        @click="openQrModal(batch)"
+                    >
+                        Показать QR
+                    </n-button>
+                </div>
+            </article>
         </div>
 
         <EudrQrModal
@@ -97,6 +145,48 @@ const handleQrAction = (action) => {
     gap: $spacing-md;
 }
 
+.eudr-section__desktop {
+    display: block;
+}
+
+.eudr-section__mobile {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.eudr-card {
+    border: 1px solid $text-light-grey;
+    border-radius: $radius-lg;
+    padding: $spacing-md;
+    background-color: $bg-gray;
+}
+
+.eudr-card__line {
+    margin: 4px 0 0;
+    font-size: $font-size-sm;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.eudr-card__line--status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.eudr-card__label {
+    color: $text-dark-grey;
+    margin-right: 4px;
+}
+
+.eudr-card__actions {
+    margin-top: $spacing-md;
+}
+
 .eudr-section__header {
     h2 {
         margin: 0;
@@ -154,15 +244,25 @@ const handleQrAction = (action) => {
 }
 
 .eudr-status--ok {
-    color: $text-green;
+    color: $accent-success-dark;
 }
 
 .eudr-status--review {
-    color: $accent-primary;
+    color: $accent-orange;
 }
 
 .eudr-table__button {
     min-height: 44px;
+}
+
+@media (max-width: $breakpoint-lg) {
+    .eudr-section__desktop {
+        display: none;
+    }
+
+    .eudr-section__mobile {
+        display: flex;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

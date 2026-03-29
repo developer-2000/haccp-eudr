@@ -1,5 +1,6 @@
 import { createDefaultState } from "@/features/demo/composables/demoDefaultState";
 import { buildDemoBatches } from "@/features/demo/data/eudrBatchPublic";
+import { normalizeAllChecklistTaskMeasurementStatuses } from "@/features/demo/domain/checklistTaskModel";
 
 export const STORAGE_KEY = "haccp-demo-state";
 
@@ -14,13 +15,15 @@ const normalizeHydratedStateDates = (state) => {
         ...(state?.report ?? {}),
         reportDayIso: defaults.report.reportDayIso,
     };
-    return {
+    const next = {
         ...state,
         inspectionDate: defaults.inspectionDate,
         report: nextReport,
         // Гарантируем, что в Reports/дневном отчёте даты партий синхронны с текущим днем.
         batches: buildDemoBatches(),
     };
+    normalizeAllChecklistTaskMeasurementStatuses(next.checklistsByNiche);
+    return next;
 };
 
 /**
@@ -49,6 +52,7 @@ export const loadPersistedDemoState = () =>
 
 export const saveStateToStorage = (state) => {
     try {
+        normalizeAllChecklistTaskMeasurementStatuses(state.checklistsByNiche);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
         // no-op: storage может быть недоступен
