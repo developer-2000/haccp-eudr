@@ -7,6 +7,16 @@ import { copyFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Уникальный суффикс каждой сборки: новые имена `*.js` / `*.css` в `public/build`, клиенты не цепляются за старый кэш.
+ * В CI задайте `VITE_BUILD_ID` (например номер пайплайна); иначе — время запуска `vite build`.
+ */
+const buildId =
+    process.env.VITE_BUILD_ID?.trim() ||
+    `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+const buildAssetPattern = `assets/[name]-[hash]-${buildId}.[ext]`;
+
 // Универсальный плагин для копирования всех файлов из public/images в build/images
 const copyPublicImages = () => {
     return {
@@ -77,6 +87,15 @@ export default defineConfig({
         preprocessorOptions: {
             scss: {
                 api: 'modern-compiler',
+            },
+        },
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                entryFileNames: `assets/[name]-[hash]-${buildId}.js`,
+                chunkFileNames: `assets/[name]-[hash]-${buildId}.js`,
+                assetFileNames: buildAssetPattern,
             },
         },
     },

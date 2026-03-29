@@ -19,71 +19,9 @@ import {
     syncGrainCoolingPendingMeasurementTimeToUserLocal,
 } from "./applyGrainCoolingMeasurement";
 
-/** События, по которым браузер разрешает «разблокировать» воспроизведение (политика autoplay). */
-const AUDIO_UNLOCK_EVENTS = ["pointerdown", "keydown", "touchstart"];
-
-let sharedReminderAudio = null;
-let reminderAudioUnlocked = false;
-
-function getSharedReminderAudio() {
-    if (!sharedReminderAudio) {
-        sharedReminderAudio = new Audio(task_grain_cooling.soundUrl);
-        sharedReminderAudio.preload = "auto";
-    }
-    return sharedReminderAudio;
-}
-
-/**
- * Вызвать один раз из обработчика жеста пользователя (синхронно в цепочке события):
- * тихий `play()` → `pause()` снимает блок autoplay для этого `Audio`, дальше звук из таймера может играть.
- */
-function unlockReminderAudioFromUserGesture() {
-    if (reminderAudioUnlocked) {
-        return;
-    }
-    const audio = getSharedReminderAudio();
-    audio.volume = 0;
-    audio.currentTime = 0;
-    audio
-        .play()
-        .then(() => {
-            audio.pause();
-            audio.currentTime = 0;
-            audio.volume = 1;
-            reminderAudioUnlocked = true;
-            detachReminderAudioUnlockListeners();
-        })
-        .catch(() => {});
-}
-
-function detachReminderAudioUnlockListeners() {
-    for (const ev of AUDIO_UNLOCK_EVENTS) {
-        window.removeEventListener(ev, unlockReminderAudioFromUserGesture, true);
-    }
-}
-
-function attachReminderAudioUnlockListeners() {
-    for (const ev of AUDIO_UNLOCK_EVENTS) {
-        window.addEventListener(ev, unlockReminderAudioFromUserGesture, {
-            capture: true,
-            passive: true,
-        });
-    }
-}
-
-/**
- * Звук напоминания: один общий `Audio` после разблокировки жестом; иначе autoplay чаще всего глушится.
- */
-export function playTaskReminderSound() {
-    const audio = getSharedReminderAudio();
-    audio.volume = 1;
-    audio.currentTime = 0;
-    audio.play().catch(() => {});
-}
-
 /**
  * Один раз за сессию (пока не сработал sessionStorage): при наличии `pending` у целевой задачи —
- * задержка из конфига → тост + звук; затем через `measurementProblemDelayMs` — `problem` у первого
+ * задержка из конфига → тост; затем через `measurementProblemDelayMs` — `problem` у первого
  * замера с **зафиксированным при старте** индексом в `task_grain_cooling.measurementIndex` — только если этот замер всё ещё `pending`.
  *
  * Сначала синхронная проверка `pending` по `demoState` (до Pinia store сценария и до любых таймеров);
@@ -134,16 +72,16 @@ export function useGlobalTaskReminder() {
             unlockGrainCoolingMeasurementIndex();
             return;
         }
-        attachReminderAudioUnlockListeners();
         toastTimerId = window.setTimeout(() => {
             if (!hasGrainCoolingPendingMeasurement(demoState)) {
                 unlockGrainCoolingMeasurementIndex();
-                detachReminderAudioUnlockListeners();
                 return;
             }
             syncGrainCoolingPendingMeasurementTimeToUserLocal(demoState);
             grainStore.markNotificationLaunched();
-            playTaskReminderSound();
+            const problemDelayMs =
+                grainStore.notificationProblemWindowMs ??
+                task_grain_cooling.measurementProblemDelayMs;
             grainCoolingReminderToastId = toast(
                 ({ closeToast }) =>
                     h(GlobalTaskReminderToast, { closeToast }),
@@ -171,13 +109,12 @@ export function useGlobalTaskReminder() {
                 }
                 grainCoolingReminderToastId = null;
                 grainStore.markNotificationCountdownCompleted();
-            }, task_grain_cooling.measurementProblemDelayMs);
+            }, problemDelayMs);
         }, task_grain_cooling.initialToastDelayMs);
     });
 
     onUnmounted(() => {
         unlockGrainCoolingMeasurementIndex();
-        detachReminderAudioUnlockListeners();
         if (toastTimerId !== null) {
             clearTimeout(toastTimerId);
         }

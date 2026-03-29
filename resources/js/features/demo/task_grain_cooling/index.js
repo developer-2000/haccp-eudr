@@ -39,7 +39,7 @@ export {
     useGrainCoolingStore,
 } from "./grainCoolingDemoEntry";
 /** Внутренняя часть цепочки; на демо вызывается только из `useGrainCoolingDemoEntry`. */
-export { useGlobalTaskReminder, playTaskReminderSound } from "./useGlobalTaskReminder";
+export { useGlobalTaskReminder } from "./useGlobalTaskReminder";
 export { default as GlobalTaskReminderToast } from "./GlobalTaskReminderToast.vue";
 export { default as GrainCoolingNotificationBanner } from "./GrainCoolingNotificationBanner.vue";
 export { navigateGrainCoolingToDemoChecklists } from "./grainCoolingNavigateToDemoChecklists";

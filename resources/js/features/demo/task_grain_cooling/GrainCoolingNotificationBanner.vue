@@ -31,7 +31,8 @@ import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
 defineOptions({ name: "GrainCoolingNotificationBanner" });
 
 const grainStore = useTaskGrainCoolingStore();
-const { notificationBannerActive, notificationLaunched } = storeToRefs(grainStore);
+const { notificationBannerActive, notificationLaunched, notificationProblemWindowMs } =
+    storeToRefs(grainStore);
 
 const remainingMs = ref(0);
 let intervalId = null;
@@ -47,7 +48,12 @@ function tick() {
         remainingMs.value = 0;
         return;
     }
-    const end = start + task_grain_cooling.measurementProblemDelayMs;
+    const windowMs =
+        notificationProblemWindowMs.value != null &&
+        Number.isFinite(notificationProblemWindowMs.value)
+            ? notificationProblemWindowMs.value
+            : task_grain_cooling.measurementProblemDelayMs;
+    const end = start + windowMs;
     remainingMs.value = Math.max(0, end - Date.now());
 }
 
@@ -105,6 +111,8 @@ watch(
         notificationBannerActive.value,
         notificationLaunched.value,
         task_grain_cooling.notificationLaunchedAt,
+        notificationProblemWindowMs.value,
+        task_grain_cooling.measurementProblemDelayMs,
     ],
     () => {
         stopTickLoop();
@@ -136,54 +144,55 @@ onUnmounted(() => {
     width: 100%;
     background-color: $bg-error_color;
     border-bottom: 1px solid rgba($text-red, 0.2);
+
+    .grain-cooling-notification-banner__inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 13px;
+        padding: 16px;
+        min-height: 44px;
+        box-sizing: border-box;
+
+        .grain-cooling-notification-banner__text {
+            margin: 0;
+            flex: 1 1 auto;
+            min-width: 0;
+            font-size: $font-size-sm;
+            font-weight: 500;
+            color: $text-color;
+            line-height: 1.35;
+
+            .grain-cooling-notification-banner__countdown {
+                font-variant-numeric: tabular-nums;
+                font-weight: 600;
+                color: $text-red;
+            }
+        }
+
+        .grain-cooling-notification-banner__go {
+            flex-shrink: 0;
+            cursor: pointer;
+            border: 1px solid rgba($accent-primary-dark, 0.45);
+            border-radius: $radius-md;
+            padding: 6px 14px;
+            font-size: $font-size-sm;
+            font-weight: 600;
+            color: $accent-primary-dark;
+            background-color: $bg-style-white;
+            font-family: inherit;
+
+            &:hover {
+                background-color: rgba($bg-light-grey, 0.9);
+            }
+
+            &:focus-visible {
+                outline: 2px solid rgba($accent-primary-dark, 0.55);
+                outline-offset: 2px;
+            }
+        }
+    }
 }
 
-.grain-cooling-notification-banner .grain-cooling-notification-banner__inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: $spacing-sm;
-    padding: $spacing-sm 0;
-    min-height: 44px;
-    box-sizing: border-box;
-}
-
-.grain-cooling-notification-banner .grain-cooling-notification-banner__text {
-    margin: 0;
-    flex: 1 1 auto;
-    min-width: 0;
-    font-size: $font-size-sm;
-    font-weight: 500;
-    color: $text-color;
-    line-height: 1.35;
-}
-
-.grain-cooling-notification-banner .grain-cooling-notification-banner__countdown {
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    color: $text-red;
-}
-
-.grain-cooling-notification-banner .grain-cooling-notification-banner__go {
-    flex-shrink: 0;
-    cursor: pointer;
-    border: 1px solid rgba($accent-primary-dark, 0.45);
-    border-radius: $radius-md;
-    padding: 6px 14px;
-    font-size: $font-size-sm;
-    font-weight: 600;
-    color: $accent-primary-dark;
-    background-color: $bg-style-white;
-    font-family: inherit;
-}
-
-.grain-cooling-notification-banner .grain-cooling-notification-banner__go:hover {
-    background-color: rgba($bg-light-grey, 0.9);
-}
-
-.grain-cooling-notification-banner .grain-cooling-notification-banner__go:focus-visible {
-    outline: 2px solid rgba($accent-primary-dark, 0.55);
-    outline-offset: 2px;
-}
 </style>

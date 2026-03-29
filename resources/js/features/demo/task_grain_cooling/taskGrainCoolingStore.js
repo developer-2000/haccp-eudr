@@ -16,6 +16,7 @@ const STORAGE_KEY = task_grain_cooling.sessionStorageKey;
  *   notificationLaunchedAt: string | null,
  *   notificationCountdownCompleted: boolean,
  *   notificationFlowLogicallyComplete: boolean,
+ *   notificationProblemWindowMs: number | null,
  * } | null}
  *   Распарсенный объект или `null`, если данных нет / `sessionStorage` недоступен / ошибка парсинга.
  *   `notificationFlowLogicallyComplete` — оба: тост уже был **и** отсчёт после тоста доведён до конца (`notificationCountdownCompleted`);
@@ -46,6 +47,11 @@ function loadPersistedNotification() {
         const countdownDone = Boolean(data.notificationCountdownCompleted);
         /** Не сырой `notificationLaunched`, а «сценарий оповещения довели до конца» — иначе при reload снова тост + таймеры. */
         const flowComplete = launched && countdownDone;
+        const rawWindow = data.notificationProblemWindowMs;
+        const notificationProblemWindowMs =
+            typeof rawWindow === "number" && Number.isFinite(rawWindow) && rawWindow >= 0
+                ? rawWindow
+                : null;
         const out = {
             notificationLaunched: launched,
             notificationLaunchedAt:
@@ -54,6 +60,7 @@ function loadPersistedNotification() {
                     : null,
             notificationCountdownCompleted: countdownDone,
             notificationFlowLogicallyComplete: flowComplete,
+            notificationProblemWindowMs,
         };
         return out;
     } catch (e) {
@@ -64,7 +71,7 @@ function loadPersistedNotification() {
 /**
  * Сохраняет в `sessionStorage` состояние оповещения (один раз за показ тоста).
  *
- * @param {{ notificationLaunched: boolean, notificationLaunchedAt: string | null, notificationBannerActive?: boolean, notificationCountdownCompleted?: boolean }} payload
+ * @param {{ notificationLaunched: boolean, notificationLaunchedAt: string | null, notificationBannerActive?: boolean, notificationCountdownCompleted?: boolean, notificationProblemWindowMs?: number | null }} payload
  * @returns {void}
  */
 function persistNotification(payload) {
@@ -121,6 +128,14 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
              * по первому замеру со статусом `pending` (тот же сценарий, что клик по строке).
              */
             autoOpenPendingAfterTaskModal: false,
+            /**
+             * Окно до `problem` в мс, зафиксированное при показе тоста (как у `setTimeout` в `useGlobalTaskReminder`).
+             * `null` — до первого показа; после reload подтягивается из sessionStorage.
+             */
+            notificationProblemWindowMs:
+                typeof persisted?.notificationProblemWindowMs === "number"
+                    ? persisted.notificationProblemWindowMs
+                    : null,
         };
     },
 
@@ -137,6 +152,7 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
                 notificationLaunchedAt: this.notificationLaunchedAt,
                 notificationBannerActive: this.notificationBannerActive,
                 notificationCountdownCompleted: this.notificationCountdownCompleted,
+                notificationProblemWindowMs: this.notificationProblemWindowMs,
             });
         },
 
@@ -149,6 +165,7 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
         markNotificationLaunched() {
             this.notificationLaunched = true;
             this.notificationLaunchedAt = new Date().toISOString();
+            this.notificationProblemWindowMs = task_grain_cooling.measurementProblemDelayMs;
             task_grain_cooling.notificationLaunchedAt = this.notificationLaunchedAt;
             this.persistGrainCoolingSession();
         },

@@ -15,10 +15,16 @@ export const task_grain_cooling = reactive({
      * Таймер `problem` меняет статус только у этого индекса; сброс — `unlockGrainCoolingMeasurementIndex` → снова `null`.
      */
     measurementIndex: null,
-    /** Задержка после загрузки SPA: через столько мс показать оповещение и проиграть звук */
-    initialToastDelayMs: 60000,
-    /** После показа оповещение: через столько мс выставить `problem` у замера с индексом `measurementIndex`, если он ещё `pending`. */
-    measurementProblemDelayMs: 300000,
+    /** Задержка после загрузки SPA: через столько мс показать оповещение (тост). */
+    // initialToastDelayMs: 60000,
+    initialToastDelayMs: 5000,
+    /**
+     * После показа тоста: через столько мс выставить `problem` у замера с индексом `measurementIndex`, если он ещё `pending`.
+     * При показе тоста значение копируется в Pinia (`notificationProblemWindowMs`) и в sessionStorage — полоса и таймер используют снимок.
+     * После смены числа на проде нужен новый фронт-бандл; на телефоне сбросьте кэш Safari/Chrome, иначе возможен старый чанк с прежней константой.
+     */
+    measurementProblemDelayMs: 30000000,
+    // measurementProblemDelayMs: 5000,
     /** Первая строка текста в глобальном тосте (подзаголовок-сигнал). */
     toastTitle: "Время выполнить задачу",
     /** Вторая строка в тосте — отображаемое имя задачи (как правило = `taskTitle`). */
@@ -27,15 +33,14 @@ export const task_grain_cooling = reactive({
     toastButtonCloseLabel: "Закрыть",
     /** Подпись кнопки перехода на демо-страницу в секцию чек-листов. */
     toastButtonNavigateLabel: "Перейти к задаче",
-    /** Путь к wav от корня сайта (`public/`), воспроизводится при показе тоста. */
-    soundUrl: "/sounds/task_completion_notification.wav",
     /** Ключ `sessionStorage` для персиста «глобальное оповещение уже показывали в этой вкладке». */
     sessionStorageKey: "task_grain_cooling",
     /**
      * Для тестов - sessionStorageKey - true
      * В продакшене держать `false`.
      */
-    clearGrainCoolingSessionStorageBeforeLoad: false,
+    // clearGrainCoolingSessionStorageBeforeLoad: false,
+    clearGrainCoolingSessionStorageBeforeLoad: true,
     /** Строковый id Pinia-store сценария (первый аргумент `defineStore`). */
     piniaStoreId: "taskGrainCooling",
     /** Имя именованного роута Vue Router при переходе из тоста на демо. */
