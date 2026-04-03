@@ -23,10 +23,15 @@ Demo построен на Vue 3 + Naive UI + localStorage. SPA с роутин�
 ## **❌ НЕДОЧЁТЫ (Что сломано/недоделано)**
 
 - **Фото/голос:** Camera mock только в legacy, нет speech recognition для "196°C".
-- **Мульти-подтверждение:** Только assignedStaffId, нет 2-person confirm (Hans/Piotr).
-- **Анимации:** Pulse/red shake есть, но нет confetti на ✓, haptic vibrate.
-- **Offline/PWA:** Нет service worker, install prompt, offline badge.
+- Не в DEMO **Мульти-подтверждение:** Только assignedStaffId, нет 2-person confirm (Hans/Piotr).
+- Не в DEMO **Анимации:** Pulse/red shake есть, но нет confetti на ✓, haptic vibrate.
+- Не в DEMO **Offline/PWA:** Нет service worker, install prompt, offline badge.
 - **Risk score AI:** Mock 72% warning не реализован.
+  🎯 Почему warning для 0-5°C HACCP стандарты (EU/UK/FDA):
+    Холодная зона: 0-5°C (идеал 0-2°C для мяса/рыбы, 4-7°C dairy).​
+    Danger zone: >5°C бактерии растут (Salmonella/E.coli).
+    Охлаждение зерна (кофейня): После roast → <21°C за 2ч, но storage 0-5°C для влажности/плесени.​
+Пример: 4.2°C = 🟢 OK, 5.5°C = 🟡 ⚠️ "Риск >5°C!", 7°C = 🔴 "Переместить товар!".
 - **Keyboard shortcuts:** Нет Ctrl+K search.
 - **Drag\&drop widgets:** Нет sortable.js на dashboard.
 - **Drag\&drop widgets:** Нет sortable.js на dashboard.

@@ -18,6 +18,7 @@ import {
     getEndOfCurrentMonthDateRu,
     getTodayDateIso,
 } from "@/features/demo/composables/demoStateDateUtils";
+import { seedChecklistsTemperatureAi } from "@/features/demo/ai/temperature/seedChecklistsTemperatureAi";
 
 /** Экспорт для сборки публичного дневного отчёта (`dailyReportPublic.js`). */
 export const createDefaultState = () => {
@@ -151,13 +152,15 @@ export const createDefaultState = () => {
         ]),
     );
 
+    const checklistsByNiche = applyDefaultAssigneesToChecklists(checklistsByNicheRaw);
+    seedChecklistsTemperatureAi(checklistsByNiche);
+
     return {
         demoStateSchemaVersion: DEMO_STATE_SCHEMA_VERSION,
         inspectionDate: getEndOfCurrentMonthDateRu(),
         sites: DEFAULT_SITES.map((s) => ({ ...s })),
         staff: DEFAULT_STAFF.map((s) => ({ ...s })),
-        checklistsByNiche:
-            applyDefaultAssigneesToChecklists(checklistsByNicheRaw),
+        checklistsByNiche,
         batches: buildDemoBatches(),
         report: {
             /** Публичная страница ежедневного отчёта: /report/YYYY-MM-DD (не карточка партии). */

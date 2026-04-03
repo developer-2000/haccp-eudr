@@ -11,7 +11,7 @@
             inputmode="decimal"
             placeholder="—"
             class="checklist-modal__pending-temp-input"
-            @update:value="$emit('update:temperatureDraft', $event)"
+            @update:value="onTemperatureDraftInput"
         >
             <template #prefix>
                 <span
@@ -70,9 +70,26 @@
 
 <script setup>
 import { NInput } from "naive-ui";
+import {
+    applyKeyboardSignToTemperatureDraft,
+    sanitizeTemperatureNumericDraft,
+} from "@/utils/helpers";
 import PendingPhotoCaptureBlock from "../show_task/PendingPhotoCaptureBlock.vue";
 
 defineOptions({ name: "TaskExecutionTemperatureTimerPanel" });
+
+const emit = defineEmits(["update:temperatureDraft", "keypad-press", "camera-shot"]);
+
+/**
+ * Ввод с клавиатуры и вставка: цифры, ведущий минус, одна точка или запятая (в черновике — точка), до 2 знаков после точки; +/− по краям — знак.
+ */
+const onTemperatureDraftInput = (value) => {
+    const sanitized = sanitizeTemperatureNumericDraft(value);
+    emit(
+        "update:temperatureDraft",
+        applyKeyboardSignToTemperatureDraft(sanitized, value),
+    );
+};
 
 const keypadDigitKeys = Object.freeze([
     "1",
@@ -116,7 +133,6 @@ defineProps({
     },
 });
 
-defineEmits(["update:temperatureDraft", "keypad-press", "camera-shot"]);
 </script>
 
 <style scoped lang="scss">

@@ -10,6 +10,8 @@ import {
     TASK_SCOPE_TYPE,
 } from "@/features/demo/data/demoChecklistTaskScope";
 import { normalizeTaskFieldDefinitions } from "@/features/demo/data/demoChecklistTaskFields";
+import { parseTemperatureFromMeasurementValue } from "@/features/demo/ai/temperature/parseTemperatureFromMeasurementValue";
+import { DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE } from "@/features/demo/task_grain_cooling/config";
 
 export const DEFAULT_TASK_ACTIVE_WEEKDAYS = Object.freeze([
     "mon",
@@ -60,6 +62,106 @@ export function normalizeTaskMeasurementRowStatuses(task) {
 }
 
 /**
+ * @param {object} current
+ * @param {object} next
+ * @returns {boolean}
+ */
+function isSameNormalizedTemperatureAiContext(current, next) {
+    return (
+        current.engine === next.engine &&
+        current.niche === next.niche &&
+        current.mode === next.mode &&
+        current.taskType === next.taskType &&
+        current.ccpMin === next.ccpMin &&
+        current.ccpMax === next.ccpMax &&
+        current.ccpLabel === next.ccpLabel &&
+        current.updatedAt === next.updatedAt
+    );
+}
+
+/**
+ * Нормализует AI-поля задачи и строк замеров in-place.
+ *
+ * @param {object|null|undefined} task
+ * @param {string|null|undefined} niche
+ * @returns {void}
+ */
+export function normalizeTaskAiFields(task, niche = null) {
+    if (!task || typeof task !== "object") {
+        return;
+    }
+
+    if (typeof task.niche !== "string" || !task.niche.trim()) {
+        task.niche = typeof niche === "string" && niche.trim() ? niche.trim() : null;
+    }
+
+    const fieldType = task?.taskFieldDefinitions?.[0]?.fieldType ?? null;
+    const isTemperatureTask = fieldType === "temperature";
+
+    if (isTemperatureTask) {
+        const aiContext =
+            task.aiContext && typeof task.aiContext === "object" ? task.aiContext : {};
+        const nextAiContext = {
+            ...DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE,
+            niche: task.niche ?? null,
+            mode: aiContext.mode ?? null,
+            ccpMin:
+                typeof aiContext.ccpMin === "number" && Number.isFinite(aiContext.ccpMin)
+                    ? aiContext.ccpMin
+                    : null,
+            ccpMax:
+                typeof aiContext.ccpMax === "number" && Number.isFinite(aiContext.ccpMax)
+                    ? aiContext.ccpMax
+                    : null,
+            ccpLabel: String(aiContext.ccpLabel ?? ""),
+            updatedAt:
+                typeof aiContext.updatedAt === "string" && aiContext.updatedAt.trim()
+                    ? aiContext.updatedAt
+                    : null,
+        };
+        const cur = task.aiContext;
+        if (
+            !cur ||
+            typeof cur !== "object" ||
+            !isSameNormalizedTemperatureAiContext(cur, nextAiContext)
+        ) {
+            task.aiContext = nextAiContext;
+        }
+    } else if (task.aiContext != null) {
+        task.aiContext = null;
+    }
+
+    if (!Array.isArray(task.measurements)) {
+        return;
+    }
+
+    for (const row of task.measurements) {
+        if (!row || typeof row !== "object") {
+            continue;
+        }
+        if (!Object.prototype.hasOwnProperty.call(row, "aiWarning")) {
+            row.aiWarning = null;
+        }
+        if (row.aiWarning && typeof row.aiWarning !== "object") {
+            row.aiWarning = null;
+        }
+        if (row.aiWarning && typeof row.aiWarning === "object") {
+            const w = row.aiWarning;
+            if (
+                Object.prototype.hasOwnProperty.call(w, "severity") &&
+                !Object.prototype.hasOwnProperty.call(w, "ai_status")
+            ) {
+                w.ai_status = w.severity;
+                delete w.severity;
+            }
+            if (Object.prototype.hasOwnProperty.call(w, "status")) {
+                delete w.status;
+            }
+        }
+    }
+}
+
+/**
  * Все задачи во всех нишах чек-листов: нормализация статусов замеров.
  *
  * @param {Record<string, unknown>|null|undefined} checklistsByNiche
@@ -76,6 +178,7 @@ export function normalizeAllChecklistTaskMeasurementStatuses(checklistsByNiche) 
         }
         for (const task of list) {
             normalizeTaskMeasurementRowStatuses(task);
+            normalizeTaskAiFields(task, niche);
         }
     }
 }
@@ -537,6 +640,103 @@ const resolveTaskAllowAssigneeReportCorrections = ({ payload }) =>
 const resolveTaskFieldDefinitions = ({ payload }) =>
     normalizeTaskFieldDefinitions(payload?.taskFieldDefinitions);
 
+const readTemperatureFieldFromDefinitions = (taskFieldDefinitions) => {
+    const defs = Array.isArray(taskFieldDefinitions) ? taskFieldDefinitions : [];
+    return defs.find((def) => def?.fieldType === "temperature") ?? null;
+};
+
+const readTemperatureLimitsFromDefinitions = (taskFieldDefinitions) => {
+    const temperatureDef = readTemperatureFieldFromDefinitions(taskFieldDefinitions);
+    if (!temperatureDef) {
+        return {
+            ccpMin: null,
+            ccpMax: null,
+            ccpLabel: "",
+            taskType: null,
+        };
+    }
+    const config =
+        temperatureDef.config && typeof temperatureDef.config === "object"
+            ? temperatureDef.config
+            : {};
+    const minRaw = Number(config.minC);
+    const maxRaw = Number(config.maxC);
+    const ccpMin = Number.isFinite(minRaw) ? minRaw : null;
+    const ccpMax = Number.isFinite(maxRaw) ? maxRaw : null;
+    const ccpLabel =
+        ccpMin != null && ccpMax != null ? `${ccpMin}..${ccpMax}°C` : "";
+    return {
+        ccpMin,
+        ccpMax,
+        ccpLabel,
+        taskType: "temperature",
+    };
+};
+
+/**
+ * Min/max °C и подпись диапазона из первого поля temperature задачи (AI, сиды).
+ *
+ * @param {object|null|undefined} task
+ * @returns {{ minC: number|null, maxC: number|null, ccpLabel: string } | null}
+ */
+export const readTaskTemperatureMinMaxC = (task) => {
+    const limits = readTemperatureLimitsFromDefinitions(task?.taskFieldDefinitions ?? []);
+    if (limits.taskType !== "temperature") {
+        return null;
+    }
+    return {
+        minC: limits.ccpMin,
+        maxC: limits.ccpMax,
+        ccpLabel: limits.ccpLabel,
+    };
+};
+
+/**
+ * Число °C из `row.value` и выставление `row.status` (`success` | `problem`) по тем же правилам, что и ✓ на клавиатуре.
+ * Строки без числа (`-`, не-°C текст) — `null`, статус не трогаем.
+ *
+ * @param {object|null|undefined} task
+ * @param {object|null|undefined} row
+ * @returns {number|null}
+ */
+export const parseMeasurementTemperatureCAndSyncRowStatusToCcp = (task, row) => {
+    if (!task || !row || typeof row !== "object") {
+        return null;
+    }
+    const limits = readTaskTemperatureMinMaxC(task);
+    if (!limits) {
+        return null;
+    }
+    const current = parseTemperatureFromMeasurementValue(row.value);
+    if (current == null) {
+        return null;
+    }
+    const minC = limits.minC;
+    const maxC = limits.maxC;
+    const withinMin = minC == null ? true : current >= minC;
+    const withinMax = maxC == null ? true : current <= maxC;
+    const inRange = withinMin && withinMax;
+    row.status = inRange ? "success" : "problem";
+    return current;
+};
+
+const buildTaskAiContext = ({ niche, taskFieldDefinitions }) => {
+    const limits = readTemperatureLimitsFromDefinitions(taskFieldDefinitions);
+    if (limits.taskType !== "temperature") {
+        return null;
+    }
+    return {
+        ...DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE,
+        niche: niche ?? null,
+        mode: null,
+        taskType: limits.taskType,
+        ccpMin: limits.ccpMin,
+        ccpMax: limits.ccpMax,
+        ccpLabel: limits.ccpLabel,
+        updatedAt: null,
+    };
+};
+
 /**
  * Возвращает equipmentTargetIds по единому правилу для default и custom источников.
  * Используется в `buildTaskFromPayload`, чтобы поле существовало только для `taskScopeType: equipment`.
@@ -592,6 +792,7 @@ const buildDefaultNonRepeatMeasurementsFromRepeatTimes = (
         time: String(time ?? "").trim() || "00:00",
         value,
         status: slotStatus,
+        aiWarning: null,
     }));
 };
 
@@ -611,6 +812,7 @@ const buildCustomPendingMeasurementsFromRepeatTimes = (
         time: String(time ?? "").trim() || "00:00",
         value,
         status: "pending",
+        aiWarning: null,
     }));
 };
 
@@ -788,6 +990,7 @@ export const buildTaskFromPayload = ({
     }
     const base = {
         id,
+        niche,
         title,
         status: aggregateOk,
         isCustom: resolveTaskIsCustom({ source }),
@@ -803,6 +1006,13 @@ export const buildTaskFromPayload = ({
         allowAssigneeReportCorrections:
             resolveTaskAllowAssigneeReportCorrections({ payload: normalized }),
     };
+    const aiContext = buildTaskAiContext({
+        niche,
+        taskFieldDefinitions: base.taskFieldDefinitions,
+    });
+    if (aiContext) {
+        base.aiContext = aiContext;
+    }
     if (equipmentTargetIds) {
         base.equipmentTargetIds = equipmentTargetIds;
     }
@@ -820,7 +1030,10 @@ export const buildTaskFromPayload = ({
         });
         return {
             ...base,
-            measurements: repeatMeasurements ?? [],
+            measurements: (repeatMeasurements ?? []).map((m) => ({
+                ...m,
+                aiWarning: null,
+            })),
             correctiveActions: correctiveActions ?? [],
         };
     }

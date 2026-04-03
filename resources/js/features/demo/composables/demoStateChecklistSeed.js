@@ -6,7 +6,7 @@ export const REPEAT_MEASUREMENTS_BY_TASK_ID = {
         { time: "15:00", value: "-", status: "pending" },
     ],
     "coffee-2": [
-        { time: "00:00", value: "34 °C", status: "success" },
+        { time: "00:00", value: "34 °C", status: "problem" },
         { time: "06:00", value: "-", status: "pending" },
         { time: "12:00", value: "-", status: "pending" },
         { time: "18:00", value: "-", status: "pending" },

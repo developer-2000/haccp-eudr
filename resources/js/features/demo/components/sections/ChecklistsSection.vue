@@ -97,10 +97,10 @@ const toConsoleSnapshot = (value) => {
 };
 
 onMounted(() => {
-    // console.log(
-    //     "[debug] checklistsByNiche snapshot",
-    //     toConsoleSnapshot(demoState.value?.checklistsByNiche ?? {}),
-    // );
+    console.log(
+        "[debug] checklistsByNiche snapshot",
+        toConsoleSnapshot(demoState.value?.checklistsByNiche ?? {}),
+    );
 });
 
 const props = defineProps({

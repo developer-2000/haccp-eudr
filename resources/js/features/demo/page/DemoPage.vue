@@ -13,8 +13,8 @@
                 <button
                     type="button"
                     class="demo-date-picker"
-                    title="Демо: в продакшене здесь выбор дня для просмотра отчётов"
-                    aria-label="Демо: выбор дня для отчётов (пока не реализовано)"
+                    title="День календаря"
+                    aria-label="День календаря"
                 >
                     <span class="demo-date-picker__icon" aria-hidden="true">
                         <svg
@@ -44,10 +44,7 @@
                             <circle cx="16" cy="16" r="1" fill="currentColor" />
                         </svg>
                     </span>
-                    <span class="demo-date-picker__text">День с отчётами</span>
-                    <span class="demo-date-picker__chev" aria-hidden="true"
-                        >▾</span
-                    >
+                    <span class="demo-date-picker__text">День календаря</span>
                 </button>
                 <div class="demo-topbar__date">
                     <time class="demo-topbar__date-value" :datetime="todayIso"
@@ -332,7 +329,7 @@ const todayFormatted = computed(() => {
     display: inline-flex;
     align-items: center;
     gap: $spacing-sm;
-    padding: $spacing-xs $spacing-md;
+    padding: $spacing-xs $spacing-sm-w $spacing-xs $spacing-md;
     min-height: 44px;
     border: 1px solid $text-light-grey;
     border-radius: $radius-lg;
@@ -355,6 +352,15 @@ const todayFormatted = computed(() => {
         outline: 2px solid rgba($accent-primary, 0.55);
         outline-offset: 2px;
     }
+
+    &::after {
+        content: "▾";
+        font-size: 20px;
+        line-height: 1;
+        opacity: 0.65;
+        margin-left: -3px;
+        flex-shrink: 0;
+    }
 }
 
 .demo-date-picker__icon {
@@ -365,13 +371,6 @@ const todayFormatted = computed(() => {
 
 .demo-date-picker__text {
     white-space: nowrap;
-}
-
-.demo-date-picker__chev {
-    font-size: 10px;
-    line-height: 1;
-    opacity: 0.65;
-    margin-left: 2px;
 }
 
 .demo-topbar__date {

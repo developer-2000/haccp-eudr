@@ -1,6 +1,7 @@
 import { createDefaultState } from "@/features/demo/composables/demoDefaultState";
 import { buildDemoBatches } from "@/features/demo/data/eudrBatchPublic";
 import { normalizeAllChecklistTaskMeasurementStatuses } from "@/features/demo/domain/checklistTaskModel";
+import { seedChecklistsTemperatureAi } from "@/features/demo/ai/temperature/seedChecklistsTemperatureAi";
 
 export const STORAGE_KEY = "haccp-demo-state";
 
@@ -23,6 +24,7 @@ const normalizeHydratedStateDates = (state) => {
         batches: buildDemoBatches(),
     };
     normalizeAllChecklistTaskMeasurementStatuses(next.checklistsByNiche);
+    seedChecklistsTemperatureAi(next.checklistsByNiche);
     return next;
 };
 

@@ -102,10 +102,10 @@ export function useGlobalTaskReminder() {
                 return;
             }
             const storageSnapshotBeforeToast = readGrainCoolingSessionStorage();
-            console.log(
-                "Старая запись sessionStorage из прошлой сессии:",
-                storageSnapshotBeforeToast,
-            );
+            // console.log(
+            //     "Старая запись sessionStorage из прошлой сессии:",
+            //     storageSnapshotBeforeToast,
+            // );
             syncGrainCoolingPendingMeasurementTimeToUserLocal(demoState);
             grainStore.markNotificationLaunched();
             const problemDelayMs =

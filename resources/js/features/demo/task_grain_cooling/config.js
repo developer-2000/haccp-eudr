@@ -1,5 +1,44 @@
 import { reactive } from "vue";
 
+/**
+ * Контракт полей `task.aiContext` для демо temperature-v1.
+ * Рантайм-значения живут только на объекте задачи; здесь — фиксированный набор ключей (не дублировать «с нуля» в коде).
+ */
+export const DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE = Object.freeze({
+    engine: "temperature-v1",
+    niche: null,
+    mode: null,
+    taskType: "temperature",
+    ccpMin: null,
+    ccpMax: null,
+    ccpLabel: "",
+    updatedAt: null,
+});
+
+/**
+ * Контракт полей `measurement.aiWarning`, когда есть отклонение (результат одного прогона `getHaccpWarning`, дальше только чтение с объекта).
+ * При норме / нет числа — на строке `null`.
+ */
+export const DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE = Object.freeze({
+    title: "",
+    /** Уровень UI: `ok` | `warning` | `problem` (порог для problem/ warning — в `TemperatureAiAnalyzer`). Не путать с `measurement.status` строки замера. */
+    ai_status: "warning",
+    risk: 0,
+    niche: null,
+    mode: null,
+    ccpLabel: "",
+    currentLine: "",
+    deviationLine: "",
+    threat: "",
+    economy: "",
+    inspector: "",
+    action: "",
+    direction: null,
+    value: null,
+    ccpMin: null,
+    ccpMax: null,
+});
+
 export const task_grain_cooling = reactive({
     /** Уникальный id задачи в демо-чеклистах (`checklistsByNiche[niche]`), совпадает с карточкой CCP. */
     id: "coffee-2",

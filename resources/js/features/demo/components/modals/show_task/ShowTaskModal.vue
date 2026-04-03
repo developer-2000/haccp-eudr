@@ -5,20 +5,23 @@
         preset="card"
         class="checklist-modal"
         content-scrollable
-        :style="{ width: '600px', maxWidth: 'calc(100vw - 32px)' }"
+        :style="{ width: '800px', maxWidth: 'calc(100vw - 32px)' }"
         :segmented="{ content: true, footer: true }"
         @update:show="onVisibilityChange"
     >
+        <!-- Шапка модалки: компактный заголовок с иконкой/типом задачи и доступным aria-лейблом -->
         <template #header>
             <CompleteTaskModalHeader
                 :has-task="Boolean(viewTask)"
+                :task-title="viewTask?.title ?? ''"
                 :task-type-display="taskTypeDisplay"
                 :task-type-aria="taskTypeAria"
             />
         </template>
+        <!-- Тело модалки рендерим только когда есть выбранная задача -->
         <template v-if="viewTask">
             <div class="checklist-modal__content">
-                <h3 class="checklist-modal__title">{{ viewTask.title }}</h3>
+                <!-- Секция ответственного: исполнитель/персонал и контекст режима -->
                 <TaskAssigneeSection
                     :task="viewTask"
                     :staff="staff"
@@ -26,11 +29,14 @@
                     :task-type="taskType"
                     :modal-show="show"
                 />
+                <!-- оборудование/помещения -->
                 <TaskTargetsLine
                     :task-scope-type="viewTask.taskScopeType"
                     :targets-line="modalTargetsLine"
                 />
+                <!-- секция Суть задачи -->
                 <TaskFieldSummarySection :lines="taskFieldSummaryLines"/>
+                <!-- Основная таблица замеров по времени: статусы, pending, раскрытие действий -->
                 <TaskMeasurementsTable
                     :task="viewTask"
                     :is-hot-mode="isHotMode"
@@ -44,6 +50,7 @@
         <!-- Боковая модалка выполнения задания -->
         <TaskExecutionPanelModal ref="pendingDrawerRef" :task="viewTask"/>
 
+        <!-- Нижние кнопки -->
         <template #footer>
             <div class="checklist-modal__footer">
                 <n-button
@@ -252,18 +259,17 @@ const refreshTaskState = () => {
     if (!task || typeof task !== "object") {
         return;
     }
-    const repeatTimes = Array.isArray(task.repeatTimes) ? task.repeatTimes : [];
+    /** Слоты дня и сброс строк — только из `measurements`, без `repeatTimes`. */
     const currentRows = Array.isArray(task.measurements) ? task.measurements : [];
-    const times = repeatTimes.length
-        ? [...repeatTimes]
-        : currentRows
-              .map((m) => String(m?.time ?? "").trim())
-              .filter(Boolean);
+    const times = currentRows
+        .map((m) => String(m?.time ?? "").trim())
+        .filter(Boolean);
 
     task.measurements = times.map((time) => ({
         time,
         value: "-",
         status: "pending",
+        aiWarning: null,
         correctiveAction: null,
         comment: null,
     }));
@@ -291,12 +297,6 @@ defineExpose({
 .checklist-modal__content {
     display: flex;
     flex-direction: column;
-}
-
-.checklist-modal__title {
-    font-size: $font-size-xl;
-    font-weight: 600;
-    margin-bottom: 10px;
 }
 
 .checklist-modal__footer {

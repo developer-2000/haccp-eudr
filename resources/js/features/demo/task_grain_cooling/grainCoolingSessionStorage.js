@@ -55,7 +55,7 @@ export function mergeGrainCoolingSessionStorage(patch) {
  */
 export function finalizeGrainCoolingNotificationStorage(finalPatch) {
     const written = mergeGrainCoolingSessionStorage(finalPatch);
-    console.log("Оповещение завершено Storage = ", written);
+    // console.log("Оповещение завершено Storage = ", written);
     return written;
 }
 

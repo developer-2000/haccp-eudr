@@ -17,6 +17,7 @@ import {
 } from "../show_task/utils.js";
 import {isCurrentMeasurementRowPending} from "@/features/demo/task_grain_cooling/grainCoolingMeasurementRow";
 import {applyPendingMeasurementFromKeypadOk} from "./applyPendingMeasurementFromKeypadOk.js";
+import {sanitizeTemperatureNumericDraft} from "@/utils/helpers";
 
 /**
  * Состояние и логика панели выполнения pending-замера (демо).
@@ -193,7 +194,13 @@ export function useTaskExecutionDrawerState(props) {
         }
         if (key === ".") {
             if (!raw.includes(".")) {
-                pendingTemperatureDraft.value = raw ? `${raw}.` : "0.";
+                if (raw === "-") {
+                    pendingTemperatureDraft.value = "-0.";
+                } else if (raw === "") {
+                    pendingTemperatureDraft.value = "0.";
+                } else {
+                    pendingTemperatureDraft.value = `${raw}.`;
+                }
             }
             return;
         }
@@ -210,7 +217,8 @@ export function useTaskExecutionDrawerState(props) {
                 const normalizedBody = body.replace(/^0+(?=\d)/, "");
                 pendingTemperatureDraft.value = `${sign}${normalizedBody || "0"}`;
             } else {
-                pendingTemperatureDraft.value = nextRaw;
+                pendingTemperatureDraft.value =
+                    sanitizeTemperatureNumericDraft(nextRaw);
             }
         }
     };
@@ -227,6 +235,7 @@ export function useTaskExecutionDrawerState(props) {
         const comment = String(pendingSingleChoiceComment.value ?? "").trim();
         m.value = answer;
         m.status = "success";
+        m.aiWarning = null;
         m.comment = comment || null;
         isOpen.value = false;
     };
@@ -243,6 +252,7 @@ export function useTaskExecutionDrawerState(props) {
         const comment = String(pendingTicketComment.value ?? "").trim();
         m.value = completed ? "Выполнен" : "Не выполнен";
         m.status = completed ? "success" : "problem";
+        m.aiWarning = null;
         m.comment = comment || null;
         isOpen.value = false;
     };

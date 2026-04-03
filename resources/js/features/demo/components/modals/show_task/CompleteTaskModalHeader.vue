@@ -1,6 +1,8 @@
 <template>
     <div class="checklist-modal__card-header">
-        <span class="checklist-modal__card-header-title" role="heading">Детали задачи</span>
+        <span class="checklist-modal__card-header-title" role="heading">{{
+            headerText
+        }}</span>
         <span
             v-if="hasTask"
             class="checklist-modal__card-header-type"
@@ -11,10 +13,16 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from "vue";
+
+const props = defineProps({
     hasTask: {
         type: Boolean,
         default: false,
+    },
+    taskTitle: {
+        type: String,
+        default: "",
     },
     taskTypeDisplay: {
         type: String,
@@ -24,6 +32,14 @@ defineProps({
         type: String,
         default: "",
     },
+});
+
+const headerText = computed(() => {
+    const t = String(props.taskTitle ?? "").trim();
+    if (props.hasTask && t) {
+        return t;
+    }
+    return "Детали задачи";
 });
 </script>
 <style scoped lang="scss">
