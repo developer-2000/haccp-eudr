@@ -46,7 +46,7 @@ export const createDefaultState = () => {
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["coffee-2"],
                 correctiveActions: CORRECTIVE_ACTIONS_BY_TASK_ID["coffee-2"],
                 taskFieldDefinitions: TASK_FIELD_DEFINITIONS_BY_TASK_ID["coffee-2"],
-                equipmentTargetIds: ["eq-cold-storage", "eq-fridge-1"],
+                equipmentTargetIds: ["eq-coffee-bean-cooler"],
             },
             {
                 id: "coffee-3",
@@ -70,12 +70,13 @@ export const createDefaultState = () => {
         bakery: [
             {
                 id: "bakery-3",
-                title: "Охлаждение помещения",
+                title: "Температура расстоечного шкафа",
                 status: false,
+                taskScopeType: "equipment",
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["bakery-3"],
                 correctiveActions: CORRECTIVE_ACTIONS_BY_TASK_ID["bakery-3"],
                 taskFieldDefinitions: TASK_FIELD_DEFINITIONS_BY_TASK_ID["bakery-3"],
-                roomTargetIds: ["room-production-hall", "room-cold-chamber"],
+                equipmentTargetIds: ["eq-bread-proofing-cabinet"],
             },
             {
                 id: "bakery-4",

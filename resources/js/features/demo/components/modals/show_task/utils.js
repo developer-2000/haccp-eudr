@@ -12,6 +12,8 @@ const COLD_EQ = new Set([
     "eq-cold-storage",
     "eq-cold-display",
     "eq-frozen-storage",
+    "eq-coffee-bean-cooler",
+    "eq-coffee-shock-cooler",
 ]);
 
 const COLD_ROOMS = new Set(["room-cold-chamber", "room-shock-freezer"]);

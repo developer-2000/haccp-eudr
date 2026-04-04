@@ -137,7 +137,8 @@ export const formatTaskFieldSummaryLine = (def) => {
     const c = def.config ?? {};
     switch (def.fieldType) {
         case TASK_FIELD_TYPE.TEMPERATURE:
-            return `Температура: ${c.label} (${c.minC ?? "—"}…${c.maxC ?? "—"} °C)`;
+            // Одна строка: измеряемая величина + CCP. Где меряем — в строке оборудования/помещений выше, не дублируем `config.label`.
+            return `Температура (${c.minC ?? "—"}…${c.maxC ?? "—"} °C)`;
         case TASK_FIELD_TYPE.SINGLE_CHOICE:
             return `Один ответ: ${c.question || "—"}, вариантов: ${Array.isArray(c.options) ? c.options.length : 0}`;
         case TASK_FIELD_TYPE.TICKET:

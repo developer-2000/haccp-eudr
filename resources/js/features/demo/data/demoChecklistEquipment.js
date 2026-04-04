@@ -2,9 +2,12 @@
  * Mock-справочник единиц оборудования для конструктора задачи «тип: оборудование».
  * Стабильные id — латиница; подписи — для UI.
  */
-import { EQUIPMENT_GROUPS } from "@/config/tasks";
+import {
+    EQUIPMENT_GROUPS,
+    equipmentGroupsForChecklistNiche,
+} from "@/config/tasks";
 
-export { EQUIPMENT_GROUPS };
+export { EQUIPMENT_GROUPS, equipmentGroupsForChecklistNiche };
 
 const KNOWN_EQUIPMENT_IDS = new Set(
     EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => it.id)),

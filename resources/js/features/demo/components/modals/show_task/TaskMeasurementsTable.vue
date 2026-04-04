@@ -211,57 +211,62 @@ const onCorrectiveActionSelect = (measurement, value) => {
     width: 100%;
     overflow-x: auto;
     background: $bg-style-white;
-}
 
-.checklist-modal__table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 420px;
-    color: $text-color;
-}
+    .checklist-modal__table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 420px;
+        color: $text-color;
 
-.checklist-modal__table th,
-.checklist-modal__table td {
-    text-align: left;
-    padding: $spacing-sm;
-    border-bottom: 1px solid $text-light-grey;
-    vertical-align: middle;
-}
+        th,
+        td {
+            text-align: left;
+            padding: $spacing-sm;
+            border-bottom: 1px solid $text-light-grey;
+            vertical-align: middle;
+        }
 
-.checklist-modal__table th {
-    font-size: $font-size-sm;
-    color: $text-dark-grey;
-    font-weight: 600;
-}
+        th {
+            font-size: $font-size-sm;
+            color: $text-dark-grey;
+            font-weight: 600;
+        }
 
-.checklist-modal__table:not(.checklist-modal__table--measurements) th,
-.checklist-modal__table:not(.checklist-modal__table--measurements) td {
-    text-align: center;
-}
+        &:not(.checklist-modal__table--measurements) th,
+        &:not(.checklist-modal__table--measurements) td {
+            text-align: center;
+        }
+    }
 
-.checklist-modal__table--measurements th,
-.checklist-modal__table--measurements td {
-    text-align: center;
-}
+    .checklist-modal__table--measurements{
 
-.checklist-modal__table--measurements .checklist-modal__col-time,
-.checklist-modal__table--measurements .checklist-modal__col-decision,
-.checklist-modal__table--measurements .checklist-modal__col-status {
-    padding: 0 10px;
-}
+        th,
+        td {
+            text-align: center;
+        }
 
-.checklist-modal__table--measurements .checklist-modal__col-time {
-    width: 10%;
-    min-width: 75px;
-}
+        .checklist-modal__col-time,
+        .checklist-modal__col-decision,
+        .checklist-modal__col-status {
+            padding: 0 10px;
+        }
 
-.checklist-modal__table--measurements .checklist-modal__col-decision {
-    width: 65%;
-}
+        .checklist-modal__col-time {
+            width: 10%;
+            min-width: 75px;
+        }
 
-.checklist-modal__table--measurements .checklist-modal__col-status {
-    width: 25%;
-    min-width: 75px;
+        .checklist-modal__col-decision {
+            width: 65%;
+        }
+
+        .checklist-modal__col-status {
+            width: 25%;
+            min-width: 75px;
+        }
+
+    }
+
 }
 
 .checklist-modal__decision-nested {
@@ -272,23 +277,33 @@ const onCorrectiveActionSelect = (measurement, value) => {
     margin: 0;
     border: none;
     outline: none;
-}
 
-.checklist-modal__decision-nested tr,
-.checklist-modal__decision-nested td,
-.checklist-modal__decision-nested th {
-    border: none !important;
-    outline: none;
-    box-shadow: none;
-}
+    tr,
+    td,
+    th {
+        border: none !important;
+        outline: none;
+        box-shadow: none;
+    }
 
-.checklist-modal__decision-nested td {
-    padding: 2px 4px;
-    font-size: $font-size-xs;
-    line-height: 1.35;
-    color: $text-dark-grey;
-    vertical-align: top;
-    word-break: break-word;
+    td {
+        padding: 2px 4px;
+        font-size: $font-size-xs;
+        line-height: 1.35;
+        color: $text-dark-grey;
+        vertical-align: top;
+        word-break: break-word;
+    }
+
+    .checklist-modal__decision-nested__value {
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .checklist-modal__decision-nested__threat,
+    .checklist-modal__decision-nested__action {
+        text-align: center;
+    }
 }
 
 .checklist-modal__bolt-text{
@@ -297,19 +312,9 @@ const onCorrectiveActionSelect = (measurement, value) => {
     color: $text-dark-grey;
 }
 
-.checklist-modal__decision-nested__value {
-    text-align: center;
-    font-weight: 500;
-}
-
 .checklist-modal__measurement-row-cell[data-label="Решение"]
     > .checklist-modal__measurement-value {
     font-weight: 500;
-}
-
-.checklist-modal__decision-nested__threat,
-.checklist-modal__decision-nested__action {
-    text-align: center;
 }
 
 .checklist-modal__table--measurements
@@ -532,90 +537,67 @@ const onCorrectiveActionSelect = (measurement, value) => {
         align-items: center;
         text-align: center;
         gap: $spacing-xs;
-    }
 
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Статус"]::before {
-        text-align: center;
-    }
+        &::before {
+            text-align: center;
+        }
 
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Статус"]
         .checklist-modal__measurement-value--status {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-    }
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
 
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Статус"]
         .checklist-modal__status-trigger,
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Статус"]
         .checklist-modal__status-pill {
-        margin: 0 auto;
+            margin: 0 auto;
+        }
     }
 
     .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Время"]::before {
-        display: none;
-    }
-
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Время"] {
+    > tr:first-child
+    > td.checklist-modal__measurement-row-cell[data-label="Время"]{
         justify-content: flex-end;
-    }
 
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Время"]
+        &::before {
+            display: none;
+        }
+
         .checklist-modal__measurement-value {
-        text-align: right;
+            text-align: right;
+        }
     }
+
 
     .checklist-modal__measurement-group
         > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Решение"]::before {
-        display: none;
-    }
-
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Решение"] {
+        > td.checklist-modal__measurement-row-cell[data-label="Решение"]{
         justify-content: center;
-    }
 
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Решение"]
+        &::before {
+            display: none;
+        }
+
         .checklist-modal__measurement-value {
-        text-align: center;
-    }
+            text-align: center;
+        }
 
-    .checklist-modal__measurement-group
-        > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Решение"]
         .checklist-modal__decision-nested {
-        width: 100%;
+            width: 100%;
+        }
     }
 
     .checklist-modal__measurement-group > tr:not(:first-child) {
         display: block;
-    }
 
-    .checklist-modal__measurement-group > tr:not(:first-child) > td {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
+        & > td {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
     }
-
 }
+
 
 .checklist-modal__status-pill {
     display: inline-flex;

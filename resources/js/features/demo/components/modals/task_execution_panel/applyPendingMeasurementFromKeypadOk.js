@@ -11,6 +11,9 @@ import {
     resolveTaskNicheForTemperatureAi,
     resolveTemperatureAiMode,
 } from "@/features/demo/ai/temperature/taskTemperatureAiContext";
+import { resolveBreadRowForTaskMeasurement } from "@/features/demo/ai/temperature/breadBands";
+import { resolveCoffeeRowForTaskMeasurement } from "@/features/demo/ai/temperature/coffeeBands";
+import { resolveMeatRowForTaskMeasurement } from "@/features/demo/ai/temperature/meatBands";
 import { readTaskTemperatureMinMaxC } from "@/features/demo/domain/checklistTaskModel";
 
 const temperatureAiAnalyzer = createTemperatureAiAnalyzer();
@@ -95,20 +98,52 @@ export function applyPendingMeasurementFromKeypadOk({
     // Попадание в допуск по обеим границам.
     const inRange = withinMin && withinMax;
 
-    // Отображаемое значение с запятой как в UI локали задачи.
-    const display = String(normalized).replace(".", ",");
-    m.value = `${display} °C`;
-    // Если лимитов нет — слот считаем успешным; иначе success только при inRange.
-    const statusOk = limits == null ? true : inRange;
-    m.status = statusOk ? "success" : "problem";
-    // Градусы из уже сохранённого текста ячейки — именно их подставляем в расчёт AI.
-    const currentValueFromMeasurement = parseTemperatureFromMeasurementValue(m.value);
-    // Ниша задачи: task.niche или эвристика по id.
+    // Ниша задачи: task.niche или эвристика по id (нужна до вердикта по строке).
     const taskNiche = resolveTaskNicheForTemperatureAi(task);
     // Ключ профиля в анализаторе (bakery → bread).
     const analyzerNiche = mapTaskNicheToAnalyzerNiche(taskNiche);
-    // Режим профиля: явный aiContext или эвристика по ниши/оборудованию.
-    const aiMode = resolveTemperatureAiMode(task, analyzerNiche);
+
+    // Отображаемое значение с запятой как в UI локали задачи.
+    const display = String(normalized).replace(".", ",");
+    m.value = `${display} °C`;
+    const currentValueFromMeasurement = parseTemperatureFromMeasurementValue(m.value);
+    const aiMode = resolveTemperatureAiMode(
+        task,
+        analyzerNiche,
+        currentValueFromMeasurement,
+    );
+    let statusOk = limits == null ? true : inRange;
+    if (analyzerNiche === "bread") {
+        const bandRow = resolveBreadRowForTaskMeasurement(
+            n,
+            task?.equipmentTargetIds,
+            aiMode,
+        );
+        if (bandRow) {
+            statusOk = bandRow.status === "normal";
+        }
+    }
+    if (analyzerNiche === "meat") {
+        const bandRow = resolveMeatRowForTaskMeasurement(
+            n,
+            task?.equipmentTargetIds,
+            aiMode,
+        );
+        if (bandRow) {
+            statusOk = bandRow.status === "normal";
+        }
+    }
+    if (analyzerNiche === "coffee") {
+        const bandRow = resolveCoffeeRowForTaskMeasurement(
+            n,
+            task?.equipmentTargetIds,
+            aiMode,
+        );
+        if (bandRow) {
+            statusOk = bandRow.status === "normal";
+        }
+    }
+    m.status = statusOk ? "success" : "problem";
     // Вердикт AI в `m.aiWarning`: при success — мясо из полос «норма», при problem — предупреждение HACCP.
     let aiDisplay = null;
     if (currentValueFromMeasurement != null) {
@@ -119,6 +154,7 @@ export function applyPendingMeasurementFromKeypadOk({
                   currentValue: currentValueFromMeasurement,
                   ccpMin: minC,
                   ccpMax: maxC,
+                  equipmentTargetIds: task?.equipmentTargetIds,
               })
             : temperatureAiAnalyzer.getHaccpWarning({
                   niche: analyzerNiche,
@@ -126,6 +162,7 @@ export function applyPendingMeasurementFromKeypadOk({
                   currentValue: currentValueFromMeasurement,
                   ccpMin: minC,
                   ccpMax: maxC,
+                  equipmentTargetIds: task?.equipmentTargetIds,
               });
     }
     m.aiWarning = aiDisplay;

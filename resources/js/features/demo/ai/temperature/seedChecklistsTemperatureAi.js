@@ -56,9 +56,9 @@ export function seedChecklistsTemperatureAi(checklistsByNiche) {
             const { minC, maxC, ccpLabel: limitsLabel } = limits;
             const taskNiche = resolveTaskNicheForTemperatureAi(task) ?? nicheKey;
             const analyzerNiche = mapTaskNicheToAnalyzerNiche(taskNiche);
-            const aiMode = resolveTemperatureAiMode(task, analyzerNiche);
             const measurements = Array.isArray(task.measurements) ? task.measurements : [];
             let lastDisplay = null;
+            let lastAiMode = resolveTemperatureAiMode(task, analyzerNiche);
             for (const row of measurements) {
                 if (!row || typeof row !== "object") {
                     continue;
@@ -77,12 +77,15 @@ export function seedChecklistsTemperatureAi(checklistsByNiche) {
                     }
                     continue;
                 }
+                const aiMode = resolveTemperatureAiMode(task, analyzerNiche, current);
+                lastAiMode = aiMode;
                 const aiParams = {
                     niche: analyzerNiche,
                     mode: aiMode,
                     currentValue: current,
                     ccpMin: minC,
                     ccpMax: maxC,
+                    equipmentTargetIds: task.equipmentTargetIds,
                 };
                 const display =
                     row.status === "success"
@@ -97,7 +100,7 @@ export function seedChecklistsTemperatureAi(checklistsByNiche) {
                 task.aiContext = {
                     ...task.aiContext,
                     niche: task.niche ?? taskNiche,
-                    mode: aiMode,
+                    mode: lastAiMode,
                     taskType: "temperature",
                     ccpMin: minC,
                     ccpMax: maxC,

@@ -11,6 +11,14 @@ import {
 } from "@/features/demo/data/demoChecklistTaskScope";
 import { normalizeTaskFieldDefinitions } from "@/features/demo/data/demoChecklistTaskFields";
 import { parseTemperatureFromMeasurementValue } from "@/features/demo/ai/temperature/parseTemperatureFromMeasurementValue";
+import { resolveBreadRowForTaskMeasurement } from "@/features/demo/ai/temperature/breadBands";
+import { resolveCoffeeRowForTaskMeasurement } from "@/features/demo/ai/temperature/coffeeBands";
+import { resolveMeatRowForTaskMeasurement } from "@/features/demo/ai/temperature/meatBands";
+import {
+    mapTaskNicheToAnalyzerNiche,
+    resolveTaskNicheForTemperatureAi,
+    resolveTemperatureAiMode,
+} from "@/features/demo/ai/temperature/taskTemperatureAiContext";
 import { DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE } from "@/features/demo/task_grain_cooling/config";
 
 export const DEFAULT_TASK_ACTIVE_WEEKDAYS = Object.freeze([
@@ -661,8 +669,13 @@ const readTemperatureLimitsFromDefinitions = (taskFieldDefinitions) => {
             : {};
     const minRaw = Number(config.minC);
     const maxRaw = Number(config.maxC);
-    const ccpMin = Number.isFinite(minRaw) ? minRaw : null;
-    const ccpMax = Number.isFinite(maxRaw) ? maxRaw : null;
+    let ccpMin = Number.isFinite(minRaw) ? minRaw : null;
+    let ccpMax = Number.isFinite(maxRaw) ? maxRaw : null;
+    if (ccpMin != null && ccpMax != null && ccpMin > ccpMax) {
+        const swap = ccpMin;
+        ccpMin = ccpMax;
+        ccpMax = swap;
+    }
     const ccpLabel =
         ccpMin != null && ccpMax != null ? `${ccpMin}..${ccpMax}°C` : "";
     return {
@@ -716,7 +729,43 @@ export const parseMeasurementTemperatureCAndSyncRowStatusToCcp = (task, row) => 
     const withinMin = minC == null ? true : current >= minC;
     const withinMax = maxC == null ? true : current <= maxC;
     const inRange = withinMin && withinMax;
-    row.status = inRange ? "success" : "problem";
+    let statusOk = inRange;
+    const taskNiche = resolveTaskNicheForTemperatureAi(task);
+    const analyzerNiche = mapTaskNicheToAnalyzerNiche(taskNiche);
+    if (analyzerNiche === "bread") {
+        const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
+        const band = resolveBreadRowForTaskMeasurement(
+            current,
+            task?.equipmentTargetIds,
+            mode,
+        );
+        if (band) {
+            statusOk = band.status === "normal";
+        }
+    }
+    if (analyzerNiche === "meat") {
+        const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
+        const band = resolveMeatRowForTaskMeasurement(
+            current,
+            task?.equipmentTargetIds,
+            mode,
+        );
+        if (band) {
+            statusOk = band.status === "normal";
+        }
+    }
+    if (analyzerNiche === "coffee") {
+        const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
+        const band = resolveCoffeeRowForTaskMeasurement(
+            current,
+            task?.equipmentTargetIds,
+            mode,
+        );
+        if (band) {
+            statusOk = band.status === "normal";
+        }
+    }
+    row.status = statusOk ? "success" : "problem";
     return current;
 };
 

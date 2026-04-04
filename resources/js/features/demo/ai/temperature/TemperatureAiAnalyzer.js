@@ -1,286 +1,376 @@
 import { DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE } from "@/features/demo/task_grain_cooling/config";
-import { resolveMeatStorageBand } from "./meatStorageThreatBands";
+import {
+    BREAD_MODE_ANALYZER_PROFILES,
+    breadBandMatchesTaskEquipment,
+    resolveBreadRowForTaskMeasurement,
+    taskHasBreadEquipment,
+} from "./breadBands";
+import {
+    coffeeBandMatchesTaskEquipment,
+    resolveCoffeeRowForTaskMeasurement,
+    taskHasCoffeeEquipment,
+} from "./coffeeBands";
+import {
+    MEAT_MODE_ANALYZER_PROFILES,
+    meatBandMatchesTaskEquipment,
+    resolveMeatRowForTaskMeasurement,
+    taskHasMeatEquipment,
+} from "./meatBands";
+
+/**
+ * Окна CCP по режимам только при **`eq-coffee-*`** в задаче.
+ * Без кофейного оборудования строки и подписи — только из **`DEFAULT_COFFEE_AI_PROFILE_FALLBACK`** в `coffeeBands.js`.
+ */
+const COFFEE_TEMPERATURE_PROFILES = Object.freeze({
+    storage: Object.freeze({
+        ccpMin: 15,
+        ccpMax: 24,
+        ccpLabel: "15..24°C (хранение зерна, норма)",
+        threatHigh: "Перегрев зерна и рост риска качества/микотоксинов",
+        threatLow: "Переохлаждение зерна и риск конденсата при циклах",
+        economyHigh: "Потеря аромата и стоимости партии",
+        economyLow: "Снижение стабильности профиля обжарки",
+        inspectorHigh: "Отклонение по условиям хранения сырья",
+        inspectorLow: "Отклонение по условиям температурного режима",
+        actionHigh: "Стабилизировать температуру склада и проверить вентиляцию",
+        actionLow: "Проверить утепление и исключить температурные качели",
+        riskSlope: 12,
+    }),
+    roasting: Object.freeze({
+        ccpMin: 195,
+        ccpMax: 230,
+        ccpLabel: "195..230°C (обжарка)",
+        threatHigh: "Перегрев барабана — риск подгорания и акриламида",
+        threatLow: "Недожар — сырой вкус и нестабильный экстракт",
+        economyHigh: "Потеря партии обжарки",
+        economyLow: "Брак по профилю и повторный цикл",
+        inspectorHigh: "Отклонение по режиму обжарки",
+        inspectorLow: "Отклонение по режиму обжарки",
+        actionHigh: "Остановить рост температуры и снизить нагрев",
+        actionLow: "Довести профиль до целевого окна",
+        riskSlope: 14,
+    }),
+    cooling: Object.freeze({
+        ccpMin: 15,
+        ccpMax: 24,
+        ccpLabel: "15..24°C (охлаждение после обжарки, норма)",
+        threatHigh: "Слишком тепло при охлаждении — догарка и риск плесени",
+        threatLow: "Слишком холодно — конденсат в зёрнах",
+        economyHigh: "Потеря качества партии",
+        economyLow: "Риск порчи при упаковке",
+        inspectorHigh: "Отклонение по охлаждению",
+        inspectorLow: "Отклонение по охлаждению",
+        actionHigh: "Ускорить охлаждение (вентиляция / шок-кулер)",
+        actionLow: "Стабилизировать температуру без перегрева/переохлаждения",
+        riskSlope: 12,
+    }),
+});
 
 /** Порог % риска: `>=` → `ai_status: "problem"`, иначе `"warning"`. См. `AI temperature functions.md`. */
 const AI_STATUS_PROBLEM_MIN_RISK_PERCENT = 70;
 
 const TEMPERATURE_PROFILES = Object.freeze({
-    /** Тексты угроз/действий для мяса — только в `meatStorageThreatBands.js`; здесь окно CCP и наклон риска. */
-    meat: Object.freeze({
-        chilled: Object.freeze({
-            ccpMin: 0,
-            ccpMax: 2,
-            ccpLabel: "0..2°C (охлажденное мясо, HACCP EU minced meat)",
-            riskSlope: 20,
-        }),
-        freezer: Object.freeze({
-            ccpMin: -24,
-            ccpMax: -18,
-            ccpLabel: "-24..-18°C (морозильник, EU окно хранения)",
-            riskSlope: 16,
-        }),
-    }),
-    coffee: Object.freeze({
-        storage: Object.freeze({
-            ccpMin: 15,
-            ccpMax: 25,
-            ccpLabel: "15..25°C (хранение зерна)",
-            threatHigh: "Перегрев зерна и рост риска качества/микотоксинов",
-            threatLow: "Переохлаждение зерна и риск конденсата при циклах",
-            economyHigh: "Потеря аромата и стоимости партии",
-            economyLow: "Снижение стабильности профиля обжарки",
-            inspectorHigh: "Отклонение по условиям хранения сырья",
-            inspectorLow: "Отклонение по условиям температурного режима",
-            actionHigh: "Стабилизировать температуру склада и проверить вентиляцию",
-            actionLow: "Проверить утепление и исключить температурные качели",
-            riskSlope: 12,
-        }),
-    }),
+    meat: MEAT_MODE_ANALYZER_PROFILES,
+    coffee: COFFEE_TEMPERATURE_PROFILES,
     bread: Object.freeze({
-        proofing: Object.freeze({
-            ccpMin: 24,
-            ccpMax: 28,
-            ccpLabel: "24..28°C (тесто/расстойка)",
-            threatHigh: "Перерасстойка и рост микробиологических рисков",
-            threatLow: "Недорасстойка и нарушение технологического режима",
-            economyHigh: "Потеря выхода и ухудшение качества партии",
-            economyLow: "Брак по структуре и повторный цикл производства",
-            inspectorHigh: "Отклонение технологического CCP по температуре",
-            inspectorLow: "Отклонение технологического CCP по температуре",
-            actionHigh: "Снизить температуру камеры и скорректировать цикл",
-            actionLow: "Поднять температуру и скорректировать время расстойки",
-            riskSlope: 14,
-        }),
+        sponge_mix: BREAD_MODE_ANALYZER_PROFILES.sponge_mix,
+        proofing: BREAD_MODE_ANALYZER_PROFILES.proofing,
+        baking: BREAD_MODE_ANALYZER_PROFILES.baking,
+        cooling: BREAD_MODE_ANALYZER_PROFILES.cooling,
     }),
 });
 
+// ═══════════════════════════════════════════════════════════════════════════
+// ОБЩЕЕ — чистые функции: числа, риск, подписи (без привязки к нише)
+// ═══════════════════════════════════════════════════════════════════════════
+
+function parseFiniteNumber(value) {
+    if (typeof value === "number") {
+        return Number.isFinite(value) ? value : null;
+    }
+
+    if (typeof value !== "string") {
+        return null;
+    }
+
+    const normalized = value.replace(",", ".").trim();
+    if (!normalized) {
+        return null;
+    }
+
+    const parsed = Number(normalized);
+    return Number.isFinite(parsed) ? parsed : null;
+}
+
+function clampValue(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+}
+
+function roundToTwoDecimals(value) {
+    return Math.round(value * 100) / 100;
+}
+
+function buildRangeLabel(min, max) {
+    return `${min}..${max}°C`;
+}
+
+function calculateRiskFromDeviation(deviationFromLimit, riskSlope) {
+    const slope = parseFiniteNumber(riskSlope) ?? 12;
+    const rawRisk = Math.round(deviationFromLimit * slope);
+    return clampValue(rawRisk, 1, 100);
+}
+
+function formatTemperatureValueForUi(value, withPlusSign = true) {
+    const numeric = parseFiniteNumber(value);
+    if (numeric == null) {
+        return "—";
+    }
+
+    const rounded = roundToTwoDecimals(numeric);
+    const sign = rounded > 0 && withPlusSign ? "+" : "";
+    return `${sign}${rounded}°C`;
+}
+
+/**
+ * Отклонение от диапазона «Суть задачи» (поля min/max задачи). Не влияет на выбор строки полосы в `breadBands.js`.
+ *
+ * @param {number|null} current
+ * @param {number|null} rangeMin
+ * @param {number|null} rangeMax
+ * @returns {{ line: string }}
+ */
+function deviationFromTaskCcpRange(current, rangeMin, rangeMax) {
+    const min = parseFiniteNumber(rangeMin);
+    const max = parseFiniteNumber(rangeMax);
+    if (min == null || max == null || current == null || !Number.isFinite(current)) {
+        return { line: "" };
+    }
+    if (current >= min && current <= max) {
+        return {
+            line: `В диапазоне`,
+        };
+    }
+    if (current > max) {
+        const mag = roundToTwoDecimals(current - max);
+        return {
+            line: `Превышение: ${formatTemperatureValueForUi(mag, true)}`,
+        };
+    }
+    // Ниже min: отклонение со знаком (24 °C при 25…35 → −1 °C), не модуль «+1».
+    const delta = roundToTwoDecimals(current - min);
+    return {
+        line: `Понижение: ${formatTemperatureValueForUi(delta, false)}`,
+    };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// МЯСО — тексты из полос (`meatBands.js`); без `eq-meat-*` — `DEFAULT_MEAT_AI_PROFILE_FALLBACK`
+// ═══════════════════════════════════════════════════════════════════════════
+
+function meatOutOfRangeBandTexts(temperatureC, mode, equipmentTargetIds) {
+    const band = resolveMeatRowForTaskMeasurement(
+        temperatureC,
+        equipmentTargetIds,
+        mode,
+    );
+    if (band && !meatBandMatchesTaskEquipment(band, equipmentTargetIds)) {
+        return {
+            threat: null,
+            action: null,
+            economy: null,
+            inspector: null,
+        };
+    }
+    return {
+        threat: band?.threat ?? null,
+        action: band?.action ?? null,
+        economy: null,
+        inspector: null,
+    };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// КОФЕ — `DEFAULT_COFFEE_AI_PROFILE_FALLBACK` без оборудования; при `eq-coffee-*` — полосы + `COFFEE_TEMPERATURE_PROFILES` (локально)
+// ═══════════════════════════════════════════════════════════════════════════
+
+function coffeeOutOfRangeBandTexts(
+    profileContext,
+    direction,
+    temperatureC,
+    equipmentTargetIds,
+) {
+    const p = profileContext.profile;
+    const high = direction === "too_high";
+    const fromCoffeeProfile = () => ({
+        threat: high ? p?.threatHigh ?? null : p?.threatLow ?? null,
+        economy: high ? p?.economyHigh ?? null : p?.economyLow ?? null,
+        inspector: high ? p?.inspectorHigh ?? null : p?.inspectorLow ?? null,
+        action: high ? p?.actionHigh ?? null : p?.actionLow ?? null,
+    });
+
+    const row = resolveCoffeeRowForTaskMeasurement(
+        temperatureC,
+        equipmentTargetIds,
+        profileContext.mode,
+    );
+    if (row && !coffeeBandMatchesTaskEquipment(row, equipmentTargetIds)) {
+        return fromCoffeeProfile();
+    }
+    return {
+        threat: row?.threat ?? null,
+        action: row?.action ?? null,
+        economy: null,
+        inspector: null,
+    };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ТЕСТО (хлеб) — полосы `breadTemperatureThreatBands`; без `eq-bread-*` — `DEFAULT_BREAD_AI_PROFILE_FALLBACK`
+// ═══════════════════════════════════════════════════════════════════════════
+
+function breadOutOfRangeBandTexts(
+    profileContext,
+    direction,
+    temperatureC,
+    equipmentTargetIds,
+) {
+    const row = resolveBreadRowForTaskMeasurement(
+        temperatureC,
+        equipmentTargetIds,
+        profileContext.mode,
+    );
+    if (row) {
+        return {
+            threat: row.threat ?? null,
+            action: row.action ?? null,
+            economy: null,
+            inspector: null,
+        };
+    }
+    const p = profileContext.profile;
+    const high = direction === "too_high";
+    return {
+        threat: high ? p?.threatHigh ?? null : p?.threatLow ?? null,
+        economy: high ? p?.economyHigh ?? null : p?.economyLow ?? null,
+        inspector: high ? p?.inspectorHigh ?? null : p?.inspectorLow ?? null,
+        action: high ? p?.actionHigh ?? null : p?.actionLow ?? null,
+    };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Прочие ниши — только поля профиля `threat*` / `action*` / …
+// ═══════════════════════════════════════════════════════════════════════════
+
+function profileOutOfRangeTexts(profile, direction) {
+    const p = profile;
+    const high = direction === "too_high";
+    return {
+        threat: high ? p?.threatHigh ?? null : p?.threatLow ?? null,
+        economy: high ? p?.economyHigh ?? null : p?.economyLow ?? null,
+        inspector: high ? p?.inspectorHigh ?? null : p?.inspectorLow ?? null,
+        action: high ? p?.actionHigh ?? null : p?.actionLow ?? null,
+    };
+}
+
+/**
+ * [МЯСО | КОФЕ | ТЕСТО | …] Тексты при отклонении от CCP: диспетчер по `profileContext.niche`.
+ */
+function resolveOutOfRangeTextsForNiche(
+    profileContext,
+    direction,
+    temperatureC,
+    equipmentTargetIds,
+) {
+    if (profileContext.niche === "meat") {
+        return meatOutOfRangeBandTexts(
+            temperatureC,
+            profileContext.mode,
+            equipmentTargetIds,
+        );
+    }
+    if (profileContext.niche === "coffee") {
+        return coffeeOutOfRangeBandTexts(
+            profileContext,
+            direction,
+            temperatureC,
+            equipmentTargetIds,
+        );
+    }
+    if (profileContext.niche === "bread") {
+        return breadOutOfRangeBandTexts(
+            profileContext,
+            direction,
+            temperatureC,
+            equipmentTargetIds,
+        );
+    }
+    return profileOutOfRangeTexts(profileContext.profile, direction);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// МЯСО | КОФЕ | ТЕСТО — усиление `ai_status` до `problem` при `critical` в полосах
+// ═══════════════════════════════════════════════════════════════════════════
+
+function shouldForceProblemForMeatCriticalBand(value, mode, equipmentTargetIds) {
+    const row = resolveMeatRowForTaskMeasurement(value, equipmentTargetIds, mode);
+    if (!row) {
+        return false;
+    }
+    if (!taskHasMeatEquipment(equipmentTargetIds)) {
+        return row.status === "critical";
+    }
+    return (
+        meatBandMatchesTaskEquipment(row, equipmentTargetIds) &&
+        row.status === "critical"
+    );
+}
+
+function shouldForceProblemForCoffeeCriticalBand(value, mode, equipmentTargetIds) {
+    const row = resolveCoffeeRowForTaskMeasurement(value, equipmentTargetIds, mode);
+    if (!row) {
+        return false;
+    }
+    if (!taskHasCoffeeEquipment(equipmentTargetIds)) {
+        return row.status === "critical";
+    }
+    return (
+        coffeeBandMatchesTaskEquipment(row, equipmentTargetIds) &&
+        row.status === "critical"
+    );
+}
+
+function shouldForceProblemForBreadCriticalBand(value, mode, equipmentTargetIds) {
+    const row = resolveBreadRowForTaskMeasurement(value, equipmentTargetIds, mode);
+    if (!row) {
+        return false;
+    }
+    if (!taskHasBreadEquipment(equipmentTargetIds)) {
+        return row.status === "critical";
+    }
+    return (
+        breadBandMatchesTaskEquipment(row, equipmentTargetIds) &&
+        row.status === "critical"
+    );
+}
+
 export class TemperatureAiAnalyzer {
-    /**
-     * Создает экземпляр анализатора температуры.
-     * Используется как единая точка хранения профилей и публичных методов AI-аналитики.
-     */
     constructor(options = {}) {
         this.options = options;
     }
 
     /**
-     * Возвращает базовые профили ниш и режимов.
-     * Используется как структурный контракт для дальнейшего наполнения нормативами и рисками.
+     * [ОБЩЕЕ] Экспорт `TEMPERATURE_PROFILES` для контрактов и тестов.
      */
     getProfiles() {
         return TEMPERATURE_PROFILES;
     }
 
-    /**
-     * Анализирует температурный показатель относительно диапазона задачи.
-     * Используется как основное ядро вычислений AI для модалки задачи.
-     */
-    analyzeTemperature(params = {}) {
-        const {
-            niche,
-            mode,
-            currentValue,
-            ccpMin: inputCcpMin,
-            ccpMax: inputCcpMax,
-        } = params;
-
-        const profileContext = this.resolveProfileContext(niche, mode);
-        const current = this.toFiniteNumber(currentValue);
-        const ccpMin = this.toFiniteNumber(inputCcpMin);
-        const ccpMax = this.toFiniteNumber(inputCcpMax);
-        const range = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
-
-        if (current == null || range == null) {
-            return {
-                status: "invalid",
-                niche: profileContext.niche,
-                mode: profileContext.mode,
-                value: current,
-                ccpMin: range?.ccpMin ?? null,
-                ccpMax: range?.ccpMax ?? null,
-                ccpLabel: range?.ccpLabel ?? profileContext.profile?.ccpLabel ?? "",
-                inRange: null,
-                direction: null,
-                deviationFromLimit: null,
-                risk: 0,
-                threat: null,
-                economy: null,
-                inspector: null,
-                action: null,
-            };
-        }
-
-        const ccpLabel = range.ccpLabel || this.buildRangeLabel(range.ccpMin, range.ccpMax);
-        const inRange = current >= range.ccpMin && current <= range.ccpMax;
-
-        if (inRange) {
-            return {
-                status: "ok",
-                niche: profileContext.niche,
-                mode: profileContext.mode,
-                value: current,
-                ccpMin: range.ccpMin,
-                ccpMax: range.ccpMax,
-                ccpLabel,
-                inRange: true,
-                direction: "in_range",
-                deviationFromLimit: 0,
-                risk: 0,
-                threat: null,
-                economy: null,
-                inspector: null,
-                action: null,
-            };
-        }
-
-        const direction = current > range.ccpMax ? "too_high" : "too_low";
-        const deviationFromLimit =
-            direction === "too_high"
-                ? current - range.ccpMax
-                : range.ccpMin - current;
-        const risk = this.calculateRisk(deviationFromLimit, profileContext.profile?.riskSlope);
-        const texts = this.resolveOutOfRangeTexts(
-            profileContext,
-            direction,
-            current,
-        );
-
-        return {
-            status: "problem",
-            niche: profileContext.niche,
-            mode: profileContext.mode,
-            value: current,
-            ccpMin: range.ccpMin,
-            ccpMax: range.ccpMax,
-            ccpLabel,
-            inRange: false,
-            direction,
-            deviationFromLimit: this.roundToTwo(deviationFromLimit),
-            risk,
-            ...texts,
-        };
-    }
+    // ───────────────────────────────────────────────────────────────────────
+    // ОБЩЕЕ — контекст профиля и диапазон CCP
+    // ───────────────────────────────────────────────────────────────────────
 
     /**
-     * Тексты при отклонении от CCP: мясо — `meatStorageThreatBands`, иначе поля профиля ниши.
-     */
-    resolveOutOfRangeTexts(profileContext, direction, temperatureC) {
-        if (profileContext.niche === "meat") {
-            const band = resolveMeatStorageBand(temperatureC, profileContext.mode);
-            return {
-                threat: band?.threat ?? null,
-                action: band?.action ?? null,
-                economy: null,
-                inspector: null,
-            };
-        }
-        const p = profileContext.profile;
-        const high = direction === "too_high";
-        return {
-            threat: high ? p?.threatHigh ?? null : p?.threatLow ?? null,
-            economy: high ? p?.economyHigh ?? null : p?.economyLow ?? null,
-            inspector: high ? p?.inspectorHigh ?? null : p?.inspectorLow ?? null,
-            action: high ? p?.actionHigh ?? null : p?.actionLow ?? null,
-        };
-    }
-
-    /**
-     * Формирует объект предупреждения для UI.
-     * Используется для подготовки данных рендера в модалке без бизнес-логики в компоненте.
-     */
-    getHaccpWarning(params = {}) {
-        const analysis = this.analyzeTemperature(params);
-
-        if (!analysis || analysis.status !== "problem") {
-            return null;
-        }
-
-        const risk = this.clamp(Math.round(analysis.risk ?? 0), 0, 100);
-        const ai_status =
-            risk >= AI_STATUS_PROBLEM_MIN_RISK_PERCENT ? "problem" : "warning";
-        const directionLabel =
-            analysis.direction === "too_high"
-                ? "Превышение"
-                : analysis.direction === "too_low"
-                  ? "Понижение"
-                  : "Отклонение";
-        const headlineWord =
-            analysis.direction === "too_high"
-                ? "ПРЕВЫШЕНИЕ"
-                : analysis.direction === "too_low"
-                  ? "ПОНИЖЕНИЕ"
-                  : "ОТКЛОНЕНИЕ";
-        const currentFormatted = this.formatTemperatureValue(analysis.value);
-        const mag = analysis.deviationFromLimit;
-        const deviationFormatted =
-            analysis.direction === "too_high"
-                ? this.formatTemperatureValue(mag, true)
-                : analysis.direction === "too_low"
-                  ? this.formatTemperatureValue(-mag, false)
-                  : this.formatTemperatureValue(mag, false);
-
-        return {
-            ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
-            title: `${headlineWord}: ${risk}%`,
-            ai_status,
-            risk,
-            niche: analysis.niche,
-            mode: analysis.mode,
-            ccpLabel: analysis.ccpLabel ?? "",
-            currentLine: currentFormatted,
-            deviationLine: `${directionLabel}: ${deviationFormatted}`,
-            threat: analysis.threat ?? "",
-            economy: analysis.economy ?? "",
-            inspector: analysis.inspector ?? "",
-            action: analysis.action ?? "",
-            direction: analysis.direction,
-            value: analysis.value,
-            ccpMin: analysis.ccpMin,
-            ccpMax: analysis.ccpMax,
-        };
-    }
-
-    /**
-     * Вердикт AI при попадании в CCP (только ниша `meat`): тексты из `meatStorageThreatBands`.
-     * Остальные ниши — `null` (блок AI на строке не показываем).
-     */
-    getHaccpInRangeDisplay(params = {}) {
-        const analysis = this.analyzeTemperature(params);
-        if (!analysis || analysis.status !== "ok") {
-            return null;
-        }
-        if (analysis.niche !== "meat") {
-            return null;
-        }
-        const band = resolveMeatStorageBand(analysis.value, analysis.mode);
-        if (!band) {
-            return null;
-        }
-        const currentFormatted = this.formatTemperatureValue(analysis.value);
-        return {
-            ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
-            title: "В пределах CCP",
-            ai_status: "ok",
-            risk: 0,
-            niche: analysis.niche,
-            mode: analysis.mode,
-            ccpLabel: analysis.ccpLabel ?? "",
-            currentLine: currentFormatted,
-            deviationLine: "Показание в норме",
-            threat: band.threat ?? "",
-            economy: "",
-            inspector: "",
-            action: band.action ?? "",
-            direction: "in_range",
-            value: analysis.value,
-            ccpMin: analysis.ccpMin,
-            ccpMax: analysis.ccpMax,
-        };
-    }
-
-    /**
-     * Разрешает целевой профиль по нише и режиму.
-     * Используется для безопасного выбора конфигурации с fallback на дефолтный режим ниши.
+     * [ОБЩЕЕ] Ниша + режим → объект профиля из `TEMPERATURE_PROFILES`.
      */
     resolveProfileContext(niche, mode) {
         const normalizedNiche = String(niche ?? "").trim();
@@ -313,36 +403,15 @@ export class TemperatureAiAnalyzer {
     }
 
     /**
-     * Приводит значение к конечному числу.
-     * Используется для унификации входных данных и безопасной проверки диапазонов.
-     */
-    toFiniteNumber(value) {
-        if (typeof value === "number") {
-            return Number.isFinite(value) ? value : null;
-        }
-
-        if (typeof value !== "string") {
-            return null;
-        }
-
-        const normalized = value.replace(",", ".").trim();
-        if (!normalized) {
-            return null;
-        }
-
-        const parsed = Number(normalized);
-        return Number.isFinite(parsed) ? parsed : null;
-    }
-
-    /**
-     * Определяет рабочий диапазон CCP.
-     * Используется для приоритета диапазона из задачи и fallback к профилю ниши.
+     * [ОБЩЕЕ] Диапазон из задачи с fallback на профиль ниши.
      */
     resolveCcpRange(inputMin, inputMax, profile) {
-        const profileMin = this.toFiniteNumber(profile?.ccpMin);
-        const profileMax = this.toFiniteNumber(profile?.ccpMax);
-        const rangeMin = inputMin ?? profileMin;
-        const rangeMax = inputMax ?? profileMax;
+        const profileMin = parseFiniteNumber(profile?.ccpMin);
+        const profileMax = parseFiniteNumber(profile?.ccpMax);
+        const inMin = parseFiniteNumber(inputMin);
+        const inMax = parseFiniteNumber(inputMax);
+        const rangeMin = inMin ?? profileMin;
+        const rangeMax = inMax ?? profileMax;
 
         if (rangeMin == null || rangeMax == null) {
             return null;
@@ -352,66 +421,642 @@ export class TemperatureAiAnalyzer {
             return null;
         }
 
+        const boundsFromTask =
+            inMin != null &&
+            inMax != null &&
+            Number.isFinite(inMin) &&
+            Number.isFinite(inMax);
+        const ccpLabel = boundsFromTask
+            ? buildRangeLabel(rangeMin, rangeMax)
+            : profile?.ccpLabel ?? buildRangeLabel(rangeMin, rangeMax);
+
         return {
             ccpMin: rangeMin,
             ccpMax: rangeMax,
-            ccpLabel: profile?.ccpLabel ?? this.buildRangeLabel(rangeMin, rangeMax),
+            ccpLabel,
         };
     }
 
-    /**
-     * Рассчитывает риск по отклонению от допустимой границы.
-     * Используется для перевода величины отклонения в процентный риск 0..100.
-     */
-    calculateRisk(deviationFromLimit, riskSlope) {
-        const slope = this.toFiniteNumber(riskSlope) ?? 12;
-        const rawRisk = Math.round(deviationFromLimit * slope);
-        return this.clamp(rawRisk, 1, 100);
-    }
+    // ───────────────────────────────────────────────────────────────────────
+    // ОБЩЕЕ — ядро анализа по допуску задачи
+    // ───────────────────────────────────────────────────────────────────────
 
     /**
-     * Ограничивает значение заданным диапазоном.
-     * Используется для защиты итоговых чисел от выхода за допустимые пределы.
+     * [ОБЩЕЕ] Температура относительно CCP задачи; риск и тексты — через диспетчер ниш.
      */
-    clamp(value, min, max) {
-        return Math.min(max, Math.max(min, value));
-    }
+    analyzeTemperature(params = {}) {
+        const {
+            niche,
+            mode,
+            currentValue,
+            ccpMin: inputCcpMin,
+            ccpMax: inputCcpMax,
+            equipmentTargetIds,
+        } = params;
 
-    /**
-     * Округляет число до двух знаков после запятой.
-     * Используется для стабильного отображения числовых отклонений.
-     */
-    roundToTwo(value) {
-        return Math.round(value * 100) / 100;
-    }
+        const profileContext = this.resolveProfileContext(niche, mode);
+        const current = parseFiniteNumber(currentValue);
+        const ccpMin = parseFiniteNumber(inputCcpMin);
+        const ccpMax = parseFiniteNumber(inputCcpMax);
 
-    /**
-     * Форматирует температурное значение для человекочитаемого UI.
-     * Используется для единообразного отображения текущего значения и отклонения.
-     */
-    formatTemperatureValue(value, withPlusSign = true) {
-        const numeric = this.toFiniteNumber(value);
-        if (numeric == null) {
-            return "—";
+        if (profileContext.niche === "bread" && current != null) {
+            const row = resolveBreadRowForTaskMeasurement(
+                current,
+                equipmentTargetIds,
+                mode,
+            );
+            if (!row) {
+                return {
+                    status: "invalid",
+                    niche: profileContext.niche,
+                    mode: profileContext.mode,
+                    value: current,
+                    ccpMin: null,
+                    ccpMax: null,
+                    ccpLabel: profileContext.profile?.ccpLabel ?? "",
+                    inRange: null,
+                    direction: null,
+                    deviationFromLimit: null,
+                    risk: 0,
+                    threat: null,
+                    economy: null,
+                    inspector: null,
+                    action: null,
+                    taskCcpDeviationLine: "",
+                };
+            }
+            const taskRange = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
+            const taskCcpDev = deviationFromTaskCcpRange(
+                current,
+                taskRange?.ccpMin,
+                taskRange?.ccpMax,
+            );
+            const labelFromRow = row.temperatureLabel ?? "";
+            const ccpLabelForUi =
+                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ""
+                    ? taskRange.ccpLabel
+                    : labelFromRow || profileContext.profile?.ccpLabel || "";
+            if (row.status === "normal") {
+                return {
+                    status: "ok",
+                    niche: profileContext.niche,
+                    mode: profileContext.mode,
+                    value: current,
+                    ccpMin: taskRange?.ccpMin ?? null,
+                    ccpMax: taskRange?.ccpMax ?? null,
+                    ccpLabel: ccpLabelForUi,
+                    inRange: true,
+                    direction: "in_range",
+                    deviationFromLimit: 0,
+                    risk: 0,
+                    threat: null,
+                    economy: null,
+                    inspector: null,
+                    action: null,
+                    taskCcpDeviationLine: taskCcpDev.line,
+                };
+            }
+            const riskForUi = row.status === "critical" ? 100 : 55;
+            return {
+                status: "problem",
+                niche: profileContext.niche,
+                mode: profileContext.mode,
+                value: current,
+                ccpMin: taskRange?.ccpMin ?? null,
+                ccpMax: taskRange?.ccpMax ?? null,
+                ccpLabel: ccpLabelForUi,
+                inRange: false,
+                direction: row.status === "critical" ? "too_high" : "too_low",
+                deviationFromLimit: roundToTwoDecimals(0),
+                risk: riskForUi,
+                threat: row.threat ?? null,
+                economy: null,
+                inspector: null,
+                action: row.action ?? null,
+                taskCcpDeviationLine: taskCcpDev.line,
+            };
         }
 
-        const rounded = this.roundToTwo(numeric);
-        const sign = rounded > 0 && withPlusSign ? "+" : "";
-        return `${sign}${rounded}°C`;
+        // Мясо: вердикт по полосе (`resolveMeatRowForTaskMeasurement`), как хлеб — иначе при попадании в min/max
+        // задачи, но не в «норме» полосы, `getHaccpWarning` получал `analysis.status === "ok"` и возвращал `null`.
+        if (profileContext.niche === "meat" && current != null) {
+            const row = resolveMeatRowForTaskMeasurement(
+                current,
+                equipmentTargetIds,
+                mode,
+            );
+            if (!row) {
+                return {
+                    status: "invalid",
+                    niche: profileContext.niche,
+                    mode: profileContext.mode,
+                    value: current,
+                    ccpMin: null,
+                    ccpMax: null,
+                    ccpLabel: profileContext.profile?.ccpLabel ?? "",
+                    inRange: null,
+                    direction: null,
+                    deviationFromLimit: null,
+                    risk: 0,
+                    threat: null,
+                    economy: null,
+                    inspector: null,
+                    action: null,
+                    taskCcpDeviationLine: "",
+                };
+            }
+            const taskRange = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
+            const taskCcpDev = deviationFromTaskCcpRange(
+                current,
+                taskRange?.ccpMin,
+                taskRange?.ccpMax,
+            );
+            const labelFromRow = row.temperatureLabel ?? "";
+            const ccpLabelForUi =
+                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ""
+                    ? taskRange.ccpLabel
+                    : labelFromRow || profileContext.profile?.ccpLabel || "";
+            if (row.status === "normal") {
+                return {
+                    status: "ok",
+                    niche: profileContext.niche,
+                    mode: profileContext.mode,
+                    value: current,
+                    ccpMin: taskRange?.ccpMin ?? null,
+                    ccpMax: taskRange?.ccpMax ?? null,
+                    ccpLabel: ccpLabelForUi,
+                    inRange: true,
+                    direction: "in_range",
+                    deviationFromLimit: 0,
+                    risk: 0,
+                    threat: null,
+                    economy: null,
+                    inspector: null,
+                    action: null,
+                    taskCcpDeviationLine: taskCcpDev.line,
+                };
+            }
+            const riskForUi = row.status === "critical" ? 100 : 55;
+            return {
+                status: "problem",
+                niche: profileContext.niche,
+                mode: profileContext.mode,
+                value: current,
+                ccpMin: taskRange?.ccpMin ?? null,
+                ccpMax: taskRange?.ccpMax ?? null,
+                ccpLabel: ccpLabelForUi,
+                inRange: false,
+                direction: row.status === "critical" ? "too_high" : "too_low",
+                deviationFromLimit: roundToTwoDecimals(0),
+                risk: riskForUi,
+                threat: row.threat ?? null,
+                economy: null,
+                inspector: null,
+                action: row.action ?? null,
+                taskCcpDeviationLine: taskCcpDev.line,
+            };
+        }
+
+        if (profileContext.niche === "coffee" && current != null) {
+            const row = resolveCoffeeRowForTaskMeasurement(
+                current,
+                equipmentTargetIds,
+                mode,
+            );
+            if (!row) {
+                return {
+                    status: "invalid",
+                    niche: profileContext.niche,
+                    mode: profileContext.mode,
+                    value: current,
+                    ccpMin: null,
+                    ccpMax: null,
+                    ccpLabel: profileContext.profile?.ccpLabel ?? "",
+                    inRange: null,
+                    direction: null,
+                    deviationFromLimit: null,
+                    risk: 0,
+                    threat: null,
+                    economy: null,
+                    inspector: null,
+                    action: null,
+                    taskCcpDeviationLine: "",
+                };
+            }
+            const taskRange = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
+            const taskCcpDev = deviationFromTaskCcpRange(
+                current,
+                taskRange?.ccpMin,
+                taskRange?.ccpMax,
+            );
+            const labelFromRow = row.temperatureLabel ?? "";
+            const ccpLabelForUi =
+                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ""
+                    ? taskRange.ccpLabel
+                    : labelFromRow || profileContext.profile?.ccpLabel || "";
+            if (row.status === "normal") {
+                return {
+                    status: "ok",
+                    niche: profileContext.niche,
+                    mode: profileContext.mode,
+                    value: current,
+                    ccpMin: taskRange?.ccpMin ?? null,
+                    ccpMax: taskRange?.ccpMax ?? null,
+                    ccpLabel: ccpLabelForUi,
+                    inRange: true,
+                    direction: "in_range",
+                    deviationFromLimit: 0,
+                    risk: 0,
+                    threat: null,
+                    economy: null,
+                    inspector: null,
+                    action: null,
+                    taskCcpDeviationLine: taskCcpDev.line,
+                };
+            }
+            const riskForUi = row.status === "critical" ? 100 : 55;
+            return {
+                status: "problem",
+                niche: profileContext.niche,
+                mode: profileContext.mode,
+                value: current,
+                ccpMin: taskRange?.ccpMin ?? null,
+                ccpMax: taskRange?.ccpMax ?? null,
+                ccpLabel: ccpLabelForUi,
+                inRange: false,
+                direction: row.status === "critical" ? "too_high" : "too_low",
+                deviationFromLimit: roundToTwoDecimals(0),
+                risk: riskForUi,
+                threat: row.threat ?? null,
+                economy: null,
+                inspector: null,
+                action: row.action ?? null,
+                taskCcpDeviationLine: taskCcpDev.line,
+            };
+        }
+
+        const range = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
+
+        if (current == null || range == null) {
+            return {
+                status: "invalid",
+                niche: profileContext.niche,
+                mode: profileContext.mode,
+                value: current,
+                ccpMin: range?.ccpMin ?? null,
+                ccpMax: range?.ccpMax ?? null,
+                ccpLabel: range?.ccpLabel ?? profileContext.profile?.ccpLabel ?? "",
+                inRange: null,
+                direction: null,
+                deviationFromLimit: null,
+                risk: 0,
+                threat: null,
+                economy: null,
+                inspector: null,
+                action: null,
+            };
+        }
+
+        const ccpLabel = range.ccpLabel || buildRangeLabel(range.ccpMin, range.ccpMax);
+        const inRange = current >= range.ccpMin && current <= range.ccpMax;
+
+        if (inRange) {
+            const taskCcpDev = deviationFromTaskCcpRange(
+                current,
+                range.ccpMin,
+                range.ccpMax,
+            );
+            return {
+                status: "ok",
+                niche: profileContext.niche,
+                mode: profileContext.mode,
+                value: current,
+                ccpMin: range.ccpMin,
+                ccpMax: range.ccpMax,
+                ccpLabel,
+                inRange: true,
+                direction: "in_range",
+                deviationFromLimit: 0,
+                risk: 0,
+                threat: null,
+                economy: null,
+                inspector: null,
+                action: null,
+                taskCcpDeviationLine: taskCcpDev.line,
+            };
+        }
+
+        const direction = current > range.ccpMax ? "too_high" : "too_low";
+        const deviationFromLimit =
+            direction === "too_high"
+                ? current - range.ccpMax
+                : range.ccpMin - current;
+        const risk = calculateRiskFromDeviation(
+            deviationFromLimit,
+            profileContext.profile?.riskSlope,
+        );
+        const texts = resolveOutOfRangeTextsForNiche(
+            profileContext,
+            direction,
+            current,
+            equipmentTargetIds,
+        );
+
+        const taskCcpDev = deviationFromTaskCcpRange(
+            current,
+            range.ccpMin,
+            range.ccpMax,
+        );
+        return {
+            status: "problem",
+            niche: profileContext.niche,
+            mode: profileContext.mode,
+            value: current,
+            ccpMin: range.ccpMin,
+            ccpMax: range.ccpMax,
+            ccpLabel,
+            inRange: false,
+            direction,
+            deviationFromLimit: roundToTwoDecimals(deviationFromLimit),
+            risk,
+            ...texts,
+            taskCcpDeviationLine: taskCcpDev.line,
+        };
     }
 
+    // ───────────────────────────────────────────────────────────────────────
+    // ОБЩЕЕ — UI: предупреждение при отклонении (каркас + МЯСО | КОФЕ для critical)
+    // ───────────────────────────────────────────────────────────────────────
+
     /**
-     * Формирует человекочитаемую подпись диапазона.
-     * Используется когда явный label не передан в профиле.
+     * [ОБЩЕЕ] Объект для строки замера при `problem` по CCP. Порог риска общий;
+     * [МЯСО | КОФЕ | ТЕСТО]: `problem`, если полоса `critical` (кофе/хлеб — при совпадении equipment).
      */
+    getHaccpWarning(params = {}) {
+        const analysis = this.analyzeTemperature(params);
+
+        if (!analysis || analysis.status !== "problem") {
+            return null;
+        }
+
+        const risk = clampValue(Math.round(analysis.risk ?? 0), 0, 100);
+        let ai_status =
+            risk >= AI_STATUS_PROBLEM_MIN_RISK_PERCENT ? "problem" : "warning";
+        if (analysis.niche === "meat") {
+            if (
+                shouldForceProblemForMeatCriticalBand(
+                    analysis.value,
+                    analysis.mode,
+                    params.equipmentTargetIds,
+                )
+            ) {
+                ai_status = "problem";
+            }
+        } else if (analysis.niche === "coffee") {
+            if (
+                shouldForceProblemForCoffeeCriticalBand(
+                    analysis.value,
+                    analysis.mode,
+                    params.equipmentTargetIds,
+                )
+            ) {
+                ai_status = "problem";
+            }
+        } else if (analysis.niche === "bread") {
+            if (
+                shouldForceProblemForBreadCriticalBand(
+                    analysis.value,
+                    analysis.mode,
+                    params.equipmentTargetIds,
+                )
+            ) {
+                ai_status = "problem";
+            }
+        }
+        const directionLabel =
+            analysis.direction === "too_high"
+                ? "Превышение"
+                : analysis.direction === "too_low"
+                  ? "Понижение"
+                  : "Отклонение";
+        const headlineWord =
+            analysis.direction === "too_high"
+                ? "ПРЕВЫШЕНИЕ"
+                : analysis.direction === "too_low"
+                  ? "ПОНИЖЕНИЕ"
+                  : "ОТКЛОНЕНИЕ";
+        const currentFormatted = formatTemperatureValueForUi(analysis.value);
+        const mag = analysis.deviationFromLimit;
+        const deviationFormatted =
+            analysis.direction === "too_high"
+                ? formatTemperatureValueForUi(mag, true)
+                : analysis.direction === "too_low"
+                  ? formatTemperatureValueForUi(-mag, false)
+                  : formatTemperatureValueForUi(mag, false);
+
+        const deviationLineFromTaskCcp =
+            (analysis.niche === "bread" ||
+                analysis.niche === "meat" ||
+                analysis.niche === "coffee") &&
+            typeof analysis.taskCcpDeviationLine === "string" &&
+            analysis.taskCcpDeviationLine.trim() !== ""
+                ? analysis.taskCcpDeviationLine
+                : null;
+        const deviationLineBread =
+            deviationLineFromTaskCcp ?? `${directionLabel}: ${deviationFormatted}`;
+
+        return {
+            ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
+            title: `${headlineWord}: ${risk}%`,
+            ai_status,
+            risk,
+            niche: analysis.niche,
+            mode: analysis.mode,
+            ccpLabel: analysis.ccpLabel ?? "",
+            currentLine: currentFormatted,
+            deviationLine: deviationLineBread,
+            threat: analysis.threat ?? "",
+            economy: analysis.economy ?? "",
+            inspector: analysis.inspector ?? "",
+            action: analysis.action ?? "",
+            direction: analysis.direction,
+            value: analysis.value,
+            ccpMin: analysis.ccpMin,
+            ccpMax: analysis.ccpMax,
+        };
+    }
+
+    // ───────────────────────────────────────────────────────────────────────
+    // МЯСО | КОФЕ | ТЕСТО — UI: в норме по CCP, тексты из полос
+    // ───────────────────────────────────────────────────────────────────────
+
+    /**
+     * [МЯСО | КОФЕ | ТЕСТО] В окне min/max задачи: тексты из полос;
+     * [КОФЕ | ТЕСТО] без совпадения equipment — пустые threat/action.
+     */
+    getHaccpInRangeDisplay(params = {}) {
+        const analysis = this.analyzeTemperature(params);
+        if (!analysis || analysis.status !== "ok") {
+            return null;
+        }
+        if (
+            analysis.niche !== "meat" &&
+            analysis.niche !== "coffee" &&
+            analysis.niche !== "bread"
+        ) {
+            return null;
+        }
+        const currentFormatted = formatTemperatureValueForUi(analysis.value);
+        if (analysis.niche === "meat") {
+            const row = resolveMeatRowForTaskMeasurement(
+                analysis.value,
+                params.equipmentTargetIds,
+                analysis.mode,
+            );
+            if (!row) {
+                return null;
+            }
+            const useBandNarrative =
+                !taskHasMeatEquipment(params.equipmentTargetIds) ||
+                meatBandMatchesTaskEquipment(row, params.equipmentTargetIds);
+            const taskDevLine =
+                analysis.taskCcpDeviationLine &&
+                analysis.taskCcpDeviationLine.trim() !== ""
+                    ? analysis.taskCcpDeviationLine
+                    : "—";
+            return {
+                ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
+                title: "В пределах CCP",
+                ai_status: "ok",
+                risk: 0,
+                niche: analysis.niche,
+                mode: analysis.mode,
+                ccpLabel: analysis.ccpLabel ?? "",
+                currentLine: currentFormatted,
+                deviationLine: taskDevLine,
+                threat: useBandNarrative ? row.threat ?? "" : "",
+                economy: "",
+                inspector: "",
+                action: useBandNarrative ? row.action ?? "" : "",
+                direction: "in_range",
+                value: analysis.value,
+                ccpMin: analysis.ccpMin,
+                ccpMax: analysis.ccpMax,
+            };
+        }
+        if (analysis.niche === "bread") {
+            const row = resolveBreadRowForTaskMeasurement(
+                analysis.value,
+                params.equipmentTargetIds,
+                analysis.mode,
+            );
+            if (!row) {
+                return null;
+            }
+            const useBandNarrative =
+                !taskHasBreadEquipment(params.equipmentTargetIds) ||
+                breadBandMatchesTaskEquipment(row, params.equipmentTargetIds);
+            const taskDevLine =
+                analysis.taskCcpDeviationLine && analysis.taskCcpDeviationLine.trim() !== ""
+                    ? analysis.taskCcpDeviationLine
+                    : "—";
+            return {
+                ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
+                title: "В пределах CCP",
+                ai_status: "ok",
+                risk: 0,
+                niche: analysis.niche,
+                mode: analysis.mode,
+                ccpLabel: analysis.ccpLabel ?? "",
+                currentLine: currentFormatted,
+                deviationLine: taskDevLine,
+                threat: useBandNarrative ? row.threat ?? "" : "",
+                economy: "",
+                inspector: "",
+                action: useBandNarrative ? row.action ?? "" : "",
+                direction: "in_range",
+                value: analysis.value,
+                ccpMin: analysis.ccpMin,
+                ccpMax: analysis.ccpMax,
+            };
+        }
+        if (analysis.niche === "coffee") {
+            const row = resolveCoffeeRowForTaskMeasurement(
+                analysis.value,
+                params.equipmentTargetIds,
+                analysis.mode,
+            );
+            if (!row) {
+                return null;
+            }
+            const useBandNarrative =
+                !taskHasCoffeeEquipment(params.equipmentTargetIds) ||
+                coffeeBandMatchesTaskEquipment(row, params.equipmentTargetIds);
+            const taskDevLine =
+                analysis.taskCcpDeviationLine &&
+                analysis.taskCcpDeviationLine.trim() !== ""
+                    ? analysis.taskCcpDeviationLine
+                    : "—";
+            return {
+                ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
+                title: "В пределах CCP",
+                ai_status: "ok",
+                risk: 0,
+                niche: analysis.niche,
+                mode: analysis.mode,
+                ccpLabel: analysis.ccpLabel ?? "",
+                currentLine: currentFormatted,
+                deviationLine: taskDevLine,
+                threat: useBandNarrative ? row.threat ?? "" : "",
+                economy: "",
+                inspector: "",
+                action: useBandNarrative ? row.action ?? "" : "",
+                direction: "in_range",
+                value: analysis.value,
+                ccpMin: analysis.ccpMin,
+                ccpMax: analysis.ccpMax,
+            };
+        }
+        return null;
+    }
+
+    // ───────────────────────────────────────────────────────────────────────
+    // ОБЩЕЕ — делегаты к модульным утилитам (совместимость, если вызывали с `this`)
+    // ───────────────────────────────────────────────────────────────────────
+
+    /** [ОБЩЕЕ] Парсинг числа для входных данных (делегат к `parseFiniteNumber`). */
+    toFiniteNumber(value) {
+        return parseFiniteNumber(value);
+    }
+
+    /** [ОБЩЕЕ] */
+    clamp(value, min, max) {
+        return clampValue(value, min, max);
+    }
+
+    /** [ОБЩЕЕ] */
+    roundToTwo(value) {
+        return roundToTwoDecimals(value);
+    }
+
+    /** [ОБЩЕЕ] */
+    formatTemperatureValue(value, withPlusSign = true) {
+        return formatTemperatureValueForUi(value, withPlusSign);
+    }
+
+    /** [ОБЩЕЕ] */
     buildRangeLabel(min, max) {
-        return `${min}..${max}°C`;
+        return buildRangeLabel(min, max);
+    }
+
+    /** [ОБЩЕЕ] */
+    calculateRisk(deviationFromLimit, riskSlope) {
+        return calculateRiskFromDeviation(deviationFromLimit, riskSlope);
     }
 }
 
 /**
- * Создает экземпляр TemperatureAiAnalyzer.
- * Используется для централизованного и удобного подключения анализатора в UI-слое.
+ * [ОБЩЕЕ] Фабрика экземпляра для UI-слоя.
  */
 export const createTemperatureAiAnalyzer = (options = {}) =>
     new TemperatureAiAnalyzer(options);

@@ -7,6 +7,7 @@ import {
     loadStateFromStorage,
     saveStateToStorage,
 } from "@/features/demo/composables/demoStatePersistence";
+import { seedChecklistsTemperatureAi } from "@/features/demo/ai/temperature/seedChecklistsTemperatureAi";
 import { clearAssigneeInChecklists } from "@/features/demo/utils/demoStaff";
 
 export { createDefaultState } from "@/features/demo/composables/demoDefaultState";
@@ -138,13 +139,16 @@ export const useDemoState = () => {
             return null;
         }
         const prev = demoState.value.checklistsByNiche[niche] ?? [];
+        const nextChecklistsByNiche = {
+            ...demoState.value.checklistsByNiche,
+            [niche]: [...prev, task],
+        };
         demoState.value = {
             ...demoState.value,
-            checklistsByNiche: {
-                ...demoState.value.checklistsByNiche,
-                [niche]: [...prev, task],
-            },
+            checklistsByNiche: nextChecklistsByNiche,
         };
+        // Иначе у новых задач `parseMeasurement…` выставит status, но `aiWarning` останется null (сид только при load/дефолте).
+        seedChecklistsTemperatureAi(demoState.value.checklistsByNiche);
         return task.id;
     };
 

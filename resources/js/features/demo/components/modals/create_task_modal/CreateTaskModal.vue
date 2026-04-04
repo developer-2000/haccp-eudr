@@ -386,10 +386,7 @@ import {
 import ChecklistTaskFieldsSection from "@/features/demo/components/checklist/ChecklistTaskFieldsSection.vue";
 import Icon from "@/components/Icon.vue";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
-import {
-    EQUIPMENT_GROUPS,
-    normalizeEquipmentTargetIds,
-} from "@/features/demo/data/demoChecklistEquipment";
+import { normalizeEquipmentTargetIds } from "@/features/demo/data/demoChecklistEquipment";
 import {
     normalizeRoomTargetIds,
     ROOM_GROUPS,
@@ -397,7 +394,10 @@ import {
 import { FREQUENCY_CODE } from "@/features/demo/data/demoChecklistTaskFrequency";
 import { TASK_SCOPE_TYPE } from "@/features/demo/data/demoChecklistTaskScope";
 import { TASK_FIELD_TYPE } from "@/features/demo/data/demoChecklistTaskFields";
-import { taskFieldTypeOptionsByScopeType } from "@/config/tasks";
+import {
+    equipmentGroupsForChecklistNiche,
+    taskFieldTypeOptionsByScopeType,
+} from "@/config/tasks";
 import {
     NICHE_TO_SITE_ID,
     resolveAssigneeIdForNiche,
@@ -513,18 +513,43 @@ const addForm = reactive({
     scheduleSlotCount: 1,
 });
 
-const equipmentGroupSelectOptions = EQUIPMENT_GROUPS.map((g) => ({
-    label: g.groupTitle,
-    value: g.groupTitle,
-}));
+/** Группы оборудования по табу чек-листа (`activeNiche`) + общие (`typeEquipment: different`). */
+const equipmentGroupsForActiveNiche = computed(() =>
+    equipmentGroupsForChecklistNiche(props.activeNiche),
+);
 
-const equipmentPickerGroupTitle = ref(EQUIPMENT_GROUPS[0].groupTitle);
+const equipmentGroupSelectOptions = computed(() =>
+    equipmentGroupsForActiveNiche.value.map((g) => ({
+        label: g.groupTitle,
+        value: g.groupTitle,
+    })),
+);
+
+const equipmentPickerGroupTitle = ref("");
+
+watch(
+    () => equipmentGroupsForActiveNiche.value,
+    (groups) => {
+        if (!Array.isArray(groups) || !groups.length) {
+            return;
+        }
+        const titles = new Set(groups.map((g) => g.groupTitle));
+        if (!titles.has(equipmentPickerGroupTitle.value)) {
+            equipmentPickerGroupTitle.value = groups[0].groupTitle;
+        }
+    },
+    { deep: true, immediate: true },
+);
 
 const equipmentGroupForPicker = computed(() => {
-    const found = EQUIPMENT_GROUPS.find(
+    const groups = equipmentGroupsForActiveNiche.value;
+    if (!groups.length) {
+        return { groupTitle: "", items: [] };
+    }
+    const found = groups.find(
         (g) => g.groupTitle === equipmentPickerGroupTitle.value,
     );
-    return found ?? EQUIPMENT_GROUPS[0];
+    return found ?? groups[0];
 });
 const normalizedScheduleSlotCount = computed(() => {
     const n = Number(addForm.scheduleSlotCount);
@@ -559,7 +584,8 @@ watch(
             addForm.roomTargetIds = [];
         }
         if (scope === TASK_SCOPE_TYPE.EQUIPMENT) {
-            equipmentPickerGroupTitle.value = EQUIPMENT_GROUPS[0].groupTitle;
+            const g = equipmentGroupsForChecklistNiche(props.activeNiche);
+            equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? "";
         }
         const allowedFieldTypes = new Set(
             taskFieldTypeOptionsByScopeType(scope).map((o) => o.value),
@@ -745,12 +771,29 @@ watch(
     },
 );
 
+/** Смена таба чек-листа с открытой модалкой: сброс выбора оборудования под новую нишу. */
+watch(
+    () => props.activeNiche,
+    () => {
+        if (!props.show) {
+            return;
+        }
+        if (addForm.taskScopeType !== TASK_SCOPE_TYPE.EQUIPMENT) {
+            return;
+        }
+        addForm.equipmentTargetIds = [];
+        const g = equipmentGroupsForChecklistNiche(props.activeNiche);
+        equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? "";
+    },
+);
+
 /**
  * Сбрасывает поля формы добавления задачи перед открытием или после закрытия модалки.
  */
 const resetAddForm = () => {
     addWizardStep.value = 1;
-    equipmentPickerGroupTitle.value = EQUIPMENT_GROUPS[0].groupTitle;
+    const g = equipmentGroupsForChecklistNiche(props.activeNiche);
+    equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? "";
     Object.assign(addForm, {
         ...createModalDraft(props.activeNiche, {
             startDate: startOfTodayTimestamp(),

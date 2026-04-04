@@ -46,27 +46,211 @@ export const taskFieldTypeOptionsByScopeType = (taskScopeType) =>
         : TASK_FIELD_TYPE_OPTIONS_EQUIPMENT;
 
 /**
+ * Ниша группы оборудования относительно табов чек-листа (`coffee` | `bakery` | `meat`).
+ * `different` — общие группы, показываются при создании задачи в любой нише.
+ *
+ * @typedef {'meat'|'bread'|'coffee'|'different'} EquipmentGroupTypeEquipment
+ */
+
+/**
  * Группы и элементы «Предмета задачи» для типа «Оборудование».
  * Используются в чекбоксах выбора оборудования в модалке добавления задачи.
+ *
+ * У каждой группы поле **`typeEquipment`** — рядом с **`groupTitle`**, не на элементах `items`.
  */
 export const EQUIPMENT_GROUPS = [
+    // Кофе: обжарка (задачи с температурой по режиму roasting).
+    {
+        groupTitle: "Кофе — обжарка",
+        typeEquipment: "coffee",
+        items: [
+            {
+                id: "eq-coffee-roaster",
+                label:
+                    "Ростер (жаровня) — барабанный/воздушный 1–30 кг, нагрев до 230°C, лопастное перемешивание",
+            },
+            {
+                id: "eq-coffee-destoner",
+                label: "Дестонер — отделяет камни и мусор после обжарки",
+            },
+        ],
+    },
+    // Кофе: охлаждение зерна после обжарки (режим cooling).
+    {
+        groupTitle: "Кофе — охлаждение",
+        typeEquipment: "coffee",
+        items: [
+            {
+                id: "eq-coffee-bean-cooler",
+                label:
+                    "Кулер (охладитель зёрен) — вентилятор + сито; с 230°C до ~25°C за 5–10 мин",
+            },
+            {
+                id: "eq-coffee-shock-cooler",
+                label:
+                    "Шок-кулер — крупные партии (конвейер + воздух −20°C)",
+            },
+        ],
+    },
+    // Кофе: хранение зерна (режим storage).
+    {
+        groupTitle: "Кофе — хранение",
+        typeEquipment: "coffee",
+        items: [
+            {
+                id: "eq-coffee-vacuum-containers",
+                label:
+                    "Вакуумные контейнеры — Coffee Gator/Airscape, герметичность + дегазация CO₂",
+            },
+            {
+                id: "eq-coffee-warehouse-shelving",
+                label:
+                    "Складские стеллажи — климат-контроль 15–25°C, влажность <60%",
+            },
+            {
+                id: "eq-coffee-grain-canisters",
+                label:
+                    "Канистры зерновые — нержавейка/пластик с клапаном (Tightvac)",
+            },
+        ],
+    },
+    // Хлеб/тесто: опарка и замес (режим sponge_mix).
+    {
+        groupTitle: "Хлеб/тесто — опарка и замес",
+        typeEquipment: "bread",
+        items: [
+            {
+                id: "eq-bread-spiral-mixer",
+                label:
+                    "Тестомес (спиральный / тестомесильная машина) — замес опары/теста 28–32°C, контроль воды/муки",
+            },
+            {
+                id: "eq-bread-preferment-vat",
+                label:
+                    "Опарный чан — брожение опары (крышка герметичная)",
+            },
+        ],
+    },
+    // Хлеб/тесто: расстойка (режим proofing).
+    {
+        groupTitle: "Хлеб/тесто — расстойка",
+        typeEquipment: "bread",
+        items: [
+            {
+                id: "eq-bread-proofing-cabinet",
+                label:
+                    "Расстоечный шкаф — 32–40°C, влажность 75–85%, подъём теста",
+            },
+            {
+                id: "eq-bread-proofing-trays",
+                label:
+                    "Расстоечные лотки — сетчатые противни для циркуляции воздуха",
+            },
+        ],
+    },
+    // Хлеб/тесто: выпечка (режим baking).
+    {
+        groupTitle: "Хлеб/тесто — выпечка",
+        typeEquipment: "bread",
+        items: [
+            {
+                id: "eq-bread-rotary-oven",
+                label:
+                    "Ротационная печь — 200–250°C корпус; сердцевина хлеба 95–100°C",
+            },
+            {
+                id: "eq-bread-crumb-probe",
+                label:
+                    "Термометр сердцевины — контроль 95°C внутри буханки (HACCP CCP)",
+            },
+        ],
+    },
+    // Хлеб/тесто: охлаждение (режим cooling).
+    {
+        groupTitle: "Хлеб/тесто — охлаждение",
+        typeEquipment: "bread",
+        items: [
+            {
+                id: "eq-bread-cooling-conveyor",
+                label:
+                    "Конвейер охлаждения — с ~95°C до ~25°C за ~2 ч (без конденсата)",
+            },
+            {
+                id: "eq-bread-ventilated-racks",
+                label:
+                    "Вентиляционные стеллажи — период охлаждения (сетка снизу)",
+            },
+        ],
+    },
+    // Мясо — охлаждённое хранение (+0…+8 °C), HACCP.
+    {
+        groupTitle: "Мясо — охлаждённое хранение (+0…+8 °C)",
+        typeEquipment: "meat",
+        items: [
+            {
+                id: "eq-meat-chilled-room",
+                label:
+                    "Холодильная камера (+0…+4 °C) — основное хранение",
+            },
+            {
+                id: "eq-meat-chilled-cabinet",
+                label:
+                    "Холодильный шкаф (0…+7 °C) — цех/прилавок",
+            },
+            {
+                id: "eq-meat-chilled-display",
+                label:
+                    "Холодильный прилавок/витрина (+2…+5 °C) — продажа",
+            },
+            {
+                id: "eq-meat-chilled-semi-finished",
+                label:
+                    "Камера охлаждения полуфабрикатов (+0…+2 °C)",
+            },
+        ],
+    },
+    // Мясо — заморозка (< 0 °C), HACCP.
+    {
+        groupTitle: "Мясо — заморозка (−40…−12 °C)",
+        typeEquipment: "meat",
+        items: [
+            {
+                id: "eq-meat-freezer-room",
+                label:
+                    "Морозильная камера (−18…−25 °C) — длительное хранение",
+            },
+            {
+                id: "eq-meat-shock-freezer",
+                label:
+                    "Шоковая заморозка (−30…−40 °C) — свежая продукция",
+            },
+            {
+                id: "eq-meat-freezer-cabinet",
+                label:
+                    "Морозильный шкаф (−12…−18 °C) — цех",
+            },
+            {
+                id: "eq-meat-deep-freezer",
+                label:
+                    "Глубокая заморозка (−25 °C и ниже) — премиум",
+            },
+        ],
+    },
     // Группа термообработки и приготовления.
     {
         groupTitle: "Приготовление и термообработка",
+        typeEquipment: "different",
         // Оборудование этапа приготовления.
         items: [
             { id: "eq-stove", label: "Плита" },
             { id: "eq-combi-oven", label: "Комбинированная печь" },
             { id: "eq-fryer", label: "Фритюрница" },
-            { id: "eq-immersion-circ", label: "Погружной циркулятор" },
-            { id: "eq-bain-marie", label: "Бейн Мари" },
-            { id: "eq-juicer", label: "Соковыжималка" },
-            { id: "eq-coffee-machine", label: "Кофемашина" },
         ],
     },
     // Группа холодовой цепочки и хранения.
     {
         groupTitle: "Холод и хранение",
+        typeEquipment: "different",
         // Холодильное и складское оборудование.
         items: [
             { id: "eq-fridge-1", label: "Холодильник 1" },
@@ -83,6 +267,7 @@ export const EQUIPMENT_GROUPS = [
     // Группа измерительного и контрольного инвентаря.
     {
         groupTitle: "Контроль и измерения",
+        typeEquipment: "different",
         // Средства измерения и контроля.
         items: [
             { id: "eq-probe-1", label: "Зондовый термометр 1" },
@@ -93,6 +278,7 @@ export const EQUIPMENT_GROUPS = [
     // Группа контактных поверхностей и зон.
     {
         groupTitle: "Поверхности и зоны контакта",
+        typeEquipment: "different",
         // Поверхности, требующие регулярного контроля/санобработки.
         items: [
             { id: "eq-countertop", label: "Столешницы" },
@@ -109,6 +295,7 @@ export const EQUIPMENT_GROUPS = [
     // Группа мойки и санитарной инфраструктуры.
     {
         groupTitle: "Мойка и санитария",
+        typeEquipment: "different",
         // Оборудование и инвентарь для санитарных процедур.
         items: [
             { id: "eq-sinks", label: "Раковины" },
@@ -125,6 +312,7 @@ export const EQUIPMENT_GROUPS = [
     // Группа логистики и вспомогательных средств.
     {
         groupTitle: "Логистика и вспомогательное",
+        typeEquipment: "different",
         // Вспомогательные объекты для хранения, перемещения и уборки.
         items: [
             { id: "eq-transport-box", label: "Транспортировочный ящик" },
@@ -138,3 +326,35 @@ export const EQUIPMENT_GROUPS = [
         ],
     },
 ];
+
+/**
+ * Таб чек-листа (`ChecklistsSection`): `coffee` | `bakery` | `meat` → тип группы оборудования.
+ * Пекарня в данных — `bakery`, в группах — `bread`.
+ *
+ * @param {string|null|undefined} checklistNiche
+ * @returns {EquipmentGroupTypeEquipment}
+ */
+export function checklistNicheToEquipmentGroupType(checklistNiche) {
+    const n = String(checklistNiche ?? "").trim();
+    if (n === "bakery") {
+        return "bread";
+    }
+    if (n === "coffee" || n === "meat") {
+        return n;
+    }
+    return "different";
+}
+
+/**
+ * Группы оборудования для модалки создания задачи: нишевая выборка + общие (`different`).
+ *
+ * @param {string|null|undefined} checklistNiche
+ * @returns {typeof EQUIPMENT_GROUPS}
+ */
+export function equipmentGroupsForChecklistNiche(checklistNiche) {
+    const want = checklistNicheToEquipmentGroupType(checklistNiche);
+    return EQUIPMENT_GROUPS.filter(
+        (g) =>
+            g.typeEquipment === want || g.typeEquipment === "different",
+    );
+}
