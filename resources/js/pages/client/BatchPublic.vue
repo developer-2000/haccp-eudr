@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="batch-public"
-        :class="{ 'batch-public--pdf-open': wantsAutoPrint }"
-    >
+    <div class="batch-public">
         <div v-if="record" class="batch-public__toolbar no-print">
             <button
                 type="button"
@@ -262,10 +259,6 @@ watch(
         $bg-gray 40%
     );
     padding: $spacing-lg $spacing-md $spacing-2xl;
-}
-
-.batch-public--pdf-open .batch-public__toolbar {
-    display: none;
 }
 
 .batch-public__toolbar {

@@ -46,6 +46,8 @@
                                 <td>
                                     <RouterLink
                                         class="eudr-qr-modal__batch-link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         :to="{
                                             name: 'BatchPublic',
                                             params: {

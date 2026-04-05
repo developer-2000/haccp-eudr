@@ -18,6 +18,11 @@ const navConfig = {
             hasDropdown: false,
         },
         {
+            label: "messages.nav.menu.about",
+            link: "/about",
+            hasDropdown: false,
+        },
+        {
             label: "messages.nav.menu.survey",
             link: "/survey",
             hasDropdown: false,

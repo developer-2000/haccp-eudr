@@ -114,7 +114,10 @@ import {
 } from "@vicons/material";
 
 /** Fluent UI System Icons (Microsoft), через @vicons/fluent */
-import { PeopleCommunity24Filled } from "@vicons/fluent";
+import {
+    PeopleCommunity24Filled,
+    TargetArrow24Regular,
+} from "@vicons/fluent";
 
 /**
  * ViconsIcon - компонент-обертка из @vicons/utils
@@ -177,6 +180,7 @@ const icons = Object.freeze({
     "event-repeat-twotone": EventRepeatTwotone,
     "delete-forever-twotone": DeleteForeverTwotone,
     "people-community-24-filled": PeopleCommunity24Filled,
+    "target-arrow-24-regular": TargetArrow24Regular,
 });
 
 // ============================================
@@ -253,6 +257,7 @@ const viconsIcons = [
     "event-repeat-twotone", // @vicons/material
     "delete-forever-twotone", // @vicons/material
     "people-community-24-filled", // @vicons/fluent
+    "target-arrow-24-regular", // @vicons/fluent
 ];
 
 /**

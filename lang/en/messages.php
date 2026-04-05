@@ -10,6 +10,7 @@ return [
         'menu' => [
             'how_it_works' => 'How it works',
             'for_whom' => 'For whom',
+            'about' => 'About',
             'demo' => 'Demo',
             'survey' => 'Survey',
         ],

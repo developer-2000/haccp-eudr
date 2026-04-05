@@ -53,8 +53,8 @@ export const task_grain_cooling = reactive({
      */
     measurementIndex: null,
     /** Задержка после загрузки SPA: через столько мс показать глобальное оповещение. */
-    // initialToastDelayMs: 60000,
-    initialToastDelayMs: 1000,
+    initialToastDelayMs: 60000,
+    // initialToastDelayMs: 1000,
     /**
      * После показа тоста: через столько мс выставить `problem` у замера с индексом `measurementIndex`, если он ещё `pending`.
      * При показе тоста значение копируется в Pinia (`notificationProblemWindowMs`) и в sessionStorage — полоса и таймер используют снимок.

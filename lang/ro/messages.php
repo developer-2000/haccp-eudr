@@ -10,6 +10,7 @@ return [
         'menu' => [
             'how_it_works' => 'Cum funcționează',
             'for_whom' => 'Pentru cine',
+            'about' => 'Despre',
             'demo' => 'Demo',
             'survey' => 'Sondaj',
         ],
