@@ -4,19 +4,17 @@
         <div class="hero-section__left">
             <h1>
                 {{ $t("home.hero.title_line1") }}
-                <br />
-                {{ $t("home.hero.title_line2") }}
             </h1>
             <p class="hero-section__description">
-                {{ $t("home.hero.description_prefix") }}
-                <strong>{{ $t("home.hero.description_emphasis") }}</strong>
+                <strong>{{ $t("home.hero.description_prefix") }}</strong>
+                {{ $t("home.hero.description_emphasis") }}
             </p>
             <div class="hero-section__buttons">
                 <button
                     class="btn-client btn-success btn-success-hero"
                     @click="goToSurvey"
                 >
-                    {{ $t("messages.nav.cta.tell_about_business") }}
+                    Расскажите о бизнесе
                 </button>
                 <button
                     class="btn-client btn-outline-primary"

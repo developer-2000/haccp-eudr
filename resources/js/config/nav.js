@@ -7,23 +7,23 @@ const navConfig = {
     },
     menu: [
         {
-            label: "messages.nav.menu.how_it_works",
+            label: "header.menu.how_it_works",
             link: "/how-it-works",
             hasDropdown: false,
         },
         {
-            label: "messages.nav.menu.demo",
+            label: "header.menu.demo",
             link: "/demo/dashboard",
             activePathPrefix: "/demo",
             hasDropdown: false,
         },
         {
-            label: "messages.nav.menu.about",
+            label: "header.menu.about",
             link: "/about",
             hasDropdown: false,
         },
         {
-            label: "messages.nav.menu.survey",
+            label: "header.menu.survey",
             link: "/survey",
             hasDropdown: false,
         },

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Index from "./basic/Index.vue";
 import Home from "./pages/client/Home.vue";
 import About from "./pages/client/About.vue";
-import SurveyPlaceholder from "./pages/client/SurveyPlaceholder.vue";
+import SurveyPlaceholder from "./pages/client/Survey.vue";
 import DemoPlaceholder from "./pages/client/Demo.vue";
 import HowItWorks from "./pages/client/HowWorks.vue";
 import BatchPublic from "./pages/client/BatchPublic.vue";

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
-    'name' => env('APP_NAME', 'HACCP-EUDR'),
+    'name' => env('APP_NAME', 'HACCPilot'),
 
     'env' => env('APP_ENV', 'production'),
 

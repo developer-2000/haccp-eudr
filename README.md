@@ -2,47 +2,80 @@
 
 Laravel 10 проект с Vue.js 3.4.0 и SCSS.
 
+## Требования
+
+- PHP >= 8.1
+- Composer
+- Node.js >= 16.x
+- npm или yarn
+- OpenServer (для Windows)
+
+## Настройка окружения
+
+Создайте файл `.env` на основе `.env.example` (если есть) или создайте новый:
+
+```bash
+cp .env.example .env
+```
+
+## Настройка ENV
+
+Параметры подключения к БД:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=MySQL-8.0
+DB_PORT=3306
+DB_DATABASE=haccpilot
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Параметры почты app.mailgun.com:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=587
+MAIL_USERNAME=мой логин
+MAIL_PASSWORD=мой пароль
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=мой логин
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+## Установка зависимостей
+
+```env
+ - Установка пакетов
+composer install
+npm install
+ - Генерация уникального ключа приложения
+php artisan key:generate
+ - Миграции с seeder
+php artisan migrate:fresh --seed
+ - Отработка задач
+php artisan queue:work
+ - разработка в браузере
+npm run dev
+npm run build
+ - просмотр в смартфоне
+npm run serve:mobile
+```
+
 ## Адреса
 
 - Проект: [haccp-eudr.local](http://haccp-eudr.local/)
 - Смартфон: [http://192.168.101.11:8000](http://192.168.101.11:8000)
 - Mysql: [PhpMyAdmin](http://phpmyadmin/index.php?route=/database/structure&db=haccp-eudr&server=8)
 
-### Запуск на смартфоне (та же Wi‑Fi)
-
-1. **Терминал 1** — фронт:
-    ```bash
-    npm run dev
-    ```
-2. **Терминал 2** — Laravel на всех интерфейсах:
-    ```bash
-    npm run serve:mobile
-    ```
-3. На телефоне открой: [http://192.168.101.11:8000](http://192.168.101.11:8000)
-
-Подробнее: `Documents/developer/demo site/MOBILE-DEV.md` (брандмауэр, .env, сеть «Частная»).
-
-### Режим разработки
-
-Запустите Vite dev server:
-
-```bash
-npm run dev
-```
-
-Vite будет доступен по адресу: `http://haccp-eudr.local:5179/`
-
-### Сборка для продакшена
-
-```bash
-npm run build
-```
-
-### Перезапуск миграций и сидоров
-
-```bash
-php artisan migrate:fresh --seed
-```
+## Тестовая почта локально
+### Запуск Mailpit
+1. Открой командную строку (Win + R → `cmd` → Enter)
+   Перейди в папку Mailpit:
+   cd /d D:\programm\Mailpit\mailpit-windows-amd64
+2. Запуск Mailpit браузера: Mailpit.exe
+   http://192.168.101.11:8025
 
 ## Технологии
 
@@ -51,39 +84,64 @@ php artisan migrate:fresh --seed
 - **Сборщик**: Vite 4
 - **Стили**: SCSS
 
-## Используемые пакеты
+## Используемые пакеты, сервисы, инструменты
 
-### Frontend зависимости
+- **Backend (PHP / Laravel):**
+  - `laravel/framework` (Laravel 10)
+  - `laravel/sanctum`
+  - `laravel/tinker`
+  - `guzzlehttp/guzzle`
 
-- **[Vue.js](https://vuejs.org/)** (^3.4.0) - Прогрессивный JavaScript фреймворк
-- **[Vue Router](https://router.vuejs.org/)** (^4.6.4) - Официальный роутер для Vue.js
-- **[Heroicons](https://heroicons.com/)** ([@heroicons/vue](https://github.com/tailwindlabs/heroicons) ^2.2.0) - Красивые SVG иконки от создателей Tailwind CSS
-- **[Naive UI](https://www.naiveui.com/en-US/os-theme/components/button)** (^2.43.2) - UI библиотека компонентов для Vue 3
-- **[Xicons](https://www.xicons.org/#/)** ([@vicons/antd](https://github.com/07akioni/xicons) ^0.13.0) - Иконки для библиотеки Naive UI
-- **[@vicons/utils](https://github.com/07akioni/xicons)** (^0.1.4) - Утилиты для работы с иконками
-- **[vue-tel-num-input](https://github.com/MarkMinerov/vue-tel-num-input)** (^0.1.10) - Компонент ввода телефонного номера с выбором страны и валидацией
-- **[libphonenumber-js](https://github.com/catamphetamine/libphonenumber-js)** (^1.12.33) - Библиотека для валидации и форматирования телефонных номеров (peer dependency для vue-tel-num-input)
+- **Frontend (Vue):**
+  - `vue` 3
+  - `vue-router`
+  - `pinia`
+  - `vue-i18n`
+  - `naive-ui`
+  - `vue3-toastify`
+  - `qrcode`
+  - `uuid`
+  - `libphonenumber-js`
+  - `i18n-iso-countries`
+  - `vue-tel-num-input`
 
-### Инструменты разработки
+- **Иконки:**
+  - `@heroicons/vue`
+  - `@tabler/icons-vue`
+  - `@carbon/icons-vue`
+  - `@vicons/*` (`antd`, `carbon`, `fluent`, `ionicons4`, `ionicons5`, `material`)
 
-- **[Vite](https://vitejs.dev/)** (^5.4.0) - Сборщик и dev-сервер
-- **[@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue)** (^4.5.0) - Плагин Vite для Vue.js
-- **[Laravel Vite Plugin](https://github.com/laravel/vite-plugin)** (^1.0.0) - Плагин для интеграции Vite с Laravel
-- **[Sass](https://sass-lang.com/)** (^1.69.0) - Препроцессор CSS
-- **[Axios](https://axios-http.com/)** (^1.1.2) - HTTP клиент
+- **Сборка и стили:**
+  - `vite`
+  - `@vitejs/plugin-vue`
+  - `laravel-vite-plugin`
+  - `sass` (SCSS)
 
-### Инструменты качества кода
+- **Качество кода и форматирование:**
+  - `eslint`
+  - `eslint-plugin-vue`
+  - `eslint-plugin-prettier`
+  - `prettier`
+  - `laravel/pint`
 
-- **[ESLint](https://eslint.org/)** (^9.39.2) - Линтер для JavaScript и Vue
-- **[@eslint/js](https://github.com/eslint/eslint)** (^9.39.2) - Базовая конфигурация ESLint
-- **[@babel/eslint-parser](https://github.com/babel/babel/tree/main/eslint/babel-eslint-parser)** (^7.28.5) - Парсер Babel для ESLint
-- **[eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)** (^10.6.2) - Плагин ESLint для Vue.js
-- **[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)** (^10.1.8) - Отключает правила ESLint, конфликтующие с Prettier
-- **[eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier)** (^5.5.4) - Интеграция Prettier в ESLint
-- **[@vue/eslint-config-prettier](https://github.com/vuejs/eslint-config-prettier)** (^10.2.0) - Конфигурация Prettier для Vue
-- **[Prettier](https://prettier.io/)** (^3.7.4) - Форматтер кода
+- **Тестирование и отладка:**
+  - `phpunit/phpunit`
+  - `nunomaduro/collision`
+  - `spatie/laravel-ignition`
+  - `fakerphp/faker`
+  - `mockery/mockery`
 
-#### Команды для работы с инструментами качества кода
+- **Почта и очереди:**
+  - SMTP через `Mailgun` (`smtp.mailgun.org`)
+  - Laravel Queue (`database` driver)
+  - Worker: `php artisan queue:work`
+
+- **База данных и окружение:**
+  - `MySQL` (OpenServer / OSPanel)
+  - `PhpMyAdmin` для администрирования БД
+  - Локальный домен проекта: `http://haccpilot.local`
+
+## Команды для работы с инструментами качества кода
 
 **Рекомендуется использовать:**
 
@@ -134,72 +192,4 @@ php artisan migrate:fresh --seed
 - **Prettier** (`npm run format`) — исправляет только форматирование (внешний вид кода)
 - **Комбинированная** (`npm run lint:format`) — исправляет всё сразу (рекомендуется)
 
-## Требования
 
-- PHP >= 8.1
-- Composer
-- Node.js >= 16.x
-- npm или yarn
-- OpenServer (для Windows)
-
-## Установка
-
-### 1. Клонирование и установка PHP зависимостей
-
-```bash
-composer install
-```
-
-### 2. Настройка окружения
-
-Создайте файл `.env` на основе `.env.example` (если есть) или создайте новый:
-
-```bash
-cp .env.example .env
-```
-
-Или создайте `.env` вручную с базовыми настройками для OpenServer.
-
-Сгенерируйте ключ приложения:
-
-```bash
-php artisan key:generate
-```
-
-### 3. Настройка базы данных
-
-В файле `.env` укажите параметры подключения к БД:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=MySQL-8.0
-DB_PORT=3306
-DB_DATABASE=haccp-eudr
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-Выполните миграции:
-
-```bash
-php artisan migrate
-```
-
-### 4. Настройка сессий для HTTP
-
-В файле `.env` добавьте (для работы по HTTP):
-
-```env
-APP_URL=http://haccp-eudr.local
-SESSION_SECURE_COOKIE=false
-```
-
-### 5. Установка JavaScript зависимостей
-
-```bash
-npm install
-```
-
-### Vue DevTools
-
-Для Vue 3 используйте Vue DevTools v7 (поддерживает Vue 3).

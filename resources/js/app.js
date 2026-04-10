@@ -23,7 +23,7 @@ app.use(Vue3Toastify, {
     limit: 3,
     pauseOnHover: true,
     newestOnTop: true,
-    theme: "dark",
+    theme: "light",
 });
 app.use(router);
 

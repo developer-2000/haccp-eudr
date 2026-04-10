@@ -59,7 +59,7 @@ const copyPublicImages = () => {
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/scss/app.scss', 'resources/js/app.js'],
+            input: ['resources/scss/app.scss', 'resources/js/app.js', 'resources/js/technical.js'],
             refresh: true,
             detectTls: false,
         }),
@@ -96,6 +96,15 @@ export default defineConfig({
                 entryFileNames: `assets/[name]-[hash]-${buildId}.js`,
                 chunkFileNames: `assets/[name]-[hash]-${buildId}.js`,
                 assetFileNames: buildAssetPattern,
+                /**
+                 * Один чанк на naive-ui: иначе Rollup ругается, что entry (`import naive from "naive-ui"`)
+                 * и async-чанки (`import { NButton } from "naive-ui"`) тянут один пакет по разным границам.
+                 */
+                manualChunks(id) {
+                    if (id.includes('node_modules/naive-ui')) {
+                        return 'naive-ui';
+                    }
+                },
             },
         },
     },

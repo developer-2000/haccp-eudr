@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Ajută-ne să construim un sistem care elimină dificultățile HACCP',
+        'subtitle' => 'Sondaj scurt — aproximativ 5 minute. Răspunsurile tale ne vor ajuta să facem sistemul util pentru operațiuni reale și inspecții.',
+        'trust' => 'Răspunsurile tale sunt utilizate doar pentru analiză și nu sunt partajate cu terți.',
+        'start' => 'Începe',
+    ],
+
+    'nav' => [
+        'back' => 'Înapoi',
+        'back_aria' => 'Revino la pasul anterior',
+    ],
+
+    'progress' => [
+        'aria' => 'Sondaj: pasul :current din :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Te rugăm să introduci emailul — acest câmp este obligatoriu.',
+        'email_invalid' => 'Te rugăm să introduci o adresă de email validă.',
+    ],
+
+    'ui' => [
+        'next' => 'Următorul',
+        'next_disabled_aria' => 'Următorul — răspunde mai întâi la întrebare',
+        'other_default_label' => 'Te rugăm să specifici',
+        'other_aria_prefix' => 'Detaliu suplimentar pentru răspunsul tău:',
+        'select_placeholder' => 'Alege o opțiune',
+        'country_clear' => 'Șterge țara selectată',
+        'country_search' => 'Caută după numele țării',
+        'country_search_placeholder' => 'Caută…',
+        'submit' => 'Trimite',
+        'submit_sending' => 'Se trimite…',
+        'submit_failed' => 'Nu am putut trimite datele sondajului. Te rugăm să încerci din nou.',
+        'questions_load_error' => 'Nu am putut încărca întrebările sondajului. Reîncarcă pagina sau încearcă din nou mai târziu.',
+        'response_saved' => 'Răspunsul la sondaj a fost salvat.',
+        'verification_sent' => 'Codul de verificare a fost trimis pe email.',
+        'cooldown_wait' => 'Te rugăm să aștepți câteva secunde și să încerci din nou.',
+        'token_not_found' => 'Tokenul nu a fost găsit. Te rugăm să completezi sondajul din nou.',
+        'network_error' => 'Eroare de rețea. Te rugăm să încerci din nou.',
+        'pin_instruction' => 'Un cod PIN a fost trimis la adresa de email indicată. Introduceți-l pentru a confirma identitatea.',
+        'pin_attempts_left' => '1 din 2 încercări rămase',
+        'pin_container_aria' => 'Verificare cod PIN',
+        'pin_group_aria' => 'Cod PIN din 4 cifre',
+    ],
+
+    'lead' => [
+        'title' => 'Lasă datele tale de contact pentru a:',
+        'bullet_discount' => 'primi o reducere pe viață de 20%',
+        'bullet_access' => 'obține acces anticipat la sistem',
+        'bullet_influence' => 'influența direcția de dezvoltare a produsului',
+        'expectation' => 'Acesta este pasul final: după el, sondajul este complet. Avem nevoie doar de datele tale pentru a reveni cu un răspuns.',
+        'field_name' => 'Numele tău',
+        'field_business_name' => 'Numele afacerii',
+        'field_email' => 'Email',
+        'field_email_required_sr' => '(obligatoriu)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 sau wa.me/…',
+        'placeholder_telegram' => "{'@'}username",
+    ],
+
+    'success' => [
+        'title' => 'Mulțumesc. Te voi contacta personal când sistemul va fi gata.',
+        'body' => "Vei primi o invitație la o versiune sandbox,\nunde vei putea testa sistemul în practică și influența modul în care evoluează. Acest lucru ne ajută să adaptăm produsul la procesele reale de business.",
+        'reassurance' => 'Nu planificăm mailinguri în masă — doar un mesaj personal cu rezultatele.',
+        'update_hint' => "Dacă procesele tale se schimbă, apar sarcini noi sau idei —\nvei putea actualiza răspunsurile prin linkul trimis pe email.",
+        'home_link' => 'Înapoi la pagina principală',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Mulțumim pentru completarea listei de întrebări!',
+        'subtitle' => 'Participarea dumneavoastră este o contribuție semnificativă în etapa de formare.',
+        'image_alt' => 'Răspunsul a fost salvat în baza de date',
+        'email_label' => 'Email:',
+        'sent_label' => 'Trimis:',
+        'reset_button' => 'Actualizați recenzia',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, mulțumim pentru răspunsurile tale',
+        'subject_default' => 'Mulțumim pentru răspunsurile tale',
+        'header_tagline' => 'Sistem de conformitate HACCP în timp real',
+        'title' => 'Mulțumim pentru participare — accesul tău și reducerea de 20%',
+        'greeting_with_name' => 'Bună, :name!',
+        'greeting_default' => 'Bună!',
+        'thank_you' => 'Mulțumim că ți-ai dedicat timpul pentru a completa sondajul.',
+        'value_note' => 'Răspunsurile tale sunt cu adevărat valoroase — ele influențează direct produsul.',
+        'registered_as' => 'Ești înregistrat ca participant cu acces anticipat',
+        'discount_label' => '–20% reducere pe viață',
+        'discount_code_label' => 'Codul tău:',
+        'description_line1' => 'Sistemul se află în prezent în dezvoltare.',
+        'description_line2' => 'Analizez răspunsurile antreprenorilor și perfecționez funcționalitatea pentru procesele reale.',
+        'description_line3' => 'Scopul principal este ca sistemul să te ajute să treci inspecțiile cu încredere, nu doar să „ții evidențe".',
+        'benefits_title' => 'Ce vei primi:',
+        'benefit_1' => 'Urmărirea acțiunilor în timp real',
+        'benefit_2' => 'Istoric transparent pentru inspecții',
+        'benefit_3' => 'Control fără sarcină suplimentară',
+        'cta_button' => 'Accesează site-ul',
+        'footer_updates' => 'Voi împărtăși periodic noutăți despre dezvoltare și te voi invita să testezi funcții noi.',
+        'footer_feedback' => 'Feedback-ul și ideile tale vor ajuta să facem sistemul cât mai convenabil și util în munca reală.',
+        'footer_reply' => 'Dacă ai deja gânduri sau sarcini — pur și simplu răspunde la acest email.',
+        'footer_signature' => 'Cu stimă, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Codul tău de verificare pentru HACCPilot',
+        'header_tagline' => 'Confirmare de securitate pentru actualizarea sondajului',
+        'title' => 'Confirmarea actualizării răspunsurilor',
+        'description' => 'Ai solicitat actualizarea răspunsurilor în sondajul HACCPilot.',
+        'instruction' => 'Pentru confirmare, introdu codul de mai jos:',
+        'code_expiry' => 'Codul este valabil pentru o perioadă limitată',
+        'not_you' => 'Dacă nu tu ai făcut această solicitare — pur și simplu ignoră acest email.',
+        'data_safe' => 'Datele tale vor rămâne neschimbate.',
+        'cta_button' => 'Înapoi la actualizare',
+        'footer_auto' => 'Acesta este un mesaj automat din sistemul HACCPilot.',
+        'footer_purpose' => 'Codul este utilizat doar pentru confirmarea modificării datelor.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Răspunsurile tale la sondaj au fost actualizate',
+        'header_tagline' => 'Confirmarea actualizării datelor sondajului',
+        'title' => 'Datele tale au fost actualizate cu succes!',
+        'greeting_with_name' => 'Bună, :name!',
+        'greeting_default' => 'Bună!',
+        'thank_you' => 'Mulțumim pentru actualizarea răspunsurilor la sondaj.',
+        'status_label' => 'Statusul sondajului tău:',
+        'status_value' => 'Actualizat și confirmat',
+        'status_note' => 'Toate modificările au fost salvate și vor fi utilizate pentru personalizarea sistemului HACCPilot.',
+        'footer_auto' => 'Aceasta este o notificare automată din sistemul HACCPilot.',
+        'footer_data_use' => 'Datele tale sunt utilizate doar pentru îmbunătățirea acurateței și personalizarea sistemului.',
+        'footer_signature' => 'Cu stimă, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Linkul este invalid sau a expirat. Te rugăm să completezi sondajul din nou.',
+        'attempts_exhausted' => 'Nu am reușit să verificăm codul. Te rugăm să completezi sondajul din nou.',
+        'code_invalid' => 'Cod invalid. Te rugăm să încerci din nou.',
+        'success' => 'Răspunsurile au fost actualizate cu succes.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Ce tip de afacere conduci?',
+            'options' => [
+                'cafe' => 'Cafenea / coffee shop',
+                'bakery' => 'Brutărie / producție de pâine',
+                'meat' => 'Producție de carne / măcelărie',
+                'kitchen' => 'Bucătărie / producție alimentară',
+                'other' => 'Altul',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Câți oameni lucrează pentru tine?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'În ce țară îți desfășori activitatea?',
+            'field_caption' => 'Alege o țară din listă',
+        ],
+        '4' => [
+            'question_text' => 'Cum gestionezi HACCP în prezent?',
+            'options' => [
+                'paper' => 'Înregistrări pe hârtie',
+                'excel' => 'Excel / Google Sheets',
+                'software' => 'Folosim propriul software',
+                'partial' => 'Parțial documentat / fără un sistem real',
+                'other' => 'Altul',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Folosești soluții HACCP plătite?',
+            'options' => [
+                'yes' => 'Da',
+                'no' => 'Nu',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Cât de mulțumit ești de abordarea actuală?',
+            'options' => [
+                'fully' => 'Complet mulțumit',
+                'partially_ok' => 'Parțial mulțumit',
+                'rather_not' => 'Mai degrabă nemulțumit',
+                'not_at_all' => 'Deloc mulțumit',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Ai lua în considerare trecerea la un sistem mai convenabil?',
+            'options' => [
+                'yes' => 'Da',
+                'maybe' => 'Poate',
+                'no' => 'Nu',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Cine este responsabil în practică de HACCP în afacerea ta?',
+            'options' => [
+                'self' => 'Eu personal',
+                'manager' => 'Manager / administrator',
+                'staff' => 'Personal desemnat',
+                'none' => 'Nimeni nu se ocupă formal',
+                'other' => 'Altul',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Cât de des uită personalul să finalizeze sau să înregistreze sarcinile?',
+            'options' => [
+                'often' => 'Des',
+                'sometimes' => 'Uneori',
+                'rarely' => 'Rar',
+                'almost_never' => 'Aproape niciodată',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Se întâmplă ca înregistrările să fie completate retroactiv?',
+            'options' => [
+                'often' => 'Da, des',
+                'sometimes' => 'Uneori',
+                'rarely' => 'Rar',
+                'never' => 'Niciodată',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Care este cea mai dificilă parte pentru tine în gestionarea HACCP?',
+            'subtitle' => 'Poți selecta mai mult de un răspuns.',
+            'options' => [
+                'records' => 'Menținerea evidențelor și documentației',
+                'staff_control' => 'Supravegherea activității personalului',
+                'realtime' => 'Respectarea procedurilor în timp real',
+                'inspections' => 'Pregătirea pentru inspecții',
+                'training' => 'Instruirea și disciplina personalului',
+                'chaos' => 'Lipsa unui sistem unic / procese haotice',
+                'other' => 'Altul',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Ai avut inspecții în ultimul an?',
+            'options' => [
+                'yes' => 'Da',
+                'no' => 'Nu',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Ce te stresează cel mai mult în timpul unei inspecții?',
+            'options' => [
+                'docs' => 'Documentația',
+                'staff' => 'Comportamentul personalului',
+                'missing_records' => 'Lipsa înregistrărilor',
+                'overall' => 'Totul în general',
+                'other' => 'Altul',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Cât de important este pentru tine să fii pregătit pentru o inspecție neanunțată?',
+            'options' => [
+                'very' => 'Foarte important',
+                'rather' => 'Destul de important',
+                'not_thought' => 'Nu m-am gândit prea mult la asta',
+                'not_important' => 'Nu este important',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Cât de important este pentru tine să ai un sistem care înregistrează acțiunile personalului în timp real (nu completate ulterior)?',
+            'options' => [
+                'very' => 'Foarte important',
+                'rather' => 'Destul de important',
+                'unsure' => 'Nu sunt sigur',
+                'not_important' => 'Nu este important',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Care dintre aceste funcționalități ar fi cu adevărat utile în activitatea ta?',
+            'subtitle' => 'Poți selecta mai mult de un răspuns.',
+            'other_detail_field_label' => 'Spune-ne ce este important pentru tine',
+            'group_headings' => [
+                'safety' => 'Control și siguranță',
+                'inspection' => 'Lucrul cu inspecțiile',
+                'staff' => 'Confortul personalului',
+                'automation' => 'Automatizare',
+                'more' => 'Suplimentar',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Alerte când temperatura iese din interval',
+                'capture_at_moment' => 'Înregistrarea datelor în momentul efectuării sarcinii (fără completare retroactivă)',
+                'two_person_confirm' => 'Confirmarea sarcinii de către două persoane',
+                'reports_qr_link' => 'Acces rapid la rapoarte pentru inspecții (QR / link)',
+                'photo_proof' => 'Fotografii ca dovadă că sarcina a fost realizată',
+                'full_action_history' => 'Istoric complet al acțiunilor personalului',
+                'offline_mobile' => 'Funcționează offline pe telefon',
+                'voice_input' => 'Introducere date prin voce',
+                'biz_templates' => 'Șabloane simple gata făcute pe tip de afacere',
+                'bluetooth_temp' => 'Înregistrare automată a temperaturii (senzori Bluetooth)',
+                'risk_warnings' => 'Evaluarea riscurilor și avertizări timpurii',
+                'loss_on_violations' => 'Estimarea pierderilor în caz de încălcări',
+                'internal_staff_tasks' => 'Liste interne de sarcini pentru personal',
+                'push_reminders' => 'Notificări push pentru personal',
+                'other' => 'Altul (spune-ne ce este important pentru tine)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Dacă sistemul ar putea rezolva o problemă principală pentru tine, care ar fi aceasta?',
+            'field_caption' => 'Răspunsul tău',
+        ],
+    ],
+];

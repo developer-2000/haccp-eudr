@@ -48,7 +48,7 @@
             :value="ticketComment"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }"
-            placeholder="Комментарий исполнителя (необязательно)"
+            placeholder="Комментарий исполнителя"
             @update:value="$emit('update:ticketComment', $event)"
         />
         <!-- Фиксация статуса и закрытие — логика в родителе. -->

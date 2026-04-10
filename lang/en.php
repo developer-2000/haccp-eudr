@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'messages' => require __DIR__ . '/en/messages.php',
-    'home' => require __DIR__ . '/en/home.php',
+    'home' => require __DIR__.'/en/home.php',
+    'header' => require __DIR__.'/en/header.php',
+    'survey' => require __DIR__.'/en/survey.php',
 ];

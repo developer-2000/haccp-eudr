@@ -57,6 +57,10 @@ body {
         overflow-y: auto;
         display: flex;
         flex-direction: column;
+
+        &.main-content--bg-style-white {
+            background-color: $bg-style-white;
+        }
     }
 }
 
@@ -140,6 +144,26 @@ a.n-button:focus-visible {
 // ============================================
 // Forms elements
 // ============================================
+
+// iOS Safari: при фокусе на поле с эффективным font-size < 16px страница «подъезжает» (как при pinch-zoom).
+// Достаточно min 16px у самого input/textarea/select и у внутренних полей Naive UI (n-input задаёт 14px через тему).
+$ios-form-control-min-font: 16px;
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]):not([type="hidden"]),
+textarea,
+select {
+    font-size: max($ios-form-control-min-font, 1rem);
+}
+
+.n-input .n-input__input-el,
+.n-input .n-input__textarea-el,
+.n-input-number .n-input__input-el {
+    font-size: max($ios-form-control-min-font, 1em) !important;
+}
+
+input.n-base-selection-input {
+    font-size: max($ios-form-control-min-font, 1rem) !important;
+}
 
 // Icon info в label
 .label-svg {

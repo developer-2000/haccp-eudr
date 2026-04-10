@@ -9,7 +9,7 @@
     <div class="demo-app" :class="theme">
         <!-- HEADER -->
         <header class="demo-header">
-            <div class="logo">HACCP-EUDR Demo</div>
+            <div class="logo">HACCPilot</div>
             <div class="header-right">
                 <span class="user">{{ demoData.niche }}</span>
                 <button @click="toggleTheme" class="theme-btn">

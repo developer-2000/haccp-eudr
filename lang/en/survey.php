@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Help us build a system that takes the pain out of HACCP',
+        'subtitle' => 'Short survey - about 5 minutes. Your answers will help us make the system work for real operations and inspections.',
+        'trust' => 'Your answers are used for analysis only and are not shared with third parties.',
+        'start' => 'Get started',
+    ],
+
+    'nav' => [
+        'back' => 'Back',
+        'back_aria' => 'Go back to the previous step',
+    ],
+
+    'progress' => [
+        'aria' => 'Survey: step :current of :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Please enter your email - this field is required.',
+        'email_invalid' => 'Please enter a valid email address.',
+    ],
+
+    'ui' => [
+        'next' => 'Next',
+        'next_disabled_aria' => 'Next - answer the question first',
+        'other_default_label' => 'Please specify',
+        'other_aria_prefix' => 'Additional detail for your answer:',
+        'select_placeholder' => 'Choose an option',
+        'country_clear' => 'Clear selected country',
+        'country_search' => 'Search by country name',
+        'country_search_placeholder' => 'Search…',
+        'submit' => 'Submit',
+        'submit_sending' => 'Sending...',
+        'submit_failed' => 'Failed to submit survey data. Please try again.',
+        'questions_load_error' => 'Unable to load survey questions. Please refresh the page or try again later.',
+        'response_saved' => 'Survey response saved.',
+        'verification_sent' => 'Verification code has been sent to your email.',
+        'cooldown_wait' => 'Please wait a few seconds and try again.',
+        'token_not_found' => 'Token not found. Please try to complete the survey again.',
+        'network_error' => 'Network error. Please try again.',
+        'pin_instruction' => 'A PIN code has been sent to the specified email address. Enter it to confirm ownership.',
+        'pin_attempts_left' => '1 of 2 attempts remaining',
+        'pin_container_aria' => 'PIN code verification',
+        'pin_group_aria' => '4-digit PIN code',
+    ],
+
+    'lead' => [
+        'title' => 'Leave your contact details to:',
+        'bullet_discount' => 'get a lifetime 20% discount',
+        'bullet_access' => 'get early access to the system',
+        'bullet_influence' => 'influence the product roadmap',
+        'expectation' => 'This is the final step: after it, the survey is complete. We only need your details to follow up with you.',
+        'field_name' => 'Your name',
+        'field_business_name' => 'Business name',
+        'field_email' => 'Email',
+        'field_email_required_sr' => '(required)',
+        'field_phone' => 'Phone',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 or wa.me/...',
+        'placeholder_telegram' => "{'@'}username",
+    ],
+
+    'success' => [
+        'title' => 'Thank you. I will contact you personally when the system is ready.',
+        'body' => "You will get an invitation to a sandbox version,\nwhere you can try the system in practice and shape how it evolves. That helps us adapt the product to real business processes.",
+        'reassurance' => 'We are not planning bulk mailings - only a personal message with results.',
+        'update_hint' => "If your processes change, you get new tasks or ideas -\nyou will be able to update your answers via the link sent to your email.",
+        'home_link' => 'Back to home',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Thank you for completing the list of questions!',
+        'subtitle' => 'Your participation is a significant contribution at the stage of formation.',
+        'image_alt' => 'The response has been saved in the database',
+        'email_label' => 'Email:',
+        'sent_label' => 'Sent:',
+        'reset_button' => 'Update review',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, thanks for your answers',
+        'subject_default' => 'Thanks for your answers',
+        'header_tagline' => 'Real-time HACCP compliance system',
+        'title' => 'Thank you for your participation — your access and 20% discount',
+        'greeting_with_name' => 'Hello, :name!',
+        'greeting_default' => 'Hello!',
+        'thank_you' => 'Thank you for taking the time to complete the survey.',
+        'value_note' => 'Your answers are truly valuable — they directly shape the product.',
+        'registered_as' => 'You are registered as an early access participant',
+        'discount_label' => '–20% lifetime discount',
+        'discount_code_label' => 'Your code:',
+        'description_line1' => 'The system is currently in development.',
+        'description_line2' => 'I am analyzing responses from business owners and refining the functionality for real-world processes.',
+        'description_line3' => 'The main goal is for the system to help you pass inspections with confidence, not just "keep records".',
+        'benefits_title' => 'What you will get:',
+        'benefit_1' => 'Real-time action tracking',
+        'benefit_2' => 'Transparent history for inspections',
+        'benefit_3' => 'Control without extra workload',
+        'cta_button' => 'Go to website',
+        'footer_updates' => 'I will periodically share development updates and invite you to test new features.',
+        'footer_feedback' => 'Your feedback and ideas will help make the system as convenient and useful as possible in real work.',
+        'footer_reply' => 'If you already have thoughts or tasks — simply reply to this email.',
+        'footer_signature' => 'Best regards, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Your verification code for HACCPilot',
+        'header_tagline' => 'Security confirmation for survey update',
+        'title' => 'Confirmation of answer update',
+        'description' => 'You have requested to update your answers in the HACCPilot survey.',
+        'instruction' => 'To confirm, enter the code below:',
+        'code_expiry' => 'The code is valid for a limited time',
+        'not_you' => 'If this was not you — simply ignore this email.',
+        'data_safe' => 'Your data will remain unchanged.',
+        'cta_button' => 'Return to update',
+        'footer_auto' => 'This is an automated message from the HACCPilot system.',
+        'footer_purpose' => 'The code is used only to confirm data changes.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Your survey answers have been updated',
+        'header_tagline' => 'Survey data update confirmation',
+        'title' => 'Your data has been successfully updated!',
+        'greeting_with_name' => 'Hello, :name!',
+        'greeting_default' => 'Hello!',
+        'thank_you' => 'Thank you for updating your survey answers.',
+        'status_label' => 'Your survey status:',
+        'status_value' => 'Updated and confirmed',
+        'status_note' => 'All changes have been saved and will be used to customize the HACCPilot system.',
+        'footer_auto' => 'This is an automated notification from the HACCPilot system.',
+        'footer_data_use' => 'Your data is used only to improve the accuracy and personalization of the system.',
+        'footer_signature' => 'Best regards, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'The link is invalid or has expired. Please try to complete the survey again.',
+        'attempts_exhausted' => 'Failed to verify the code. Please complete the survey again.',
+        'code_invalid' => 'Invalid code. Please try again.',
+        'success' => 'Answers successfully updated.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'What type of business do you run?',
+            'options' => [
+                'cafe' => 'Cafe / coffee shop',
+                'bakery' => 'Bakery / bread production',
+                'meat' => 'Meat production / butcher shop',
+                'kitchen' => 'Kitchen / food production',
+                'other' => 'Other',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'How many people work for you?',
+            'options' => [
+                '1_5' => '1-5',
+                '5_10' => '5-10',
+                '10_20' => '10-20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Which country do you operate in?',
+            'field_caption' => 'Choose a country from the list',
+        ],
+        '4' => [
+            'question_text' => 'How do you manage HACCP today?',
+            'options' => [
+                'paper' => 'Paper records',
+                'excel' => 'Excel / Google Sheets',
+                'software' => 'We use our own software',
+                'partial' => 'Partly documented / no real system',
+                'other' => 'Other',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Do you use paid HACCP solutions?',
+            'options' => [
+                'yes' => 'Yes',
+                'no' => 'No',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'How satisfied are you with your current approach?',
+            'options' => [
+                'fully' => 'Fully satisfied',
+                'partially_ok' => 'Somewhat satisfied',
+                'rather_not' => 'Rather dissatisfied',
+                'not_at_all' => 'Not satisfied at all',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Would you consider moving to a more convenient system?',
+            'options' => [
+                'yes' => 'Yes',
+                'maybe' => 'Maybe',
+                'no' => 'No',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Who in your business is responsible for HACCP in practice?',
+            'options' => [
+                'self' => 'I am personally',
+                'manager' => 'Manager / administrator',
+                'staff' => 'Designated staff',
+                'none' => 'Nobody formally oversees it',
+                'other' => 'Other',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'How often do staff forget to complete or record tasks?',
+            'options' => [
+                'often' => 'Often',
+                'sometimes' => 'Sometimes',
+                'rarely' => 'Rarely',
+                'almost_never' => 'Almost never',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Do records ever get filled in retrospectively?',
+            'options' => [
+                'often' => 'Yes, often',
+                'sometimes' => 'Sometimes',
+                'rarely' => 'Rarely',
+                'never' => 'Never',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'What is the hardest part of staying on top of HACCP for you?',
+            'subtitle' => 'You can select more than one answer.',
+            'options' => [
+                'records' => 'Keeping records and documentation',
+                'staff_control' => 'Supervising what staff actually do',
+                'realtime' => 'Following procedures in real time',
+                'inspections' => 'Getting ready for inspections',
+                'training' => 'Training and staff discipline',
+                'chaos' => 'No single system / chaotic processes',
+                'other' => 'Other',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Have you had inspections in the last year?',
+            'options' => [
+                'yes' => 'Yes',
+                'no' => 'No',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'What stresses you most during an inspection?',
+            'options' => [
+                'docs' => 'Documentation',
+                'staff' => 'Staff behavior',
+                'missing_records' => 'Missing records',
+                'overall' => 'Everything overall',
+                'other' => 'Other',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'How important is being ready for an unannounced inspection?',
+            'options' => [
+                'very' => 'Very important',
+                'rather' => 'Fairly important',
+                'not_thought' => 'Have not really thought about it',
+                'not_important' => 'Not important',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'How important is it for you to have a system that captures staff actions as they happen (not filled in later)?',
+            'options' => [
+                'very' => 'Very important',
+                'rather' => 'Fairly important',
+                'unsure' => 'Not sure',
+                'not_important' => 'Not important',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Which of these capabilities would be genuinely useful in your work?',
+            'subtitle' => 'You can select more than one answer.',
+            'other_detail_field_label' => 'Tell us what matters to you',
+            'group_headings' => [
+                'safety' => 'Control and safety',
+                'inspection' => 'Working with inspections',
+                'staff' => 'Staff convenience',
+                'automation' => 'Automation',
+                'more' => 'Additional',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Alerts when temperature goes out of range',
+                'capture_at_moment' => 'Capture data at the moment of the task (no backdating)',
+                'two_person_confirm' => 'Two-person confirmation of a task',
+                'reports_qr_link' => 'Quick access to reports for inspections (QR / link)',
+                'photo_proof' => 'Photos as proof a task was done',
+                'full_action_history' => 'Full history of staff actions',
+                'offline_mobile' => 'Works offline on a phone',
+                'voice_input' => 'Voice data entry',
+                'biz_templates' => 'Simple ready-made templates by business type',
+                'bluetooth_temp' => 'Automatic temperature logging (Bluetooth sensors)',
+                'risk_warnings' => 'Risk assessment and early warnings',
+                'loss_on_violations' => 'Estimate losses when rules are broken',
+                'internal_staff_tasks' => 'Internal task lists for staff',
+                'push_reminders' => 'Push reminders for staff',
+                'other' => 'Other (tell us what matters to you)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'If the system could solve one main problem for you, what would it be?',
+            'field_caption' => 'Your answer',
+        ],
+    ],
+];

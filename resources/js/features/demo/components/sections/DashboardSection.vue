@@ -54,6 +54,13 @@
             </div>
         </div>
 
+        <RouterLink
+            class="dashboard-section__checklists-cta"
+            :to="checklistsDemoRoute"
+        >
+            Checklists
+        </RouterLink>
+
         <!-- Модалка просмотра задачи: без v-if каждый заход на дашборд монтировал бы модалку и тянул Pinia taskGrainCooling без необходимости -->
         <ShowTaskModal
             v-if="isTaskModalOpen"
@@ -69,8 +76,16 @@
 
 <script setup>
 import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
 import ShowTaskModal from "@/features/demo/components/modals/show_task/ShowTaskModal.vue";
 import TaskCard from "./TaskCard.vue";
+
+const route = useRoute();
+
+const checklistsDemoRoute = computed(() => ({
+    name: "Demo",
+    params: { ...route.params, section: "checklists" },
+}));
 
 defineOptions({ name: "DashboardSection" });
 
@@ -219,6 +234,39 @@ const closeTaskModal = () => {
             flex-wrap: wrap;
             gap: $spacing-sm-w;
             overflow: visible;
+        }
+    }
+
+    .dashboard-section__checklists-cta {
+        display: none;
+    }
+
+    @media (max-width: $breakpoint-lg) {
+        .dashboard-section__checklists-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: $spacing-md;
+            padding: $spacing-md $spacing-lg;
+            border-radius: $radius-xxl-s;
+            background-color: $accent-primary;
+            color: $text-white;
+            font-size: $font-size-lg;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color $transition-base ease;
+
+            &:hover,
+            &:focus-visible {
+                background-color: $accent-primary-dark;
+                color: $text-white;
+                text-decoration: none;
+            }
+
+            &:focus-visible {
+                outline: 2px solid rgba($text-white, 0.9);
+                outline-offset: 2px;
+            }
         }
     }
 }

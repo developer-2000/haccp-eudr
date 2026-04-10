@@ -34,6 +34,13 @@ $border-color: #e5e7eb;
 $text-red: #d03050;
 $text-green: #18a058;
 
+// Нейтральный текст (slate, опрос и формы)
+$text-slate-700: #334155;
+$text-slate-500: #64748b;
+
+// Фон выбранного варианта в опросе (раньше color.mix(white, accent-success, 92%))
+$survey-choice-selected-bg: #edfaf2;
+
 // Typography
 $font-family-rubik: "Rubik", sans-serif;
 $font-size-xs: 0.75rem; // 12px

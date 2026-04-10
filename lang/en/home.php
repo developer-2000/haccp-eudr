@@ -2,10 +2,10 @@
 
 return [
     'hero' => [
-        'title_line1' => 'Comply Easily with',
-        'title_line2' => 'HACCP + EUDR Software',
-        'description_prefix' => 'Grow your coffee shop, bakery, butcher shop',
-        'description_emphasis' => 'or any small food production - fully adaptable.',
+        'title_line1' => 'Be Ready for Inspection Anytime',
+        'description_prefix' => 'Real-time HACCP system designed',
+        'description_emphasis' => ' for kitchens, bakeries and food production.',
+
         'view_demo' => 'View Demo',
         'devices_alt' => 'Devices',
     ],
@@ -103,7 +103,7 @@ return [
         ],
     ],
     'survey_cta' => [
-        'title' => 'Tell us how you manage HACCP/EUDR',
+        'title' => 'Tell us how you manage HACCPilot',
         'title_secondary' => "we'll set up a prototype for you",
         'button_text' => 'Fill out the survey (5 minutes)',
         'button_aria_label' => 'Fill out the survey (5 minutes)',

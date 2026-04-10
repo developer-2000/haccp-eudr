@@ -18,7 +18,7 @@ import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
 const origin =
     typeof window !== "undefined" && window.location?.origin
         ? window.location.origin
-        : "https://haccp-eudr.eu";
+        : "https://HACCPilot.eu";
 
 
 /** День, для которого в демо заполнена полная выгрузка (совпадает с reportDayIso в state). */
@@ -282,7 +282,7 @@ export const getDailyReportSnapshot = (dateIso) => {
         dateIso: safe,
         dateLongRu: formatIsoLongRu(safe),
         hasFullRecord: isReferenceDay,
-        documentRef: `HACCP-EUDR-DAILY-${safe}-DEMO`,
+        documentRef: `HACCPilot-DAILY-${safe}-DEMO`,
         establishment: {
             legalName: "Piotr Bakery Sp. z o.o.",
             address: "ul. Przykładowa 12, 00-001 Warszawa, Poland",

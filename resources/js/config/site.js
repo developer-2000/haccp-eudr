@@ -10,7 +10,7 @@ let siteStore = null;
 function getSiteStore() {
     if (!siteStore) {
         if (!getActivePinia()) {
-            return { name: "HACCP-EUDR" };
+            return { name: "HACCPilot" };
         }
         siteStore = useSiteConfigStore();
     }
@@ -19,7 +19,7 @@ function getSiteStore() {
 
 const siteConfig = {
     get name() {
-        return getSiteStore().name || "HACCP-EUDR";
+        return getSiteStore().name || "HACCPilot";
     },
 };
 

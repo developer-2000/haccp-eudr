@@ -391,6 +391,9 @@ const todayFormatted = computed(() => {
 
 .demo-topbar-cta {
     display: none;
+    margin: 25px auto 0 auto;
+    width: 240px;
+    justify-content: center;
 }
 
 .demo-layout {
@@ -468,15 +471,6 @@ const todayFormatted = computed(() => {
 
     .demo-topbar-cta {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        max-width: none;
-        margin: 0;
-        border-radius: 0;
-        box-sizing: border-box;
-        min-height: 48px;
-        text-decoration: none;
     }
 }
 

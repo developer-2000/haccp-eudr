@@ -31,7 +31,7 @@
             :value="comment"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }"
-            placeholder="Комментарий исполнителя (необязательно)"
+            placeholder="Комментарий исполнителя"
             @update:value="$emit('update:comment', $event)"
         />
         <!-- Запись в объект замера и закрытие панели — в родителе (submit). -->

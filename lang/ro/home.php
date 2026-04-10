@@ -2,10 +2,9 @@
 
 return [
     'hero' => [
-        'title_line1' => 'Respectă ușor',
-        'title_line2' => 'Software HACCP + EUDR',
-        'description_prefix' => 'Dezvoltă-ți cafeneaua, brutăria, măcelăria',
-        'description_emphasis' => 'sau orice mică producție alimentară - complet adaptabil.',
+        'title_line1' => 'Fii pregătit pentru Inspecție Oricând',
+        'description_prefix' => 'Sistem HACCP în timp real conceput',
+        'description_emphasis' => ' pentru bucătării, brutării și producția alimentară.',
         'view_demo' => 'Vezi demo',
         'devices_alt' => 'Dispozitive',
     ],

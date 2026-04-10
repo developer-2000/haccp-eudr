@@ -78,11 +78,11 @@ import CreateTaskModal from "@/features/demo/components/modals/create_task_modal
 import ShowTaskModal from "@/features/demo/components/modals/show_task/ShowTaskModal.vue";
 import TaskCard from "@/features/demo/components/sections/TaskCard.vue";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
+import { task_grain_cooling } from "@/features/demo/task_grain_cooling/config";
 import {
     registerGrainCoolingChecklistsDeepLinkWatcher,
-    task_grain_cooling,
     useGrainCoolingStore,
-} from "@/features/demo/task_grain_cooling";
+} from "@/features/demo/task_grain_cooling/grainCoolingDemoEntry";
 
 defineOptions({ name: "ChecklistsSection" });
 
@@ -97,10 +97,10 @@ const toConsoleSnapshot = (value) => {
 };
 
 onMounted(() => {
-    console.log(
-        "[debug] checklistsByNiche snapshot",
-        toConsoleSnapshot(demoState.value?.checklistsByNiche ?? {}),
-    );
+    // console.log(
+    //     "[debug] checklistsByNiche snapshot",
+    //     toConsoleSnapshot(demoState.value?.checklistsByNiche ?? {}),
+    // );
 });
 
 const props = defineProps({

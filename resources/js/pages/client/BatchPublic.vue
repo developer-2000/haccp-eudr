@@ -132,32 +132,66 @@
             <section class="batch-public__section">
                 <h2>4. Цепочка поставок</h2>
                 <div class="batch-public__table-wrap">
-                    <table class="batch-public__table">
-                        <thead>
-                            <tr>
-                                <th>Роль</th>
-                                <th>Участник</th>
-                                <th>Страна</th>
-                                <th>Реф. (demo)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(row, idx) in record.supplierChain"
-                                :key="idx"
-                            >
-                                <td>{{ row.role }}</td>
-                                <td>{{ row.name }}</td>
-                                <td>{{ row.country }}</td>
-                                <td>{{ row.ref }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="batch-public__chain-desktop">
+                        <table class="batch-public__table">
+                            <thead>
+                                <tr>
+                                    <th>Роль</th>
+                                    <th>Участник</th>
+                                    <th>Страна</th>
+                                    <th>Реф. (demo)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(row, idx) in record.supplierChain"
+                                    :key="idx"
+                                >
+                                    <td>{{ row.role }}</td>
+                                    <td>{{ row.name }}</td>
+                                    <td>{{ row.country }}</td>
+                                    <td>{{ row.ref }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="batch-public__chain-mobile">
+                        <article
+                            v-for="(row, idx) in record.supplierChain"
+                            :key="idx"
+                            class="batch-public__chain-card"
+                        >
+                            <p class="batch-public__chain-line">
+                                <span class="batch-public__chain-label"
+                                    >Роль:</span
+                                >
+                                {{ row.role }}
+                            </p>
+                            <p class="batch-public__chain-line">
+                                <span class="batch-public__chain-label"
+                                    >Участник:</span
+                                >
+                                {{ row.name }}
+                            </p>
+                            <p class="batch-public__chain-line">
+                                <span class="batch-public__chain-label"
+                                    >Страна:</span
+                                >
+                                {{ row.country }}
+                            </p>
+                            <p class="batch-public__chain-line">
+                                <span class="batch-public__chain-label"
+                                    >Реф. (demo):</span
+                                >
+                                {{ row.ref }}
+                            </p>
+                        </article>
+                    </div>
                 </div>
             </section>
 
             <section class="batch-public__section">
-                <h2>5. Оценка / доказательства (демо)</h2>
+                <h2>5. Оценка / доказательства</h2>
                 <p class="batch-public__lead">{{ record.statusDetail }}</p>
                 <ul class="batch-public__evidence">
                     <li v-for="(ev, idx) in record.evidence" :key="idx">
@@ -419,6 +453,39 @@ watch(
     border-radius: $radius-lg;
 }
 
+.batch-public__chain-desktop {
+    display: block;
+}
+
+.batch-public__chain-mobile {
+    display: none;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.batch-public__chain-card {
+    border: 1px solid $text-light-grey;
+    border-radius: $radius-lg;
+    padding: $spacing-md;
+    background: $bg-gray;
+}
+
+.batch-public__chain-line {
+    margin: 4px 0 0;
+    font-size: $font-size-sm;
+    word-break: break-word;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.batch-public__chain-label {
+    color: $text-dark-grey;
+    margin-right: 4px;
+    font-weight: 500;
+}
+
 .batch-public__table {
     width: 100%;
     border-collapse: collapse;
@@ -441,6 +508,21 @@ watch(
 
     tbody tr:last-child td {
         border-bottom: none;
+    }
+}
+
+@media (max-width: $breakpoint-lg) {
+    .batch-public__chain-desktop {
+        display: none;
+    }
+
+    .batch-public__chain-mobile {
+        display: flex;
+    }
+
+    .batch-public__table-wrap {
+        overflow-x: visible;
+        border: none;
     }
 }
 
@@ -508,6 +590,14 @@ watch(
         box-shadow: none;
         max-width: 100%;
         padding: 0;
+    }
+
+    .batch-public__chain-desktop {
+        display: block !important;
+    }
+
+    .batch-public__chain-mobile {
+        display: none !important;
     }
 
     .no-print {

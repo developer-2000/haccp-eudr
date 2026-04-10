@@ -6,7 +6,7 @@
 const origin =
     typeof window !== "undefined" && window.location?.origin
         ? window.location.origin
-        : "https://haccp-eudr.eu";
+        : "https://HACCPilot.eu";
 
 const formatDateToRu = (date) => {
     const day = String(date.getDate()).padStart(2, "0");

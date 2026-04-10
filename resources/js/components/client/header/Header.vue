@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <nav class="nav" role="navigation" aria-label="Main navigation">
+        <nav class="nav" role="navigation" :aria-label="$t('header.nav.aria_label')">
             <div class="container nav-container">
                 <!-- Лого, ссылка на главную с учётом локали -->
                 <div class="nav-logo">
@@ -23,7 +23,7 @@
                     v-if="isMobile"
                     class="mobile-menu-toggle"
                     :aria-expanded="isMobileMenuOpen"
-                    aria-label="Toggle mobile menu"
+                    :aria-label="$t('header.nav.toggle_mobile_menu')"
                     @click="toggleMobileMenu"
                 >
                     <Icon
@@ -47,7 +47,7 @@
                             "
                             class="mobile-menu__lang"
                             role="group"
-                            aria-label="Language"
+                            :aria-label="$t('header.nav.language_group_aria')"
                         >
                             <button
                                 v-for="lang in languagesList"
@@ -95,7 +95,7 @@
                         v-if="languagesList.length > 1"
                         class="lang-switcher"
                         role="group"
-                        aria-label="Language"
+                        :aria-label="$t('header.nav.language_group_aria')"
                     >
                         <button
                             v-for="lang in languagesList"
@@ -122,7 +122,7 @@
                         :class="{ 'nav-cta--icon-only': isCtaIconOnly }"
                         :aria-label="
                             isCtaIconOnly
-                                ? $t('messages.nav.cta.aria_icon_only')
+                                ? $t('header.cta.aria_icon_only')
                                 : undefined
                         "
                         @click="goToSurvey"
@@ -134,11 +134,11 @@
                         />
                         <template v-else>
                             <span class="nav-cta-line">{{
-                                $t("messages.nav.cta.leave_request")
+                                $t("header.cta.leave_request")
                             }}</span>
-                            <span class="nav-cta-line nav-cta-line--accent">{{
-                                $t("messages.nav.cta.tell_about_business")
-                            }}</span>
+                            <span
+                                class="nav-cta-line nav-cta-line--accent"
+                            >{{ $t("header.cta.tell_about_business") }}</span>
                         </template>
                     </button>
                 </div>
@@ -222,6 +222,38 @@ const currentLocale = computed(() => {
     return knownLocales[0] || "en";
 });
 
+/**
+ * SERVER - Смена языка: POST /locale (session, cookie, лог), затем переход на /{locale}/путь.
+ */
+async function setLocale(locale) {
+    if (locale === currentLocale.value) return;
+    const pathname = window.location.pathname;
+    const codes = languagesList.value.map((l) => l.code);
+    const segments = pathname.split("/").filter(Boolean);
+    const rest = (
+        codes.includes(segments[0]) ? segments.slice(1) : segments
+    ).join("/");
+    const url = "/" + locale + (rest ? "/" + rest : "");
+    const csrf = document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute("content");
+    try {
+        await axios.post(
+            "/locale",
+            { locale },
+            {
+                headers: {
+                    Accept: "application/json",
+                    ...(csrf && { "X-CSRF-TOKEN": csrf }),
+                },
+            },
+        );
+    } catch {
+        /* ignore */
+    }
+    window.location.href = url;
+}
+
 const goToSurvey = () => {
     router.push("/" + currentLocale.value + "/survey");
 };
@@ -258,9 +290,7 @@ const safeLogo = computed(() => {
 });
 
 /**
- * Меню для навигации: пункты из navConfig (nav.js), у каждого item.label — ключ i18n (напр. nav.menu.how_it_works).
- * Строку перевода здесь не подставляем: NavMenuItem выводит подпись через {{ $t(item.label) }},
- * словари берутся из vue-i18n (window.translations из lang/*.json, отдаёт SetLocale).
+ * Меню: пункты из navConfig (nav.js), `item.label` — ключ vue-i18n (напр. header.menu.demo).
  */
 /** @type {import('vue').ComputedRef<NavConfig['menu']>} */
 const safeMenu = computed(() => {
@@ -282,38 +312,6 @@ const safeMenu = computed(() => {
                 : null,
     }));
 });
-
-/**
- * Смена языка: POST /locale (session, cookie, лог), затем переход на /{locale}/путь.
- */
-async function setLocale(locale) {
-    if (locale === currentLocale.value) return;
-    const pathname = window.location.pathname;
-    const codes = languagesList.value.map((l) => l.code);
-    const segments = pathname.split("/").filter(Boolean);
-    const rest = (
-        codes.includes(segments[0]) ? segments.slice(1) : segments
-    ).join("/");
-    const url = "/" + locale + (rest ? "/" + rest : "");
-    const csrf = document
-        .querySelector('meta[name="csrf-token"]')
-        ?.getAttribute("content");
-    try {
-        await axios.post(
-            "/locale",
-            { locale },
-            {
-                headers: {
-                    Accept: "application/json",
-                    ...(csrf && { "X-CSRF-TOKEN": csrf }),
-                },
-            },
-        );
-    } catch {
-        /* ignore */
-    }
-    window.location.href = url;
-}
 
 function getLanguagesList() {
     const el = document.getElementById("app");

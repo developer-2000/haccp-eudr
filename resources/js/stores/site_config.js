@@ -22,7 +22,7 @@ export const useSiteConfigStore = defineStore("site", {
             if (this.loaded) {
                 return;
             }
-            this.name = import.meta.env.VITE_APP_NAME || "HACCP-EUDR";
+            this.name = import.meta.env.VITE_APP_NAME || "HACCPilot";
             this.loaded = true;
         },
     },

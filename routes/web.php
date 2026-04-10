@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Client\SurveyQuestionsController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\Technical\MailTestController;
 use Illuminate\Support\Facades\Route;
 
 $localePattern = implode('|', available_locales());
@@ -20,10 +22,34 @@ Route::get('/batch/{batchId}', function () {
     return view('index-client');
 })->where('batchId', '[A-Za-z0-9_-]+');
 
-// Публичный дневной отчёт HACCP + EUDR (SPA): /report/{date} без локали и /{locale}/report/{date} — см. группу `{locale}/{any}` ниже.
+// Публичный дневной отчёт HACCPilot (SPA): /report/{date} без локали и /{locale}/report/{date} — см. группу `{locale}/{any}` ниже.
 Route::get('/report/{date}', function () {
     return view('index-client');
 })->where('date', '[0-9]{4}-[0-9]{2}-[0-9]{2}');
+
+// JSON вопросов опроса для SPA: без префикса локали (перевод на клиенте, vue-i18n).
+Route::get('/survey/questions', [SurveyQuestionsController::class, 'index'])
+    ->middleware('throttle:20,1')
+    ->name('client.survey.questions');
+
+// Отправка ответов опроса.
+Route::post('/survey/submit', [SurveyQuestionsController::class, 'submitAnswersQuestions'])
+    ->middleware(['setLocale', 'throttle:10,1'])
+    ->name('client.survey.submit');
+
+Route::post('/survey/verify', [SurveyQuestionsController::class, 'verifyCode'])
+    ->middleware(['setLocale', 'throttle:10,1'])
+    ->name('client.survey.verify');
+
+Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')
+    ->group(function () {
+        // http://haccpilot.local/technical
+        Route::get('/', [MailTestController::class, 'index'])->name('index');
+
+        // Тестовая отправка письма
+        Route::get('/mail-test', [MailTestController::class, 'index'])->name('mail-test.index');
+        Route::post('/mail-test/send', [MailTestController::class, 'send'])->name('mail-test.send');
+    });
 
 // SPA: маршруты с префиксом {locale}, middleware SetLocale, отдача index-client.
 Route::group([
@@ -38,6 +64,3 @@ Route::group([
         return view('index-client');
     })->where('any', '.*');
 });
-
-
-

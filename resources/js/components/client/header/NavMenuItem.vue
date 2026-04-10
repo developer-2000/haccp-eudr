@@ -10,7 +10,11 @@
                 :to="itemLink"
                 class="nav-link"
                 :class="{ 'nav-link--exact-page': isExactPageLink }"
-                :aria-label="`${$t(item.label)} menu`"
+                :aria-label="
+                    $t('header.nav.item_menu_aria', {
+                        item: $t(item.label),
+                    })
+                "
             >
                 {{ $t(item.label) }}
                 <Icon
@@ -43,7 +47,11 @@
             <button
                 class="mobile-menu-item-header"
                 :aria-expanded="isOpen"
-                :aria-label="`Toggle ${$t(item.label)} submenu`"
+                :aria-label="
+                    $t('header.nav.toggle_submenu_aria', {
+                        item: $t(item.label),
+                    })
+                "
                 role="menuitem"
                 @click="handleToggle"
             >
