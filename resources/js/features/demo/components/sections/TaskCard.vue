@@ -12,8 +12,8 @@
     >
         <div v-if="showDeleteAction" class="ccp-card__actions" @click.stop>
             <n-popconfirm
-                positive-text="Удалить"
-                negative-text="Отмена"
+                :positive-text="t('demo.task_card.delete')"
+                :negative-text="t('demo.task_card.cancel')"
                 :positive-button-props="{ type: 'info' }"
                 :negative-button-props="{ type: 'warning' }"
                 @positive-click="emit('remove', task.id)"
@@ -24,7 +24,7 @@
                         size="tiny"
                         type="error"
                         class="ccp-card__delete-btn"
-                        aria-label="Удалить контрольную точку"
+                        :aria-label="t('demo.task_card.delete_aria')"
                     >
                         <Icon
                             name="delete-forever-twotone"
@@ -33,7 +33,7 @@
                         />
                     </n-button>
                 </template>
-                Удалить эту задачу?
+                {{ t('demo.task_card.delete_confirm') }}
             </n-popconfirm>
         </div>
 
@@ -100,7 +100,7 @@
                 'hot-task-row__assignee--empty': isHotMode && !assigneeDisplay,
             }"
         >
-            Ответственный:
+            {{ t('demo.task_card.assignee_label') }}
             {{ assigneeDisplay || assigneeEmptyText }}
         </p>
 
@@ -140,6 +140,7 @@
 <script setup>
 import { computed } from "vue";
 import { NButton, NPopconfirm } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import Icon from "@/components/Icon.vue";
 import { firstPendingMeasurementTime } from "@/features/demo/domain/checklistTaskModel";
 import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
@@ -151,6 +152,8 @@ import {
 } from "@/features/demo/data/demoChecklistTaskScope";
 
 defineOptions({ name: "TaskCard" });
+
+const { t } = useI18n();
 
 const props = defineProps({
     task: { type: Object, required: true },
@@ -165,11 +168,7 @@ const props = defineProps({
 
 const emit = defineEmits(["select", "remove"]);
 
-const NICHE_LABELS = {
-    coffee: "Кофейня",
-    bakery: "Пекарня",
-    meat: "Мясо",
-};
+const NICHE_LABEL_KEYS = { coffee: 'niche_coffee', bakery: 'niche_bakery', meat: 'niche_meat' };
 
 const NICHE_EMOJI = {
     coffee: "☕",
@@ -211,7 +210,7 @@ const startOfTodayTs = () => {
 };
 
 const formatEuDate = (ts) =>
-    new Intl.DateTimeFormat("ru-RU", {
+    new Intl.DateTimeFormat("en-GB", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -223,7 +222,7 @@ const scheduledLine = computed(() => {
         typeof startDate === "number" &&
         Number.isFinite(startDate) &&
         startDate > startOfTodayTs();
-    return isFuture ? `Запланирована с ${formatEuDate(startDate)}` : "";
+    return isFuture ? t('demo.task_card.scheduled_from', { date: formatEuDate(startDate) }) : "";
 });
 
 const assigneeDisplay = computed(() => {
@@ -235,7 +234,7 @@ const assigneeDisplay = computed(() => {
     return name === "—" ? "" : name;
 });
 
-const assigneeEmptyText = computed(() => (isHotMode.value ? "—" : "не назначен"));
+const assigneeEmptyText = computed(() => (isHotMode.value ? "—" : t('demo.task_card.assignee_empty')));
 
 const normalizedScopeType = computed(() =>
     normalizeTaskScopeType(props.task?.taskScopeType),
@@ -262,7 +261,8 @@ const nicheEmoji = computed(() => {
 
 const nicheAria = computed(() => {
     const type = props.task?.type;
-    return type ? (NICHE_LABELS[type] ?? String(type)) : "";
+    const key = NICHE_LABEL_KEYS[type];
+    return key ? t(`demo.task_card.${key}`) : String(type);
 });
 
 </script>

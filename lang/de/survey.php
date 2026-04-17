@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Helfen Sie uns, ein System zu entwickeln, das den HACCP-Aufwand reduziert',
+        'subtitle' => 'Kurze Umfrage – etwa 5 Minuten. Ihre Antworten helfen uns, das System für echte Betriebsabläufe und Inspektionen zu optimieren.',
+        'trust' => 'Ihre Antworten werden nur zur Analyse verwendet und nicht an Dritte weitergegeben.',
+        'start' => 'Starten',
+    ],
+
+    'nav' => [
+        'back' => 'Zurück',
+        'back_aria' => 'Zum vorherigen Schritt zurückgehen',
+    ],
+
+    'progress' => [
+        'aria' => 'Umfrage: Schritt :current von :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Bitte geben Sie Ihre E-Mail ein – dieses Feld ist erforderlich.',
+        'email_invalid' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+    ],
+
+    'ui' => [
+        'next' => 'Weiter',
+        'next_disabled_aria' => 'Weiter - beantworten Sie zuerst die Frage',
+        'other_default_label' => 'Bitte angeben',
+        'other_aria_prefix' => 'Zusätzliche Angabe zu Ihrer Antwort:',
+        'select_placeholder' => 'Option auswählen',
+        'country_clear' => 'Ausgewähltes Land löschen',
+        'country_search' => 'Nach Ländernamen suchen',
+        'country_search_placeholder' => 'Suchen…',
+        'submit' => 'Absenden',
+        'submit_sending' => 'Wird gesendet...',
+        'submit_failed' => 'Senden der Umfragedaten fehlgeschlagen. Bitte versuchen Sie es erneut.',
+        'questions_load_error' => 'Umfragefragen konnten nicht geladen werden. Bitte aktualisieren Sie die Seite oder versuchen Sie es später erneut.',
+        'response_saved' => 'Umfrageantwort gespeichert.',
+        'verification_sent' => 'Der Bestätigungscode wurde an Ihre E-Mail gesendet.',
+        'cooldown_wait' => 'Bitte warten Sie einige Sekunden und versuchen Sie es erneut.',
+        'token_not_found' => 'Token nicht gefunden. Bitte versuchen Sie, die Umfrage erneut auszufüllen.',
+        'network_error' => 'Netzwerkfehler. Bitte versuchen Sie es erneut.',
+        'pin_instruction' => 'Ein PIN-Code wurde an die angegebene E-Mail-Adresse gesendet. Geben Sie ihn zur Bestätigung ein.',
+        'pin_attempts_left' => '1 von 2 Versuchen verbleibend',
+        'pin_container_aria' => 'PIN-Code-Verifizierung',
+        'pin_group_aria' => '4-stelliger PIN-Code',
+    ],
+
+    'lead' => [
+        'title' => 'Hinterlassen Sie Ihre Kontaktdaten, um:',
+        'bullet_discount' => 'einen lebenslangen Rabatt von 20 % zu erhalten',
+        'bullet_access' => 'frühen Zugang zum System zu erhalten',
+        'bullet_influence' => 'die Produkt-Roadmap zu beeinflussen',
+        'expectation' => 'Dies ist der letzte Schritt: Danach ist die Umfrage abgeschlossen. Wir benötigen Ihre Daten nur für die weitere Kontaktaufnahme.',
+        'field_name' => 'Ihr Name',
+        'field_business_name' => 'Name des Unternehmens',
+        'field_email' => 'E-Mail',
+        'field_email_required_sr' => '(erforderlich)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 oder wa.me/...',
+        'placeholder_telegram' => "{'@'}username",
+    ],
+
+    'success' => [
+        'title' => 'Vielen Dank. Ich werde Sie persönlich kontaktieren, sobald das System bereit ist.',
+        'body' => "Sie erhalten eine Einladung zur Sandbox-Version,\nin der Sie das System praktisch testen und seine Entwicklung mitgestalten können. Das hilft uns, das Produkt an reale Geschäftsprozesse anzupassen.",
+        'reassurance' => 'Es sind keine Massenmailings geplant – nur eine persönliche Nachricht mit Ergebnissen.',
+        'update_hint' => "Wenn sich Ihre Prozesse ändern oder neue Aufgaben bzw. Ideen entstehen,\nkönnen Sie Ihre Antworten über den an Ihre E-Mail gesendeten Link aktualisieren.",
+        'home_link' => 'Zur Startseite',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Vielen Dank für das Ausfüllen des Fragebogens!',
+        'subtitle' => 'Ihre Teilnahme ist ein wichtiger Beitrag in dieser Entwicklungsphase.',
+        'image_alt' => 'Die Antwort wurde in der Datenbank gespeichert',
+        'email_label' => 'E-Mail:',
+        'sent_label' => 'Gesendet:',
+        'reset_button' => 'Auswertung aktualisieren',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, danke für Ihre Antworten',
+        'subject_default' => 'Danke für Ihre Antworten',
+        'header_tagline' => 'Echtzeit-HACCP-Konformitätssystem',
+        'title' => 'Vielen Dank für Ihre Teilnahme — Ihr Zugang und 20 % Rabatt',
+        'greeting_with_name' => 'Hallo, :name!',
+        'greeting_default' => 'Hallo!',
+        'thank_you' => 'Vielen Dank, dass Sie sich die Zeit genommen haben, die Umfrage auszufüllen.',
+        'value_note' => 'Ihre Antworten sind wirklich wertvoll — sie prägen das Produkt direkt.',
+        'registered_as' => 'Sie sind als Teilnehmer für den frühen Zugang registriert',
+        'discount_label' => '–20 % lebenslanger Rabatt',
+        'discount_code_label' => 'Ihr Code:',
+        'description_line1' => 'Das System befindet sich derzeit in Entwicklung.',
+        'description_line2' => 'Ich analysiere Antworten von Geschäftsinhabern und verbessere die Funktionalität für reale Prozesse.',
+        'description_line3' => 'Das Hauptziel ist, dass das System Ihnen hilft, Inspektionen sicher zu bestehen, nicht nur „Aufzeichnungen zu führen“.',
+        'benefits_title' => 'Was Sie erhalten:',
+        'benefit_1' => 'Echtzeit-Verfolgung von Abläufen',
+        'benefit_2' => 'Transparente Historie für Inspektionen',
+        'benefit_3' => 'Kontrolle ohne zusätzlichen Aufwand',
+        'cta_button' => 'Zur Website',
+        'footer_updates' => 'Ich werde regelmäßig Entwicklungsupdates teilen und Sie einladen, neue Funktionen zu testen.',
+        'footer_feedback' => 'Ihr Feedback und Ihre Ideen helfen dabei, das System so bequem und nützlich wie möglich zu machen.',
+        'footer_reply' => 'Wenn Sie bereits Gedanken oder Aufgaben haben — antworten Sie einfach auf diese E-Mail.',
+        'footer_signature' => 'Mit freundlichen Grüßen, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Ihr Bestätigungscode für HACCPilot',
+        'header_tagline' => 'Sicherheitsbestätigung für Umfrage-Update',
+        'title' => 'Bestätigung der Antwortaktualisierung',
+        'description' => 'Sie haben angefordert, Ihre Antworten in der HACCPilot-Umfrage zu aktualisieren.',
+        'instruction' => 'Zur Bestätigung geben Sie den folgenden Code ein:',
+        'code_expiry' => 'Der Code ist nur für begrenzte Zeit gültig',
+        'not_you' => 'Falls Sie das nicht waren — ignorieren Sie diese E-Mail einfach.',
+        'data_safe' => 'Ihre Daten bleiben unverändert.',
+        'cta_button' => 'Zurück zur Aktualisierung',
+        'footer_auto' => 'Dies ist eine automatische Nachricht des HACCPilot-Systems.',
+        'footer_purpose' => 'Der Code wird nur zur Bestätigung von Datenänderungen verwendet.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Ihre Umfrageantworten wurden aktualisiert',
+        'header_tagline' => 'Bestätigung der Aktualisierung von Umfragedaten',
+        'title' => 'Ihre Daten wurden erfolgreich aktualisiert!',
+        'greeting_with_name' => 'Hallo, :name!',
+        'greeting_default' => 'Hallo!',
+        'thank_you' => 'Vielen Dank für die Aktualisierung Ihrer Umfrageantworten.',
+        'status_label' => 'Ihr Umfragestatus:',
+        'status_value' => 'Aktualisiert und bestätigt',
+        'status_note' => 'Alle Änderungen wurden gespeichert und werden zur Anpassung des HACCPilot-Systems verwendet.',
+        'footer_auto' => 'Dies ist eine automatische Benachrichtigung des HACCPilot-Systems.',
+        'footer_data_use' => 'Ihre Daten werden nur zur Verbesserung der Genauigkeit und Personalisierung des Systems verwendet.',
+        'footer_signature' => 'Mit freundlichen Grüßen, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Der Link ist ungültig oder abgelaufen. Bitte versuchen Sie erneut, die Umfrage auszufüllen.',
+        'attempts_exhausted' => 'Bestätigung des Codes fehlgeschlagen. Bitte füllen Sie die Umfrage erneut aus.',
+        'code_invalid' => 'Ungültiger Code. Bitte versuchen Sie es erneut.',
+        'success' => 'Antworten erfolgreich aktualisiert.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Welche Art von Geschäft betreiben Sie?',
+            'options' => [
+                'cafe' => 'Café / Kaffeegeschäft',
+                'bakery' => 'Bäckerei / Brotproduktion',
+                'meat' => 'Fleischproduktion / Metzgerei',
+                'kitchen' => 'Küche / Lebensmittelproduktion',
+                'other' => 'Sonstiges',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Wie viele Personen arbeiten bei Ihnen?',
+            'options' => [
+                '1_5' => '1-5',
+                '5_10' => '5-10',
+                '10_20' => '10-20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'In welchem Land sind Sie tätig?',
+            'field_caption' => 'Wählen Sie ein Land aus der Liste',
+        ],
+        '4' => [
+            'question_text' => 'Wie verwalten Sie HACCP heute?',
+            'options' => [
+                'paper' => 'Papierdokumentation',
+                'excel' => 'Excel / Google Tabellen',
+                'software' => 'Eigene Software im Einsatz',
+                'partial' => 'Teilweise dokumentiert / kein echtes System',
+                'other' => 'Sonstiges',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Nutzen Sie kostenpflichtige HACCP-Lösungen?',
+            'options' => [
+                'yes' => 'Ja',
+                'nb' => 'Nein',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Wie zufrieden sind Sie mit Ihrem aktuellen Ansatz?',
+            'options' => [
+                'fully' => 'Vollständig zufrieden',
+                'partially_ok' => 'Teilweise zufrieden',
+                'rather_not' => 'Eher unzufrieden',
+                'not_at_all' => 'Überhaupt nicht zufrieden',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Würden Sie auf ein bequemeres System umsteigen?',
+            'options' => [
+                'yes' => 'Ja',
+                'maybe' => 'Vielleicht',
+                'nb' => 'Nein',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Wer ist in Ihrem Betrieb praktisch für HACCP verantwortlich?',
+            'options' => [
+                'self' => 'Ich persönlich',
+                'manager' => 'Manager / Administrator',
+                'staff' => 'Zugewiesene Mitarbeiter',
+                'none' => 'Niemand überwacht es offiziell',
+                'other' => 'Sonstiges',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Wie oft vergessen Mitarbeiter Aufgaben oder Einträge?',
+            'options' => [
+                'often' => 'Oft',
+                'sometimes' => 'Manchmal',
+                'rarely' => 'Selten',
+                'almost_never' => 'Fast nie',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Werden Aufzeichnungen nachträglich ausgefüllt?',
+            'options' => [
+                'often' => 'Ja, oft',
+                'sometimes' => 'Manchmal',
+                'rarely' => 'Selten',
+                'never' => 'Nie',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Was ist für Sie die größte Herausforderung bei HACCP?',
+            'subtitle' => 'Sie können mehrere Antworten auswählen.',
+            'options' => [
+                'records' => 'Dokumentation und Aufzeichnungen',
+                'staff_control' => 'Kontrolle der tatsächlichen Arbeit der Mitarbeiter',
+                'realtime' => 'Einhaltung der Prozesse in Echtzeit',
+                'inspections' => 'Vorbereitung auf Inspektionen',
+                'training' => 'Schulung und Disziplin der Mitarbeiter',
+                'chaos' => 'Kein einheitliches System / chaotische Prozesse',
+                'other' => 'Sonstiges',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Hatten Sie im letzten Jahr Inspektionen?',
+            'options' => [
+                'yes' => 'Ja',
+                'nb' => 'Nein',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Was stresst Sie bei einer Inspektion am meisten?',
+            'options' => [
+                'docs' => 'Dokumentation',
+                'staff' => 'Verhalten der Mitarbeiter',
+                'missing_records' => 'Fehlende Aufzeichnungen',
+                'overall' => 'Alles insgesamt',
+                'other' => 'Sonstiges',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Wie wichtig ist die Vorbereitung auf unangekündigte Inspektionen?',
+            'options' => [
+                'very' => 'Sehr wichtig',
+                'rather' => 'Eher wichtig',
+                'not_thought' => 'Darüber nicht wirklich nachgedacht',
+                'not_important' => 'Nicht wichtig',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Wie wichtig ist Ihnen ein System, das Mitarbeiteraktionen in Echtzeit erfasst (nicht nachträglich)?',
+            'options' => [
+                'very' => 'Sehr wichtig',
+                'rather' => 'Eher wichtig',
+                'unsure' => 'Unentschieden',
+                'not_important' => 'Nicht wichtig',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Welche Funktionen wären für Ihre Arbeit wirklich nützlich?',
+            'subtitle' => 'Sie können mehrere Antworten auswählen.',
+            'other_detail_field_label' => 'Sagen Sie uns, was Ihnen wichtig ist',
+            'group_headings' => [
+                'safety' => 'Kontrolle und Sicherheit',
+                'inspection' => 'Arbeit mit Inspektionen',
+                'staff' => 'Mitarbeiterkomfort',
+                'automation' => 'Automatisierung',
+                'more' => 'Zusätzlich',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Warnungen bei Temperaturabweichungen',
+                'capture_at_moment' => 'Datenerfassung im Moment der Aufgabe (keine Rückdatierung)',
+                'two_person_confirm' => 'Zwei-Personen-Bestätigung einer Aufgabe',
+                'reports_qr_link' => 'Schneller Zugriff auf Berichte für Inspektionen (QR / Link)',
+                'photo_proof' => 'Fotos als Nachweis der Aufgabenerledigung',
+                'full_action_history' => 'Vollständige Historie der Mitarbeiteraktionen',
+                'offline_mobile' => 'Funktioniert offline auf dem Smartphone',
+                'voice_input' => 'Spracheingabe',
+                'biz_templates' => 'Einfache Vorlagen nach Betriebstyp',
+                'bluetooth_temp' => 'Automatische Temperaturaufzeichnung (Bluetooth-Sensoren)',
+                'risk_warnings' => 'Risikobewertung und Frühwarnungen',
+                'loss_on_violations' => 'Verluste bei Regelverstößen berechnen',
+                'internal_staff_tasks' => 'Interne Aufgabenlisten für Mitarbeiter',
+                'push_reminders' => 'Push-Erinnerungen für Mitarbeiter',
+                'other' => 'Sonstiges (sagen Sie uns, was wichtig ist)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Wenn das System ein Hauptproblem für Sie lösen könnte – welches wäre das?',
+            'field_caption' => 'Ihre Antwort',
+        ],
+    ],
+];

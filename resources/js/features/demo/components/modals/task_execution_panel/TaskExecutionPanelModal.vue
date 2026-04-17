@@ -1,13 +1,12 @@
 <template>
     <!-- Боковая панель выполнения pending-замера: ширина от viewport, справа, открывается через ref.open() из родителя (ShowTaskModal). -->
     <n-drawer v-model:show="isOpen" :width="pendingDrawerWidth" placement="right">
-        <n-drawer-content>
-            <!-- Шапка drawer: название задачи и закрытие; не трогает настройки самого n-drawer. -->
+        <n-drawer-content closable>
+            <!-- Шапка drawer: название задачи; крестик закрытия — стандартный от n-drawer-content. -->
             <template #header>
-                <TaskExecutionPanelHeader
-                    :title="pendingDrawerTitle"
-                    @close="closeDrawer"
-                />
+                <span class="checklist-modal__pending-header-title">
+                    {{ pendingDrawerTitle }}
+                </span>
             </template>
             <!-- Тело панели: контекст + одна из трёх форм ввода по типу поля задачи. -->
             <div class="checklist-modal__pending-drawer">
@@ -61,7 +60,6 @@
 <script setup>
 import {NDrawer, NDrawerContent} from "naive-ui";
 import TaskExecutionMetaBlock from "./TaskExecutionMetaBlock.vue";
-import TaskExecutionPanelHeader from "./TaskExecutionPanelHeader.vue";
 import TaskExecutionSingleChoicePanel from "./TaskExecutionSingleChoicePanel.vue";
 import TaskExecutionTemperatureTimerPanel from "./TaskExecutionTemperatureTimerPanel.vue";
 import TaskExecutionTicketPanel from "./TaskExecutionTicketPanel.vue";

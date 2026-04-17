@@ -6,9 +6,10 @@
             <n-button
                 type="primary"
                 class="checklists-add-btn"
+                size="large"
                 @click="openAddModal"
             >
-                Добавить
+                {{ t('demo.checklists.add') }}
             </n-button>
         </div>
         <n-tabs
@@ -32,7 +33,7 @@
                     v-if="!tasksByNiche(tab.id).length"
                     class="checklists-empty"
                 >
-                    Сегодня, в этой нише нет задач. Завтрашний день может принести изменения!
+                    {{ t('demo.checklists.empty_state') }}
                 </div>
 
                 <!-- Сетка карточек контрольных точек по выбранной нише -->
@@ -72,8 +73,9 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onActivated, onMounted, ref } from "vue";
+import { computed, nextTick, onActivated, ref } from "vue";
 import { NButton, NTabPane, NTabs } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import CreateTaskModal from "@/features/demo/components/modals/create_task_modal/CreateTaskModal.vue";
 import ShowTaskModal from "@/features/demo/components/modals/show_task/ShowTaskModal.vue";
 import TaskCard from "@/features/demo/components/sections/TaskCard.vue";
@@ -86,22 +88,8 @@ import {
 
 defineOptions({ name: "ChecklistsSection" });
 
+const { t } = useI18n();
 const { demoState, removeChecklistTask } = useDemoState();
-
-const toConsoleSnapshot = (value) => {
-    try {
-        return JSON.parse(JSON.stringify(value));
-    } catch {
-        return value;
-    }
-};
-
-onMounted(() => {
-    // console.log(
-    //     "[debug] checklistsByNiche snapshot",
-    //     toConsoleSnapshot(demoState.value?.checklistsByNiche ?? {}),
-    // );
-});
 
 const props = defineProps({
     checklistsByNiche: {
@@ -114,14 +102,14 @@ const props = defineProps({
     },
 });
 
-const nicheTabs = [
-    { id: "coffee", label: "Кофейня" },
-    { id: "bakery", label: "Пекарня" },
-    { id: "meat", label: "Мясо" },
-];
+const nicheTabs = computed(() => [
+    { id: "coffee", label: t('demo.checklists.niche_coffee') },
+    { id: "bakery", label: t('demo.checklists.niche_bakery') },
+    { id: "meat", label: t('demo.checklists.niche_meat') },
+]);
 
 function resetActiveNicheToFirst() {
-    activeNiche.value = nicheTabs[0].id;
+    activeNiche.value = nicheTabs.value[0].id;
 }
 
 const NICHE_EMOJI = {
@@ -131,7 +119,7 @@ const NICHE_EMOJI = {
 };
 const nicheEmoji = (nicheId) => NICHE_EMOJI[nicheId] ?? "";
 
-const activeNiche = ref(nicheTabs[0].id);
+const activeNiche = ref("coffee");
 const isModalOpen = ref(false);
 const tasksByNiche = (nicheId) =>
     demoState.value.checklistsByNiche?.[nicheId] ?? [];

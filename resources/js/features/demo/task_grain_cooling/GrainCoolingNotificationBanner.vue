@@ -7,7 +7,7 @@
     >
         <div class="grain-cooling-notification-banner__inner container">
             <p class="grain-cooling-notification-banner__text">
-                {{ task_grain_cooling.toastTitle }} — {{ task_grain_cooling.toastTaskName }}:
+                {{ t(task_grain_cooling.toastTitleKey) }} — {{ t(task_grain_cooling.toastTaskNameKey) }}:
                 <span class="grain-cooling-notification-banner__countdown">{{ countdownLabel }}</span>
             </p>
             <button
@@ -15,7 +15,7 @@
                 class="grain-cooling-notification-banner__go"
                 @click="onGo"
             >
-                {{ task_grain_cooling.toastButtonNavigateLabel }}
+                {{ t(task_grain_cooling.toastButtonNavigateLabelKey) }}
             </button>
         </div>
     </div>
@@ -24,7 +24,10 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { computed, onUnmounted, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { task_grain_cooling } from "./config";
+
+const { t } = useI18n();
 import { navigateGrainCoolingToDemoChecklists } from "./grainCoolingNavigateToDemoChecklists";
 import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
 

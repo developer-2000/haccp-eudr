@@ -33,6 +33,9 @@ import HeroSection from "@/components/client/home/HeroSection.vue";
 import MetricsSection from "@/components/client/home/MetricsSection.vue";
 import NichesSection from "@/components/client/home/NichesSection.vue";
 import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
+import { usePageSeo } from "@/composables/usePageSeo";
+
+usePageSeo({ i18nKey: "seo.home" });
 </script>
 
 <style lang="scss" scoped>

@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Help ons een systeem te bouwen dat de pijn van HACCP-naleving wegneemt',
+        'subtitle' => 'Korte enquête — ongeveer 5 minuten. Uw antwoorden helpen ons het systeem te laten werken voor echte operaties en inspecties.',
+        'trust' => 'Uw antwoorden worden alleen voor analyse gebruikt en niet gedeeld met derden.',
+        'start' => 'Beginnen',
+    ],
+
+    'nav' => [
+        'back' => 'Terug',
+        'back_aria' => 'Ga terug naar de vorige stap',
+    ],
+
+    'progress' => [
+        'aria' => 'Enquête: stap :current van :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Voer uw e-mailadres in — dit veld is verplicht.',
+        'email_invalid' => 'Voer een geldig e-mailadres in.',
+    ],
+
+    'ui' => [
+        'next' => 'Volgende',
+        'next_disabled_aria' => 'Volgende — beantwoord eerst de vraag',
+        'other_default_label' => 'Specificeer alstublieft',
+        'other_aria_prefix' => 'Aanvullende details voor uw antwoord:',
+        'select_placeholder' => 'Kies een optie',
+        'country_clear' => 'Geselecteerd land wissen',
+        'country_search' => 'Zoeken op landnaam',
+        'country_search_placeholder' => 'Zoeken…',
+        'submit' => 'Verzenden',
+        'submit_sending' => 'Bezig met verzenden...',
+        'submit_failed' => 'Verzenden van enquêtegegevens mislukt. Probeer het opnieuw.',
+        'questions_load_error' => 'Kan de enquêtevragen niet laden. Vernieuw de pagina of probeer het later opnieuw.',
+        'response_saved' => 'Enquêteantwoord opgeslagen.',
+        'verification_sent' => 'Verificatiecode is naar uw e-mail verzonden.',
+        'cooldown_wait' => 'Wacht een paar seconden en probeer het opnieuw.',
+        'token_not_found' => 'Token niet gevonden. Probeer de enquête opnieuw te voltooien.',
+        'network_error' => 'Netwerkfout. Probeer het opnieuw.',
+        'pin_instruction' => 'Er is een pincode naar het opgegeven e-mailadres gestuurd. Voer deze in om eigendom te bevestigen.',
+        'pin_attempts_left' => '{used} van {total} pogingen over',
+        'pin_container_aria' => 'PIN-codeverificatie',
+        'pin_group_aria' => '4-cijferige PIN-code',
+    ],
+
+    'lead' => [
+        'title' => 'Laat uw contactgegevens achter om:',
+        'bullet_discount' => 'een levenslange korting van 20% te krijgen',
+        'bullet_access' => 'vroege toegang tot het systeem te krijgen',
+        'bullet_influence' => 'invloed te hebben op de productroutekaart',
+        'expectation' => 'Dit is de laatste stap: daarna is de enquête voltooid. We hebben alleen uw gegevens nodig om contact met u op te nemen.',
+        'field_name' => 'Uw naam',
+        'field_business_name' => 'Bedrijfsnaam',
+        'field_email' => 'E-mail',
+        'field_email_required_sr' => '(verplicht)',
+        'field_phone' => 'Telefoon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 of wa.me/...',
+        'placeholder_telegram' => "{'@'}gebruikersnaam",
+    ],
+
+    'success' => [
+        'title' => 'Bedankt. Ik neem persoonlijk contact met u op wanneer het systeem klaar is.',
+        'body' => "U ontvangt een uitnodiging voor een sandbox-versie,\nwaar u het systeem in de praktijk kunt testen en kunt bepalen hoe het zich ontwikkelt. Dit helpt ons het product aan te passen aan echte bedrijfsprocessen.",
+        'reassurance' => 'We zijn niet van plan bulkmail te versturen — alleen een persoonlijk bericht met updates.',
+        'update_hint' => "Als uw processen veranderen of u nieuwe taken krijgt —\nkunt u uw antwoorden bijwerken via de link die naar uw e-mail is gestuurd.",
+        'home_link' => 'Terug naar startpagina',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Bedankt voor het invullen van de vragenlijst!',
+        'subtitle' => 'Uw deelname is een belangrijke bijdrage in de vroege ontwikkelingsfase.',
+        'image_alt' => 'Het antwoord is opgeslagen in de database',
+        'email_label' => 'E-mail:',
+        'sent_label' => 'Verzonden:',
+        'reset_button' => 'Antwoorden bijwerken',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, bedankt voor uw antwoorden',
+        'subject_default' => 'Bedankt voor uw antwoorden',
+        'header_tagline' => 'Realtime HACCP-conformiteitssysteem',
+        'title' => 'Bedankt voor uw deelname — uw toegang en 20% korting',
+        'greeting_with_name' => 'Hallo, :name!',
+        'greeting_default' => 'Hallo!',
+        'thank_you' => 'Bedankt dat u de tijd heeft genomen om de vragenlijst in te vullen.',
+        'value_note' => 'Uw antwoorden zijn echt waardevol — ze bepalen direct het product.',
+        'registered_as' => 'U bent geregistreerd als vroege toegangsdeelnemer',
+        'discount_label' => '–20% levenslange korting',
+        'discount_code_label' => 'Uw code:',
+        'description_line1' => 'Het systeem is momenteel in ontwikkeling.',
+        'description_line2' => 'Ik analyseer antwoorden van bedrijfseigenaren en verfijn de functionaliteit voor praktijkomgevingen.',
+        'description_line3' => 'Het belangrijkste doel is dat het systeem u helpt inspecties met vertrouwen te doorstaan — niet alleen registraties bijhouden.',
+        'benefits_title' => 'Wat u krijgt:',
+        'benefit_1' => 'Realtime actietracking',
+        'benefit_2' => 'Transparante geschiedenis voor inspecties',
+        'benefit_3' => 'Controle zonder extra werklast',
+        'cta_button' => 'Ga naar de website',
+        'footer_updates' => 'Ik zal periodiek ontwikkelingsupdates delen en u uitnodigen om nieuwe functies te testen.',
+        'footer_feedback' => 'Uw feedback en ideeën helpen het systeem nuttiger te maken in de praktijk.',
+        'footer_reply' => 'Als u al gedachten of vereisten heeft — antwoord dan eenvoudig op deze e-mail.',
+        'footer_signature' => 'Met vriendelijke groet, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Uw verificatiecode voor HACCPilot',
+        'header_tagline' => 'Beveiligingsbevestiging voor wijziging van de vragenlijst',
+        'title' => 'Bevestig het wijzigen van uw antwoorden',
+        'description' => 'U heeft verzocht uw antwoorden in de HACCPilot-vragenlijst te wijzigen.',
+        'instruction' => 'Voer ter bevestiging de onderstaande code in:',
+        'code_expiry' => 'De code is slechts beperkt geldig',
+        'not_you' => 'Als u dit niet was — negeer deze e-mail eenvoudig.',
+        'data_safe' => 'Uw gegevens blijven ongewijzigd.',
+        'cta_button' => 'Terug naar wijziging',
+        'footer_auto' => 'Dit is een automatisch bericht van het HACCPilot-systeem.',
+        'footer_purpose' => 'De code wordt alleen gebruikt om gegevenswijzigingen te bevestigen.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Uw antwoorden op de vragenlijst zijn bijgewerkt',
+        'header_tagline' => 'Bevestiging van gegevenswijziging van de vragenlijst',
+        'title' => 'Uw gegevens zijn succesvol bijgewerkt!',
+        'greeting_with_name' => 'Hallo, :name!',
+        'greeting_default' => 'Hallo!',
+        'thank_you' => 'Bedankt voor het bijwerken van uw antwoorden op de vragenlijst.',
+        'status_label' => 'Uw vragenlijststatus:',
+        'status_value' => 'Bijgewerkt en bevestigd',
+        'status_note' => 'Alle wijzigingen zijn opgeslagen en worden gebruikt om het HACCPilot-systeem te personaliseren.',
+        'footer_auto' => 'Dit is een automatische melding van het HACCPilot-systeem.',
+        'footer_data_use' => 'Uw gegevens worden alleen gebruikt om de nauwkeurigheid en personalisatie van het systeem te verbeteren.',
+        'footer_signature' => 'Met vriendelijke groet, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'De link is ongeldig of verlopen. Probeer de vragenlijst opnieuw in te vullen.',
+        'attempts_exhausted' => 'Verificatie mislukt. Vul de vragenlijst opnieuw in.',
+        'code_invalid' => 'Ongeldige code. Probeer het opnieuw.',
+        'success' => 'Antwoorden op de vragenlijst succesvol bijgewerkt.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Wat voor soort bedrijf runt u?',
+            'options' => [
+                'cafe' => 'Café / koffiebar',
+                'bakery' => 'Bakkerij / broodproductie',
+                'meat' => 'Vleesproductie / slagerij',
+                'kitchen' => 'Keuken / voedselproductie',
+                'other' => 'Overig',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Hoeveel mensen werken er bij u?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'In welk land bent u actief?',
+            'field_caption' => 'Kies een land uit de lijst',
+        ],
+        '4' => [
+            'question_text' => 'Hoe beheert u HACCP vandaag?',
+            'options' => [
+                'paper' => 'Papieren registraties',
+                'excel' => 'Excel / Google Sheets',
+                'software' => 'Wij gebruiken onze eigen software',
+                'partial' => 'Gedeeltelijk gedocumenteerd / geen echt systeem',
+                'other' => 'Overig',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Gebruikt u betaalde HACCP-oplossingen?',
+            'options' => [
+                'yes' => 'Ja',
+                'nb' => 'Nee',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Hoe tevreden bent u met uw huidige aanpak?',
+            'options' => [
+                'fully' => 'Volledig tevreden',
+                'partially_ok' => 'Gedeeltelijk tevreden',
+                'rather_not' => 'Eerder ontevreden',
+                'not_at_all' => 'Helemaal niet tevreden',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Zou u overwegen over te stappen naar een handiger systeem?',
+            'options' => [
+                'yes' => 'Ja',
+                'maybe' => 'Misschien',
+                'nb' => 'Nee',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Wie in uw bedrijf is in de praktijk verantwoordelijk voor HACCP?',
+            'options' => [
+                'self' => 'Ik ben persoonlijk verantwoordelijk',
+                'manager' => 'Manager / beheerder',
+                'staff' => 'Aangewezen personeel',
+                'none' => 'Niemand houdt hier formeel toezicht op',
+                'other' => 'Overig',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Hoe vaak vergeten medewerkers taken te voltooien of te registreren?',
+            'options' => [
+                'often' => 'Vaak',
+                'sometimes' => 'Soms',
+                'rarely' => 'Zelden',
+                'almost_never' => 'Bijna nooit',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Worden registraties soms achteraf ingevuld?',
+            'options' => [
+                'often' => 'Ja, vaak',
+                'sometimes' => 'Soms',
+                'rarely' => 'Zelden',
+                'never' => 'Nooit',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Wat is voor u het moeilijkste aan HACCP bijhouden?',
+            'subtitle' => 'U kunt meerdere antwoorden selecteren.',
+            'options' => [
+                'records' => 'Registraties en documentatie bijhouden',
+                'staff_control' => 'Toezicht houden op wat personeel daadwerkelijk doet',
+                'realtime' => 'Procedures in realtime volgen',
+                'inspections' => 'Voorbereiden op inspecties',
+                'training' => 'Training en discipline van personeel',
+                'chaos' => 'Geen enkel systeem / chaotische processen',
+                'other' => 'Overig',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Heeft u het afgelopen jaar inspecties gehad?',
+            'options' => [
+                'yes' => 'Ja',
+                'nb' => 'Nee',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Wat veroorzaakt de meeste stress tijdens een inspectie?',
+            'options' => [
+                'docs' => 'Documentatie',
+                'staff' => 'Gedrag van personeel',
+                'missing_records' => 'Ontbrekende registraties',
+                'overall' => 'Alles in het algemeen',
+                'other' => 'Overig',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Hoe belangrijk is het om voorbereid te zijn op een onaangekondigde inspectie?',
+            'options' => [
+                'very' => 'Zeer belangrijk',
+                'rather' => 'Vrij belangrijk',
+                'not_thought' => 'Niet echt over nagedacht',
+                'not_important' => 'Niet belangrijk',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Hoe belangrijk is het voor u om een systeem te hebben dat medewerkersacties vastlegt op het moment dat ze plaatsvinden (niet achteraf)?',
+            'options' => [
+                'very' => 'Zeer belangrijk',
+                'rather' => 'Vrij belangrijk',
+                'unsure' => 'Niet zeker',
+                'not_important' => 'Niet belangrijk',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Welke van deze functies zouden echt nuttig zijn in uw werk?',
+            'subtitle' => 'U kunt meerdere antwoorden selecteren.',
+            'other_detail_field_label' => 'Vertel wat voor u belangrijk is',
+            'group_headings' => [
+                'safety' => 'Controle en veiligheid',
+                'inspection' => 'Werken met inspecties',
+                'staff' => 'Gebruiksgemak voor personeel',
+                'automation' => 'Automatisering',
+                'more' => 'Aanvullend',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Meldingen wanneer de temperatuur buiten bereik komt',
+                'capture_at_moment' => 'Gegevens vastleggen op het moment van de taak (niet achteraf invullen)',
+                'two_person_confirm' => 'Twee-persoons bevestiging van een taak',
+                'reports_qr_link' => 'Snelle toegang tot rapporten voor inspecties (QR / link)',
+                'photo_proof' => 'Foto’s als bewijs dat een taak is uitgevoerd',
+                'full_action_history' => 'Volledige geschiedenis van medewerkersacties',
+                'offline_mobile' => 'Werkt offline op een telefoon',
+                'voice_input' => 'Spraakinvoer',
+                'biz_templates' => 'Eenvoudige kant-en-klare sjablonen per bedrijfstype',
+                'bluetooth_temp' => 'Automatische temperatuurregistratie (Bluetooth-sensoren)',
+                'risk_warnings' => 'Risico-inschatting en vroege waarschuwingen',
+                'loss_on_violations' => 'Schade inschatten bij overtredingen',
+                'internal_staff_tasks' => 'Interne takenlijsten voor personeel',
+                'push_reminders' => 'Push-herinneringen voor personeel',
+                'other' => 'Overig (vertel wat voor u belangrijk is)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Als het systeem één groot probleem voor u zou kunnen oplossen, wat zou dat zijn?',
+            'field_caption' => 'Uw antwoord',
+        ],
+    ],
+];

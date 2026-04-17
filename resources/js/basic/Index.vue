@@ -2,13 +2,17 @@
     <n-message-provider placement="top">
         <div class="app-wrapper">
             <Header />
+            <!-- Глобальный баннер уведомления о задаче охлаждения зерна (AI) -->
             <GrainCoolingNotificationBanner />
             <main
                 class="main-content"
                 :class="{ 'main-content--bg-style-white': isAboutRoute }"
             >
                 <router-view />
+                <Footer />
             </main>
+            <!-- Модальный оверлей согласия с политикой конфиденциальности (показывается один раз) -->
+            <ConsentOverlay />
         </div>
     </n-message-provider>
 </template>
@@ -17,6 +21,8 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import Header from "../components/client/header/Header.vue";
+import Footer from "../components/client/footer/Footer.vue";
+import ConsentOverlay from "../components/client/consent/ConsentOverlay.vue";
 import GrainCoolingNotificationBanner from "@/features/demo/task_grain_cooling/GrainCoolingNotificationBanner.vue";
 
 defineOptions({

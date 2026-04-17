@@ -45,7 +45,7 @@ export function useGrainCoolingShowTaskModalBridge({
         },
     );
 
-    async function onOpenPending(item, source = "неизвестно") {
+    async function onOpenPending(item, source = "unknown") {
         await openShowTaskModalPendingDrawer({
             getTask: getTaskResolved,
             item,

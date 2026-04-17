@@ -1,4 +1,5 @@
 import { reactive } from "vue";
+import { SS_TASK_GRAIN_COOLING } from "@/config/storageNames";
 
 /**
  * Контракт полей `task.aiContext` для демо temperature-v1.
@@ -44,8 +45,8 @@ export const task_grain_cooling = reactive({
     id: "coffee-2",
     /** Ключ ниши в демо-state: `coffee` | `bakery` | `meat`. */
     niche: "coffee",
-    /** Название задачи как в `task.title` демо-данных (карточка, модалка, согласованность с сидом). */
-    taskTitle: "Охлаждение зерна",
+    /** i18n-ключ названия задачи (используется в `task.title` через `t()` в компонентах). */
+    taskTitleKey: "demo_ai.grain_cooling.task_title",
     /**
      * Индекс элемента в массиве `measurements` целевой задачи.
      * В файле изначально `null`; при старте сценария сюда мутируется индекс первого `pending` (`lockGrainCoolingMeasurementIndex`).
@@ -61,16 +62,16 @@ export const task_grain_cooling = reactive({
      * После смены числа на проде нужен новый фронт-бандл; на телефоне сбросьте кэш Safari/Chrome, иначе возможен старый чанк с прежней константой.
      */
     measurementProblemDelayMs: 300000,
-    /** Первая строка текста в глобальном оповещении (подзаголовок-сигнал). */
-    toastTitle: "Время выполнить задачу",
-    /** Вторая строка в оповещении — отображаемое имя задачи (как правило = `taskTitle`). */
-    toastTaskName: "Охлаждение зерна",
-    /** Подпись кнопки закрытия оповещения без перехода к задаче. */
-    toastButtonCloseLabel: "Закрыть",
-    /** Подпись кнопки перехода на демо-страницу в секцию чек-листов. */
-    toastButtonNavigateLabel: "Перейти к задаче",
+    /** i18n-ключ первой строки оповещения. */
+    toastTitleKey: "demo_ai.grain_cooling.toast_title",
+    /** i18n-ключ имени задачи в оповещении. */
+    toastTaskNameKey: "demo_ai.grain_cooling.task_title",
+    /** i18n-ключ кнопки закрытия оповещения. */
+    toastButtonCloseLabelKey: "demo_ai.grain_cooling.toast_button_close",
+    /** i18n-ключ кнопки перехода к задаче. */
+    toastButtonNavigateLabelKey: "demo_ai.grain_cooling.toast_button_navigate",
     /** Ключ `sessionStorage` для персиста «глобальное оповещение уже показывали в этой вкладке». */
-    sessionStorageKey: "task_grain_cooling",
+    sessionStorageKey: SS_TASK_GRAIN_COOLING,
     /**
      * Для тестов - sessionStorageKey - true
      * В продакшене держать `false`.

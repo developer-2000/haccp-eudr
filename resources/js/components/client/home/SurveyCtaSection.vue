@@ -84,7 +84,7 @@ function goToSurvey() {
     box-shadow: $shadow-lg, $shadow-sm-md;
 
     @media (max-width: $breakpoint-sm) {
-        width: 100%;
+        font-size: 13px;
     }
 }
 </style>

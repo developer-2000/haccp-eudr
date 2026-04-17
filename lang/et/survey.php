@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Aita meil luua süsteem, mis eemaldab HACCP vastavuse valu',
+        'subtitle' => 'Lühike küsitlus — umbes 5 minutit. Sinu vastused aitavad meil muuta süsteemi päris tööprotsesside ja kontrollide jaoks sobivaks.',
+        'trust' => 'Sinu vastuseid kasutatakse ainult analüüsiks ja neid ei jagata kolmandate osapooltega.',
+        'start' => 'Alusta',
+    ],
+
+    'nav' => [
+        'back' => 'Tagasi',
+        'back_aria' => 'Mine eelmise sammu juurde tagasi',
+    ],
+
+    'progress' => [
+        'aria' => 'Küsitlus: samm :current / :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Palun sisesta oma e-post — see väli on kohustuslik.',
+        'email_invalid' => 'Palun sisesta kehtiv e-posti aadress.',
+    ],
+
+    'ui' => [
+        'next' => 'Edasi',
+        'next_disabled_aria' => 'Edasi — vasta esmalt küsimusele',
+        'other_default_label' => 'Palun täpsusta',
+        'other_aria_prefix' => 'Lisadetail sinu vastusele:',
+        'select_placeholder' => 'Vali valik',
+        'country_clear' => 'Eemalda valitud riik',
+        'country_search' => 'Otsi riigi nime järgi',
+        'country_search_placeholder' => 'Otsi…',
+        'submit' => 'Saada',
+        'submit_sending' => 'Saatmine...',
+        'submit_failed' => 'Küsitluse andmete saatmine ebaõnnestus. Palun proovi uuesti.',
+        'questions_load_error' => 'Küsitluse küsimusi ei õnnestunud laadida. Palun värskenda lehte või proovi hiljem uuesti.',
+        'response_saved' => 'Küsitluse vastus salvestatud.',
+        'verification_sent' => 'Kinnituskood saadeti sinu e-postile.',
+        'cooldown_wait' => 'Palun oota paar sekundit ja proovi uuesti.',
+        'token_not_found' => 'Tunnust ei leitud. Palun proovi küsitlus uuesti täita.',
+        'network_error' => 'Võrgu viga. Palun proovi uuesti.',
+        'pin_instruction' => 'PIN-kood saadeti määratud e-posti aadressile. Sisesta see kinnitamiseks.',
+        'pin_attempts_left' => '{used} / {total} katset alles',
+        'pin_container_aria' => 'PIN-koodi kinnitamine',
+        'pin_group_aria' => '4-kohaline PIN-kood',
+    ],
+
+    'lead' => [
+        'title' => 'Jäta oma kontaktandmed, et:',
+        'bullet_discount' => 'saada eluaegne 20% allahindlus',
+        'bullet_access' => 'saada varajane ligipääs süsteemile',
+        'bullet_influence' => 'mõjutada toote arendussuunda',
+        'expectation' => 'See on viimane samm: pärast seda küsitlus lõpeb. Vajame ainult sinu andmeid, et sinuga ühendust võtta.',
+        'field_name' => 'Sinu nimi',
+        'field_business_name' => 'Ettevõtte nimi',
+        'field_email' => 'E-post',
+        'field_email_required_sr' => '(kohustuslik)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 või wa.me/...',
+        'placeholder_telegram' => "{'@'}kasutajanimi",
+    ],
+
+    'success' => [
+        'title' => 'Aitäh. Võtan sinuga isiklikult ühendust, kui süsteem on valmis.',
+        'body' => "Sa saad kutse testkeskkonda,\nkus saad süsteemi praktiliselt proovida ja selle arengut kujundada. See aitab meil kohandada toodet päris äriprotsessidele.",
+        'reassurance' => 'Me ei plaani masspostitusi — ainult isiklikud uuendused.',
+        'update_hint' => "Kui sinu protsessid muutuvad või lisanduvad uued ülesanded —\nsaad oma vastuseid uuendada e-kirjaga saadetud lingi kaudu.",
+        'home_link' => 'Tagasi avalehele',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Aitäh küsimustiku täitmise eest!',
+        'subtitle' => 'Sinu panus on oluline osa arenduse varasest etapist.',
+        'image_alt' => 'Vastus on andmebaasi salvestatud',
+        'email_label' => 'E-post:',
+        'sent_label' => 'Saadetud:',
+        'reset_button' => 'Uuenda vastuseid',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, aitäh sinu vastuste eest',
+        'subject_default' => 'Aitäh sinu vastuste eest',
+        'header_tagline' => 'Reaalajas HACCP vastavussüsteem',
+        'title' => 'Aitäh osalemise eest — sinu ligipääs ja 20% allahindlus',
+        'greeting_with_name' => 'Tere, :name!',
+        'greeting_default' => 'Tere!',
+        'thank_you' => 'Aitäh, et võtsid aega küsitluse täitmiseks.',
+        'value_note' => 'Sinu vastused on tõesti väärtuslikud — need kujundavad otseselt toodet.',
+        'registered_as' => 'Sa oled registreeritud varajase ligipääsu osalejana',
+        'discount_label' => '–20% eluaegne allahindlus',
+        'discount_code_label' => 'Sinu kood:',
+        'description_line1' => 'Süsteem on hetkel arenduses.',
+        'description_line2' => 'Analüüsin ettevõtete omanike vastuseid ja täiustan funktsionaalsust reaalsete tööprotsesside jaoks.',
+        'description_line3' => 'Peamine eesmärk on, et süsteem aitaks sul kontrollid enesekindlalt läbida — mitte lihtsalt andmeid talletada.',
+        'benefits_title' => 'Mida sa saad:',
+        'benefit_1' => 'Reaalajas tegevuste jälgimine',
+        'benefit_2' => 'Läbipaistev ajalugu kontrollide jaoks',
+        'benefit_3' => 'Kontroll ilma lisatööta',
+        'cta_button' => 'Mine veebilehele',
+        'footer_updates' => 'Jagan aeg-ajalt arenduse uuendusi ja kutsun sind uusi funktsioone testima.',
+        'footer_feedback' => 'Sinu tagasiside ja ideed aitavad muuta süsteemi praktilisemaks.',
+        'footer_reply' => 'Kui sul on juba mõtteid või nõudeid — vasta lihtsalt sellele e-kirjale.',
+        'footer_signature' => 'Parimate soovidega, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Sinu kinnituskood HACCPilotile',
+        'header_tagline' => 'Turvakinnitus küsitluse uuendamiseks',
+        'title' => 'Kinnita oma vastuste uuendamine',
+        'description' => 'Sa soovisid oma vastuseid HACCPilot küsitluses uuendada.',
+        'instruction' => 'Kinnitamiseks sisesta allolev kood:',
+        'code_expiry' => 'Kood kehtib piiratud aja',
+        'not_you' => 'Kui see ei olnud sina — ignoreeri seda e-kirja.',
+        'data_safe' => 'Sinu andmed jäävad muutmata.',
+        'cta_button' => 'Tagasi uuendama',
+        'footer_auto' => 'See on automaatne sõnum HACCPilot süsteemist.',
+        'footer_purpose' => 'Koodi kasutatakse ainult andmete muutmise kinnitamiseks.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Teie küsitluse vastused on uuendatud',
+        'header_tagline' => 'Küsitluse andmete uuendamise kinnitus',
+        'title' => 'Teie andmed on edukalt uuendatud!',
+        'greeting_with_name' => 'Tere, :name!',
+        'greeting_default' => 'Tere!',
+        'thank_you' => 'Täname, et uuendasite oma küsitluse vastuseid.',
+        'status_label' => 'Teie küsitluse staatus:',
+        'status_value' => 'Uuendatud ja kinnitatud',
+        'status_note' => 'Kõik muudatused on salvestatud ja neid kasutatakse HACCPiloti süsteemi kohandamiseks.',
+        'footer_auto' => 'See on automaatne teade HACCPiloti süsteemist.',
+        'footer_data_use' => 'Teie andmeid kasutatakse ainult süsteemi täpsuse ja isikupärastamise parandamiseks.',
+        'footer_signature' => 'Parimate soovidega, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Link on kehtetu või aegunud. Palun proovige küsitlus uuesti läbida.',
+        'attempts_exhausted' => 'Kinnitamine ebaõnnestus. Palun täitke küsitlus uuesti.',
+        'code_invalid' => 'Vale kood. Palun proovige uuesti.',
+        'success' => 'Küsitluse vastused on edukalt uuendatud.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Mis tüüpi ettevõtet te juhite?',
+            'options' => [
+                'cafe' => 'Kohvik / kohvik-baar',
+                'bakery' => 'Pagariäri / leivatootmine',
+                'meat' => 'Lihatootmine / lihapood',
+                'kitchen' => 'Köök / toidutootmine',
+                'other' => 'Muu',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Mitu inimest teie juures töötab?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Millises riigis te tegutsete?',
+            'field_caption' => 'Valige riik loendist',
+        ],
+        '4' => [
+            'question_text' => 'Kuidas te täna HACCP-d haldate?',
+            'options' => [
+                'paper' => 'Paberil arvestus',
+                'excel' => 'Excel / Google Sheets',
+                'software' => 'Kasutame oma tarkvara',
+                'partial' => 'Osaliselt dokumenteeritud / puudub reaalne süsteem',
+                'other' => 'Muu',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Kas kasutate tasulisi HACCP lahendusi?',
+            'options' => [
+                'yes' => 'Jah',
+                'nb' => 'Ei',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Kui rahul olete oma praeguse lähenemisega?',
+            'options' => [
+                'fully' => 'Täiesti rahul',
+                'partially_ok' => 'Pigem rahul',
+                'rather_not' => 'Pigem rahulolematu',
+                'not_at_all' => 'Ei ole rahul',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Kas kaaluksite üleminekut mugavamale süsteemile?',
+            'options' => [
+                'yes' => 'Jah',
+                'maybe' => 'Võib-olla',
+                'nb' => 'Ei',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Kes teie ettevõttes vastutab HACCP eest praktikas?',
+            'options' => [
+                'self' => 'Ma vastutan isiklikult',
+                'manager' => 'Juhataja / administraator',
+                'staff' => 'Määratud töötajad',
+                'none' => 'Keegi ei jälgi seda ametlikult',
+                'other' => 'Muu',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Kui tihti unustavad töötajad ülesandeid täita või kirja panna?',
+            'options' => [
+                'often' => 'Tihti',
+                'sometimes' => 'Vahel',
+                'rarely' => 'Harva',
+                'almost_never' => 'Peaaegu mitte kunagi',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Kas andmeid täidetakse kunagi tagantjärele?',
+            'options' => [
+                'often' => 'Jah, tihti',
+                'sometimes' => 'Vahel',
+                'rarely' => 'Harva',
+                'never' => 'Mitte kunagi',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Mis on teie jaoks HACCP järgimise juures kõige raskem?',
+            'subtitle' => 'Saate valida mitu vastust.',
+            'options' => [
+                'records' => 'Arvestuse ja dokumentatsiooni pidamine',
+                'staff_control' => 'Töötajate tegeliku tegevuse kontroll',
+                'realtime' => 'Reaalajas protsesside järgimine',
+                'inspections' => 'Ettevalmistus kontrollideks',
+                'training' => 'Koolitus ja distsipliin',
+                'chaos' => 'Ühtse süsteemi puudumine / kaootilised protsessid',
+                'other' => 'Muu',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Kas teil on olnud kontrolle viimase aasta jooksul?',
+            'options' => [
+                'yes' => 'Jah',
+                'nb' => 'Ei',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Mis tekitab kontrolli ajal kõige rohkem stressi?',
+            'options' => [
+                'docs' => 'Dokumentatsioon',
+                'staff' => 'Töötajate käitumine',
+                'missing_records' => 'Puuduvad kirjed',
+                'overall' => 'Kõik kokku',
+                'other' => 'Muu',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Kui oluline on olla valmis etteteatamata kontrolliks?',
+            'options' => [
+                'very' => 'Väga oluline',
+                'rather' => 'Üsna oluline',
+                'not_thought' => 'Pole sellele mõelnud',
+                'not_important' => 'Ei ole oluline',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Kui oluline on teie jaoks süsteem, mis fikseerib töötajate tegevused reaalajas (mitte tagantjärele)?',
+            'options' => [
+                'very' => 'Väga oluline',
+                'rather' => 'Üsna oluline',
+                'unsure' => 'Ei ole kindel',
+                'not_important' => 'Ei ole oluline',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Millised neist võimalustest oleksid teie töös tõeliselt kasulikud?',
+            'subtitle' => 'Saate valida mitu vastust.',
+            'other_detail_field_label' => 'Kirjutage, mis on teie jaoks oluline',
+            'group_headings' => [
+                'safety' => 'Kontroll ja ohutus',
+                'inspection' => 'Töö kontrollidega',
+                'staff' => 'Töötajate mugavus',
+                'automation' => 'Automatiseerimine',
+                'more' => 'Lisavõimalused',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Hoiatused temperatuuri väljumisel normist',
+                'capture_at_moment' => 'Andmete kogumine hetkel (ilma tagantjärele sisestamiseta)',
+                'two_person_confirm' => 'Kahe inimese kinnitus ülesandele',
+                'reports_qr_link' => 'Kiire ligipääs aruannetele (QR / link)',
+                'photo_proof' => 'Fotod ülesande täitmise tõendina',
+                'full_action_history' => 'Töötajate tegevuste täielik ajalugu',
+                'offline_mobile' => 'Töötab telefonis võrguühenduseta',
+                'voice_input' => 'Häälsisestus',
+                'biz_templates' => 'Lihtsad valmis mallid ettevõtte tüübi järgi',
+                'bluetooth_temp' => 'Automaatne temperatuuri logimine (Bluetooth andurid)',
+                'risk_warnings' => 'Riskianalüüs ja varajased hoiatused',
+                'loss_on_violations' => 'Kahjude hinnang reeglite rikkumisel',
+                'internal_staff_tasks' => 'Sisemised ülesanded töötajatele',
+                'push_reminders' => 'Töötajate meeldetuletused',
+                'other' => 'Muu (kirjutage, mis on oluline)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Kui süsteem lahendaks teie jaoks ühe peamise probleemi, mis see oleks?',
+            'field_caption' => 'Teie vastus',
+        ],
+    ],
+];

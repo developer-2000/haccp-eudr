@@ -2,15 +2,16 @@
 
 return [
     'hero' => [
-        'title_line1' => 'Fii pregătit pentru Inspecție Oricând',
+        'title_line1' => 'Software HACCP pentru conformitate în timp real cu siguranța alimentară',
         'description_prefix' => 'Sistem HACCP în timp real conceput',
+        'tell_about_business' => 'Spune-ne despre afacerea ta',
         'description_emphasis' => ' pentru bucătării, brutării și producția alimentară.',
         'view_demo' => 'Vezi demo',
         'devices_alt' => 'Dispozitive',
     ],
     'metrics' => [
         'profit' => [
-            'title' => 'Profit',
+            'title' => 'Eficiență a costurilor',
             'line1' => [
                 'word' => 'Concurenți → ',
                 'value' => '€99+ /lună',
@@ -22,7 +23,7 @@ return [
             'right' => '€600/an',
         ],
         'inspection' => [
-            'title' => 'Inspecție 100%',
+            'title' => 'Pregătire pentru inspecții',
             'line1' => [
                 'word' => 'Scanează QR → ',
                 'value' => 'Vede TOTUL',
@@ -33,7 +34,7 @@ return [
             ],
         ],
         'time' => [
-            'title' => '+2h libere pe zi',
+            'title' => 'Monitorizare HACCP în timp real',
             'line1' => [
                 'word' => 'Telefon → ',
                 'value' => '2 min/listă de verificare',
@@ -57,7 +58,7 @@ return [
     ],
     'niches' => [
         'coffee' => [
-            'title' => 'CAFEA',
+            'title' => 'HACCP pentru prăjitorii de cafea',
             'subtitle' => 'Prăjitorie',
             'points' => [
                 'roaster_195C' => 'Prăjitor 195°C',
@@ -68,7 +69,7 @@ return [
             'cta' => 'DEMO',
         ],
         'bakery' => [
-            'title' => 'BRUTĂRIE',
+            'title' => 'HACCP pentru brutării',
             'subtitle' => 'Artizanală',
             'points' => [
                 'dough_26C' => 'Aluat 26°C',
@@ -79,7 +80,7 @@ return [
             'cta' => 'DEMO',
         ],
         'meat' => [
-            'title' => 'CARNE',
+            'title' => 'HACCP pentru procesarea cărnii',
             'subtitle' => 'Măcelar',
             'points' => [
                 'frozen_minus18C' => '-18°C congelat',

@@ -1,6 +1,96 @@
 @use "variables" as *;
 
 // ============================================
+// Локальные шрифты (см. public/fonts/{rubik,inter}/)
+// ============================================
+
+@font-face {
+    font-family: "Rubik";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-300.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Rubik";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Rubik";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-500.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Rubik";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-600.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Rubik";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-700.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Rubik";
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-800.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("../fonts/inter/inter-v20-cyrillic_latin-300.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/inter/inter-v20-cyrillic_latin-regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../fonts/inter/inter-v20-cyrillic_latin-500.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../fonts/inter/inter-v20-cyrillic_latin-600.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/inter/inter-v20-cyrillic_latin-700.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url("../fonts/inter/inter-v20-cyrillic_latin-800.woff2") format("woff2");
+}
+
+// ============================================
 // Base Styles
 // ============================================
 
@@ -16,7 +106,7 @@ body {
 
 * {
     box-sizing: border-box;
-    font-family: $font-family-rubik !important;
+    font-family: $font-family-rubik;
     margin: 0;
     padding: 0;
 }
@@ -110,7 +200,6 @@ a {
 
 p {
     font-size: $font-size-lg;
-    color: $text-light-grey;
 }
 
 button {
@@ -134,6 +223,36 @@ button:focus-visible,
 a.n-button:hover,
 a.n-button:focus-visible {
     text-decoration: none;
+}
+// close in modal button (наивно повышаем специфичность — Naive UI использует inline CSS vars)
+body .n-base-close {
+    font-size: 23px !important;
+    transition: color $transition-base;
+    outline: none !important;
+
+    &::before {
+        width: 28px !important;
+        height: 28px !important;
+        background-color: transparent !important;
+    }
+
+    &:focus,
+    &:focus-visible,
+    &:focus:not(:hover) {
+        &::before {
+            background-color: transparent !important;
+        }
+    }
+
+    &:not(.n-base-close--disabled) {
+        &:hover {
+            color: $text-red !important;
+
+            &::before {
+                background-color: $bg-error_color !important;
+            }
+        }
+    }
 }
 
 .vue-greeting {
@@ -317,5 +436,26 @@ input.n-base-selection-input {
         display: flex;
         justify-content: flex-end;
         gap: $spacing-sm;
+    }
+}
+
+.point-dot-shadow{
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-full;
+    background-color: $text-light-grey;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
     }
 }

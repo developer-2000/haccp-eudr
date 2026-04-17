@@ -1,8 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
+import { i18n } from "@/i18n";
 import {
     TASK_FIELD_TYPE,
     TASK_FIELD_TYPE_OPTIONS,
 } from "@/config/tasks";
+
+const tt = (...args) => i18n.global.t(...args);
 
 export { TASK_FIELD_TYPE, TASK_FIELD_TYPE_OPTIONS };
 
@@ -55,7 +58,7 @@ const normalizeConfig = (fieldType, raw) => {
     switch (fieldType) {
         case TASK_FIELD_TYPE.TEMPERATURE: {
             const base = {
-                label: strOrEmpty(r.label) || "Температура",
+                label: strOrEmpty(r.label) || tt('demo.task_field_summary.temperature_default'),
                 minC: numOrNull(r.minC),
                 maxC: numOrNull(r.maxC),
             };
@@ -138,11 +141,11 @@ export const formatTaskFieldSummaryLine = (def) => {
     switch (def.fieldType) {
         case TASK_FIELD_TYPE.TEMPERATURE:
             // Одна строка: измеряемая величина + CCP. Где меряем — в строке оборудования/помещений выше, не дублируем `config.label`.
-            return `Температура (${c.minC ?? "—"}…${c.maxC ?? "—"} °C)`;
+            return tt('demo.task_field_summary.temperature_line', { min: c.minC ?? "—", max: c.maxC ?? "—" });
         case TASK_FIELD_TYPE.SINGLE_CHOICE:
-            return `Один ответ: ${c.question || "—"}, вариантов: ${Array.isArray(c.options) ? c.options.length : 0}`;
+            return tt('demo.task_field_summary.single_choice_line', { question: c.question || "—", count: Array.isArray(c.options) ? c.options.length : 0 });
         case TASK_FIELD_TYPE.TICKET:
-            return `Заявка: ${c.description || "без описания"}`;
+            return tt('demo.task_field_summary.ticket_line', { description: c.description || tt('demo.task_field_summary.ticket_no_desc') });
         default:
             return def.fieldType;
     }

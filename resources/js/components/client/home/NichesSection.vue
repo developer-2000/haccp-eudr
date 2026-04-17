@@ -203,6 +203,7 @@ const niches = [
         font-weight: 700;
         color: $text-logo;
         letter-spacing: 0.02em;
+        line-height: 24px;
     }
 
     .niche-card__subtitle {

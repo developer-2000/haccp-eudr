@@ -1,7 +1,7 @@
 <template>
     <section class="advantages-section">
         <div class="container">
-            <h2 class="advantages-section__heading">WHAT YOU GET</h2>
+            <h2 class="advantages-section__heading">{{ t('how_it_work.advantages.heading') }}</h2>
             <div class="advantages-section__grid">
                 <article
                     v-for="cat in advantageCategories"
@@ -21,69 +21,75 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
 defineOptions({
     name: "AdvantagesSection",
 });
 
+const { t } = useI18n();
+
 /**
  * Категории преимуществ для предпринимателя.
+ * Реактивно обновляются при смене языка.
  */
-const advantageCategories = [
+const advantageCategories = computed(() => [
     {
         id: "setup-speed",
-        title: "🚀 30 minutes = everything ready",
+        title: t('how_it_work.advantages.cat1_title'),
         points: [
-            "Downloaded → chose niche → CCP auto",
-            "Notifications + recipes set up",
-            "System works without consultants",
+            t('how_it_work.advantages.cat1_point_1'),
+            t('how_it_work.advantages.cat1_point_2'),
+            t('how_it_work.advantages.cat1_point_3'),
         ],
     },
     {
         id: "full-control",
-        title: "🔍 Full control 24/7",
+        title: t('how_it_work.advantages.cat2_title'),
         points: [
-            "All temperatures + tasks in 1 app",
-            "Fridges/cooking/sanitation",
-            "Bluetooth auto + AI risks",
+            t('how_it_work.advantages.cat2_point_1'),
+            t('how_it_work.advantages.cat2_point_2'),
+            t('how_it_work.advantages.cat2_point_3'),
         ],
     },
     {
         id: "smart-checklist",
-        title: "📱 Checklist like Instagram",
+        title: t('how_it_work.advantages.cat3_title'),
         points: [
-            "1 click + photo/voice/GPS",
-            "Offline sync + audit trail",
-            "2 people confirm → no fraud",
+            t('how_it_work.advantages.cat3_point_1'),
+            t('how_it_work.advantages.cat3_point_2'),
+            t('how_it_work.advantages.cat3_point_3'),
         ],
     },
     {
         id: "inspector-proof",
-        title: "🔗 Inspector scans → OK",
+        title: t('how_it_work.advantages.cat4_title'),
         points: [
-            "QR → dashboard without presence",
-            "PDF in 1 click instead of 3 days of panic",
-            "€0 fines (HACCP + EUDR)",
+            t('how_it_work.advantages.cat4_point_1'),
+            t('how_it_work.advantages.cat4_point_2'),
+            t('how_it_work.advantages.cat4_point_3'),
         ],
     },
     {
         id: "pro-dashboard",
-        title: "📊 Dashboard like Apple",
+        title: t('how_it_work.advantages.cat5_title'),
         points: [
-            "All data 1 screen + cross-device",
-            "Push alerts + drag&drop widgets",
-            "Dark/Light + log search",
+            t('how_it_work.advantages.cat5_point_1'),
+            t('how_it_work.advantages.cat5_point_2'),
+            t('how_it_work.advantages.cat5_point_3'),
         ],
     },
     {
         id: "eudr-safe",
-        title: "🌍 EUDR export without risk",
+        title: t('how_it_work.advantages.cat6_title'),
         points: [
-            "QR + GPS + DDS for each batch",
-            "100% compliance → €0 fines",
-            "EU market open forever",
+            t('how_it_work.advantages.cat6_point_1'),
+            t('how_it_work.advantages.cat6_point_2'),
+            t('how_it_work.advantages.cat6_point_3'),
         ],
     },
-];
+]);
 </script>
 
 <style lang="scss" scoped>

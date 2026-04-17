@@ -5,11 +5,11 @@
                 <table class="eudr-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Продукт</th>
-                            <th>Поставщик</th>
-                            <th>Дата</th>
-                            <th>Статус</th>
+                            <th>{{ t('demo.eudr.col_id') }}</th>
+                            <th>{{ t('demo.eudr.col_product') }}</th>
+                            <th>{{ t('demo.eudr.col_supplier') }}</th>
+                            <th>{{ t('demo.eudr.col_date') }}</th>
+                            <th>{{ t('demo.eudr.col_status') }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -32,7 +32,7 @@
                                     type="info"
                                     @click="openQrModal(batch)"
                                 >
-                                    Показать QR
+                                    {{ t('demo.eudr.show_qr') }}
                                 </n-button>
                             </td>
                         </tr>
@@ -48,23 +48,23 @@
                 class="eudr-card"
             >
                 <p class="eudr-card__line">
-                    <span class="eudr-card__label">ID:</span>
+                    <span class="eudr-card__label">{{ t('demo.eudr.col_id') }}:</span>
                     {{ batch.id }}
                 </p>
                 <p class="eudr-card__line">
-                    <span class="eudr-card__label">Продукт:</span>
+                    <span class="eudr-card__label">{{ t('demo.eudr.col_product') }}:</span>
                     {{ batch.product }}
                 </p>
                 <p class="eudr-card__line">
-                    <span class="eudr-card__label">Поставщик:</span>
+                    <span class="eudr-card__label">{{ t('demo.eudr.col_supplier') }}:</span>
                     {{ batch.supplier }}
                 </p>
                 <p class="eudr-card__line">
-                    <span class="eudr-card__label">Дата:</span>
+                    <span class="eudr-card__label">{{ t('demo.eudr.col_date') }}:</span>
                     {{ batch.date }}
                 </p>
                 <p class="eudr-card__line eudr-card__line--status">
-                    <span class="eudr-card__label">Статус:</span>
+                    <span class="eudr-card__label">{{ t('demo.eudr.col_status') }}:</span>
                     <span
                         class="eudr-status"
                         :class="`eudr-status--${batch.status}`"
@@ -78,7 +78,7 @@
                         block
                         @click="openQrModal(batch)"
                     >
-                        Показать QR
+                        {{ t('demo.eudr.show_qr') }}
                     </n-button>
                 </div>
             </article>
@@ -95,9 +95,12 @@
 
 <script setup>
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import EudrQrModal from "@/features/demo/components/modals/EudrQrModal.vue";
 
 defineOptions({ name: "EudrSection" });
+
+const { t } = useI18n();
 
 const props = defineProps({
     batches: {

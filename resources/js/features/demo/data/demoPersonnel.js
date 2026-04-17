@@ -1,8 +1,8 @@
 /**
  * Дефолтные площадки и персонал для демо HACCP (без backend).
- * Должности согласованы с типовыми ролями на обжарке кофе, в пекарне и на мясопереработке
- * (обжарщик/оператор ростера, технолог, пекарь, мастер цеха, обвальщик, контроль качества и т.д.).
  */
+import { i18n } from "@/i18n";
+const tt = (...args) => i18n.global.t(...args);
 
 /**
  * Увеличивать при смене дефолтных `sites`/`staff` в коде: тогда из localStorage подтянутся новые моки,
@@ -33,7 +33,7 @@ export const DEFAULT_STAFF = [
         id: "staff-coffee-1",
         siteId: "site-coffee",
         fullName: "Morgan James",
-        role: "Старший обжарщик (оператор ростера)",
+        role: tt('demo.staff_roles.senior_roaster'),
         phone: "+31 20 555 0101",
         email: "j.morgan@demo.local",
         active: true,
@@ -42,7 +42,7 @@ export const DEFAULT_STAFF = [
         id: "staff-coffee-2",
         siteId: "site-coffee",
         fullName: "Richardson Emma",
-        role: "Технолог пищевого производства",
+        role: tt('demo.staff_roles.food_technologist'),
         phone: "+31 20 555 0102",
         email: "e.richardson@demo.local",
         active: true,
@@ -51,7 +51,7 @@ export const DEFAULT_STAFF = [
         id: "staff-coffee-3",
         siteId: "site-coffee",
         fullName: "O'Brien Michael",
-        role: "Кладовщик сырья и готовой продукции",
+        role: tt('demo.staff_roles.warehouse_keeper'),
         phone: "+31 20 555 0103",
         email: "m.obrien@demo.local",
         active: true,
@@ -60,7 +60,7 @@ export const DEFAULT_STAFF = [
         id: "staff-bakery-1",
         siteId: "site-bakery",
         fullName: "Laurent Sophie",
-        role: "Технолог хлебопекарного производства",
+        role: tt('demo.staff_roles.bakery_technologist'),
         phone: "+48 22 555 0101",
         email: "s.laurent@demo.local",
         active: true,
@@ -69,7 +69,7 @@ export const DEFAULT_STAFF = [
         id: "staff-bakery-2",
         siteId: "site-bakery",
         fullName: "Keller Thomas",
-        role: "Пекарь 6-го разряда",
+        role: tt('demo.staff_roles.baker_6th_grade'),
         phone: "+48 22 555 0102",
         email: "t.keller@demo.local",
         active: true,
@@ -78,7 +78,7 @@ export const DEFAULT_STAFF = [
         id: "staff-bakery-3",
         siteId: "site-bakery",
         fullName: "Kowalska Anna",
-        role: "Мастер смены",
+        role: tt('demo.staff_roles.shift_supervisor'),
         phone: "+48 22 555 0103",
         email: "a.kowalska@demo.local",
         active: true,
@@ -87,7 +87,7 @@ export const DEFAULT_STAFF = [
         id: "staff-meat-1",
         siteId: "site-meat",
         fullName: "Hayes David",
-        role: "Мастер мясного цеха",
+        role: tt('demo.staff_roles.meat_shop_foreman'),
         phone: "+1 614 555 0101",
         email: "d.hayes@demo.local",
         active: true,
@@ -96,7 +96,7 @@ export const DEFAULT_STAFF = [
         id: "staff-meat-2",
         siteId: "site-meat",
         fullName: "Walsh Jennifer",
-        role: "Специалист по холодовой цепи",
+        role: tt('demo.staff_roles.cold_chain_specialist'),
         phone: "+1 614 555 0102",
         email: "j.walsh@demo.local",
         active: true,
@@ -105,7 +105,7 @@ export const DEFAULT_STAFF = [
         id: "staff-meat-3",
         siteId: "site-meat",
         fullName: "Chen Robert",
-        role: "Контролёр ОТК",
+        role: tt('demo.staff_roles.qc_inspector'),
         phone: "+1 614 555 0103",
         email: "r.chen@demo.local",
         active: true,

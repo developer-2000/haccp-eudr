@@ -3,6 +3,7 @@ import { getGrainCoolingTaskAndMeasurementByRowIndex } from "./grainCoolingIndex
 import { isGrainCoolingScenarioSuppressedForRoute } from "./grainCoolingPublicRoutes";
 import { isGrainCoolingScenarioStorageCompleted } from "./grainCoolingStorageStatus";
 import { getGrainCoolingTaskFromDemoState } from "./resolveGrainCoolingTaskFromDemoState";
+import { LS_CONSENT_VERSION } from "@/config/storageNames";
 
 /**
  * Обход `measurements` **по порядку с начала массива** (индекс 0, 1, …): первый элемент со
@@ -51,8 +52,13 @@ export function grainCoolingScenarioShouldRun(demoStateRef) {
 }
 
 /**
- * `true` только если у целевой задачи в `demoState` есть хотя бы один замер со статусом `pending`
- * (первый с начала массива), **и** текущий маршрут не публичная страница партии/отчёта (`grainCoolingPublicRoutes`).
+ * Синхронизирует флаг `task_grain_cooling.scenarioProcessAllowed`.
+ * Сценарий разрешён только при выполнении **всех** условий:
+ * 1. Пользователь принял consent-баннер (`LS_CONSENT_VERSION === "true"` в localStorage).
+ * 2. У целевой задачи есть хотя бы один замер со статусом `pending` (первый с начала массива).
+ * 3. Текущий маршрут — не публичная страница партии/отчёта (`grainCoolingPublicRoutes`).
+ * 4. В `sessionStorage` ещё не зафиксировано логическое завершение сценария (`status: "completed"`).
+ *
  * `false` — `useGlobalTaskReminder` не вешает оповещение и таймеры; `useGrainCoolingStore()` может вернуть `null`.
  *
  * @param {import('vue').Ref<object>} demoStateRef
@@ -60,11 +66,16 @@ export function grainCoolingScenarioShouldRun(demoStateRef) {
  * @returns {void}
  */
 export function syncGrainCoolingScenarioProcessAllowed(demoStateRef, route) {
+
+    const consentAccepted =
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem(LS_CONSENT_VERSION) === "true";
+
     const dataOk = grainCoolingScenarioShouldRun(demoStateRef);
     const suppressed = route ? isGrainCoolingScenarioSuppressedForRoute(route) : false;
     const storedDone = isGrainCoolingScenarioStorageCompleted();
     task_grain_cooling.scenarioProcessAllowed =
-        dataOk && !suppressed && !storedDone;
+        consentAccepted && dataOk && !suppressed && !storedDone;
 }
 
 /**

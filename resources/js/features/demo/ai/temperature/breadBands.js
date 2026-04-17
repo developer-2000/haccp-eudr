@@ -15,7 +15,9 @@
  */
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Оборудование (id для привязки полос к задаче)
+import { i18n } from "@/i18n";
+const tt = (...args) => i18n.global.t(...args);
+
 // ═══════════════════════════════════════════════════════════════════════════
 
 /** Опарка / замес. */
@@ -123,29 +125,29 @@ export function getBreadModeCcpWindow(mode) {
 export const BREAD_SPONGE_MIX_BANDS = Object.freeze([
     Object.freeze({
         id: "bread_sponge_gt_35",
-        processLabel: "Опарка/Замес",
+        processLabel: tt('demo.bread_bands.process_sponge'),
         temperatureLabel: "> 35°C",
         status: "critical",
-        threat: "Дрожжи погибают — тесто не поднимется",
-        action: "Охладить воду/муку",
+        threat: tt('demo.bread_bands.sponge_hot_threat'),
+        action: tt('demo.bread_bands.sponge_hot_action'),
         equipmentTargetIds: BREAD_SPONGE_MIX_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "bread_sponge_26_34",
-        processLabel: "Опарка/Замес",
+        processLabel: tt('demo.bread_bands.process_sponge'),
         temperatureLabel: "26…34°C",
         status: "normal",
-        threat: "Идеальная для брожения",
+        threat: tt('demo.bread_bands.sponge_normal_threat'),
         action: "—",
         equipmentTargetIds: BREAD_SPONGE_MIX_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "bread_sponge_lt_25",
-        processLabel: "Опарка/Замес",
+        processLabel: tt('demo.bread_bands.process_sponge'),
         temperatureLabel: "< 25°C",
         status: "warning",
-        threat: "Медленное брожение — тесто кислое",
-        action: "Подогреть",
+        threat: tt('demo.bread_bands.sponge_cold_threat'),
+        action: tt('demo.bread_bands.sponge_cold_action'),
         equipmentTargetIds: BREAD_SPONGE_MIX_EQUIPMENT_IDS,
     }),
 ]);
@@ -154,29 +156,29 @@ export const BREAD_SPONGE_MIX_BANDS = Object.freeze([
 export const BREAD_PROOFING_BANDS = Object.freeze([
     Object.freeze({
         id: "bread_proof_gt_40",
-        processLabel: "Расстойка",
+        processLabel: tt('demo.bread_bands.process_proofing'),
         temperatureLabel: "> 41°C",
         status: "critical",
-        threat: "Тесто расплывается — хлеб плоский",
-        action: "Понизить T",
+        threat: tt('demo.bread_bands.proofing_hot_threat'),
+        action: tt('demo.bread_bands.proofing_hot_action'),
         equipmentTargetIds: BREAD_PROOFING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "bread_proof_32_40",
-        processLabel: "Расстойка",
+        processLabel: tt('demo.bread_bands.process_proofing'),
         temperatureLabel: "32…40°C",
         status: "normal",
-        threat: "Правильная расстойка",
+        threat: tt('demo.bread_bands.proofing_normal_threat'),
         action: "—",
         equipmentTargetIds: BREAD_PROOFING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "bread_proof_lt_30",
-        processLabel: "Расстойка",
+        processLabel: tt('demo.bread_bands.process_proofing'),
         temperatureLabel: "< 31°C",
         status: "warning",
-        threat: "Не поднялось — плотный мякиш",
-        action: "Увеличить T/время",
+        threat: tt('demo.bread_bands.proofing_cold_threat'),
+        action: tt('demo.bread_bands.proofing_cold_action'),
         equipmentTargetIds: BREAD_PROOFING_EQUIPMENT_IDS,
     }),
 ]);
@@ -186,44 +188,44 @@ export const BREAD_BAKING_BANDS = Object.freeze([
     // 36-94°C — недопечённое
     Object.freeze({
         id: "bread_undercook_36_94",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "36…94°C",
         status: "critical",
-        threat: "Сердцевина сырая — бактерии выживают",
-        action: "Допекать до 95°C+",
+        threat: tt('demo.bread_bands.baking_raw_threat'),
+        action: tt('demo.bread_bands.baking_raw_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
     }),
 
     // 95-180°C — стерильно, но не выпечено
     Object.freeze({
         id: "bread_sterile_95_180",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "95…180°C",
         status: "normal",
-        threat: "Стерильно, но недопечено",
-        action: "Продолжать выпечку",
+        threat: tt('demo.bread_bands.baking_sterile_threat'),
+        action: tt('demo.bread_bands.baking_sterile_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
     }),
 
     // 181-260°C — стандартная выпечка
     Object.freeze({
         id: "bread_bake_normal_181_260",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "181…260°C",
         status: "normal",
-        threat: "Правильная выпечка",
-        action: "Готово к охлаждению",
+        threat: tt('demo.bread_bands.baking_normal_threat'),
+        action: tt('demo.bread_bands.baking_normal_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
     }),
 
     // > 260°C — перегрев
     Object.freeze({
         id: "bread_overheat_gt_260",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "> 260°C",
         status: "warning",
-        threat: "Корочка сгорает — акриламид",
-        action: "Срочно снизить до 220°C",
+        threat: tt('demo.bread_bands.baking_burn_threat'),
+        action: tt('demo.bread_bands.baking_burn_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
     }),
 ]);
@@ -232,29 +234,29 @@ export const BREAD_BAKING_BANDS = Object.freeze([
 export const BREAD_COOLING_BANDS = Object.freeze([
     Object.freeze({
         id: "bread_cool_gt_35",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.bread_bands.process_cooling'),
         temperatureLabel: "> 35°C (>2ч)",
         status: "critical",
-        threat: "Конденсат внутри → плесень через 2 часа",
-        action: "Включить вентиляторы / конвейер быстрее",
+        threat: tt('demo.bread_bands.cooling_hot_threat'),
+        action: tt('demo.bread_bands.cooling_hot_action'),
         equipmentTargetIds: BREAD_COOLING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "bread_cool_25_35",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.bread_bands.process_cooling'),
         temperatureLabel: "25…35°C",
         status: "normal",
-        threat: "Правильное охлаждение",
-        action: "Готово к упаковке через 2 часа",
+        threat: tt('demo.bread_bands.cooling_normal_threat'),
+        action: tt('demo.bread_bands.cooling_normal_action'),
         equipmentTargetIds: BREAD_COOLING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "bread_cool_lt_25",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.bread_bands.process_cooling'),
         temperatureLabel: "< 25°C",
         status: "warning",
-        threat: "Охлаждение слишком быстрое — хлеб осел",
-        action: "Увеличить расстояние на стеллажах",
+        threat: tt('demo.bread_bands.cooling_cold_threat'),
+        action: tt('demo.bread_bands.cooling_cold_action'),
         equipmentTargetIds: BREAD_COOLING_EQUIPMENT_IDS,
     }),
 ]);
@@ -263,51 +265,51 @@ export const BREAD_COOLING_BANDS = Object.freeze([
 export const DEFAULT_BREAD_AI_PROFILE_FALLBACK = Object.freeze([
     Object.freeze({
         id: "bread_cool_lt_25",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.bread_bands.process_cooling'),
         temperatureLabel: "< 25°C",
         status: "warning",
-        threat: "Слишком холодно — дрожжи не работают / хлеб осел",
-        action: "Подогреть до 28-32°C",
+        threat: tt('demo.bread_bands.fallback_cold_threat'),
+        action: tt('demo.bread_bands.fallback_cold_action'),
     }),
     Object.freeze({
         id: "bread_cool_25_35",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.bread_bands.process_cooling'),
         temperatureLabel: "25…35°C",
         status: "normal",
-        threat: "Правильное охлаждение",
-        action: "Готово к упаковке",
+        threat: tt('demo.bread_bands.fallback_cool_threat'),
+        action: tt('demo.bread_bands.fallback_cool_action'),
     }),
     Object.freeze({
         id: "bread_undercook_36_94",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "36…94°C",
         status: "critical",
-        threat: "Сердцевина сырая — бактерии выживают",
-        action: "Допекать до 95°C+",
+        threat: tt('demo.bread_bands.baking_raw_threat'),
+        action: tt('demo.bread_bands.baking_raw_action'),
     }),
     Object.freeze({
         id: "bread_sterile_95_180",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "95…180°C",
         status: "normal",
-        threat: "Стерильно, но недопечено",
-        action: "Продолжать выпечку",
+        threat: tt('demo.bread_bands.baking_sterile_threat'),
+        action: tt('demo.bread_bands.baking_sterile_action'),
     }),
     Object.freeze({
         id: "bread_bake_normal_181_260",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "181…260°C",
         status: "normal",
-        threat: "Правильная выпечка",
-        action: "Готово к охлаждению",
+        threat: tt('demo.bread_bands.baking_normal_threat'),
+        action: tt('demo.bread_bands.baking_normal_action'),
     }),
     Object.freeze({
         id: "bread_overheat_gt_260",
-        processLabel: "Выпечка",
+        processLabel: tt('demo.bread_bands.process_baking'),
         temperatureLabel: "> 260°C",
         status: "warning",
-        threat: "Корочка сгорает — акриламид",
-        action: "Срочно снизить до 220°C",
+        threat: tt('demo.bread_bands.baking_burn_threat'),
+        action: tt('demo.bread_bands.baking_burn_action'),
     }),
 ]);
 
@@ -369,25 +371,25 @@ export const BREAD_MODE_ANALYZER_PROFILES = Object.freeze({
     sponge_mix: Object.freeze({
         ccpMin: SM.normalMin,
         ccpMax: SM.normalMax,
-        ccpLabel: "26..34°C (опарка/замес)",
+        ccpLabel: tt('demo.bread_bands.ccp_sponge_mix'),
         riskSlope: 14,
     }),
     proofing: Object.freeze({
         ccpMin: PF.normalMin,
         ccpMax: PF.normalMax,
-        ccpLabel: "32..40°C (расстойка)",
+        ccpLabel: tt('demo.bread_bands.ccp_proofing'),
         riskSlope: 14,
     }),
     baking: Object.freeze({
         ccpMin: BK.ccpMin,
         ccpMax: BK.ccpMax,
-        ccpLabel: "181..260°C (выпечка)",
+        ccpLabel: tt('demo.bread_bands.ccp_baking'),
         riskSlope: 12,
     }),
     cooling: Object.freeze({
         ccpMin: CL.normalMin,
         ccpMax: CL.normalMax,
-        ccpLabel: "25..35°C (охлаждение)",
+        ccpLabel: tt('demo.bread_bands.ccp_cooling'),
         riskSlope: 12,
     }),
 });
@@ -557,16 +559,6 @@ export function resolveBreadRowForTaskMeasurement(t, taskEquipmentTargetIds, mod
         return resolveBreadBand(t, mode);
     }
     return pickDefaultBreadNoEquipmentBand(t);
-}
-
-/**
- * @param {number} t
- * @param {string|null|undefined} mode
- * @returns {string|null}
- */
-export function resolveBreadThreat(t, mode) {
-    const band = resolveBreadBand(t, mode);
-    return band ? band.threat : null;
 }
 
 /**

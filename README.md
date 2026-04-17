@@ -61,6 +61,8 @@ npm run dev
 npm run build
  - просмотр в смартфоне
 npm run serve:mobile
+ - генерация sitemap.xml (запускать после добавления новых страниц или локалей, создает public/sitemap.xml со всеми публичными URL и hreflang)
+php artisan sitemap:generate
 ```
 
 ## Адреса
@@ -68,6 +70,7 @@ npm run serve:mobile
 - Проект: [haccp-eudr.local](http://haccp-eudr.local/)
 - Смартфон: [http://192.168.101.11:8000](http://192.168.101.11:8000)
 - Mysql: [PhpMyAdmin](http://phpmyadmin/index.php?route=/database/structure&db=haccp-eudr&server=8)
+- Почта: [Почта](http://192.168.101.11:8025)
 
 ## Тестовая почта локально
 ### Запуск Mailpit

@@ -155,7 +155,8 @@ const handleSelect = (sectionId) => {
 }
 
 .demo-section-nav__label {
-    min-width: 0;
+    width: 100%;
+    text-align: left;
 }
 
 .demo-sidebar__link {

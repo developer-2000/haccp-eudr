@@ -119,6 +119,7 @@ import SurveyQuestionStep from "../../components/client/survey/SurveyQuestionSte
 import SurveySubmittedState from "../../components/client/survey/SurveySubmittedState.vue";
 
 import SurveyDigitalCodeVerification from "@/components/client/survey/SurveyDigitalCodeVerification.vue";
+import { LS_SURVEY_SUBMISSION_STATE, SS_VERIFICATION_TOKEN } from "@/config/storageNames";
 
 const SurveyMainFlow = defineAsyncComponent(() =>
     import("../../components/client/survey/screens/SurveyMainFlow.vue")
@@ -134,6 +135,10 @@ const SurveyLeadScreen = defineAsyncComponent(() =>
 );
 
 defineOptions({ name: "Survey" });
+
+import { usePageSeo } from "@/composables/usePageSeo";
+
+usePageSeo({ i18nKey: "seo.survey" });
 
 // =============================================================================
 // Хуки и i18n
@@ -152,7 +157,7 @@ const surveyHomeRouteLocation = computed(() => {
 // Константы
 // =============================================================================
 const SURVEY_LEAD_EMAIL_INPUT_ID = "survey-lead-email";
-const SURVEY_SUBMISSION_STATE_KEY = "survey_submission_state_v1";
+const SURVEY_SUBMISSION_STATE_KEY = LS_SURVEY_SUBMISSION_STATE;
 
 /** П. 7.4: запас при прокрутке к полю (клавиатура на мобильных). */
 const SURVEY_MOBILE_SCROLL_PADDING_BOTTOM =
@@ -275,7 +280,7 @@ async function submitSurveyResponse(data = null) {
                 // Сообщение для пользователя
                 toast.info(t('survey.ui.verification_sent'), { autoClose: 5000 });
                 // Сохранение токена доступа к его записи ответов draft
-                sessionStorage.setItem('verification_token', verification_token);
+                sessionStorage.setItem(SS_VERIFICATION_TOKEN, verification_token);
                 // Инициализация счётчика попыток
                 pinAttemptsLeft.value = attempt_counter;
 
@@ -311,7 +316,7 @@ async function submitSurveyResponse(data = null) {
  */
 async function handlePinComplete(pin) {
 
-    const token = sessionStorage.getItem("verification_token");
+    const token = sessionStorage.getItem(SS_VERIFICATION_TOKEN);
     if (!token) {
         toast.error(t('survey.ui.token_not_found'), { autoClose: 5000 });
         return;
@@ -340,7 +345,7 @@ async function handlePinComplete(pin) {
                 }
                 // 2 Если попытки закончились Или токен не совпадает
                 else if(code === 1 || code === 2){
-                    sessionStorage.removeItem("verification_token");
+                    sessionStorage.removeItem(SS_VERIFICATION_TOKEN);
                     toast.info(message, { autoClose: 5000 });
                     resetSurveyStateToIntro();
                 }
@@ -1135,6 +1140,12 @@ function resetSurveyFromSubmittedState() {
 @use "../../../scss/variables" as *;
 
 .survey-page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    //min-height: 0;
+    min-width: 0;
+
     .survey-page__api-error {
         margin-bottom: $spacing-md;
         padding: $spacing-sm-m $spacing-md;
@@ -1145,12 +1156,6 @@ function resetSurveyFromSubmittedState() {
         font-size: $font-size-sm;
         line-height: 1.4;
     }
-
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    min-width: 0;
 
     :deep(.survey-layout) {
         flex: 1;
@@ -1263,8 +1268,8 @@ function resetSurveyFromSubmittedState() {
         box-sizing: border-box;
         min-height: $spacing-2xl;
         padding: $spacing-sm-m $spacing-md-lg;
-        width: 100%;
-        max-width: 160px;
+        width: auto;
+        min-width: 160px;
         font-size: $font-size-base;
         font-weight: 500;
         line-height: 1.35;

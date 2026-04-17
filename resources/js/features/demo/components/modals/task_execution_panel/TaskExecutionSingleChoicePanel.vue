@@ -9,7 +9,7 @@
         <div
             class="checklist-modal__single-choice-options"
             role="radiogroup"
-            aria-label="Варианты ответа"
+            :aria-label="t('demo.single_choice_panel.options_aria')"
         >
             <button
                 v-for="option in options"
@@ -31,7 +31,7 @@
             :value="comment"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }"
-            placeholder="Комментарий исполнителя"
+            :placeholder="t('demo.single_choice_panel.comment_placeholder')"
             @update:value="$emit('update:comment', $event)"
         />
         <!-- Запись в объект замера и закрытие панели — в родителе (submit). -->
@@ -41,7 +41,7 @@
             :disabled="!answer"
             @click="$emit('submit')"
         >
-            Подтвердить ответ
+            {{ t('demo.single_choice_panel.confirm_answer') }}
         </n-button>
 
         <!-- Фото → документ (PendingPhotoCaptureBlock). -->
@@ -58,6 +58,9 @@
 
 <script setup>
 import { NButton, NInput } from "naive-ui";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 import PendingPhotoCaptureBlock from "../show_task/PendingPhotoCaptureBlock.vue";
 
 defineProps({

@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Segíts nekünk egy olyan rendszert építeni, amely megszünteti a HACCP megfelelés nehézségeit',
+        'subtitle' => 'Rövid kérdőív — kb. 5 perc. A válaszaid segítenek, hogy a rendszer valódi működésre és ellenőrzésekre legyen alkalmas.',
+        'trust' => 'A válaszaidat kizárólag elemzési célokra használjuk, harmadik féllel nem osztjuk meg.',
+        'start' => 'Kezdés',
+    ],
+
+    'nav' => [
+        'back' => 'Vissza',
+        'back_aria' => 'Vissza az előző lépéshez',
+    ],
+
+    'progress' => [
+        'aria' => 'Kérdőív: :current. lépés a :total-ból',
+    ],
+
+    'validation' => [
+        'email_required' => 'Kérjük, add meg az e-mail címed — ez a mező kötelező.',
+        'email_invalid' => 'Kérjük, adj meg érvényes e-mail címet.',
+    ],
+
+    'ui' => [
+        'next' => 'Tovább',
+        'next_disabled_aria' => 'Tovább — előbb válaszolj a kérdésre',
+        'other_default_label' => 'Kérjük, pontosítsd',
+        'other_aria_prefix' => 'Kiegészítő részlet a válaszodhoz:',
+        'select_placeholder' => 'Válassz egy opciót',
+        'country_clear' => 'Kiválasztott ország törlése',
+        'country_search' => 'Keresés ország neve alapján',
+        'country_search_placeholder' => 'Keresés…',
+        'submit' => 'Küldés',
+        'submit_sending' => 'Küldés...',
+        'submit_failed' => 'Nem sikerült elküldeni a kérdőívet. Kérjük, próbáld újra.',
+        'questions_load_error' => 'Nem sikerült betölteni a kérdőív kérdéseit. Frissítsd az oldalt, vagy próbáld később.',
+        'response_saved' => 'A válasz elmentve.',
+        'verification_sent' => 'Ellenőrző kód elküldve az e-mail címedre.',
+        'cooldown_wait' => 'Kérjük, várj néhány másodpercet, majd próbáld újra.',
+        'token_not_found' => 'Token nem található. Kérjük, kezdd újra a kérdőívet.',
+        'network_error' => 'Hálózati hiba. Kérjük, próbáld újra.',
+        'pin_instruction' => 'Egy PIN kódot küldtünk a megadott e-mail címre. Add meg a megerősítéshez.',
+        'pin_attempts_left' => '{used} / {total} próbálkozás maradt',
+        'pin_container_aria' => 'PIN kód ellenőrzés',
+        'pin_group_aria' => '4 számjegyű PIN kód',
+    ],
+
+    'lead' => [
+        'title' => 'Add meg az elérhetőségeidet, hogy:',
+        'bullet_discount' => 'élethosszig tartó 20% kedvezményt kapj',
+        'bullet_access' => 'korai hozzáférést kapj a rendszerhez',
+        'bullet_influence' => 'befolyásold a termék fejlesztését',
+        'expectation' => 'Ez az utolsó lépés: utána a kérdőív befejeződik. Az adataidra csak a kapcsolatfelvételhez van szükségünk.',
+        'field_name' => 'Neved',
+        'field_business_name' => 'Vállalkozás neve',
+        'field_email' => 'E-mail',
+        'field_email_required_sr' => '(kötelező)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 vagy wa.me/...',
+        'placeholder_telegram' => "{'@'}felhasználónév",
+    ],
+
+    'success' => [
+        'title' => 'Köszönöm. Személyesen felveszem Önnel a kapcsolatot, amikor a rendszer elkészül.',
+        'body' => "Meghívást fog kapni egy sandbox verzióhoz,\nahol gyakorlatban kipróbálhatja a rendszert, és alakíthatja annak fejlődését. Ez segít nekünk a terméket a valós üzleti folyamatokhoz igazítani.",
+        'reassurance' => 'Nem tervezünk tömeges levelezést — csak személyes üzenetet frissítésekkel.',
+        'update_hint' => "Ha a folyamatai megváltoznak vagy új feladatai lesznek —\na válaszait frissítheti az e-mailben küldött linken keresztül.",
+        'home_link' => 'Vissza a kezdőlapra',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Köszönjük a kérdőív kitöltését!',
+        'subtitle' => 'Az Ön részvétele jelentős hozzájárulás a fejlesztés korai szakaszában.',
+        'image_alt' => 'A válasz el lett mentve az adatbázisba',
+        'email_label' => 'E-mail:',
+        'sent_label' => 'Elküldve:',
+        'reset_button' => 'Válaszok frissítése',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, köszönjük a válaszait',
+        'subject_default' => 'Köszönjük a válaszait',
+        'header_tagline' => 'Valós idejű HACCP megfelelőségi rendszer',
+        'title' => 'Köszönjük a részvételét — az Ön hozzáférése és 20% kedvezménye',
+        'greeting_with_name' => 'Szia, :name!',
+        'greeting_default' => 'Szia!',
+        'thank_you' => 'Köszönjük, hogy időt szánt a kérdőív kitöltésére.',
+        'value_note' => 'Válaszai valóban értékesek — közvetlenül alakítják a terméket.',
+        'registered_as' => 'Ön korai hozzáférés résztvevőként van regisztrálva',
+        'discount_label' => '–20% életre szóló kedvezmény',
+        'discount_code_label' => 'Az Ön kódja:',
+        'description_line1' => 'A rendszer jelenleg fejlesztés alatt áll.',
+        'description_line2' => 'Elemzem az üzlettulajdonosok válaszait, és finomítom a funkcionalitást a valós működéshez.',
+        'description_line3' => 'A fő cél, hogy a rendszer segítse Önt az ellenőrzések magabiztos teljesítésében — ne csak nyilvántartás legyen.',
+        'benefits_title' => 'Amit kapni fog:',
+        'benefit_1' => 'Valós idejű műveletkövetés',
+        'benefit_2' => 'Átlátható előzmények ellenőrzésekhez',
+        'benefit_3' => 'Ellenőrzés extra terhelés nélkül',
+        'cta_button' => 'Ugrás a weboldalra',
+        'footer_updates' => 'Időnként megosztom a fejlesztési frissítéseket és meghívlak új funkciók tesztelésére.',
+        'footer_feedback' => 'Visszajelzései és ötletei segítenek a rendszer hasznosságának javításában a valós működésben.',
+        'footer_reply' => 'Ha már vannak gondolatai vagy igényei — egyszerűen válaszoljon erre az e-mailre.',
+        'footer_signature' => 'Üdvözlettel, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Az Ön ellenőrző kódja a HACCPilothoz',
+        'header_tagline' => 'Biztonsági megerősítés a kérdőív módosításához',
+        'title' => 'Válaszai módosításának megerősítése',
+        'description' => 'Módosítást kért a HACCPilot kérdőívben megadott válaszaira.',
+        'instruction' => 'A megerősítéshez adja meg az alábbi kódot:',
+        'code_expiry' => 'A kód korlátozott ideig érvényes',
+        'not_you' => 'Ha ez nem Ön volt — hagyja figyelmen kívül ezt az e-mailt.',
+        'data_safe' => 'Az adatai változatlanok maradnak.',
+        'cta_button' => 'Vissza a módosításhoz',
+        'footer_auto' => 'Ez egy automatikus üzenet a HACCPilot rendszertől.',
+        'footer_purpose' => 'A kód kizárólag az adatmódosítás megerősítésére szolgál.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'A kérdőív válaszai frissítve lettek',
+        'header_tagline' => 'Kérdőív adatok frissítésének visszaigazolása',
+        'title' => 'Az adatai sikeresen frissítve lettek!',
+        'greeting_with_name' => 'Szia, :name!',
+        'greeting_default' => 'Szia!',
+        'thank_you' => 'Köszönjük, hogy frissítette a kérdőív válaszait.',
+        'status_label' => 'A kérdőív állapota:',
+        'status_value' => 'Frissítve és megerősítve',
+        'status_note' => 'Minden módosítás el lett mentve, és a HACCPilot rendszer testreszabásához lesz használva.',
+        'footer_auto' => 'Ez egy automatikus értesítés a HACCPilot rendszertől.',
+        'footer_data_use' => 'Az adatait kizárólag a rendszer pontosságának és személyre szabásának javítására használjuk.',
+        'footer_signature' => 'Üdvözlettel, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'A link érvénytelen vagy lejárt. Kérjük, próbálja meg újra kitölteni a kérdőívet.',
+        'attempts_exhausted' => 'Az ellenőrzés sikertelen. Kérjük, töltse ki újra a kérdőívet.',
+        'code_invalid' => 'Érvénytelen kód. Kérjük, próbálja újra.',
+        'success' => 'A kérdőív válaszai sikeresen frissítve lettek.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Milyen típusú vállalkozást üzemeltet?',
+            'options' => [
+                'cafe' => 'Kávézó / kávézó',
+                'bakery' => 'Pékség / kenyérgyártás',
+                'meat' => 'Húselőállítás / hentesüzlet',
+                'kitchen' => 'Konyha / élelmiszer-előállítás',
+                'other' => 'Egyéb',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Hány ember dolgozik Önnek?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Melyik országban működik?',
+            'field_caption' => 'Válasszon országot a listából',
+        ],
+        '4' => [
+            'question_text' => 'Hogyan kezeli ma a HACCP-t?',
+            'options' => [
+                'paper' => 'Papíralapú nyilvántartás',
+                'excel' => 'Excel / Google Táblázatok',
+                'software' => 'Saját szoftvert használunk',
+                'partial' => 'Részben dokumentált / nincs valódi rendszer',
+                'other' => 'Egyéb',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Használ fizetős HACCP megoldásokat?',
+            'options' => [
+                'yes' => 'Igen',
+                'nb' => 'Nem',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Mennyire elégedett a jelenlegi megközelítésével?',
+            'options' => [
+                'fully' => 'Teljesen elégedett',
+                'partially_ok' => 'Részben elégedett',
+                'rather_not' => 'Inkább elégedetlen',
+                'not_at_all' => 'Egyáltalán nem elégedett',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Fontolná egy kényelmesebb rendszerre való áttérést?',
+            'options' => [
+                'yes' => 'Igen',
+                'maybe' => 'Talán',
+                'nb' => 'Nem',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Ki felel a HACCP-ért a vállalkozásában a gyakorlatban?',
+            'options' => [
+                'self' => 'Én személyesen vagyok felelős',
+                'manager' => 'Vezető / adminisztrátor',
+                'staff' => 'Kijelölt munkatársak',
+                'none' => 'Nincs hivatalos felügyelet',
+                'other' => 'Egyéb',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Milyen gyakran felejtik el a dolgozók a feladatok rögzítését?',
+            'options' => [
+                'often' => 'Gyakran',
+                'sometimes' => 'Néha',
+                'rarely' => 'Ritkán',
+                'almost_never' => 'Szinte soha',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Előfordul, hogy a nyilvántartásokat utólag töltik ki?',
+            'options' => [
+                'often' => 'Igen, gyakran',
+                'sometimes' => 'Néha',
+                'rarely' => 'Ritkán',
+                'never' => 'Soha',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Mi a legnehezebb a HACCP követésében?',
+            'subtitle' => 'Több választ is kiválaszthat.',
+            'options' => [
+                'records' => 'Nyilvántartás és dokumentáció vezetése',
+                'staff_control' => 'Annak felügyelete, amit a dolgozók ténylegesen csinálnak',
+                'realtime' => 'Eljárások valós idejű követése',
+                'inspections' => 'Felkészülés az ellenőrzésekre',
+                'training' => 'Képzés és dolgozói fegyelem',
+                'chaos' => 'Nincs egységes rendszer / kaotikus folyamatok',
+                'other' => 'Egyéb',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Volt ellenőrzés az elmúlt évben?',
+            'options' => [
+                'yes' => 'Igen',
+                'nb' => 'Nem',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Mi okozza a legnagyobb stresszt az ellenőrzés során?',
+            'options' => [
+                'docs' => 'Dokumentáció',
+                'staff' => 'Dolgozói viselkedés',
+                'missing_records' => 'Hiányzó nyilvántartások',
+                'overall' => 'Minden összességében',
+                'other' => 'Egyéb',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Mennyire fontos az, hogy felkészült legyen egy előre be nem jelentett ellenőrzésre?',
+            'options' => [
+                'very' => 'Nagyon fontos',
+                'rather' => 'Elég fontos',
+                'not_thought' => 'Még nem gondoltam rá',
+                'not_important' => 'Nem fontos',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Mennyire fontos Önnek egy rendszer, amely a dolgozói tevékenységeket valós időben rögzíti (nem utólag)?',
+            'options' => [
+                'very' => 'Nagyon fontos',
+                'rather' => 'Elég fontos',
+                'unsure' => 'Nem biztos',
+                'not_important' => 'Nem fontos',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Ezek közül mely képességek lennének hasznosak a munkájában?',
+            'subtitle' => 'Több választ is kiválaszthat.',
+            'other_detail_field_label' => 'Írja le, mi fontos Önnek',
+            'group_headings' => [
+                'safety' => 'Ellenőrzés és biztonság',
+                'inspection' => 'Ellenőrzésekkel való munka',
+                'staff' => 'Dolgozói kényelem',
+                'automation' => 'Automatizálás',
+                'more' => 'Továbbiak',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Riasztások, ha a hőmérséklet a tartományon kívül esik',
+                'capture_at_moment' => 'Adatrögzítés a feladat pillanatában (utólagos kitöltés nélkül)',
+                'two_person_confirm' => 'Két személyes feladatmegerősítés',
+                'reports_qr_link' => 'Gyors hozzáférés a jelentésekhez ellenőrzéshez (QR / link)',
+                'photo_proof' => 'Fotók mint bizonyíték a feladat elvégzéséről',
+                'full_action_history' => 'A dolgozói műveletek teljes története',
+                'offline_mobile' => 'Offline működés telefonon',
+                'voice_input' => 'Hangalapú adatbevitel',
+                'biz_templates' => 'Egyszerű, előre elkészített sablonok üzlettípus szerint',
+                'bluetooth_temp' => 'Automatikus hőmérséklet-rögzítés (Bluetooth szenzorok)',
+                'risk_warnings' => 'Kockázatértékelés és korai figyelmeztetések',
+                'loss_on_violations' => 'Becsült veszteségek szabálysértések esetén',
+                'internal_staff_tasks' => 'Belső feladatlisták dolgozóknak',
+                'push_reminders' => 'Push emlékeztetők dolgozóknak',
+                'other' => 'Egyéb (írja le, mi fontos Önnek)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Ha a rendszer egyetlen fő problémát megoldhatna, mi lenne az?',
+            'field_caption' => 'Válasza',
+        ],
+    ],
+];

@@ -1,3 +1,4 @@
+import { i18n } from "@/i18n";
 import {
     DEFAULT_SITES,
     DEFAULT_STAFF,
@@ -27,7 +28,7 @@ export const createDefaultState = () => {
         coffee: [
             {
                 id: "coffee-1",
-                title: "Заявка по помещению кофейни",
+                title: i18n.global.t('demo.seed_tasks.coffee_1'),
                 status: true,
                 taskScopeType: "rooms",
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["coffee-1"],
@@ -41,7 +42,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "coffee-2",
-                title: "Охлаждение зерна",
+                title: i18n.global.t('demo.seed_tasks.coffee_2'),
                 status: false,
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["coffee-2"],
                 correctiveActions: CORRECTIVE_ACTIONS_BY_TASK_ID["coffee-2"],
@@ -50,7 +51,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "coffee-3",
-                title: "Проверка маркировки и упаковки партии",
+                title: i18n.global.t('demo.seed_tasks.coffee_3'),
                 status: false,
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["coffee-3"],
                 correctiveActions: CORRECTIVE_ACTIONS_BY_TASK_ID["coffee-3"],
@@ -59,7 +60,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "coffee-4",
-                title: "Заявка в техслужбу по кофемашине",
+                title: i18n.global.t('demo.seed_tasks.coffee_4'),
                 status: false,
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["coffee-4"],
                 correctiveActions: CORRECTIVE_ACTIONS_BY_TASK_ID["coffee-4"],
@@ -70,7 +71,7 @@ export const createDefaultState = () => {
         bakery: [
             {
                 id: "bakery-3",
-                title: "Температура расстоечного шкафа",
+                title: i18n.global.t('demo.seed_tasks.bakery_3'),
                 status: false,
                 taskScopeType: "equipment",
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["bakery-3"],
@@ -80,7 +81,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "bakery-4",
-                title: "Заявка по помещениям пекарни",
+                title: i18n.global.t('demo.seed_tasks.bakery_4'),
                 status: false,
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["bakery-4"],
                 correctiveActions: CORRECTIVE_ACTIONS_BY_TASK_ID["bakery-4"],
@@ -89,7 +90,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "bakery-5",
-                title: "Сроки сырья",
+                title: i18n.global.t('demo.seed_tasks.bakery_5'),
                 status: true,
                 taskFieldDefinitions: TASK_FIELD_DEFINITIONS_BY_TASK_ID["bakery-5"],
                 roomTargetIds: ["room-raw-storage", "room-receiving"],
@@ -98,7 +99,7 @@ export const createDefaultState = () => {
         meat: [
             {
                 id: "meat-1",
-                title: "Морозильная камера",
+                title: i18n.global.t('demo.seed_tasks.meat_1'),
                 status: false,
                 taskScopeType: "equipment",
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["meat-1"],
@@ -108,7 +109,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "meat-2",
-                title: "Маркировка партии",
+                title: i18n.global.t('demo.seed_tasks.meat_2'),
                 status: true,
                 taskScopeType: "rooms",
                 taskFieldDefinitions: TASK_FIELD_DEFINITIONS_BY_TASK_ID["meat-2"],
@@ -116,7 +117,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "meat-3",
-                title: "Температура хранения",
+                title: i18n.global.t('demo.seed_tasks.meat_3'),
                 status: false,
                 taskScopeType: "equipment",
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["meat-3"],
@@ -126,7 +127,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "meat-4",
-                title: "Заявка по оборудованию термоконтроля",
+                title: i18n.global.t('demo.seed_tasks.meat_4'),
                 status: false,
                 taskScopeType: "equipment",
                 measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["meat-4"],
@@ -136,7 +137,7 @@ export const createDefaultState = () => {
             },
             {
                 id: "meat-5",
-                title: "Санобработка",
+                title: i18n.global.t('demo.seed_tasks.meat_5'),
                 status: true,
                 taskScopeType: "rooms",
                 taskFieldDefinitions: TASK_FIELD_DEFINITIONS_BY_TASK_ID["meat-5"],

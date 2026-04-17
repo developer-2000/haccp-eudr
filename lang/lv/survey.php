@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Palīdziet mums izveidot sistēmu, kas novērš HACCP atbilstības sāpes',
+        'subtitle' => 'Īsa aptauja — apmēram 5 minūtes. Jūsu atbildes palīdzēs mums izveidot sistēmu, kas darbojas reālās darbībās un pārbaudēs.',
+        'trust' => 'Jūsu atbildes tiek izmantotas tikai analīzei un netiek kopīgotas ar trešajām pusēm.',
+        'start' => 'Sākt',
+    ],
+
+    'nav' => [
+        'back' => 'Atpakaļ',
+        'back_aria' => 'Atgriezties pie iepriekšējā soļa',
+    ],
+
+    'progress' => [
+        'aria' => 'Aptauja: solis :current nb :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Lūdzu, ievadiet savu e-pastu — šis lauks ir obligāts.',
+        'email_invalid' => 'Lūdzu, ievadiet derīgu e-pasta adresi.',
+    ],
+
+    'ui' => [
+        'next' => 'Tālāk',
+        'next_disabled_aria' => 'Tālāk — vispirms atbildiet uz jautājumu',
+        'other_default_label' => 'Lūdzu, precizējiet',
+        'other_aria_prefix' => 'Papildu informācija jūsu atbildei:',
+        'select_placeholder' => 'Izvēlieties opciju',
+        'country_clear' => 'Notīrīt izvēlēto valsti',
+        'country_search' => 'Meklēt pēc valsts nosaukuma',
+        'country_search_placeholder' => 'Meklēt…',
+        'submit' => 'Iesniegt',
+        'submit_sending' => 'Sūta...',
+        'submit_failed' => 'Neizdevās iesniegt aptaujas datus. Lūdzu, mēģiniet vēlreiz.',
+        'questions_load_error' => 'Nevar ielādēt aptaujas jautājumus. Lūdzu, atsvaidziniet lapu vai mēģiniet vēlāk.',
+        'response_saved' => 'Aptaujas atbilde saglabāta.',
+        'verification_sent' => 'Verifikācijas kods ir nosūtīts uz jūsu e-pastu.',
+        'cooldown_wait' => 'Lūdzu, uzgaidiet dažas sekundes un mēģiniet vēlreiz.',
+        'token_not_found' => 'Tokens nav atrasts. Lūdzu, mēģiniet aizpildīt aptauju vēlreiz.',
+        'network_error' => 'Tīkla kļūda. Lūdzu, mēģiniet vēlreiz.',
+        'pin_instruction' => 'PIN kods ir nosūtīts uz norādīto e-pasta adresi. Ievadiet to, lai apstiprinātu īpašumtiesības.',
+        'pin_attempts_left' => '{used} nb {total} mēģinājumiem atlikuši',
+        'pin_container_aria' => 'PIN koda verifikācija',
+        'pin_group_aria' => '4 ciparu PIN kods',
+    ],
+
+    'lead' => [
+        'title' => 'Atstājiet savus kontaktdatus, lai:',
+        'bullet_discount' => 'saņemtu mūža 20% atlaidi',
+        'bullet_access' => 'iegūtu agrīnu piekļuvi sistēmai',
+        'bullet_influence' => 'ietekmētu produkta attīstības plānu',
+        'expectation' => 'Šis ir pēdējais solis: pēc tā aptauja tiek pabeigta. Mums nepieciešami tikai jūsu dati, lai ar jums sazinātos.',
+        'field_name' => 'Jūsu vārds',
+        'field_business_name' => 'Uzņēmuma nosaukums',
+        'field_email' => 'E-pasts',
+        'field_email_required_sr' => '(obligāts)',
+        'field_phone' => 'Tālrunis',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 vai wa.me/...',
+        'placeholder_telegram' => "{'@'}lietotajvards",
+    ],
+
+    'success' => [
+        'title' => 'Paldies. Es ar jums sazināšos personīgi, kad sistēma būs gatava.',
+        'body' => "Jūs saņemsiet ielūgumu uz sandbox versiju,\nkur varēsiet izmēģināt sistēmu praksē un ietekmēt tās attīstību. Tas palīdz mums pielāgot produktu reāliem biznesa procesiem.",
+        'reassurance' => 'Mēs neplānojam masveida sūtījumus — tikai personīgu ziņu ar atjauninājumiem.',
+        'update_hint' => "Ja jūsu procesi mainās vai parādās jauni uzdevumi —\njūs varēsiet atjaunināt savas atbildes, izmantojot saiti, kas nosūtīta uz jūsu e-pastu.",
+        'home_link' => 'Atpakaļ uz sākumlapu',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Paldies, ka aizpildījāt anketu!',
+        'subtitle' => 'Jūsu dalība ir nozīmīgs ieguldījums agrīnā izstrādes posmā.',
+        'image_alt' => 'Atbilde ir saglabāta datubāzē',
+        'email_label' => 'E-pasts:',
+        'sent_label' => 'Nosūtīts:',
+        'reset_button' => 'Atjaunināt atbildes',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, paldies par jūsu atbildēm',
+        'subject_default' => 'Paldies par jūsu atbildēm',
+        'header_tagline' => 'Reāllaika HACCP atbilstības sistēma',
+        'title' => 'Paldies par jūsu dalību — jūsu piekļuve un 20% atlaide',
+        'greeting_with_name' => 'Sveiki, :name!',
+        'greeting_default' => 'Sveiki!',
+        'thank_you' => 'Paldies, ka veltījāt laiku, lai aizpildītu aptauju.',
+        'value_note' => 'Jūsu atbildes ir patiešām vērtīgas — tās tieši ietekmē produktu.',
+        'registered_as' => 'Jūs esat reģistrēts kā agrīnās piekļuves dalībnieks',
+        'discount_label' => '–20% mūža atlaide',
+        'discount_code_label' => 'Jūsu kods:',
+        'description_line1' => 'Sistēma pašlaik tiek izstrādāta.',
+        'description_line2' => 'Es analizēju uzņēmumu īpašnieku atbildes un pilnveidoju funkcionalitāti reālai darbībai.',
+        'description_line3' => 'Galvenais mērķis ir, lai sistēma palīdzētu jums pārliecinoši izturēt pārbaudes, ne tikai glabāt ierakstus.',
+        'benefits_title' => 'Ko jūs saņemsiet:',
+        'benefit_1' => 'Reāllaika darbību uzskaite',
+        'benefit_2' => 'Caurspīdīga vēsture pārbaudēm',
+        'benefit_3' => 'Kontrole bez papildu slodzes',
+        'cta_button' => 'Doties uz vietni',
+        'footer_updates' => 'Es periodiski dalīšos ar izstrādes jaunumiem un aicināšu jūs testēt jaunas funkcijas.',
+        'footer_feedback' => 'Jūsu atsauksmes un idejas palīdzēs padarīt sistēmu noderīgāku reālajā darbībā.',
+        'footer_reply' => 'Ja jums jau ir domas vai prasības — vienkārši atbildiet uz šo e-pastu.',
+        'footer_signature' => 'Ar cieņu, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Jūsu verifikācijas kods HACCPilot',
+        'header_tagline' => 'Drošības apstiprinājums aptaujas atjaunināšanai',
+        'title' => 'Apstipriniet savu atbilžu atjaunināšanu',
+        'description' => 'Jūs esat pieprasījis atjaunināt savas atbildes HACCPilot aptaujā.',
+        'instruction' => 'Lai apstiprinātu, ievadiet zemāk esošo kodu:',
+        'code_expiry' => 'Kods ir derīgs ierobežotu laiku',
+        'not_you' => 'Ja tas nebijāt jūs — vienkārši ignorējiet šo e-pastu.',
+        'data_safe' => 'Jūsu dati paliks nemainīti.',
+        'cta_button' => 'Atgriezties pie atjaunināšanas',
+        'footer_auto' => 'Šis ir automātisks ziņojums nb HACCPilot sistēmas.',
+        'footer_purpose' => 'Kods tiek izmantots tikai datu izmaiņu apstiprināšanai.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Jūsu aptaujas atbildes ir atjauninātas',
+        'header_tagline' => 'Aptaujas datu atjaunināšanas apstiprinājums',
+        'title' => 'Jūsu dati ir veiksmīgi atjaunināti!',
+        'greeting_with_name' => 'Sveiki, :name!',
+        'greeting_default' => 'Sveiki!',
+        'thank_you' => 'Paldies, ka atjauninājāt savas aptaujas atbildes.',
+        'status_label' => 'Jūsu aptaujas statuss:',
+        'status_value' => 'Atjaunināts un apstiprināts',
+        'status_note' => 'Visas izmaiņas ir saglabātas un tiks izmantotas HACCPilot sistēmas pielāgošanai.',
+        'footer_auto' => 'Šis ir automātisks paziņojums nb HACCPilot sistēmas.',
+        'footer_data_use' => 'Jūsu dati tiek izmantoti tikai sistēmas precizitātes un personalizācijas uzlabošanai.',
+        'footer_signature' => 'Ar cieņu, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Saite ir nederīga vai tās derīguma termiņš ir beidzies. Lūdzu, mēģiniet aizpildīt aptauju vēlreiz.',
+        'attempts_exhausted' => 'Verifikācija neizdevās. Lūdzu, aizpildiet aptauju vēlreiz.',
+        'code_invalid' => 'Nepareizs kods. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Aptaujas atbildes veiksmīgi atjauninātas.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Kāda veida uzņēmumu jūs vadāt?',
+            'options' => [
+                'cafe' => 'Kafejnīca / kafijas veikals',
+                'bakery' => 'Maiznīca / maizes ražošana',
+                'meat' => 'Gaļas ražošana / miesnieku veikals',
+                'kitchen' => 'Virtuve / pārtikas ražošana',
+                'other' => 'Cits',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Cik cilvēku strādā jūsu uzņēmumā?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Kurā valstī jūs darbojaties?',
+            'field_caption' => 'Izvēlieties valsti nb saraksta',
+        ],
+        '4' => [
+            'question_text' => 'Kā jūs šodien pārvaldāt HACCP?',
+            'options' => [
+                'paper' => 'Papīra uzskaite',
+                'excel' => 'Excel / Google tabulas',
+                'software' => 'Mēs izmantojam savu programmatūru',
+                'partial' => 'Daļēji dokumentēts / nav reālas sistēmas',
+                'other' => 'Cits',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Vai jūs izmantojat maksas HACCP risinājumus?',
+            'options' => [
+                'yes' => 'Jā',
+                'nb' => 'Nē',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Cik apmierināts jūs esat ar savu pašreizējo pieeju?',
+            'options' => [
+                'fully' => 'Pilnībā apmierināts',
+                'partially_ok' => 'Daļēji apmierināts',
+                'rather_not' => 'Drīzāk neapmierināts',
+                'not_at_all' => 'Vispār neapmierināts',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Vai jūs apsvērtu pāreju uz ērtāku sistēmu?',
+            'options' => [
+                'yes' => 'Jā',
+                'maybe' => 'Varbūt',
+                'nb' => 'Nē',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Kurš jūsu uzņēmumā praktiski atbild par HACCP?',
+            'options' => [
+                'self' => 'Es pats esmu atbildīgs',
+                'manager' => 'Vadītājs / administrators',
+                'staff' => 'Noteikts personāls',
+                'none' => 'Neviens oficiāli nepārrauga',
+                'other' => 'Cits',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Cik bieži darbinieki aizmirst veikt vai reģistrēt uzdevumus?',
+            'options' => [
+                'often' => 'Bieži',
+                'sometimes' => 'Dažreiz',
+                'rarely' => 'Reti',
+                'almost_never' => 'Gandrīz nekad',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Vai ieraksti kādreiz tiek aizpildīti ar atpakaļejošu datumu?',
+            'options' => [
+                'often' => 'Jā, bieži',
+                'sometimes' => 'Dažreiz',
+                'rarely' => 'Reti',
+                'never' => 'Nekad',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Kas jums ir visgrūtākais HACCP uzturēšanā?',
+            'subtitle' => 'Jūs varat izvēlēties vairākas atbildes.',
+            'options' => [
+                'records' => 'Uzskaites un dokumentācija',
+                'staff_control' => 'Darbinieku uzraudzība',
+                'realtime' => 'Procesu ievērošana reāllaikā',
+                'inspections' => 'Sagatavošanās pārbaudēm',
+                'training' => 'Apmācība un disciplīna',
+                'chaos' => 'Nav vienotas sistēmas / haotiski procesi',
+                'other' => 'Cits',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Vai jums pēdējā gada laikā bija pārbaudes?',
+            'options' => [
+                'yes' => 'Jā',
+                'nb' => 'Nē',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Kas jūs visvairāk satrauc pārbaudes laikā?',
+            'options' => [
+                'docs' => 'Dokumentācija',
+                'staff' => 'Darbinieku uzvedība',
+                'missing_records' => 'Trūkstoši ieraksti',
+                'overall' => 'Viss kopumā',
+                'other' => 'Cits',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Cik svarīga jums ir gatavība neplānotai pārbaudei?',
+            'options' => [
+                'very' => 'Ļoti svarīga',
+                'rather' => 'Diezgan svarīga',
+                'not_thought' => 'Par to neesmu īpaši domājis',
+                'not_important' => 'Nav svarīga',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Cik svarīgi jums ir, lai sistēma fiksētu darbinieku darbības to notikšanas brīdī (nevis vēlāk)?',
+            'options' => [
+                'very' => 'Ļoti svarīgi',
+                'rather' => 'Diezgan svarīgi',
+                'unsure' => 'Neesmu pārliecināts',
+                'not_important' => 'Nav svarīgi',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Kuras nb šīm iespējām jums būtu patiešām noderīgas darbā?',
+            'subtitle' => 'Jūs varat izvēlēties vairākas atbildes.',
+            'other_detail_field_label' => 'Pastāstiet, kas jums ir svarīgi',
+            'group_headings' => [
+                'safety' => 'Kontrole un drošība',
+                'inspection' => 'Darbs ar pārbaudēm',
+                'staff' => 'Personāla ērtības',
+                'automation' => 'Automatizācija',
+                'more' => 'Papildu',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Brīdinājumi, kad temperatūra iziet ārpus robežām',
+                'capture_at_moment' => 'Datu fiksēšana uzdevuma izpildes brīdī (bez atpakaļdatēšanas)',
+                'two_person_confirm' => 'Divu personu uzdevuma apstiprinājums',
+                'reports_qr_link' => 'Ātra piekļuve pārskatiem pārbaudēm (QR / saite)',
+                'photo_proof' => 'Foto kā pierādījums uzdevuma izpildei',
+                'full_action_history' => 'Pilna darbinieku darbību vēsture',
+                'offline_mobile' => 'Darbojas bezsaistē telefonā',
+                'voice_input' => 'Balss datu ievade',
+                'biz_templates' => 'Vienkāršas gatavas veidnes pēc uzņēmuma tipa',
+                'bluetooth_temp' => 'Automātiska temperatūras reģistrēšana (Bluetooth sensori)',
+                'risk_warnings' => 'Riska novērtējums un agrīni brīdinājumi',
+                'loss_on_violations' => 'Zaudējumu aprēķins pārkāpumu gadījumā',
+                'internal_staff_tasks' => 'Iekšējie uzdevumu saraksti darbiniekiem',
+                'push_reminders' => 'Paziņojumi darbiniekiem',
+                'other' => 'Cits (pastāstiet, kas jums ir svarīgi)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Ja sistēma varētu atrisināt vienu galveno problēmu jums, kas tā būtu?',
+            'field_caption' => 'Jūsu atbilde',
+        ],
+    ],
+];

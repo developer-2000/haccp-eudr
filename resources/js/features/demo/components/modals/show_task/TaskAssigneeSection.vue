@@ -2,27 +2,27 @@
     <div class="checklist-modal__assignee-block border-bottom-dashed">
         <template v-if="isHotMode">
             <p class="checklist-modal__hot-assignee-label">
-                <span>Ответственный:</span>
+                <span>{{ t('demo.task_assignee.label_colon') }}</span>
                 <span
                     class="checklist-modal__hot-assignee-text"
                     :class="{
                         'checklist-modal__hot-assignee-text--empty': !modalAssigneeDisplay,
                     }"
                 >
-                    {{ modalAssigneeDisplay || "Не назначен" }}
+                    {{ modalAssigneeDisplay || t('demo.task_assignee.not_assigned') }}
                 </span>
             </p>
         </template>
         <template v-else>
-            <p class="checklist-modal__assignee-label">Ответственный</p>
+            <p class="checklist-modal__assignee-label">{{ t('demo.task_assignee.label') }}</p>
             <template v-if="!task.assignedStaffId && !assigneePickerOpen">
                 <div class="checklist-modal__assignee-row">
-                    <span class="checklist-modal__assignee-empty">Не назначен</span>
+                    <span class="checklist-modal__assignee-empty">{{ t('demo.task_assignee.not_assigned') }}</span>
                     <n-button
                         type="primary"
                         @click="assigneePickerOpen = true"
                     >
-                        Назначить
+                        {{ t('demo.task_assignee.assign') }}
                     </n-button>
                 </div>
             </template>
@@ -32,7 +32,7 @@
                 :options="assigneeSelectOptions"
                 clearable
                 filterable
-                placeholder="Выберите сотрудника площадки"
+                :placeholder="t('demo.task_assignee.select_placeholder')"
                 @update:value="onAssigneeUpdate"
             />
         </template>
@@ -42,7 +42,10 @@
 <script setup>
 import {computed, ref, watch} from "vue";
 import {NButton, NSelect} from "naive-ui";
+import {useI18n} from "vue-i18n";
 import {NICHE_TO_SITE_ID, resolveStaffFullName} from "@/features/demo/utils/demoStaff";
+
+const {t} = useI18n();
 
 const props = defineProps({
     task: {
@@ -117,6 +120,7 @@ watch(
     },
 );
 </script>
+
 <style scoped lang="scss">
 @use "../../../../../../scss/variables" as *;
 

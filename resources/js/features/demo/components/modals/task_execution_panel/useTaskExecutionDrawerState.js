@@ -1,4 +1,6 @@
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
+import { i18n } from "@/i18n";
+const tt = (...args) => i18n.global.t(...args);
 import {TASK_FIELD_TYPE_OPTIONS} from "@/features/demo/data/demoChecklistTaskFields";
 import {
     EQUIPMENT_LABEL_BY_ID,
@@ -86,7 +88,7 @@ export function useTaskExecutionDrawerState(props) {
 
     const pendingSingleChoiceQuestion = computed(() => {
         const q = pendingSingleChoiceDefinition.value?.config?.question;
-        return String(q ?? "").trim() || "Выберите ответ";
+        return String(q ?? "").trim() || tt('demo.execution_drawer.select_answer');
     });
 
     const pendingSingleChoiceOptions = computed(() => {
@@ -136,12 +138,13 @@ export function useTaskExecutionDrawerState(props) {
 
     const pendingDrawerFieldTypeDisplay = computed(() => {
         const ft = pendingDrawerFieldType.value;
-        const label = TASK_FIELD_TYPE_OPTIONS.find((o) => o.value === ft)?.label;
+        const options = typeof TASK_FIELD_TYPE_OPTIONS === 'function' ? TASK_FIELD_TYPE_OPTIONS() : TASK_FIELD_TYPE_OPTIONS;
+        const label = options.find((o) => o.value === ft)?.label;
         return label ?? (ft ? String(ft) : "—");
     });
 
     const pendingInputSuffix = computed(() =>
-        pendingDrawerFieldType.value === "timer" ? "мин" : "°C",
+        pendingDrawerFieldType.value === "timer" ? "min" : "°C",
     );
 
     const pendingInputPrefix = computed(() =>
@@ -250,7 +253,7 @@ export function useTaskExecutionDrawerState(props) {
         }
         const completed = pendingTicketStatus.value === "completed";
         const comment = String(pendingTicketComment.value ?? "").trim();
-        m.value = completed ? "Выполнен" : "Не выполнен";
+        m.value = completed ? tt('demo.execution_drawer.status_completed') : tt('demo.execution_drawer.status_not_completed');
         m.status = completed ? "success" : "problem";
         m.aiWarning = null;
         m.comment = comment || null;

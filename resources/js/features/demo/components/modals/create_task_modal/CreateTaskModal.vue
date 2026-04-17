@@ -4,7 +4,7 @@
         :show="show"
         preset="card"
         class="checklists-add-modal"
-        title="Новая задача"
+        :title="t('demo.create_task.modal_title')"
         :style="addModalCardRootStyle"
         :content-style="addModalCardContentStyle"
         :segmented="{ content: true, footer: true }"
@@ -21,7 +21,7 @@
             <!-- Рельс этапов 1–2: назад только на пройденный шаг (кнопка), текущий и будущий — не кликабельны -->
             <nav
                 class="checklists-add-wizard__rail"
-                aria-label="Этапы создания задачи"
+                :aria-label="t('demo.create_task.wizard_aria')"
             >
                 <template
                     v-for="(stepId, stepIdx) in ADD_WIZARD_STEPS"
@@ -80,16 +80,17 @@
                 <!-- Шаг 1 мастера: название, тип задачи, блок «Детали задачи» (скрывается на шаге 2) -->
                 <template v-if="addWizardStep === 1">
                     <n-form-item
-                        label="Название"
+                        :label="t('demo.create_task.title_label')"
                         required
                         class="checklists-add-form__title"
                     >
                         <n-input
                             v-model:value="addForm.title"
-                            placeholder="Например: Контроль витрины"
+                            size="large"
+                            :placeholder="t('demo.create_task.title_placeholder')"
                         />
                     </n-form-item>
-                    <n-form-item label="Тип задачи">
+                    <n-form-item :label="t('demo.create_task.task_type')">
                         <n-radio-group
                             v-model:value="addForm.taskScopeType"
                             class="checklists-scope-group"
@@ -112,49 +113,51 @@
                     <!-- Блок «Детали задачи»: ответственный и частота -->
                     <div class="checklists-details-block">
                         <p class="checklists-details-heading">
-                            Детали задачи
+                            {{ t('demo.create_task.task_details') }}
                         </p>
                         <n-form-item
                             v-if="isEquipmentOrRooms"
-                            label="Ответственный работник"
+                            :label="t('demo.create_task.assignee_required')"
                             required
                             class="checklists-add-form__assignee"
                         >
                             <n-select
                                 v-model:value="addForm.assignedStaffId"
                                 :options="assigneeSelectOptions"
+                                size="large"
                                 clearable
                                 filterable
-                                placeholder="Выберите сотрудника площадки"
+                                :placeholder="t('demo.create_task.assignee_placeholder')"
                             />
                         </n-form-item>
                         <template v-else>
                             <n-form-item
-                                label="Назначить задачу"
+                                :label="t('demo.create_task.assign_task')"
                                 class="checklists-add-form__assignee"
                             >
                                 <n-select
                                     v-model:value="addForm.assignedStaffId"
                                     :options="assigneeSelectOptions"
+                                    size="large"
                                     clearable
                                     filterable
-                                    placeholder="Необязательно"
+                                    :placeholder="t('demo.create_task.assign_optional')"
                                 />
                             </n-form-item>
                             <p class="checklists-standalone-hint">
-                                Можно не указывать — тогда задача в демо
-                                считается в том числе на всю компанию.
+                                {{ t('demo.create_task.assign_hint') }}
                             </p>
                         </template>
-                        <n-form-item label="Частота">
+                        <n-form-item :label="t('demo.create_task.frequency')">
                             <n-select
                                 v-model:value="addForm.frequency"
                                 :options="frequencySelectOptions"
+                                size="large"
                             />
                         </n-form-item>
                         <div class="checklists-working-days-block">
                             <p class="checklists-working-days-block__title">
-                                Рабочие дни
+                                {{ t('demo.create_task.working_days') }}
                             </p>
                             <div class="checklists-working-days-block__list">
                                 <button
@@ -174,25 +177,27 @@
                         </div>
                         <div class="checklists-details-schedule-row">
                             <n-form-item
-                                label="Начало старта задачи"
+                                :label="t('demo.create_task.start_date')"
                                 required
                                 class="checklists-details-start-date"
                             >
                                 <n-date-picker
                                     v-model:value="addForm.startDate"
                                     type="date"
+                                    size="large"
                                     :is-date-disabled="isStartDateDisabled"
-                                    placeholder="Выберите дату"
+                                    :placeholder="t('demo.create_task.start_date_placeholder')"
                                 />
                             </n-form-item>
                             <n-form-item
-                                label="Повторений в день"
+                                :label="t('demo.create_task.repeats_per_day')"
                                 required
                                 class="checklists-details-repeats-per-day"
                             >
                                 <n-input-number
                                     v-model:value="addForm.scheduleSlotCount"
                                     :show-button="false"
+                                    size="large"
                                     :min="1"
                                     :step="1"
                                     :precision="0"
@@ -204,13 +209,13 @@
                         </div>
                         <div class="checklists-repeat-times-block">
                             <p class="checklists-repeat-times-block__title">
-                                Время выполнения
+                                {{ t('demo.create_task.execution_time') }}
                             </p>
                             <div class="checklists-repeat-times-block__list">
                                 <n-form-item
                                     v-for="idx in normalizedScheduleSlotCount"
                                     :key="`repeat-time-${idx}`"
-                                    :label="`Повтор ${idx}`"
+                                    :label="t('demo.create_task.repeat_n', { n: idx })"
                                     required
                                     class="checklists-repeat-times-block__item"
                                 >
@@ -220,8 +225,9 @@
                                         "
                                         format="HH:mm"
                                         value-format="HH:mm"
+                                        size="large"
                                         clearable
-                                        placeholder="Выберите время"
+                                        :placeholder="t('demo.create_task.time_placeholder')"
                                     />
                                 </n-form-item>
                             </div>
@@ -238,15 +244,16 @@
                         class="checklists-equipment-block"
                     >
                         <p class="checklists-details-heading">
-                            Предмет задачи
+                            {{ t('demo.create_task.task_subject') }}
                         </p>
                         <n-form-item
-                            label="Группа"
+                            :label="t('demo.create_task.group')"
                             class="checklists-equipment-group-select"
                         >
                             <n-select
                                 v-model:value="equipmentPickerGroupTitle"
                                 :options="equipmentGroupSelectOptions"
+                                size="large"
                             />
                         </n-form-item>
                         <n-checkbox-group
@@ -272,7 +279,7 @@
                         class="checklists-equipment-block"
                     >
                         <p class="checklists-details-heading">
-                            Предмет задачи
+                            {{ t('demo.create_task.task_subject') }}
                         </p>
                         <n-checkbox-group
                             v-model:value="addForm.roomTargetIds"
@@ -314,7 +321,7 @@
                     <div class="checklists-report-corrections">
                         <div class="header-checklists-report-corrections">
                             <p class="checklists-report-corrections__title">
-                                Корректировки в отчёте
+                                {{ t('demo.create_task.report_corrections') }}
                             </p>
                             <n-switch
                                 v-model:value="
@@ -323,10 +330,7 @@
                             />
                         </div>
                         <p class="checklists-report-corrections__text">
-                            Разрешить ответственному самостоятельно вносить
-                            корректировки в отчёт по задаче (не
-                            редактирование карточки целиком). В демо
-                            уведомления по email не отправляются.
+                            {{ t('demo.create_task.report_corrections_text') }}
                         </p>
                     </div>
                 </template>
@@ -335,29 +339,32 @@
         <!-- Футер модалки: Отмена, Добавить, Далее (закрытие только отсюда или крестик в заголовке карточки) -->
         <template #footer>
             <div class="checklists-modal-footer">
-                <n-button type="warning" @click="closeModal">
-                    Отмена
+                <n-button type="warning" size="large" @click="closeModal">
+                    {{ t('demo.create_task.cancel') }}
                 </n-button>
                 <n-button
                     v-if="addWizardStep === 2"
                     type="success"
+                    size="large"
                     @click="backToAddWizardStep1"
                 >
-                    Назад
+                    {{ t('demo.create_task.back') }}
                 </n-button>
                 <n-button
                     v-if="addWizardStep === 2"
                     type="info"
+                    size="large"
                     @click="submitAddTask"
                 >
-                    Добавить
+                    {{ t('demo.create_task.add') }}
                 </n-button>
                 <n-button
                     v-if="addWizardStep === 1"
                     type="primary"
+                    size="large"
                     @click="advanceAddWizardStep"
                 >
-                    Далее
+                    {{ t('demo.create_task.next') }}
                 </n-button>
             </div>
         </template>
@@ -366,6 +373,7 @@
 
 <script setup>
 import { computed, reactive, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import {
     NButton,
     NCheckbox,
@@ -409,6 +417,8 @@ import {
 } from "@/features/demo/domain/checklistTaskModel";
 
 defineOptions({ name: "CreateTaskModal" });
+
+const { t } = useI18n();
 
 const props = defineProps({
     show: {
@@ -464,31 +474,31 @@ const addModalBodyScrollStyle = {
 const message = useMessage();
 const { addChecklistTask } = useDemoState();
 
-const taskScopeOptions = [
+const taskScopeOptions = computed(() => [
     {
         value: TASK_SCOPE_TYPE.EQUIPMENT,
-        label: "Оборудование",
-        hint: "Задача с возможным выбором нескольких единиц оборудования. (Температуры, вопрос-ответ, контроль или поручение)",
+        label: t('demo.create_task.scope_equipment'),
+        hint: t('demo.create_task.scope_equipment_hint'),
     },
     {
         value: TASK_SCOPE_TYPE.ROOMS,
-        label: "Комнаты",
-        hint: "Одно задание для нескольких помещений или зон (например уборка пола).",
+        label: t('demo.create_task.scope_rooms'),
+        hint: t('demo.create_task.scope_rooms_hint'),
     },
-];
+]);
 
 let activeValidationErrorElements = [];
 
 const ADD_WIZARD_STEPS = Object.freeze([1, 2]);
 const addWizardStep = ref(1);
-const WEEKDAY_OPTIONS = Object.freeze([
-    { value: "mon", short: "Пн" },
-    { value: "tue", short: "Вт" },
-    { value: "wed", short: "Ср" },
-    { value: "thu", short: "Чт" },
-    { value: "fri", short: "Пт" },
-    { value: "sat", short: "Сб" },
-    { value: "sun", short: "Вс" },
+const WEEKDAY_OPTIONS = computed(() => [
+    { value: "mon", short: t('demo.create_task.day_mon') },
+    { value: "tue", short: t('demo.create_task.day_tue') },
+    { value: "wed", short: t('demo.create_task.day_wed') },
+    { value: "thu", short: t('demo.create_task.day_thu') },
+    { value: "fri", short: t('demo.create_task.day_fri') },
+    { value: "sat", short: t('demo.create_task.day_sat') },
+    { value: "sun", short: t('demo.create_task.day_sun') },
 ]);
 const startOfTodayTimestamp = () => {
     const d = new Date();
@@ -748,11 +758,11 @@ const assigneeSelectOptions = computed(() => {
 /**
  * Варианты периодичности для поля «Частота» в конструкторе задачи.
  */
-const frequencySelectOptions = [
-    { label: "Регулярно", value: FREQUENCY_CODE.CUSTOM },
-    { label: "Один раз в день", value: FREQUENCY_CODE.DAILY },
-    { label: "Раз в неделю", value: FREQUENCY_CODE.WEEKLY },
-];
+const frequencySelectOptions = computed(() => [
+    { label: t('demo.create_task.freq_custom'), value: FREQUENCY_CODE.CUSTOM },
+    { label: t('demo.create_task.freq_daily'), value: FREQUENCY_CODE.DAILY },
+    { label: t('demo.create_task.freq_weekly'), value: FREQUENCY_CODE.WEEKLY },
+]);
 
 const onUpdateShow = (value) => {
     emit("update:show", value);
@@ -804,12 +814,12 @@ const resetAddForm = () => {
 
 const addWizardStepAriaLabel = (stepId) => {
     if (addWizardStep.value > stepId) {
-        return `Шаг ${stepId}, выполнено`;
+        return t('demo.create_task.step_done', { n: stepId });
     }
     if (addWizardStep.value === stepId) {
-        return `Шаг ${stepId}, текущий`;
+        return t('demo.create_task.step_current', { n: stepId });
     }
-    return `Шаг ${stepId}, недоступен`;
+    return t('demo.create_task.step_unavailable', { n: stepId });
 };
 
 const onAddWizardStepClick = (stepId) => {
@@ -822,13 +832,13 @@ const onAddWizardStepClick = (stepId) => {
 const validateScheduleFields = () => {
     if (addForm.startDate == null) {
         scrollToModalField(".checklists-details-start-date");
-        message.warning("Укажите дату в поле «Начало старта задачи».");
+        message.warning(t('demo.create_task.warn_start_date'));
         return false;
     }
     const slotCountValue = Number(addForm.scheduleSlotCount);
     if (!Number.isFinite(slotCountValue) || Math.trunc(slotCountValue) < 1) {
         scrollToModalField(".checklists-details-repeats-per-day");
-        message.warning("Укажите корректное число в поле «Повторений в день».");
+        message.warning(t('demo.create_task.warn_repeats'));
         return false;
     }
     if (
@@ -836,7 +846,7 @@ const validateScheduleFields = () => {
         addForm.repeatTimes.some((time) => !String(time ?? "").trim())
     ) {
         scrollToModalField(".checklists-repeat-times-block");
-        message.warning("Укажите время для каждого повтора в день.");
+        message.warning(t('demo.create_task.warn_repeat_times'));
         return false;
     }
     clearValidationErrorMark();
@@ -912,7 +922,7 @@ const validateTaskFieldsSection = () => {
         : [];
     if (!rows.length) {
         scrollToModalField(".task-fields-section", true);
-        message.warning("Укажите поле в секции «Суть задачи».");
+        message.warning(t('demo.create_task.warn_task_field'));
         return false;
     }
     const hasSelectedFieldTypeRequiringExceptions = rows.some(
@@ -926,7 +936,7 @@ const validateTaskFieldsSection = () => {
         const rowNum = i + 1;
         if (!row.fieldType) {
             scrollToModalField(`[data-field-row-index="${i}"]`);
-            message.warning(`Выберите тип для поля задачи №${rowNum}.`);
+            message.warning(t('demo.create_task.warn_field_type', { n: rowNum }));
             return false;
         }
         const hasText = (v) => String(v ?? "").trim().length > 0;
@@ -942,14 +952,14 @@ const validateTaskFieldsSection = () => {
                     !hasRequiredNumber(cfg.maxC)
                 ) {
                     scrollToModalField(`[data-field-row-index="${i}"]`);
-                    message.warning(`Заполните все обязательные данные в поле №${rowNum} (температура).`);
+                    message.warning(t('demo.create_task.warn_field_temp', { n: rowNum }));
                     return false;
                 }
                 break;
             case TASK_FIELD_TYPE.SINGLE_CHOICE:
                 if (!hasText(cfg.question)) {
                     scrollToModalField(`[data-field-row-index="${i}"]`);
-                    message.warning(`Заполните вопрос в поле №${rowNum}.`);
+                    message.warning(t('demo.create_task.warn_field_question', { n: rowNum }));
                     return false;
                 }
                 if (
@@ -958,20 +968,20 @@ const validateTaskFieldsSection = () => {
                     cfg.options.some((opt) => !hasText(opt))
                 ) {
                     scrollToModalField(`[data-field-row-index="${i}"]`);
-                    message.warning(`Заполните все варианты ответа в поле №${rowNum}.`);
+                    message.warning(t('demo.create_task.warn_field_answers', { n: rowNum }));
                     return false;
                 }
                 break;
             case TASK_FIELD_TYPE.TICKET:
                 if (!hasText(cfg.description)) {
                     scrollToModalField(`[data-field-row-index="${i}"]`);
-                    message.warning(`Заполните описание заявки в поле №${rowNum}.`);
+                    message.warning(t('demo.create_task.warn_field_ticket', { n: rowNum }));
                     return false;
                 }
                 break;
             default:
                 scrollToModalField(`[data-field-row-index="${i}"]`);
-                message.warning(`Поле №${rowNum} заполнено некорректно.`);
+                message.warning(t('demo.create_task.warn_field_invalid', { n: rowNum }));
                 return false;
         }
     }
@@ -984,7 +994,7 @@ const validateTaskFieldsSection = () => {
         );
         if (!hasAny) {
             scrollToModalField(".task-fields-section__exception-block", true);
-            message.warning("Составьте список пояснений на случай провала задачи!");
+            message.warning(t('demo.create_task.warn_corrective_actions'));
             return false;
         }
     }
@@ -1021,7 +1031,7 @@ const advanceAddWizardStep = () => {
     }
     if (!String(addForm.title ?? "").trim()) {
         scrollToModalField(".checklists-add-form__title");
-        message.warning("Укажите название задачи.");
+        message.warning(t('demo.create_task.warn_title_required'));
         return;
     }
     const assigneeResolved = resolveAssigneeIdForNiche(
@@ -1031,9 +1041,7 @@ const advanceAddWizardStep = () => {
     );
     if (isEquipmentOrRooms.value && !assigneeResolved) {
         scrollToModalField(".checklists-add-form__assignee");
-        message.warning(
-            "Выбрать ответственного для задачи!",
-        );
+        message.warning(t('demo.create_task.warn_assignee_required'));
         return;
     }
     addWizardStep.value = 2;
@@ -1056,9 +1064,7 @@ const submitAddTask = () => {
     );
     if (isEquipmentOrRooms.value && !assigneeResolved) {
         scrollToModalField(".checklists-add-form__assignee");
-        message.warning(
-            "Выберите ответственного для задач с охватом оборудования или комнат.",
-        );
+        message.warning(t('demo.create_task.warn_assignee_scope'));
         return;
     }
     if (!validateScheduleFields()) {
@@ -1068,7 +1074,7 @@ const submitAddTask = () => {
         const eq = normalizeEquipmentTargetIds(addForm.equipmentTargetIds);
         if (!eq.length) {
             scrollToModalField(".checklists-equipment-block", true);
-            message.warning("Укажите предназначение задачи");
+            message.warning(t('demo.create_task.warn_scope_required'));
             return;
         }
     }
@@ -1076,7 +1082,7 @@ const submitAddTask = () => {
         const rooms = normalizeRoomTargetIds(addForm.roomTargetIds);
         if (!rooms.length) {
             scrollToModalField(".checklists-equipment-block", true);
-            message.warning("Вы не указали предназначение задачи");
+            message.warning(t('demo.create_task.warn_scope_empty'));
             return;
         }
     }
@@ -1090,7 +1096,7 @@ const submitAddTask = () => {
     const taskPayload = modalFormData;
     const id = addChecklistTask(props.activeNiche, taskPayload);
     if (!id) {
-        message.warning("Укажите название контрольной точки.");
+        message.warning(t('demo.create_task.warn_checkpoint_name'));
         return;
     }
     emit("update:show", false);

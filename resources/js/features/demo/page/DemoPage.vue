@@ -13,8 +13,8 @@
                 <button
                     type="button"
                     class="demo-date-picker"
-                    title="День календаря"
-                    aria-label="День календаря"
+                    :title="t('demo.page.calendar_day')"
+                    :aria-label="t('demo.page.calendar_day')"
                 >
                     <span class="demo-date-picker__icon" aria-hidden="true">
                         <svg
@@ -44,7 +44,7 @@
                             <circle cx="16" cy="16" r="1" fill="currentColor" />
                         </svg>
                     </span>
-                    <span class="demo-date-picker__text">День календаря</span>
+                    <span class="demo-date-picker__text">{{ t('demo.page.calendar_day') }}</span>
                 </button>
                 <div class="demo-topbar__date">
                     <time class="demo-topbar__date-value" :datetime="todayIso"
@@ -59,7 +59,7 @@
             :to="surveyPath"
             class="btn-client btn-success demo-topbar-cta"
         >
-            Хочу такое для бизнеса
+            {{ t('demo.page.cta_survey') }}
         </RouterLink>
 
         <!-- Лейаут: сайдбар (desktop) + основной контент -->
@@ -76,7 +76,7 @@
                     :to="surveyPath"
                     class="btn-client btn-success demo-sidebar__cta"
                 >
-                    Хочу такое для бизнеса
+                    {{ t('demo.page.cta_survey') }}
                 </RouterLink>
             </aside>
 
@@ -87,7 +87,7 @@
                         {{ activeSectionConfig.title }}
                     </h1>
 
-                    <KeepAlive :max="sectionLinks.length">
+                    <KeepAlive :max="sectionLinks.length" >
                         <component
                             :is="activeSectionComponent"
                             :key="activeSectionId"
@@ -103,14 +103,23 @@
 <script setup>
 import { computed, defineAsyncComponent, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import DemoSectionNavigation from "@/features/demo/components/nav/DemoSectionNavigation.vue";
 import { useDemoDashboardViewModel } from "@/features/demo/composables/useDemoDashboardViewModel";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
+import { usePageSeo } from "@/composables/usePageSeo";
 
 defineOptions({ name: "Demo" });
 
 const route = useRoute();
 const router = useRouter();
+const { t } = useI18n();
+
+const demoSeoKey = computed(() => {
+    const section = route.params.section || "dashboard";
+    return `seo.demo_${section}`;
+});
+usePageSeo({ i18nKey: demoSeoKey });
 
 /** Допустимые сегменты URL после `/demo/` — совпадают с `id` в sectionLinks. */
 const DEMO_SECTION_IDS = new Set([
@@ -166,33 +175,13 @@ watch(
     { immediate: true },
 );
 
-const sectionLinks = [
-    {
-        id: "dashboard",
-        label: "Dashboard",
-        svg: "laptop-mac-twotone",
-    },
-    {
-        id: "checklists",
-        label: "Checklists",
-        svg: "task-complete",
-    },
-    {
-        id: "personnel",
-        label: "Персонал",
-        svg: "people-community-24-filled",
-    },
-    {
-        id: "eudr",
-        label: "EUDR QR (сырье)",
-        svg: "qr-code-twotone",
-    },
-    {
-        id: "reports",
-        label: "Reports",
-        svg: "report-search",
-    },
-];
+const sectionLinks = computed(() => [
+    { id: "dashboard", label: t('demo.page.section_dashboard'), svg: "laptop-mac-twotone" },
+    { id: "checklists", label: t('demo.page.section_checklists'), svg: "task-complete" },
+    { id: "personnel", label: t('demo.page.section_personnel'), svg: "people-community-24-filled" },
+    { id: "eudr", label: t('demo.page.section_eudr'), svg: "qr-code-twotone" },
+    { id: "reports", label: t('demo.page.section_reports'), svg: "report-search" },
+]);
 
 const sectionComponentMap = {
     dashboard: DashboardSectionAsync,
@@ -202,40 +191,20 @@ const sectionComponentMap = {
     reports: ReportsSectionAsync,
 };
 
-const sectionConfigMap = {
-    dashboard: {
-        id: "dashboard",
-        title: "Dashboard",
-        inlineTitle: false,
-    },
-    checklists: {
-        id: "checklists",
-        title: "Checklists",
-        inlineTitle: false,
-    },
-    personnel: {
-        id: "personnel",
-        title: "Персонал",
-        inlineTitle: false,
-    },
-    eudr: {
-        id: "eudr",
-        title: "EUDR QR (сырье)",
-        inlineTitle: false,
-    },
-    reports: {
-        id: "reports",
-        title: "Reports",
-        inlineTitle: true,
-    },
-};
+const sectionConfigMap = computed(() => ({
+    dashboard: { id: "dashboard", title: t('demo.page.section_dashboard'), inlineTitle: false },
+    checklists: { id: "checklists", title: t('demo.page.section_checklists'), inlineTitle: false },
+    personnel: { id: "personnel", title: t('demo.page.section_personnel'), inlineTitle: false },
+    eudr: { id: "eudr", title: t('demo.page.section_eudr'), inlineTitle: false },
+    reports: { id: "reports", title: t('demo.page.section_reports'), inlineTitle: true },
+}));
 
 const activeSectionComponent = computed(
     () => sectionComponentMap[activeSectionId.value] ?? null,
 );
 
 const activeSectionConfig = computed(
-    () => sectionConfigMap[activeSectionId.value] ?? null,
+    () => sectionConfigMap.value[activeSectionId.value] ?? null,
 );
 
 const activeSectionProps = computed(() => {
@@ -286,14 +255,13 @@ const todayIso = computed(() => {
     return `${y}-${m}-${day}`;
 });
 
-/** Дата в формате «25 марта 2026», без « г.» */
+/** Дата в локализованном формате на основе текущей локали из URL. */
 const todayFormatted = computed(() => {
-    const s = new Intl.DateTimeFormat("ru-RU", {
+    return new Intl.DateTimeFormat(locale.value, {
         day: "numeric",
         month: "long",
         year: "numeric",
     }).format(new Date());
-    return s.replace(/\s+г\.?$/u, "").trim();
 });
 
 </script>
@@ -303,7 +271,7 @@ const todayFormatted = computed(() => {
 
 .demo-page {
     position: relative;
-    min-height: 100%;
+    flex: 1;
     background-color: $bg-gray;
     scroll-behavior: smooth;
 }
@@ -392,8 +360,11 @@ const todayFormatted = computed(() => {
 .demo-topbar-cta {
     display: none;
     margin: 25px auto 0 auto;
-    width: 240px;
-    justify-content: center;
+    width: fit-content;
+    max-width: calc(100% - 32px);
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+    white-space: nowrap;
 }
 
 .demo-layout {
@@ -438,6 +409,10 @@ const todayFormatted = computed(() => {
     min-height: 220px;
     box-shadow: $shadow-sm;
     transition: box-shadow $transition-base ease;
+
+    @media (max-width: 500px) {
+        padding: $spacing-lg $spacing-md-lg $spacing-xl $spacing-md-lg;
+    }
 
     &:hover {
         box-shadow: $shadow-md;

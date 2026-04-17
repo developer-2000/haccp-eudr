@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Hjelp oss å bygge et system som fjerner smerten ved HACCP-samsvar',
+        'subtitle' => 'Kort undersøkelse — ca. 5 minutter. Svarene dine vil hjelpe oss å gjøre systemet egnet for reell drift og inspeksjoner.',
+        'trust' => 'Svarene dine brukes kun til analyse og deles ikke med tredjeparter.',
+        'start' => 'Kom i gang',
+    ],
+
+    'nav' => [
+        'back' => 'Tilbake',
+        'back_aria' => 'Gå tilbake til forrige steg',
+    ],
+
+    'progress' => [
+        'aria' => 'Undersøkelse: steg :current av :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Vennligst skriv inn e-post — dette feltet er påkrevd.',
+        'email_invalid' => 'Vennligst skriv inn en gyldig e-postadresse.',
+    ],
+
+    'ui' => [
+        'next' => 'Neste',
+        'next_disabled_aria' => 'Neste — svar på spørsmålet først',
+        'other_default_label' => 'Vennligst spesifiser',
+        'other_aria_prefix' => 'Tilleggsdetalj for svaret ditt:',
+        'select_placeholder' => 'Velg et alternativ',
+        'country_clear' => 'Fjern valgt land',
+        'country_search' => 'Søk etter landnavn',
+        'country_search_placeholder' => 'Søk…',
+        'submit' => 'Send inn',
+        'submit_sending' => 'Sender...',
+        'submit_failed' => 'Kunne ikke sende inn undersøkelsesdata. Prøv igjen.',
+        'questions_load_error' => 'Kunne ikke laste undersøkelsesspørsmål. Oppdater siden eller prøv igjen senere.',
+        'response_saved' => 'Svar på undersøkelsen lagret.',
+        'verification_sent' => 'Verifiseringskode er sendt til e-posten din.',
+        'cooldown_wait' => 'Vennligst vent noen sekunder og prøv igjen.',
+        'token_not_found' => 'Token ikke funnet. Prøv å fullføre undersøkelsen igjen.',
+        'network_error' => 'Nettverksfeil. Prøv igjen.',
+        'pin_instruction' => 'En PIN-kode er sendt til den angitte e-postadressen. Skriv den inn for å bekrefte eierskap.',
+        'pin_attempts_left' => '{used} av {total} forsøk igjen',
+        'pin_container_aria' => 'PIN-kode verifisering',
+        'pin_group_aria' => '4-sifret PIN-kode',
+    ],
+
+    'lead' => [
+        'title' => 'Legg igjen kontaktinformasjonen din for å:',
+        'bullet_discount' => 'få 20 % livstidsrabatt',
+        'bullet_access' => 'få tidlig tilgang til systemet',
+        'bullet_influence' => 'påvirke produktets utviklingsplan',
+        'expectation' => 'Dette er siste steg: etter dette er undersøkelsen fullført. Vi trenger kun dine opplysninger for å følge opp med deg.',
+        'field_name' => 'Ditt navn',
+        'field_business_name' => 'Bedriftsnavn',
+        'field_email' => 'E-post',
+        'field_email_required_sr' => '(påkrevd)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 eller wa.me/...',
+        'placeholder_telegram' => "{'@'}brukernavn",
+    ],
+
+    'success' => [
+        'title' => 'Takk. Jeg vil kontakte deg personlig når systemet er klart.',
+        'body' => "Du vil få en invitasjon til en sandkasseversjon,\nder du kan teste systemet i praksis og være med å forme utviklingen. Dette hjelper oss å tilpasse produktet til reelle forretningsprosesser.",
+        'reassurance' => 'Vi planlegger ikke masseutsendelser — kun en personlig melding med oppdateringer.',
+        'update_hint' => "Hvis prosessene dine endrer seg eller du får nye oppgaver —\nvil du kunne oppdatere svarene dine via lenken sendt til e-posten din.",
+        'home_link' => 'Tilbake til forsiden',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Takk for at du fullførte spørreskjemaet!',
+        'subtitle' => 'Din deltakelse er et betydelig bidrag i den tidlige fasen av utviklingen.',
+        'image_alt' => 'Svaret er lagret i databasen',
+        'email_label' => 'E-post:',
+        'sent_label' => 'Sendt:',
+        'reset_button' => 'Oppdater svar',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, takk for dine svar',
+        'subject_default' => 'Takk for dine svar',
+        'header_tagline' => 'HACCP-overholdelsessystem i sanntid',
+        'title' => 'Takk for din deltakelse — din tilgang og 20% rabatt',
+        'greeting_with_name' => 'Hei, :name!',
+        'greeting_default' => 'Hei!',
+        'thank_you' => 'Takk for at du tok deg tid til å fullføre spørreundersøkelsen.',
+        'value_note' => 'Dine svar er virkelig verdifulle — de former direkte produktet.',
+        'registered_as' => 'Du er registrert som en deltaker med tidlig tilgang',
+        'discount_label' => '–20% livstidsrabatt',
+        'discount_code_label' => 'Din kode:',
+        'description_line1' => 'Systemet er for øyeblikket under utvikling.',
+        'description_line2' => 'Jeg analyserer svar fra bedriftseiere og forbedrer funksjonaliteten for reelle arbeidsprosesser.',
+        'description_line3' => 'Hovedmålet er at systemet skal hjelpe deg å bestå inspeksjoner med trygghet — ikke bare føre registreringer.',
+        'benefits_title' => 'Hva du får:',
+        'benefit_1' => 'Sporing av handlinger i sanntid',
+        'benefit_2' => 'Transparent historikk for inspeksjoner',
+        'benefit_3' => 'Kontroll uten ekstra arbeidsbelastning',
+        'cta_button' => 'Gå til nettsiden',
+        'footer_updates' => 'Jeg vil jevnlig dele utviklingsoppdateringer og invitere deg til å teste nye funksjoner.',
+        'footer_feedback' => 'Din tilbakemelding og dine ideer vil hjelpe med å gjøre systemet mer nyttig i reell drift.',
+        'footer_reply' => 'Hvis du allerede har tanker eller krav — svar bare på denne e-posten.',
+        'footer_signature' => 'Med vennlig hilsen, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Din verifiseringskode for HACCPilot',
+        'header_tagline' => 'Sikkerhetsbekreftelse for oppdatering av spørreundersøkelsen',
+        'title' => 'Bekreft oppdatering av dine svar',
+        'description' => 'Du har bedt om å oppdatere dine svar i HACCPilot-spørreundersøkelsen.',
+        'instruction' => 'For å bekrefte, skriv inn koden nedenfor:',
+        'code_expiry' => 'Koden er gyldig i en begrenset periode',
+        'not_you' => 'Hvis dette ikke var deg — bare ignorer denne e-posten.',
+        'data_safe' => 'Dine data vil forbli uendret.',
+        'cta_button' => 'Gå tilbake til oppdatering',
+        'footer_auto' => 'Dette er en automatisk melding fra HACCPilot-systemet.',
+        'footer_purpose' => 'Koden brukes kun for å bekrefte datendringer.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Dine svar i spørreundersøkelsen er oppdatert',
+        'header_tagline' => 'Bekreftelse på oppdatering av spørreundersøkelsesdata',
+        'title' => 'Dine data er успешно oppdatert!',
+        'greeting_with_name' => 'Hei, :name!',
+        'greeting_default' => 'Hei!',
+        'thank_you' => 'Takk for at du oppdaterte dine svar i spørreundersøkelsen.',
+        'status_label' => 'Status for din spørreundersøkelse:',
+        'status_value' => 'Oppdatert og bekreftet',
+        'status_note' => 'Alle endringer er lagret og vil bli brukt til å tilpasse HACCPilot-systemet.',
+        'footer_auto' => 'Dette er et automatisk varsel fra HACCPilot-systemet.',
+        'footer_data_use' => 'Dine data brukes kun for å forbedre systemets nøyaktighet og personalisering.',
+        'footer_signature' => 'Med vennlig hilsen, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Lenken er ugyldig eller har utløpt. Prøv å fullføre spørreundersøkelsen igjen.',
+        'attempts_exhausted' => 'Verifisering mislyktes. Fullfør spørreundersøkelsen igjen.',
+        'code_invalid' => 'Ugyldig kode. Prøv igjen.',
+        'success' => 'Svarene i spørreundersøkelsen er успешно oppdatert.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Hvilken type virksomhet driver du?',
+            'options' => [
+                'cafe' => 'Kafé / kaffebar',
+                'bakery' => 'Bakeri / brødproduksjon',
+                'meat' => 'Kjøttproduksjon / slakteri',
+                'kitchen' => 'Kjøkken / matproduksjon',
+                'other' => 'Annet',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Hvor mange personer jobber for deg?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'I hvilket land driver du virksomhet?',
+            'field_caption' => 'Velg et land fra listen',
+        ],
+        '4' => [
+            'question_text' => 'Hvordan håndterer du HACCP i dag?',
+            'options' => [
+                'paper' => 'Papirregistreringer',
+                'excel' => 'Excel / Google Sheets',
+                'software' => 'Vi bruker egen programvare',
+                'partial' => 'Delvis dokumentert / ikke et reelt system',
+                'other' => 'Annet',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Bruker du betalte HACCP-løsninger?',
+            'options' => [
+                'yes' => 'Ja',
+                'nb' => 'Nei',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Hvor fornøyd er du med din nåværende tilnærming?',
+            'options' => [
+                'fully' => 'Helt fornøyd',
+                'partially_ok' => 'Delvis fornøyd',
+                'rather_not' => 'Ganske misfornøyd',
+                'not_at_all' => 'Ikke fornøyd i det hele tatt',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Ville du vurdert å gå over til et mer praktisk system?',
+            'options' => [
+                'yes' => 'Ja',
+                'maybe' => 'Kanskje',
+                'nb' => 'Nei',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Hvem i virksomheten din er ansvarlig for HACCP i praksis?',
+            'options' => [
+                'self' => 'Jeg er personlig ansvarlig',
+                'manager' => 'Leder / administrator',
+                'staff' => 'Utpekt ansatte',
+                'none' => 'Ingen har formelt ansvar',
+                'other' => 'Annet',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Hvor ofte glemmer ansatte å fullføre eller registrere oppgaver?',
+            'options' => [
+                'often' => 'Ofte',
+                'sometimes' => 'Noen ganger',
+                'rarely' => 'Sjelden',
+                'almost_never' => 'Nesten aldri',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Blir registreringer noen ganger fylt inn i ettertid?',
+            'options' => [
+                'often' => 'Ja, ofte',
+                'sometimes' => 'Noen ganger',
+                'rarely' => 'Sjelden',
+                'never' => 'Aldri',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Hva er den vanskeligste delen med å holde HACCP under kontroll for deg?',
+            'subtitle' => 'Du kan velge flere svar.',
+            'options' => [
+                'records' => 'Å føre registre og dokumentasjon',
+                'staff_control' => 'Å overvåke hva ansatte faktisk gjør',
+                'realtime' => 'Å følge prosedyrer i sanntid',
+                'inspections' => 'Å forberede seg til inspeksjoner',
+                'training' => 'Opplæring og personaldisiplin',
+                'chaos' => 'Intet enkelt system / kaotiske prosesser',
+                'other' => 'Annet',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Har du hatt inspeksjoner det siste året?',
+            'options' => [
+                'yes' => 'Ja',
+                'nb' => 'Nei',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Hva stresser deg mest under en inspeksjon?',
+            'options' => [
+                'docs' => 'Dokumentasjon',
+                'staff' => 'Ansattes oppførsel',
+                'missing_records' => 'Manglende registreringer',
+                'overall' => 'Alt samlet',
+                'other' => 'Annet',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Hvor viktig er det for deg å være klar for en uanmeldt inspeksjon?',
+            'options' => [
+                'very' => 'Veldig viktig',
+                'rather' => 'Ganske viktig',
+                'not_thought' => 'Har ikke tenkt så mye på det',
+                'not_important' => 'Ikke viktig',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Hvor viktig er det for deg å ha et system som fanger opp ansattes handlinger mens de skjer (ikke i ettertid)?',
+            'options' => [
+                'very' => 'Veldig viktig',
+                'rather' => 'Ganske viktig',
+                'unsure' => 'Usikker',
+                'not_important' => 'Ikke viktig',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Hvilke av disse funksjonene ville være virkelig nyttige i arbeidet ditt?',
+            'subtitle' => 'Du kan velge flere svar.',
+            'other_detail_field_label' => 'Fortell hva som betyr noe for deg',
+            'group_headings' => [
+                'safety' => 'Kontroll og sikkerhet',
+                'inspection' => 'Arbeid med inspeksjoner',
+                'staff' => 'Ansattes brukervennlighet',
+                'automation' => 'Automatisering',
+                'more' => 'Tillegg',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Varsler når temperaturen går utenfor område',
+                'capture_at_moment' => 'Registrering i det øyeblikket oppgaven utføres (ikke etterpå)',
+                'two_person_confirm' => 'To-persons bekreftelse av en oppgave',
+                'reports_qr_link' => 'Rask tilgang til rapporter for inspeksjoner (QR / lenke)',
+                'photo_proof' => 'Bilder som bevis på utført oppgave',
+                'full_action_history' => 'Full historikk over ansattes handlinger',
+                'offline_mobile' => 'Fungerer offline på telefon',
+                'voice_input' => 'Taleinntasting',
+                'biz_templates' => 'Enkle ferdige maler etter virksomhetstype',
+                'bluetooth_temp' => 'Automatisk temperaturlogging (Bluetooth-sensorer)',
+                'risk_warnings' => 'Risikovurdering og tidlige varsler',
+                'loss_on_violations' => 'Estimer tap ved brudd på regler',
+                'internal_staff_tasks' => 'Interne oppgavelister for ansatte',
+                'push_reminders' => 'Push-påminnelser for ansatte',
+                'other' => 'Annet (fortell hva som betyr noe for deg)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Hvis systemet kunne løse ett hovedproblem for deg, hva ville det være?',
+            'field_caption' => 'Ditt svar',
+        ],
+    ],
+];

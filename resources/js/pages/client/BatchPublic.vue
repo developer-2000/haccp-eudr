@@ -6,18 +6,17 @@
                 class="batch-public__print btn-client btn-outline-primary"
                 @click="print"
             >
-                Печать / PDF
+                {{ t('batch.public.print_pdf') }}
             </button>
         </div>
 
         <div v-if="!record" class="batch-public__missing container">
-            <h1 class="batch-public__missing-title">Партия не найдена</h1>
+            <h1 class="batch-public__missing-title">{{ t('batch.public.not_found_title') }}</h1>
             <p class="batch-public__missing-text">
-                Код «{{ batchId }}» не существует в демо-данных. Проверьте
-                ссылку или откройте демо EUDR QR.
+                {{ t('batch.public.not_found_text', { batchId }) }}
             </p>
             <RouterLink class="btn-client btn-outline-primary" :to="homePath"
-                >На главную</RouterLink
+                >{{ t('batch.public.go_home') }}</RouterLink
             >
         </div>
 
@@ -25,30 +24,25 @@
             <header class="batch-public__head">
                 <div class="batch-public__eu-band" aria-hidden="true" />
                 <p class="batch-public__kicker">
-                    Regulation (EU) 2023/1115 — demo disclosure
+                    {{ t('batch.public.kicker') }}
                 </p>
                 <h1 class="batch-public__title">
-                    EUDR — раскрытие сведений по партии
+                    {{ t('batch.public.title') }}
                 </h1>
                 <p class="batch-public__sub">
-                    Не юридически обязательный документ; демонстрация для
-                    инспектора / контрагента.
+                    {{ t('batch.public.subtitle') }}
                 </p>
                 <div class="batch-public__refs">
                     <div>
-                        <span class="batch-public__label"
-                            >Batch / consignment ID</span
-                        >
+                        <span class="batch-public__label">{{ t('batch.public.batch_id_label') }}</span>
                         <strong>{{ record.id }}</strong>
                     </div>
                     <div>
-                        <span class="batch-public__label"
-                            >DDS reference (demo)</span
-                        >
+                        <span class="batch-public__label">{{ t('batch.public.dds_reference_label') }}</span>
                         <strong>{{ record.ddsReference }}</strong>
                     </div>
                     <div>
-                        <span class="batch-public__label">Статус</span>
+                        <span class="batch-public__label">{{ t('batch.public.status_label') }}</span>
                         <span
                             class="batch-public__status"
                             :class="`batch-public__status--${record.status}`"
@@ -60,86 +54,86 @@
             </header>
 
             <section class="batch-public__section">
-                <h2>1. Оператор (EU)</h2>
+                <h2>{{ t('batch.public.section_operator') }}</h2>
                 <dl class="batch-public__dl">
                     <div>
-                        <dt>Наименование</dt>
+                        <dt>{{ t('batch.public.operator_name') }}</dt>
                         <dd>{{ record.operator.name }}</dd>
                     </div>
                     <div>
-                        <dt>Адрес</dt>
+                        <dt>{{ t('batch.public.operator_address') }}</dt>
                         <dd>{{ record.operator.address }}</dd>
                     </div>
                     <div>
-                        <dt>Роль</dt>
+                        <dt>{{ t('batch.public.operator_role') }}</dt>
                         <dd>{{ record.operator.role }}</dd>
                     </div>
                     <div>
-                        <dt>EORI</dt>
+                        <dt>{{ t('batch.public.operator_eori') }}</dt>
                         <dd>{{ record.operator.eori }}</dd>
                     </div>
                 </dl>
             </section>
 
             <section class="batch-public__section">
-                <h2>2. Продукт</h2>
+                <h2>{{ t('batch.public.section_product') }}</h2>
                 <dl class="batch-public__dl">
                     <div>
-                        <dt>Описание</dt>
+                        <dt>{{ t('batch.public.product_description') }}</dt>
                         <dd>{{ record.product.name }}</dd>
                     </div>
                     <div>
-                        <dt>CN code (illustrative)</dt>
+                        <dt>{{ t('batch.public.product_cn_code') }}</dt>
                         <dd>{{ record.product.cnCode }}</dd>
                     </div>
                     <div>
-                        <dt>Категория</dt>
+                        <dt>{{ t('batch.public.product_category') }}</dt>
                         <dd>{{ record.product.category }}</dd>
                     </div>
                     <div>
-                        <dt>Масса / объём</dt>
+                        <dt>{{ t('batch.public.product_quantity') }}</dt>
                         <dd>{{ record.product.quantity }}</dd>
                     </div>
                     <div>
-                        <dt>Внутренний лот</dt>
+                        <dt>{{ t('batch.public.product_lot') }}</dt>
                         <dd>{{ record.product.lot }}</dd>
                     </div>
                 </dl>
             </section>
 
             <section class="batch-public__section">
-                <h2>3. Происхождение / участок (мок)</h2>
+                <h2>{{ t('batch.public.section_origin') }}</h2>
                 <dl class="batch-public__dl">
                     <div>
-                        <dt>Страна</dt>
+                        <dt>{{ t('batch.public.plot_country') }}</dt>
                         <dd>{{ record.plot.country }}</dd>
                     </div>
                     <div>
-                        <dt>Регион</dt>
+                        <dt>{{ t('batch.public.plot_region') }}</dt>
                         <dd>{{ record.plot.region }}</dd>
                     </div>
                     <div class="batch-public__dl-wide">
-                        <dt>Геоданные / ссылка</dt>
+                        <dt>{{ t('batch.public.plot_geo') }}</dt>
                         <dd>{{ record.plot.geo }}</dd>
                     </div>
                     <div class="batch-public__dl-wide">
-                        <dt>Период урожая / покрытия</dt>
+                        <dt>{{ t('batch.public.plot_harvest') }}</dt>
                         <dd>{{ record.harvestPeriod }}</dd>
                     </div>
                 </dl>
             </section>
 
             <section class="batch-public__section">
-                <h2>4. Цепочка поставок</h2>
+                <h2>{{ t('batch.public.section_supply_chain') }}</h2>
                 <div class="batch-public__table-wrap">
                     <div class="batch-public__chain-desktop">
                         <table class="batch-public__table">
                             <thead>
                                 <tr>
-                                    <th>Роль</th>
-                                    <th>Участник</th>
-                                    <th>Страна</th>
-                                    <th>Реф. (demo)</th>
+                                    <th>{{ t('batch.public.chain_role') }}</th>
+                                    <th>{{ t('batch.public.chain_participant') }}</th>
+                                    <th>{{ t('batch.public.chain_country') }}</th>
+                                    <th>{{ t('batch.public.chain_ref') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -162,27 +156,19 @@
                             class="batch-public__chain-card"
                         >
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label"
-                                    >Роль:</span
-                                >
+                                <span class="batch-public__chain-label">{{ t('batch.public.chain_role') }}:</span>
                                 {{ row.role }}
                             </p>
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label"
-                                    >Участник:</span
-                                >
+                                <span class="batch-public__chain-label">{{ t('batch.public.chain_participant') }}:</span>
                                 {{ row.name }}
                             </p>
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label"
-                                    >Страна:</span
-                                >
+                                <span class="batch-public__chain-label">{{ t('batch.public.chain_country') }}:</span>
                                 {{ row.country }}
                             </p>
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label"
-                                    >Реф. (demo):</span
-                                >
+                                <span class="batch-public__chain-label">{{ t('batch.public.chain_ref') }}:</span>
                                 {{ row.ref }}
                             </p>
                         </article>
@@ -191,7 +177,7 @@
             </section>
 
             <section class="batch-public__section">
-                <h2>5. Оценка / доказательства</h2>
+                <h2>{{ t('batch.public.section_evidence') }}</h2>
                 <p class="batch-public__lead">{{ record.statusDetail }}</p>
                 <ul class="batch-public__evidence">
                     <li v-for="(ev, idx) in record.evidence" :key="idx">
@@ -205,12 +191,12 @@
 
             <footer class="batch-public__footer">
                 <div class="batch-public__meta">
-                    <span>Версия документа: {{ record.documentVersion }}</span>
-                    <span>Сформировано: {{ record.generatedAt }}</span>
+                    <span>{{ t('batch.public.document_version', { version: record.documentVersion }) }}</span>
+                    <span>{{ t('batch.public.generated_at', { date: record.generatedAt }) }}</span>
                 </div>
                 <p class="batch-public__disclaimer">{{ record.disclaimer }}</p>
                 <p class="batch-public__url no-print">
-                    Публичная ссылка: {{ canonicalUrl }}
+                    {{ t('batch.public.public_link', { url: canonicalUrl }) }}
                 </p>
             </footer>
         </article>
@@ -218,18 +204,27 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, watch } from "vue";
+import { computed, nextTick, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {
     getBatchPublicRecord,
     buildBatchPublicUrl,
 } from "@/features/demo/data/eudrBatchPublic";
+import { usePageSeo } from "@/composables/usePageSeo";
 
 defineOptions({ name: "BatchPublic" });
 
+const { t } = useI18n();
 const route = useRoute();
 const batchId = computed(() => String(route.params.batchId ?? ""));
 const record = computed(() => getBatchPublicRecord(batchId.value));
+
+const batchSeoParams = computed(() => ({
+    id: record.value?.id ?? batchId.value,
+    product: record.value?.product?.name ?? "",
+}));
+usePageSeo({ i18nKey: "seo.batch_public", i18nParams: batchSeoParams });
 
 const homePath = "/en";
 
@@ -263,17 +258,6 @@ const runAutoPrint = () => {
         });
     });
 };
-
-const syncTitle = () => {
-    if (record.value) {
-        document.title = `EUDR ${record.value.id} — ${record.value.product.name}`;
-    } else {
-        document.title = "Партия не найдена — EUDR demo";
-    }
-};
-
-onMounted(syncTitle);
-watch([record, batchId], syncTitle);
 
 watch(
     () => [record.value?.id, route.query.print],

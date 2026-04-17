@@ -2,17 +2,17 @@
     <n-config-provider :theme="darkTheme" :theme-overrides="naiveThemeOverrides">
         <div class="global-task-reminder-toast" role="status">
             <p class="global-task-reminder-toast__title">
-                {{ task_grain_cooling.toastTitle }}
+                {{ t(task_grain_cooling.toastTitleKey) }}
             </p>
             <p class="global-task-reminder-toast__task-name">
-                {{ task_grain_cooling.toastTaskName }}
+                {{ t(task_grain_cooling.toastTaskNameKey) }}
             </p>
             <div class="global-task-reminder-toast__actions">
                 <n-button type="warning" @click="handleClose">
-                    {{ task_grain_cooling.toastButtonCloseLabel }}
+                    {{ t(task_grain_cooling.toastButtonCloseLabelKey) }}
                 </n-button>
                 <n-button type="info" @click="goToDemoChecklists">
-                    {{ task_grain_cooling.toastButtonNavigateLabel }}
+                    {{ t(task_grain_cooling.toastButtonNavigateLabelKey) }}
                 </n-button>
             </div>
         </div>
@@ -21,7 +21,10 @@
 
 <script setup>
 import { darkTheme, NButton, NConfigProvider } from "naive-ui";
+import { i18n } from "@/i18n";
 import { task_grain_cooling } from "./config";
+
+const t = (...args) => i18n.global.t(...args);
 import { navigateGrainCoolingToDemoChecklists } from "./grainCoolingNavigateToDemoChecklists";
 
 defineOptions({ name: "GlobalTaskReminderToast" });

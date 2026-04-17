@@ -5,7 +5,7 @@
         title="Error equipment"
         type="error"
     >
-        Блютуз устройство не доступно или выключено!
+        {{ t('demo.execution_meta.bluetooth_error') }}
     </n-alert>
     <!-- Контекст замера: цели (оборудование или помещения) в одной строке. -->
     <div class="checklist-modal__pending-meta">
@@ -17,6 +17,9 @@
 
 <script setup>
 import {NAlert} from "naive-ui";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 defineProps({
     showAlert: {

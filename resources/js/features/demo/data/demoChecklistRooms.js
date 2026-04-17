@@ -1,54 +1,60 @@
 /**
- * Mock-справочник помещений и зон для конструктора задачи «тип: комнаты».
- * Стабильные id — латиница; подписи — для UI.
+ * Mock-справочник помещений и зон для конструктора задачи.
  */
+import { i18n } from "@/i18n";
+const tt = (...args) => i18n.global.t(...args);
 
-export const ROOM_GROUPS = [
-    {
-        groupTitle: "Производство и технология",
-        items: [
-            { id: "room-production-hall", label: "Производственный цех" },
-            { id: "room-shock-freezer", label: "Камера шоковой заморозки" },
-            {
-                id: "room-glazing",
-                label: "Зона глазирования / финиша",
-            },
-        ],
-    },
-    {
-        groupTitle: "Склады и приёмка",
-        items: [
-            { id: "room-raw-storage", label: "Склад сырья" },
-            { id: "room-finished-storage", label: "Склад готовой продукции" },
-            { id: "room-receiving", label: "Зона приёмки" },
-            { id: "room-cold-chamber", label: "Холодная камера (помещение)" },
-            { id: "room-waste", label: "Зона отходов" },
-        ],
-    },
-    {
-        groupTitle: "Санитария и персонал",
-        items: [
-            { id: "room-wash", label: "Моечная" },
-            { id: "room-wc-staff", label: "Санузел персонала" },
-            { id: "room-locker", label: "Раздевалка" },
-        ],
-    },
-    {
-        groupTitle: "Инфраструктура",
-        items: [
-            { id: "room-corridor", label: "Коридор" },
-            { id: "room-office-qc", label: "Офис / пост контроля качества" },
-        ],
-    },
+const ROOM_STRUCTURE = [
+    { groupKey: 'group_production', items: [
+        { id: "room-production-hall", labelKey: 'room_production_hall' },
+        { id: "room-shock-freezer", labelKey: 'room_shock_freezer' },
+        { id: "room-glazing", labelKey: 'room_glazing_zone' },
+    ]},
+    { groupKey: 'group_storage', items: [
+        { id: "room-raw-storage", labelKey: 'room_raw_storage' },
+        { id: "room-finished-storage", labelKey: 'room_finished_storage' },
+        { id: "room-receiving", labelKey: 'room_receiving' },
+        { id: "room-cold-chamber", labelKey: 'room_cold_chamber' },
+        { id: "room-waste", labelKey: 'room_waste' },
+    ]},
+    { groupKey: 'group_sanitation', items: [
+        { id: "room-wash", labelKey: 'room_wash' },
+        { id: "room-wc-staff", labelKey: 'room_wc_staff' },
+        { id: "room-locker", labelKey: 'room_locker' },
+    ]},
+    { groupKey: 'group_infrastructure', items: [
+        { id: "room-corridor", labelKey: 'room_corridor' },
+        { id: "room-office-qc", labelKey: 'room_office_qc' },
+    ]},
 ];
 
+/**
+ * Возвращает группы помещений с переведёнными подписями.
+ * Вызывается при каждом обращении, чтобы i18n был готов и локаль актуальна.
+ */
+export function getRoomGroups() {
+    return ROOM_STRUCTURE.map((g) => ({
+        groupTitle: tt(`demo.rooms.${g.groupKey}`),
+        items: g.items.map((it) => ({ id: it.id, label: tt(`demo.rooms.${it.labelKey}`) })),
+    }));
+}
+
+export const ROOM_GROUPS = getRoomGroups();
+
 const KNOWN_ROOM_IDS = new Set(
-    ROOM_GROUPS.flatMap((g) => g.items.map((it) => it.id)),
+    ROOM_STRUCTURE.flatMap((g) => g.items.map((it) => it.id)),
 );
 
-const LABEL_BY_ROOM_ID = new Map(
-    ROOM_GROUPS.flatMap((g) => g.items.map((it) => [it.id, it.label])),
-);
+/**
+ * Возвращает переведённый label помещения по id.
+ */
+function getRoomLabelById(id) {
+    for (const g of ROOM_STRUCTURE) {
+        const item = g.items.find((it) => it.id === id);
+        if (item) return tt(`demo.rooms.${item.labelKey}`);
+    }
+    return id;
+}
 
 /**
  * Оставляет только известные id помещений, без дубликатов.
@@ -81,7 +87,7 @@ export const roomTargetsSummary = (ids) => {
         return "";
     }
     if (list.length <= 2) {
-        return list.map((id) => LABEL_BY_ROOM_ID.get(id) ?? id).join(", ");
+        return list.map((id) => getRoomLabelById(id)).join(", ");
     }
-    return `${list.length} выбрано`;
+    return tt('demo.rooms.selected_count', { count: list.length });
 };

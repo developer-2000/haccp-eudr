@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\SurveyQuestionsController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Technical\MailTestController;
@@ -40,6 +41,11 @@ Route::post('/survey/submit', [SurveyQuestionsController::class, 'submitAnswersQ
 Route::post('/survey/verify', [SurveyQuestionsController::class, 'verifyCode'])
     ->middleware(['setLocale', 'throttle:10,1'])
     ->name('client.survey.verify');
+
+// Отправка сообщения из публичной формы Contact (honeypot + throttle 5/min).
+Route::post('/contact', [ContactController::class, 'submit'])
+    ->middleware(['setLocale', 'throttle:5,1'])
+    ->name('client.contact.submit');
 
 Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')
     ->group(function () {

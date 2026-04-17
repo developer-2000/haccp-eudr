@@ -6,7 +6,7 @@
                 <div class="nav-logo">
                     <router-link :to="safeLogo.link" class="logo-link">
                         <span class="logo-site">{{ siteConfig.name }}</span>
-                        <span class="logo-app">App</span>
+                        <span class="logo-app">demo</span>
                     </router-link>
                 </div>
                 <!-- Пункты меню, десктоп -->
@@ -162,7 +162,8 @@ defineOptions({
 import Icon from "../../Icon.vue";
 /** @type {NavConfig} */
 import navConfig from "@/config/nav";
-import siteConfig from "@/config/site";
+import { useSiteConfigStore } from "@/stores";
+const siteConfig = useSiteConfigStore();
 import { useMobileMenu } from "./composables/useMobileMenu";
 import { useBreakpoint } from "./composables/useBreakpoint";
 import NavMenuItem from "./NavMenuItem.vue";
@@ -206,20 +207,20 @@ import {
     shallowRef,
 } from "vue";
 
-const initialLocale = ref("en");
+const initialLocale = ref(window.locale || "en");
 const defaultLanguages = [];
 
 const languagesList = ref(getLanguagesList());
 const currentLocale = computed(() => {
     const fromRoute = route.params.locale;
-    const knownLocales = languagesList.value.map((l) => l.code);
-    if (typeof fromRoute === "string" && knownLocales.includes(fromRoute)) {
+    const allLocales = window.availableLocales || [];
+    if (typeof fromRoute === "string" && allLocales.includes(fromRoute)) {
         return fromRoute;
     }
-    if (knownLocales.includes(initialLocale.value)) {
+    if (allLocales.includes(initialLocale.value)) {
         return initialLocale.value;
     }
-    return knownLocales[0] || "en";
+    return "en";
 });
 
 /**
@@ -228,10 +229,12 @@ const currentLocale = computed(() => {
 async function setLocale(locale) {
     if (locale === currentLocale.value) return;
     const pathname = window.location.pathname;
-    const codes = languagesList.value.map((l) => l.code);
+    // Используем полный список доступных языков, а не только те 2, что в переключателе
+    const allLocales = window.availableLocales || languagesList.value.map((l) => l.code);
     const segments = pathname.split("/").filter(Boolean);
+    // Если первый сегмент — это какой-то язык из всех доступных, убираем его
     const rest = (
-        codes.includes(segments[0]) ? segments.slice(1) : segments
+        allLocales.includes(segments[0]) ? segments.slice(1) : segments
     ).join("/");
     const url = "/" + locale + (rest ? "/" + rest : "");
     const csrf = document
@@ -545,7 +548,7 @@ onBeforeUnmount(() => {
 
     .box-switch-lang-mobile-menu {
         gap: 2px;
-        margin: 20px 0 0;
+        margin: 20px 0 20px;
         display: flex;
         justify-content: flex-end;
         align-items: center;

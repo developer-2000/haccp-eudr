@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /technical
+Disallow: /api/
+Disallow: /survey/submit
+Disallow: /survey/verify
+
+Sitemap: https://haccpilot.com/sitemap.xml

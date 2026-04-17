@@ -71,7 +71,7 @@ const PRICE_HIGHLIGHT_CLASS = {
  * Wraps the first €-price in value with a highlight span.
  * @param {string} value - Raw text (e.g. "€99+ /month")
  * @param {'competitor'|'ours'} highlight - Which highlight class to use
- * @returns {string} HTML string with wrapped price, or escaped value if no highlight
+ * @returns {string} HTML string with wrapped price, or escaped value if nb highlight
  */
 function formatMetricValue(value, highlight) {
     if (!highlight || !PRICE_HIGHLIGHT_CLASS[highlight]) {

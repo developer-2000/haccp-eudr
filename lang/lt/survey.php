@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Padėkite sukurti sistemą, kuri pašalina HACCP atitikties skausmus',
+        'subtitle' => 'Trumpa apklausa — apie 5 minutes. Jūsų atsakymai padės mums sukurti sistemą, veikiančią realiose operacijose ir patikrose.',
+        'trust' => 'Jūsų atsakymai naudojami tik analizei ir nėra perduodami trečiosioms šalims.',
+        'start' => 'Pradėti',
+    ],
+
+    'nav' => [
+        'back' => 'Atgal',
+        'back_aria' => 'Grįžti į ankstesnį žingsnį',
+    ],
+
+    'progress' => [
+        'aria' => 'Apklausa: žingsnis :current iš :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Įveskite el. paštą — šis laukas yra privalomas.',
+        'email_invalid' => 'Įveskite galiojantį el. pašto adresą.',
+    ],
+
+    'ui' => [
+        'next' => 'Toliau',
+        'next_disabled_aria' => 'Toliau — pirmiausia atsakykite į klausimą',
+        'other_default_label' => 'Prašome patikslinti',
+        'other_aria_prefix' => 'Papildoma jūsų atsakymo informacija:',
+        'select_placeholder' => 'Pasirinkite variantą',
+        'country_clear' => 'Išvalyti pasirinktą šalį',
+        'country_search' => 'Ieškoti pagal šalies pavadinimą',
+        'country_search_placeholder' => 'Ieškoti…',
+        'submit' => 'Pateikti',
+        'submit_sending' => 'Siunčiama...',
+        'submit_failed' => 'Nepavyko pateikti apklausos duomenų. Bandykite dar kartą.',
+        'questions_load_error' => 'Nepavyko įkelti apklausos klausimų. Atnaujinkite puslapį arba bandykite vėliau.',
+        'response_saved' => 'Apklausos atsakymas išsaugotas.',
+        'verification_sent' => 'Patvirtinimo kodas išsiųstas į jūsų el. paštą.',
+        'cooldown_wait' => 'Palaukite kelias sekundes ir bandykite dar kartą.',
+        'token_not_found' => 'Tokenas nerastas. Bandykite užbaigti apklausą iš naujo.',
+        'network_error' => 'Tinklo klaida. Bandykite dar kartą.',
+        'pin_instruction' => 'PIN kodas išsiųstas į nurodytą el. paštą. Įveskite jį, kad patvirtintumėte.',
+        'pin_attempts_left' => 'Liko {used} iš {total} bandymų',
+        'pin_container_aria' => 'PIN kodo patvirtinimas',
+        'pin_group_aria' => '4 skaitmenų PIN kodas',
+    ],
+
+    'lead' => [
+        'title' => 'Palikite savo kontaktinius duomenis:',
+        'bullet_discount' => 'gauti viso laikotarpio 20% nuolaidą',
+        'bullet_access' => 'gauti ankstyvą prieigą prie sistemos',
+        'bullet_influence' => 'daryti įtaką produkto vystymo krypčiai',
+        'expectation' => 'Tai paskutinis žingsnis: po jo apklausa bus baigta. Mums reikia jūsų duomenų tik tolimesniam susisiekimui.',
+        'field_name' => 'Jūsų vardas',
+        'field_business_name' => 'Verslo pavadinimas',
+        'field_email' => 'El. paštas',
+        'field_email_required_sr' => '(privalomas)',
+        'field_phone' => 'Telefonas',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 arba wa.me/...',
+        'placeholder_telegram' => "{'@'}vartotojas",
+    ],
+
+    'success' => [
+        'title' => 'Ačiū. Susisieksiu su jumis asmeniškai, kai sistema bus paruošta.',
+        'body' => "Gausite kvietimą į bandomąją versiją,\nkur galėsite išbandyti sistemą praktiškai ir formuoti jos vystymąsi. Tai padeda mums pritaikyti produktą realiems verslo procesams.",
+        'reassurance' => 'Mes neplanuojame masinių laiškų — tik asmeninius pranešimus su atnaujinimais.',
+        'update_hint' => "Jei jūsų procesai pasikeis arba atsiras naujų užduočių —\ngalėsite atnaujinti savo atsakymus per nuorodą, atsiųstą į el. paštą.",
+        'home_link' => 'Grįžti į pradžią',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Ačiū, kad užpildėte klausimyną!',
+        'subtitle' => 'Jūsų dalyvavimas yra reikšmingas indėlis ankstyvoje kūrimo stadijoje.',
+        'image_alt' => 'Atsakymas išsaugotas duomenų bazėje',
+        'email_label' => 'El. paštas:',
+        'sent_label' => 'Išsiųsta:',
+        'reset_button' => 'Atnaujinti atsakymus',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, ačiū už jūsų atsakymus',
+        'subject_default' => 'Ačiū už jūsų atsakymus',
+        'header_tagline' => 'Realaus laiko HACCP atitikties sistema',
+        'title' => 'Ačiū už dalyvavimą — jūsų prieiga ir 20% nuolaida',
+        'greeting_with_name' => 'Sveiki, :name!',
+        'greeting_default' => 'Sveiki!',
+        'thank_you' => 'Ačiū, kad skyrėte laiko užpildyti klausimyną.',
+        'value_note' => 'Jūsų atsakymai yra tikrai vertingi — jie tiesiogiai formuoja produktą.',
+        'registered_as' => 'Jūs užregistruoti kaip ankstyvos prieigos dalyvis',
+        'discount_label' => '–20% visam laikui nuolaida',
+        'discount_code_label' => 'Jūsų kodas:',
+        'description_line1' => 'Sistema šiuo metu kuriama.',
+        'description_line2' => 'Analizuoju verslo savininkų atsakymus ir tobulinu funkcionalumą realioms operacijoms.',
+        'description_line3' => 'Pagrindinis tikslas — kad sistema padėtų jums užtikrintai praeiti patikrinimus — ne tik kaupti įrašus.',
+        'benefits_title' => 'Ką gausite:',
+        'benefit_1' => 'Veiksmų sekimas realiu laiku',
+        'benefit_2' => 'Skaidri istorija patikrinimams',
+        'benefit_3' => 'Kontrolė be papildomo darbo',
+        'cta_button' => 'Eiti į svetainę',
+        'footer_updates' => 'Periodiškai dalinsiuosi kūrimo naujienomis ir kviesiu išbandyti naujas funkcijas.',
+        'footer_feedback' => 'Jūsų atsiliepimai ir idėjos padės padaryti sistemą naudingesnę realiose operacijose.',
+        'footer_reply' => 'Jei jau turite minčių ar reikalavimų — tiesiog atsakykite į šį el. laišką.',
+        'footer_signature' => 'Pagarbiai, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Jūsų patvirtinimo kodas HACCP sistemai',
+        'header_tagline' => 'Saugumo patvirtinimas klausimyno atnaujinimui',
+        'title' => 'Patvirtinkite savo atsakymų atnaujinimą',
+        'description' => 'Jūs pateikėte prašymą atnaujinti savo atsakymus HACCP sistemos klausimyne.',
+        'instruction' => 'Patvirtinimui įveskite žemiau esantį kodą:',
+        'code_expiry' => 'Kodas galioja ribotą laiką',
+        'not_you' => 'Jei tai ne jūs — tiesiog ignoruokite šį el. laišką.',
+        'data_safe' => 'Jūsų duomenys liks nepakitę.',
+        'cta_button' => 'Grįžti prie atnaujinimo',
+        'footer_auto' => 'Tai automatinis pranešimas iš HACCP sistemos.',
+        'footer_purpose' => 'Kodas naudojamas tik duomenų pakeitimui patvirtinti.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Jūsų klausimyno atsakymai atnaujinti',
+        'header_tagline' => 'Klausimyno duomenų atnaujinimo patvirtinimas',
+        'title' => 'Jūsų duomenys sėkmingai atnaujinti!',
+        'greeting_with_name' => 'Sveiki, :name!',
+        'greeting_default' => 'Sveiki!',
+        'thank_you' => 'Ačiū, kad atnaujinote savo atsakymus.',
+        'status_label' => 'Jūsų klausimyno būsena:',
+        'status_value' => 'Atnaujinta ir patvirtinta',
+        'status_note' => 'Visi pakeitimai išsaugoti ir bus naudojami sistemos pritaikymui.',
+        'footer_auto' => 'Tai automatinis pranešimas iš HACCP sistemos.',
+        'footer_data_use' => 'Jūsų duomenys naudojami tik sistemos tikslumui ir personalizavimui gerinti.',
+        'footer_signature' => 'Pagarbiai, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Nuoroda negalioja arba pasibaigė jos galiojimas. Bandykite užpildyti klausimyną iš naujo.',
+        'attempts_exhausted' => 'Patvirtinimas nepavyko. Prašome užpildyti klausimyną iš naujo.',
+        'code_invalid' => 'Neteisingas kodas. Bandykite dar kartą.',
+        'success' => 'Klausimyno atsakymai sėkmingai atnaujinti.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Kokio tipo verslą vykdote?',
+            'options' => [
+                'cafe' => 'Kavinė / kavos parduotuvė',
+                'bakery' => 'Kepykla / duonos gamyba',
+                'meat' => 'Mėsos gamyba / mėsinė',
+                'kitchen' => 'Virtuvė / maisto gamyba',
+                'other' => 'Kita',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Kiek žmonių dirba jūsų įmonėje?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Kokioje šalyje vykdote veiklą?',
+            'field_caption' => 'Pasirinkite šalį iš sąrašo',
+        ],
+        '4' => [
+            'question_text' => 'Kaip šiandien valdote HACCP?',
+            'options' => [
+                'paper' => 'Popieriniai įrašai',
+                'excel' => 'Excel / Google skaičiuoklės',
+                'software' => 'Naudojame savo sistemą',
+                'partial' => 'Iš dalies dokumentuota / nėra sistemos',
+                'other' => 'Kita',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Ar naudojate mokamus HACCP sprendimus?',
+            'options' => [
+                'yes' => 'Taip',
+                'nb' => 'Ne',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Kiek esate patenkinti dabartiniu sprendimu?',
+            'options' => [
+                'fully' => 'Visiškai patenkinti',
+                'partially_ok' => 'Iš dalies patenkinti',
+                'rather_not' => 'Labiau nepatenkinti',
+                'not_at_all' => 'Visiškai nepatenkinti',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Ar svarstytumėte pereiti prie patogesnės sistemos?',
+            'options' => [
+                'yes' => 'Taip',
+                'maybe' => 'Galbūt',
+                'nb' => 'Ne',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Kas jūsų įmonėje atsakingas už HACCP praktikoje?',
+            'options' => [
+                'self' => 'Aš esu asmeniškai atsakingas',
+                'manager' => 'Vadovas / administratorius',
+                'staff' => 'Paskirti darbuotojai',
+                'none' => 'Niekas oficialiai neprižiūri',
+                'other' => 'Kita',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Kaip dažnai darbuotojai pamiršta atlikti ar užfiksuoti užduotis?',
+            'options' => [
+                'often' => 'Dažnai',
+                'sometimes' => 'Kartais',
+                'rarely' => 'Retai',
+                'almost_never' => 'Beveik niekada',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Ar įrašai kada nors pildomi retrospektyviai?',
+            'options' => [
+                'often' => 'Taip, dažnai',
+                'sometimes' => 'Kartais',
+                'rarely' => 'Retai',
+                'never' => 'Niekada',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Kas jums sunkiausia valdant HACCP?',
+            'subtitle' => 'Galite pasirinkti kelis atsakymus.',
+            'options' => [
+                'records' => 'Įrašų ir dokumentacijos vedimas',
+                'staff_control' => 'Darbuotojų veiksmų kontrolė',
+                'realtime' => 'Procesų sekimas realiu laiku',
+                'inspections' => 'Pasiruošimas patikrinimams',
+                'training' => 'Mokymai ir disciplina',
+                'chaos' => 'Nėra vienos sistemos / chaotiški procesai',
+                'other' => 'Kita',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Ar turėjote patikrinimų per paskutinius metus?',
+            'options' => [
+                'yes' => 'Taip',
+                'nb' => 'Ne',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Kas labiausiai stresuoja per patikrinimą?',
+            'options' => [
+                'docs' => 'Dokumentacija',
+                'staff' => 'Darbuotojų elgesys',
+                'missing_records' => 'Trūkstami įrašai',
+                'overall' => 'Viskas bendrai',
+                'other' => 'Kita',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Kiek svarbu būti pasiruošus neplaniniam patikrinimui?',
+            'options' => [
+                'very' => 'Labai svarbu',
+                'rather' => 'Gana svarbu',
+                'not_thought' => 'Nesusimąsčiau',
+                'not_important' => 'Nesvarbu',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Kiek svarbu, kad sistema fiksuotų darbuotojų veiksmus realiu laiku (ne vėliau)?',
+            'options' => [
+                'very' => 'Labai svarbu',
+                'rather' => 'Gana svarbu',
+                'unsure' => 'Nežinau',
+                'not_important' => 'Nesvarbu',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Kokios funkcijos jums būtų naudingiausios darbe?',
+            'subtitle' => 'Galite pasirinkti kelis atsakymus.',
+            'other_detail_field_label' => 'Parašykite, kas jums svarbu',
+            'group_headings' => [
+                'safety' => 'Kontrolė ir sauga',
+                'inspection' => 'Darbas su patikrinimais',
+                'staff' => 'Darbuotojų patogumas',
+                'automation' => 'Automatizavimas',
+                'more' => 'Papildoma',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Įspėjimai, kai temperatūra išeina už ribų',
+                'capture_at_moment' => 'Duomenų fiksavimas užduoties metu (ne vėliau)',
+                'two_person_confirm' => 'Dviejų žmonių užduoties patvirtinimas',
+                'reports_qr_link' => 'Greita prieiga prie ataskaitų (QR / nuoroda)',
+                'photo_proof' => 'Nuotraukos kaip įrodymas, kad užduotis atlikta',
+                'full_action_history' => 'Pilna darbuotojų veiksmų istorija',
+                'offline_mobile' => 'Veikia be interneto telefone',
+                'voice_input' => 'Balso įvestis',
+                'biz_templates' => 'Paprasti šablonai pagal verslo tipą',
+                'bluetooth_temp' => 'Automatinis temperatūros fiksavimas (Bluetooth jutikliai)',
+                'risk_warnings' => 'Rizikos vertinimas ir ankstyvi įspėjimai',
+                'loss_on_violations' => 'Nuostolių skaičiavimas pažeidimų atveju',
+                'internal_staff_tasks' => 'Vidiniai darbuotojų užduočių sąrašai',
+                'push_reminders' => 'Priminimai darbuotojams',
+                'other' => 'Kita (parašykite, kas svarbu)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Jei sistema galėtų išspręsti vieną pagrindinę jūsų problemą, kas tai būtų?',
+            'field_caption' => 'Jūsų atsakymas',
+        ],
+    ],
+];

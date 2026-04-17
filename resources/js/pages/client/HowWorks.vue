@@ -16,6 +16,9 @@ defineOptions({ name: "HowItWorks" });
 import StepsSection from "@/components/client/how-it-works/StepsSection.vue";
 import AdvantagesSection from "@/components/client/how-it-works/AdvantagesSection.vue";
 import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
+import { usePageSeo } from "@/composables/usePageSeo";
+
+usePageSeo({ i18nKey: "seo.how_it_works" });
 </script>
 
 <style lang="scss" scoped>

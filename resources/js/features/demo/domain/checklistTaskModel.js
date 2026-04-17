@@ -1,4 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
+import { i18n } from "@/i18n";
+const tt = (...args) => i18n.global.t(...args);
 import {
     FREQUENCY_CODE,
     normalizeFrequency,
@@ -275,70 +277,20 @@ const DEMO_SURFACE_SANITARY_EQ = new Set([
     "eq-toilet",
 ]);
 
-const DEMO_ADMINISTRATIVE_OK_VALUES = new Set([
-    "В сроке",
-    "Соответствует",
-    "Выполнена",
-    "По графику",
-    "В норме",
-    "Поверхности в норме",
-]);
 
 /**
  * Демо: осмысленное значение колонки «Замер» для ok-задачи по названию и целям (оборудование/помещения).
  */
+/**
+ * Определяет демо-значение замера для ok-задачи по стабильным ID оборудования/помещений.
+ * Не зависит от языка title — работает с любой локалью.
+ */
 const inferDefaultOkMeasurementDisplayValue = ({
-    title,
     equipmentTargetIds = [],
     roomTargetIds = [],
 }) => {
-    const t = String(title ?? "").toLowerCase();
     const eq = Array.isArray(equipmentTargetIds) ? equipmentTargetIds : [];
     const rooms = Array.isArray(roomTargetIds) ? roomTargetIds : [];
-
-    const firstColdValue = () => {
-        for (const id of eq) {
-            const v = DEMO_COLD_EQ_VALUE[id];
-            if (v) {
-                return v;
-            }
-        }
-        return "4 °C";
-    };
-
-    if (/влажност/.test(t)) {
-        return "58 %";
-    }
-    if (/тесто/.test(t)) {
-        return "90 мин";
-    }
-    if (/выпечк/.test(t)) {
-        return "24 мин";
-    }
-    if (/срок/.test(t)) {
-        return "В сроке";
-    }
-    if (/маркировк/.test(t)) {
-        return "Соответствует";
-    }
-    if (/чистк/.test(t)) {
-        return "Выполнена";
-    }
-    if (/санобработк|санитар/.test(t)) {
-        return "По графику";
-    }
-    if (/ростер/.test(t)) {
-        return "212 °C";
-    }
-    if (/термощуп/.test(t)) {
-        return "72 °C";
-    }
-    if (/температур|молок|морозил|холодн|охлажден/.test(t)) {
-        return firstColdValue();
-    }
-    if (/хранен|партии/.test(t) && eq.some((id) => DEMO_DRY_STORAGE_EQ.has(id))) {
-        return "21 °C";
-    }
 
     for (const id of eq) {
         if (DEMO_COLD_EQ_VALUE[id]) {
@@ -351,6 +303,9 @@ const inferDefaultOkMeasurementDisplayValue = ({
     if (eq.some((id) => DEMO_HEAT_PROCESS_EQ.has(id))) {
         return "185 °C";
     }
+    if (eq.includes("eq-coffee-roaster")) {
+        return "212 °C";
+    }
     if (eq.includes("eq-coffee-machine")) {
         return "93 °C";
     }
@@ -361,17 +316,19 @@ const inferDefaultOkMeasurementDisplayValue = ({
         eq.some((id) => DEMO_SURFACE_SANITARY_EQ.has(id)) ||
         ["eq-handwash", "eq-sinks", "eq-dishwasher"].some((id) => eq.includes(id))
     ) {
-        return "Поверхности в норме";
+        return tt('demo.ok_values.surfaces_normal');
     }
-
-    if (
-        rooms.includes("room-cold-chamber") &&
-        (/охлажден|холодн|камер/.test(t) || eq.length === 0)
-    ) {
+    if (rooms.includes("room-cold-chamber")) {
         return "7 °C";
     }
+    if (rooms.includes("room-wash") || rooms.includes("room-wc-staff")) {
+        return tt('demo.ok_values.on_schedule');
+    }
+    if (rooms.length > 0 && eq.length === 0) {
+        return tt('demo.ok_values.compliant');
+    }
 
-    return "В норме";
+    return tt('demo.ok_values.normal');
 };
 
 /**
@@ -466,12 +423,12 @@ const resolveTaskTitle = ({ payload, source, context = {} }) => {
     }
     const fallbackValue = String(payload?.value ?? "").trim();
     if (fallbackValue) {
-        return `Задача: ${fallbackValue}`;
+        return tt('demo.task_title.task_prefix', { value: fallbackValue });
     }
     const indexSuffix = Number.isInteger(context.index)
         ? ` #${context.index + 1}`
         : "";
-    return `Задача по умолчанию${indexSuffix}`;
+    return tt('demo.task_title.default_task', { suffix: indexSuffix });
 };
 
 /**
@@ -491,53 +448,6 @@ export const firstPendingMeasurementTime = (task) => {
     const pend = firstPendingMeasurement(task);
     const t = pend?.time;
     return typeof t === "string" && t.trim() ? t.trim() : "";
-};
-
-const MEASUREMENT_TIME_HH_MM_RE = /^\d{2}:\d{2}$/;
-
-const timeStringToMinutesOfDay = (time) => {
-    const t = String(time ?? "").trim();
-    if (!MEASUREMENT_TIME_HH_MM_RE.test(t)) {
-        return null;
-    }
-    const [h, m] = t.split(":").map(Number);
-    return h * 60 + m;
-};
-
-/**
- * Локальные суточные минуты от 00:00 (часы клиента).
- */
-export const currentLocalMinutesOfDay = () => {
-    const d = new Date();
-    return d.getHours() * 60 + d.getMinutes();
-};
-
-/**
- * Слот для верхней таблицы «Детали задачи»: с начала массива первый замер с `time` ≥ текущего;
- * если такого нет — последний элемент `measurements`.
- */
-export const selectMeasurementSlotByCurrentTime = (
-    measurements,
-    nowMinutesOfDay = null,
-) => {
-    const list = Array.isArray(measurements) ? measurements : [];
-    if (!list.length) {
-        return null;
-    }
-    const now =
-        typeof nowMinutesOfDay === "number" && Number.isFinite(nowMinutesOfDay)
-            ? nowMinutesOfDay
-            : currentLocalMinutesOfDay();
-    for (const m of list) {
-        const mins = timeStringToMinutesOfDay(m?.time);
-        if (mins === null) {
-            continue;
-        }
-        if (mins >= now) {
-            return m;
-        }
-    }
-    return list[list.length - 1];
 };
 
 /**
@@ -1131,22 +1041,15 @@ const deriveDefaultRepeatScheduleFromMeasurements = (measurements) => {
     };
 };
 
+/**
+ * Fallback: назначает оборудование по нише, если задача создана без явного выбора.
+ */
 const inferDefaultEquipmentTargetIdsForTask = (title, niche) => {
-    const t = String(title ?? "").toLowerCase();
-    if (/термощуп|зонд/.test(t)) {
-        return ["eq-probe-1"];
-    }
-    if (/кофе|ростер/.test(t)) {
-        return ["eq-coffee-machine"];
-    }
-    if (/жар|печ|термообработ|фрит|плита/.test(t)) {
-        return ["eq-stove"];
-    }
-    if (/температур|молок|морозил|холодн|охлажден|камера/.test(t)) {
-        return ["eq-fridge-1"];
-    }
     if (niche === "coffee") {
         return ["eq-coffee-machine"];
+    }
+    if (niche === "bakery") {
+        return ["eq-bread-proofing-cabinet"];
     }
     if (niche === "meat") {
         return ["eq-fridge-1"];
@@ -1210,33 +1113,3 @@ export const buildDefaultTask = (baseTask, niche, context = {}) => {
     });
 };
 
-/**
- * Преобразует объект задачи в черновик модалки.
- * Используется для консистентной обратной подстановки данных в форму.
- */
-export const mapTaskToModalDraft = (task = {}, _context = {}) => {
-    const rowsFromTask = Array.isArray(task.correctiveActions)
-        ? task.correctiveActions.map((text) => ({
-              id: uuidv4(),
-              text: String(text ?? ""),
-          }))
-        : [];
-    const measurements = Array.isArray(task.measurements) ? task.measurements : [];
-    const scheduleSlotCount =
-        measurements.length > 0
-            ? repeatsPerDayFromMeasurements(measurements)
-            : Math.max(
-                  1,
-                  Array.isArray(task.repeatTimes) ? task.repeatTimes.length : 1,
-              );
-    return {
-        ...createModalDraft(""),
-        ...normalizeModalDraft({
-            ...task,
-            correctiveActionRows: rowsFromTask,
-        }),
-        title: String(task?.title ?? ""),
-        correctiveActionRows: rowsFromTask,
-        scheduleSlotCount,
-    };
-};

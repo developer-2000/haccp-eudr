@@ -2,8 +2,8 @@
 
 return [
     'intro' => [
-        'title' => 'Help us build a system that takes the pain out of HACCP',
-        'subtitle' => 'Short survey - about 5 minutes. Your answers will help us make the system work for real operations and inspections.',
+        'title' => 'Help us build a system that removes the pain from HACCP compliance',
+        'subtitle' => 'Short survey — about 5 minutes. Your answers will help us make the system work for real operations and inspections.',
         'trust' => 'Your answers are used for analysis only and are not shared with third parties.',
         'start' => 'Get started',
     ],
@@ -18,13 +18,13 @@ return [
     ],
 
     'validation' => [
-        'email_required' => 'Please enter your email - this field is required.',
+        'email_required' => 'Please enter your email — this field is required.',
         'email_invalid' => 'Please enter a valid email address.',
     ],
 
     'ui' => [
         'next' => 'Next',
-        'next_disabled_aria' => 'Next - answer the question first',
+        'next_disabled_aria' => 'Next — answer the question first',
         'other_default_label' => 'Please specify',
         'other_aria_prefix' => 'Additional detail for your answer:',
         'select_placeholder' => 'Choose an option',
@@ -41,7 +41,7 @@ return [
         'token_not_found' => 'Token not found. Please try to complete the survey again.',
         'network_error' => 'Network error. Please try again.',
         'pin_instruction' => 'A PIN code has been sent to the specified email address. Enter it to confirm ownership.',
-        'pin_attempts_left' => '1 of 2 attempts remaining',
+        'pin_attempts_left' => '{used} of {total} attempts remaining',
         'pin_container_aria' => 'PIN code verification',
         'pin_group_aria' => '4-digit PIN code',
     ],
@@ -66,19 +66,19 @@ return [
 
     'success' => [
         'title' => 'Thank you. I will contact you personally when the system is ready.',
-        'body' => "You will get an invitation to a sandbox version,\nwhere you can try the system in practice and shape how it evolves. That helps us adapt the product to real business processes.",
-        'reassurance' => 'We are not planning bulk mailings - only a personal message with results.',
-        'update_hint' => "If your processes change, you get new tasks or ideas -\nyou will be able to update your answers via the link sent to your email.",
+        'body' => "You will get an invitation to a sandbox version,\nwhere you can try the system in practice and shape how it evolves. This helps us adapt the product to real business processes.",
+        'reassurance' => 'We are not planning bulk mailings — only a personal message with updates.',
+        'update_hint' => "If your processes change or you get new tasks —\nyou will be able to update your answers via the link sent to your email.",
         'home_link' => 'Back to home',
     ],
 
     'submitted_state' => [
-        'title' => 'Thank you for completing the list of questions!',
-        'subtitle' => 'Your participation is a significant contribution at the stage of formation.',
+        'title' => 'Thank you for completing the questionnaire!',
+        'subtitle' => 'Your participation is a significant contribution at the early stage of development.',
         'image_alt' => 'The response has been saved in the database',
         'email_label' => 'Email:',
         'sent_label' => 'Sent:',
-        'reset_button' => 'Update review',
+        'reset_button' => 'Update responses',
     ],
 
     'email' => [
@@ -94,23 +94,23 @@ return [
         'discount_label' => '–20% lifetime discount',
         'discount_code_label' => 'Your code:',
         'description_line1' => 'The system is currently in development.',
-        'description_line2' => 'I am analyzing responses from business owners and refining the functionality for real-world processes.',
-        'description_line3' => 'The main goal is for the system to help you pass inspections with confidence, not just "keep records".',
+        'description_line2' => 'I am analyzing responses from business owners and refining the functionality for real-world operations.',
+        'description_line3' => 'The main goal is for the system to help you pass inspections with confidence — not just keep records.',
         'benefits_title' => 'What you will get:',
         'benefit_1' => 'Real-time action tracking',
         'benefit_2' => 'Transparent history for inspections',
         'benefit_3' => 'Control without extra workload',
         'cta_button' => 'Go to website',
         'footer_updates' => 'I will periodically share development updates and invite you to test new features.',
-        'footer_feedback' => 'Your feedback and ideas will help make the system as convenient and useful as possible in real work.',
-        'footer_reply' => 'If you already have thoughts or tasks — simply reply to this email.',
+        'footer_feedback' => 'Your feedback and ideas will help make the system more useful in real operations.',
+        'footer_reply' => 'If you already have thoughts or requirements — simply reply to this email.',
         'footer_signature' => 'Best regards, Shamil Bagalov',
     ],
 
     'email_verify' => [
         'subject' => 'Your verification code for HACCPilot',
         'header_tagline' => 'Security confirmation for survey update',
-        'title' => 'Confirmation of answer update',
+        'title' => 'Confirm update of your answers',
         'description' => 'You have requested to update your answers in the HACCPilot survey.',
         'instruction' => 'To confirm, enter the code below:',
         'code_expiry' => 'The code is valid for a limited time',
@@ -132,15 +132,15 @@ return [
         'status_value' => 'Updated and confirmed',
         'status_note' => 'All changes have been saved and will be used to customize the HACCPilot system.',
         'footer_auto' => 'This is an automated notification from the HACCPilot system.',
-        'footer_data_use' => 'Your data is used only to improve the accuracy and personalization of the system.',
+        'footer_data_use' => 'Your data is used only to improve system accuracy and personalization.',
         'footer_signature' => 'Best regards, Shamil Bagalov',
     ],
 
     'verify' => [
         'token_invalid' => 'The link is invalid or has expired. Please try to complete the survey again.',
-        'attempts_exhausted' => 'Failed to verify the code. Please complete the survey again.',
+        'attempts_exhausted' => 'Verification failed. Please complete the survey again.',
         'code_invalid' => 'Invalid code. Please try again.',
-        'success' => 'Answers successfully updated.',
+        'success' => 'Survey answers successfully updated.',
     ],
 
     'questions' => [
@@ -157,9 +157,9 @@ return [
         '2' => [
             'question_text' => 'How many people work for you?',
             'options' => [
-                '1_5' => '1-5',
-                '5_10' => '5-10',
-                '10_20' => '10-20',
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
                 '20_plus' => '20+',
             ],
         ],
@@ -173,7 +173,7 @@ return [
                 'paper' => 'Paper records',
                 'excel' => 'Excel / Google Sheets',
                 'software' => 'We use our own software',
-                'partial' => 'Partly documented / no real system',
+                'partial' => 'Partly documented / nb real system',
                 'other' => 'Other',
             ],
         ],
@@ -204,7 +204,7 @@ return [
         '8' => [
             'question_text' => 'Who in your business is responsible for HACCP in practice?',
             'options' => [
-                'self' => 'I am personally',
+                'self' => 'I am personally responsible',
                 'manager' => 'Manager / administrator',
                 'staff' => 'Designated staff',
                 'none' => 'Nobody formally oversees it',
@@ -291,7 +291,7 @@ return [
             ],
             'options' => [
                 'temp_alerts' => 'Alerts when temperature goes out of range',
-                'capture_at_moment' => 'Capture data at the moment of the task (no backdating)',
+                'capture_at_moment' => 'Capture data at the moment of the task (nb backdating)',
                 'two_person_confirm' => 'Two-person confirmation of a task',
                 'reports_qr_link' => 'Quick access to reports for inspections (QR / link)',
                 'photo_proof' => 'Photos as proof a task was done',

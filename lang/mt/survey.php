@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Għinna nibnu sistema li tneħħi l-uġigħ tal-konformità HACCP',
+        'subtitle' => 'Stħarriġ qasir — madwar 5 minuti. It-tweġibiet tiegħek jgħinuna nagħmlu s-sistema taħdem għal operazzjonijiet u spezzjonijiet reali.',
+        'trust' => 'It-tweġibiet tiegħek jintużaw biss għall-analiżi u ma jinqasmux ma’ partijiet terzi.',
+        'start' => 'Ibda',
+    ],
+
+    'nav' => [
+        'back' => 'Lura',
+        'back_aria' => 'Mur lura għall-pass preċedenti',
+    ],
+
+    'progress' => [
+        'aria' => 'Stħarriġ: pass :current minn :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Jekk jogħġbok daħħal l-email tiegħek — dan il-qasam huwa obbligatorju.',
+        'email_invalid' => 'Jekk jogħġbok daħħal indirizz tal-email validu.',
+    ],
+
+    'ui' => [
+        'next' => 'Li jmiss',
+        'next_disabled_aria' => 'Li jmiss — wieġeb il-mistoqsija l-ewwel',
+        'other_default_label' => 'Jekk jogħġbok speċifika',
+        'other_aria_prefix' => 'Dettall addizzjonali għat-tweġiba tiegħek:',
+        'select_placeholder' => 'Agħżel għażla',
+        'country_clear' => 'Neħħi l-pajjiż magħżul',
+        'country_search' => 'Fittex skont l-isem tal-pajjiż',
+        'country_search_placeholder' => 'Fittex…',
+        'submit' => 'Ibgħat',
+        'submit_sending' => 'Qed jintbagħat...',
+        'submit_failed' => 'Ma rnexxiex tibgħat id-data tal-istħarriġ. Erġa’ pprova.',
+        'questions_load_error' => 'Ma jistgħux jitgħabbew il-mistoqsijiet tal-istħarriġ. Aġġorna l-paġna jew erġa’ pprova aktar tard.',
+        'response_saved' => 'It-tweġiba tal-istħarriġ ġiet salvata.',
+        'verification_sent' => 'Kodiċi ta’ verifika ntbagħat lill-email tiegħek.',
+        'cooldown_wait' => 'Jekk jogħġbok stenna ftit sekondi u erġa’ pprova.',
+        'token_not_found' => 'Token ma nstabx. Jekk jogħġbok erġa’ pprova l-istħarriġ.',
+        'network_error' => 'Żball tan-netwerk. Erġa’ pprova.',
+        'pin_instruction' => 'Kodiċi PIN intbagħat lill-email speċifikata. Daħħlu biex tikkonferma s-sid.',
+        'pin_attempts_left' => '{used} minn {total} tentattivi li fadal',
+        'pin_container_aria' => 'Verifika tal-kodiċi PIN',
+        'pin_group_aria' => 'Kodiċi PIN ta’ 4 ċifri',
+    ],
+
+    'lead' => [
+        'title' => 'Ħalli d-dettalji ta’ kuntatt tiegħek biex:',
+        'bullet_discount' => 'tikseb skont ta’ 20% għal dejjem',
+        'bullet_access' => 'tikseb aċċess bikri għas-sistema',
+        'bullet_influence' => 'tinfluwenza l-pjan ta’ żvilupp tal-prodott',
+        'expectation' => 'Dan huwa l-aħħar pass: wara dan, l-istħarriġ jitlesta. Neħtieġu biss id-dettalji tiegħek biex nikkuntattjawk.',
+        'field_name' => 'Isem tiegħek',
+        'field_business_name' => 'Isem tan-negozju',
+        'field_email' => 'Email',
+        'field_email_required_sr' => '(obbligatorju)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 jew wa.me/...',
+        'placeholder_telegram' => "{'@'}username",
+    ],
+
+    'success' => [
+        'title' => 'Grazzi. Nikkuntattjak personalment meta s-sistema tkun lesta.',
+        'body' => "Se tirċievi stedina għal verżjoni sandbox,\nfejn tista’ tipprova s-sistema fil-prattika u tgħin tifforma kif tevolvi. Dan jgħinna naddattaw il-prodott għal proċessi reali tan-negozju.",
+        'reassurance' => 'M’aħniex qed nippjanaw mailings tal-massa — biss messaġġ personali b’aġġornamenti.',
+        'update_hint' => "Jekk il-proċessi tiegħek jinbidlu jew ikollok kompiti ġodda —\ntista’ taġġorna t-tweġibiet tiegħek permezz tal-link mibgħut lill-email tiegħek.",
+        'home_link' => 'Lura għall-paġna ewlenija',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Grazzi talli lestejt il-kwestjonarju!',
+        'subtitle' => 'Il-parteċipazzjoni tiegħek hija kontribuzzjoni sinifikanti fl-istadju bikri tal-iżvilupp.',
+        'image_alt' => 'Ir-risposta ġiet salvata fid-database',
+        'email_label' => 'Email:',
+        'sent_label' => 'Mibgħut:',
+        'reset_button' => 'Aġġorna r-risposti',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, grazzi tar-risposti tiegħek',
+        'subject_default' => 'Grazzi tar-risposti tiegħek',
+        'header_tagline' => 'Sistema ta’ konformità HACCP f’ħin reali',
+        'title' => 'Grazzi tal-parteċipazzjoni tiegħek — l-aċċess u skont ta’ 20%',
+        'greeting_with_name' => 'Bonġu, :name!',
+        'greeting_default' => 'Bonġu!',
+        'thank_you' => 'Grazzi talli ħadt il-ħin biex timla l-kwestjonarju.',
+        'value_note' => 'Ir-risposti tiegħek huma tassew ta’ valur — dawn jiffurmaw direttament il-prodott.',
+        'registered_as' => 'Int irreġistrat bħala parteċipant b’aċċess bikri',
+        'discount_label' => '–20% skont għal dejjem',
+        'discount_code_label' => 'Il-kodiċi tiegħek:',
+        'description_line1' => 'Is-sistema bħalissa tinsab fl-iżvilupp.',
+        'description_line2' => 'Qed nanalizza r-risposti tas-sidien tan-negozji u nirfina l-funzjonalità għal operazzjonijiet reali.',
+        'description_line3' => 'L-għan ewlieni huwa li s-sistema tgħinek tgħaddi minn spezzjonijiet b’kunfidenza — mhux biss iżżomm rekords.',
+        'benefits_title' => 'Dak li se tirċievi:',
+        'benefit_1' => 'Traċċar ta’ azzjonijiet f’ħin reali',
+        'benefit_2' => 'Storja trasparenti għall-ispezzjonijiet',
+        'benefit_3' => 'Kontroll mingħajr xogħol żejjed',
+        'cta_button' => 'Mur fuq il-websajt',
+        'footer_updates' => 'Perjodikament naqsam aġġornamenti dwar l-iżvilupp u nistiednek tittestja funzjonijiet ġodda.',
+        'footer_feedback' => 'Ir-rispons u l-ideat tiegħek jgħinu biex is-sistema ssir aktar utli f’operazzjonijiet reali.',
+        'footer_reply' => 'Jekk diġà għandek ħsibijiet jew rekwiżiti — sempliċement wieġeb għal din l-email.',
+        'footer_signature' => 'Tislijiet, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Il-kodiċi ta’ verifika tiegħek għal HACCPilot',
+        'header_tagline' => 'Konferma ta’ sigurtà għall-aġġornament tal-kwestjonarju',
+        'title' => 'Ikkonferma l-aġġornament tar-risposti tiegħek',
+        'description' => 'Int tlabt li taġġorna r-risposti tiegħek fil-kwestjonarju HACCPilot.',
+        'instruction' => 'Biex tikkonferma, daħħal il-kodiċi hawn taħt:',
+        'code_expiry' => 'Il-kodiċi huwa validu għal żmien limitat',
+        'not_you' => 'Jekk dan ma kontx int — sempliċement injora din l-email.',
+        'data_safe' => 'Id-data tiegħek tibqa’ l-istess.',
+        'cta_button' => 'Irritorna għall-aġġornament',
+        'footer_auto' => 'Din hija messaġġ awtomatiku mis-sistema HACCPilot.',
+        'footer_purpose' => 'Il-kodiċi jintuża biss biex jikkonferma bidliet fid-data.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Ir-risposti tal-kwestjonarju tiegħek ġew aġġornati',
+        'header_tagline' => 'Konferma ta’ aġġornament tad-data tal-kwestjonarju',
+        'title' => 'Id-data tiegħek ġiet aġġornata b’suċċess!',
+        'greeting_with_name' => 'Bonġu, :name!',
+        'greeting_default' => 'Bonġu!',
+        'thank_you' => 'Grazzi talli aġġornajt ir-risposti tal-kwestjonarju tiegħek.',
+        'status_label' => 'L-istatus tal-kwestjonarju tiegħek:',
+        'status_value' => 'Aġġornat u kkonfermat',
+        'status_note' => 'Il-bidliet kollha ġew salvati u se jintużaw biex is-sistema HACCPilot tiġi personalizzata.',
+        'footer_auto' => 'Din hija notifika awtomatika mis-sistema HACCPilot.',
+        'footer_data_use' => 'Id-data tiegħek tintuża biss biex titjieb l-eżattezza u l-personalizzazzjoni tas-sistema.',
+        'footer_signature' => 'Tislijiet, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Il-link hija invalida jew skaduta. Jekk jogħġbok erġa’ ipprova l-kwestjonarju.',
+        'attempts_exhausted' => 'Verifika falliet. Jekk jogħġbok lesti l-kwestjonarju mill-ġdid.',
+        'code_invalid' => 'Kodiċi mhux validu. Jekk jogħġbok erġa’ ipprova.',
+        'success' => 'Ir-risposti tal-kwestjonarju ġew aġġornati b’suċċess.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'X’tip ta’ negozju tmexxi?',
+            'options' => [
+                'cafe' => 'Kafetterija / ħanut tal-kafè',
+                'bakery' => 'Fornerija / produzzjoni tal-ħobż',
+                'meat' => 'Produzzjoni tal-laħam / biċċerija',
+                'kitchen' => 'Kċina / produzzjoni tal-ikel',
+                'other' => 'Oħra',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Kemm persuni jaħdmu miegħek?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'F’liema pajjiż topera?',
+            'field_caption' => 'Agħżel pajjiż mil-lista',
+        ],
+        '4' => [
+            'question_text' => 'Kif tmexxi HACCP illum?',
+            'options' => [
+                'paper' => 'Rekords fuq karta',
+                'excel' => 'Excel / Google Sheets',
+                'software' => 'Nużaw softwer tagħna stess',
+                'partial' => 'Dokumentazzjoni parzjali / mingħajr sistema vera',
+                'other' => 'Oħra',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Tuża soluzzjonijiet HACCP imħallsa?',
+            'options' => [
+                'yes' => 'Iva',
+                'nb' => 'Le',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Kemm int sodisfatt bl-approċċ attwali tiegħek?',
+            'options' => [
+                'fully' => 'Kompletament sodisfatt',
+                'partially_ok' => 'Xi ftit sodisfatt',
+                'rather_not' => 'Pjuttost mhux sodisfatt',
+                'not_at_all' => 'Mhux sodisfatt xejn',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Tikkunsidra li tmur għal sistema aktar konvenjenti?',
+            'options' => [
+                'yes' => 'Iva',
+                'maybe' => 'Forsi',
+                'nb' => 'Le',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Min fil-kumpanija tiegħek huwa responsabbli għall-HACCP fil-prattika?',
+            'options' => [
+                'self' => 'Jien personalment responsabbli',
+                'manager' => 'Manager / amministratur',
+                'staff' => 'Persunal magħżul',
+                'none' => 'Ħadd ma jissorvelja formalment',
+                'other' => 'Oħra',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Kemm-il darba l-persunal jinsa jlesti jew jirreġistra kompiti?',
+            'options' => [
+                'often' => 'Spiss',
+                'sometimes' => 'Xi drabi',
+                'rarely' => 'Rari',
+                'almost_never' => 'Kważi qatt',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Ir-rekords qatt jimtlew b’mod retrospettiv?',
+            'options' => [
+                'often' => 'Iva, spiss',
+                'sometimes' => 'Xi drabi',
+                'rarely' => 'Rari',
+                'never' => 'Qatt',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'X’inhi l-aktar parti diffiċli biex iżżomm HACCP taħt kontroll għalik?',
+            'subtitle' => 'Tista’ tagħżel aktar minn tweġiba waħda.',
+            'options' => [
+                'records' => 'Żamma ta’ rekords u dokumentazzjoni',
+                'staff_control' => 'Sorveljanza ta’ dak li jagħmel il-persunal',
+                'realtime' => 'Segwiment ta’ proċeduri f’ħin reali',
+                'inspections' => 'Tħejjija għall-ispezzjonijiet',
+                'training' => 'Taħriġ u dixxiplina tal-persunal',
+                'chaos' => 'Mingħajr sistema waħda / proċessi kaotiċi',
+                'other' => 'Oħra',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Kellek spezzjonijiet fl-aħħar sena?',
+            'options' => [
+                'yes' => 'Iva',
+                'nb' => 'Le',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'X’jagħmlek l-aktar stressjat waqt spezzjoni?',
+            'options' => [
+                'docs' => 'Dokumentazzjoni',
+                'staff' => 'Imġiba tal-persunal',
+                'missing_records' => 'Rekords neqsin',
+                'overall' => 'Kollox flimkien',
+                'other' => 'Oħra',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Kemm hu importanti għalik li tkun lest għal spezzjoni mhux imħabbra?',
+            'options' => [
+                'very' => 'Importanti ħafna',
+                'rather' => 'Pjuttost importanti',
+                'not_thought' => 'Ma ħsibtx ħafna dwaru',
+                'not_important' => 'Mhux importanti',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Kemm hu importanti għalik li jkollok sistema li taqbad l-azzjonijiet tal-persunal hekk kif iseħħu (mhux imdaħħla wara)?',
+            'options' => [
+                'very' => 'Importanti ħafna',
+                'rather' => 'Pjuttost importanti',
+                'unsure' => 'Mhux ċert',
+                'not_important' => 'Mhux importanti',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Liema minn dawn il-kapaċitajiet ikunu verament utli fix-xogħol tiegħek?',
+            'subtitle' => 'Tista’ tagħżel aktar minn tweġiba waħda.',
+            'other_detail_field_label' => 'Għidilna x’inhu importanti għalik',
+            'group_headings' => [
+                'safety' => 'Kontroll u sigurtà',
+                'inspection' => 'Xogħol mal-ispezzjonijiet',
+                'staff' => 'Konvenjenza tal-persunal',
+                'automation' => 'Awtomazzjoni',
+                'more' => 'Addizzjonali',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Allerti meta t-temperatura toħroġ mir-reġjun',
+                'capture_at_moment' => 'Qbid ta’ data fil-mument tal-kompitu (mingħajr retrodatazzjoni)',
+                'two_person_confirm' => 'Konferma ta’ żewġ persuni għal kompitu',
+                'reports_qr_link' => 'Aċċess rapidu għar-rapporti għall-ispezzjonijiet (QR / link)',
+                'photo_proof' => 'Ritratti bħala prova li l-kompitu sar',
+                'full_action_history' => 'Storja sħiħa tal-azzjonijiet tal-persunal',
+                'offline_mobile' => 'Jaħdem offline fuq telefon',
+                'voice_input' => 'Daħla bil-vuċi',
+                'biz_templates' => 'Mudelli sempliċi lesti skont it-tip ta’ negozju',
+                'bluetooth_temp' => 'Reġistrazzjoni awtomatika tat-temperatura (sensuri Bluetooth)',
+                'risk_warnings' => 'Valutazzjoni tar-riskju u twissijiet bikrin',
+                'loss_on_violations' => 'Stima tat-telf meta jinkisru r-regoli',
+                'internal_staff_tasks' => 'Listi ta’ kompiti interni għall-persunal',
+                'push_reminders' => 'Tifkiriet push għall-persunal',
+                'other' => 'Oħra (għidilna x’inhu importanti għalik)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Jekk is-sistema tista’ ssolvi problema ewlenija waħda għalik, x’ikun?',
+            'field_caption' => 'It-tweġiba tiegħek',
+        ],
+    ],
+];

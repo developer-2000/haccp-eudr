@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Hjálpaðu okkur að byggja kerfi sem fjarlægir sársaukann úr HACCP samræmi',
+        'subtitle' => 'Stutt könnun — um 5 mínútur. Svör þín munu hjálpa okkur að láta kerfið virka í raunverulegum rekstri og eftirliti.',
+        'trust' => 'Svör þín eru aðeins notuð til greiningar og eru ekki deild með þriðja aðila.',
+        'start' => 'Byrja',
+    ],
+
+    'nav' => [
+        'back' => 'Til baka',
+        'back_aria' => 'Fara aftur í fyrra skref',
+    ],
+
+    'progress' => [
+        'aria' => 'Könnun: skref :current af :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Vinsamlegast sláðu inn netfang — þetta reitur er skylda.',
+        'email_invalid' => 'Vinsamlegast sláðu inn gilt netfang.',
+    ],
+
+    'ui' => [
+        'next' => 'Næst',
+        'next_disabled_aria' => 'Næst — svaraðu spurningunni fyrst',
+        'other_default_label' => 'Vinsamlegast tilgreindu',
+        'other_aria_prefix' => 'Viðbótarupplýsingar um svar þitt:',
+        'select_placeholder' => 'Veldu valkost',
+        'country_clear' => 'Hreinsa valið land',
+        'country_search' => 'Leita eftir landsnafni',
+        'country_search_placeholder' => 'Leita…',
+        'submit' => 'Senda',
+        'submit_sending' => 'Sendi...',
+        'submit_failed' => 'Mistókst að senda gögn könnunar. Reyndu aftur.',
+        'questions_load_error' => 'Ekki tókst að hlaða spurningum könnunar. Endurnýjaðu síðuna eða reyndu aftur síðar.',
+        'response_saved' => 'Svar könnunar vistað.',
+        'verification_sent' => 'Staðfestingarkóði hefur verið sendur á netfangið þitt.',
+        'cooldown_wait' => 'Vinsamlegast bíddu í nokkrar sekúndur og reyndu aftur.',
+        'token_not_found' => 'Tákn fannst ekki. Reyndu að klára könnunina aftur.',
+        'network_error' => 'Netvilla. Reyndu aftur.',
+        'pin_instruction' => 'PIN kóði hefur verið sendur á uppgefið netfang. Sláðu hann inn til að staðfesta.',
+        'pin_attempts_left' => '{used} af {total} tilraunum eftir',
+        'pin_container_aria' => 'PIN kóða staðfesting',
+        'pin_group_aria' => '4 stafa PIN kóði',
+    ],
+
+    'lead' => [
+        'title' => 'Skildu eftir tengiliðaupplýsingar þínar til að:',
+        'bullet_discount' => 'fá ævilangan 20% afslátt',
+        'bullet_access' => 'fá snemmtækan aðgang að kerfinu',
+        'bullet_influence' => 'hafa áhrif á þróun vörunnar',
+        'expectation' => 'Þetta er síðasta skrefið: eftir þetta er könnunin lokið. Við þurfum aðeins upplýsingar þínar til að hafa samband við þig.',
+        'field_name' => 'Nafn þitt',
+        'field_business_name' => 'Nafn fyrirtækis',
+        'field_email' => 'Netfang',
+        'field_email_required_sr' => '(skylda)',
+        'field_phone' => 'Sími',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 eða wa.me/...',
+        'placeholder_telegram' => "{'@'}notandanafn",
+    ],
+
+    'success' => [
+        'title' => 'Takk fyrir. Ég mun hafa persónulega samband þegar kerfið er tilbúið.',
+        'body' => "Þú færð boð í sandkassaaðgang,\nþar sem þú getur prófað kerfið í reynd og mótað þróun þess. Þetta hjálpar okkur að aðlaga vöruna að raunverulegum ferlum í rekstri.",
+        'reassurance' => 'Við ætlum ekki að senda fjöldapósta — aðeins persónuleg skilaboð með uppfærslum.',
+        'update_hint' => "Ef ferlar þínir breytast eða þú færð ný verkefni —\nþú getur uppfært svör þín með hlekk sem sendur er á netfangið þitt.",
+        'home_link' => 'Til baka á forsíðu',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Þakka þér fyrir að ljúka spurningalistanum!',
+        'subtitle' => 'Þátttaka þín er mikilvægt framlag á fyrstu stigum þróunar.',
+        'image_alt' => 'Svar hefur verið vistað í gagnagrunninum',
+        'email_label' => 'Tölvupóstur:',
+        'sent_label' => 'Sent:',
+        'reset_button' => 'Uppfæra svör',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, takk fyrir svörin þín',
+        'subject_default' => 'Takk fyrir svörin þín',
+        'header_tagline' => 'Rauntíma HACCP samræmiskerfi',
+        'title' => 'Þakka þér fyrir þátttökuna — aðgangur þinn og 20% afsláttur',
+        'greeting_with_name' => 'Halló, :name!',
+        'greeting_default' => 'Halló!',
+        'thank_you' => 'Þakka þér fyrir að gefa þér tíma til að fylla út spurningalistann.',
+        'value_note' => 'Svör þín eru sannarlega verðmæt — þau móta beint vöruna.',
+        'registered_as' => 'Þú ert skráður sem þátttakandi í snemma aðgangi',
+        'discount_label' => '–20% lífstíðar afsláttur',
+        'discount_code_label' => 'Kóðinn þinn:',
+        'description_line1' => 'Kerfið er nú í þróun.',
+        'description_line2' => 'Ég er að greina svör frá eigendum fyrirtækja og betrumbæta virkni fyrir raunverulegan rekstur.',
+        'description_line3' => 'Meginmarkmiðið er að kerfið hjálpi þér að standast eftirlit með öryggi — ekki bara halda skrár.',
+        'benefits_title' => 'Það sem þú færð:',
+        'benefit_1' => 'Rauntíma aðgerðaskráning',
+        'benefit_2' => 'Gagnsæ saga fyrir eftirlit',
+        'benefit_3' => 'Stjórnun án aukinna verkefna',
+        'cta_button' => 'Fara á vefsíðu',
+        'footer_updates' => 'Ég mun reglulega deila þróunaruppfærslum og bjóða þér að prófa nýja eiginleika.',
+        'footer_feedback' => 'Ábendingar þínar og hugmyndir munu hjálpa til við að gera kerfið gagnlegra í raunverulegum rekstri.',
+        'footer_reply' => 'Ef þú hefur nú þegar hugmyndir eða kröfur — svaraðu einfaldlega þessum tölvupósti.',
+        'footer_signature' => 'Með bestu kveðjum, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Staðfestingarkóði fyrir HACCPilot',
+        'header_tagline' => 'Öryggisstaðfesting fyrir uppfærslu spurningalista',
+        'title' => 'Staðfestu uppfærslu svara þinna',
+        'description' => 'Þú hefur beðið um að uppfæra svör þín í HACCPilot spurningalistanum.',
+        'instruction' => 'Til að staðfesta, sláðu inn kóðann hér að neðan:',
+        'code_expiry' => 'Kóðinn gildir í takmarkaðan tíma',
+        'not_you' => 'Ef þetta var ekki þú — hunsaðu einfaldlega þennan tölvupóst.',
+        'data_safe' => 'Gögn þín verða óbreytt.',
+        'cta_button' => 'Fara aftur í uppfærslu',
+        'footer_auto' => 'Þetta er sjálfvirk skilaboð frá HACCPilot kerfinu.',
+        'footer_purpose' => 'Kóðinn er aðeins notaður til að staðfesta gagnabreytingar.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Svör þín í spurningalistanum hafa verið uppfærð',
+        'header_tagline' => 'Staðfesting á uppfærslu gagna í spurningalista',
+        'title' => 'Gögn þín hafa verið uppfærð með góðum árangri!',
+        'greeting_with_name' => 'Halló, :name!',
+        'greeting_default' => 'Halló!',
+        'thank_you' => 'Þakka þér fyrir að uppfæra svör þín í spurningalistanum.',
+        'status_label' => 'Staða spurningalista þíns:',
+        'status_value' => 'Uppfært og staðfest',
+        'status_note' => 'Allar breytingar hafa verið vistaðar og verða notaðar til að aðlaga HACCPilot kerfið.',
+        'footer_auto' => 'Þetta er sjálfvirk tilkynning frá HACCPilot kerfinu.',
+        'footer_data_use' => 'Gögn þín eru aðeins notuð til að bæta nákvæmni og sérsníðingu kerfisins.',
+        'footer_signature' => 'Með bestu kveðjum, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Tengillinn er ógildur eða útrunninn. Vinsamlegast reyndu að ljúka spurningalistanum aftur.',
+        'attempts_exhausted' => 'Staðfesting mistókst. Vinsamlegast ljúktu spurningalistanum aftur.',
+        'code_invalid' => 'Ógildur kóði. Vinsamlegast reyndu aftur.',
+        'success' => 'Svör spurningalista hafa verið uppfærð með góðum árangri.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Hvers konar fyrirtæki rekur þú?',
+            'options' => [
+                'cafe' => 'Kaffihús / kaffibar',
+                'bakery' => 'Bakarí / brauðframleiðsla',
+                'meat' => 'Kjötframleiðsla / sláturhús',
+                'kitchen' => 'Eldhús / matvælaframleiðsla',
+                'other' => 'Annað',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Hversu margir vinna hjá þér?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Í hvaða landi starfar þú?',
+            'field_caption' => 'Veldu land af listanum',
+        ],
+        '4' => [
+            'question_text' => 'Hvernig heldur þú utan um HACCP í dag?',
+            'options' => [
+                'paper' => 'Pappírsskrár',
+                'excel' => 'Excel / Google töflur',
+                'software' => 'Við notum okkar eigin hugbúnað',
+                'partial' => 'Að hluta skráð / ekkert raunverulegt kerfi',
+                'other' => 'Annað',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Notar þú greidd HACCP lausn?',
+            'options' => [
+                'yes' => 'Já',
+                'nb' => 'Nei',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Hversu ánægður ert þú með núverandi aðferð?',
+            'options' => [
+                'fully' => 'Alveg ánægður',
+                'partially_ok' => 'Að hluta ánægður',
+                'rather_not' => 'Frekar óánægður',
+                'not_at_all' => 'Alls ekki ánægður',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Myndir þú íhuga að skipta yfir í þægilegra kerfi?',
+            'options' => [
+                'yes' => 'Já',
+                'maybe' => 'Kannski',
+                'nb' => 'Nei',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Hver ber ábyrgð á HACCP í þínu fyrirtæki?',
+            'options' => [
+                'self' => 'Ég er persónulega ábyrgur',
+                'manager' => 'Stjórnandi / framkvæmdastjóri',
+                'staff' => 'Tilnefnt starfsfólk',
+                'none' => 'Enginn hefur formlega umsjón',
+                'other' => 'Annað',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Hversu oft gleyma starfsmenn að skrá verkefni?',
+            'options' => [
+                'often' => 'Oft',
+                'sometimes' => 'Stundum',
+                'rarely' => 'Sjaldan',
+                'almost_never' => 'Næstum aldrei',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Eru skrár stundum fylltar út eftir á?',
+            'options' => [
+                'often' => 'Já, oft',
+                'sometimes' => 'Stundum',
+                'rarely' => 'Sjaldan',
+                'never' => 'Aldrei',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Hvað er erfiðast við að halda utan um HACCP?',
+            'subtitle' => 'Þú getur valið fleiri en eitt svar.',
+            'options' => [
+                'records' => 'Skráning og skjölun',
+                'staff_control' => 'Eftirlit með starfsmönnum',
+                'realtime' => 'Fylgni við verklag í rauntíma',
+                'inspections' => 'Undirbúningur fyrir eftirlit',
+                'training' => 'Þjálfun og agi starfsmanna',
+                'chaos' => 'Ekkert eitt kerfi / ringulreið',
+                'other' => 'Annað',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Hefur þú fengið eftirlit á síðasta ári?',
+            'options' => [
+                'yes' => 'Já',
+                'nb' => 'Nei',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Hvað veldur þér mestum streitu við eftirlit?',
+            'options' => [
+                'docs' => 'Skjölun',
+                'staff' => 'Hegðun starfsmanna',
+                'missing_records' => 'Vantar skrár',
+                'overall' => 'Allt í heild',
+                'other' => 'Annað',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Hversu mikilvægt er að vera tilbúinn fyrir óvænt eftirlit?',
+            'options' => [
+                'very' => 'Mjög mikilvægt',
+                'rather' => 'Frekar mikilvægt',
+                'not_thought' => 'Hef ekki hugsað um það',
+                'not_important' => 'Ekki mikilvægt',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Hversu mikilvægt er fyrir þig að kerfi skrái aðgerðir starfsmanna í rauntíma (ekki eftir á)?',
+            'options' => [
+                'very' => 'Mjög mikilvægt',
+                'rather' => 'Frekar mikilvægt',
+                'unsure' => 'Óviss',
+                'not_important' => 'Ekki mikilvægt',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Hvaða eiginleikar væru raunverulega gagnlegir í þínu starfi?',
+            'subtitle' => 'Þú getur valið fleiri en eitt svar.',
+            'other_detail_field_label' => 'Segðu okkur hvað skiptir máli fyrir þig',
+            'group_headings' => [
+                'safety' => 'Stjórnun og öryggi',
+                'inspection' => 'Vinna með eftirlit',
+                'staff' => 'Þægindi starfsfólks',
+                'automation' => 'Sjálfvirkni',
+                'more' => 'Viðbót',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Viðvaranir þegar hitastig fer út fyrir mörk',
+                'capture_at_moment' => 'Skráning á staðnum (ekki afturvirkt)',
+                'two_person_confirm' => 'Staðfesting tveggja aðila á verkefni',
+                'reports_qr_link' => 'Fljótur aðgangur að skýrslum fyrir eftirlit (QR / tengill)',
+                'photo_proof' => 'Myndir sem sönnun á framkvæmd verkefnis',
+                'full_action_history' => 'Full saga aðgerða starfsmanna',
+                'offline_mobile' => 'Virkar án nettengingar í síma',
+                'voice_input' => 'Raddinnsláttur',
+                'biz_templates' => 'Einfaldar tilbúnar sniðmát eftir fyrirtækjagerð',
+                'bluetooth_temp' => 'Sjálfvirk hitamæling (Bluetooth skynjarar)',
+                'risk_warnings' => 'Áhættumat og snemmbúnar viðvaranir',
+                'loss_on_violations' => 'Áætlun á tapi við reglubrot',
+                'internal_staff_tasks' => 'Innri verkefnalistar fyrir starfsfólk',
+                'push_reminders' => 'Push áminningar fyrir starfsfólk',
+                'other' => 'Annað (segðu okkur hvað skiptir máli fyrir þig)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Ef kerfið gæti leyst eitt aðalvandamál fyrir þig, hvað væri það?',
+            'field_caption' => 'Svar þitt',
+        ],
+    ],
+];

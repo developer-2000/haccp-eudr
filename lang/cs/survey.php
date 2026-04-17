@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Pomozte nám vytvořit systém, který odstraňuje bolest z dodržování HACCP',
+        'subtitle' => 'Krátký dotazník — asi 5 minut. Vaše odpovědi nám pomohou vytvořit systém pro reálný provoz a inspekce.',
+        'trust' => 'Vaše odpovědi jsou použity pouze pro analýzu a nejsou sdíleny s třetími stranami.',
+        'start' => 'Začít',
+    ],
+
+    'nav' => [
+        'back' => 'Zpět',
+        'back_aria' => 'Vraťte se na předchozí krok',
+    ],
+
+    'progress' => [
+        'aria' => 'Dotazník: krok :current z :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Zadejte svůj e-mail — toto pole je povinné.',
+        'email_invalid' => 'Zadejte platnou e-mailovou adresu.',
+    ],
+
+    'ui' => [
+        'next' => 'Další',
+        'next_disabled_aria' => 'Další — nejprve odpovězte na otázku',
+        'other_default_label' => 'Upřesněte',
+        'other_aria_prefix' => 'Doplňující detail k vaší odpovědi:',
+        'select_placeholder' => 'Vyberte možnost',
+        'country_clear' => 'Zrušit výběr země',
+        'country_search' => 'Hledat podle názvu země',
+        'country_search_placeholder' => 'Hledat…',
+        'submit' => 'Odeslat',
+        'submit_sending' => 'Odesílání...',
+        'submit_failed' => 'Nepodařilo se odeslat data dotazníku. Zkuste to znovu.',
+        'questions_load_error' => 'Nepodařilo se načíst otázky dotazníku. Obnovte stránku nebo to zkuste později.',
+        'response_saved' => 'Odpověď byla uložena.',
+        'verification_sent' => 'Ověřovací kód byl odeslán na váš e-mail.',
+        'cooldown_wait' => 'Počkejte několik sekund a zkuste to znovu.',
+        'token_not_found' => 'Token nebyl nalezen. Zkuste dotazník dokončit znovu.',
+        'network_error' => 'Chyba sítě. Zkuste to znovu.',
+        'pin_instruction' => 'Na uvedený e-mail byl odeslán PIN kód. Zadejte jej pro potvrzení vlastnictví.',
+        'pin_attempts_left' => '{used} z {total} zbývajících pokusů',
+        'pin_container_aria' => 'Ověření PIN kódu',
+        'pin_group_aria' => '4místný PIN kód',
+    ],
+
+    'lead' => [
+        'title' => 'Zanechte své kontaktní údaje, abyste:',
+        'bullet_discount' => 'získali doživotní 20% slevu',
+        'bullet_access' => 'získali předběžný přístup k systému',
+        'bullet_influence' => 'ovlivnili plán vývoje produktu',
+        'expectation' => 'Toto je poslední krok: poté je dotazník dokončen. Potřebujeme pouze vaše údaje pro následný kontakt.',
+        'field_name' => 'Vaše jméno',
+        'field_business_name' => 'Název firmy',
+        'field_email' => 'E-mail',
+        'field_email_required_sr' => '(povinné)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 nebo wa.me/...',
+        'placeholder_telegram' => "{'@'}uživatelské_jméno",
+    ],
+
+    'success' => [
+        'title' => 'Děkujeme. Budu vás osobně kontaktovat, až bude systém připraven.',
+        'body' => "Obdržíte pozvánku do sandbox verze,\nkde si můžete systém vyzkoušet v praxi a ovlivnit jeho vývoj. To nám pomáhá přizpůsobit produkt reálným firemním procesům.",
+        'reassurance' => 'Neplánujeme hromadné e-maily — pouze osobní zprávy s aktualizacemi.',
+        'update_hint' => "Pokud se vaše procesy změní nebo přibydou nové úkoly —\nbudete moci své odpovědi aktualizovat přes odkaz zaslaný na váš e-mail.",
+        'home_link' => 'Zpět na úvod',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Děkujeme za vyplnění dotazníku!',
+        'subtitle' => 'Vaše účast je významným příspěvkem v rané fázi vývoje.',
+        'image_alt' => 'Odpověď byla uložena do databáze',
+        'email_label' => 'E-mail:',
+        'sent_label' => 'Odesláno:',
+        'reset_button' => 'Aktualizovat odpovědi',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, děkujeme za vaše odpovědi',
+        'subject_default' => 'Děkujeme za vaše odpovědi',
+        'header_tagline' => 'Systém pro HACCP dodržování v reálném čase',
+        'title' => 'Děkujeme za vaši účast — váš přístup a 20% sleva',
+        'greeting_with_name' => 'Dobrý den, :name!',
+        'greeting_default' => 'Dobrý den!',
+        'thank_you' => 'Děkujeme, že jste si našli čas na vyplnění dotazníku.',
+        'value_note' => 'Vaše odpovědi jsou velmi cenné — přímo ovlivňují vývoj produktu.',
+        'registered_as' => 'Jste registrován jako účastník předběžného přístupu',
+        'discount_label' => '−20 % doživotní sleva',
+        'discount_code_label' => 'Váš kód:',
+        'description_line1' => 'Systém je aktuálně ve vývoji.',
+        'description_line2' => 'Analyzuji odpovědi provozovatelů a upravuji funkce pro reálné provozy.',
+        'description_line3' => 'Hlavním cílem je, aby vám systém pomohl projít inspekcemi s jistotou — ne jen „evidovat záznamy“.',
+        'benefits_title' => 'Co získáte:',
+        'benefit_1' => 'Sledování činností v reálném čase',
+        'benefit_2' => 'Transparentní historie pro inspekce',
+        'benefit_3' => 'Kontrola bez zbytečné zátěže',
+        'cta_button' => 'Přejít na web',
+        'footer_updates' => 'Pravidelně budu sdílet aktualizace vývoje a zvát vás k testování nových funkcí.',
+        'footer_feedback' => 'Vaše zpětná vazba pomůže učinit systém užitečnějším v reálném provozu.',
+        'footer_reply' => 'Pokud již máte nápady nebo požadavky — stačí odpovědět na tento e-mail.',
+        'footer_signature' => 'S pozdravem, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Váš ověřovací kód pro HACCPilot',
+        'header_tagline' => 'Bezpečnostní potvrzení změny dotazníku',
+        'title' => 'Potvrzení změny odpovědí',
+        'description' => 'Požádali jste o úpravu svých odpovědí v dotazníku HACCPilot.',
+        'instruction' => 'Pro potvrzení zadejte kód níže:',
+        'code_expiry' => 'Kód je platný po omezenou dobu',
+        'not_you' => 'Pokud jste to nebyli vy — jednoduše tento e-mail ignorujte.',
+        'data_safe' => 'Vaše data zůstanou nezměněna.',
+        'cta_button' => 'Zpět k úpravě',
+        'footer_auto' => 'Toto je automatická zpráva systému HACCPilot.',
+        'footer_purpose' => 'Kód slouží pouze k potvrzení změn dat.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Vaše odpovědi v dotazníku byly aktualizovány',
+        'header_tagline' => 'Potvrzení aktualizace dat dotazníku',
+        'title' => 'Vaše data byla úspěšně aktualizována!',
+        'greeting_with_name' => 'Dobrý den, :name!',
+        'greeting_default' => 'Dobrý den!',
+        'thank_you' => 'Děkujeme za aktualizaci vašich odpovědí v dotazníku.',
+        'status_label' => 'Stav vašeho dotazníku:',
+        'status_value' => 'Aktualizováno a potvrzeno',
+        'status_note' => 'Všechny změny byly uloženy a budou použity pro přizpůsobení systému HACCPilot.',
+        'footer_auto' => 'Toto je automatické oznámení systému HACCPilot.',
+        'footer_data_use' => 'Vaše data jsou použita pouze ke zlepšení přesnosti a personalizace systému.',
+        'footer_signature' => 'S pozdravem, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Odkaz je neplatný nebo vypršel. Zkuste dotazník dokončit znovu.',
+        'attempts_exhausted' => 'Ověření selhalo. Dokončete prosím dotazník znovu.',
+        'code_invalid' => 'Neplatný kód. Zkuste to znovu.',
+        'success' => 'Odpovědi byly úspěšně aktualizovány.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Jaký typ podnikání provozujete?',
+            'options' => [
+                'cafe' => 'Kavárna / kávový podnik',
+                'bakery' => 'Pekárna / výroba pečiva',
+                'meat' => 'Masná výroba / řeznictví',
+                'kitchen' => 'Kuchyně / potravinářská výroba',
+                'other' => 'Jiné',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Kolik lidí u vás pracuje?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Ve které zemi působíte?',
+            'field_caption' => 'Vyberte zemi ze seznamu',
+        ],
+        '4' => [
+            'question_text' => 'Jak dnes řídíte HACCP?',
+            'options' => [
+                'paper' => 'Papírové záznamy',
+                'excel' => 'Excel / Google tabulky',
+                'software' => 'Používáme vlastní software',
+                'partial' => 'Částečně dokumentováno / bez skutečného systému',
+                'other' => 'Jiné',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Používáte placená HACCP řešení?',
+            'options' => [
+                'yes' => 'Ano',
+                'nb' => 'Ne',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Jak jste spokojeni se svým současným přístupem?',
+            'options' => [
+                'fully' => 'Plně spokojeni',
+                'partially_ok' => 'Spíše spokojeni',
+                'rather_not' => 'Spíše nespokojeni',
+                'not_at_all' => 'Vůbec nespokojeni',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Zvažovali byste přechod na pohodlnější systém?',
+            'options' => [
+                'yes' => 'Ano',
+                'maybe' => 'Možná',
+                'nb' => 'Ne',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Kdo ve vaší firmě zodpovídá za HACCP v praxi?',
+            'options' => [
+                'self' => 'Já osobně',
+                'manager' => 'Manažer / administrátor',
+                'staff' => 'Určení zaměstnanci',
+                'none' => 'Nikdo to formálně neřídí',
+                'other' => 'Jiné',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Jak často zaměstnanci zapomínají plnit nebo zaznamenávat úkoly?',
+            'options' => [
+                'often' => 'Často',
+                'sometimes' => 'Někdy',
+                'rarely' => 'Zřídka',
+                'almost_never' => 'Téměř nikdy',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Vyplňují se záznamy někdy zpětně?',
+            'options' => [
+                'often' => 'Ano, často',
+                'sometimes' => 'Někdy',
+                'rarely' => 'Zřídka',
+                'never' => 'Nikdy',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Co je pro vás nejtěžší při řízení HACCP?',
+            'subtitle' => 'Můžete vybrat více odpovědí.',
+            'options' => [
+                'records' => 'Vedení záznamů a dokumentace',
+                'staff_control' => 'Kontrola práce zaměstnanců',
+                'realtime' => 'Dodržování postupů v reálném čase',
+                'inspections' => 'Příprava na inspekce',
+                'training' => 'Školení a disciplína zaměstnanců',
+                'chaos' => 'Žádný jednotný systém / chaos v procesech',
+                'other' => 'Jiné',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Měli jste v posledním roce inspekci?',
+            'options' => [
+                'yes' => 'Ano',
+                'nb' => 'Ne',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Co vás během inspekce nejvíce stresuje?',
+            'options' => [
+                'docs' => 'Dokumentace',
+                'staff' => 'Chování zaměstnanců',
+                'missing_records' => 'Chybějící záznamy',
+                'overall' => 'Vše celkově',
+                'other' => 'Jiné',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Jak důležité je pro vás být připraven na neohlášenou inspekci?',
+            'options' => [
+                'very' => 'Velmi důležité',
+                'rather' => 'Spíše důležité',
+                'not_thought' => 'Nepřemýšlel jsem o tom',
+                'not_important' => 'Nedůležité',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Jak důležité je pro vás, aby systém zachycoval činnosti zaměstnanců v reálném čase (ne zpětně)?',
+            'options' => [
+                'very' => 'Velmi důležité',
+                'rather' => 'Spíše důležité',
+                'unsure' => 'Nevím',
+                'not_important' => 'Nedůležité',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Které z těchto funkcí by pro vás byly skutečně užitečné?',
+            'subtitle' => 'Můžete vybrat více odpovědí.',
+            'other_detail_field_label' => 'Napište, co je pro vás důležité',
+            'group_headings' => [
+                'safety' => 'Kontrola a bezpečnost',
+                'inspection' => 'Práce s inspekcemi',
+                'staff' => 'Pohodlí zaměstnanců',
+                'automation' => 'Automatizace',
+                'more' => 'Další',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Upozornění při překročení teploty',
+                'capture_at_moment' => 'Zachycení dat v okamžiku úkolu (bez zpětného zadávání)',
+                'two_person_confirm' => 'Dvoučlenné potvrzení úkolu',
+                'reports_qr_link' => 'Rychlý přístup k reportům pro inspekce (QR / odkaz)',
+                'photo_proof' => 'Fotografie jako důkaz provedení úkolu',
+                'full_action_history' => 'Úplná historie činností zaměstnanců',
+                'offline_mobile' => 'Funguje offline na telefonu',
+                'voice_input' => 'Hlasové zadávání',
+                'biz_templates' => 'Jednoduché předpřipravené šablony podle typu podniku',
+                'bluetooth_temp' => 'Automatické měření teploty (Bluetooth senzory)',
+                'risk_warnings' => 'Hodnocení rizik a včasná varování',
+                'loss_on_violations' => 'Odhad ztrát při porušení pravidel',
+                'internal_staff_tasks' => 'Interní úkoly pro zaměstnance',
+                'push_reminders' => 'Upozornění pro zaměstnance',
+                'other' => 'Jiné (napište, co je pro vás důležité)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Jaký hlavní problém by pro vás měl systém vyřešit?',
+            'field_caption' => 'Vaše odpověď',
+        ],
+    ],
+];

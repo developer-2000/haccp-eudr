@@ -19,7 +19,7 @@ class SurveySubmitRequest extends FormRequest
             'contacts' => ['required', 'array'],
             'contacts.name' => ['nullable', 'string', 'max:255'],
             // 🔥 улучшенная валидация email
-            'contacts.email' => ['required', 'email:rfc,dns', 'max:255'],
+            'contacts.email' => ['required', 'email:rfc', 'max:255'],
             'contacts.business_name' => ['nullable', 'string', 'max:255'],
             'contacts.phone' => ['nullable', 'string', 'max:255'],
             'contacts.whatsapp' => ['nullable', 'string', 'max:255'],

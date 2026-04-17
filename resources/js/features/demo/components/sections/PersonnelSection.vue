@@ -3,7 +3,11 @@
     <div class="personnel-section">
         <!-- Открывает модалку создания сотрудника -->
         <div class="personnel-section__toolbar">
-            <n-button type="primary" @click="openCreateModal">
+            <n-button
+                type="primary"
+                size="large"
+                @click="openCreateModal"
+            >
                 {{ personnelSectionText.add }}
             </n-button>
         </div>
@@ -81,6 +85,7 @@
                                             <n-button
                                                 type="info"
                                                 class="personnel-section__action-btn"
+                                                size="large"
                                                 @click="openEditModal(member)"
                                             >
                                                 {{ personnelSectionText.edit }}
@@ -104,6 +109,7 @@
                                                     <n-button
                                                         type="error"
                                                         class="personnel-section__action-btn"
+                                                        size="large"
                                                     >
                                                         {{ personnelSectionText.delete }}
                                                     </n-button>
@@ -176,6 +182,7 @@
                                 type="info"
                                 block
                                 class="personnel-section__action-btn"
+                                size="large"
                                 @click="openEditModal(member)"
                             >
                                 {{ personnelSectionText.edit }}
@@ -192,6 +199,7 @@
                                         type="error"
                                         block
                                         class="personnel-section__action-btn"
+                                        size="large"
                                     >
                                         {{ personnelSectionText.delete }}
                                     </n-button>
@@ -215,35 +223,38 @@
 <script setup>
 import { computed, onActivated, ref, watch } from "vue";
 import { NButton, NPopconfirm, NTabs, NTabPane, useMessage } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import CreateEditStaffModal from "@/features/demo/components/modals/create_edit_staff/CreateEditStaffModal.vue";
 import { siteEmojiForDemo } from "@/features/demo/data/demoPersonnel";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
 
 defineOptions({ name: "PersonnelSection" });
 
+const { t } = useI18n();
+
 /** Все пользовательские строки секции (шаблон + сообщения). */
-const personnelSectionText = {
-    add: "Добавить",
-    colFullName: "ФИО",
-    colRole: "Должность",
-    colPhone: "Телефон",
-    colEmail: "Email",
-    colStatus: "Статус",
-    labelFullName: "ФИО:",
-    labelRole: "Должность:",
-    labelPhone: "Телефон:",
-    labelEmail: "Email:",
-    labelStatus: "Статус:",
-    empty: "—",
-    statusActive: "On",
-    statusInactive: "Off",
-    edit: "Изменить",
-    delete: "Удалить",
-    cancel: "Отмена",
-    removeConfirmBase: "Удалить сотрудника «{name}»?",
-    removeConfirmWithTasks: "С {n} задач(и) будет убран этот сотрудник!",
-    removeSuccess: "Сотрудник удалён",
-};
+const personnelSectionText = computed(() => ({
+    add: t('demo.personnel.add'),
+    colFullName: t('demo.personnel.col_full_name'),
+    colRole: t('demo.personnel.col_role'),
+    colPhone: t('demo.personnel.col_phone'),
+    colEmail: t('demo.personnel.col_email'),
+    colStatus: t('demo.personnel.col_status'),
+    labelFullName: t('demo.personnel.label_full_name'),
+    labelRole: t('demo.personnel.label_role'),
+    labelPhone: t('demo.personnel.label_phone'),
+    labelEmail: t('demo.personnel.label_email'),
+    labelStatus: t('demo.personnel.label_status'),
+    empty: t('demo.personnel.empty'),
+    statusActive: t('demo.personnel.status_active'),
+    statusInactive: t('demo.personnel.status_inactive'),
+    edit: t('demo.personnel.edit'),
+    delete: t('demo.personnel.delete'),
+    cancel: t('demo.personnel.cancel'),
+    removeConfirmBase: 'demo.personnel.remove_confirm_base',
+    removeConfirmWithTasks: 'demo.personnel.remove_confirm_with_tasks',
+    removeSuccess: t('demo.personnel.remove_success'),
+}));
 
 const message = useMessage();
 const { demoState, removeStaff } = useDemoState();
@@ -314,17 +325,11 @@ const countAssignedTasks = (staffId) => {
  */
 const removeConfirmText = (member) => {
     const n = countAssignedTasks(member.id);
-    const base = personnelSectionText.removeConfirmBase.replace(
-        "{name}",
-        member.fullName,
-    );
+    const base = t(personnelSectionText.value.removeConfirmBase, { name: member.fullName });
     if (n === 0) {
         return base;
     }
-    return `${base} ${personnelSectionText.removeConfirmWithTasks.replace(
-        "{n}",
-        String(n),
-    )}`;
+    return `${base} ${t(personnelSectionText.value.removeConfirmWithTasks, { n: String(n) })}`;
 };
 
 /**
@@ -332,7 +337,7 @@ const removeConfirmText = (member) => {
  */
 const onConfirmRemove = (member) => {
     removeStaff(member.id);
-    message.success(personnelSectionText.removeSuccess);
+    message.success(personnelSectionText.value.removeSuccess);
 };
 
 /**

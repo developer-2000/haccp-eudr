@@ -1,4 +1,5 @@
-/** Статические сиды для демо-чек-листов: слоты замеров, корректирующие действия, определения полей CCP. */
+import { i18n } from "@/i18n";
+const tt = (...args) => i18n.global.t(...args);
 
 const pendingSlot = (time) => ({
     time,
@@ -45,13 +46,13 @@ export const CORRECTIVE_ACTIONS_BY_TASK_ID = {
     "coffee-1": [],
     /** Задача «Охлаждение зерна» (`coffee-2`): почему ответственный не выполнил задачу вовремя / как задумано. */
     "coffee-2": [
-        "Отошел раньше от рабочего места",
-        "Отвлекся на другие обязанности",
-        "Замер не делал без уважительной причины",
-        "Не понимает режим, CCP и что фиксировать",
-        "Охладитель/линия в простое, ждали техслужбу",
-        "До охлаждения зерна не добрался в срок",
-        "Не знал, что от него ждут замер / смена не передала задачу",
+        tt('demo.seed_corrective.left_workplace'),
+        tt('demo.seed_corrective.distracted'),
+        tt('demo.seed_corrective.no_measurement'),
+        tt('demo.seed_corrective.no_understanding'),
+        tt('demo.seed_corrective.equipment_downtime'),
+        tt('demo.seed_corrective.missed_deadline'),
+        tt('demo.seed_corrective.no_handoff'),
     ],
     "coffee-3": [],
     "coffee-4": [],
@@ -72,8 +73,7 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-coffee-1-ticket",
             fieldType: "ticket",
             config: {
-                description:
-                    "Осмотреть зону ответственности, кратко описать возможные проблемы в комментарии, при необходимости сделать фото и прикрепить файл.",
+                description: tt('demo.seed_field_descriptions.coffee_1_desc'),
             },
         },
     ],
@@ -92,8 +92,8 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-coffee-3-single-choice",
             fieldType: "single_choice",
             config: {
-                question: "Состояние упаковки партии и маркировки корректно?",
-                options: ["Да, все корректно", "Нет, есть замечания"],
+                question: tt('demo.seed_field_descriptions.coffee_3_question'),
+                options: [tt('demo.seed_field_descriptions.coffee_3_opt_yes'), tt('demo.seed_field_descriptions.coffee_3_opt_no')],
             },
         },
     ],
@@ -102,7 +102,7 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-coffee-4-ticket",
             fieldType: "ticket",
             config: {
-                description: "Оформить заявку в техслужбу при нестабильной работе кофемашины.",
+                description: tt('demo.seed_field_descriptions.coffee_4_desc'),
             },
         },
     ],
@@ -121,8 +121,7 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-bakery-4-ticket",
             fieldType: "ticket",
             config: {
-                description:
-                    "Оформить заявку на проверку вентиляции и влажности в выбранных помещениях.",
+                description: tt('demo.seed_field_descriptions.bakery_4_desc'),
             },
         },
     ],
@@ -131,8 +130,8 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-bakery-5-single-choice",
             fieldType: "single_choice",
             config: {
-                question: "Сроки сырья и маркировка актуальны?",
-                options: ["Да, все в порядке", "Нет, есть просрочка/ошибка"],
+                question: tt('demo.seed_field_descriptions.bakery_5_question'),
+                options: [tt('demo.seed_field_descriptions.bakery_5_opt_yes'), tt('demo.seed_field_descriptions.bakery_5_opt_no')],
             },
         },
     ],
@@ -148,8 +147,8 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-meat-2-single-choice",
             fieldType: "single_choice",
             config: {
-                question: "Маркировка партии заполнена корректно?",
-                options: ["Да, корректно", "Нет, требуется исправление"],
+                question: tt('demo.seed_field_descriptions.meat_2_question'),
+                options: [tt('demo.seed_field_descriptions.meat_2_opt_yes'), tt('demo.seed_field_descriptions.meat_2_opt_no')],
             },
         },
     ],
@@ -165,7 +164,7 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-meat-4-ticket",
             fieldType: "ticket",
             config: {
-                description: "Создать заявку на обслуживание оборудования термоконтроля.",
+                description: tt('demo.seed_field_descriptions.meat_4_desc'),
             },
         },
     ],
@@ -174,7 +173,7 @@ export const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
             id: "def-meat-5-ticket",
             fieldType: "ticket",
             config: {
-                description: "Санобработка выполнена не полностью. Оформить заявку на доработку.",
+                description: tt('demo.seed_field_descriptions.meat_5_desc'),
             },
         },
     ],

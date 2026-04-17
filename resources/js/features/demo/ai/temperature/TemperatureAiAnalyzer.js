@@ -1,4 +1,7 @@
+import { i18n } from "@/i18n";
 import { DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE } from "@/features/demo/task_grain_cooling/config";
+
+const tt = (...args) => i18n.global.t(...args);
 import {
     BREAD_MODE_ANALYZER_PROFILES,
     breadBandMatchesTaskEquipment,
@@ -21,64 +24,66 @@ import {
  * Окна CCP по режимам только при **`eq-coffee-*`** в задаче.
  * Без кофейного оборудования строки и подписи — только из **`DEFAULT_COFFEE_AI_PROFILE_FALLBACK`** в `coffeeBands.js`.
  */
-const COFFEE_TEMPERATURE_PROFILES = Object.freeze({
-    storage: Object.freeze({
-        ccpMin: 15,
-        ccpMax: 24,
-        ccpLabel: "15..24°C (хранение зерна, норма)",
-        threatHigh: "Перегрев зерна и рост риска качества/микотоксинов",
-        threatLow: "Переохлаждение зерна и риск конденсата при циклах",
-        economyHigh: "Потеря аромата и стоимости партии",
-        economyLow: "Снижение стабильности профиля обжарки",
-        inspectorHigh: "Отклонение по условиям хранения сырья",
-        inspectorLow: "Отклонение по условиям температурного режима",
-        actionHigh: "Стабилизировать температуру склада и проверить вентиляцию",
-        actionLow: "Проверить утепление и исключить температурные качели",
-        riskSlope: 12,
-    }),
-    roasting: Object.freeze({
-        ccpMin: 195,
-        ccpMax: 230,
-        ccpLabel: "195..230°C (обжарка)",
-        threatHigh: "Перегрев барабана — риск подгорания и акриламида",
-        threatLow: "Недожар — сырой вкус и нестабильный экстракт",
-        economyHigh: "Потеря партии обжарки",
-        economyLow: "Брак по профилю и повторный цикл",
-        inspectorHigh: "Отклонение по режиму обжарки",
-        inspectorLow: "Отклонение по режиму обжарки",
-        actionHigh: "Остановить рост температуры и снизить нагрев",
-        actionLow: "Довести профиль до целевого окна",
-        riskSlope: 14,
-    }),
-    cooling: Object.freeze({
-        ccpMin: 15,
-        ccpMax: 24,
-        ccpLabel: "15..24°C (охлаждение после обжарки, норма)",
-        threatHigh: "Слишком тепло при охлаждении — догарка и риск плесени",
-        threatLow: "Слишком холодно — конденсат в зёрнах",
-        economyHigh: "Потеря качества партии",
-        economyLow: "Риск порчи при упаковке",
-        inspectorHigh: "Отклонение по охлаждению",
-        inspectorLow: "Отклонение по охлаждению",
-        actionHigh: "Ускорить охлаждение (вентиляция / шок-кулер)",
-        actionLow: "Стабилизировать температуру без перегрева/переохлаждения",
-        riskSlope: 12,
-    }),
-});
+/**
+ * Возвращает локализованные профили температур для кофейного оборудования.
+ * Вызывается при каждом анализе, чтобы тексты соответствовали текущей локали.
+ */
+function getCoffeeTemperatureProfiles() {
+    return {
+        storage: {
+            ccpMin: 15, ccpMax: 24, riskSlope: 12,
+            ccpLabel: tt('demo.temperature_ai.storage_ccp_label'),
+            threatHigh: tt('demo.temperature_ai.storage_threat_high'),
+            threatLow: tt('demo.temperature_ai.storage_threat_low'),
+            economyHigh: tt('demo.temperature_ai.storage_economy_high'),
+            economyLow: tt('demo.temperature_ai.storage_economy_low'),
+            inspectorHigh: tt('demo.temperature_ai.storage_inspector_high'),
+            inspectorLow: tt('demo.temperature_ai.storage_inspector_low'),
+            actionHigh: tt('demo.temperature_ai.storage_action_high'),
+            actionLow: tt('demo.temperature_ai.storage_action_low'),
+        },
+        roasting: {
+            ccpMin: 195, ccpMax: 230, riskSlope: 14,
+            ccpLabel: tt('demo.temperature_ai.roasting_ccp_label'),
+            threatHigh: tt('demo.temperature_ai.roasting_threat_high'),
+            threatLow: tt('demo.temperature_ai.roasting_threat_low'),
+            economyHigh: tt('demo.temperature_ai.roasting_economy_high'),
+            economyLow: tt('demo.temperature_ai.roasting_economy_low'),
+            inspectorHigh: tt('demo.temperature_ai.roasting_inspector_high'),
+            inspectorLow: tt('demo.temperature_ai.roasting_inspector_low'),
+            actionHigh: tt('demo.temperature_ai.roasting_action_high'),
+            actionLow: tt('demo.temperature_ai.roasting_action_low'),
+        },
+        cooling: {
+            ccpMin: 15, ccpMax: 24, riskSlope: 12,
+            ccpLabel: tt('demo.temperature_ai.cooling_ccp_label'),
+            threatHigh: tt('demo.temperature_ai.cooling_threat_high'),
+            threatLow: tt('demo.temperature_ai.cooling_threat_low'),
+            economyHigh: tt('demo.temperature_ai.cooling_economy_high'),
+            economyLow: tt('demo.temperature_ai.cooling_economy_low'),
+            inspectorHigh: tt('demo.temperature_ai.cooling_inspector_high'),
+            inspectorLow: tt('demo.temperature_ai.cooling_inspector_low'),
+            actionHigh: tt('demo.temperature_ai.cooling_action_high'),
+            actionLow: tt('demo.temperature_ai.cooling_action_low'),
+        },
+    };
+}
 
 /** Порог % риска: `>=` → `ai_status: "problem"`, иначе `"warning"`. См. `AI temperature functions.md`. */
 const AI_STATUS_PROBLEM_MIN_RISK_PERCENT = 70;
 
-const TEMPERATURE_PROFILES = Object.freeze({
-    meat: MEAT_MODE_ANALYZER_PROFILES,
-    coffee: COFFEE_TEMPERATURE_PROFILES,
-    bread: Object.freeze({
-        sponge_mix: BREAD_MODE_ANALYZER_PROFILES.sponge_mix,
-        proofing: BREAD_MODE_ANALYZER_PROFILES.proofing,
-        baking: BREAD_MODE_ANALYZER_PROFILES.baking,
-        cooling: BREAD_MODE_ANALYZER_PROFILES.cooling,
-    }),
-});
+function getTemperatureProfiles() {
+    return {
+        meat: MEAT_MODE_ANALYZER_PROFILES,
+        coffee: getCoffeeTemperatureProfiles(),
+        bread: {
+            sponge_mix: BREAD_MODE_ANALYZER_PROFILES.sponge_mix,
+            proofing: BREAD_MODE_ANALYZER_PROFILES.proofing,
+            baking: BREAD_MODE_ANALYZER_PROFILES.baking,
+            cooling: BREAD_MODE_ANALYZER_PROFILES.cooling,
+        },
+    };
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // ОБЩЕЕ — чистые функции: числа, риск, подписи (без привязки к нише)
@@ -147,19 +152,18 @@ function deviationFromTaskCcpRange(current, rangeMin, rangeMax) {
     }
     if (current >= min && current <= max) {
         return {
-            line: `В диапазоне`,
+            line: tt('demo.temperature_ai.in_range'),
         };
     }
     if (current > max) {
         const mag = roundToTwoDecimals(current - max);
         return {
-            line: `Превышение: ${formatTemperatureValueForUi(mag, true)}`,
+            line: tt('demo.temperature_ai.exceeded_by', { value: formatTemperatureValueForUi(mag, true) }),
         };
     }
-    // Ниже min: отклонение со знаком (24 °C при 25…35 → −1 °C), не модуль «+1».
     const delta = roundToTwoDecimals(current - min);
     return {
-        line: `Понижение: ${formatTemperatureValueForUi(delta, false)}`,
+        line: tt('demo.temperature_ai.below_by', { value: formatTemperatureValueForUi(delta, false) }),
     };
 }
 
@@ -362,7 +366,7 @@ export class TemperatureAiAnalyzer {
      * [ОБЩЕЕ] Экспорт `TEMPERATURE_PROFILES` для контрактов и тестов.
      */
     getProfiles() {
-        return TEMPERATURE_PROFILES;
+        return getTemperatureProfiles();
     }
 
     // ───────────────────────────────────────────────────────────────────────
@@ -375,7 +379,7 @@ export class TemperatureAiAnalyzer {
     resolveProfileContext(niche, mode) {
         const normalizedNiche = String(niche ?? "").trim();
         const normalizedMode = String(mode ?? "").trim();
-        const nicheConfig = TEMPERATURE_PROFILES[normalizedNiche] ?? null;
+        const nicheConfig = getTemperatureProfiles()[normalizedNiche] ?? null;
 
         if (!nicheConfig) {
             return {
@@ -835,16 +839,16 @@ export class TemperatureAiAnalyzer {
         }
         const directionLabel =
             analysis.direction === "too_high"
-                ? "Превышение"
+                ? tt('demo.temperature_ai.direction_high')
                 : analysis.direction === "too_low"
-                  ? "Понижение"
-                  : "Отклонение";
+                  ? tt('demo.temperature_ai.direction_low')
+                  : tt('demo.temperature_ai.direction_deviation');
         const headlineWord =
             analysis.direction === "too_high"
-                ? "ПРЕВЫШЕНИЕ"
+                ? tt('demo.temperature_ai.headline_high')
                 : analysis.direction === "too_low"
-                  ? "ПОНИЖЕНИЕ"
-                  : "ОТКЛОНЕНИЕ";
+                  ? tt('demo.temperature_ai.headline_low')
+                  : tt('demo.temperature_ai.headline_deviation');
         const currentFormatted = formatTemperatureValueForUi(analysis.value);
         const mag = analysis.deviationFromLimit;
         const deviationFormatted =
@@ -926,7 +930,7 @@ export class TemperatureAiAnalyzer {
                     : "—";
             return {
                 ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
-                title: "В пределах CCP",
+                title: tt('demo.temperature_ai.within_ccp'),
                 ai_status: "ok",
                 risk: 0,
                 niche: analysis.niche,
@@ -962,7 +966,7 @@ export class TemperatureAiAnalyzer {
                     : "—";
             return {
                 ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
-                title: "В пределах CCP",
+                title: tt('demo.temperature_ai.within_ccp'),
                 ai_status: "ok",
                 risk: 0,
                 niche: analysis.niche,
@@ -999,7 +1003,7 @@ export class TemperatureAiAnalyzer {
                     : "—";
             return {
                 ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
-                title: "В пределах CCP",
+                title: tt('demo.temperature_ai.within_ccp'),
                 ai_status: "ok",
                 risk: 0,
                 niche: analysis.niche,

@@ -11,9 +11,9 @@
             <!-- Заголовок колонок таблицы замеров -->
             <thead>
                 <tr>
-                    <th>Время</th>
-                    <th>Решение</th>
-                    <th>Статус</th>
+                    <th>{{ t('demo.measurements.col_time') }}</th>
+                    <th>{{ t('demo.measurements.col_decision') }}</th>
+                    <th>{{ t('demo.measurements.col_status') }}</th>
                 </tr>
             </thead>
             <!-- Строки повременной выполнения задачи -->
@@ -48,6 +48,7 @@
                             v-if="item.aiWarning"
                             class="checklist-modal__decision-nested"
                         >
+                            <tbody>
                             <tr>
                                 <td class="checklist-modal__decision-nested__value">
                                     <span class="checklist-modal__bolt-text">{{
@@ -65,6 +66,7 @@
                                     {{ item.aiWarning.action }}
                                 </td>
                             </tr>
+                            </tbody>
                         </table>
                         <span
                             v-else
@@ -99,10 +101,10 @@
                                             Boolean(item.correctiveAction),
                                     },
                                 ]"
-                                aria-label="Ответить"
+                                :aria-label="t('demo.measurements.respond')"
                                 @click="toggleActionRow(item.time)"
                             >
-                                Ответить
+                                {{ t('demo.measurements.respond') }}
                             </button>
                             <!-- pending: панель выполнения -->
                             <button
@@ -118,10 +120,10 @@
                                         ? 'checklist-modal__status-trigger--pending-neutral'
                                         : 'checklist-modal__status-trigger--pending'
                                 "
-                                aria-label="Решить"
+                                :aria-label="t('demo.measurements.resolve')"
                                 @click="$emit('open-pending', item)"
                             >
-                                Решить
+                                {{ t('demo.measurements.resolve') }}
                             </button>
                             <!-- строка ответа на проблему -->
                             <p
@@ -138,12 +140,12 @@
                     <td colspan="3" class="checklist-modal__action-row">
                         <div class="checklist-modal__action-box">
                             <p class="checklist-modal__action-title">
-                                Корректирующие действия
+                                {{ t('demo.measurements.corrective_actions') }}
                             </p>
                             <n-select
                                 :value="item.correctiveAction ?? null"
                                 :options="resolveActionOptions(task)"
-                                placeholder="Выберите действие"
+                                :placeholder="t('demo.measurements.select_action')"
                                 @update:value="onCorrectiveActionSelect(item, $event)"
                             />
                         </div>
@@ -162,6 +164,9 @@
 
 <script setup>
 import {NSelect} from "naive-ui";
+import {useI18n} from "vue-i18n";
+
+const {t} = useI18n();
 
 const props = defineProps({
     task: {

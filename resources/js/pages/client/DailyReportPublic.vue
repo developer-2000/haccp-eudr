@@ -9,22 +9,21 @@
                 class="daily-report__print btn-client btn-outline-primary"
                 @click="print"
             >
-                Print / PDF
+                {{ t('report.public.print_pdf') }}
             </button>
         </div>
 
         <div v-if="!snapshot" class="daily-report__missing container">
             <h1 class="daily-report__missing-title">
-                Invalid or unknown report date
+                {{ t('report.public.invalid_title') }}
             </h1>
             <p class="daily-report__missing-text">
-                Use a valid calendar date in the URL (YYYY-MM-DD), e.g.
-                <code>{{ reportReferenceIso }}</code> for the demo daily bundle.
+                {{ t('report.public.invalid_text', { date: reportReferenceIso }) }}
             </p>
             <RouterLink
                 class="btn-client btn-outline-primary"
                 :to="fallbackDemoEudr"
-                >EUDR demo</RouterLink
+                >{{ t('report.public.eudr_demo_link') }}</RouterLink
             >
         </div>
 
@@ -32,63 +31,57 @@
             <header class="daily-report__head">
                 <div class="daily-report__eu-band" aria-hidden="true" />
                 <p class="daily-report__kicker">
-                    EU Regulation (EU) 2023/1115 (EUDR) · FSMA-style
-                    recordkeeping (illustrative) — demo disclosure
+                    {{ t('report.public.kicker') }}
                 </p>
                 <h1 class="daily-report__title">
-                    Daily HACCP monitoring &amp; supply intake summary
+                    {{ t('report.public.title') }}
                 </h1>
                 <p class="daily-report__sub">
-                    Single-day operational snapshot for inspector / third-party
-                    review. Not a legal DDS or official FDA filing.
+                    {{ t('report.public.subtitle') }}
                 </p>
                 <div class="daily-report__refs">
                     <div>
-                        <span class="daily-report__label"
-                            >Report reference</span
-                        >
+                        <span class="daily-report__label">{{ t('report.public.report_reference') }}</span>
                         <strong>{{ snapshot.documentRef }}</strong>
                     </div>
                     <div>
-                        <span class="daily-report__label"
-                            >Calendar date UTC</span
-                        >
+                        <span class="daily-report__label">{{ t('report.public.calendar_date_utc') }}</span>
                         <strong>{{ snapshot.dateIso }}</strong>
                     </div>
                     <div>
-                        <span class="daily-report__label">Localized</span>
+                        <span class="daily-report__label">{{ t('report.public.localized') }}</span>
                         <strong>{{ snapshot.dateLongRu }}</strong>
                     </div>
                 </div>
             </header>
 
             <section class="daily-report__section">
-                <h2>1. Establishment</h2>
+                <h2>{{ t('report.public.section_establishment') }}</h2>
                 <dl class="daily-report__dl">
                     <div>
-                        <dt>Legal name</dt>
+                        <dt>{{ t('report.public.legal_name') }}</dt>
                         <dd>{{ snapshot.establishment.legalName }}</dd>
                     </div>
                     <div>
-                        <dt>Registered address</dt>
+                        <dt>{{ t('report.public.registered_address') }}</dt>
                         <dd>{{ snapshot.establishment.address }}</dd>
                     </div>
                     <div>
-                        <dt>EORI (EU)</dt>
+                        <dt>{{ t('report.public.eori_eu') }}</dt>
                         <dd>{{ snapshot.establishment.eori }}</dd>
                     </div>
                     <div>
-                        <dt>U.S. FDA / FSMA note</dt>
+                        <dt>{{ t('report.public.fda_note') }}</dt>
                         <dd>{{ snapshot.establishment.fdaRegistration }}</dd>
                     </div>
                     <div>
-                        <dt>EU competent authority (illustrative)</dt>
+                        <dt>{{ t('report.public.competent_authority') }}</dt>
                         <dd>
                             {{ snapshot.establishment.competentAuthorityEu }}
                         </dd>
                     </div>
                     <div>
-                        <dt>Operating name (demo)</dt>
+                        <dt>{{ t('report.public.operating_name') }}</dt>
                         <dd>{{ snapshot.companyShort }}</dd>
                     </div>
                 </dl>
@@ -98,38 +91,27 @@
                 v-if="!snapshot.hasFullRecord"
                 class="daily-report__section daily-report__section--muted"
             >
-                <h2>2. Records for this date</h2>
+                <h2>{{ t('report.public.section_no_records') }}</h2>
                 <p class="daily-report__lead">
-                    The demo dataset does not include a full daily bundle for
-                    this calendar day. In production, this page would list CCP
-                    readings and any EUDR-linked intakes recorded for the
-                    selected date only.
+                    {{ t('report.public.no_records_text') }}
                 </p>
             </section>
 
             <template v-else>
                 <section class="daily-report__section">
                     <h2>
-                        2. Scope &amp; inventory (HACCP monitoring — same
-                        calendar day)
+                        {{ t('report.public.section_scope') }}
                     </h2>
                     <p class="daily-report__lead">
-                        Complete register of all control points in the demo
-                        dataset for the reporting date. Scheduled checks include
-                        full time-stamped readings. Single-point checks show the
-                        last recorded value.
+                        {{ t('report.public.scope_lead') }}
                     </p>
                     <div class="daily-report__summary">
                         <div class="daily-report__summary-item">
-                            <span class="daily-report__label"
-                                >Total control points (all niches)</span
-                            >
+                            <span class="daily-report__label">{{ t('report.public.total_ccp_tasks') }}</span>
                             <strong>{{ snapshot.totalCcpTasks }}</strong>
                         </div>
                         <div class="daily-report__summary-item">
-                            <span class="daily-report__label"
-                                >Reporting date (label)</span
-                            >
+                            <span class="daily-report__label">{{ t('report.public.reporting_date') }}</span>
                             <strong>{{ snapshot.inspectionDateLabel }}</strong>
                         </div>
                     </div>
@@ -137,24 +119,24 @@
                         class="daily-report__table-wrap daily-report__table-wrap--mt"
                     >
                         <p class="daily-report__register-caption-mobile">
-                            Consolidated register (summary)
+                            {{ t('report.public.register_caption') }}
                         </p>
                         <div class="daily-report__register-desktop">
                             <table
                                 class="daily-report__table daily-report__table--compact"
                             >
                                 <caption class="daily-report__caption">
-                                    Consolidated register (summary)
+                                    {{ t('report.public.register_caption') }}
                                 </caption>
                                 <thead>
                                     <tr>
-                                        <th scope="col">Process / niche</th>
-                                        <th scope="col">Control point</th>
+                                        <th scope="col">{{ t('report.public.col_process') }}</th>
+                                        <th scope="col">{{ t('report.public.col_control_point') }}</th>
                                         <th scope="col">
-                                            Recorded value / schedule
+                                            {{ t('report.public.col_recorded_value') }}
                                         </th>
-                                        <th scope="col">Person responsible</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">{{ t('report.public.col_assignee') }}</th>
+                                        <th scope="col">{{ t('report.public.col_status') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -185,35 +167,25 @@
                                 class="daily-report__register-card"
                             >
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label"
-                                        >Process / niche:</span
-                                    >
+                                    <span class="daily-report__register-label">{{ t('report.public.col_process') }}:</span>
                                     {{ row.niche }}
                                 </p>
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label"
-                                        >Control point:</span
-                                    >
+                                    <span class="daily-report__register-label">{{ t('report.public.col_control_point') }}:</span>
                                     {{ row.ccp }}
                                 </p>
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label"
-                                        >Recorded value / schedule:</span
-                                    >
+                                    <span class="daily-report__register-label">{{ t('report.public.col_recorded_value') }}:</span>
                                     {{ row.detail }}
                                 </p>
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label"
-                                        >Person responsible:</span
-                                    >
+                                    <span class="daily-report__register-label">{{ t('report.public.col_assignee') }}:</span>
                                     {{ row.assigneeName }}
                                 </p>
                                 <p
                                     class="daily-report__register-line daily-report__register-line--status"
                                 >
-                                    <span class="daily-report__register-label"
-                                        >Status:</span
-                                    >
+                                    <span class="daily-report__register-label">{{ t('report.public.col_status') }}:</span>
                                     <span
                                         class="daily-report__pill"
                                         :class="`daily-report__pill--${row.statusPillKey}`"
@@ -239,13 +211,10 @@
                                   ? "B"
                                   : "C"
                         }}
-                        HACCP — {{ section.nicheLabel }}
+                        {{ t('report.public.haccp_section_title', { label: section.nicheLabel }) }}
                     </h2>
                     <p class="daily-report__lead">
-                        All tasks for this process area. Where verification is
-                        scheduled (repeat), all time slots and outcomes are
-                        listed; corrective action templates available to staff
-                        are enumerated for audit traceability.
+                        {{ t('report.public.haccp_section_lead') }}
                     </p>
 
                     <div
@@ -266,19 +235,19 @@
                         </div>
                         <dl class="daily-report__task-dl">
                             <div>
-                                <dt>Control point ID (demo)</dt>
+                                <dt>{{ t('report.public.control_point_id') }}</dt>
                                 <dd>
-                                    <code class="daily-report__code">{{
-                                        task.id
-                                    }}</code>
+                                    <code class="daily-report__code">
+                                        {{task.id}}
+                                    </code>
                                 </dd>
                             </div>
                             <div>
-                                <dt>Last recorded / scheduled parameter</dt>
+                                <dt>{{ t('report.public.last_recorded') }}</dt>
                                 <dd>{{ task.value }}</dd>
                             </div>
                             <div>
-                                <dt>Person responsible (demo roster)</dt>
+                                <dt>{{ t('report.public.person_responsible_demo') }}</dt>
                                 <dd>{{ task.assigneeName }}</dd>
                             </div>
                         </dl>
@@ -288,7 +257,7 @@
                             class="daily-report__subblock"
                         >
                             <h4 class="daily-report__h4">
-                                Time-stamped verification (same operating day)
+                                {{ t('report.public.time_stamped_verification') }}
                             </h4>
                             <div
                                 class="daily-report__table-wrap daily-report__table-wrap--meas"
@@ -297,11 +266,11 @@
                                     <table class="daily-report__table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Time</th>
+                                                <th scope="col">{{ t('report.public.col_time') }}</th>
                                                 <th scope="col">
-                                                    Observed value
+                                                    {{ t('report.public.col_observed_value') }}
                                                 </th>
-                                                <th scope="col">Result</th>
+                                                <th scope="col">{{ t('report.public.col_result') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -332,26 +301,17 @@
                                         class="daily-report__meas-card"
                                     >
                                         <p class="daily-report__meas-line">
-                                            <span
-                                                class="daily-report__meas-label"
-                                                >Time:</span
-                                            >
+                                            <span class="daily-report__meas-label">{{ t('report.public.col_time') }}:</span>
                                             {{ m.time }}
                                         </p>
                                         <p class="daily-report__meas-line">
-                                            <span
-                                                class="daily-report__meas-label"
-                                                >Observed value:</span
-                                            >
+                                            <span class="daily-report__meas-label">{{ t('report.public.col_observed_value') }}:</span>
                                             {{ m.value }}
                                         </p>
                                         <p
                                             class="daily-report__meas-line daily-report__meas-line--result"
                                         >
-                                            <span
-                                                class="daily-report__meas-label"
-                                                >Result:</span
-                                            >
+                                            <span class="daily-report__meas-label">{{ t('report.public.col_result') }}:</span>
                                             <span
                                                 class="daily-report__pill daily-report__pill--sm"
                                                 :class="`daily-report__pill--${m.resultPillKey}`"
@@ -372,8 +332,7 @@
                             class="daily-report__subblock"
                         >
                             <h4 class="daily-report__h4">
-                                Corrective action template library (available
-                                responses)
+                                {{ t('report.public.corrective_actions_title') }}
                             </h4>
                             <ol class="daily-report__ol">
                                 <li
@@ -391,22 +350,16 @@
 
                 <section class="daily-report__section">
                     <h2>
-                        4. EUDR — deforestation regulation: consignments
-                        recorded this calendar day
+                        {{ t('report.public.section_eudr') }}
                     </h2>
                     <p class="daily-report__lead">
-                        Intake is intermittent; when a consignment is booked,
-                        the batch disclosure URL points to the regulatory-style
-                        traceability page (not a supplier postal address).
-                        Below: summary row plus DDS operator/product
-                        cross-check.
+                        {{ t('report.public.eudr_lead') }}
                     </p>
                     <p
                         v-if="snapshot.supplyRows.length === 0"
                         class="daily-report__lead daily-report__lead--warn"
                     >
-                        No EUDR-linked intake recorded for this date in the demo
-                        dataset.
+                        {{ t('report.public.no_eudr_intake') }}
                     </p>
                     <template v-else>
                         <div
@@ -416,11 +369,11 @@
                                 <table class="daily-report__table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Batch ID</th>
-                                            <th scope="col">Product (list)</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">{{ t('report.public.col_batch_id') }}</th>
+                                            <th scope="col">{{ t('report.public.col_product_list') }}</th>
+                                            <th scope="col">{{ t('report.public.col_status') }}</th>
                                             <th scope="col">
-                                                Public disclosure (URL)
+                                                {{ t('report.public.col_public_disclosure') }}
                                             </th>
                                         </tr>
                                     </thead>
@@ -455,29 +408,21 @@
                                     class="daily-report__supply-card"
                                 >
                                     <p class="daily-report__supply-line">
-                                        <span class="daily-report__supply-label"
-                                            >Batch ID:</span
-                                        >
+                                        <span class="daily-report__supply-label">{{ t('report.public.col_batch_id') }}:</span>
                                         <strong>{{ b.id }}</strong>
                                     </p>
                                     <p class="daily-report__supply-line">
-                                        <span class="daily-report__supply-label"
-                                            >Product (list):</span
-                                        >
+                                        <span class="daily-report__supply-label">{{ t('report.public.col_product_list') }}:</span>
                                         {{ b.product }}
                                     </p>
                                     <p class="daily-report__supply-line">
-                                        <span class="daily-report__supply-label"
-                                            >Status:</span
-                                        >
+                                        <span class="daily-report__supply-label">{{ t('report.public.col_status') }}:</span>
                                         {{ b.statusLabel }}
                                     </p>
                                     <p
                                         class="daily-report__supply-line daily-report__supply-line--url"
                                     >
-                                        <span class="daily-report__supply-label"
-                                            >Public disclosure (URL):</span
-                                        >
+                                        <span class="daily-report__supply-label">{{ t('report.public.col_public_disclosure') }}:</span>
                                         <a
                                             class="daily-report__a"
                                             :href="b.url"
@@ -497,26 +442,25 @@
                             class="daily-report__eudr-detail"
                         >
                             <h3 class="daily-report__h3-eudr">
-                                4.{{ idx + 1 }} Batch {{ sd.listRow.id }} — due
-                                diligence snapshot (demo)
+                                {{ t('report.public.eudr_detail_title', { n: idx + 1, id: sd.listRow.id }) }}
                             </h3>
                             <template v-if="sd.eudr">
                                 <dl
                                     class="daily-report__dl daily-report__dl--tight"
                                 >
                                     <div>
-                                        <dt>DDS reference</dt>
+                                        <dt>{{ t('report.public.dds_reference') }}</dt>
                                         <dd>{{ sd.eudr.ddsReference }}</dd>
                                     </div>
                                     <div>
-                                        <dt>EU operator</dt>
+                                        <dt>{{ t('report.public.eu_operator') }}</dt>
                                         <dd>
                                             {{ sd.eudr.operator.name }} —
                                             {{ sd.eudr.operator.address }}
                                         </dd>
                                     </div>
                                     <div>
-                                        <dt>Product</dt>
+                                        <dt>{{ t('report.public.product') }}</dt>
                                         <dd>
                                             {{ sd.eudr.product.name }} (CN
                                             {{ sd.eudr.product.cnCode }}) —
@@ -524,13 +468,13 @@
                                         </dd>
                                     </div>
                                     <div>
-                                        <dt>Assessment (demo narrative)</dt>
+                                        <dt>{{ t('report.public.assessment') }}</dt>
                                         <dd>{{ sd.eudr.statusDetail }}</dd>
                                     </div>
                                 </dl>
                             </template>
                             <p v-else class="daily-report__lead">
-                                Extended record not loaded for this batch id.
+                                {{ t('report.public.extended_record_missing') }}
                             </p>
                         </div>
                     </template>
@@ -539,45 +483,27 @@
                 <section
                     class="daily-report__section daily-report__section--muted"
                 >
-                    <h2>5. Record integrity (inspection checklist)</h2>
+                    <h2>{{ t('report.public.section_integrity') }}</h2>
                     <ul class="daily-report__checklist">
-                        <li>
-                            All HACCP control points for the day are enumerated
-                            above with time logic for scheduled PRPs/CCPs.
-                        </li>
-                        <li>
-                            Corrective action templates are versioned in-system;
-                            selection is logged at task level in production.
-                        </li>
-                        <li>
-                            EUDR rows reference batch disclosure pages suitable
-                            for competent authority review (demo).
-                        </li>
-                        <li>
-                            Print/PDF export from browser — suitable for
-                            third-party audit dossier appendix.
-                        </li>
+                        <li>{{ t('report.public.integrity_item_1') }}</li>
+                        <li>{{ t('report.public.integrity_item_2') }}</li>
+                        <li>{{ t('report.public.integrity_item_3') }}</li>
+                        <li>{{ t('report.public.integrity_item_4') }}</li>
                     </ul>
                 </section>
             </template>
 
             <footer class="daily-report__footer">
                 <div class="daily-report__meta">
-                    <span>Demo inspection preview</span>
-                    <span
-                        >Dataset inspection date label:
-                        {{ snapshot.inspectionDateLabel }}</span
-                    >
-                    <span class="no-print"
-                        >Generated (client):
-                        {{ snapshot.generatedAtUtcHint }}</span
-                    >
+                    <span>{{ t('report.public.demo_inspection_preview') }}</span>
+                    <span>{{ t('report.public.inspection_date_label', { label: snapshot.inspectionDateLabel }) }}</span>
+                    <span class="no-print">{{ t('report.public.generated_client', { time: generatedAtFormatted }) }}</span>
                 </div>
                 <p class="daily-report__disclaimer">
                     {{ snapshot.disclaimer }}
                 </p>
                 <p class="daily-report__url no-print">
-                    Публичная ссылка: {{ canonicalUrl }}
+                    {{ t('report.public.public_link', { url: canonicalUrl }) }}
                 </p>
             </footer>
         </article>
@@ -585,17 +511,20 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, watch } from "vue";
+import { computed, nextTick, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {
     buildDailyReportPublicUrl,
     getDailyReportSnapshot,
     parseIsoDateSafe,
     REPORT_REFERENCE_ISO,
 } from "@/features/demo/data/dailyReportPublic";
+import { usePageSeo } from "@/composables/usePageSeo";
 
 defineOptions({ name: "DailyReportPublic" });
 
+const { t } = useI18n();
 const route = useRoute();
 const dateParam = computed(() => String(route.params.date ?? ""));
 const reportReferenceIso = REPORT_REFERENCE_ISO;
@@ -607,6 +536,13 @@ const snapshot = computed(() => {
     }
     return getDailyReportSnapshot(safe);
 });
+
+const reportSeoParams = computed(() => ({
+    date: snapshot.value?.dateIso ?? dateParam.value,
+    company: snapshot.value?.companyShort ?? "",
+    points: snapshot.value?.totalCcpTasks ?? "",
+}));
+usePageSeo({ i18nKey: "seo.report_public", i18nParams: reportSeoParams });
 
 const fallbackDemoEudr = "/en/demo/eudr";
 
@@ -625,6 +561,20 @@ const canonicalUrl = computed(() =>
     buildDailyReportPublicUrl(dateParam.value, localeForCanonical.value),
 );
 
+const generatedAtFormatted = computed(() => {
+    if (!snapshot.value) {
+        return "";
+    }
+    const localeTag = localeForCanonical.value || "en";
+    return new Intl.DateTimeFormat(localeTag, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+    }).format(new Date(snapshot.value.generatedAtUtcHint));
+});
+
 const wantsAutoPrint = computed(() => route.query.print === "1");
 
 const print = () => window.print();
@@ -639,17 +589,6 @@ const runAutoPrint = () => {
         });
     });
 };
-
-const syncTitle = () => {
-    if (snapshot.value) {
-        document.title = `Daily report ${snapshot.value.dateIso} — HACCP + EUDR (demo)`;
-    } else {
-        document.title = "Report not found — demo";
-    }
-};
-
-onMounted(syncTitle);
-watch([snapshot, dateParam], syncTitle);
 
 watch(
     () => [snapshot.value?.dateIso, route.query.print],

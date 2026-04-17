@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Auta meitä rakentamaan järjestelmä, joka poistaa HACCP-vaatimustenmukaisuuden tuskan',
+        'subtitle' => 'Lyhyt kysely — noin 5 minuuttia. Vastauksesi auttavat meitä tekemään järjestelmästä toimivan oikeissa tuotantoympäristöissä ja tarkastuksissa.',
+        'trust' => 'Vastauksiasi käytetään vain analysointiin, eikä niitä jaeta kolmansille osapuolille.',
+        'start' => 'Aloita',
+    ],
+
+    'nav' => [
+        'back' => 'Takaisin',
+        'back_aria' => 'Palaa edelliseen vaiheeseen',
+    ],
+
+    'progress' => [
+        'aria' => 'Kysely: vaihe :current / :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Syötä sähköpostiosoite — tämä kenttä on pakollinen.',
+        'email_invalid' => 'Syötä kelvollinen sähköpostiosoite.',
+    ],
+
+    'ui' => [
+        'next' => 'Seuraava',
+        'next_disabled_aria' => 'Seuraava — vastaa ensin kysymykseen',
+        'other_default_label' => 'Tarkenna',
+        'other_aria_prefix' => 'Lisätiedot vastauksellesi:',
+        'select_placeholder' => 'Valitse vaihtoehto',
+        'country_clear' => 'Poista valittu maa',
+        'country_search' => 'Etsi maan nimellä',
+        'country_search_placeholder' => 'Etsi…',
+        'submit' => 'Lähetä',
+        'submit_sending' => 'Lähetetään...',
+        'submit_failed' => 'Kyselyn lähetys epäonnistui. Yritä uudelleen.',
+        'questions_load_error' => 'Kyselyn kysymyksiä ei voitu ladata. Päivitä sivu tai yritä myöhemmin uudelleen.',
+        'response_saved' => 'Kyselyn vastaus tallennettu.',
+        'verification_sent' => 'Vahvistuskoodi on lähetetty sähköpostiisi.',
+        'cooldown_wait' => 'Odota muutama sekunti ja yritä uudelleen.',
+        'token_not_found' => 'Tunnistetta ei löytynyt. Yritä täyttää kysely uudelleen.',
+        'network_error' => 'Verkkovirhe. Yritä uudelleen.',
+        'pin_instruction' => 'PIN-koodi on lähetetty annettuun sähköpostiosoitteeseen. Syötä se vahvistaaksesi omistajuuden.',
+        'pin_attempts_left' => '{used} / {total} yritystä jäljellä',
+        'pin_container_aria' => 'PIN-koodin vahvistus',
+        'pin_group_aria' => '4-numeroinen PIN-koodi',
+    ],
+
+    'lead' => [
+        'title' => 'Jätä yhteystietosi saadaksesi:',
+        'bullet_discount' => 'elinikäisen 20 % alennuksen',
+        'bullet_access' => 'varhaisen pääsyn järjestelmään',
+        'bullet_influence' => 'vaikutusmahdollisuuden tuotekehitykseen',
+        'expectation' => 'Tämä on viimeinen vaihe: sen jälkeen kysely on valmis. Tarvitsemme vain tietosi ottaaksemme sinuun yhteyttä.',
+        'field_name' => 'Nimesi',
+        'field_business_name' => 'Yrityksen nimi',
+        'field_email' => 'Sähköposti',
+        'field_email_required_sr' => '(pakollinen)',
+        'field_phone' => 'Puhelin',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 tai wa.me/...',
+        'placeholder_telegram' => "{'@'}käyttäjänimi",
+    ],
+
+    'success' => [
+        'title' => 'Kiitos. Otan sinuun henkilökohtaisesti yhteyttä, kun järjestelmä on valmis.',
+        'body' => "Saat kutsun testiversioon (sandbox),\nmissä voit kokeilla järjestelmää käytännössä ja vaikuttaa sen kehitykseen. Tämä auttaa meitä mukauttamaan tuotteen todellisiin liiketoimintaprosesseihin.",
+        'reassurance' => 'Emme suunnittele massapostituksia — vain henkilökohtaisia päivitysviestejä.',
+        'update_hint' => "Jos prosessisi muuttuvat tai saat uusia tehtäviä —\nvoit päivittää vastauksesi sähköpostiisi lähetetyn linkin kautta.",
+        'home_link' => 'Takaisin etusivulle',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Kiitos kyselyn täyttämisestä!',
+        'subtitle' => 'Osallistumisesi on merkittävä panos kehityksen varhaisessa vaiheessa.',
+        'image_alt' => 'Vastaus on tallennettu tietokantaan',
+        'email_label' => 'Sähköposti:',
+        'sent_label' => 'Lähetetty:',
+        'reset_button' => 'Päivitä vastaukset',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, kiitos vastauksistasi',
+        'subject_default' => 'Kiitos vastauksistasi',
+        'header_tagline' => 'Reaaliaikainen HACCP-vaatimustenmukaisuusjärjestelmä',
+        'title' => 'Kiitos osallistumisestasi — käyttöoikeutesi ja 20 % alennus',
+        'greeting_with_name' => 'Hei, :name!',
+        'greeting_default' => 'Hei!',
+        'thank_you' => 'Kiitos, että käytit aikaa kyselyn täyttämiseen.',
+        'value_note' => 'Vastauksesi ovat todella arvokkaita — ne muokkaavat suoraan tuotetta.',
+        'registered_as' => 'Olet rekisteröitynyt varhaisen pääsyn osallistujaksi',
+        'discount_label' => '–20 % elinikäinen alennus',
+        'discount_code_label' => 'Koodisi:',
+        'description_line1' => 'Järjestelmä on tällä hetkellä kehitteillä.',
+        'description_line2' => 'Analysoin yritysten omistajien vastauksia ja viimeistelen toiminnallisuutta todellisia käyttötapauksia varten.',
+        'description_line3' => 'Päätavoite on, että järjestelmä auttaa sinua läpäisemään tarkastukset luottavaisin mielin — ei vain tallentamaan tietoja.',
+        'benefits_title' => 'Mitä saat:',
+        'benefit_1' => 'Reaaliaikainen toimintojen seuranta',
+        'benefit_2' => 'Läpinäkyvä historia tarkastuksia varten',
+        'benefit_3' => 'Hallinta ilman ylimääräistä työkuormaa',
+        'cta_button' => 'Siirry verkkosivulle',
+        'footer_updates' => 'Jaan säännöllisesti kehityspäivityksiä ja kutsun sinut testaamaan uusia ominaisuuksia.',
+        'footer_feedback' => 'Palautteesi ja ideasi auttavat tekemään järjestelmästä hyödyllisemmän käytännössä.',
+        'footer_reply' => 'Jos sinulla on jo ajatuksia tai vaatimuksia — vastaa tähän sähköpostiin.',
+        'footer_signature' => 'Ystävällisin terveisin, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Vahvistuskoodisi HACCPilot-järjestelmään',
+        'header_tagline' => 'Turvallisuusvahvistus kyselyn päivitystä varten',
+        'title' => 'Vahvista vastaustesi päivitys',
+        'description' => 'Olet pyytänyt vastaustesi päivittämistä HACCPilot-kyselyssä.',
+        'instruction' => 'Vahvista syöttämällä alla oleva koodi:',
+        'code_expiry' => 'Koodi on voimassa rajoitetun ajan',
+        'not_you' => 'Jos tämä et ollut sinä — voit jättää tämän viestin huomiotta.',
+        'data_safe' => 'Tietosi pysyvät muuttumattomina.',
+        'cta_button' => 'Palaa päivitykseen',
+        'footer_auto' => 'Tämä on automaattinen viesti HACCPilot-järjestelmästä.',
+        'footer_purpose' => 'Koodia käytetään vain tietojen muutosten vahvistamiseen.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Kyselyvastauksesi on päivitetty',
+        'header_tagline' => 'Kyselydatan päivitysvahvistus',
+        'title' => 'Tietosi on päivitetty onnistuneesti!',
+        'greeting_with_name' => 'Hei, :name!',
+        'greeting_default' => 'Hei!',
+        'thank_you' => 'Kiitos, että päivität kyselyvastauksesi.',
+        'status_label' => 'Kyselysi tila:',
+        'status_value' => 'Päivitetty ja vahvistettu',
+        'status_note' => 'Kaikki muutokset on tallennettu ja niitä käytetään HACCPilot-järjestelmän räätälöintiin.',
+        'footer_auto' => 'Tämä on automaattinen ilmoitus HACCPilot-järjestelmästä.',
+        'footer_data_use' => 'Tietojasi käytetään vain järjestelmän tarkkuuden ja personoinnin parantamiseen.',
+        'footer_signature' => 'Ystävällisin terveisin, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Linkki on virheellinen tai vanhentunut. Yritä täyttää kysely uudelleen.',
+        'attempts_exhausted' => 'Vahvistus epäonnistui. Täytä kysely uudelleen.',
+        'code_invalid' => 'Virheellinen koodi. Yritä uudelleen.',
+        'success' => 'Kyselyvastaukset päivitetty onnistuneesti.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Millainen yritys sinulla on?',
+            'options' => [
+                'cafe' => 'Kahvila / kahvipiste',
+                'bakery' => 'Leipomo / leipätuotanto',
+                'meat' => 'Lihatuotanto / lihakauppa',
+                'kitchen' => 'Keittiö / elintarviketuotanto',
+                'other' => 'Muu',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Kuinka monta henkilöä sinulla työskentelee?',
+            'options' => [
+                '1_5' => '1–5',
+                '5_10' => '5–10',
+                '10_20' => '10–20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'Missä maassa toimitte?',
+            'field_caption' => 'Valitse maa listasta',
+        ],
+        '4' => [
+            'question_text' => 'Miten hallitsette HACCP:ia tällä hetkellä?',
+            'options' => [
+                'paper' => 'Paperikirjanpito',
+                'excel' => 'Excel / Google Sheets',
+                'software' => 'Käytämme omaa ohjelmistoa',
+                'partial' => 'Osittain dokumentoitu / ei varsinaista järjestelmää',
+                'other' => 'Muu',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Käytättekö maksullisia HACCP-ratkaisuja?',
+            'options' => [
+                'yes' => 'Kyllä',
+                'nb' => 'Ei',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Kuinka tyytyväinen olet nykyiseen toimintatapaan?',
+            'options' => [
+                'fully' => 'Täysin tyytyväinen',
+                'partially_ok' => 'Melko tyytyväinen',
+                'rather_not' => 'Melko tyytymätön',
+                'not_at_all' => 'Ei lainkaan tyytyväinen',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Harkitsisitko siirtymistä helpompaan järjestelmään?',
+            'options' => [
+                'yes' => 'Kyllä',
+                'maybe' => 'Ehkä',
+                'nb' => 'Ei',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Kuka yrityksessäsi vastaa HACCP:sta käytännössä?',
+            'options' => [
+                'self' => 'Minä itse',
+                'manager' => 'Esimies / hallinnoija',
+                'staff' => 'Nimetty henkilöstö',
+                'none' => 'Kukaan ei vastaa virallisesti',
+                'other' => 'Muu',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Kuinka usein henkilöstö unohtaa täyttää tai kirjata tehtäviä?',
+            'options' => [
+                'often' => 'Usein',
+                'sometimes' => 'Joskus',
+                'rarely' => 'Harvoin',
+                'almost_never' => 'Lähes ei koskaan',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Täytetäänkö kirjauksia koskaan jälkikäteen?',
+            'options' => [
+                'often' => 'Kyllä, usein',
+                'sometimes' => 'Joskus',
+                'rarely' => 'Harvoin',
+                'never' => 'Ei koskaan',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Mikä on sinulle vaikeinta HACCP:n hallinnassa?',
+            'subtitle' => 'Voit valita useita vastauksia.',
+            'options' => [
+                'records' => 'Kirjanpito ja dokumentaatio',
+                'staff_control' => 'Henkilöstön toiminnan valvonta',
+                'realtime' => 'Toiminnan seuraaminen reaaliajassa',
+                'inspections' => 'Tarkastuksiin valmistautuminen',
+                'training' => 'Koulutus ja kurinalaisuus',
+                'chaos' => 'Ei yhtenäistä järjestelmää / kaaos',
+                'other' => 'Muu',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Onko teillä ollut tarkastuksia viimeisen vuoden aikana?',
+            'options' => [
+                'yes' => 'Kyllä',
+                'nb' => 'Ei',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Mikä stressaa sinua eniten tarkastuksessa?',
+            'options' => [
+                'docs' => 'Dokumentaatio',
+                'staff' => 'Henkilöstön toiminta',
+                'missing_records' => 'Puuttuvat kirjaukset',
+                'overall' => 'Kaikki kokonaisuutena',
+                'other' => 'Muu',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Kuinka tärkeää on olla valmis yllätystarkastuksiin?',
+            'options' => [
+                'very' => 'Erittäin tärkeää',
+                'rather' => 'Melko tärkeää',
+                'not_thought' => 'En ole ajatellut asiaa',
+                'not_important' => 'Ei tärkeää',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Kuinka tärkeää sinulle on järjestelmä, joka tallentaa henkilöstön toimet reaaliajassa (ei jälkikäteen)?',
+            'options' => [
+                'very' => 'Erittäin tärkeää',
+                'rather' => 'Melko tärkeää',
+                'unsure' => 'En ole varma',
+                'not_important' => 'Ei tärkeää',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Mitkä näistä ominaisuuksista olisivat sinulle aidosti hyödyllisiä?',
+            'subtitle' => 'Voit valita useita vastauksia.',
+            'other_detail_field_label' => 'Kerro mikä on sinulle tärkeää',
+            'group_headings' => [
+                'safety' => 'Valvonta ja turvallisuus',
+                'inspection' => 'Tarkastusten hallinta',
+                'staff' => 'Henkilöstön helppous',
+                'automation' => 'Automaatio',
+                'more' => 'Lisäominaisuudet',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Hälytykset, kun lämpötila ylittää rajan',
+                'capture_at_moment' => 'Tietojen tallennus heti tehtävän hetkellä (ei jälkikirjausta)',
+                'two_person_confirm' => 'Kahden henkilön vahvistus tehtävälle',
+                'reports_qr_link' => 'Nopea pääsy raportteihin tarkastuksia varten (QR / linkki)',
+                'photo_proof' => 'Valokuvat todisteena tehdystä työstä',
+                'full_action_history' => 'Täysi henkilöstön toimintahistoria',
+                'offline_mobile' => 'Toimii offline-tilassa puhelimessa',
+                'voice_input' => 'Äänisyöttö',
+                'biz_templates' => 'Yksinkertaiset valmiit mallit liiketoimintatyypeille',
+                'bluetooth_temp' => 'Automaattinen lämpötilan seuranta (Bluetooth-anturit)',
+                'risk_warnings' => 'Riskien arviointi ja varoitukset',
+                'loss_on_violations' => 'Arvioi tappiot sääntöjen rikkomisesta',
+                'internal_staff_tasks' => 'Sisäiset tehtävälistat henkilöstölle',
+                'push_reminders' => 'Push-muistutukset henkilöstölle',
+                'other' => 'Muu (kerro mikä on sinulle tärkeää)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Jos järjestelmä voisi ratkaista yhden pääongelman, mikä se olisi?',
+            'field_caption' => 'Vastauksesi',
+        ],
+    ],
+];

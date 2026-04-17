@@ -42,7 +42,7 @@
                     :is-hot-mode="isHotMode"
                     :task-scheduled-for-future="taskScheduledForFuture"
                     v-model:expanded-action-row-key="expandedActionRowKey"
-                    @open-pending="(row) => onOpenPending(row, 'клик: бейдж pending в колонке «Статус» таблицы замеров')"
+                    @open-pending="(row) => onOpenPending(row, 'click: pending badge in Status column')"
                 />
             </div>
         </template>
@@ -56,12 +56,19 @@
                 <n-button
                     v-if="!isHotMode && viewTask"
                     type="warning"
+                    size="large"
                     @click="onFooterRefreshClick"
                 >
-                    Обновить
+                    {{ tr('demo.show_task_modal.refresh') }}
                 </n-button>
                 <div v-else></div>
-                <n-button type="info" @click="onFooterCloseClick">Закрыть</n-button>
+                <n-button
+                    size="large"
+                    type="info"
+                    @click="onFooterCloseClick"
+                >
+                    {{ tr('demo.show_task_modal.close') }}
+                </n-button>
             </div>
         </template>
     </n-modal>
@@ -70,6 +77,7 @@
 <script setup>
 import {computed, ref, watch} from "vue";
 import {NButton, NModal} from "naive-ui";
+import {useI18n} from "vue-i18n";
 import {
     formatTaskFieldSummaryLine,
     normalizeTaskFieldDefinitions,
@@ -95,6 +103,8 @@ import {
 } from "@/features/demo/task_grain_cooling";
 
 defineOptions({name: "ShowTaskModal"});
+
+const {t: tr} = useI18n();
 
 const props = defineProps({
     show: {
@@ -181,17 +191,13 @@ const taskFieldSummaryLines = computed(() => {
     return normalizeTaskFieldDefinitions(t.taskFieldDefinitions).map((def) => {
         if (def?.fieldType === TASK_FIELD_TYPE.TICKET) {
             const description = String(def?.config?.description ?? "").trim();
-            return `Заявка: ${description || "—"}`;
+            return tr('demo.show_task_modal.ticket_label', { description: description || "—" });
         }
         return formatTaskFieldSummaryLine(def);
     });
 });
 
-const NICHE_LABELS = {
-    coffee: "Кофейня",
-    bakery: "Пекарня",
-    meat: "Мясо",
-};
+const NICHE_LABEL_KEYS = { coffee: 'niche_coffee', bakery: 'niche_bakery', meat: 'niche_meat' };
 
 const NICHE_EMOJI = {
     coffee: "☕",
@@ -203,9 +209,10 @@ const taskTypeDisplay = computed(
     () => NICHE_EMOJI[props.taskType] ?? props.taskType,
 );
 
-const taskTypeAria = computed(
-    () => NICHE_LABELS[props.taskType] ?? props.taskType,
-);
+const taskTypeAria = computed(() => {
+    const key = NICHE_LABEL_KEYS[props.taskType];
+    return key ? tr(`demo.show_task_modal.${key}`) : props.taskType;
+});
 
 const showModel = computed({
     get: () => props.show,

@@ -92,7 +92,7 @@ class SurveyQuestionsSeeder extends Seeder
                 'is_active' => true,
                 'options' => [
                     $this->o('5', 'yes'),
-                    $this->o('5', 'no'),
+                    $this->o('5', 'nb'),
                 ],
             ],
             [
@@ -117,7 +117,7 @@ class SurveyQuestionsSeeder extends Seeder
                 'options' => [
                     $this->o('7', 'yes'),
                     $this->o('7', 'maybe'),
-                    $this->o('7', 'no'),
+                    $this->o('7', 'nb'),
                 ],
             ],
             [
@@ -185,11 +185,11 @@ class SurveyQuestionsSeeder extends Seeder
                 'is_active' => true,
                 'options' => [
                     $this->o('12', 'yes'),
-                    $this->o('12', 'no'),
+                    $this->o('12', 'nb'),
                 ],
                 'branches' => [
                     'yes' => '12_1',
-                    'no' => '12_2',
+                    'nb' => '12_2',
                 ],
             ],
             [

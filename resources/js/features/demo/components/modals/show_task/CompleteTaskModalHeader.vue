@@ -14,6 +14,9 @@
 
 <script setup>
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const props = defineProps({
     hasTask: {
@@ -39,7 +42,7 @@ const headerText = computed(() => {
     if (props.hasTask && t) {
         return t;
     }
-    return "Детали задачи";
+    return t('demo.show_task_modal.task_details');
 });
 </script>
 <style scoped lang="scss">

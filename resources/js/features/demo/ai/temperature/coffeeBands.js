@@ -16,8 +16,11 @@
  * У каждой полосы поле **`equipmentTargetIds`** — те же `id`, что в **`EQUIPMENT_GROUPS`** (`resources/js/config/tasks.js`, группы «Кофе — …»).
  */
 
+import { i18n } from "@/i18n";
+const tt = (...args) => i18n.global.t(...args);
+
 // ═══════════════════════════════════════════════════════════════════════════
-// Оборудование (id для `task.equipmentTargetIds`; см. `EQUIPMENT_GROUPS` в `tasks.js`)
+// Оборудование
 // ═══════════════════════════════════════════════════════════════════════════
 
 /** Хранение зерна — группа «Кофе — хранение». */
@@ -80,38 +83,38 @@ const C = COFFEE_TEMP.cooling;
 export const COFFEE_STORAGE_BANDS = Object.freeze([
     Object.freeze({
         id: "coffee_storage_gt_30",
-        processLabel: "Хранение",
+        processLabel: tt('demo.coffee_bands.process_storage'),
         temperatureLabel: "> +30°C",
         status: "critical",
-        threat: "Эфирные масла испаряются — вкус теряется за 1-2 недели",
-        action: "Срочно открыть контейнеры, проветрить склад, включить вентиляцию",
+        threat: tt('demo.coffee_bands.storage_hot_threat'),
+        action: tt('demo.coffee_bands.storage_hot_action'),
         equipmentTargetIds: COFFEE_STORAGE_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_storage_25_30",
-        processLabel: "Хранение",
+        processLabel: tt('demo.coffee_bands.process_storage'),
         temperatureLabel: "+25…+30°C",
         status: "warning",
-        threat: "Потеря 20-30% аромата в вакуумных контейнерах за месяц",
-        action: "Открыть клапаны дегазации Tightvac, включить вентиляцию склада",
+        threat: tt('demo.coffee_bands.storage_warm_threat'),
+        action: tt('demo.coffee_bands.storage_warm_action'),
         equipmentTargetIds: COFFEE_STORAGE_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_storage_15_24",
-        processLabel: "Хранение",
+        processLabel: tt('demo.coffee_bands.process_storage'),
         temperatureLabel: "+15…+24°C",
         status: "normal",
-        threat: "Идеальные условия",
-        action: "Поддерживать влажность < 60%, проверять герметичность контейнеров",
+        threat: tt('demo.coffee_bands.storage_normal_threat'),
+        action: tt('demo.coffee_bands.storage_normal_action'),
         equipmentTargetIds: COFFEE_STORAGE_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_storage_lt_15",
-        processLabel: "Хранение",
+        processLabel: tt('demo.coffee_bands.process_storage'),
         temperatureLabel: "< +15°C",
         status: "warning",
-        threat: "Конденсат внутри — плесень через 2-3 недели",
-        action: "Открыть ВСЕ контейнеры на 24ч проветривание, просушить зёрна",
+        threat: tt('demo.coffee_bands.storage_cold_threat'),
+        action: tt('demo.coffee_bands.storage_cold_action'),
         equipmentTargetIds: COFFEE_STORAGE_EQUIPMENT_IDS,
     }),
 ]);
@@ -123,38 +126,38 @@ export const COFFEE_STORAGE_BANDS = Object.freeze([
 export const COFFEE_ROASTING_BANDS = Object.freeze([
     Object.freeze({
         id: "coffee_roast_gt_230",
-        processLabel: "Обжарка",
+        processLabel: tt('demo.coffee_bands.process_roasting'),
         temperatureLabel: "> 230°C",
         status: "critical",
-        threat: "Сгорело — горечь + акриламид",
-        action: "Выбросить партию",
+        threat: tt('demo.coffee_bands.roasting_burn_threat'),
+        action: tt('demo.coffee_bands.roasting_burn_action'),
         equipmentTargetIds: COFFEE_ROASTING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_roast_195_230",
-        processLabel: "Обжарка",
+        processLabel: tt('demo.coffee_bands.process_roasting'),
         temperatureLabel: "195…230°C",
         status: "normal",
-        threat: "Правильная обжарка",
+        threat: tt('demo.coffee_bands.roasting_normal_threat'),
         action: "—",
         equipmentTargetIds: COFFEE_ROASTING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_roast_165_195",
-        processLabel: "Обжарка",
+        processLabel: tt('demo.coffee_bands.process_roasting'),
         temperatureLabel: "165…194°C",
         status: "warning",
-        threat: "Недожарка — сырой вкус",
-        action: "Дожарить",
+        threat: tt('demo.coffee_bands.roasting_under_threat'),
+        action: tt('demo.coffee_bands.roasting_under_action'),
         equipmentTargetIds: COFFEE_ROASTING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_roast_lt_165",
-        processLabel: "Обжарка",
+        processLabel: tt('demo.coffee_bands.process_roasting'),
         temperatureLabel: "< 165°C",
         status: "critical",
-        threat: "Сырые зёрна — не кофе",
-        action: "Выбросить партию",
+        threat: tt('demo.coffee_bands.roasting_raw_threat'),
+        action: tt('demo.coffee_bands.roasting_raw_action'),
         equipmentTargetIds: COFFEE_ROASTING_EQUIPMENT_IDS,
     }),
 ]);
@@ -167,38 +170,38 @@ export const COFFEE_ROASTING_BANDS = Object.freeze([
 export const COFFEE_COOLING_BANDS = Object.freeze([
     Object.freeze({
         id: "coffee_cool_gt_40",
-        processLabel: "Охлаждение",
-        temperatureLabel: "> +40°C (>10 мин)",
+        processLabel: tt('demo.coffee_bands.process_cooling'),
+        temperatureLabel: tt('demo.coffee_bands.temp_label_cooling_critical'),
         status: "critical",
-        threat: "Догарка внутри — вкус горелый",
-        action: "Шок-кулер немедленно",
+        threat: tt('demo.coffee_bands.cooling_hot_threat'),
+        action: tt('demo.coffee_bands.cooling_hot_action'),
         equipmentTargetIds: COFFEE_COOLING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_cool_25_40",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.coffee_bands.process_cooling'),
         temperatureLabel: "+25…+40°C",
         status: "warning",
-        threat: "Медленное охлаждение — плесень",
-        action: "Ускорить вентиляцию",
+        threat: tt('demo.coffee_bands.cooling_warm_threat'),
+        action: tt('demo.coffee_bands.cooling_warm_action'),
         equipmentTargetIds: COFFEE_COOLING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_cool_15_24",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.coffee_bands.process_cooling'),
         temperatureLabel: "+15…+24°C",
         status: "normal",
-        threat: "Идеально охладилось",
-        action: "Упаковать",
+        threat: tt('demo.coffee_bands.cooling_normal_threat'),
+        action: tt('demo.coffee_bands.cooling_normal_action'),
         equipmentTargetIds: COFFEE_COOLING_EQUIPMENT_IDS,
     }),
     Object.freeze({
         id: "coffee_cool_lt_15",
-        processLabel: "Охлаждение",
+        processLabel: tt('demo.coffee_bands.process_cooling'),
         temperatureLabel: "< +15°C",
         status: "warning",
-        threat: "Конденсат внутри зёрен",
-        action: "Подогреть / просушить",
+        threat: tt('demo.coffee_bands.cooling_cold_threat'),
+        action: tt('demo.coffee_bands.cooling_cold_action'),
         equipmentTargetIds: COFFEE_COOLING_EQUIPMENT_IDS,
     }),
 ]);
@@ -213,51 +216,51 @@ export const COFFEE_COOLING_BANDS = Object.freeze([
 export const DEFAULT_COFFEE_AI_PROFILE_FALLBACK = Object.freeze([
     Object.freeze({
         id: "coffee_cold_lt_14",
-        processLabel: "Хранение/Охлаждение",
+        processLabel: tt('demo.coffee_bands.process_storage_cooling'),
         temperatureLabel: "< +15°C",
         status: "warning",
-        threat: "Конденсат в зёрнах — риск плесени",
-        action: "Подогреть до +20°C и просушить",
+        threat: tt('demo.coffee_bands.fallback_cold_threat'),
+        action: tt('demo.coffee_bands.fallback_cold_action'),
     }),
     Object.freeze({
         id: "coffee_ideal_15_24",
-        processLabel: "Хранение/Охлаждение",
+        processLabel: tt('demo.coffee_bands.process_storage_cooling'),
         temperatureLabel: "+15…+24°C",
         status: "normal",
-        threat: "Оптимальные условия для кофе",
-        action: "Хранить или упаковывать",
+        threat: tt('demo.coffee_bands.fallback_normal_threat'),
+        action: tt('demo.coffee_bands.fallback_normal_action'),
     }),
     Object.freeze({
         id: "coffee_warm_25_40",
-        processLabel: "Хранение/Охлаждение",
+        processLabel: tt('demo.coffee_bands.process_storage_cooling'),
         temperatureLabel: "+25…+40°C",
         status: "warning",
-        threat: "Медленное охлаждение или потеря аромата",
-        action: "Ускорить охлаждение или проветрить",
+        threat: tt('demo.coffee_bands.fallback_warm_threat'),
+        action: tt('demo.coffee_bands.fallback_warm_action'),
     }),
     Object.freeze({
         id: "coffee_hot_41_194",
-        processLabel: "Обжарка/Охлаждение",
+        processLabel: tt('demo.coffee_bands.process_roasting_cooling'),
         temperatureLabel: "+41…+194°C",
         status: "normal",
-        threat: "Нормальный нагрев или остывание",
-        action: "Продолжать процесс",
+        threat: tt('demo.coffee_bands.fallback_mid_threat'),
+        action: tt('demo.coffee_bands.fallback_mid_action'),
     }),
     Object.freeze({
         id: "coffee_roast_perfect_195_230",
-        processLabel: "Обжарка",
+        processLabel: tt('demo.coffee_bands.process_roasting'),
         temperatureLabel: "195…230°C",
         status: "normal",
-        threat: "Идеальная обжарка кофе",
-        action: "Готово к охлаждению",
+        threat: tt('demo.coffee_bands.fallback_roast_threat'),
+        action: tt('demo.coffee_bands.fallback_roast_action'),
     }),
     Object.freeze({
         id: "coffee_burn_gt_231",
-        processLabel: "Обжарка",
+        processLabel: tt('demo.coffee_bands.process_roasting'),
         temperatureLabel: "> +230°C",
         status: "critical",
-        threat: "Зёрна сгорели — горечь и акриламид",
-        action: "Выбросить партию немедленно",
+        threat: tt('demo.coffee_bands.fallback_burn_threat'),
+        action: tt('demo.coffee_bands.fallback_burn_action'),
     }),
 ]);
 
@@ -410,15 +413,6 @@ export function resolveCoffeeBand(t, mode) {
     return null;
 }
 
-/**
- * @param {number} t
- * @param {string|null|undefined} mode
- * @returns {string|null}
- */
-export function resolveCoffeeThreat(t, mode) {
-    const band = resolveCoffeeBand(t, mode);
-    return band ? band.threat : null;
-}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Оборудование задачи и сопоставление с полосой

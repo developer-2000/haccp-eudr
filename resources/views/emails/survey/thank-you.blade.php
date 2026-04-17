@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>HACCPilot demo</title>
+    <title>{{ config('app.name') }} demo</title>
 </head>
 <body style="margin:0; padding:0; background:#eef6ff; font-family: Arial, sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eef6ff; padding:20px;">
@@ -15,7 +15,7 @@
                         <table width="100%">
                             <tr>
                                 <td style="color:#ffffff; font-size:18px; font-weight:bold;">
-                                    HACCPilot demo
+                                    {{ config('app.name') }} demo
                                 </td>
                                 <td align="right">
                                     <img src="https://res.cloudinary.com/dgisx7rv4/image/upload/f_auto,q_auto/favicon-32x32_a1njvt" style="width: 25px;" alt="Logo">

@@ -97,7 +97,8 @@ const formattedSubmittedAt = computed(() =>
     flex: 1;
     justify-content: center;
     align-items: center;
-    padding: $spacing-md 0;
+    min-height: min-content;
+    padding: $spacing-md 0 30px;
 
     .survey-submitted-state__inner {
         width: 100%;

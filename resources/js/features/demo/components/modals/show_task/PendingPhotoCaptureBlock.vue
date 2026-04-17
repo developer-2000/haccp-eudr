@@ -8,7 +8,7 @@
             checklist-modal__pending-photo-row
             checklist-modal__pending-photo-row--labeled"
         >
-            <div class="label_for_element">Сделать фото для отчетности</div>
+            <div class="label_for_element">{{ t('demo.photo_capture.take_photo') }}</div>
             <n-button
                 type="primary"
                 secondary
@@ -38,14 +38,14 @@
             checklist-modal__pending-photo-row--labeled
             checklist-modal__document"
         >
-            <div class="label_for_element">Документ для отчётности</div>
+            <div class="label_for_element">{{ t('demo.photo_capture.report_document') }}</div>
             <n-button
                 type="primary"
                 secondary
                 class="checklist-modal__pending-camera-btn"
                 @click="$emit('attach-report')"
             >
-                Прикрепить файл
+                {{ t('demo.photo_capture.attach_file') }}
             </n-button>
             <p class="checklist-modal__pending-photo-name">
                 {{ reportFileName || "" }}
@@ -57,8 +57,11 @@
 <script setup>
 import { NButton, NIcon } from "naive-ui";
 import { AddAPhotoTwotone } from "@vicons/material";
+import { useI18n } from "vue-i18n";
 
 defineOptions({ name: "PendingPhotoCaptureBlock" });
+
+const { t } = useI18n();
 
 defineProps({
     photoNames: {

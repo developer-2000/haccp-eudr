@@ -1,8 +1,8 @@
-import siteConfig from "./site.js";
-
 const navConfig = {
     logo: {
-        text: siteConfig.name,
+        get text() {
+            return window.appName || "";
+        },
         link: "/",
     },
     menu: [

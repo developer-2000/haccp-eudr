@@ -14,7 +14,7 @@
                     class="btn-client btn-success btn-success-hero"
                     @click="goToSurvey"
                 >
-                    Расскажите о бизнесе
+                    {{ $t("home.hero.tell_about_business") }}
                 </button>
                 <button
                     class="btn-client btn-outline-primary"
@@ -28,7 +28,7 @@
         <!-- Right Content -->
         <div class="hero-section__right">
             <img
-                :src="'/images/devices.png'"
+                :src="'/images/tablets.jpg'"
                 :alt="$t('home.hero.devices_alt')"
                 class="hero-image"
             />

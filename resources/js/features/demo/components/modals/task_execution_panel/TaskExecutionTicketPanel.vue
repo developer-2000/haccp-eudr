@@ -4,7 +4,7 @@
         <!-- Read-only описание из taskFieldDefinitions (тип ticket). -->
         <div class="checklist-modal__ticket-description">
             <p class="checklist-modal__ticket-description-title">
-                Описание задания
+                {{ t('demo.ticket_panel.description_label') }}
             </p>
             <p class="checklist-modal__ticket-description-text">
                 {{ description }}
@@ -14,7 +14,7 @@
         <div
             class="checklist-modal__single-choice-options"
             role="radiogroup"
-            aria-label="Статус выполнения заявки"
+            :aria-label="t('demo.ticket_panel.status_aria')"
         >
             <button
                 type="button"
@@ -28,7 +28,7 @@
                 @click="$emit('update:ticketStatus', 'not_completed')"
             >
                 <span class="checklist-modal__single-choice-radio" />
-                <span>Не выполнен</span>
+                <span>{{ t('demo.ticket_panel.not_completed') }}</span>
             </button>
             <button
                 type="button"
@@ -40,7 +40,7 @@
                 @click="$emit('update:ticketStatus', 'completed')"
             >
                 <span class="checklist-modal__single-choice-radio" />
-                <span>Выполнен</span>
+                <span>{{ t('demo.ticket_panel.completed') }}</span>
             </button>
         </div>
         <!-- Комментарий к результату заявки. -->
@@ -48,7 +48,7 @@
             :value="ticketComment"
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }"
-            placeholder="Комментарий исполнителя"
+            :placeholder="t('demo.ticket_panel.comment_placeholder')"
             @update:value="$emit('update:ticketComment', $event)"
         />
         <!-- Фиксация статуса и закрытие — логика в родителе. -->
@@ -57,7 +57,7 @@
             class="checklist-modal__single-choice-submit"
             @click="$emit('submit')"
         >
-            Подтвердить статус
+            {{ t('demo.ticket_panel.confirm_status') }}
         </n-button>
 
         <!-- Фото → документ (PendingPhotoCaptureBlock). -->
@@ -74,7 +74,10 @@
 
 <script setup>
 import { NButton, NInput } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import PendingPhotoCaptureBlock from "../show_task/PendingPhotoCaptureBlock.vue";
+
+const { t } = useI18n();
 
 defineProps({
     description: {

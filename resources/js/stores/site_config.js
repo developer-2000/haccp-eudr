@@ -13,6 +13,8 @@ export const useSiteConfigStore = defineStore("site", {
     state: () => ({
         /** @type {string} */
         name: "",
+        /** @type {string} */
+        adminEmail: "",
         /** @type {boolean} */
         loaded: false,
     }),
@@ -22,7 +24,8 @@ export const useSiteConfigStore = defineStore("site", {
             if (this.loaded) {
                 return;
             }
-            this.name = import.meta.env.VITE_APP_NAME || "HACCPilot";
+            this.name = window.appName || "";
+            this.adminEmail = window.adminEmail || "";
             this.loaded = true;
         },
     },

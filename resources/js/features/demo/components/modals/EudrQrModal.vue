@@ -2,7 +2,7 @@
     <n-modal
         v-model:show="showModel"
         preset="card"
-        title="Детали партии"
+        :title="t('demo.eudr_qr_modal.title')"
         class="eudr-qr-modal"
         content-scrollable
         :trap-focus="false"
@@ -24,25 +24,25 @@
                     <table class="eudr-qr-modal__table">
                         <thead>
                             <tr>
-                                <th>Параметр</th>
-                                <th>Значение</th>
+                                <th>{{ t('demo.eudr_qr_modal.col_parameter') }}</th>
+                                <th>{{ t('demo.eudr_qr_modal.col_value') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Продукт</td>
+                                <td>{{ t('demo.eudr_qr_modal.row_product') }}</td>
                                 <td>{{ batch.product }}</td>
                             </tr>
                             <tr>
-                                <td>Поставщик</td>
+                                <td>{{ t('demo.eudr_qr_modal.row_supplier') }}</td>
                                 <td>{{ batch.supplier }}</td>
                             </tr>
                             <tr>
-                                <td>Дата</td>
+                                <td>{{ t('demo.eudr_qr_modal.row_date') }}</td>
                                 <td>{{ batch.date }}</td>
                             </tr>
                             <tr>
-                                <td>Ссылка</td>
+                                <td>{{ t('demo.eudr_qr_modal.row_link') }}</td>
                                 <td>
                                     <RouterLink
                                         class="eudr-qr-modal__batch-link"
@@ -77,12 +77,12 @@
         <template #footer>
             <div class="eudr-qr-modal__actions">
                 <n-button type="warning" @click="emitAction('close')">
-                    Отмена
+                    {{ t('demo.eudr_qr_modal.cancel') }}
                 </n-button>
                 <n-button type="info" @click="copyPageUrl">
-                    Копировать
+                    {{ t('demo.eudr_qr_modal.copy') }}
                 </n-button>
-                <n-button type="info" @click="openBatchPdf"> PDF </n-button>
+                <n-button type="info" @click="openBatchPdf">{{ t('demo.eudr_qr_modal.pdf') }}</n-button>
             </div>
         </template>
     </n-modal>
@@ -93,9 +93,12 @@ import QRCode from "qrcode";
 import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { NButton, NModal, useMessage } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import { buildBatchPublicUrl } from "@/features/demo/data/eudrBatchPublic";
 
 defineOptions({ name: "EudrQrModal" });
+
+const { t } = useI18n();
 
 const props = defineProps({
     show: {
@@ -194,7 +197,7 @@ const resolveAbsoluteBatchUrl = () => {
 const copyPageUrl = async () => {
     const href = resolveAbsoluteBatchUrl().trim();
     if (!href) {
-        message.warning("Нет ссылки для копирования");
+        message.warning(t('demo.eudr_qr_modal.no_link'));
         return;
     }
 
@@ -223,12 +226,10 @@ const copyPageUrl = async () => {
     }
 
     if (ok) {
-        message.success("URL страницы скопирован в буфер обмена");
+        message.success(t('demo.eudr_qr_modal.copy_success'));
         setTimeout(() => emit("close"), 0);
     } else {
-        message.error(
-            "Не удалось скопировать ссылку (нужен HTTPS или разрешение буфера)",
-        );
+        message.error(t('demo.eudr_qr_modal.copy_error'));
     }
 };
 

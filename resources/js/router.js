@@ -7,6 +7,8 @@ import DemoPlaceholder from "./pages/client/Demo.vue";
 import HowItWorks from "./pages/client/HowWorks.vue";
 import BatchPublic from "./pages/client/BatchPublic.vue";
 import DailyReportPublic from "./pages/client/DailyReportPublic.vue";
+import PrivacyPolicy from "./pages/client/PrivacyPolicy.vue";
+import Contact from "./pages/client/Contact.vue";
 
 const routes = [
     { path: "/", redirect: "/en" },
@@ -65,6 +67,16 @@ const routes = [
                 path: "demo/:section",
                 name: "Demo",
                 component: DemoPlaceholder,
+            },
+            {
+                path: "privacy-policy",
+                name: "PrivacyPolicy",
+                component: PrivacyPolicy,
+            },
+            {
+                path: "contact",
+                name: "Contact",
+                component: Contact,
             },
         ],
     },

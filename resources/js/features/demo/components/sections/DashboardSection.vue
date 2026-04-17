@@ -5,7 +5,7 @@
         <div class="dashboard-metrics">
             <article class="metric-card">
                 <p class="metric-card__label metric-card__label--success">
-                    Выполнены
+                    {{ t('demo.dashboard.completed') }}
                 </p>
                 <p class="metric-card__value">
                     {{ metrics.tasksDone }}/{{ metrics.tasksTotal }}
@@ -13,24 +13,24 @@
             </article>
 
             <article class="metric-card metric-card--success">
-                <p class="metric-card__label">Compliance</p>
+                <p class="metric-card__label">{{ t('demo.dashboard.compliance') }}</p>
                 <p class="metric-card__value">{{ metrics.compliance }}%</p>
             </article>
 
             <article class="metric-card metric-card--danger">
-                <p class="metric-card__label">Критические CCP</p>
+                <p class="metric-card__label">{{ t('demo.dashboard.critical_ccp') }}</p>
                 <p class="metric-card__value">{{ metrics.criticalCount }}</p>
             </article>
 
             <article class="metric-card metric-card--warn">
-                <p class="metric-card__label">Без ответственного</p>
+                <p class="metric-card__label">{{ t('demo.dashboard.no_assignee') }}</p>
                 <p class="metric-card__value">
                     {{ metrics.tasksWithoutAssignee ?? 0 }}
                 </p>
             </article>
 
             <article class="metric-card">
-                <p class="metric-card__label">Инспекция</p>
+                <p class="metric-card__label">{{ t('demo.dashboard.inspection') }}</p>
                 <p class="metric-card__value">{{ metrics.inspectionDate }}</p>
             </article>
         </div>
@@ -38,7 +38,7 @@
         <!-- Список «горячих» задач (не OK): клик открывает модалку без перехода в Checklists -->
         <div class="hot-tasks">
             <div class="hot-tasks__header">
-                <h2 class="hot-tasks__title">Hot tasks</h2>
+                <h2 class="hot-tasks__title">{{ t('demo.dashboard.hot_tasks') }}</h2>
             </div>
 
             <div class="hot-tasks__list">
@@ -58,7 +58,7 @@
             class="dashboard-section__checklists-cta"
             :to="checklistsDemoRoute"
         >
-            Checklists
+            {{ t('demo.dashboard.checklists') }}
         </RouterLink>
 
         <!-- Модалка просмотра задачи: без v-if каждый заход на дашборд монтировал бы модалку и тянул Pinia taskGrainCooling без необходимости -->
@@ -77,10 +77,12 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 import ShowTaskModal from "@/features/demo/components/modals/show_task/ShowTaskModal.vue";
 import TaskCard from "./TaskCard.vue";
 
 const route = useRoute();
+const { t } = useI18n();
 
 const checklistsDemoRoute = computed(() => ({
     name: "Demo",

@@ -2,8 +2,9 @@ import { createDefaultState } from "@/features/demo/composables/demoDefaultState
 import { buildDemoBatches } from "@/features/demo/data/eudrBatchPublic";
 import { normalizeAllChecklistTaskMeasurementStatuses } from "@/features/demo/domain/checklistTaskModel";
 import { seedChecklistsTemperatureAi } from "@/features/demo/ai/temperature/seedChecklistsTemperatureAi";
+import { LS_DEMO_STATE } from "@/config/storageNames";
 
-export const STORAGE_KEY = "haccp-demo-state";
+export const STORAGE_KEY = LS_DEMO_STATE;
 
 /**
  * После загрузки состояния из `localStorage` подмешивает «свежие» даты и демо-партии из `createDefaultState` / `buildDemoBatches`.
@@ -57,6 +58,6 @@ export const saveStateToStorage = (state) => {
         normalizeAllChecklistTaskMeasurementStatuses(state.checklistsByNiche);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
-        // no-op: storage может быть недоступен
+        // nb-op: storage может быть недоступен
     }
 };

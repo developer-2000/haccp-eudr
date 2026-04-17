@@ -112,6 +112,7 @@ import {
     QrCodeTwotone,
     EventRepeatTwotone,
     DeleteForeverTwotone,
+    MarkEmailReadTwotone,
 } from "@vicons/material";
 
 /** Fluent UI System Icons (Microsoft), через @vicons/fluent */
@@ -208,6 +209,7 @@ const icons = Object.freeze({
     "qr-code-twotone": QrCodeTwotone,
     "event-repeat-twotone": EventRepeatTwotone,
     "delete-forever-twotone": DeleteForeverTwotone,
+    "mark-email-read-twotone": MarkEmailReadTwotone,
     "people-community-24-filled": PeopleCommunity24Filled,
     "target-arrow-24-regular": TargetArrow24Regular,
 });
@@ -285,6 +287,7 @@ const viconsIcons = [
     "watch-later-twotone", // @vicons/material
     "event-repeat-twotone", // @vicons/material
     "delete-forever-twotone", // @vicons/material
+    "mark-email-read-twotone", // @vicons/material
     "people-community-24-filled", // @vicons/fluent
     "target-arrow-24-regular", // @vicons/fluent
 ];

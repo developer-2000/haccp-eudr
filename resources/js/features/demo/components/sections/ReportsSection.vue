@@ -1,7 +1,7 @@
 <template>
     <div class="reports-section">
         <div class="reports-public-link">
-            <h3>Публичный отчет</h3>
+            <h3>{{ t('demo.reports.public_report') }}</h3>
             <div class="reports-public-link__row">
                 <code class="reports-public-link__url">
                     <span class="reports-public-link__url-text">{{
@@ -9,31 +9,39 @@
                     }}</span>
                 </code>
                 <div class="reports-public-link__actions">
-                    <n-button type="success" @click="handleCopyLink">
-                        Копировать
+                    <n-button
+                        type="success"
+                        size="large"
+                        @click="handleCopyLink"
+                    >
+                        {{ t('demo.reports.copy') }}
                     </n-button>
-                    <n-button type="info" @click="goToPublicReport">
-                        Перейти
+                    <n-button
+                        type="info"
+                        size="large"
+                        @click="goToPublicReport"
+                    >
+                        {{ t('demo.reports.go_to') }}
                     </n-button>
                 </div>
             </div>
         </div>
 
         <div class="report-preview">
-            <h2>Дневной подробный отчёт</h2>
+            <h2>{{ t('demo.reports.daily_report') }}</h2>
 
-            <h3 class="report-preview__category">Задачи</h3>
+            <h3 class="report-preview__category">{{ t('demo.reports.tasks') }}</h3>
             <div class="report-preview__desktop">
                 <div class="report-preview__table-wrap">
                     <table class="report-preview__table">
                         <thead>
                             <tr>
-                                <th>Дата</th>
-                                <th>Точка</th>
-                                <th>Значение</th>
-                                <th>Ответственный</th>
-                                <th>Фото</th>
-                                <th>Статус</th>
+                                <th>{{ t('demo.reports.col_date') }}</th>
+                                <th>{{ t('demo.reports.col_point') }}</th>
+                                <th>{{ t('demo.reports.col_value') }}</th>
+                                <th>{{ t('demo.reports.col_assignee') }}</th>
+                                <th>{{ t('demo.reports.col_photo') }}</th>
+                                <th>{{ t('demo.reports.col_status') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,31 +71,29 @@
                     class="report-preview-card"
                 >
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Дата:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_date') }}:</span>
                         {{ row.date }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Точка:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_point') }}:</span>
                         {{ row.point }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Значение:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_value') }}:</span>
                         {{ row.value }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label"
-                            >Ответственный:</span
-                        >
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_assignee') }}:</span>
                         {{ row.assignee }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Фото:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_photo') }}:</span>
                         {{ row.photo }}
                     </p>
                     <p
                         class="report-preview-card__line report-preview-card__line--status"
                     >
-                        <span class="report-preview-card__label">Статус:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_status') }}:</span>
                         <span
                             class="report-status"
                             :class="`report-status--${row.statusKey}`"
@@ -98,17 +104,17 @@
                 </article>
             </div>
 
-            <h3 class="report-preview__category">Поставки сырья</h3>
+            <h3 class="report-preview__category">{{ t('demo.reports.raw_materials') }}</h3>
             <div class="report-preview__desktop">
                 <div class="report-preview__table-wrap">
                     <table class="report-preview__table">
                         <thead>
                             <tr>
-                                <th>Дата</th>
-                                <th>Точка</th>
-                                <th>Значение</th>
-                                <th>Фото</th>
-                                <th>Статус</th>
+                                <th>{{ t('demo.reports.col_date') }}</th>
+                                <th>{{ t('demo.reports.col_point') }}</th>
+                                <th>{{ t('demo.reports.col_value') }}</th>
+                                <th>{{ t('demo.reports.col_photo') }}</th>
+                                <th>{{ t('demo.reports.col_status') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -137,25 +143,25 @@
                     class="report-preview-card"
                 >
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Дата:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_date') }}:</span>
                         {{ row.date }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Точка:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_point') }}:</span>
                         {{ row.point }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Значение:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_value') }}:</span>
                         {{ row.value }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">Фото:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_photo') }}:</span>
                         {{ row.photo }}
                     </p>
                     <p
                         class="report-preview-card__line report-preview-card__line--status"
                     >
-                        <span class="report-preview-card__label">Статус:</span>
+                        <span class="report-preview-card__label">{{ t('demo.reports.col_status') }}:</span>
                         <span
                             class="report-status"
                             :class="`report-status--${row.statusKey}`"
@@ -173,14 +179,14 @@
                 class="btn-client btn-primary"
                 @click="handleExportAction('pdf')"
             >
-                Скачать PDF
+                {{ t('demo.reports.download_pdf') }}
             </button>
             <button
                 type="button"
                 class="btn-client btn-success"
                 @click="handleExportAction('inspector')"
             >
-                Инспектору
+                {{ t('demo.reports.to_inspector') }}
             </button>
         </div>
     </div>
@@ -190,12 +196,14 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { useMessage } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import { buildDailyReportPublicUrl } from "@/features/demo/data/dailyReportPublic";
 import { taskDisplayStatusKey } from "@/features/demo/domain/checklistTaskModel";
 import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
 
 defineOptions({ name: "ReportsSection" });
 
+const { t } = useI18n();
 const message = useMessage();
 const route = useRoute();
 
@@ -231,10 +239,9 @@ const props = defineProps({
     },
 });
 
-const NICHE_RU = {
-    coffee: "Кофейня",
-    bakery: "Пекарня",
-    meat: "Мясо / EUDR",
+const nicheLabel = (niche) => {
+    const map = { coffee: 'niche_coffee', bakery: 'niche_bakery', meat: 'niche_meat' };
+    return map[niche] ? t(`demo.reports.${map[niche]}`) : niche;
 };
 
 /** YYYY-MM-DD → DD.MM.YYYY */
@@ -272,7 +279,7 @@ function formatTaskValue(task) {
 
 function taskPhotoLabel(task) {
     if (Array.isArray(task.measurements) && task.measurements.length) {
-        return "Да";
+        return t('demo.reports.photo_yes');
     }
     return "—";
 }
@@ -283,14 +290,14 @@ function taskStatusRow(task) {
             (m) => m.status === "pending",
         );
         if (hasPending) {
-            return { label: "Pending", key: "review" };
+            return { label: t('demo.reports.status_pending'), key: "review" };
         }
-        return { label: "Success", key: "ok" };
+        return { label: t('demo.reports.status_success'), key: "ok" };
     }
     if (taskDisplayStatusKey(task) === "problem") {
-        return { label: "Отклонение", key: "problem" };
+        return { label: t('demo.reports.status_deviation'), key: "problem" };
     }
-    return { label: "OK", key: "ok" };
+    return { label: t('demo.reports.status_ok'), key: "ok" };
 }
 
 const taskPreviewRows = computed(() => {
@@ -300,13 +307,13 @@ const taskPreviewRows = computed(() => {
     for (const [niche, tasks] of Object.entries(
         props.checklistsByNiche ?? {},
     )) {
-        const nicheLabel = NICHE_RU[niche] ?? niche;
+        const nicheLbl = nicheLabel(niche);
         for (const task of tasks) {
             const st = taskStatusRow(task);
             rows.push({
                 id: `ccp-${niche}-${task.id}`,
                 date: dayLabel,
-                point: `${nicheLabel} — ${task.title}`,
+                point: `${nicheLbl} — ${task.title}`,
                 value: formatTaskValue(task),
                 assignee: resolveStaffFullName(
                     props.staff,
@@ -328,7 +335,7 @@ const batchPreviewRows = computed(() =>
         date: b.date ?? "—",
         point: `EUDR — ${b.product} (${b.id})`,
         value: `${b.supplier} · ${b.statusLabel}`,
-        photo: "Нет",
+        photo: t('demo.reports.photo_no'),
         statusLabel: b.statusLabel,
         statusKey: b.status === "review" ? "review" : "ok",
     })),
@@ -379,12 +386,12 @@ const handleCopyLink = async () => {
         } else if (!copyTextFallback(text)) {
             throw new Error("copy");
         }
-        message.success("Адрес скопирован в буфер обмена");
+        message.success(t('demo.reports.copy_success'));
     } catch {
         if (copyTextFallback(text)) {
-            message.success("Адрес скопирован в буфер обмена");
+            message.success(t('demo.reports.copy_success'));
         } else {
-            message.error("Не удалось скопировать ссылку");
+            message.error(t('demo.reports.copy_error'));
         }
     }
 };
@@ -396,8 +403,8 @@ const handleCopyLink = async () => {
 const handleExportAction = (action) => {
     message.success(
         action === "pdf"
-            ? "PDF отчёт сформирован (демо)."
-            : "Отчёт отправлен инспектору (демо).",
+            ? t('demo.reports.pdf_success')
+            : t('demo.reports.inspector_success'),
     );
 };
 </script>
@@ -589,6 +596,13 @@ h3 {
     flex-wrap: wrap;
     justify-content: flex-end;
     margin-top: 20px;
+
+    > .btn-client {
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+        justify-content: center;
+    }
 }
 
 @media (max-width: $breakpoint-lg) {

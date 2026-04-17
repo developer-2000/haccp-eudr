@@ -1,7 +1,7 @@
 <template>
     <div ref="aboutPageRootRef" class="container about-page">
         <header class="about-page__title-bar">
-            <h1 class="about-page__heading">О проекте.</h1>
+            <h1 class="about-page__heading">{{ t('about.page.heading') }}</h1>
         </header>
         <div class="about-page__split">
             <aside class="about-page__photo" aria-hidden="true">
@@ -19,24 +19,20 @@
                     class="about-page__fp-scroll"
                     tabindex="0"
                     role="region"
-                    aria-label="Секции: о себе"
+                    :aria-label="t('about.page.aria_sections')"
                     @scroll.passive="scheduleActiveFromScroll"
                     @pointerdown.passive="releaseProgrammaticNavFromUserInput"
                 >
                     <section class="about-fp-section">
                         <div class="about-fp">
                             <p class="about-fp__text">
-                                Привет. Меня зовут Bagalov Shamil. Я разработчик
-                                и создаю этот продукт один.
+                                {{ t('about.intro.p1') }}
                             </p>
                             <p class="about-fp__text">
-                                Я много лет работаю с веб-системами и
-                                автоматизацией процессов.
+                                {{ t('about.intro.p2') }}
                             </p>
                             <p class="about-fp__text">
-                                И в какой-то момент увидел одну и ту же
-                                проблему у бизнеса, который работает с
-                                продуктами питания.
+                                {{ t('about.intro.p3') }}
                             </p>
                         </div>
                     </section>
@@ -50,49 +46,29 @@
                                     class="about-fp__title-icon about-fp__title-icon--danger"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">В чем проблема</span>
+                                <span class="about-fp__title-label">{{ t('about.problem.title') }}</span>
                             </h2>
                             <p class="about-fp__text">
-                                Если у тебя есть кухня, пекарня или производство
-                                — ты это знаешь.
+                                {{ t('about.problem.lead') }}
                             </p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">
-                                    Проверки приходят неожиданно.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Требования HACCP нужно соблюдать постоянно.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Записи часто делают «потом», а не в моменте.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Персонал забывает или игнорирует задачи.
-                                </li>
+                                <li class="about-fp__list-item">{{ t('about.problem.item_1') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.problem.item_2') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.problem.item_3') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.problem.item_4') }}</li>
                             </ul>
-                            <p class="about-fp__text">В результате.</p>
+                            <p class="about-fp__text">{{ t('about.problem.as_result') }}</p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">
-                                    Данные теряют доверие.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Возрастает риск ошибок.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Появляются штрафы и стресс.
-                                </li>
+                                <li class="about-fp__list-item">{{ t('about.problem.result_1') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.problem.result_2') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.problem.result_3') }}</li>
                             </ul>
                             <p class="about-fp__text">
-                                И чаще всего у тебя есть только 2 варианта.
+                                {{ t('about.problem.two_options') }}
                             </p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">
-                                    Платить за сложные и дорогие решения.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Или вести всё вручную и надеяться, что всё в
-                                    порядке.
-                                </li>
+                                <li class="about-fp__list-item">{{ t('about.problem.option_1') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.problem.option_2') }}</li>
                             </ul>
                         </div>
                     </section>
@@ -106,28 +82,21 @@
                                     class="about-fp__title-icon about-fp__title-icon--accent-orange"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">Что я делаю</span>
+                                <span class="about-fp__title-label">{{ t('about.what_i_do.title') }}</span>
                             </h2>
                             <p class="about-fp__text">
-                                Я создаю систему, которая фиксирует процессы в
-                                момент выполнения, а не задним числом.
+                                {{ t('about.what_i_do.p1') }}
                             </p>
-                            <p class="about-fp__text">Каждое действие.</p>
+                            <p class="about-fp__text">{{ t('about.what_i_do.every_action') }}</p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">
-                                    Записывается по времени.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Привязывается к сотруднику.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Остаётся в системе как факт.
-                                </li>
+                                <li class="about-fp__list-item">{{ t('about.what_i_do.item_1') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.what_i_do.item_2') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.what_i_do.item_3') }}</li>
                             </ul>
                             <p class="about-fp__text">
-                                Если задача не выполнена — фиксируется причина.
+                                {{ t('about.what_i_do.task_not_done') }}
                             </p>
-                            <p class="about-fp__text">Это даёт главное.</p>
+                            <p class="about-fp__text">{{ t('about.what_i_do.main_thing') }}</p>
                             <p
                                 class="about-fp__text about-fp__text--with-inline-icon"
                             >
@@ -137,8 +106,7 @@
                                     aria-hidden="true"
                                 />
                                 <span>
-                                    Доказуемую и прозрачную историю соблюдения
-                                    HACCP.
+                                    {{ t('about.what_i_do.highlight') }}
                                 </span>
                             </p>
                         </div>
@@ -153,27 +121,21 @@
                                     class="about-fp__title-icon about-fp__title-icon--accent-success-dark"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">Почему я</span>
+                                <span class="about-fp__title-label">{{ t('about.why_me.title') }}</span>
                             </h2>
                             <p class="about-fp__text">
-                                Я не компания и не стартап с инвесторами.
+                                {{ t('about.why_me.p1') }}
                             </p>
                             <p class="about-fp__text">
-                                Я разработчик, и для меня важно следующее.
+                                {{ t('about.why_me.p2') }}
                             </p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">
-                                    Лично пишу этот продукт.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Лично отвечаю за его развитие.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Делаю его так, как сделал бы для себя.
-                                </li>
+                                <li class="about-fp__list-item">{{ t('about.why_me.item_1') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.why_me.item_2') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.why_me.item_3') }}</li>
                             </ul>
                             <p class="about-fp__text">
-                                Это означает простую вещь.
+                                {{ t('about.why_me.simple_thing') }}
                             </p>
                             <p
                                 class="about-fp__text about-fp__text--with-inline-icon"
@@ -184,9 +146,7 @@
                                     aria-hidden="true"
                                 />
                                 <span>
-                                    Мне важно, чтобы система реально
-                                    использовалась в работе, а не просто
-                                    выглядела функциональной.
+                                    {{ t('about.why_me.highlight') }}
                                 </span>
                             </p>
                         </div>
@@ -202,31 +162,18 @@
                                     class="about-fp__title-icon about-fp__title-icon--accent-primary"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">Что ты получаешь</span>
+                                <span class="about-fp__title-label">{{ t('about.what_you_get.title') }}</span>
                             </h2>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">
-                                    Фиксацию действий сотрудников в реальном
-                                    времени.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Прозрачную и понятную отчётность.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Контроль выполнения задач и смен.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Меньше риска ошибок и штрафов.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Спокойствие при проверках.
-                                </li>
+                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_1') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_2') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_3') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_4') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_5') }}</li>
                             </ul>
-                            <p class="about-fp__text">Дополнительно.</p>
+                            <p class="about-fp__text">{{ t('about.what_you_get.additional') }}</p>
                             <p class="about-fp__text">
-                                Ты можешь вести внутренние задачи для команды
-                                (они не попадают в отчёты и остаются внутри
-                                бизнеса).
+                                {{ t('about.what_you_get.extra') }}
                             </p>
                         </div>
                     </section>
@@ -241,27 +188,18 @@
                                     class="about-fp__title-icon about-fp__title-icon--danger"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">Почему стоит пройти опрос</span>
+                                <span class="about-fp__title-label">{{ t('about.survey.title') }}</span>
                             </h2>
                             <p class="about-fp__text">
-                                Сейчас я собираю реальные потребности бизнеса,
-                                чтобы сделать систему максимально полезной на
-                                практике.
+                                {{ t('about.survey.p1') }}
                             </p>
                             <p class="about-fp__text">
-                                Если ты пройдёшь короткий опрос.
+                                {{ t('about.survey.if_complete') }}
                             </p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">
-                                    Система будет адаптирована под твои
-                                    процессы.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Ты получишь пожизненную скидку 20%.
-                                </li>
-                                <li class="about-fp__list-item">
-                                    Сможешь повлиять на развитие продукта.
-                                </li>
+                                <li class="about-fp__list-item">{{ t('about.survey.item_1') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.survey.item_2') }}</li>
+                                <li class="about-fp__list-item">{{ t('about.survey.item_3') }}</li>
                             </ul>
                             <p
                                 class="about-fp__text about-fp__text--with-inline-icon"
@@ -271,7 +209,7 @@
                                     class="about-fp__text-icon"
                                     aria-hidden="true"
                                 />
-                                <span>Это займёт около 5 минут.</span>
+                                <span>{{ t('about.survey.time_estimate') }}</span>
                             </p>
                         </div>
                     </section>
@@ -287,7 +225,7 @@
 
                 <nav
                     class="about-page__nav-dots"
-                    aria-label="Навигация по секциям"
+                    :aria-label="t('about.page.aria_navigation')"
                 >
                     <div
                         v-for="i in sectionCount"
@@ -340,11 +278,13 @@
 
 <script setup>
 import { nextTick, onMounted, onUnmounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { ExclamationCircleTwotone } from "@vicons/antd";
 import { Bulb } from "@vicons/ionicons5";
 import { ManageAccountsTwotone } from "@vicons/material";
 import Icon from "@/components/Icon.vue";
 import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
+import { usePageSeo } from "@/composables/usePageSeo";
 
 // =============================================================================
 // Мета компонента
@@ -352,6 +292,10 @@ import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
 defineOptions({
     name: "About",
 });
+
+const { t } = useI18n();
+
+usePageSeo({ i18nKey: "seo.about" });
 
 // =============================================================================
 // Константы
@@ -576,9 +520,9 @@ function navDotAriaLabel(index) {
     const letter = WELCOME_MARKERS[index];
     const n = index + 1;
     if (letter) {
-        return `Секция ${n}, буква «${letter}» (welcome)`;
+        return t('about.page.nav_dot_aria', { n, letter });
     }
-    return `Секция ${n}`;
+    return t('about.page.nav_dot_aria_simple', { n });
 }
 
 // =============================================================================
@@ -682,13 +626,13 @@ onUnmounted(() => {
     position: relative;
     z-index: 0;
     flex: 1;
-    min-height: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     padding: 60px 30px 0 80px;
     background-color: $bg-style-white;
+    min-height: 720px;
 
     &::before {
         content: "";
@@ -708,12 +652,12 @@ onUnmounted(() => {
         position: relative;
         z-index: 1;
         flex-shrink: 0;
-        padding-bottom: $spacing-md;
 
         .about-page__heading {
             font-size: $font-size-2-5xl;
             font-weight: 700;
             color: $text-color;
+            margin: 0;
         }
     }
 
@@ -794,9 +738,16 @@ onUnmounted(() => {
                         margin: 0 auto;
                         padding: $spacing-lg;
                         width: 100%;
+                        box-sizing: content-box;
+
+                        @media (max-width: 600px) {
+                            box-sizing: border-box;
+                            padding: 20px 0 40px 10px;
+                        }
 
                         &.about-fp--cta {
                             max-width: none;
+                            padding: 0;
                         }
 
                         .about-fp__cta-surface {
@@ -1033,7 +984,7 @@ onUnmounted(() => {
         padding: 20px 15px 0 15px;
 
         .about-page__title-bar{
-            padding-bottom: 0;
+            padding-bottom: 20px;
 
             .about-page__heading{
                 text-align: center;

@@ -113,6 +113,8 @@ return [
     |
     */
 
+    'admin_email' => env('EMAIL_ADMIN'),
+
     'markdown' => [
         'theme' => 'default',
 

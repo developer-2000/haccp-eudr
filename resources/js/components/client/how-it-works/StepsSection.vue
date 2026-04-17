@@ -1,43 +1,24 @@
 <template>
     <section class="steps-section">
         <div class="container">
-            <h1 class="steps-section__heading">Steps</h1>
+            <h1 class="steps-section__heading">{{ t('how_it_work.steps.heading') }}</h1>
             <div class="steps-section__list">
-                <article
-                    v-for="step in steps"
-                    :key="step.id"
-                    class="step-block"
-                >
+                <article v-for="step in steps" :key="step.id" class="step-block">
                     <div class="step-block__num" aria-hidden="true">
                         {{ step.id }}
                     </div>
                     <div class="step-block__content">
                         <h2 class="step-block__title">
-                            <Icon
-                                v-if="step.iconName"
-                                :name="step.iconName"
-                                :class="['step-block__icon', step.iconClass]"
-                                aria-hidden="true"
-                            />
-                            <span class="step-block__title-text">{{
-                                step.title
-                            }}</span>
+                            <Icon v-if="step.iconName" :name="step.iconName" :class="['step-block__icon', step.iconClass]" aria-hidden="true"/>
+                            <span class="step-block__title-text">
+                                {{ step.title }}
+                            </span>
                         </h2>
-                        <p
-                            class="step-block__desc"
-                            :class="{ 'step-block__desc--accent': step.accent }"
-                        >
+                        <h3 class="step-block__desc" :class="{ 'step-block__desc--accent': step.accent }">
                             {{ step.desc }}
-                        </p>
-                        <ul
-                            v-if="step.benefits?.length"
-                            class="step-block__benefits"
-                        >
-                            <li
-                                v-for="(benefit, i) in step.benefits"
-                                :key="i"
-                                class="step-block__benefit"
-                            >
+                        </h3>
+                        <ul v-if="step.benefits?.length" class="step-block__benefits">
+                            <li v-for="(benefit, i) in step.benefits" :key="i" class="step-block__benefit">
                                 {{ benefit }}
                             </li>
                         </ul>
@@ -49,119 +30,123 @@
 </template>
 
 <script setup>
+import {computed} from "vue";
+import {useI18n} from "vue-i18n";
+import Icon from "@/components/Icon.vue";
+
 defineOptions({
     name: "StepsSection",
 });
 
-/**
- * Шаги процесса для секции ШАГИ.
- * accent: true — описание зелёным bold (шаг 6).
- */
-import Icon from "@/components/Icon.vue";
+const {t} = useI18n();
 
-const steps = [
+/**
+ * Шаги процесса для секции "Как это работает".
+ * Тексты берутся из переводов; иконки и id остаются статичными.
+ */
+const steps = computed(() => [
     {
         id: 1,
-        title: "Download + Setup",
+        title: t('how_it_work.steps.step1_title'),
         iconName: "laptop-mac-twotone",
-        desc: "Website in browser without installation + app on smartphone",
+        desc: t('how_it_work.steps.step1_desc'),
         accent: false,
         benefits: [
-            "30 minutes = your system is ready",
-            "Choose a niche → CCP is ready",
-            "Set up notifications",
-            "Add recipes/ingredients",
-            "Upload documents/photos",
+            t('how_it_work.steps.step1_benefit_1'),
+            t('how_it_work.steps.step1_benefit_2'),
+            t('how_it_work.steps.step1_benefit_3'),
+            t('how_it_work.steps.step1_benefit_4'),
+            t('how_it_work.steps.step1_benefit_5'),
         ],
     },
     {
         id: 2,
-        title: "Monitoring",
+        title: t('how_it_work.steps.step2_title'),
         iconName: "control-twotone",
-        desc: "All CCP in 1 - 24/7 deviation alerts",
+        desc: t('how_it_work.steps.step2_desc'),
         accent: false,
         benefits: [
-            "Hourly/daily staff tasks",
-            "Room/fridge temperatures",
-            "Goods receiving + storage",
-            "Facility sanitation",
-            "Cooking temperatures",
-            "Equipment calibration",
+            t('how_it_work.steps.step2_benefit_1'),
+            t('how_it_work.steps.step2_benefit_2'),
+            t('how_it_work.steps.step2_benefit_3'),
+            t('how_it_work.steps.step2_benefit_4'),
+            t('how_it_work.steps.step2_benefit_5'),
+            t('how_it_work.steps.step2_benefit_6'),
         ],
     },
     {
         id: 3,
-        title: "CCP Automation",
+        title: t('how_it_work.steps.step3_title'),
         iconName: "coffee-maker-twotone",
-        desc: "Bluetooth thermometers + alerts + auto-logs",
+        desc: t('how_it_work.steps.step3_desc'),
         accent: false,
         benefits: [
-            "Bluetooth thermometers auto-log",
-            "Push/SMS alerts to staff",
-            "Auto-corrections on deviations",
-            "Real-time AI risk analysis",
-            "Auto report generation",
+            t('how_it_work.steps.step3_benefit_1'),
+            t('how_it_work.steps.step3_benefit_2'),
+            t('how_it_work.steps.step3_benefit_3'),
+            t('how_it_work.steps.step3_benefit_4'),
+            t('how_it_work.steps.step3_benefit_5'),
         ],
     },
     {
         id: 4,
-        title: "Checklist",
+        title: t('how_it_work.steps.step4_title'),
         iconName: "schedule-twotone",
         iconClass: "metric-icon--inspection",
-        desc: "1 click = record saved + photo/voice",
+        desc: t('how_it_work.steps.step4_desc'),
         accent: false,
         benefits: [
-            "Offline without failures",
-            "Before/after photo (195°C) in 1 click",
-            "Voice CCP input",
-            "Second person confirmation",
-            "GPS where it was done",
-            "Auto timestamp + who did it",
-            "Audit trail for inspector",
+            t('how_it_work.steps.step4_benefit_1'),
+            t('how_it_work.steps.step4_benefit_2'),
+            t('how_it_work.steps.step4_benefit_3'),
+            t('how_it_work.steps.step4_benefit_4'),
+            t('how_it_work.steps.step4_benefit_5'),
+            t('how_it_work.steps.step4_benefit_6'),
+            t('how_it_work.steps.step4_benefit_7'),
         ],
     },
     {
         id: 5,
-        title: "QR Inspector",
+        title: t('how_it_work.steps.step5_title'),
         iconName: "qr-code-twotone",
         iconClass: "metric-icon--eudr",
-        desc: "Inspector scans → online without your presence",
+        desc: t('how_it_work.steps.step5_desc'),
         accent: false,
         benefits: [
-            "PDF in 1 click instead of 3 days of panic",
-            "€0 fines forever",
-            "EUDR export without blocks",
+            t('how_it_work.steps.step5_benefit_1'),
+            t('how_it_work.steps.step5_benefit_2'),
+            t('how_it_work.steps.step5_benefit_3'),
         ],
     },
     {
         id: 6,
-        title: "Dashboard + Alerts",
+        title: t('how_it_work.steps.step6_title'),
         iconName: "dashboard-twotone",
-        desc: "Intuitive UX + sync across all devices",
+        desc: t('how_it_work.steps.step6_desc'),
         accent: false,
         benefits: [
-            "All data on 1 screen",
-            "Push alerts → 0 misses",
-            "Phone/tablet/PC sync",
-            "Search across all logs",
-            "Drag&drop widgets",
-            "Notification personalization",
-            "Dark/Light mode auto",
+            t('how_it_work.steps.step6_benefit_1'),
+            t('how_it_work.steps.step6_benefit_2'),
+            t('how_it_work.steps.step6_benefit_3'),
+            t('how_it_work.steps.step6_benefit_4'),
+            t('how_it_work.steps.step6_benefit_5'),
+            t('how_it_work.steps.step6_benefit_6'),
+            t('how_it_work.steps.step6_benefit_7'),
         ],
     },
     {
         id: 7,
-        title: "EUDR Export",
+        title: t('how_it_work.steps.step7_title'),
         iconName: "tag-export",
-        desc: "Each batch = QR + GPS + DDS ready",
+        desc: t('how_it_work.steps.step7_desc'),
         accent: false,
         benefits: [
-            "100% EUDR compliance",
-            "€0 fines (4% turnover)",
-            "EU export without blocks",
+            t('how_it_work.steps.step7_benefit_1'),
+            t('how_it_work.steps.step7_benefit_2'),
+            t('how_it_work.steps.step7_benefit_3'),
         ],
     },
-];
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -177,8 +162,14 @@ const steps = [
     font-size: $font-size-2-5xl;
     font-weight: 700;
     color: $text-color;
-    margin: 0 0 $spacing-xl;
     text-align: center;
+    max-width: 630px;
+    width: 100%;
+    margin: 0 auto 40px;
+
+    @media (max-width: 530px) {
+        font-size: $font-size-2-25xl;
+    }
 }
 
 .steps-section__list {
@@ -244,7 +235,7 @@ const steps = [
 }
 
 .step-block__title {
-    font-size: 2rem;
+    font-size: $font-size-2-375xl;
     font-weight: 700;
     color: $text-color;
     margin: 0;
@@ -276,7 +267,7 @@ const steps = [
     }
 
     @media (max-width: 530px) {
-        font-size: 30px;
+        font-size: $font-size-2-125xl;
 
         :deep(.xicon svg) {
             width: 45px;

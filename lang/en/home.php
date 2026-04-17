@@ -2,16 +2,17 @@
 
 return [
     'hero' => [
-        'title_line1' => 'Be Ready for Inspection Anytime',
+        'title_line1' => 'HACCP Software for Real-Time Food Safety Compliance',
         'description_prefix' => 'Real-time HACCP system designed',
         'description_emphasis' => ' for kitchens, bakeries and food production.',
-
+        'tell_about_business' => 'Tell us about your business',
         'view_demo' => 'View Demo',
         'devices_alt' => 'Devices',
     ],
+
     'metrics' => [
         'profit' => [
-            'title' => 'Profit',
+            'title' => 'Cost efficiency',
             'line1' => [
                 'word' => 'Competitors → ',
                 'value' => '€99+ /month',
@@ -23,7 +24,7 @@ return [
             'right' => '€600/year',
         ],
         'inspection' => [
-            'title' => 'Inspection 100%',
+            'title' => 'Inspection readiness',
             'line1' => [
                 'word' => 'Scans QR → ',
                 'value' => 'Sees EVERYTHING',
@@ -34,7 +35,7 @@ return [
             ],
         ],
         'time' => [
-            'title' => 'Free +2h per day',
+            'title' => 'Real-time HACCP monitoring',
             'line1' => [
                 'word' => 'Phone → ',
                 'value' => '2 min/checklist',
@@ -56,9 +57,10 @@ return [
             ],
         ],
     ],
+
     'niches' => [
         'coffee' => [
-            'title' => 'COFFEE',
+            'title' => 'HACCP for Coffee Roasters',
             'subtitle' => 'Roastery',
             'points' => [
                 'roaster_195C' => '195°C roaster',
@@ -69,18 +71,18 @@ return [
             'cta' => 'DEMO',
         ],
         'bakery' => [
-            'title' => 'BAKERY',
+            'title' => 'HACCP for Bakeries',
             'subtitle' => 'Artisan',
             'points' => [
                 'dough_26C' => '26°C dough',
                 'core_95C' => 'core 95°C',
                 'starter_plus21C' => 'sourdough starter +21°C',
             ],
-            'result' => 'HACCP automatically, no paperwork',
+            'result' => 'HACCP automatically, nb paperwork',
             'cta' => 'DEMO',
         ],
         'meat' => [
-            'title' => 'MEAT',
+            'title' => 'HACCP for Meat Processing',
             'subtitle' => 'Butcher',
             'points' => [
                 'frozen_minus18C' => '-18°C frozen',
@@ -102,6 +104,7 @@ return [
             'cta' => 'TAKE THE SURVEY',
         ],
     ],
+
     'survey_cta' => [
         'title' => 'Tell us how you manage HACCPilot',
         'title_secondary' => "we'll set up a prototype for you",

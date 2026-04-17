@@ -1,0 +1,315 @@
+<?php
+
+return [
+    'intro' => [
+        'title' => 'Pomozite nam izgraditi sustav koji uklanja poteškoće HACCP-a',
+        'subtitle' => 'Kratka anketa - oko 5 minuta. Vaši odgovori pomoći će nam da sustav funkcionira u stvarnim operacijama i inspekcijama.',
+        'trust' => 'Vaši odgovori koriste se samo za analizu i ne dijele se s trećim stranama.',
+        'start' => 'Započnite',
+    ],
+
+    'nav' => [
+        'back' => 'Natrag',
+        'back_aria' => 'Vrati se na prethodni korak',
+    ],
+
+    'progress' => [
+        'aria' => 'Anketa: korak :current od :total',
+    ],
+
+    'validation' => [
+        'email_required' => 'Unesite svoju e-poštu - ovo polje je obavezno.',
+        'email_invalid' => 'Unesite valjanu adresu e-pošte.',
+    ],
+
+    'ui' => [
+        'next' => 'Sljedeće',
+        'next_disabled_aria' => 'Sljedeće - najprije odgovorite na pitanje',
+        'other_default_label' => 'Molimo navedite',
+        'other_aria_prefix' => 'Dodatni detalj vašeg odgovora:',
+        'select_placeholder' => 'Odaberite opciju',
+        'country_clear' => 'Očisti odabranu državu',
+        'country_search' => 'Pretraži po nazivu države',
+        'country_search_placeholder' => 'Pretraži…',
+        'submit' => 'Pošalji',
+        'submit_sending' => 'Slanje...',
+        'submit_failed' => 'Slanje podataka ankete nije uspjelo. Pokušajte ponovno.',
+        'questions_load_error' => 'Nije moguće učitati pitanja ankete. Osvježite stranicu ili pokušajte kasnije.',
+        'response_saved' => 'Odgovor ankete je spremljen.',
+        'verification_sent' => 'Verifikacijski kod poslan je na vašu e-poštu.',
+        'cooldown_wait' => 'Pričekajte nekoliko sekundi i pokušajte ponovno.',
+        'token_not_found' => 'Token nije pronađen. Pokušajte ponovno ispuniti anketu.',
+        'network_error' => 'Mrežna pogreška. Pokušajte ponovno.',
+        'pin_instruction' => 'PIN kod poslan je na navedenu adresu e-pošte. Unesite ga za potvrdu vlasništva.',
+        'pin_attempts_left' => 'Preostaje 1 od 2 pokušaja',
+        'pin_container_aria' => 'Verifikacija PIN koda',
+        'pin_group_aria' => '4-znamenkasti PIN kod',
+    ],
+
+    'lead' => [
+        'title' => 'Ostavite svoje kontakt podatke za:',
+        'bullet_discount' => 'ostvarite doživotni popust od 20%',
+        'bullet_access' => 'dobijete rani pristup sustavu',
+        'bullet_influence' => 'utječete na razvoj proizvoda',
+        'expectation' => 'Ovo je završni korak: nakon njega anketa je završena. Trebamo samo vaše podatke za daljnji kontakt.',
+        'field_name' => 'Vaše ime',
+        'field_business_name' => 'Naziv tvrtke',
+        'field_email' => 'E-mail',
+        'field_email_required_sr' => '(obavezno)',
+        'field_phone' => 'Telefon',
+        'field_whatsapp' => 'WhatsApp',
+        'field_telegram' => 'Telegram',
+        'placeholder_phone' => '+1 555 000-00-00',
+        'placeholder_whatsapp' => '+1 555 000-00-00 ili wa.me/...',
+        'placeholder_telegram' => "{'@'}korisničkoime",
+    ],
+
+    'success' => [
+        'title' => 'Hvala vam. Osobno ću vas kontaktirati kada sustav bude spreman.',
+        'body' => "Dobit ćete pozivnicu za sandbox verziju,\nu kojoj možete isprobati sustav u praksi i utjecati na njegov razvoj. To nam pomaže prilagoditi proizvod stvarnim poslovnim procesima.",
+        'reassurance' => 'Ne planiramo masovna slanja - samo osobnu poruku s rezultatima.',
+        'update_hint' => "Ako se vaši procesi promijene, dobijete nove zadatke ili ideje -\nmoći ćete ažurirati svoje odgovore putem poveznice poslane na vaš e-mail.",
+        'home_link' => 'Natrag na početnu',
+    ],
+
+    'submitted_state' => [
+        'title' => 'Hvala vam što ste ispunili popis pitanja!',
+        'subtitle' => 'Vaše sudjelovanje predstavlja značajan doprinos fazi formiranja.',
+        'image_alt' => 'Odgovor je spremljen u bazu podataka',
+        'email_label' => 'E-mail:',
+        'sent_label' => 'Poslano:',
+        'reset_button' => 'Ažuriraj pregled',
+    ],
+
+    'email' => [
+        'subject_with_name' => ':name, hvala na vašim odgovorima',
+        'subject_default' => 'Hvala na vašim odgovorima',
+        'header_tagline' => 'Sustav za usklađenost HACCP-a u stvarnom vremenu',
+        'title' => 'Hvala vam na sudjelovanju — vaš pristup i 20% popusta',
+        'greeting_with_name' => 'Pozdrav, :name!',
+        'greeting_default' => 'Pozdrav!',
+        'thank_you' => 'Hvala vam što ste odvojili vrijeme za ispunjavanje ankete.',
+        'value_note' => 'Vaši odgovori su zaista vrijedni — izravno oblikuju proizvod.',
+        'registered_as' => 'Registrirani ste kao sudionik ranog pristupa',
+        'discount_label' => '–20% doživotni popust',
+        'discount_code_label' => 'Vaš kod:',
+        'description_line1' => 'Sustav je trenutno u razvoju.',
+        'description_line2' => 'Analiziram odgovore vlasnika tvrtki i prilagođavam funkcionalnosti stvarnim procesima.',
+        'description_line3' => 'Glavni cilj je da sustav pomogne u prolasku inspekcija s povjerenjem, a ne samo da “vodi evidenciju”.',
+        'benefits_title' => 'Što ćete dobiti:',
+        'benefit_1' => 'Praćenje aktivnosti u stvarnom vremenu',
+        'benefit_2' => 'Transparentna povijest za inspekcije',
+        'benefit_3' => 'Kontrola bez dodatnog opterećenja',
+        'cta_button' => 'Idi na web stranicu',
+        'footer_updates' => 'Povremeno ću dijeliti razvojne novosti i pozivati vas na testiranje novih funkcionalnosti.',
+        'footer_feedback' => 'Vaše povratne informacije i ideje pomoći će da sustav bude što jednostavniji i korisniji u stvarnom radu.',
+        'footer_reply' => 'Ako već imate ideje ili zadatke — jednostavno odgovorite na ovaj e-mail.',
+        'footer_signature' => 'Srdačno, Shamil Bagalov',
+    ],
+
+    'email_verify' => [
+        'subject' => 'Vaš verifikacijski kod za HACCPilot',
+        'header_tagline' => 'Sigurnosna potvrda za ažuriranje ankete',
+        'title' => 'Potvrda ažuriranja odgovora',
+        'description' => 'Zatražili ste ažuriranje svojih odgovora u HACCPilot anketi.',
+        'instruction' => 'Za potvrdu unesite kod ispod:',
+        'code_expiry' => 'Kod vrijedi ograničeno vrijeme',
+        'not_you' => 'Ako to niste bili vi — jednostavno zanemarite ovu poruku.',
+        'data_safe' => 'Vaši podaci ostaju nepromijenjeni.',
+        'cta_button' => 'Povratak na ažuriranje',
+        'footer_auto' => 'Ovo je automatska poruka sustava HACCPilot.',
+        'footer_purpose' => 'Kod se koristi samo za potvrdu promjena podataka.',
+    ],
+
+    'email_updated' => [
+        'subject' => 'Vaši odgovori na anketu su ažurirani',
+        'header_tagline' => 'Potvrda ažuriranja podataka ankete',
+        'title' => 'Vaši podaci su uspješno ažurirani!',
+        'greeting_with_name' => 'Pozdrav, :name!',
+        'greeting_default' => 'Pozdrav!',
+        'thank_you' => 'Hvala vam što ste ažurirali svoje odgovore u anketi.',
+        'status_label' => 'Status vaše ankete:',
+        'status_value' => 'Ažurirano i potvrđeno',
+        'status_note' => 'Sve promjene su spremljene i koristit će se za prilagodbu HACCPilot sustava.',
+        'footer_auto' => 'Ovo je automatska obavijest sustava HACCPilot.',
+        'footer_data_use' => 'Vaši podaci se koriste isključivo za poboljšanje točnosti i personalizacije sustava.',
+        'footer_signature' => 'Srdačno, Shamil Bagalov',
+    ],
+
+    'verify' => [
+        'token_invalid' => 'Poveznica je nevažeća ili je istekla. Pokušajte ponovno ispuniti anketu.',
+        'attempts_exhausted' => 'Verifikacija koda nije uspjela. Molimo ispunite anketu ponovno.',
+        'code_invalid' => 'Neispravan kod. Pokušajte ponovno.',
+        'success' => 'Odgovori su uspješno ažurirani.',
+    ],
+
+    'questions' => [
+        '1' => [
+            'question_text' => 'Kakvu vrstu poslovanja vodite?',
+            'options' => [
+                'cafe' => 'Kafić / coffee shop',
+                'bakery' => 'Pekara / proizvodnja kruha',
+                'meat' => 'Proizvodnja mesa / mesnica',
+                'kitchen' => 'Kuhinja / proizvodnja hrane',
+                'other' => 'Ostalo',
+            ],
+        ],
+        '2' => [
+            'question_text' => 'Koliko ljudi radi za vas?',
+            'options' => [
+                '1_5' => '1-5',
+                '5_10' => '5-10',
+                '10_20' => '10-20',
+                '20_plus' => '20+',
+            ],
+        ],
+        '3' => [
+            'question_text' => 'U kojoj državi poslujete?',
+            'field_caption' => 'Odaberite državu s popisa',
+        ],
+        '4' => [
+            'question_text' => 'Kako danas upravljate HACCP-om?',
+            'options' => [
+                'paper' => 'Papirnati zapisi',
+                'excel' => 'Excel / Google tablice',
+                'software' => 'Koristimo vlastiti softver',
+                'partial' => 'Djelomično dokumentirano / bez stvarnog sustava',
+                'other' => 'Ostalo',
+            ],
+        ],
+        '5' => [
+            'question_text' => 'Koristite li plaćena HACCP rješenja?',
+            'options' => [
+                'yes' => 'Da',
+                'nb' => 'Ne',
+            ],
+        ],
+        '6' => [
+            'question_text' => 'Koliko ste zadovoljni svojim trenutnim pristupom?',
+            'options' => [
+                'fully' => 'Potpuno zadovoljan',
+                'partially_ok' => 'Djelomično zadovoljan',
+                'rather_not' => 'Prilično nezadovoljan',
+                'not_at_all' => 'Uopće nisam zadovoljan',
+            ],
+        ],
+        '7' => [
+            'question_text' => 'Biste li razmotrili prelazak na praktičniji sustav?',
+            'options' => [
+                'yes' => 'Da',
+                'maybe' => 'Možda',
+                'nb' => 'Ne',
+            ],
+        ],
+        '8' => [
+            'question_text' => 'Tko je u vašem poslovanju odgovoran za HACCP u praksi?',
+            'options' => [
+                'self' => 'Ja osobno',
+                'manager' => 'Menadžer / administrator',
+                'staff' => 'Određeno osoblje',
+                'none' => 'Nitko formalno ne nadzire',
+                'other' => 'Ostalo',
+            ],
+        ],
+        '9' => [
+            'question_text' => 'Koliko često zaposlenici zaborave izvršiti ili zabilježiti zadatke?',
+            'options' => [
+                'often' => 'Često',
+                'sometimes' => 'Ponekad',
+                'rarely' => 'Rijetko',
+                'almost_never' => 'Gotovo nikad',
+            ],
+        ],
+        '10' => [
+            'question_text' => 'Ispunjavaju li se zapisi ikada naknadno?',
+            'options' => [
+                'often' => 'Da, često',
+                'sometimes' => 'Ponekad',
+                'rarely' => 'Rijetko',
+                'never' => 'Nikad',
+            ],
+        ],
+        '11' => [
+            'question_text' => 'Što vam je najteže u održavanju HACCP-a?',
+            'subtitle' => 'Možete odabrati više odgovora.',
+            'options' => [
+                'records' => 'Vođenje zapisa i dokumentacije',
+                'staff_control' => 'Nadzor nad onim što zaposlenici stvarno rade',
+                'realtime' => 'Praćenje procedura u stvarnom vremenu',
+                'inspections' => 'Priprema za inspekcije',
+                'training' => 'Obuka i disciplina osoblja',
+                'chaos' => 'Nema jedinstvenog sustava / kaotični procesi',
+                'other' => 'Ostalo',
+            ],
+        ],
+        '12' => [
+            'question_text' => 'Jeste li imali inspekcije u posljednjoj godini?',
+            'options' => [
+                'yes' => 'Da',
+                'nb' => 'Ne',
+            ],
+        ],
+        '12_1' => [
+            'question_text' => 'Što vam je najstresnije tijekom inspekcije?',
+            'options' => [
+                'docs' => 'Dokumentacija',
+                'staff' => 'Ponašanje osoblja',
+                'missing_records' => 'Nedostajući zapisi',
+                'overall' => 'Sve u cjelini',
+                'other' => 'Ostalo',
+            ],
+        ],
+        '12_2' => [
+            'question_text' => 'Koliko vam je važna spremnost na nenajavljenu inspekciju?',
+            'options' => [
+                'very' => 'Vrlo važno',
+                'rather' => 'Prilično važno',
+                'not_thought' => 'Nisam o tome razmišljao',
+                'not_important' => 'Nije važno',
+            ],
+        ],
+        '13' => [
+            'question_text' => 'Koliko vam je važno imati sustav koji bilježi aktivnosti zaposlenika u trenutku događanja (a ne naknadno)?',
+            'options' => [
+                'very' => 'Vrlo važno',
+                'rather' => 'Prilično važno',
+                'unsure' => 'Nisam siguran',
+                'not_important' => 'Nije važno',
+            ],
+        ],
+        '14' => [
+            'question_text' => 'Koje bi vam od ovih mogućnosti stvarno bile korisne u radu?',
+            'subtitle' => 'Možete odabrati više odgovora.',
+            'other_detail_field_label' => 'Navedite što vam je važno',
+            'group_headings' => [
+                'safety' => 'Kontrola i sigurnost',
+                'inspection' => 'Rad s inspekcijama',
+                'staff' => 'Udobnost za osoblje',
+                'automation' => 'Automatizacija',
+                'more' => 'Dodatno',
+                'other_row' => '',
+            ],
+            'options' => [
+                'temp_alerts' => 'Upozorenja kada temperatura izađe iz raspona',
+                'capture_at_moment' => 'Bilježenje podataka u trenutku zadatka (bez naknadnog unosa)',
+                'two_person_confirm' => 'Potvrda zadatka od dvije osobe',
+                'reports_qr_link' => 'Brzi pristup izvješćima za inspekcije (QR / poveznica)',
+                'photo_proof' => 'Fotografije kao dokaz izvršenja zadatka',
+                'full_action_history' => 'Potpuna povijest aktivnosti zaposlenika',
+                'offline_mobile' => 'Radi offline na mobitelu',
+                'voice_input' => 'Glasovni unos podataka',
+                'biz_templates' => 'Jednostavni gotovi predlošci po tipu poslovanja',
+                'bluetooth_temp' => 'Automatsko bilježenje temperature (Bluetooth senzori)',
+                'risk_warnings' => 'Procjena rizika i rana upozorenja',
+                'loss_on_violations' => 'Procjena gubitaka kod kršenja pravila',
+                'internal_staff_tasks' => 'Interni zadaci za osoblje',
+                'push_reminders' => 'Push podsjetnici za osoblje',
+                'other' => 'Ostalo (napišite što vam je važno)',
+            ],
+        ],
+        '15' => [
+            'question_text' => 'Ako bi sustav mogao riješiti jedan vaš glavni problem, koji bi to bio?',
+            'field_caption' => 'Vaš odgovor',
+        ],
+    ],
+];

@@ -17,38 +17,35 @@
             label-width="auto"
         >
             <!-- Привязка к площадке: влияет на фильтрацию в табах и на выбор ответственного в чек-листах по нише. -->
-            <n-form-item label="Площадка" path="siteId">
+            <n-form-item :label="t('demo.staff_modal.site')" path="siteId">
                 <n-select
                     :key="siteSelectResetKey"
                     v-model:value="form.siteId"
                     :options="siteOptions"
                 />
             </n-form-item>
-            <!-- Обязательные для submit: площадка, ФИО, должность. -->
-            <n-form-item label="ФИО" path="fullName">
+            <n-form-item :label="t('demo.staff_modal.full_name')" path="fullName">
                 <n-input
                     v-model:value="form.fullName"
-                    placeholder="Smith John"
+                    :placeholder="t('demo.staff_modal.full_name_placeholder')"
                 />
             </n-form-item>
-            <n-form-item label="Должность" path="role">
-                <n-input v-model:value="form.role" placeholder="Технолог" />
+            <n-form-item :label="t('demo.staff_modal.role')" path="role">
+                <n-input v-model:value="form.role" :placeholder="t('demo.staff_modal.role_placeholder')" />
             </n-form-item>
-            <!-- Контакты опциональны; пустые не блокируют сохранение. -->
-            <n-form-item label="Телефон" path="phone">
+            <n-form-item :label="t('demo.staff_modal.phone')" path="phone">
                 <n-input
                     v-model:value="form.phone"
-                    placeholder="+1 614 555 0199"
+                    :placeholder="t('demo.staff_modal.phone_placeholder')"
                 />
             </n-form-item>
-            <n-form-item label="Email" path="email">
+            <n-form-item :label="t('demo.staff_modal.email')" path="email">
                 <n-input
                     v-model:value="form.email"
-                    placeholder="name@company.local"
+                    :placeholder="t('demo.staff_modal.email_placeholder')"
                 />
             </n-form-item>
-            <!-- Неактивные скрываются из выбора ответственного в задачах (логика в demoStaff / модалках задач). -->
-            <n-form-item label="Активен" path="active">
+            <n-form-item :label="t('demo.staff_modal.active')" path="active">
                 <n-switch v-model:value="form.active" />
             </n-form-item>
         </n-form>
@@ -56,14 +53,14 @@
             <!-- Закрытие без сохранения; «Сохранить» — валидация и вызов API composable. -->
             <div class="create-edit-staff-modal__footer">
                 <n-button type="warning" @click="modalShow = false">
-                    Отмена
+                    {{ t('demo.staff_modal.cancel') }}
                 </n-button>
                 <n-button
                     type="info"
                     :loading="submitLoading"
                     @click="submitForm"
                 >
-                    Сохранить
+                    {{ t('demo.staff_modal.save') }}
                 </n-button>
             </div>
         </template>
@@ -82,10 +79,13 @@ import {
     NSwitch,
     useMessage,
 } from "naive-ui";
+import { useI18n } from "vue-i18n";
 import { siteEmojiForDemo } from "@/features/demo/data/demoPersonnel";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
 
 defineOptions({ name: "CreateEditStaffModal" });
+
+const { t } = useI18n();
 
 const props = defineProps({
     /** Площадка по умолчанию для режима «Новый сотрудник» (активный таб секции). */
@@ -136,7 +136,7 @@ const form = ref({
 });
 
 const modalTitle = computed(() =>
-    editingId.value ? "Редактировать сотрудника" : "Новый сотрудник",
+    editingId.value ? t('demo.staff_modal.title_edit') : t('demo.staff_modal.title_create'),
 );
 
 const emptyForm = () => ({
@@ -210,7 +210,7 @@ const submitForm = () => {
         !String(form.value.fullName ?? "").trim() ||
         !String(form.value.role ?? "").trim()
     ) {
-        message.warning("Укажите площадку, ФИО и должность");
+        message.warning(t('demo.staff_modal.validation_required'));
         return;
     }
     submitLoading.value = true;
@@ -226,10 +226,10 @@ const submitForm = () => {
                 active: form.value.active,
             });
             if (!ok) {
-                message.error("Не удалось сохранить");
+                message.error(t('demo.staff_modal.save_error'));
                 return;
             }
-            message.success("Сохранено");
+            message.success(t('demo.staff_modal.save_success'));
         } else {
             const id = addStaff({
                 siteId: form.value.siteId,
@@ -240,10 +240,10 @@ const submitForm = () => {
                 active: form.value.active,
             });
             if (!id) {
-                message.error("Заполните обязательные поля");
+                message.error(t('demo.staff_modal.fill_required'));
                 return;
             }
-            message.success("Сотрудник добавлен");
+            message.success(t('demo.staff_modal.add_success'));
         }
         modalShow.value = false;
     } finally {

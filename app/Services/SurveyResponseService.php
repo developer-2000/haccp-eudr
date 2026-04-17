@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Listeners\Survey\SendSurveyAdminNotifyListener;
 use App\Listeners\Survey\SendSurveyAnswersUpdatedListener;
 use App\Listeners\Survey\SendSurveyThankYouListener;
 use App\Listeners\Survey\SendSurveyVerificationCodeListener;
@@ -49,12 +50,21 @@ class SurveyResponseService
                 ]
             );
 
-            // Отправка письма при первом ответе на вопросы и код скидки
+            // Client - Отправка письма при первом ответе на вопросы и код скидки
             SendSurveyThankYouListener::dispatch(
                 $email,
                 $discountCode,
                 $contacts['name'] ?? '',
                 app()->getLocale(),
+            );
+
+            // Admin - Уведомление о новом ответе
+            SendSurveyAdminNotifyListener::dispatch(
+                'created',
+                $email,
+                $contacts['name'] ?? null,
+                $this->resolveCountryName($record->country),
+                $record->business_type,
             );
 
             return [
@@ -91,7 +101,7 @@ class SurveyResponseService
             ]
         );
 
-        // Отправка письма 4-значный код для обновления draft-записи.
+        // Client - Отправка письма 4-значный код для обновления draft-записи.
         SendSurveyVerificationCodeListener::dispatch(
             $email,
             (string) $verification_code,
@@ -146,11 +156,20 @@ class SurveyResponseService
         // Переносит данные draft-записи, обновляя submitted-запись
         $this->confirmDraftVerification($draft);
 
-        // Отправка после обновления ответов
+        // Client - Отправка после обновления ответов
         SendSurveyAnswersUpdatedListener::dispatch(
             $draft->email,
             $draft->name ?? '',
             app()->getLocale(),
+        );
+
+        // Admin - Уведомление об обновлении ответа
+        SendSurveyAdminNotifyListener::dispatch(
+            'updated',
+            $draft->email,
+            $draft->name ?? null,
+            $this->resolveCountryName($draft->country),
+            $draft->business_type,
         );
 
         return $this->verifyFailedResponse(__('survey.verify.success'), 4, 'success');
@@ -333,6 +352,34 @@ class SurveyResponseService
                 'answers' => $draft->answers,
             ]);
         }
+    }
+
+    /**
+     * Конвертирует ISO alpha-2 код страны в английское название.
+     * Читает данные из npm-пакета i18n-iso-countries (тот же источник, что на фронте).
+     */
+    private function resolveCountryName(?string $code): ?string
+    {
+        if (!$code) {
+            return null;
+        }
+
+        $code = mb_strtoupper($code);
+        $jsonPath = base_path('node_modules/i18n-iso-countries/langs/en.json');
+
+        if (!file_exists($jsonPath)) {
+            return $code;
+        }
+
+        $data = json_decode(file_get_contents($jsonPath), true);
+        $countries = $data['countries'] ?? [];
+
+        if (isset($countries[$code])) {
+            $name = $countries[$code];
+            return is_array($name) ? $name[0] : $name;
+        }
+
+        return $code;
     }
 
     /**
