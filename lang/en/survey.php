@@ -173,7 +173,7 @@ return [
                 'paper' => 'Paper records',
                 'excel' => 'Excel / Google Sheets',
                 'software' => 'We use our own software',
-                'partial' => 'Partly documented / nb real system',
+                'partial' => 'Partly documented / no real system',
                 'other' => 'Other',
             ],
         ],
@@ -291,7 +291,7 @@ return [
             ],
             'options' => [
                 'temp_alerts' => 'Alerts when temperature goes out of range',
-                'capture_at_moment' => 'Capture data at the moment of the task (nb backdating)',
+                'capture_at_moment' => 'Capture data at the moment of the task (no backdating)',
                 'two_person_confirm' => 'Two-person confirmation of a task',
                 'reports_qr_link' => 'Quick access to reports for inspections (QR / link)',
                 'photo_proof' => 'Photos as proof a task was done',

@@ -78,7 +78,7 @@ return [
                 'core_95C' => 'core 95°C',
                 'starter_plus21C' => 'sourdough starter +21°C',
             ],
-            'result' => 'HACCP automatically, nb paperwork',
+            'result' => 'HACCP automatically, no paperwork',
             'cta' => 'DEMO',
         ],
         'meat' => [

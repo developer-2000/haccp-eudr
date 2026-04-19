@@ -3,7 +3,6 @@
         <div v-if="questionsLoadError" class="survey-page__api-error" role="alert">
             {{ questionsLoadError }}
         </div>
-
         <!-- Показ 4 значного цифрового блока верификации кода -->
         <SurveyDigitalCodeVerification
             v-if="activeScreen === 'verification'"

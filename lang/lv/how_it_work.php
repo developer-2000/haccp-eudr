@@ -57,7 +57,7 @@ return [
         'step7_title' => 'EUDR eksports',
         'step7_desc' => 'Katra partija = QR + GPS + DDS gatavs',
         'step7_benefit_1' => '100% EUDR atbilstība',
-        'step7_benefit_2' => '€0 sodi (4% nb apgrozījuma)',
+        'step7_benefit_2' => '€0 sodi (4% no apgrozījuma)',
         'step7_benefit_3' => 'ES eksports bez bloķējumiem',
     ],
 

@@ -340,7 +340,7 @@ return [
         'eq_rotary_oven' => 'Rotationsugn — 200–250°C skal; brödets kärna 95–100°C',
         'eq_core_thermometer' => 'Kärntermometer — 95°C inuti brödet (HACCP CCP)',
         'group_bread_cooling' => 'Bröd/deg — kylning',
-        'eq_cooling_conveyor' => 'Kyltransportör — från ~95°C till ~25°C på ~2 h (nb kondens)',
+        'eq_cooling_conveyor' => 'Kyltransportör — från ~95°C till ~25°C på ~2 h (no kondens)',
         'eq_ventilation_racks' => 'Ventilationsställ — kylperiod (nätbotten)',
         'group_meat_chilled' => 'Kött — kylförvaring (+0…+8 °C)',
         'eq_cold_chamber' => 'Kylrum (+0…+4 °C) — huvudförvaring',

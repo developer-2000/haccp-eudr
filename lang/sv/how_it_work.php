@@ -77,7 +77,7 @@ return [
         'cat3_title' => '📱 Checklista som Instagram',
         'cat3_point_1' => '1 klick + foto/voice/GPS',
         'cat3_point_2' => 'Offline-synk + granskningsspår',
-        'cat3_point_3' => '2 personer bekräftar → nb bedrägeri',
+        'cat3_point_3' => '2 personer bekräftar → no bedrägeri',
 
         'cat4_title' => '🔗 Inspektör skannar → OK',
         'cat4_point_1' => 'QR → dashboard utan närvaro',

@@ -57,7 +57,7 @@ return [
         'integrity_item_1' => 'Visi dienas HACCP kontroles punkti ir uzskaitīti iepriekš ar laika loģiku plānotajiem PRP/CCP.',
         'integrity_item_2' => 'Korektīvo darbību veidnes ir versiju kontrolētas sistēmā; izvēle tiek reģistrēta uzdevuma līmenī ražošanā.',
         'integrity_item_3' => 'EUDR rindas atsaucas uz partiju atklāšanas lapām, kas piemērotas kompetentās iestādes pārskatam (demonstrācija).',
-        'integrity_item_4' => 'Drukāšana/PDF eksportēšana nb pārlūkprogrammas — piemērota trešās puses audita pielikumam.',
+        'integrity_item_4' => 'Drukāšana/PDF eksportēšana no pārlūkprogrammas — piemērota trešās puses audita pielikumam.',
         'demo_inspection_preview' => 'Demonstrācijas inspekcijas priekšskatījums',
         'inspection_date_label' => 'Datu kopas inspekcijas datuma etiķete: {label}',
         'generated_client' => 'Ģenerēts (klients): {time}',

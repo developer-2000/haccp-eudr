@@ -3,7 +3,7 @@
 return [
     'page' => [
         'title' => 'Privātuma politika',
-        'subtitle' => '{name} • Stājas spēkā nb 01.01.2026',
+        'subtitle' => '{name} • Stājas spēkā no 01.01.2026',
     ],
 
     'general' => [

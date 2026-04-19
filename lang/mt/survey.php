@@ -181,7 +181,7 @@ return [
             'question_text' => 'Tuża soluzzjonijiet HACCP imħallsa?',
             'options' => [
                 'yes' => 'Iva',
-                'nb' => 'Le',
+                'no' => 'Le',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Iva',
                 'maybe' => 'Forsi',
-                'nb' => 'Le',
+                'no' => 'Le',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Kellek spezzjonijiet fl-aħħar sena?',
             'options' => [
                 'yes' => 'Iva',
-                'nb' => 'Le',
+                'no' => 'Le',
             ],
         ],
         '12_1' => [

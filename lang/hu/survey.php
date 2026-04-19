@@ -181,7 +181,7 @@ return [
             'question_text' => 'Használ fizetős HACCP megoldásokat?',
             'options' => [
                 'yes' => 'Igen',
-                'nb' => 'Nem',
+                'no' => 'Nem',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Igen',
                 'maybe' => 'Talán',
-                'nb' => 'Nem',
+                'no' => 'Nem',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Volt ellenőrzés az elmúlt évben?',
             'options' => [
                 'yes' => 'Igen',
-                'nb' => 'Nem',
+                'no' => 'Nem',
             ],
         ],
         '12_1' => [

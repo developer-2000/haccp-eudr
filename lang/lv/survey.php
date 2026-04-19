@@ -14,7 +14,7 @@ return [
     ],
 
     'progress' => [
-        'aria' => 'Aptauja: solis :current nb :total',
+        'aria' => 'Aptauja: solis :current no :total',
     ],
 
     'validation' => [
@@ -41,7 +41,7 @@ return [
         'token_not_found' => 'Tokens nav atrasts. Lūdzu, mēģiniet aizpildīt aptauju vēlreiz.',
         'network_error' => 'Tīkla kļūda. Lūdzu, mēģiniet vēlreiz.',
         'pin_instruction' => 'PIN kods ir nosūtīts uz norādīto e-pasta adresi. Ievadiet to, lai apstiprinātu īpašumtiesības.',
-        'pin_attempts_left' => '{used} nb {total} mēģinājumiem atlikuši',
+        'pin_attempts_left' => '{used} no {total} mēģinājumiem atlikuši',
         'pin_container_aria' => 'PIN koda verifikācija',
         'pin_group_aria' => '4 ciparu PIN kods',
     ],
@@ -117,7 +117,7 @@ return [
         'not_you' => 'Ja tas nebijāt jūs — vienkārši ignorējiet šo e-pastu.',
         'data_safe' => 'Jūsu dati paliks nemainīti.',
         'cta_button' => 'Atgriezties pie atjaunināšanas',
-        'footer_auto' => 'Šis ir automātisks ziņojums nb HACCPilot sistēmas.',
+        'footer_auto' => 'Šis ir automātisks ziņojums no HACCPilot sistēmas.',
         'footer_purpose' => 'Kods tiek izmantots tikai datu izmaiņu apstiprināšanai.',
     ],
 
@@ -131,7 +131,7 @@ return [
         'status_label' => 'Jūsu aptaujas statuss:',
         'status_value' => 'Atjaunināts un apstiprināts',
         'status_note' => 'Visas izmaiņas ir saglabātas un tiks izmantotas HACCPilot sistēmas pielāgošanai.',
-        'footer_auto' => 'Šis ir automātisks paziņojums nb HACCPilot sistēmas.',
+        'footer_auto' => 'Šis ir automātisks paziņojums no HACCPilot sistēmas.',
         'footer_data_use' => 'Jūsu dati tiek izmantoti tikai sistēmas precizitātes un personalizācijas uzlabošanai.',
         'footer_signature' => 'Ar cieņu, Shamil Bagalov',
     ],
@@ -165,7 +165,7 @@ return [
         ],
         '3' => [
             'question_text' => 'Kurā valstī jūs darbojaties?',
-            'field_caption' => 'Izvēlieties valsti nb saraksta',
+            'field_caption' => 'Izvēlieties valsti no saraksta',
         ],
         '4' => [
             'question_text' => 'Kā jūs šodien pārvaldāt HACCP?',
@@ -181,7 +181,7 @@ return [
             'question_text' => 'Vai jūs izmantojat maksas HACCP risinājumus?',
             'options' => [
                 'yes' => 'Jā',
-                'nb' => 'Nē',
+                'no' => 'Nē',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Jā',
                 'maybe' => 'Varbūt',
-                'nb' => 'Nē',
+                'no' => 'Nē',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Vai jums pēdējā gada laikā bija pārbaudes?',
             'options' => [
                 'yes' => 'Jā',
-                'nb' => 'Nē',
+                'no' => 'Nē',
             ],
         ],
         '12_1' => [
@@ -278,7 +278,7 @@ return [
             ],
         ],
         '14' => [
-            'question_text' => 'Kuras nb šīm iespējām jums būtu patiešām noderīgas darbā?',
+            'question_text' => 'Kuras no šīm iespējām jums būtu patiešām noderīgas darbā?',
             'subtitle' => 'Jūs varat izvēlēties vairākas atbildes.',
             'other_detail_field_label' => 'Pastāstiet, kas jums ir svarīgi',
             'group_headings' => [

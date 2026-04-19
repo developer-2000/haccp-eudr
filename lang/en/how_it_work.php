@@ -77,7 +77,7 @@ return [
         'cat3_title' => '📱 Checklist like Instagram',
         'cat3_point_1' => '1 click + photo/voice/GPS',
         'cat3_point_2' => 'Offline sync + audit trail',
-        'cat3_point_3' => '2 people confirm → nb fraud',
+        'cat3_point_3' => '2 people confirm → no fraud',
 
         'cat4_title' => '🔗 Inspector scans → OK',
         'cat4_point_1' => 'QR → dashboard without presence',

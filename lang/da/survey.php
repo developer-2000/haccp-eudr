@@ -181,7 +181,7 @@ return [
             'question_text' => 'Bruger du betalte HACCP løsninger?',
             'options' => [
                 'yes' => 'Ja',
-                'nb' => 'Nej',
+                'no' => 'Nej',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Ja',
                 'maybe' => 'Måske',
-                'nb' => 'Nej',
+                'no' => 'Nej',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Har du haft inspektioner det seneste år?',
             'options' => [
                 'yes' => 'Ja',
-                'nb' => 'Nej',
+                'no' => 'Nej',
             ],
         ],
         '12_1' => [

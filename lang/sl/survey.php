@@ -181,7 +181,7 @@ return [
             'question_text' => 'Ali uporabljate plačljive HACCP rešitve?',
             'options' => [
                 'yes' => 'Da',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Da',
                 'maybe' => 'Morda',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Ali ste imeli inšpekcije v zadnjem letu?',
             'options' => [
                 'yes' => 'Da',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '12_1' => [

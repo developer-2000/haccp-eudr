@@ -94,7 +94,7 @@ return [
             'chain_operator_country' => 'Polija',
         ],
         'CF762' => [
-            'status_detail' => 'Pienācīgas pārbaudes datu kopums tiek verificēts: nb augšējā piegādātāja pieprasīti papildu ģeolokācijas pierādījumi. Laišana ES tirgū jāveic saskaņā ar jūsu iekšējo apstiprināšanas procedūru.',
+            'status_detail' => 'Pienācīgas pārbaudes datu kopums tiek verificēts: no augšējā piegādātāja pieprasīti papildu ģeolokācijas pierādījumi. Laišana ES tirgū jāveic saskaņā ar jūsu iekšējo apstiprināšanas procedūru.',
             'operator_name' => 'Roast Trade Europe B.V.',
             'operator_address' => 'Keizersgracht 100, 1015 CW Amsterdam, Netherlands',
             'operator_role' => 'ES operators (tirgotājs)',

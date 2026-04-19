@@ -181,7 +181,7 @@ return [
             'question_text' => 'Notar þú greidd HACCP lausn?',
             'options' => [
                 'yes' => 'Já',
-                'nb' => 'Nei',
+                'no' => 'Nei',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Já',
                 'maybe' => 'Kannski',
-                'nb' => 'Nei',
+                'no' => 'Nei',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Hefur þú fengið eftirlit á síðasta ári?',
             'options' => [
                 'yes' => 'Já',
-                'nb' => 'Nei',
+                'no' => 'Nei',
             ],
         ],
         '12_1' => [

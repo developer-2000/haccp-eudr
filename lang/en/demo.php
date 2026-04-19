@@ -146,7 +146,7 @@ return [
         'temperature_line' => 'Temperature ({min}…{max} °C)',
         'single_choice_line' => 'Single answer: {question}, options: {count}',
         'ticket_line' => 'Request: {description}',
-        'ticket_no_desc' => 'nb description',
+        'ticket_no_desc' => 'no description',
     ],
 
     'single_choice_panel' => [
@@ -340,7 +340,7 @@ return [
         'eq_rotary_oven' => 'Rotary oven — 200–250°C shell; bread core 95–100°C',
         'eq_core_thermometer' => 'Core thermometer — 95°C inside the loaf (HACCP CCP)',
         'group_bread_cooling' => 'Bread/dough — cooling',
-        'eq_cooling_conveyor' => 'Cooling conveyor — from ~95°C to ~25°C in ~2 h (nb condensation)',
+        'eq_cooling_conveyor' => 'Cooling conveyor — from ~95°C to ~25°C in ~2 h (no condensation)',
         'eq_ventilation_racks' => 'Ventilation racks — cooling period (mesh bottom)',
         'group_meat_chilled' => 'Meat — chilled storage (+0…+8 °C)',
         'eq_cold_chamber' => 'Cold chamber (+0…+4 °C) — main storage',

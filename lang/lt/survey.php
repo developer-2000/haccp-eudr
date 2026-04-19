@@ -181,7 +181,7 @@ return [
             'question_text' => 'Ar naudojate mokamus HACCP sprendimus?',
             'options' => [
                 'yes' => 'Taip',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Taip',
                 'maybe' => 'Galbūt',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Ar turėjote patikrinimų per paskutinius metus?',
             'options' => [
                 'yes' => 'Taip',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '12_1' => [

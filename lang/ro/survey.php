@@ -181,7 +181,7 @@ return [
             'question_text' => 'Folosești soluții HACCP plătite?',
             'options' => [
                 'yes' => 'Da',
-                'nb' => 'Nu',
+                'no' => 'Nu',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Da',
                 'maybe' => 'Poate',
-                'nb' => 'Nu',
+                'no' => 'Nu',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Ai avut inspecții în ultimul an?',
             'options' => [
                 'yes' => 'Da',
-                'nb' => 'Nu',
+                'no' => 'Nu',
             ],
         ],
         '12_1' => [

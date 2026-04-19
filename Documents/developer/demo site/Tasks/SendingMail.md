@@ -66,7 +66,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ```env
 запуск в консоли для очередей - php artisan queue:work
-страница тестового письма - http://haccpilot.local/technical
+страница тестового письма - /technical
 Смотреть в спаме на thwglobal2000@gmail.com
 ```
 
@@ -96,14 +96,14 @@ MAIL_FROM_NAME="${APP_NAME}"
    "Запрос на отправку поставлен в очередь".
 3. Показать базовую диагностику:
    время запроса и целевой email.
-4. Адрес страницы - http://haccpilot.local/technical
+4. Адрес страницы - /technical
 
 ### 3.4. Как получить результат (через очередь) **✅ Выполнено **
 
 1. В консоли проекта запустить worker:
    `php artisan queue:work`
 2. Открыть страницу:
-   `http://haccpilot.local/technical`
+   `/technical`
 3. Нажать кнопку:
    `Отправить тестовое письмо`.
 4. Проверить результат:

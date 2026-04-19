@@ -49,7 +49,7 @@ Route::post('/contact', [ContactController::class, 'submit'])
 
 Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')
     ->group(function () {
-        // http://haccpilot.local/technical
+        // /technical
         Route::get('/', [MailTestController::class, 'index'])->name('index');
 
         // Тестовая отправка письма

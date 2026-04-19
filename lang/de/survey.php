@@ -181,7 +181,7 @@ return [
             'question_text' => 'Nutzen Sie kostenpflichtige HACCP-Lösungen?',
             'options' => [
                 'yes' => 'Ja',
-                'nb' => 'Nein',
+                'no' => 'Nein',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Ja',
                 'maybe' => 'Vielleicht',
-                'nb' => 'Nein',
+                'no' => 'Nein',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Hatten Sie im letzten Jahr Inspektionen?',
             'options' => [
                 'yes' => 'Ja',
-                'nb' => 'Nein',
+                'no' => 'Nein',
             ],
         ],
         '12_1' => [

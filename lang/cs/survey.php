@@ -181,7 +181,7 @@ return [
             'question_text' => 'Používáte placená HACCP řešení?',
             'options' => [
                 'yes' => 'Ano',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Ano',
                 'maybe' => 'Možná',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Měli jste v posledním roce inspekci?',
             'options' => [
                 'yes' => 'Ano',
-                'nb' => 'Ne',
+                'no' => 'Ne',
             ],
         ],
         '12_1' => [

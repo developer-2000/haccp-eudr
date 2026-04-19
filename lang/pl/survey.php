@@ -181,7 +181,7 @@ return [
             'question_text' => 'Czy korzystasz z płatnych rozwiązań HACCP?',
             'options' => [
                 'yes' => 'Tak',
-                'nb' => 'Nie',
+                'no' => 'Nie',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Tak',
                 'maybe' => 'Może',
-                'nb' => 'Nie',
+                'no' => 'Nie',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Czy miałeś kontrole w ciągu ostatniego roku?',
             'options' => [
                 'yes' => 'Tak',
-                'nb' => 'Nie',
+                'no' => 'Nie',
             ],
         ],
         '12_1' => [

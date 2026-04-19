@@ -181,7 +181,7 @@ return [
             'question_text' => 'Utiliza soluções HACCP pagas?',
             'options' => [
                 'yes' => 'Sim',
-                'nb' => 'Não',
+                'no' => 'Não',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Sim',
                 'maybe' => 'Talvez',
-                'nb' => 'Não',
+                'no' => 'Não',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Teve inspeções no último ano?',
             'options' => [
                 'yes' => 'Sim',
-                'nb' => 'Não',
+                'no' => 'Não',
             ],
         ],
         '12_1' => [

@@ -181,7 +181,7 @@ return [
             'question_text' => 'Kas kasutate tasulisi HACCP lahendusi?',
             'options' => [
                 'yes' => 'Jah',
-                'nb' => 'Ei',
+                'no' => 'Ei',
             ],
         ],
         '6' => [
@@ -198,7 +198,7 @@ return [
             'options' => [
                 'yes' => 'Jah',
                 'maybe' => 'Võib-olla',
-                'nb' => 'Ei',
+                'no' => 'Ei',
             ],
         ],
         '8' => [
@@ -246,7 +246,7 @@ return [
             'question_text' => 'Kas teil on olnud kontrolle viimase aasta jooksul?',
             'options' => [
                 'yes' => 'Jah',
-                'nb' => 'Ei',
+                'no' => 'Ei',
             ],
         ],
         '12_1' => [

@@ -58,6 +58,6 @@ export const saveStateToStorage = (state) => {
         normalizeAllChecklistTaskMeasurementStatuses(state.checklistsByNiche);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
-        // nb-op: storage может быть недоступен
+        // no-op: storage может быть недоступен
     }
 };

@@ -1,0 +1,37 @@
+name: Deploy to server
+
+on:
+  push:
+    branches:
+      - main_demo
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: deploy
+          key: ${{ secrets.SSH_KEY }}
+          script_stop: true
+          script: |
+            set -e
+
+            echo "=== START REMOTE DEPLOY ==="
+
+            # проверяем что скрипт существует
+            if [ ! -f /home/deploy/scripts/deploy.sh ]; then
+              echo "❌ deploy.sh NOT FOUND"
+              exit 1
+            fi
+
+            # проверяем права
+            chmod +x /home/deploy/scripts/deploy.sh
+
+            # запускаем деплой
+            bash /home/deploy/scripts/deploy.sh
+
+            echo "=== DEPLOY FINISHED ==="

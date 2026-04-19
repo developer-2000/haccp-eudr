@@ -78,7 +78,7 @@ return [
                 'core_95C' => 'kärna 95°C',
                 'starter_plus21C' => 'surdegsstart +21°C',
             ],
-            'result' => 'HACCP automatiskt, nb pappersarbete',
+            'result' => 'HACCP automatiskt, no pappersarbete',
             'cta' => 'DEMO',
         ],
         'meat' => [
