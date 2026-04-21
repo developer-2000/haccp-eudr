@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Concerns\LogsFormEvents;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Client\ContactSubmitRequest;
 use App\Services\ContactMessageService;
@@ -9,6 +10,8 @@ use Illuminate\Http\JsonResponse;
 
 class ContactController extends BaseController
 {
+    use LogsFormEvents;
+
     /**
      * Принимает сообщение из публичной формы Contact.
      * Валидация выполняется в ContactSubmitRequest. Honeypot-проверка отсекает ботов в silent-режиме —
@@ -37,25 +40,39 @@ class ContactController extends BaseController
     }
 
     /**
-     * Двойной honeypot: скрытое поле hp_company и таймер hp_started_at.
+     * Двойной honeypot: скрытое поле hp_company и клиентский таймер hp_elapsed.
      * Возвращает true, если заполнено скрытое поле (бот) или форма отправлена быстрее 5 секунд
      * с момента открытия (для человека нереальный темп заполнения). Любой из признаков → silent reject.
+     * hp_elapsed считается на клиенте, чтобы drift часов сервер/клиент не ломал проверку.
      */
     private function isHoneypotTriggered(array $payload): bool
     {
-        // 1 Возвращает true, если заполнено скрытое поле
         $hpCompany = (string) ($payload['hp_company'] ?? '');
+
+        // 1 Возвращает true, если заполнено скрытое поле
         if ($hpCompany !== '') {
+//            $this->logFormEvent('Contact: Bot — заполнено скрытое поле hp_company', $payload);
             return true;
         }
 
-        // 2 Возвращает true, если поле не пришло
-        $startedAt = (int) ($payload['hp_started_at'] ?? 0);
-        if ($startedAt <= 0) {
+        $elapsed = $payload['hp_elapsed'] ?? null;
+
+        // 2 Возвращает true, если поле не пришло (клиент без JS / кривой бот)
+        if ($elapsed === null) {
+//            $this->logFormEvent('Contact: Bot — отсутствует hp_elapsed', $payload);
             return true;
         }
 
-        // 3 Возвращает true, если заполнил письмо бот
-        return (now()->timestamp - $startedAt) < 5;
+        // 3 Возвращает true, если заполнил письмо бот (меньше 5 секунд на заполнение)
+        if ((int) $elapsed < 5) {
+            $this->logFormEvent(
+//                "Contact: Bot — форма отправлена быстрее 5 секунд (hp_elapsed={$elapsed})",
+                $payload
+            );
+            return true;
+        }
+
+        return false;
     }
+
 }

@@ -7,7 +7,7 @@
             <aside class="about-page__photo" aria-hidden="true">
                 <img
                     class="about-page__photo-img"
-                    :src="'/images/bagalov-shamil.jpg'"
+                    :src="'/images/avatar_500_500.jpg'"
                     alt=""
                     decoding="async"
                 />

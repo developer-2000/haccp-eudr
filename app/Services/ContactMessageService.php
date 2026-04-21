@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Concerns\LogsFormEvents;
 use App\Listeners\Contact\SendContactAdminNotifyListener;
 use App\Models\ContactMessage;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,8 @@ use Throwable;
 
 class ContactMessageService
 {
+    use LogsFormEvents;
+
     /**
      * Сохраняет сообщение формы Contact в БД и ставит уведомление админу в очередь.
      * Rate-limit по email и защита от дублей отрабатывают как тихий skip — клиент получает
@@ -18,12 +21,10 @@ class ContactMessageService
      */
     public function store(array $payload, array $userMeta): array
     {
-        $email = $payload['email'];
-        $messageText = $payload['message'];
-
         // Тихий skip: rate-limit по email или точный дубль уже есть в БД.
         // Запись не создаём, письмо не шлём; контроллер отдаст generic success.
-        if ($this->isRateLimitedByEmail($email) || $this->isDuplicate($email, $messageText)) {
+        // Логирование события в Sentry выполняют сами методы-детекторы.
+        if ($this->isRateLimitedByEmail($payload) || $this->isDuplicate($payload)) {
             return ['status' => 'skipped'];
         }
 
@@ -50,6 +51,7 @@ class ContactMessageService
             });
         }
         catch (Throwable $e) {
+            report($e);
             return ['status' => 'error'];
         }
 
@@ -60,24 +62,38 @@ class ContactMessageService
      * Проверяет, не отправлялось ли уже сообщение с этого email за последнюю минуту.
      * Защита дополняет throttle по IP: за NAT-ом под одним IP могут сидеть несколько юзеров,
      * а rate-limit по email отсекает повторные отправки конкретного адресата.
+     * При срабатывании сам шлёт событие в Sentry с данными отправителя.
      */
-    private function isRateLimitedByEmail(string $email): bool
+    private function isRateLimitedByEmail(array $payload): bool
     {
-        return ContactMessage::query()
-            ->where('email', $email)
+        $limited = ContactMessage::query()
+            ->where('email', $payload['email'])
             ->where('created_at', '>', now()->subMinute())
             ->exists();
+
+//        if ($limited) {
+//            $this->logFormEvent('Contact: rate-limit по email — за последнюю минуту уже было сообщение', $payload);
+//        }
+
+        return $limited;
     }
 
     /**
      * Проверяет наличие дубля: точно такой же текст сообщения от того же email уже есть в БД.
      * Защищает от двойного клика, повторных отправок и мусорного replay одной и той же формы.
+     * При срабатывании сам шлёт событие в Sentry с данными отправителя.
      */
-    private function isDuplicate(string $email, string $messageText): bool
+    private function isDuplicate(array $payload): bool
     {
-        return ContactMessage::query()
-            ->where('email', $email)
-            ->where('message', $messageText)
+        $duplicate = ContactMessage::query()
+            ->where('email', $payload['email'])
+            ->where('message', $payload['message'])
             ->exists();
+
+//        if ($duplicate) {
+//            $this->logFormEvent('Contact: точный дубль сообщения от того же email', $payload);
+//        }
+
+        return $duplicate;
     }
 }

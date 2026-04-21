@@ -38,7 +38,7 @@
                         <div class="contact-intro__author">
                             <div class="contact-intro__author-avatar">
                                 <img
-                                    :src="'/images/bagalov-shamil.jpg'"
+                                    :src="'/images/avatar_120_120.jpg'"
                                     :alt="t('contact.author_name')"
                                     class="contact-intro__author-photo"
                                 />
@@ -176,7 +176,9 @@ const submitting = ref(false);
 
 // Флаг «сообщение отправлено» — при true форма скрывается, показывается success-view
 const sent = ref(false);
-// Unix-timestamp момента открытия формы — honeypot-таймер (если отправка быстрее 5 сек → бот)
+// Unix-timestamp (сек) момента открытия формы — honeypot-таймер.
+// На сервер уходит не абсолютное время, а уже посчитанный elapsed (см. submitForm),
+// чтобы избежать зависимости от рассинхрона часов клиент/сервер.
 const honeypotStartedAt = ref(0);
 
 // Фиксирует время открытия формы при монтировании компонента
@@ -229,14 +231,15 @@ async function submitForm() {
     // Блокируем кнопку Send message (loader)
     submitting.value = true;
 
-    // Сборка payload: видимые поля + honeypot (скрытое поле + таймстемп открытия формы)
+    // Сборка payload: видимые поля + honeypot (скрытое поле + elapsed посчитан на клиенте,
+    // чтобы бэкенд не сравнивал клиентский timestamp со своим now() — клиентские часы могут расходиться)
     const payload = {
         name: form.name,
         email: form.email,
         company: form.company,
         message: form.message,
         hp_company: form.hp_company,
-        hp_started_at: honeypotStartedAt.value,
+        hp_elapsed: Math.floor(Date.now() / 1000) - honeypotStartedAt.value,
     };
 
     // POST-запрос; 3-й аргумент true → при ошибке вернёт строку с текстом (а не null)

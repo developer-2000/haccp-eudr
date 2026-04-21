@@ -34,12 +34,12 @@ class ContactSubmitTest extends TestCase
     private function validPayload(array $overrides = []): array
     {
         return array_merge([
-            'name'          => 'John Doe',
-            'email'         => 'john@example.com',
-            'company'       => 'Acme Inc.',
-            'message'       => 'Hello, I have a question about your service.',
-            'hp_company'    => '',
-            'hp_started_at' => now()->timestamp - 30,
+            'name'       => 'John Doe',
+            'email'      => 'john@example.com',
+            'company'    => 'Acme Inc.',
+            'message'    => 'Hello, I have a question about your service.',
+            'hp_company' => '',
+            'hp_elapsed' => 30,
         ], $overrides);
     }
 
@@ -162,8 +162,8 @@ class ContactSubmitTest extends TestCase
     public function test_honeypot_missing_timestamp_silently_rejects(): void
     {
         $response = $this->postJson('/contact', $this->validPayload([
-            'email'         => 'bot2@x.com',
-            'hp_started_at' => 0,
+            'email'      => 'bot2@x.com',
+            'hp_elapsed' => null,
         ]));
 
         $response->assertStatus(200);
@@ -174,8 +174,8 @@ class ContactSubmitTest extends TestCase
     public function test_honeypot_too_fast_submission_silently_rejects(): void
     {
         $response = $this->postJson('/contact', $this->validPayload([
-            'email'         => 'bot3@x.com',
-            'hp_started_at' => now()->timestamp - 2,
+            'email'      => 'bot3@x.com',
+            'hp_elapsed' => 2,
         ]));
 
         $response->assertStatus(200);

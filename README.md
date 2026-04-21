@@ -4,7 +4,7 @@ Laravel 10 проект с Vue.js 3.4.0 и SCSS.
 
 ## Требования
 
-- PHP >= 8.1
+- PHP >= 8.2
 - Composer
 - Node.js >= 16.x
 - npm или yarn
