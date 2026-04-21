@@ -10,10 +10,12 @@
 <div
     id="technical-app"
     data-target-email="{{ $targetEmail }}"
+    data-admin-email="{{ $adminEmail }}"
     data-mailer="{{ $mailer }}"
     data-queue-connection="{{ $queueConnection }}"
     data-request-time="{{ now()->toDateTimeString() }}"
     data-mail-send-url="{{ route('technical.mail-test.send') }}"
+    data-mail-send-all-url="{{ route('technical.mail-test.send-all') }}"
     data-mail-test-url="{{ route('technical.mail-test.index') }}"
     data-status-message="{{ session('status', '') }}"
     data-csrf-token="{{ csrf_token() }}"

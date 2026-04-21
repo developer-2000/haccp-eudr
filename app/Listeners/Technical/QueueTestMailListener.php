@@ -34,6 +34,6 @@ class QueueTestMailListener implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->recipient)->send(new TestMail());
+        Mail::send(new TestMail($this->recipient));
     }
 }

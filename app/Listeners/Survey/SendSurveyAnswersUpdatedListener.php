@@ -22,15 +22,19 @@ class SendSurveyAnswersUpdatedListener implements ShouldQueue
     use InteractsWithQueue;
     use SerializesModels;
 
-    private string $email_to;
-    private string $recipientName;
-    private string $locale;
+    private string $userEmail;
+    private string $userName;
+    private string $userLocale;
 
-    public function __construct(string $email_to, string $recipientName, string $locale)
+    public function __construct(
+        string $userEmail,
+        string $userName,
+        string $userLocale
+    )
     {
-        $this->email_to = $email_to;
-        $this->recipientName = $recipientName;
-        $this->locale = $locale;
+        $this->userEmail = $userEmail;
+        $this->userName = $userName;
+        $this->userLocale = $userLocale;
     }
 
     /**
@@ -38,10 +42,10 @@ class SendSurveyAnswersUpdatedListener implements ShouldQueue
      */
     public function handle(): void
     {
-        App::setLocale($this->locale);
+        App::setLocale($this->userLocale);
 
-        Mail::to($this->email_to)->send(
-            new SurveyAnswersUpdatedMail($this->recipientName)
+        Mail::send(
+            new SurveyAnswersUpdatedMail($this->userEmail, $this->userName)
         );
     }
 }

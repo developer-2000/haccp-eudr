@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Письмо благодарности за заполнение опроса с персональным скидочным кодом.
+ * Письмо благодарности Клиенту за заполнение опроса с персональным скидочным кодом.
  * Отправляется через очередь после первичной отправки ответов.
  */
 class SurveyThankYouMail extends Mailable
@@ -18,20 +18,26 @@ class SurveyThankYouMail extends Mailable
     use SerializesModels;
 
     public function __construct(
+        private readonly string $userEmail,
         private readonly string $discountCode,
-        private readonly string $recipientName,
+        private readonly string $userName,
     ) {}
 
     /**
-     * Формирует конверт письма с темой.
+     * Envelope пользователю: from = наш адрес (SPF/DKIM/DMARC alignment).
      */
     public function envelope(): Envelope
     {
-        $subject = $this->recipientName
-            ? __('survey.email.subject_with_name', ['name' => $this->recipientName])
+        $subject = $this->userName
+            ? __('survey.email.subject_with_name', ['name' => $this->userName])
             : __('survey.email.subject_default');
 
         return new Envelope(
+            from: config('mail.from.address'),
+            to: [$this->userEmail],
+            replyTo: [
+                config('app.email_admin'),
+            ],
             subject: $subject,
         );
     }
@@ -45,7 +51,7 @@ class SurveyThankYouMail extends Mailable
             view: 'emails.survey.thank-you',
             with: [
                 'discountCode' => $this->discountCode,
-                'recipientName' => $this->recipientName,
+                'recipientName' => $this->userName,
                 'siteUrl' => config('app.url'),
             ],
         );

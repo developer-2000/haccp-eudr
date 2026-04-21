@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Отправляет письмо благодарности со скидочным кодом через очередь.
+ * Отправляет письмо Клиенту благодарности со скидочным кодом через очередь.
  * Диспатчится из SurveyResponseService после первичного сохранения ответов.
  */
 class SendSurveyThankYouListener implements ShouldQueue
@@ -22,16 +22,16 @@ class SendSurveyThankYouListener implements ShouldQueue
     use InteractsWithQueue;
     use SerializesModels;
 
-    private string $email_to;
+    private string $userEmail;
     private string $discountCode;
-    private string $recipientName;
+    private string $userName;
     private string $locale;
 
-    public function __construct(string $email_to, string $discountCode, string $recipientName, string $locale)
+    public function __construct(string $userEmail, string $discountCode, string $userName, string $locale)
     {
-        $this->email_to = $email_to;
+        $this->userEmail = $userEmail;
         $this->discountCode = $discountCode;
-        $this->recipientName = $recipientName;
+        $this->userName = $userName;
         $this->locale = $locale;
     }
 
@@ -42,8 +42,8 @@ class SendSurveyThankYouListener implements ShouldQueue
     {
         App::setLocale($this->locale);
 
-        Mail::to($this->email_to)->send(
-            new SurveyThankYouMail($this->discountCode, $this->recipientName)
+        Mail::send(
+            new SurveyThankYouMail($this->userEmail, $this->discountCode, $this->userName)
         );
     }
 }

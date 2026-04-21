@@ -6,6 +6,8 @@ return [
 
     'name' => env('APP_NAME', 'HACCPilot'),
 
+    'email_admin' => env('EMAIL_ADMIN', 'office@haccpilot.eu'),
+
     'env' => env('APP_ENV', 'production'),
 
     'debug' => (bool) env('APP_DEBUG', false),

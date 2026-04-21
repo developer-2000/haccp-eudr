@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Уведомление админу о новом или обновлённом ответе опроса.
+ * Уведомление Админу о новом или обновлённом ответе опроса.
  * Содержит данные респондента: email, имя, страну, тип бизнеса.
  */
 class SurveyAdminNotifyMail extends Mailable
@@ -18,22 +18,26 @@ class SurveyAdminNotifyMail extends Mailable
     use SerializesModels;
 
     public function __construct(
+        private readonly string $adminEmail,
         private readonly string $eventType,
-        private readonly string $respondentEmail,
-        private readonly ?string $respondentName,
-        private readonly ?string $country,
+        private readonly string $userEmail,
+        private readonly ?string $userName,
+        private readonly ?string $userCountry,
         private readonly ?string $businessType,
     ) {}
 
     /**
-     * Формирует конверт письма с темой, зависящей от типа события.
+     * Envelope админу: from = наш адрес (SPF/DKIM/DMARC alignment), reply-to = email респондента.
      */
     public function envelope(): Envelope
     {
         $prefix = $this->eventType === 'created' ? 'Создан ответ' : 'Обновлен ответ';
 
         return new Envelope(
-            subject: "[HACCPilot Survey] {$prefix} — {$this->respondentEmail}",
+            from: config('mail.from.address'),
+            to: [$this->adminEmail],
+            replyTo: [],
+            subject: "[HACCPilot Survey] {$prefix} — {$this->userEmail}",
         );
     }
 
@@ -46,9 +50,9 @@ class SurveyAdminNotifyMail extends Mailable
             view: 'emails.survey.admin-notify',
             with: [
                 'eventType'      => $this->eventType,
-                'respondentEmail' => $this->respondentEmail,
-                'respondentName' => $this->respondentName ?? '—',
-                'country'        => $this->country ?? '—',
+                'respondentEmail' => $this->userEmail,
+                'respondentName' => $this->userName ?? '—',
+                'country'        => $this->userCountry ?? '—',
                 'businessType'   => $this->businessType ?? '—',
             ],
         );

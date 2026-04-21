@@ -7,10 +7,12 @@ const root = document.getElementById("technical-app");
 if (root) {
     const app = createApp(TechnicalPage, {
         targetEmail: root.dataset.targetEmail || "",
+        adminEmail: root.dataset.adminEmail || "",
         mailer: root.dataset.mailer || "",
         queueConnection: root.dataset.queueConnection || "",
         requestTime: root.dataset.requestTime || "",
         mailSendUrl: root.dataset.mailSendUrl || "",
+        mailSendAllUrl: root.dataset.mailSendAllUrl || "",
         mailTestUrl: root.dataset.mailTestUrl || "",
         statusMessage: root.dataset.statusMessage || "",
         csrfToken: root.dataset.csrfToken || "",

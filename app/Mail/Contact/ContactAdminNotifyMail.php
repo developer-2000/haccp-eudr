@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Письмо админу о новом сообщении из публичной формы Contact.
+ * Письмо Админу о новом сообщении из публичной формы Contact.
  * Диспатчится из SendContactAdminNotifyListener после записи в БД.
  */
 class ContactAdminNotifyMail extends Mailable
@@ -18,20 +18,25 @@ class ContactAdminNotifyMail extends Mailable
     use SerializesModels;
 
     public function __construct(
-        private readonly string $name,
-        private readonly string $email,
-        private readonly ?string $company,
-        private readonly string $message,
+        private readonly string $userName,
+        private readonly string $userEmail,
+        private readonly ?string $userCompany,
+        private readonly string $userMessage,
         private readonly array $userMeta,
     ) {}
 
     /**
-     * Формирует тему письма с email отправителя для удобной фильтрации в почтовом ящике админа.
+     * Envelope админу: from = наш адрес (SPF/DKIM/DMARC alignment), reply-to = email пользователя.
      */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '[' . config('app.name') . '] ' . __('contact.admin_subject', ['email' => $this->email]),
+            from: config('mail.from.address'),
+            to: [config('mail.admin_email')],
+            replyTo: [],
+            subject: '[' . config('app.name') . '] ' . __('contact.admin_subject', [
+                'email' => $this->userEmail,
+            ]),
         );
     }
 
@@ -43,10 +48,10 @@ class ContactAdminNotifyMail extends Mailable
         return new Content(
             view: 'emails.contact.admin-notify',
             with: [
-                'name'        => $this->name,
-                'email'       => $this->email,
-                'company'     => $this->company ?? '—',
-                'messageText' => $this->message,
+                'name'        => $this->userName,
+                'email'       => $this->userEmail,
+                'company'     => $this->userCompany ?? '—',
+                'messageText' => $this->userMessage,
                 'locale'      => $this->userMeta['locale'] ?? '—',
                 'ip'          => $this->userMeta['ip'] ?? '—',
                 'userAgent'   => $this->userMeta['user_agent'] ?? '—',

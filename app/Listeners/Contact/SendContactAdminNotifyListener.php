@@ -22,10 +22,10 @@ class SendContactAdminNotifyListener implements ShouldQueue
     use SerializesModels;
 
     public function __construct(
-        private readonly string $name,
-        private readonly string $email,
-        private readonly ?string $company,
-        private readonly string $message,
+        private readonly string $userName,
+        private readonly string $userEmail,
+        private readonly ?string $userCompany,
+        private readonly string $userMessage,
         private readonly array $userMeta,
     ) {}
 
@@ -34,17 +34,14 @@ class SendContactAdminNotifyListener implements ShouldQueue
      */
     public function handle(): void
     {
-        $adminEmail = config('mail.admin_email');
-        if (!$adminEmail) {
-            return;
-        }
 
-        Mail::to($adminEmail)->send(
+
+        Mail::send(
             new ContactAdminNotifyMail(
-                $this->name,
-                $this->email,
-                $this->company,
-                $this->message,
+                $this->userName,
+                $this->userEmail,
+                $this->userCompany,
+                $this->userMessage,
                 $this->userMeta,
             )
         );

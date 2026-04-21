@@ -22,23 +22,23 @@ class SendSurveyAdminNotifyListener implements ShouldQueue
     use SerializesModels;
 
     private string $eventType;
-    private string $respondentEmail;
-    private ?string $respondentName;
-    private ?string $country;
-    private ?string $businessType;
+    private string $userEmail;
+    private ?string $userName;
+    private ?string $userCountry;
+    private ?string $userBusinessType;
 
     public function __construct(
         string $eventType,
-        string $respondentEmail,
-        ?string $respondentName,
-        ?string $country,
-        ?string $businessType,
+        string $userEmail,
+        ?string $userName,
+        ?string $userCountry,
+        ?string $userBusinessType,
     ) {
         $this->eventType = $eventType;
-        $this->respondentEmail = $respondentEmail;
-        $this->respondentName = $respondentName;
-        $this->country = $country;
-        $this->businessType = $businessType;
+        $this->userEmail = $userEmail;
+        $this->userName = $userName;
+        $this->userCountry = $userCountry;
+        $this->userBusinessType = $userBusinessType;
     }
 
     /**
@@ -51,13 +51,14 @@ class SendSurveyAdminNotifyListener implements ShouldQueue
             return;
         }
 
-        Mail::to($adminEmail)->send(
+        Mail::send(
             new SurveyAdminNotifyMail(
+                $adminEmail,
                 $this->eventType,
-                $this->respondentEmail,
-                $this->respondentName,
-                $this->country,
-                $this->businessType,
+                $this->userEmail,
+                $this->userName,
+                $this->userCountry,
+                $this->userBusinessType,
             )
         );
     }

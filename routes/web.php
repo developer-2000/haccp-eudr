@@ -55,6 +55,7 @@ Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')
         // Тестовая отправка письма
         Route::get('/mail-test', [MailTestController::class, 'index'])->name('mail-test.index');
         Route::post('/mail-test/send', [MailTestController::class, 'send'])->name('mail-test.send');
+        Route::post('/mail-test/send-all', [MailTestController::class, 'sendAllQueued'])->name('mail-test.send-all');
     });
 
 // SPA: маршруты с префиксом {locale}, middleware SetLocale, отдача index-client.

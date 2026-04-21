@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Отправляет письмо с 4-значным кодом подтверждения через очередь.
+ * Отправляет письмо с 4-значным кодом Клиенту подтверждения через очередь.
  * Диспатчится из SurveyResponseService при обновлении ответов (draft-сценарий).
  */
 class SendSurveyVerificationCodeListener implements ShouldQueue
@@ -22,15 +22,15 @@ class SendSurveyVerificationCodeListener implements ShouldQueue
     use InteractsWithQueue;
     use SerializesModels;
 
-    private string $email_to;
+    private string $userEmail;
     private string $verificationCode;
-    private string $locale;
+    private string $userLocale;
 
-    public function __construct(string $email_to, string $verificationCode, string $locale)
+    public function __construct(string $userEmail, string $verificationCode, string $userLocale)
     {
-        $this->email_to = $email_to;
+        $this->userEmail = $userEmail;
         $this->verificationCode = $verificationCode;
-        $this->locale = $locale;
+        $this->userLocale = $userLocale;
     }
 
     /**
@@ -38,10 +38,10 @@ class SendSurveyVerificationCodeListener implements ShouldQueue
      */
     public function handle(): void
     {
-        App::setLocale($this->locale);
+        App::setLocale($this->userLocale);
 
-        Mail::to($this->email_to)->send(
-            new SurveyVerificationCodeMail($this->verificationCode)
+        Mail::send(
+            new SurveyVerificationCodeMail($this->userEmail, $this->verificationCode)
         );
     }
 }

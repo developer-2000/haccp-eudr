@@ -13,14 +13,22 @@ class TestMail extends Mailable
     use Queueable;
     use SerializesModels;
 
+    public function __construct(
+        private readonly string $toEmail,
+    ) {}
+
     /**
-     * Формирует envelope тестового письма для проверки SMTP.
-     * Используется в технической цепочке отправки.
+     * Envelope тестового письма: from = наш адрес (SPF/DKIM/DMARC alignment).
      */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'HACCP SMTP OK'
+            from: config('mail.from.address'),
+            to: [$this->toEmail],
+            replyTo: [
+                config('app.email_admin'),
+            ],
+            subject: 'HACCP SMTP OK',
         );
     }
 

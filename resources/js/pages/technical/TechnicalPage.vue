@@ -17,6 +17,7 @@
                 </p>
                 <ul class="meta">
                     <li><strong>Получатель:</strong> {{ targetEmail }}</li>
+                    <li><strong>EMAIL_ADMIN:</strong> {{ adminEmail || '—' }}</li>
                     <li><strong>Mailer:</strong> {{ mailer }}</li>
                     <li><strong>Queue connection:</strong> {{ queueConnection }}</li>
                     <li><strong>Время запроса:</strong> {{ requestTime }}</li>
@@ -24,6 +25,12 @@
                 <form method="POST" :action="mailSendUrl">
                     <input type="hidden" name="_token" :value="csrfToken">
                     <button class="btn" type="submit">Отправить тестовое письмо</button>
+                </form>
+                <form method="POST" :action="mailSendAllUrl" class="spacer-top">
+                    <input type="hidden" name="_token" :value="csrfToken">
+                    <button class="btn" type="submit" :disabled="!adminEmail">
+                        Поставить в очередь все 6 писем → EMAIL_ADMIN
+                    </button>
                 </form>
             </section>
 
@@ -74,6 +81,10 @@ defineProps({
         type: String,
         required: true,
     },
+    adminEmail: {
+        type: String,
+        default: "",
+    },
     mailer: {
         type: String,
         required: true,
@@ -87,6 +98,10 @@ defineProps({
         required: true,
     },
     mailSendUrl: {
+        type: String,
+        required: true,
+    },
+    mailSendAllUrl: {
         type: String,
         required: true,
     },
@@ -176,6 +191,11 @@ defineProps({
 
 .btn:hover {
     background: #0b1220;
+}
+
+.btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
 }
 
 .btn-secondary {

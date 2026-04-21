@@ -5,8 +5,8 @@
     <title>HACCP SMTP OK</title>
 </head>
 <body>
-    <p>FIXED! SMTP works.</p>
-    <p>Sent at: {{ $sentAt }}</p>
-    <p>Environment: {{ $appEnv }}</p>
+<p>FIXED! SMTP works.</p>
+<p>Sent at: {{ $sentAt }}</p>
+<p>Environment: {{ $appEnv }}</p>
 </body>
 </html>

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Письмо с 4-значным кодом для подтверждения обновления ответов опроса.
+ * Письмо с 4-значным кодом Клиенту для подтверждения обновления ответов опроса.
  * Отправляется через очередь при повторной отправке ответов с уже существующим email.
  */
 class SurveyVerificationCodeMail extends Mailable
@@ -18,15 +18,21 @@ class SurveyVerificationCodeMail extends Mailable
     use SerializesModels;
 
     public function __construct(
+        private readonly string $userEmail,
         private readonly string $verificationCode,
     ) {}
 
     /**
-     * Формирует конверт письма с темой подтверждения.
+     * Envelope пользователю: from = наш адрес (SPF/DKIM/DMARC alignment).
      */
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: config('mail.from.address'),
+            to: [$this->userEmail],
+            replyTo: [
+                config('app.email_admin'),
+            ],
             subject: __('survey.email_verify.subject'),
         );
     }
