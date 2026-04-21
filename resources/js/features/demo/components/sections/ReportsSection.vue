@@ -174,20 +174,13 @@
         </div>
 
         <div class="reports-footer-actions">
-            <button
-                type="button"
-                class="btn-client btn-primary"
-                @click="handleExportAction('pdf')"
+            <n-button
+                type="info"
+                size="large"
+                @click="goToPublicReport"
             >
-                {{ t('demo.reports.download_pdf') }}
-            </button>
-            <button
-                type="button"
-                class="btn-client btn-success"
-                @click="handleExportAction('inspector')"
-            >
-                {{ t('demo.reports.to_inspector') }}
-            </button>
+                {{ t('demo.reports.go_to') }}
+            </n-button>
         </div>
     </div>
 </template>
@@ -396,17 +389,6 @@ const handleCopyLink = async () => {
     }
 };
 
-/**
- * Обрабатывает действия экспорта отчета.
- * Используется для mock-сценария PDF и отправки инспектору.
- */
-const handleExportAction = (action) => {
-    message.success(
-        action === "pdf"
-            ? t('demo.reports.pdf_success')
-            : t('demo.reports.inspector_success'),
-    );
-};
 </script>
 
 <style scoped lang="scss">

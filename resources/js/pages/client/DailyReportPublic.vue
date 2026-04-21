@@ -1,10 +1,13 @@
 <template>
-    <div
-        class="daily-report"
+    <div class="daily-report"
         :class="{ 'daily-report--pdf-open': wantsAutoPrint }"
     >
-        <div v-if="snapshot" class="daily-report__toolbar no-print">
+        <div class="daily-report__toolbar no-print">
+            <n-button type="warning" size="large" @click="close">
+                {{ t('demo.show_task_modal.close') }}
+            </n-button>
             <button
+                v-if="snapshot"
                 type="button"
                 class="daily-report__print btn-client btn-outline-primary"
                 @click="print"
@@ -20,11 +23,10 @@
             <p class="daily-report__missing-text">
                 {{ t('report.public.invalid_text', { date: reportReferenceIso }) }}
             </p>
-            <RouterLink
-                class="btn-client btn-outline-primary"
-                :to="fallbackDemoEudr"
-                >{{ t('report.public.eudr_demo_link') }}</RouterLink
-            >
+
+            <n-button type="warning" size="large" class="elem-right" @click="close">
+                {{ t('demo.show_task_modal.close') }}
+            </n-button>
         </div>
 
         <article v-else class="daily-report__paper">
@@ -507,13 +509,33 @@
                 </p>
             </footer>
         </article>
+
+        <button
+            v-show="showToTop"
+            type="button"
+            class="daily-report__to-top no-print"
+            aria-label="Scroll to top"
+            @click="scrollTop"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 14l6-6 6 6"
+                />
+            </svg>
+        </button>
     </div>
 </template>
 
 <script setup>
-import { computed, nextTick, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { NButton } from "naive-ui";
 import {
     buildDailyReportPublicUrl,
     getDailyReportSnapshot,
@@ -543,8 +565,6 @@ const reportSeoParams = computed(() => ({
     points: snapshot.value?.totalCcpTasks ?? "",
 }));
 usePageSeo({ i18nKey: "seo.report_public", i18nParams: reportSeoParams });
-
-const fallbackDemoEudr = "/en/demo/eudr";
 
 const localeForCanonical = computed(() => {
     const p = route.params.locale;
@@ -579,6 +599,54 @@ const wantsAutoPrint = computed(() => route.query.print === "1");
 
 const print = () => window.print();
 
+const close = () => {
+    window.close();
+    if (!window.closed) {
+        window.history.back();
+    }
+};
+
+const SCROLL_TOP_THRESHOLD = 1500;
+const showToTop = ref(false);
+let scrollContainer = null;
+
+const getWindowScrollTop = () =>
+    window.scrollY ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop ||
+    0;
+
+const onScroll = () => {
+    const containerTop = scrollContainer ? scrollContainer.scrollTop : 0;
+    const windowTop = getWindowScrollTop();
+    let height = Math.max(containerTop, windowTop)
+    showToTop.value = height > SCROLL_TOP_THRESHOLD;
+};
+
+const scrollTop = () => {
+    if (scrollContainer) {
+        scrollContainer.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+onMounted(() => {
+    scrollContainer = document.querySelector(".main-content");
+    window.addEventListener("scroll", onScroll, { passive: true });
+    if (scrollContainer) {
+        scrollContainer.addEventListener("scroll", onScroll, { passive: true });
+    }
+    onScroll();
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener("scroll", onScroll);
+    if (scrollContainer) {
+        scrollContainer.removeEventListener("scroll", onScroll);
+    }
+    scrollContainer = null;
+});
+
 const runAutoPrint = () => {
     if (!snapshot.value || !wantsAutoPrint.value) {
         return;
@@ -608,6 +676,7 @@ watch(
         $bg-gray 40%
     );
     padding: $spacing-lg $spacing-md $spacing-2xl;
+    position: relative;
 }
 
 .daily-report--pdf-open .daily-report__toolbar {
@@ -619,7 +688,7 @@ watch(
     margin: 0 auto $spacing-md;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: $spacing-md;
     flex-wrap: wrap;
 }
@@ -1212,6 +1281,46 @@ watch(
     color: $text-dark-grey;
 }
 
+.daily-report__to-top {
+    position: fixed;
+    right: $spacing-lg;
+    bottom: $spacing-lg;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    border-radius: $radius-full;
+    background: $accent-primary;
+    color: $text-white;
+    box-shadow: $shadow-md;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    transition:
+        background-color $transition-fast,
+        transform $transition-fast,
+        box-shadow $transition-fast;
+
+    svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    &:hover,
+    &:focus-visible {
+        background: $accent-primary-dark;
+        box-shadow: $shadow-sm-md;
+        transform: translateY(-2px);
+        outline: none;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
 @media print {
     .daily-report {
         background: #fff;
@@ -1222,6 +1331,10 @@ watch(
         box-shadow: none;
         border: none;
         max-width: none;
+    }
+
+    .no-print {
+        display: none !important;
     }
 }
 </style>

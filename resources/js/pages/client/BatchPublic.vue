@@ -1,7 +1,11 @@
 <template>
     <div class="batch-public">
-        <div v-if="record" class="batch-public__toolbar no-print">
+        <div class="batch-public__toolbar no-print">
+            <n-button type="warning" size="large" @click="close">
+                {{ t('demo.show_task_modal.close') }}
+            </n-button>
             <button
+                v-if="record"
                 type="button"
                 class="batch-public__print btn-client btn-outline-primary"
                 @click="print"
@@ -15,9 +19,9 @@
             <p class="batch-public__missing-text">
                 {{ t('batch.public.not_found_text', { batchId }) }}
             </p>
-            <RouterLink class="btn-client btn-outline-primary" :to="homePath"
-                >{{ t('batch.public.go_home') }}</RouterLink
-            >
+            <n-button type="warning" size="large" class="elem-right" @click="close">
+                {{ t('demo.show_task_modal.close') }}
+            </n-button>
         </div>
 
         <article v-else class="batch-public__paper">
@@ -207,6 +211,7 @@
 import { computed, nextTick, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { NButton } from "naive-ui";
 import {
     getBatchPublicRecord,
     buildBatchPublicUrl,
@@ -248,6 +253,13 @@ const wantsAutoPrint = computed(() => route.query.print === "1");
 
 const print = () => window.print();
 
+const close = () => {
+    window.close();
+    if (!window.closed) {
+        window.history.back();
+    }
+};
+
 const runAutoPrint = () => {
     if (!record.value || !wantsAutoPrint.value) {
         return;
@@ -284,7 +296,7 @@ watch(
     margin: 0 auto $spacing-md;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: $spacing-md;
     flex-wrap: wrap;
 }
@@ -296,16 +308,16 @@ watch(
     background: $bg-style-white;
     border-radius: $radius-xl;
     border: 1px solid $text-light-grey;
-}
 
-.batch-public__missing-title {
-    margin: 0 0 $spacing-sm;
-    font-size: $font-size-2xl;
-}
+    .batch-public__missing-title {
+        margin: 0 0 $spacing-sm;
+        font-size: $font-size-2xl;
+    }
 
-.batch-public__missing-text {
-    margin: 0 0 $spacing-lg;
-    color: $text-dark-grey;
+    .batch-public__missing-text {
+        margin: 0 0 $spacing-lg;
+        color: $text-dark-grey;
+    }
 }
 
 .batch-public__paper {

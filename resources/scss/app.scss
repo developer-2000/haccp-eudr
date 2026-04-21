@@ -259,7 +259,10 @@ body .n-base-close {
     text-align: center;
     padding: $spacing-2xl;
 }
-
+.elem-right{
+    margin-left: auto;
+    display: block;
+}
 // ============================================
 // Forms elements
 // ============================================
