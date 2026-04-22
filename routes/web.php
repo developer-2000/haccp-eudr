@@ -33,22 +33,24 @@ Route::get('/survey/questions', [SurveyQuestionsController::class, 'index'])
     ->middleware('throttle:20,1')
     ->name('client.survey.questions');
 
-// Отправка ответов опроса.
-Route::post('/survey/submit', [SurveyQuestionsController::class, 'submitAnswersQuestions'])
-    ->middleware(['setLocale', 'throttle:10,1'])
-    ->name('client.survey.submit');
+// Ответы на вопросы
+Route::prefix('survey')->group(function () {
+    // Отправка ответов опроса.
+    Route::post('submit', [SurveyQuestionsController::class, 'submitAnswersQuestions'])
+        ->middleware(['setLocale', 'throttle:10,1'])
+        ->name('client.survey.submit');
 
-Route::post('/survey/verify', [SurveyQuestionsController::class, 'verifyCode'])
-    ->middleware(['setLocale', 'throttle:10,1'])
-    ->name('client.survey.verify');
+    Route::post('verify', [SurveyQuestionsController::class, 'verifyCode'])
+        ->middleware(['setLocale', 'throttle:10,1'])
+        ->name('client.survey.verify');
+});
 
 // Отправка сообщения из публичной формы Contact (honeypot + throttle 5/min).
 Route::post('/contact', [ContactController::class, 'submit'])
     ->middleware(['setLocale', 'throttle:5,1'])
     ->name('client.contact.submit');
 
-Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')
-    ->group(function () {
+Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')->group(function () {
         // /technical
         Route::get('/', [MailTestController::class, 'index'])->name('index');
 
@@ -57,8 +59,6 @@ Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')
         Route::post('/mail-test/send', [MailTestController::class, 'send'])->name('mail-test.send');
         Route::post('/mail-test/send-all', [MailTestController::class, 'sendAllQueued'])->name('mail-test.send-all');
     });
-
-
 
 // SPA: маршруты с префиксом {locale}, middleware SetLocale, отдача index-client.
 Route::group([

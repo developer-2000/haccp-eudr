@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 /**
  * Письмо с 4-значным кодом Клиенту для подтверждения обновления ответов опроса.
@@ -28,7 +29,11 @@ class SurveyVerificationCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: config('mail.from.address'),
+//            from: config('mail.from.address'),
+            from: new Address(
+                config('mail.from.address'),
+                config('app.name') // вот здесь HACCPilot
+            ),
             to: [$this->userEmail],
             replyTo: [
                 config('app.email_admin'),
