@@ -1,4 +1,4 @@
-name: Deploy to server
+name: Deploy (Single Artifact)
 
 on:
   push:
@@ -6,32 +6,85 @@ on:
       - main_demo
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # PHP
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --no-dev --optimize-autoloader --no-interaction
+
+      # Node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build frontend
+        run: |
+          npm ci
+          npm run build
+
+      # Prepare release
+      - name: Prepare release folder
+        run: |
+          rm -rf release
+          mkdir -p release
+
+          rsync -av \
+            --exclude=node_modules \
+            --exclude=.git \
+            --exclude=tests \
+            --exclude=.env \
+            ./ release/
+
+          cp -r vendor release/
+
+      # Archive
+      - name: Create artifact
+        run: tar -czf release.tar.gz release
+
+      # Upload artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: release.tar.gz
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-release
+
+      # КЛЮЧЕВОЙ ФИКС — ПЕРЕДАЧА НА СЕРВЕР
+      - name: Upload to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: deploy
+          key: ${{ secrets.SSH_KEY }}
+          source: "release.tar.gz"
+          target: "/home/deploy/releases/"
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: deploy
           key: ${{ secrets.SSH_KEY }}
-          script_stop: true
           script: |
-            set -e
-
-            echo "=== START REMOTE DEPLOY ==="
-
-            # проверяем что скрипт существует
-            if [ ! -f /home/deploy/scripts/deploy.sh ]; then
-              echo "❌ deploy.sh NOT FOUND"
-              exit 1
-            fi
-
-            # проверяем права
-            chmod +x /home/deploy/scripts/deploy.sh
-
-            # запускаем деплой
             bash /home/deploy/scripts/deploy.sh
-
-            echo "=== DEPLOY FINISHED ==="

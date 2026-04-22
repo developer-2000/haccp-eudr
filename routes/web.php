@@ -58,6 +58,8 @@ Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')
         Route::post('/mail-test/send-all', [MailTestController::class, 'sendAllQueued'])->name('mail-test.send-all');
     });
 
+
+
 // SPA: маршруты с префиксом {locale}, middleware SetLocale, отдача index-client.
 Route::group([
     'prefix' => '{locale}',

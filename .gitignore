@@ -2,7 +2,6 @@
 /.phpunit.cache
 /vendor
 /storage/*.key
-/public/build
 /public/hot
 /public/storage
 
