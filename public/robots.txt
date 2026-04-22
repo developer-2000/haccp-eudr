@@ -4,4 +4,4 @@ Disallow: /api/
 Disallow: /survey/submit
 Disallow: /survey/verify
 
-Sitemap: https://haccpilot.com/sitemap.xml
+Sitemap: https://demo.haccpilot.eu/sitemap.xml
