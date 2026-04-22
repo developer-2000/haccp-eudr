@@ -77,7 +77,6 @@
 <script setup>
 import {
     computed,
-    defineAsyncComponent,
     nextTick,
     onMounted,
     onUnmounted,
@@ -116,22 +115,13 @@ import {
 } from "../../features/survey/surveyQuestionsStub.js";
 import SurveyQuestionStep from "../../components/client/survey/SurveyQuestionStep.vue";
 import SurveySubmittedState from "../../components/client/survey/SurveySubmittedState.vue";
+import SurveyMainFlow from "../../components/client/survey/screens/SurveyMainFlow.vue";
+import SurveyIntroScreen from "../../components/client/survey/screens/SurveyIntroScreen.vue";
+import SurveySuccessScreen from "../../components/client/survey/screens/SurveySuccessScreen.vue";
+import SurveyLeadScreen from "../../components/client/survey/screens/SurveyLeadScreen.vue";
 
 import SurveyDigitalCodeVerification from "@/components/client/survey/SurveyDigitalCodeVerification.vue";
 import { LS_SURVEY_SUBMISSION_STATE, SS_VERIFICATION_TOKEN } from "@/config/storageNames";
-
-const SurveyMainFlow = defineAsyncComponent(() =>
-    import("../../components/client/survey/screens/SurveyMainFlow.vue")
-);
-const SurveyIntroScreen = defineAsyncComponent(() =>
-    import("../../components/client/survey/screens/SurveyIntroScreen.vue")
-);
-const SurveySuccessScreen = defineAsyncComponent(() =>
-    import("../../components/client/survey/screens/SurveySuccessScreen.vue")
-);
-const SurveyLeadScreen = defineAsyncComponent(() =>
-    import("../../components/client/survey/screens/SurveyLeadScreen.vue")
-);
 
 defineOptions({ name: "Survey" });
 
@@ -1174,7 +1164,7 @@ function resetSurveyFromSubmittedState() {
     }
 
     :deep(.survey-page__footer) {
-        padding-top: 20px;
+        padding: 20px 0 40px;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -52,27 +52,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
         <!-- Styles -->
-        @php
-            $isViteDev = file_exists(public_path('hot'));
-            $manifestPath = public_path('build/manifest.json');
-            $manifest = null;
-            if (!$isViteDev && file_exists($manifestPath)) {
-                $manifest = json_decode(file_get_contents($manifestPath), true);
-            }
-            $useManifest = !$isViteDev && $manifest && isset($manifest['resources/scss/app.scss']) && isset($manifest['resources/js/app.js']);
-        @endphp
-
-        @if($useManifest)
-            <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/scss/app.scss']['file']) }}">
-            @if(isset($manifest['resources/js/app.js']['css']))
-                @foreach($manifest['resources/js/app.js']['css'] as $cssFile)
-                    <link rel="stylesheet" href="{{ asset('build/' . $cssFile) }}">
-                @endforeach
-            @endif
-            <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
-        @else
-            @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-        @endif
+        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
         <div

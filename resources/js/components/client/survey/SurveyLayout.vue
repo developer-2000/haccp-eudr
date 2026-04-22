@@ -53,8 +53,7 @@ defineProps({
         flex-direction: column;
         width: 100%;
         margin: 0 auto;
-        padding: $spacing-sm clamp(#{$spacing-md}, 4vw, #{$spacing-md-lg})
-            max(28px, calc(28px + env(safe-area-inset-bottom, 0px)));
+        padding: 0;
         box-sizing: border-box;
         overflow-x: clip;
     }

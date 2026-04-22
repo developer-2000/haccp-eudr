@@ -12,6 +12,10 @@ import router from "./router";
 import { i18n } from "./i18n";
 import { useSiteConfigStore } from "@/stores";
 
+window.addEventListener("vite:preloadError", () => {
+    window.location.reload();
+});
+
 const pinia = createPinia();
 const head = createHead();
 const app = createApp(App);
