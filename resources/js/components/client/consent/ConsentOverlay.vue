@@ -15,6 +15,7 @@
                 <n-space item-style="display: inline-flex;" align="center"  class="checkbox">
                     <n-checkbox
                         :label="t('consent.checkbox_label')"
+                        size="large"
                         v-model:checked="accepted"
                         :theme-overrides="{
                             colorChecked: '#3782d2',
@@ -143,7 +144,7 @@ function continueToApp() {
 
 .n-checkbox .n-checkbox__label {
     line-height: 16px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 @keyframes pop {

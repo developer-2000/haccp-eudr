@@ -32,7 +32,7 @@ defineProps({
     display: flex;
     flex-direction: column;
     gap: $spacing-xs;
-    margin-bottom: 20px;
+    margin: 10px 0 20px;
 }
 
 .checklist-modal__assignee-label {

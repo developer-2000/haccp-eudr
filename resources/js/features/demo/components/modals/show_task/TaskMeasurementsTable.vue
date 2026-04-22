@@ -51,7 +51,7 @@
                             <tbody>
                             <tr>
                                 <td class="checklist-modal__decision-nested__value">
-                                    <span class="checklist-modal__bolt-text">{{
+                                    <span class="checklist-modal__bolt-text metric-value">{{
                                         item.value
                                     }}</span>
                                 </td>
@@ -83,7 +83,7 @@
                             <!-- Результат (понижение, повышение) -->
                             <p
                                 v-if="item.aiWarning?.deviationLine"
-                                class="checklist-modal__status-deviation-line checklist-modal__bolt-text"
+                                class="checklist-modal__status-deviation-line checklist-modal__bolt-text metric-value"
                             >
                                 {{ item.aiWarning.deviationLine }}
                             </p>
@@ -222,6 +222,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
         border-collapse: collapse;
         min-width: 420px;
         color: $text-color;
+        font-size: 14px;
 
         th,
         td {
@@ -244,6 +245,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
     }
 
     .checklist-modal__table--measurements{
+        font-weight: 500;
 
         th,
         td {
@@ -293,7 +295,6 @@ const onCorrectiveActionSelect = (measurement, value) => {
 
     td {
         padding: 2px 4px;
-        font-size: $font-size-xs;
         line-height: 1.35;
         color: $text-dark-grey;
         vertical-align: top;
@@ -311,10 +312,22 @@ const onCorrectiveActionSelect = (measurement, value) => {
     }
 }
 
-.checklist-modal__bolt-text{
-    font-size: 0.75rem;
+.checklist-modal__bolt-text,
+.metric-value{
+    font-size: 14px;
     font-weight: 500;
-    color: $text-dark-grey;
+    color: $accent-primary-dark;
+}
+
+.metric-value{
+    font-size: 16px;
+    font-weight: 300;
+    color: $text-color;
+    background: #f7f6f2;
+    padding: 2px 10px;
+    display: inline-block;
+    width: auto!important;
+    border-radius: 5px;
 }
 
 .checklist-modal__measurement-row-cell[data-label="Решение"]
@@ -528,7 +541,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
 
     .checklist-modal__measurement-group .checklist-modal__selected-action {
         flex: 1 0 100%;
-        margin: $spacing-xs 0 0;
+        margin: 15px 0 5px;
         max-width: none;
         text-align: center;
         white-space: normal;
@@ -716,7 +729,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
 
 .checklist-modal__selected-action {
     margin: 0 auto;
-    font-size: $font-size-xs;
+    font-size: 14px;
     line-height: 1.25;
     color: $text-dark-grey;
     white-space: normal;

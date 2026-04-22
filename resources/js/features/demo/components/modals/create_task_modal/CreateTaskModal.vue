@@ -267,6 +267,7 @@
                                 <n-checkbox
                                     :value="item.id"
                                     :label="item.label"
+                                    size="large"
                                 />
                             </div>
                         </n-checkbox-group>
@@ -300,6 +301,7 @@
                                     <n-checkbox
                                         :value="item.id"
                                         :label="item.label"
+                                        size="large"
                                     />
                                 </div>
                             </div>
@@ -1278,7 +1280,7 @@ const submitAddTask = () => {
         align-items: center;
         justify-content: space-between;
         gap: $spacing-md;
-        margin-bottom: $spacing-sm;
+        margin-bottom: 15px;
     }
 
     .header-checklists-report-corrections
@@ -1334,13 +1336,6 @@ const submitAddTask = () => {
         border: 1px solid $text-light-grey;
         border-radius: $radius-md;
         background-color: rgba($bg-light-grey, 0.35);
-
-        .checklists-details-heading {
-            margin: 0 0 $spacing-sm;
-            font-size: $font-size-sm;
-            font-weight: 600;
-            color: $text-color;
-        }
 
         .checklists-standalone-hint {
             margin: 0 0 $spacing-md;
@@ -1456,13 +1451,6 @@ const submitAddTask = () => {
         border-radius: $radius-md;
         background-color: $bg-style-white;
 
-        .checklists-details-heading {
-            margin: 0 0 $spacing-sm;
-            font-size: $font-size-sm;
-            font-weight: 600;
-            color: $text-color;
-        }
-
         .checklists-equipment-settings-hint {
             margin: 0 0 $spacing-sm;
             font-size: $font-size-xs;
@@ -1482,18 +1470,30 @@ const submitAddTask = () => {
             }
 
             .checklists-equipment-group-title {
-                margin: 0 0 $spacing-xs;
+                margin: 0 0 10px;
                 font-size: $font-size-xs;
                 font-weight: 600;
                 color: $text-dark-grey;
                 text-transform: uppercase;
                 letter-spacing: 0.02em;
             }
-
-            .checklists-equipment-item {
-                margin-bottom: $spacing-xs;
-            }
         }
     }
+
+    .checklists-details-heading {
+        margin: 0 0 20px;
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $text-color;
+    }
 }
+
+.checklists-equipment-item {
+    margin-bottom: 15px;
+
+    &:last-child{
+        margin: 0;
+    }
+}
+
 </style>

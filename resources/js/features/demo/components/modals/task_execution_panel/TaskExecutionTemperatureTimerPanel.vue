@@ -8,6 +8,7 @@
         <!-- Черновик числа: префикс/суффикс (🌡️/°C или ⏱️/мин) передаёт родитель. -->
         <n-input
             :value="temperatureDraft"
+            size="large"
             inputmode="decimal"
             placeholder="—"
             class="checklist-modal__pending-temp-input"
@@ -149,7 +150,7 @@ defineProps({
 .checklist-modal__pending-input-label {
     margin: 0;
     font-size: $font-size-sm;
-    font-weight: 600;
+    font-weight: 500;
     color: $text-dark-grey;
 }
 
@@ -223,6 +224,10 @@ defineProps({
     color: $text-green;
 }
 
+.checklist-modal__keypad {
+    margin-top: 30px;
+}
+
 @media (max-width: 640px) {
     .checklist-modal__pending-input {
         gap: $spacing-sm;
@@ -231,7 +236,6 @@ defineProps({
 
     .checklist-modal__keypad {
         gap: 8px;
-        margin-top: 12px;
     }
 
     .checklist-modal__keypad-digits {
