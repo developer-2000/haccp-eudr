@@ -29,7 +29,6 @@ class SurveyVerificationCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-//            from: config('mail.from.address'),
             from: new Address(
                 config('mail.from.address'),
                 config('app.name') // вот здесь HACCPilot

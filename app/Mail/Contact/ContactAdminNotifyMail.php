@@ -4,6 +4,7 @@ namespace App\Mail\Contact;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -31,7 +32,10 @@ class ContactAdminNotifyMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: config('mail.from.address'),
+            from: new Address(
+                config('mail.from.address'),
+                config('app.name') // вот здесь HACCPilot
+            ),
             to: [config('mail.admin_email')],
             replyTo: [],
             subject: '[' . config('app.name') . '] ' . __('contact.admin_subject', [

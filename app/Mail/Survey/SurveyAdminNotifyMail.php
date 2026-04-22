@@ -4,6 +4,7 @@ namespace App\Mail\Survey;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -34,7 +35,10 @@ class SurveyAdminNotifyMail extends Mailable
         $prefix = $this->eventType === 'created' ? 'Создан ответ' : 'Обновлен ответ';
 
         return new Envelope(
-            from: config('mail.from.address'),
+            from: new Address(
+                config('mail.from.address'),
+                config('app.name') // вот здесь HACCPilot
+            ),
             to: [$this->adminEmail],
             replyTo: [],
             subject: "[HACCPilot Survey] {$prefix} — {$this->userEmail}",
