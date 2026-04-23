@@ -18,39 +18,6 @@ class LocaleController extends Controller
     }
 
     /**
-     * Редирект с корня на /{locale}.
-     * Логика: если saved (session/cookie) есть в (main + browser/fallback) → используем его, иначе → main.
-     */
-    public function redirectToLocale(): RedirectResponse
-    {
-        $main = config('app.locale');
-        $fallbackLocale = config('app.fallback_locale');
-        $fromBrowser = preferred_language_from_request(request(), $this->available);
-
-        // Определяем второй язык для переключателя
-        $second = ($fromBrowser && $fromBrowser !== $main)
-            ? $fromBrowser
-            : $fallbackLocale;
-
-        $two = array_values(array_unique(array_filter([$main, $second])));
-
-        // Проверяем сохранённый язык
-        $savedLocale = request()->session()->get('locale')
-            ?? request()->cookie('locale');
-
-        // Если saved есть в отображаемых → используем его, иначе → main
-        $locale = ($savedLocale && in_array($savedLocale, $two, true))
-            ? $savedLocale
-            : $main;
-
-        if (!in_array($locale, $this->available)) {
-            $locale = $main;
-        }
-
-        return redirect('/' . $locale, 302);
-    }
-
-    /**
      * Принимает locale из body (JSON/form), валидирует по списку допустимых, пишет в session и cookie на год, возвращает JSON с установленной локалью.
      */
     public function set(Request $request): JsonResponse

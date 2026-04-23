@@ -12,22 +12,17 @@
                 <router-link :to="privacyLink" rel="nofollow">
                     {{ t('consent.privacy_link') }}
                 </router-link>
-                <n-space item-style="display: inline-flex;" align="center"  class="checkbox">
-                    <n-checkbox
-                        :label="t('consent.checkbox_label')"
-                        size="large"
-                        v-model:checked="accepted"
-                        :theme-overrides="{
-                            colorChecked: '#3782d2',
-                            borderChecked: '1px solid #3782d2',
-                            borderFocus: '1px solid #1062b9',
-                            boxShadowFocus: '0 0 0 2px rgba(16, 98, 185, 0.2)',
-                        }"/>
+                <n-space class="checkbox" @click="accepted = !accepted">
+                    <n-switch size="medium" v-model:value="accepted" />
+                    <span class="switch-label">
+                        {{ t('consent.checkbox_label') }}
+                    </span>
                 </n-space>
             </div>
 
             <n-button
                 type="info"
+                size="large"
                 :disabled="!accepted"
                 @click="continueToApp"
             >
@@ -103,8 +98,8 @@ function continueToApp() {
         .title{
             font-size: 14px;
             font-weight: 500;
-            color: $accent-success-dark;
-            margin-bottom: 10px;
+            color: $text-logo;
+            margin-bottom: 20px;
         }
 
         p {
@@ -127,7 +122,22 @@ function continueToApp() {
             .checkbox {
                 gap: 8px;
                 font-size: 13px;
-                margin-bottom: 15px;
+                margin-bottom: 30px;
+                display: flex;
+                align-items: center;
+                flex-flow: inherit!important;
+                cursor: pointer;
+
+                &:hover {
+                    .switch-label {
+                        color: $accent-primary-dark;
+                    }
+                }
+
+                .switch-label {
+                    user-select: none;
+                    transition: color 0.15s ease;
+                }
             }
         }
 

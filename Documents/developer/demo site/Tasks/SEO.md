@@ -5,6 +5,24 @@
 > **Языки:** en (основной), ro (резервный), планируется расширение на 25 локалей  
 > **Рендеринг:** CSR (Client-Side Rendering), SSR отсутствует  
 
+## Команда создания sitemap
+
+### На сервере перейти в
+  ```php
+cd /var/www/demo.haccpilot.eu/current
+php artisan sitemap:generate
+  ```
+### Если хочешь быстро проверить после генерации
+  ```php
+ls -lah public | grep sitemap
+find . -name "sitemap*.xml"
+  ```
+
+### локально
+  ```php
+    php artisan sitemap:generate
+  ```
+
 ---
 
 ## Текущее состояние

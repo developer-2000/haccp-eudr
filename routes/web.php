@@ -15,18 +15,17 @@ if ($localePattern === '') {
 Route::post('/locale', [LocaleController::class, 'set'])
     ->name('locale.set');
 
-// Редирект корня на /{locale} по session, cookie или config(app.locale).
-Route::get('/', [LocaleController::class, 'redirectToLocale']);
+// Переход на язык по умолчанию
+Route::get('/', fn () => view('index-client'))
+    ->middleware(['setLocale']);
 
-// Публичная карточка партии EUDR (SPA): /batch/{id} без локали (старые QR) и /{locale}/batch/{id} — см. группу `{locale}/{any}` ниже.
-Route::get('/batch/{batchId}', function () {
-    return view('index-client');
-})->where('batchId', '[A-Za-z0-9_-]+');
+// Публичная карточка партии закупки.
+Route::get('/batch/{batchId}', fn () => view('index-client'))
+    ->where('batchId', '[A-Za-z0-9_-]+');
 
-// Публичный дневной отчёт HACCPilot (SPA): /report/{date} без локали и /{locale}/report/{date} — см. группу `{locale}/{any}` ниже.
-Route::get('/report/{date}', function () {
-    return view('index-client');
-})->where('date', '[0-9]{4}-[0-9]{2}-[0-9]{2}');
+// Публичный дневной отчёт задач
+Route::get('/report/{date}', fn () => view('index-client'))
+    ->where('date', '[0-9]{4}-[0-9]{2}-[0-9]{2}');
 
 // JSON вопросов опроса для SPA: без префикса локали (перевод на клиенте, vue-i18n).
 Route::get('/survey/questions', [SurveyQuestionsController::class, 'index'])

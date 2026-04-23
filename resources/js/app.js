@@ -12,7 +12,14 @@ import router from "./router";
 import { i18n } from "./i18n";
 import { useSiteConfigStore } from "@/stores";
 
-window.addEventListener("vite:preloadError", () => {
+window.addEventListener("vite:preloadError", (event) => {
+    const lastReloadKey = "vite-preload-last-reload";
+    const last = Number(sessionStorage.getItem(lastReloadKey) || 0);
+    if (Date.now() - last < 60_000) {
+        event.preventDefault();
+        return;
+    }
+    sessionStorage.setItem(lastReloadKey, String(Date.now()));
     window.location.reload();
 });
 

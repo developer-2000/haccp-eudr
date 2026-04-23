@@ -101,10 +101,15 @@
 </template>
 
 <script setup>
-import { computed, defineAsyncComponent, watch } from "vue";
+import { computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import DemoSectionNavigation from "@/features/demo/components/nav/DemoSectionNavigation.vue";
+import DashboardSection from "@/features/demo/components/sections/DashboardSection.vue";
+import ChecklistsSection from "@/features/demo/components/sections/ChecklistsSection.vue";
+import PersonnelSection from "@/features/demo/components/sections/PersonnelSection.vue";
+import EudrSection from "@/features/demo/components/sections/EudrSection.vue";
+import ReportsSection from "@/features/demo/components/sections/ReportsSection.vue";
 import { useDemoDashboardViewModel } from "@/features/demo/composables/useDemoDashboardViewModel";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
 import { usePageSeo } from "@/composables/usePageSeo";
@@ -129,21 +134,6 @@ const DEMO_SECTION_IDS = new Set([
     "eudr",
     "reports",
 ]);
-const DashboardSectionAsync = defineAsyncComponent(
-    () => import("@/features/demo/components/sections/DashboardSection.vue"),
-);
-const ChecklistsSectionAsync = defineAsyncComponent(
-    () => import("@/features/demo/components/sections/ChecklistsSection.vue"),
-);
-const PersonnelSectionAsync = defineAsyncComponent(
-    () => import("@/features/demo/components/sections/PersonnelSection.vue"),
-);
-const EudrSectionAsync = defineAsyncComponent(
-    () => import("@/features/demo/components/sections/EudrSection.vue"),
-);
-const ReportsSectionAsync = defineAsyncComponent(
-    () => import("@/features/demo/components/sections/ReportsSection.vue"),
-);
 
 const locale = computed(() => {
     const paramLocale = route.params.locale;
@@ -184,11 +174,11 @@ const sectionLinks = computed(() => [
 ]);
 
 const sectionComponentMap = {
-    dashboard: DashboardSectionAsync,
-    checklists: ChecklistsSectionAsync,
-    personnel: PersonnelSectionAsync,
-    eudr: EudrSectionAsync,
-    reports: ReportsSectionAsync,
+    dashboard: DashboardSection,
+    checklists: ChecklistsSection,
+    personnel: PersonnelSection,
+    eudr: EudrSection,
+    reports: ReportsSection,
 };
 
 const sectionConfigMap = computed(() => ({

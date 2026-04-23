@@ -81,6 +81,7 @@ class SetLocale
 
         // Сохраняем в session
         $request->session()->put('locale', $locale);
+
         App::setLocale($locale);
 
         // Переводы для фронтенда
