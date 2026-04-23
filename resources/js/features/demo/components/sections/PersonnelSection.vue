@@ -1,7 +1,5 @@
 <template>
-    <!-- Секция «Персонал» -->
     <div class="personnel-section">
-        <!-- Открывает модалку создания сотрудника -->
         <div class="personnel-section__toolbar">
             <n-button
                 type="primary"
@@ -12,16 +10,13 @@
             </n-button>
         </div>
 
-        <!-- Переключение Табов ниш -->
         <n-tabs
             v-model:value="activeSiteId"
             type="line"
             class="personnel-section__tabs"
             animated
         >
-            <!-- Вкладка = одна площадка; контент — список staff с siteId === site.id. -->
             <n-tab-pane v-for="site in sites" :key="site.id" :name="site.id">
-                <!-- Заголовок вкладки: название площадки + эмодзи (визуальная связь с нишами демо). -->
                 <template #tab>
                     <span class="personnel-section__tab-label">
                         {{ site.name }}
@@ -32,16 +27,12 @@
                         >
                     </span>
                 </template>
-                <!-- Доп. контекст по площадке; скрыт, если адрес в данных не задан. -->
                 <p v-if="site.address" class="personnel-section__site-address">
                     {{ site.address }}
                 </p>
 
-                <!-- Десктоп: таблица — удобный обзор и действия в одной строке. -->
                 <div class="personnel-section__desktop">
-                    <!-- Обёртка со скроллом по X на узких экранах внутри «десктопного» брейкпоинта. -->
                     <div class="personnel-section__table-wrap">
-                        <!-- Таблица персонала текущей вкладки: те же данные, что и в карточках на mobile. -->
                         <table class="personnel-section__table">
                             <thead>
                                 <tr>
@@ -54,7 +45,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Строка сотрудника: редактирование и удаление (удаление — с подтверждением и снятием назначений в чек-листах). -->
                                 <tr
                                     v-for="member in staffBySite(site.id)"
                                     :key="member.id"
@@ -80,7 +70,6 @@
                                         </span>
                                     </td>
                                     <td class="personnel-section__actions">
-                                        <!-- Действия строки: правка в общей модалке; удаление через NPopconfirm. -->
                                         <div class="box-button">
                                             <n-button
                                                 type="info"
@@ -90,7 +79,6 @@
                                             >
                                                 {{ personnelSectionText.edit }}
                                             </n-button>
-                                            <!-- Подтверждение удаления: текст предупреждает о задачах с этим ответственным. -->
                                             <n-popconfirm
                                                 :positive-text="personnelSectionText.delete"
                                                 :negative-text="personnelSectionText.cancel"
@@ -124,7 +112,6 @@
                     </div>
                 </div>
 
-                <!-- Мобильная вёрстка: те же сотрудники и действия, что в таблице; показывается по media вместо desktop. -->
                 <div class="personnel-section__mobile">
                     <article
                         v-for="member in staffBySite(site.id)"
@@ -176,7 +163,6 @@
                                 }}
                             </span>
                         </p>
-                        <!-- Кнопки на всю ширину карточки — тот же сценарий, что в колонке действий таблицы. -->
                         <div class="personnel-card__actions">
                             <n-button
                                 type="info"
@@ -212,7 +198,6 @@
             </n-tab-pane>
         </n-tabs>
 
-        <!-- Модалка создания / редактирования сотрудника -->
         <CreateEditStaffModal
             ref="staffModalRef"
             :default-site-id="activeSiteId"

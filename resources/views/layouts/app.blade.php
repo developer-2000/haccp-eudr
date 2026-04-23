@@ -48,10 +48,8 @@
         }
         </script>
 
-        <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
-        <!-- Styles -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>
     <body class="antialiased">

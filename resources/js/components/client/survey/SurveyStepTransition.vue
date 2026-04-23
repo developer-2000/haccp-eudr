@@ -1,5 +1,4 @@
 <template>
-    <!-- out-in: без наложения двух шагов в потоке (высота); длительности — п. 7.2 -->
     <Transition
         :name="instant ? 'survey-step-instant' : 'survey-step'"
         mode="out-in"

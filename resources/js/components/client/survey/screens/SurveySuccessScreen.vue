@@ -1,5 +1,3 @@
-<!-- Экран благодарности после успешной отправки ответов опроса.
-     Показывает итоговое сообщение и ссылку на главную страницу. -->
 <template>
     <div class="survey-page__block survey-page__block--success">
         <div class="survey-page__success-inner">

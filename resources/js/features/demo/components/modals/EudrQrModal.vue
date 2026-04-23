@@ -11,7 +11,6 @@
         @update:show="onVisibilityChange"
     >
         <template v-if="batch">
-            <!-- Скрытое поле для execCommand: в модалке динамический input часто не копирует -->
             <textarea
                 ref="copyField"
                 class="eudr-qr-modal__copy-field"

@@ -2,7 +2,6 @@
     <n-message-provider placement="top">
         <div class="app-wrapper">
             <Header />
-            <!-- Глобальный баннер уведомления о задаче охлаждения зерна (AI) -->
             <GrainCoolingNotificationBanner />
             <main
                 class="main-content"
@@ -11,7 +10,6 @@
                 <router-view />
                 <Footer />
             </main>
-            <!-- Модальный оверлей согласия с политикой конфиденциальности (показывается один раз) -->
             <ConsentOverlay />
         </div>
     </n-message-provider>

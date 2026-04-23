@@ -1,6 +1,5 @@
 <template>
     <div class="box-bottom-panel-content pending-photo-capture-block">
-        <!-- 1 Фото -->
         <div
             v-show="showCamera"
             class="
@@ -29,7 +28,6 @@
             </ul>
         </div>
 
-        <!-- Документ: фиксированная подпись → кнопка → имя файла. -->
         <div
             v-show="showDocument"
             class="

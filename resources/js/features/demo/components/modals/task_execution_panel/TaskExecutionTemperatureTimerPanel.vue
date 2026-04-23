@@ -1,11 +1,8 @@
 <template>
-    <!-- Панель для полей temperature / timer: ввод значения, keypad, имитация фото. -->
     <div class="checklist-modal__pending-input">
-        <!-- Подпись типа поля (из TASK_FIELD_TYPE_OPTIONS или fallback). -->
         <p class="checklist-modal__pending-input-label">
             {{ fieldTypeDisplay }}
         </p>
-        <!-- Черновик числа: префикс/суффикс (🌡️/°C или ⏱️/мин) передаёт родитель. -->
         <n-input
             :value="temperatureDraft"
             size="large"
@@ -29,7 +26,6 @@
                 >
             </template>
         </n-input>
-        <!-- Экранная клавиатура: цифры + инструменты; события на родителя для мутации черновика и ✓. -->
         <div class="checklist-modal__keypad" role="group">
             <div class="checklist-modal__keypad-digits">
                 <button
@@ -59,7 +55,6 @@
             </div>
         </div>
 
-        <!-- Только камера (документ скрыт), подпись label_for_element над кнопкой. -->
         <PendingPhotoCaptureBlock
             :show-document="false"
             :show-camera="showCamera"

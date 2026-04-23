@@ -1,5 +1,4 @@
 <template>
-    <!-- Модалка создания новой контрольной точки (мастер из 2 шагов; без закрытия по клику вне и по Esc) -->
     <n-modal
         :show="show"
         preset="card"
@@ -13,12 +12,10 @@
         @update:show="onUpdateShow"
         @after-leave="resetAddForm"
     >
-        <!-- Тело модалки: прокручиваемая колонка (рельс шагов + форма) -->
         <div
             class="checklists-add-modal__body"
             :style="addModalBodyScrollStyle"
         >
-            <!-- Рельс этапов 1–2: назад только на пройденный шаг (кнопка), текущий и будущий — не кликабельны -->
             <nav
                 class="checklists-add-wizard__rail"
                 :aria-label="t('demo.create_task.wizard_aria')"
@@ -77,7 +74,6 @@
                 label-placement="top"
                 label-width="auto"
             >
-                <!-- Шаг 1 мастера: название, тип задачи, блок «Детали задачи» (скрывается на шаге 2) -->
                 <template v-if="addWizardStep === 1">
                     <n-form-item
                         :label="t('demo.create_task.title_label')"
@@ -110,7 +106,6 @@
                             </n-radio>
                         </n-radio-group>
                     </n-form-item>
-                    <!-- Блок «Детали задачи»: ответственный и частота -->
                     <div class="checklists-details-block">
                         <p class="checklists-details-heading">
                             {{ t('demo.create_task.task_details') }}
@@ -235,7 +230,6 @@
                     </div>
                 </template>
                 <template v-else>
-                    <!-- Тип «Оборудование»: выбор группы и единиц оборудования («Предмет задачи») -->
                     <div
                         v-if="
                             addForm.taskScopeType ===
@@ -272,7 +266,6 @@
                             </div>
                         </n-checkbox-group>
                     </div>
-                    <!-- Тип «Комнаты»: выбор помещений по группам («Предмет задачи») -->
                     <div
                         v-if="
                             addForm.taskScopeType === TASK_SCOPE_TYPE.ROOMS
@@ -307,7 +300,6 @@
                             </div>
                         </n-checkbox-group>
                     </div>
-                    <!-- Конструктор полей замера (типы полей, конфиги) -->
                     <div class="checklists-task-fields-block">
                         <ChecklistTaskFieldsSection
                             v-model="addForm.taskFieldDefinitions"
@@ -319,7 +311,6 @@
                             "
                         />
                     </div>
-                    <!-- Разрешение корректировок в отчёте ответственным -->
                     <div class="checklists-report-corrections">
                         <div class="header-checklists-report-corrections">
                             <p class="checklists-report-corrections__title">
@@ -338,7 +329,6 @@
                 </template>
             </n-form>
         </div>
-        <!-- Футер модалки: Отмена, Добавить, Далее (закрытие только отсюда или крестик в заголовке карточки) -->
         <template #footer>
             <div class="checklists-modal-footer">
                 <n-button type="warning" size="large" @click="closeModal">

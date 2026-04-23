@@ -1,6 +1,5 @@
 <template>
     <div class="hero-section__content">
-        <!-- Left Content -->
         <div class="hero-section__left">
             <h1>
                 {{ $t("home.hero.title_line1") }}
@@ -25,7 +24,6 @@
             </div>
         </div>
 
-        <!-- Right Content -->
         <div class="hero-section__right">
             <img
                 :src="'/images/tablets.jpg'"

@@ -2,14 +2,12 @@
     <header class="header">
         <nav class="nav" role="navigation" :aria-label="$t('header.nav.aria_label')">
             <div class="container nav-container">
-                <!-- Лого, ссылка на главную с учётом локали -->
                 <div class="nav-logo">
                     <router-link :to="safeLogo.link" class="logo-link">
                         <span class="logo-site">{{ siteConfig.name }}</span>
                         <span class="logo-app">demo</span>
                     </router-link>
                 </div>
-                <!-- Пункты меню, десктоп -->
                 <div v-if="!isMobile" class="nav-menu">
                     <NavMenuItem
                         v-for="item in safeMenu"
@@ -18,7 +16,6 @@
                         variant="desktop"
                     />
                 </div>
-                <!-- Кнопка открытия/закрытия мобильного меню -->
                 <button
                     v-if="isMobile"
                     class="mobile-menu-toggle"
@@ -31,7 +28,6 @@
                         class="mobile-menu-icon"
                     />
                 </button>
-                <!-- Мобильное меню, те же пункты что в десктопе -->
                 <div
                     v-if="isMobile"
                     class="mobile-menu"
@@ -39,7 +35,6 @@
                     role="menu"
                     :aria-hidden="!isMobileMenuOpen"
                 >
-                    <!-- Переключатель языков первым пунктом, когда в шапке он скрыт (≤580px) и языков 2+ -->
                     <div class="box-switch-lang-mobile-menu">
                         <div
                             v-if="
@@ -88,9 +83,7 @@
                         :on-item-click="closeMobileMenu"
                     />
                 </div>
-                <!-- Переключатель языка -->
                 <div class="nav-actions">
-                    <!-- Кнопки локалей из data-languages, POST /locale и переход по URL -->
                     <div
                         v-if="languagesList.length > 1"
                         class="lang-switcher"
@@ -115,7 +108,6 @@
                             {{ lang.prefix }}
                         </button>
                     </div>
-                    <!-- Переход на страницу опроса -->
                     <button
                         type="button"
                         class="btn-client btn-primary nav-cta"

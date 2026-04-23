@@ -1,5 +1,3 @@
-<!-- Intro-экран: приветствие, описание опроса, кнопка «Начать».
-     Показывается когда пользователь ещё не проходил опрос (нет записи в localStorage). -->
 <template>
     <div class="survey-page__block survey-page__block--intro">
         <div class="survey-page__intro-main">

@@ -1,5 +1,4 @@
 <template>
-    <!-- Демо-предупреждение про недоступный Bluetooth-датчик при вводе температуры/времени; скрыто для других типов полей. -->
     <n-alert
         v-if="showAlert"
         title="Error equipment"
@@ -7,7 +6,6 @@
     >
         {{ t('demo.execution_meta.bluetooth_error') }}
     </n-alert>
-    <!-- Контекст замера: цели (оборудование или помещения) в одной строке. -->
     <div class="checklist-modal__pending-meta">
         <b class="checklist-modal__pending-meta-line">
             {{ targetsDisplay }}

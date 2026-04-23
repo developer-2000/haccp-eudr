@@ -1,7 +1,5 @@
 <template>
-    <!-- Секция дашборда демо: метрики + горячие задачи + модалка просмотра -->
     <div class="dashboard-section">
-        <!-- Плитки метрик: выполнение, compliance, критические CCP, без ответственного, дата инспекции -->
         <div class="dashboard-metrics">
             <article class="metric-card">
                 <p class="metric-card__label metric-card__label--success">
@@ -35,7 +33,6 @@
             </article>
         </div>
 
-        <!-- Список «горячих» задач (не OK): клик открывает модалку без перехода в Checklists -->
         <div class="hot-tasks">
             <div class="hot-tasks__header">
                 <h2 class="hot-tasks__title">{{ t('demo.dashboard.hot_tasks') }}</h2>
@@ -61,7 +58,6 @@
             {{ t('demo.dashboard.checklists') }}
         </RouterLink>
 
-        <!-- Модалка просмотра задачи: без v-if каждый заход на дашборд монтировал бы модалку и тянул Pinia taskGrainCooling без необходимости -->
         <ShowTaskModal
             v-if="isTaskModalOpen"
             :show="isTaskModalOpen"

@@ -1,13 +1,11 @@
 <template>
     <div class="demo-page">
-        <!-- Мобильная навигация по секциям: над топбаром демо (на lg+ скрыта в компоненте) -->
         <DemoSectionNavigation
             variant="bottom"
             :links="sectionLinks"
             :active-id="activeSectionId"
             @select="setActiveSection"
         />
-        <!-- Верхняя панель: имитация выбора дня отчётов + дата -->
         <header class="demo-topbar">
             <div class="container demo-topbar__inner">
                 <button
@@ -54,7 +52,6 @@
             </div>
         </header>
 
-        <!-- CTA на опрос: только на адаптиве, под топбаром, на всю ширину без скруглений -->
         <RouterLink
             :to="surveyPath"
             class="btn-client btn-success demo-topbar-cta"
@@ -62,9 +59,7 @@
             {{ t('demo.page.cta_survey') }}
         </RouterLink>
 
-        <!-- Лейаут: сайдбар (desktop) + основной контент -->
         <div class="container demo-layout">
-            <!-- Сайдбар: навигация по секциям (/demo/dashboard … /demo/reports), CTA на опрос -->
             <aside class="demo-sidebar">
                 <DemoSectionNavigation
                     variant="sidebar"
@@ -81,7 +76,6 @@
             </aside>
 
             <main class="demo-main">
-                <!-- Активная секция: лениво загружается при первом переходе -->
                 <section class="demo-section" :id="activeSectionConfig.id" >
                     <h1 class="demo-section__title">
                         {{ activeSectionConfig.title }}

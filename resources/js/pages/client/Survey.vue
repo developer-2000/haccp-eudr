@@ -3,7 +3,6 @@
         <div v-if="questionsLoadError" class="survey-page__api-error" role="alert">
             {{ questionsLoadError }}
         </div>
-        <!-- Показ 4 значного цифрового блока верификации кода -->
         <SurveyDigitalCodeVerification
             v-if="activeScreen === 'verification'"
             ref="pinVerificationRef"
@@ -11,7 +10,6 @@
             @complete="handlePinComplete"
         />
 
-        <!-- Экран завершённого опроса: показывает замаскированный email и дату отправки -->
         <SurveySubmittedState
             v-else-if="activeScreen === 'submitted'"
             :masked-email="submittedState.maskedEmail"
@@ -19,20 +17,17 @@
             @reset-survey="resetSurveyFromSubmittedState"
         />
 
-        <!-- Intro-экран: приветствие, описание, кнопка «Начать» -->
         <SurveyIntroScreen
             v-else-if="activeScreen === 'intro'"
             @start="goNextSurveyStep"
         />
 
-        <!-- Экран благодарности после успешной отправки -->
         <SurveySuccessScreen
             v-else-if="activeScreen === 'success'"
             :success-copy="successCopy"
             :home-route-location="surveyHomeRouteLocation"
         />
 
-        <!-- Основной каркас опроса: шапка (прогресс + навигация) + контент шагов -->
         <SurveyMainFlow
             v-else-if="activeScreen === 'survey'"
             :progress-numerator="progressNumerator"
@@ -45,7 +40,6 @@
             :instant-transition="skipIntroQuestionTransitionOnce"
             @go-back="goPreviousSurveyStep"
         >
-            <!-- Lead-форма: сбор контактных данных перед отправкой -->
             <SurveyLeadScreen
                 v-if="currentStepId === SURVEY_FLOW_STEP_LEAD"
                 :answers="answers"
@@ -56,7 +50,6 @@
                 @submit="markSurveySubmitted"
             />
 
-            <!-- Шаг вопроса: рендер radio/checkbox/select/text для текущего вопроса -->
             <SurveyQuestionStep
                 v-else-if="currentQuestion"
                 :question="currentQuestion"

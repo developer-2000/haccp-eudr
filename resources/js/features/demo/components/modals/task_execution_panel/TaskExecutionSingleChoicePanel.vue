@@ -1,11 +1,8 @@
 <template>
-    <!-- Панель single_choice: выбор одного варианта из конфига задачи, комментарий, вложения. -->
     <div class="checklist-modal__pending-input">
-        <!-- Текст вопроса из taskFieldDefinitions[0].config.question. -->
         <p class="checklist-modal__one-answer">
             {{ question }}
         </p>
-        <!-- Крупные «радио»-кнопки (touch-friendly); выбор шлётся в родитель v-model:answer. -->
         <div
             class="checklist-modal__single-choice-options"
             role="radiogroup"
@@ -26,7 +23,6 @@
                 <span>{{ option }}</span>
             </button>
         </div>
-        <!-- Комментарий исполнителя (опционально). -->
         <n-input
             :value="comment"
             type="textarea"
@@ -34,7 +30,6 @@
             :placeholder="t('demo.single_choice_panel.comment_placeholder')"
             @update:value="$emit('update:comment', $event)"
         />
-        <!-- Запись в объект замера и закрытие панели — в родителе (submit). -->
         <n-button
             type="primary"
             class="checklist-modal__single-choice-submit"
@@ -44,7 +39,6 @@
             {{ t('demo.single_choice_panel.confirm_answer') }}
         </n-button>
 
-        <!-- Фото → документ (PendingPhotoCaptureBlock). -->
         <PendingPhotoCaptureBlock
             :report-file-name="reportFileName"
             :show-document="true"

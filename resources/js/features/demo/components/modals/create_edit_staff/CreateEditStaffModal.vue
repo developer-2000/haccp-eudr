@@ -1,5 +1,4 @@
 <template>
-    <!-- Модалка создания / редактирования сотрудника -->
     <n-modal
         v-model:show="modalShow"
         preset="card"
@@ -9,14 +8,12 @@
         :segmented="{ content: true, footer: true }"
         @after-leave="onModalAfterLeave"
     >
-        <!-- Поля совпадают с моделью staff; сохранение — addStaff или updateStaff в useDemoState. -->
         <n-form
             class="create-edit-staff-modal__form"
             :model="form"
             label-placement="top"
             label-width="auto"
         >
-            <!-- Привязка к площадке: влияет на фильтрацию в табах и на выбор ответственного в чек-листах по нише. -->
             <n-form-item :label="t('demo.staff_modal.site')" path="siteId">
                 <n-select
                     :key="siteSelectResetKey"
@@ -50,7 +47,6 @@
             </n-form-item>
         </n-form>
         <template #footer>
-            <!-- Закрытие без сохранения; «Сохранить» — валидация и вызов API composable. -->
             <div class="create-edit-staff-modal__footer">
                 <n-button type="warning" @click="modalShow = false">
                     {{ t('demo.staff_modal.cancel') }}

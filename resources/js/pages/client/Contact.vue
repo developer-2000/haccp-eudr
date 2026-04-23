@@ -2,7 +2,6 @@
     <div class="section-container-contact">
         <div class="container">
             <div class="contact-grid">
-                <!-- Левая колонка: содержимое (editorial) -->
                 <div class="contact-intro">
                     <span class="contact-intro__eyebrow">{{ t('contact.eyebrow') }}</span>
                     <h1 class="contact-intro__title">{{ t('contact.title') }}</h1>
@@ -52,7 +51,6 @@
 
                 </div>
 
-                <!-- Правая колонка: форма / success-view -->
                 <div class="contact-form-wrap">
                     <div v-if="sent" class="contact-sent-card">
                         <h2 class="contact-sent-card__title">{{ t('contact.sent_title') }}</h2>

@@ -1,5 +1,4 @@
 <template>
-    <!-- Основная модалка «Детали задачи» -->
     <n-modal
         v-model:show="showModel"
         preset="card"
@@ -9,7 +8,6 @@
         :segmented="{ content: true, footer: true }"
         @update:show="onVisibilityChange"
     >
-        <!-- Шапка модалки: компактный заголовок с иконкой/типом задачи и доступным aria-лейблом -->
         <template #header>
             <CompleteTaskModalHeader
                 :has-task="Boolean(viewTask)"
@@ -18,10 +16,8 @@
                 :task-type-aria="taskTypeAria"
             />
         </template>
-        <!-- Тело модалки рендерим только когда есть выбранная задача -->
         <template v-if="viewTask">
             <div class="checklist-modal__content">
-                <!-- Секция ответственного: исполнитель/персонал и контекст режима -->
                 <TaskAssigneeSection
                     :task="viewTask"
                     :staff="staff"
@@ -29,14 +25,11 @@
                     :task-type="taskType"
                     :modal-show="show"
                 />
-                <!-- оборудование/помещения -->
                 <TaskTargetsLine
                     :task-scope-type="viewTask.taskScopeType"
                     :targets-line="modalTargetsLine"
                 />
-                <!-- секция Суть задачи -->
                 <TaskFieldSummarySection :lines="taskFieldSummaryLines"/>
-                <!-- Основная таблица замеров по времени: статусы, pending, раскрытие действий -->
                 <TaskMeasurementsTable
                     :task="viewTask"
                     :is-hot-mode="isHotMode"
@@ -47,10 +40,8 @@
             </div>
         </template>
 
-        <!-- Боковая модалка выполнения задания -->
         <TaskExecutionPanelModal ref="pendingDrawerRef" :task="viewTask"/>
 
-        <!-- Нижние кнопки -->
         <template #footer>
             <div class="checklist-modal__footer">
                 <n-button

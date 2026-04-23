@@ -1,21 +1,16 @@
 <template>
-    <!-- Боковая панель выполнения pending-замера: ширина от viewport, справа, открывается через ref.open() из родителя (ShowTaskModal). -->
     <n-drawer v-model:show="isOpen" :width="pendingDrawerWidth" placement="right">
         <n-drawer-content closable>
-            <!-- Шапка drawer: название задачи; крестик закрытия — стандартный от n-drawer-content. -->
             <template #header>
                 <span class="checklist-modal__pending-header-title">
                     {{ pendingDrawerTitle }}
                 </span>
             </template>
-            <!-- Тело панели: контекст + одна из трёх форм ввода по типу поля задачи. -->
             <div class="checklist-modal__pending-drawer">
-                <!-- Алерт про Bluetooth для temp/timer + строка целей (оборудование/помещения). Показывается всегда, алерт — только для температуры/таймера. -->
                 <TaskExecutionMetaBlock
                     :show-alert="showBluetoothAlert"
                     :targets-display="pendingDrawerTargetsDisplay"
                 />
-                <!-- Ввод числа: температура °C или время (мин), экранная клавиатура, имитация фото. Только если тип поля temperature или timer. -->
                 <TaskExecutionTemperatureTimerPanel
                     v-if="showBluetoothAlert"
                     :field-type-display="pendingDrawerFieldTypeDisplay"
@@ -27,7 +22,6 @@
                     @keypad-press="onKeypadPress"
                     @camera-shot="simulateCameraShot"
                 />
-                <!-- Один вариант из списка + комментарий + вложения (файл/фото). Для поля single_choice. -->
                 <TaskExecutionSingleChoicePanel
                     v-else-if="pendingDrawerFieldType === 'single_choice'"
                     :question="pendingSingleChoiceQuestion"
@@ -40,7 +34,6 @@
                     @attach-report="simulateReportFileAttach"
                     @camera="simulateCameraShot"
                 />
-                <!-- Заявка: описание, статус выполнен/не выполнен, комментарий, вложения. Для поля ticket. -->
                 <TaskExecutionTicketPanel
                     v-else-if="pendingDrawerFieldType === 'ticket'"
                     :description="pendingTicketDescription"

@@ -1,14 +1,11 @@
 <template>
-    <!-- Таблица замеров показывается только если у задачи есть хотя бы один замер -->
     <div v-if="task.measurements?.length" class="checklist-modal__table-wrap">
         <table class="checklist-modal__table checklist-modal__table--measurements">
-            <!-- Фиксируем пропорции колонок: время меньше, решение/статус равные -->
             <colgroup>
                 <col class="checklist-modal__col-time">
                 <col class="checklist-modal__col-decision">
                 <col class="checklist-modal__col-status">
             </colgroup>
-            <!-- Заголовок колонок таблицы замеров -->
             <thead>
                 <tr>
                     <th>{{ t('demo.measurements.col_time') }}</th>
@@ -16,7 +13,6 @@
                     <th>{{ t('demo.measurements.col_status') }}</th>
                 </tr>
             </thead>
-            <!-- Строки повременной выполнения задачи -->
             <tbody
                 v-for="item in task.measurements"
                 :key="item.time"
@@ -80,14 +76,12 @@
                         <span
                             class="checklist-modal__measurement-value checklist-modal__measurement-value--status"
                         >
-                            <!-- Результат (понижение, повышение) -->
                             <p
                                 v-if="item.aiWarning?.deviationLine"
                                 class="checklist-modal__status-deviation-line checklist-modal__bolt-text metric-value"
                             >
                                 {{ item.aiWarning.deviationLine }}
                             </p>
-                            <!-- problem: раскрытие корректирующих действий -->
                             <button
                                 v-if="!isHotMode && item.status === 'problem'"
                                 type="button"
@@ -106,7 +100,6 @@
                             >
                                 {{ t('demo.measurements.respond') }}
                             </button>
-                            <!-- pending: панель выполнения -->
                             <button
                                 v-else-if="
                                     !isHotMode &&
@@ -125,7 +118,6 @@
                             >
                                 {{ t('demo.measurements.resolve') }}
                             </button>
-                            <!-- строка ответа на проблему -->
                             <p
                                 v-if="item.status === 'problem' && item.correctiveAction"
                                 class="checklist-modal__selected-action"
@@ -135,7 +127,6 @@
                         </span>
                     </td>
                 </tr>
-                <!-- Раскрывающаяся строка выбора корректирующего действия (только для problem и только в обычном режиме) -->
                 <tr v-if=" !isHotMode && expandedActionRowKey === item.time && item.status === 'problem' " >
                     <td colspan="3" class="checklist-modal__action-row">
                         <div class="checklist-modal__action-box">
@@ -151,7 +142,6 @@
                         </div>
                     </td>
                 </tr>
-                <!-- Отдельная строка комментария замера, если комментарий заполнен -->
                 <tr v-if="String(item.comment ?? '').trim()">
                     <td colspan="3" class="checklist-modal__comment-row">
                         {{ item.comment }}

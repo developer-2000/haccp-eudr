@@ -1,5 +1,3 @@
-<!-- Lead-форма: сбор контактных данных (email, имя, телефон) перед отправкой ответов.
-     Экранная обёртка над SurveyLeadForm, владеет переводом копирайта и ID-константами полей. -->
 <template>
     <div class="survey-page__block survey-page__block--lead">
         <SurveyLeadForm

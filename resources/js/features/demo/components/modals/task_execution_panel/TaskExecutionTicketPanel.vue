@@ -1,7 +1,5 @@
 <template>
-    <!-- Панель ticket: заявка по описанию из поля, статус, комментарий, вложения. -->
     <div class="checklist-modal__pending-input">
-        <!-- Read-only описание из taskFieldDefinitions (тип ticket). -->
         <div class="checklist-modal__ticket-description">
             <p class="checklist-modal__ticket-description-title">
                 {{ t('demo.ticket_panel.description_label') }}
@@ -10,7 +8,6 @@
                 {{ description }}
             </p>
         </div>
-        <!-- Два состояния заявки: не выполнен / выполнен (влияет на success/problem при сабмите). -->
         <div
             class="checklist-modal__single-choice-options"
             role="radiogroup"
@@ -43,7 +40,6 @@
                 <span>{{ t('demo.ticket_panel.completed') }}</span>
             </button>
         </div>
-        <!-- Комментарий к результату заявки. -->
         <n-input
             :value="ticketComment"
             type="textarea"
@@ -51,7 +47,6 @@
             :placeholder="t('demo.ticket_panel.comment_placeholder')"
             @update:value="$emit('update:ticketComment', $event)"
         />
-        <!-- Фиксация статуса и закрытие — логика в родителе. -->
         <n-button
             type="primary"
             class="checklist-modal__single-choice-submit"
@@ -60,7 +55,6 @@
             {{ t('demo.ticket_panel.confirm_status') }}
         </n-button>
 
-        <!-- Фото → документ (PendingPhotoCaptureBlock). -->
         <PendingPhotoCaptureBlock
             :report-file-name="reportFileName"
             :show-document="true"

@@ -1,7 +1,5 @@
 <template>
-    <!-- Секция чек-листов: табы ниш + сетка карточек CCP -->
     <div class="checklists-section">
-        <!-- Панель: переключение ниш (Кофейня / Пекарня / Мясо) и кнопка «Добавить CCP» -->
         <div class="checklists-toolbar">
             <n-button
                 type="primary"
@@ -28,7 +26,6 @@
                     </span>
                 </template>
 
-                <!-- Пустое состояние: в нише ещё нет задач -->
                 <div
                     v-if="!tasksByNiche(tab.id).length"
                     class="checklists-empty"
@@ -36,7 +33,6 @@
                     {{ t('demo.checklists.empty_state') }}
                 </div>
 
-                <!-- Сетка карточек контрольных точек по выбранной нише -->
                 <div v-else class="checklists-grid">
                     <TaskCard
                         v-for="task in tasksByNiche(tab.id)"
@@ -52,14 +48,12 @@
             </n-tab-pane>
         </n-tabs>
 
-        <!-- Модалка создания задачи -->
         <CreateTaskModal
             v-model:show="addModalVisible"
             :active-niche="activeNiche"
             :staff="staff"
         />
 
-        <!-- Модалка просмотра задачи: v-if — store зерна и логи taskGrainCooling только после первого открытия (диплинк открывает модалку → монтаж) -->
         <ShowTaskModal
             v-if="isModalOpen"
             ref="showTaskModalRef"
