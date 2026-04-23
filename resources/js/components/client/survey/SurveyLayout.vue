@@ -53,7 +53,7 @@ defineProps({
         flex-direction: column;
         width: 100%;
         margin: 0 auto;
-        padding: 0;
+        padding: 0 5px;
         box-sizing: border-box;
         overflow-x: clip;
     }

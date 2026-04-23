@@ -662,10 +662,26 @@ function focusSurveyStepHeading() {
     });
 }
 
-watch(transitionStepKey, () => {
-    nextTick(() => {
-        focusSurveyStepHeading();
+// Скролл страницы наверх при переходе с вопроса на вопрос
+watch(transitionStepKey, async () => {
+    await nextTick();
+
+    const el = document.querySelector(".app-wrapper .main-content");
+    if (!el) return;
+
+    const observer = new ResizeObserver(() => {
+        el.scrollTo({ top: 0, behavior: "smooth" });
+        observer.disconnect();
+
+        setTimeout(() => {
+            if (el.scrollTop > 0) {
+                el.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }, 500);
     });
+
+    observer.observe(el);
+    focusSurveyStepHeading();
 });
 
 watch(
@@ -700,8 +716,7 @@ onMounted(async () => {
     previousBranchParentAnswer = branchId ? answers[branchId] : undefined;
     clampCurrentIndexToVisibleSteps();
     if (typeof document !== "undefined") {
-        document
-            .querySelector(".app-wrapper .main-content")
+        document.querySelector(".app-wrapper .main-content")
             ?.style.setProperty(
                 "scroll-padding-bottom",
                 SURVEY_MOBILE_SCROLL_PADDING_BOTTOM,
@@ -731,8 +746,7 @@ function isSurveyFlowBlocked() {
 onUnmounted(() => {
     clearAutoNextTimer();
     if (typeof document !== "undefined") {
-        document
-            .querySelector(".app-wrapper .main-content")
+        document.querySelector(".app-wrapper .main-content")
             ?.style.removeProperty("scroll-padding-bottom");
     }
 });
@@ -1134,6 +1148,11 @@ function resetSurveyFromSubmittedState() {
     flex: 1;
     //min-height: 0;
     min-width: 0;
+
+    @media (max-width: $breakpoint-md) {
+        flex: 0 0 auto;
+        min-height: 100%;
+    }
 
     .survey-page__api-error {
         margin-bottom: $spacing-md;

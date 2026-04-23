@@ -726,7 +726,7 @@ onUnmounted(() => {
                     scroll-snap-stop: always;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
+                    //justify-content: center;
                     box-sizing: border-box;
 
                     &.about-fp-section--cta {
@@ -742,7 +742,7 @@ onUnmounted(() => {
 
                         @media (max-width: 600px) {
                             box-sizing: border-box;
-                            padding: 20px 0 40px 10px;
+                            padding: 0 0 40px 10px;
                         }
 
                         &.about-fp--cta {
@@ -981,10 +981,10 @@ onUnmounted(() => {
 
 @media (max-width: 1050px) {
     .about-page {
-        padding: 20px 15px 0 15px;
+        padding: 10px 15px 0 15px;
 
         .about-page__title-bar{
-            padding-bottom: 20px;
+            padding-bottom: 5px;
 
             .about-page__heading{
                 text-align: center;
