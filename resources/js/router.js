@@ -85,6 +85,25 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        }
+        if (to.hash) {
+            return { el: to.hash, top: 0 };
+        }
+        return new Promise((resolve) => {
+            requestAnimationFrame(() => {
+                const scrollEl = document.querySelector(".app-wrapper .main-content");
+                if (scrollEl) {
+                    scrollEl.scrollTo({ top: 0 });
+                    resolve(false);
+                    return;
+                }
+                resolve({ top: 0 });
+            });
+        });
+    },
 });
 
 export default router;
