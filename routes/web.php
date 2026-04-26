@@ -15,6 +15,20 @@ if ($localePattern === '') {
 Route::post('/locale', [LocaleController::class, 'set'])
     ->name('locale.set');
 
+// Лёгкий пинг сессии: фронт дёргает при возврате во вкладку, чтобы получить актуальный CSRF
+// и понять, жива ли сессия (после простоя >SESSION_LIFETIME Laravel создаст новую).
+// Путь вне `api/*` — чтобы не попадать под CORS из config/cors.php.
+Route::get('/session/ping', function () {
+    return response()
+        ->json([
+            'status' => 'success',
+            'data' => [
+                'csrf' => csrf_token(),
+            ],
+        ])
+        ->header('Cache-Control', 'no-store');
+})->middleware('throttle:60,1')->name('client.session.ping');
+
 // Переход на язык по умолчанию
 Route::get('/', fn () => view('index-client'))
     ->middleware(['setLocale']);

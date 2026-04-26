@@ -166,6 +166,20 @@ export class ApiAxios {
         }
 
         const status = error?.response?.status ?? "Error";
+
+        // Session expired / CSRF mismatch (Laravel 419). Reactive safety net:
+        // happens when the tab stayed open past SESSION_LIFETIME and the user
+        // submits without a prior visibilitychange refresh. Reload picks up
+        // the fresh CSRF token from the Blade meta tag.
+        if (status === 419) {
+            showToast?.(
+                "Session expired",
+                "The page will reload to refresh the session.",
+            );
+            setTimeout(() => window.location.reload(), 1500);
+            return returnError ? "Session expired" : null;
+        }
+
         let errorMessages = getApiErrors(error);
         if (typeof errorMessages !== "string") {
             errorMessages = "An unknown error occurred.";
