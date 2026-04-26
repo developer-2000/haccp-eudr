@@ -41,7 +41,7 @@ return [
         'token_not_found' => 'Tokenul nu a fost găsit. Te rugăm să completezi sondajul din nou.',
         'network_error' => 'Eroare de rețea. Te rugăm să încerci din nou.',
         'pin_instruction' => 'Un cod PIN a fost trimis la adresa de email indicată. Introduceți-l pentru a confirma identitatea.',
-        'pin_attempts_left' => '1 din 2 încercări rămase',
+        'pin_attempts_left' => '{used} din {total} încercări rămase',
         'pin_container_aria' => 'Verificare cod PIN',
         'pin_group_aria' => 'Cod PIN din 4 cifre',
     ],

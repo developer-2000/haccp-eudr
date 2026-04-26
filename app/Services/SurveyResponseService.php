@@ -87,6 +87,7 @@ class SurveyResponseService
 
         $verification_token = $this->generateToken();
         $verification_code = $this->generateVerificationCode();
+        $totalAttempts = (int) config('site.survey.attempts_4_digits', 2);
 
         // 2.2 Создаём или обновляем draft
         $draft = SurveyResponse::updateOrCreate(
@@ -95,7 +96,7 @@ class SurveyResponseService
                 'status_responses' => 'draft',
             ],
             $this->buildBaseData($contacts, $answersForStorage) + [
-                'attempt_counter' => 2,
+                'attempt_counter' => $totalAttempts,
                 'verification_code' => $verification_code,
                 'verification_token' => $verification_token,
             ]
@@ -112,6 +113,7 @@ class SurveyResponseService
             'status' => 'success',
             'update_record' => true,
             'attempt_counter' => $draft->attempt_counter,
+            'total_attempts' => $totalAttempts,
             'verification_token' => $verification_token,
         ];
     }

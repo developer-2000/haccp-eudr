@@ -61,25 +61,25 @@ class SetLocale
         // ============================================
         // 2. КАКОЙ ЯЗЫК ВЫБРАТЬ АКТИВНЫМ (locale)
         // ============================================
-        // Если пользователь ранее ВЫБРАЛ язык через переключатель (cookie/session)
-        // И этот язык есть в текущем списке отображаемых (two) → используем его
-        // Иначе → основной язык сайта (main)
-        $fromCookie = $request->cookie('locale');
-        $fromSession = $request->session()->get('locale');
-        $savedLocale = $fromCookie ?? $fromSession;
+        // Приоритет:
+        // 1) URL-сегмент {locale} (явное намерение по адресу страницы — /en/, /ro/, ...)
+        // 2) Заголовок X-Locale (фронт сам сообщает текущую локаль для POST'ов
+        //    без префикса — /survey/submit, /survey/verify и т.п.)
+        // 3) Основной язык сайта (main = APP_LOCALE)
+        // Session/cookie не используем намеренно — чтобы локаль не «застревала».
+        $fromUrl = $request->route('locale');
+        $fromHeader = $request->header('X-Locale');
 
-        // Активный язык: saved (если он в two) ИЛИ main
-        if ($savedLocale && in_array($savedLocale, $two, true)) {
-            $locale = $savedLocale;
+        if ($fromUrl && in_array($fromUrl, $available, true)) {
+            $locale = $fromUrl;
+        } elseif ($fromHeader && in_array($fromHeader, $available, true)) {
+            $locale = $fromHeader;
         } else {
             $locale = $main;
         }
 
-        if (!in_array($locale, $available)) {
-            $locale = $main;
-        }
-
-        // Сохраняем в session
+        // Сохраняем в session — пригодится для blade-переключателя языков и подобных мест,
+        // на выбор активной локали в этом middleware она не влияет.
         $request->session()->put('locale', $locale);
 
         App::setLocale($locale);

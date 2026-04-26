@@ -7,6 +7,7 @@
             v-if="activeScreen === 'verification'"
             ref="pinVerificationRef"
             :attempts-left="pinAttemptsLeft"
+            :total-attempts="pinAttemptsTotal"
             @complete="handlePinComplete"
         />
 
@@ -184,7 +185,9 @@ const submittedState = reactive({
     submittedAt: null,
 });
 const submittedStateResolved = ref(false);
-const pinAttemptsLeft = ref(2);
+/** Лимит попыток ввода 4-значного кода. Приходит с сервера в ответе на /survey/submit. */
+const pinAttemptsTotal = ref(0);
+const pinAttemptsLeft = ref(0);
 const pinVerificationRef = ref(null);
 
 let autoNextTimer = null;
@@ -246,7 +249,7 @@ async function submitSurveyResponse(data = null) {
     if(response?.status === "success"){
         const { status } = response.data
         if(status === "success"){
-            const { update_record, attempt_counter, verification_token } = response.data
+            const { update_record, attempt_counter, total_attempts, verification_token } = response.data
 
             // 1 Создал впервые
             if(!update_record){
@@ -257,14 +260,15 @@ async function submitSurveyResponse(data = null) {
                 // Показать благодарность
                 finalizeSurveyLocally();
             }
-            // 2 Обновление ответов (2 попытки)
+            // 2 Обновление ответов (с лимитом попыток из конфига бэка)
             else{
                 // Сообщение для пользователя
                 toast.info(t('survey.ui.verification_sent'), { autoClose: 5000 });
                 // Сохранение токена доступа к его записи ответов draft
                 sessionStorage.setItem(SS_VERIFICATION_TOKEN, verification_token);
-                // Инициализация счётчика попыток
+                // Инициализация счётчиков попыток (текущий и максимальный)
                 pinAttemptsLeft.value = attempt_counter;
+                pinAttemptsTotal.value = Number(total_attempts) || attempt_counter;
 
                 // Показ 4 значного цифрового блока верификации кода
                 if(attempt_counter > 0){

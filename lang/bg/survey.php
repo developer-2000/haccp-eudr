@@ -41,7 +41,7 @@ return [
         'token_not_found' => 'Токен не найден. Попробуйте пройти опрос заново.',
         'network_error' => 'Ошибка сети. Попробуйте снова.',
         'pin_instruction' => 'PIN-код отправлен на указанный email. Введите его для подтверждения.',
-        'pin_attempts_left' => '1 из 2 попыток осталось',
+        'pin_attempts_left' => '{used} из {total} попыток осталось',
         'pin_container_aria' => 'Проверка PIN-кода',
         'pin_group_aria' => '4-значный PIN-код',
     ],

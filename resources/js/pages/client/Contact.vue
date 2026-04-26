@@ -91,6 +91,12 @@
                                         v-model:value="form.email"
                                         size="large"
                                         :placeholder="t('contact.email_placeholder')"
+                                        :input-props="{
+                                            type: 'email',
+                                            name: 'email',
+                                            autocomplete: 'email',
+                                            inputmode: 'email',
+                                        }"
                                     />
                                 </n-form-item>
                             </div>

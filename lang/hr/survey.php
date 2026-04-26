@@ -41,7 +41,7 @@ return [
         'token_not_found' => 'Token nije pronađen. Pokušajte ponovno ispuniti anketu.',
         'network_error' => 'Mrežna pogreška. Pokušajte ponovno.',
         'pin_instruction' => 'PIN kod poslan je na navedenu adresu e-pošte. Unesite ga za potvrdu vlasništva.',
-        'pin_attempts_left' => 'Preostaje 1 od 2 pokušaja',
+        'pin_attempts_left' => 'Preostaje {used} od {total} pokušaja',
         'pin_container_aria' => 'Verifikacija PIN koda',
         'pin_group_aria' => '4-znamenkasti PIN kod',
     ],

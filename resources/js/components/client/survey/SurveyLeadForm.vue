@@ -70,6 +70,7 @@
                     :id="emailInputId"
                     v-model="answers.email"
                     type="email"
+                    name="email"
                     class="survey-page__control"
                     :class="{
                         'survey-lead-form__input--invalid': !!emailError,

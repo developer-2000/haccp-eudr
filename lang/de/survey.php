@@ -41,7 +41,7 @@ return [
         'token_not_found' => 'Token nicht gefunden. Bitte versuchen Sie, die Umfrage erneut auszufüllen.',
         'network_error' => 'Netzwerkfehler. Bitte versuchen Sie es erneut.',
         'pin_instruction' => 'Ein PIN-Code wurde an die angegebene E-Mail-Adresse gesendet. Geben Sie ihn zur Bestätigung ein.',
-        'pin_attempts_left' => '1 von 2 Versuchen verbleibend',
+        'pin_attempts_left' => '{used} von {total} Versuchen verbleibend',
         'pin_container_aria' => 'PIN-Code-Verifizierung',
         'pin_group_aria' => '4-stelliger PIN-Code',
     ],

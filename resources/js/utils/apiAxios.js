@@ -1,4 +1,5 @@
 import axios from "axios";
+import { i18n } from "@/i18n";
 
 /**
  * Разбор Laravel / типичного JSON с полем errors → одна строка (разделитель — перенос строки;
@@ -101,6 +102,16 @@ export class ApiAxios {
             },
         });
 
+        // Attach current SPA locale to every request — backend's SetLocale middleware
+        // uses X-Locale for endpoints without {locale} URL prefix (POST /survey/submit etc).
+        this.client.interceptors.request.use((config) => {
+            const locale = i18n?.global?.locale?.value;
+            if (locale) {
+                config.headers = config.headers || {};
+                config.headers["X-Locale"] = locale;
+            }
+            return config;
+        });
     }
 
     /** Привязывает abort к `beforeunload`, чтобы не оставлять висящие запросы при уходе со страницы. */

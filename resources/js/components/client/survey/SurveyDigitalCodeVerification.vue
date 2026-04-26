@@ -6,9 +6,9 @@
         </div>
 
         <div class="pin-header warning"
-             v-if="attemptsLeft === 1"
+             v-if="attemptsLeft > 0 && attemptsLeft < totalAttempts"
         >
-            {{ t('survey.ui.pin_attempts_left') }}
+            {{ t('survey.ui.pin_attempts_left', { used: attemptsLeft, total: totalAttempts }) }}
         </div>
 
         <div class="pin-box" :aria-label="t('survey.ui.pin_container_aria')">
@@ -44,7 +44,12 @@ const inputRefs = ref([null, null, null, null]);
 const props = defineProps({
     attemptsLeft: {
         type: Number,
-        default: 2,
+        required: true,
+    },
+    /** Максимальное число попыток ввода кода (для расчёта "X of Y remaining"). */
+    totalAttempts: {
+        type: Number,
+        required: true,
     },
 });
 
