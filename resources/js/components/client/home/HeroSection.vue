@@ -29,6 +29,7 @@
                 :src="'/images/tablets.jpg'"
                 :alt="$t('home.hero.devices_alt')"
                 class="hero-image"
+                fetchpriority="high"
             />
         </div>
     </div>

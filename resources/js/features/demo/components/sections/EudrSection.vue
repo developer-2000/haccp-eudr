@@ -96,6 +96,7 @@
 <script setup>
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { NButton } from "naive-ui";
 import EudrQrModal from "@/features/demo/components/modals/EudrQrModal.vue";
 
 defineOptions({ name: "EudrSection" });

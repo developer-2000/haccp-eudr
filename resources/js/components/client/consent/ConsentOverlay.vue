@@ -37,6 +37,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
+import { NButton, NSpace, NSwitch } from "naive-ui";
 import { LS_CONSENT_VERSION } from "@/config/storageNames";
 
 defineOptions({ name: "ConsentOverlay" });
@@ -90,6 +91,7 @@ function continueToApp() {
         padding: 28px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
         animation: pop 0.25s ease-out;
+        margin: 0 20px;
 
         h2 {
             font-size: 20px;

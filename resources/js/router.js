@@ -1,14 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Index from "./basic/Index.vue";
 import Home from "./pages/client/Home.vue";
-import About from "./pages/client/About.vue";
-import SurveyPlaceholder from "./pages/client/Survey.vue";
-import DemoPlaceholder from "./pages/client/Demo.vue";
-import HowItWorks from "./pages/client/HowWorks.vue";
-import BatchPublic from "./pages/client/BatchPublic.vue";
-import DailyReportPublic from "./pages/client/DailyReportPublic.vue";
-import PrivacyPolicy from "./pages/client/PrivacyPolicy.vue";
-import Contact from "./pages/client/Contact.vue";
+
+// Тяжёлые/редко открываемые страницы — динамические импорты для code splitting:
+// каждая попадёт в свой chunk, главная страница перестанет тащить их в bundle.
+const About = () => import("./pages/client/About.vue");
+const Survey = () => import("./pages/client/Survey.vue");
+const Demo = () => import("./pages/client/Demo.vue");
+const HowItWorks = () => import("./pages/client/HowWorks.vue");
+const BatchPublic = () => import("./pages/client/BatchPublic.vue");
+const DailyReportPublic = () => import("./pages/client/DailyReportPublic.vue");
+const PrivacyPolicy = () => import("./pages/client/PrivacyPolicy.vue");
+const Contact = () => import("./pages/client/Contact.vue");
 
 const routes = [
     { path: "/", redirect: "/en" },
@@ -54,7 +57,7 @@ const routes = [
             {
                 path: "survey",
                 name: "Survey",
-                component: SurveyPlaceholder,
+                component: Survey,
             },
             {
                 path: "demo",
@@ -66,7 +69,7 @@ const routes = [
             {
                 path: "demo/:section",
                 name: "Demo",
-                component: DemoPlaceholder,
+                component: Demo,
             },
             {
                 path: "privacy-policy",

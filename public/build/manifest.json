@@ -1,91 +1,222 @@
 {
-  "__plugin-vue_export-helper-BSRv_4_z-moaewtqp-j03yy5.js": {
-    "file": "assets/_plugin-vue_export-helper-BSRv_4_z-moaewtqp-j03yy5.js",
+  "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js": {
+    "file": "assets/_plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js",
     "name": "_plugin-vue_export-helper",
     "imports": [
-      "_naive-ui-DgfL6eEf-moaewtqp-j03yy5.js"
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js"
     ]
   },
-  "_naive-ui-DgfL6eEf-moaewtqp-j03yy5.js": {
-    "file": "assets/naive-ui-DgfL6eEf-moaewtqp-j03yy5.js",
+  "_dailyReportPublic-Cn_dFj78-mofnnysh-2ybuds.js": {
+    "file": "assets/dailyReportPublic-Cn_dFj78-mofnnysh-2ybuds.js",
+    "name": "dailyReportPublic",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js": {
+    "file": "assets/naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
     "name": "naive-ui"
   },
   "resources/fonts/inter/inter-v20-cyrillic_latin-300.woff2": {
-    "file": "assets/inter-v20-cyrillic_latin-300-Cfa0Olcg-moaewtqp-j03yy5.woff2",
+    "file": "assets/inter-v20-cyrillic_latin-300-Cfa0Olcg-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/inter/inter-v20-cyrillic_latin-300.woff2"
   },
   "resources/fonts/inter/inter-v20-cyrillic_latin-500.woff2": {
-    "file": "assets/inter-v20-cyrillic_latin-500-BOsU2yrk-moaewtqp-j03yy5.woff2",
+    "file": "assets/inter-v20-cyrillic_latin-500-BOsU2yrk-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/inter/inter-v20-cyrillic_latin-500.woff2"
   },
   "resources/fonts/inter/inter-v20-cyrillic_latin-600.woff2": {
-    "file": "assets/inter-v20-cyrillic_latin-600-C7BJIm-p-moaewtqp-j03yy5.woff2",
+    "file": "assets/inter-v20-cyrillic_latin-600-C7BJIm-p-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/inter/inter-v20-cyrillic_latin-600.woff2"
   },
   "resources/fonts/inter/inter-v20-cyrillic_latin-700.woff2": {
-    "file": "assets/inter-v20-cyrillic_latin-700-BkD5pCWO-moaewtqp-j03yy5.woff2",
+    "file": "assets/inter-v20-cyrillic_latin-700-BkD5pCWO-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/inter/inter-v20-cyrillic_latin-700.woff2"
   },
   "resources/fonts/inter/inter-v20-cyrillic_latin-800.woff2": {
-    "file": "assets/inter-v20-cyrillic_latin-800-D-ReNEnJ-moaewtqp-j03yy5.woff2",
+    "file": "assets/inter-v20-cyrillic_latin-800-D-ReNEnJ-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/inter/inter-v20-cyrillic_latin-800.woff2"
   },
   "resources/fonts/inter/inter-v20-cyrillic_latin-regular.woff2": {
-    "file": "assets/inter-v20-cyrillic_latin-regular-C_DEjFmn-moaewtqp-j03yy5.woff2",
+    "file": "assets/inter-v20-cyrillic_latin-regular-C_DEjFmn-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/inter/inter-v20-cyrillic_latin-regular.woff2"
   },
   "resources/fonts/rubik/rubik-v31-cyrillic_latin-300.woff2": {
-    "file": "assets/rubik-v31-cyrillic_latin-300-DTwu1h77-moaewtqp-j03yy5.woff2",
+    "file": "assets/rubik-v31-cyrillic_latin-300-DTwu1h77-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/rubik/rubik-v31-cyrillic_latin-300.woff2"
   },
   "resources/fonts/rubik/rubik-v31-cyrillic_latin-500.woff2": {
-    "file": "assets/rubik-v31-cyrillic_latin-500-DfU3Zj8B-moaewtqp-j03yy5.woff2",
+    "file": "assets/rubik-v31-cyrillic_latin-500-DfU3Zj8B-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/rubik/rubik-v31-cyrillic_latin-500.woff2"
   },
   "resources/fonts/rubik/rubik-v31-cyrillic_latin-600.woff2": {
-    "file": "assets/rubik-v31-cyrillic_latin-600-De4xgQTs-moaewtqp-j03yy5.woff2",
+    "file": "assets/rubik-v31-cyrillic_latin-600-De4xgQTs-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/rubik/rubik-v31-cyrillic_latin-600.woff2"
   },
   "resources/fonts/rubik/rubik-v31-cyrillic_latin-700.woff2": {
-    "file": "assets/rubik-v31-cyrillic_latin-700-Bw8KofW0-moaewtqp-j03yy5.woff2",
+    "file": "assets/rubik-v31-cyrillic_latin-700-Bw8KofW0-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/rubik/rubik-v31-cyrillic_latin-700.woff2"
   },
   "resources/fonts/rubik/rubik-v31-cyrillic_latin-800.woff2": {
-    "file": "assets/rubik-v31-cyrillic_latin-800-C0teERj6-moaewtqp-j03yy5.woff2",
+    "file": "assets/rubik-v31-cyrillic_latin-800-C0teERj6-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/rubik/rubik-v31-cyrillic_latin-800.woff2"
   },
   "resources/fonts/rubik/rubik-v31-cyrillic_latin-regular.woff2": {
-    "file": "assets/rubik-v31-cyrillic_latin-regular-CeFsnCC8-moaewtqp-j03yy5.woff2",
+    "file": "assets/rubik-v31-cyrillic_latin-regular-CeFsnCC8-mofnnysh-2ybuds.woff2",
     "src": "resources/fonts/rubik/rubik-v31-cyrillic_latin-regular.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app-DrQtUN2c-moaewtqp-j03yy5.js",
+    "file": "assets/app-CU_uMCs9-mofnnysh-2ybuds.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_naive-ui-DgfL6eEf-moaewtqp-j03yy5.js",
-      "__plugin-vue_export-helper-BSRv_4_z-moaewtqp-j03yy5.js"
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js"
+    ],
+    "dynamicImports": [
+      "resources/js/pages/client/About.vue",
+      "resources/js/pages/client/Survey.vue",
+      "resources/js/pages/client/Demo.vue",
+      "resources/js/pages/client/HowWorks.vue",
+      "resources/js/pages/client/BatchPublic.vue",
+      "resources/js/pages/client/DailyReportPublic.vue",
+      "resources/js/pages/client/PrivacyPolicy.vue",
+      "resources/js/pages/client/Contact.vue"
     ],
     "css": [
-      "assets/app-CDE0PIGK-moaewtqp-j03yy5.css"
+      "assets/app-BvRV7Oco-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/About.vue": {
+    "file": "assets/About-ZtfDH--5-mofnnysh-2ybuds.js",
+    "name": "About",
+    "src": "resources/js/pages/client/About.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/About-D5hPm4SR-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/BatchPublic.vue": {
+    "file": "assets/BatchPublic-Bz_jGyzD-mofnnysh-2ybuds.js",
+    "name": "BatchPublic",
+    "src": "resources/js/pages/client/BatchPublic.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "resources/js/app.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js"
+    ],
+    "css": [
+      "assets/BatchPublic-CV0skbC1-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/Contact.vue": {
+    "file": "assets/Contact-B_6OTI3c-mofnnysh-2ybuds.js",
+    "name": "Contact",
+    "src": "resources/js/pages/client/Contact.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/Contact-Cm1hDIFA-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/DailyReportPublic.vue": {
+    "file": "assets/DailyReportPublic-CSISHpMf-mofnnysh-2ybuds.js",
+    "name": "DailyReportPublic",
+    "src": "resources/js/pages/client/DailyReportPublic.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "resources/js/app.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js",
+      "_dailyReportPublic-Cn_dFj78-mofnnysh-2ybuds.js"
+    ],
+    "css": [
+      "assets/DailyReportPublic-BZOvc050-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/Demo.vue": {
+    "file": "assets/Demo-CZUB7Sc7-mofnnysh-2ybuds.js",
+    "name": "Demo",
+    "src": "resources/js/pages/client/Demo.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "resources/js/app.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js",
+      "_dailyReportPublic-Cn_dFj78-mofnnysh-2ybuds.js"
+    ],
+    "css": [
+      "assets/Demo-BFBP0ocO-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/HowWorks.vue": {
+    "file": "assets/HowWorks-BxMQqcVy-mofnnysh-2ybuds.js",
+    "name": "HowWorks",
+    "src": "resources/js/pages/client/HowWorks.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/HowWorks-DYnSgLIr-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/PrivacyPolicy.vue": {
+    "file": "assets/PrivacyPolicy-BVFED2FW-mofnnysh-2ybuds.js",
+    "name": "PrivacyPolicy",
+    "src": "resources/js/pages/client/PrivacyPolicy.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/PrivacyPolicy-C7LWSo9s-mofnnysh-2ybuds.css"
+    ]
+  },
+  "resources/js/pages/client/Survey.vue": {
+    "file": "assets/Survey-BbwYXRSh-mofnnysh-2ybuds.js",
+    "name": "Survey",
+    "src": "resources/js/pages/client/Survey.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "resources/js/app.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js"
+    ],
+    "css": [
+      "assets/Survey-DYz1EX2o-mofnnysh-2ybuds.css"
     ]
   },
   "resources/js/technical.js": {
-    "file": "assets/technical-D2tzyGB9-moaewtqp-j03yy5.js",
+    "file": "assets/technical-C5gZUQbl-mofnnysh-2ybuds.js",
     "name": "technical",
     "src": "resources/js/technical.js",
     "isEntry": true,
     "imports": [
-      "_naive-ui-DgfL6eEf-moaewtqp-j03yy5.js",
-      "__plugin-vue_export-helper-BSRv_4_z-moaewtqp-j03yy5.js"
+      "_naive-ui-CxO4_FpJ-mofnnysh-2ybuds.js",
+      "__plugin-vue_export-helper-vSikpYRX-mofnnysh-2ybuds.js"
     ],
     "css": [
-      "assets/technical-Cj7AW54Z-moaewtqp-j03yy5.css"
+      "assets/technical-Cj7AW54Z-mofnnysh-2ybuds.css"
     ]
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-DAo7fYj6-moaewtqp-j03yy5.css",
+    "file": "assets/app-DPGSuZBp-mofnnysh-2ybuds.css",
     "src": "resources/scss/app.scss",
     "isEntry": true
   }

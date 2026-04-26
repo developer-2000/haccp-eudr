@@ -49,6 +49,7 @@
         </script>
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <link rel="preload" as="image" href="{{ asset('/images/tablets.jpg') }}">
 
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     </head>

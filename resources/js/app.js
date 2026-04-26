@@ -3,7 +3,6 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createHead } from "unhead/client";
 import { headSymbol } from "@unhead/vue";
-import naive from "naive-ui";
 import Vue3Toastify from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import "@/features/demo/task_grain_cooling/task-grain-cooling-toastify.scss";
@@ -31,7 +30,6 @@ app.use(pinia);
 app.provide(headSymbol, head);
 app.config.globalProperties.$unhead = head;
 app.use(i18n);
-app.use(naive);
 app.use(Vue3Toastify, {
     position: "top-center",
     autoClose: false,

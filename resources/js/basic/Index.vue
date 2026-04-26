@@ -18,6 +18,7 @@
 <script setup>
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+import { NMessageProvider } from "naive-ui";
 import Header from "../components/client/header/Header.vue";
 import Footer from "../components/client/footer/Footer.vue";
 import ConsentOverlay from "../components/client/consent/ConsentOverlay.vue";
