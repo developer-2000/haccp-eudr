@@ -2,56 +2,48 @@
 ## Работа на сервере
 ### B. Сделать на сервере (минимум для SSR)
 
-Что делает INERTIA_SSR_ENABLED=true
-Включает рендер страницы на сервере до того, как браузер получит HTML.
+Цель: после деплоя Laravel при каждом запросе запрашивает HTML у локального Node-процесса на `127.0.0.1:13714` и отдаёт пользователю готовую страницу с meta-тегами уже на первом byte. Если Node-процесс упадёт — Inertia сам фоллбэчит на client-render без 500.
 
-Поток без SSR (=false):
+Подробное «зачем» и сравнение SSR/no-SSR — в [overtake_inertia.md](overtake_inertia.md). Ниже — только что и какой командой делать на сервере.
 
-Laravel отдаёт пустой <div id="app"> + <script src="/build/inertia-app.js">.
-Браузер качает JS-бандл → парсит → монтирует Vue → запрашивает данные → рендерит контент.
-Только после этого появляются <title>, <meta>, текст. Googlebot всё это время видит пустой div.
-Поток с SSR (=true):
+Все команды от пользователя `deploy` (если иначе — указано). Путь `/var/www/demo.haccpilot.eu/current` — symlink на актуальный release.
 
-Laravel при Inertia::render(...) стучится к локальному Node-сервису на 127.0.0.1:13714 (поднят php artisan inertia:start-ssr, читает bootstrap/ssr/ssr.js).
-Node прогоняет тот же Vue-код в Node-окружении и отдаёт готовый HTML с <title>, <meta description>, <link rel="canonical">, hreflang и текстом страницы.
-Laravel вставляет этот HTML в inertia.blade.php через @inertia / @inertiaHead и отдаёт клиенту первым byte'ом.
-Браузер сразу видит контент; JS-бандл потом «оживляет» страницу (hydration) для SPA-навигации через <Link>.
-Зачем нужен
-Главная причина — SEO. Цель миграции (см. overtake_inertia.md раздел "Цель"): 8 публичных типов страниц × 25 локалей = 275 URL, которые Googlebot должен индексировать с полным контентом.
+#### B.1. Node.js 20 на VPS
 
-Конкретно:
-Title / description / canonical / hreflang в HTML до выполнения JS — критично для индексации.
-Survey-страница индексируется с вопросами, а не пустым каркасом.
-BatchPublic / DailyReportPublic индексируются с продуктами и компаниями.
-LCP / FCP сокращаются на 40–60% — пользователь и ранжирующий алгоритм видят контент быстрее.
-Когда выключать (=false)
-В dev (overtake_inertia.md:104-108): не нужен HMR ломать, Vite сам всё рендерит на клиенте.
-На проде как аварийный откат: если SSR-сервис залип/упал и его нужно временно обойти — INERTIA_SSR_ENABLED=false + php artisan config:clear мгновенно переводят сайт на client-only без 500.
-Защита от падений
-Даже при включённом SSR, если Node-процесс на :13714 не отвечает — Inertia сам безопасно фоллбэчит на client-render, без 500-ошибок (overtake_inertia_server.md:22). На проде SSR держится живым через systemd-юнит inertia-ssr.service с Restart=always.
-
-#### B.1. Установить Node.js на VPS (одной командой)
-
-SSR-сервис — Node-процесс. Один пакет:
+Один раз. Нужна версия ≥18, ставим LTS 20:
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
+node --version    # должно быть v20.x
 ```
 
-#### B.2. Дополнить `/var/www/demo.haccpilot.eu/shared/.env`
+#### B.2. `.env`
+
+Открыть `/var/www/demo.haccpilot.eu/shared/.env`, добавить:
 
 ```env
 INERTIA_SSR_ENABLED=true
 ```
 
-`INERTIA_SSR_URL=http://127.0.0.1:13714` оставить дефолтным (`http://127.0.0.1:13714` уже захардкожен в `config/inertia.php`).
+`INERTIA_SSR_URL` НЕ ставить — дефолт `http://127.0.0.1:13714` уже зашит в [config/inertia.php](../../../../config/inertia.php). Прописывать только если порт занят и нужно его сменить.
 
-Защита: если SSR отвалится — Inertia сам фоллбэчит на client-render без 500.
+Применить:
 
-#### B.3. systemd-юнит для inertia-ssr (один файл, без supervisor)
+```bash
+cd /var/www/demo.haccpilot.eu/current && php artisan config:clear
+```
 
-`/etc/systemd/system/inertia-ssr.service`:
+#### B.3. systemd-юнит
+
+Один файл. От root:
+
+```bash
+sudo nano /etc/systemd/system/inertia-ssr.service
+```
+нам его нужно сделать как мы сделали авто поднятие для выполнения очередей - найди его и посмотри как там сделано
+
+Примерное Содержимое текущего файла:
 
 ```ini
 [Unit]
@@ -65,39 +57,101 @@ WorkingDirectory=/var/www/demo.haccpilot.eu/current
 ExecStart=/usr/bin/php artisan inertia:start-ssr
 Restart=always
 RestartSec=3
+StandardOutput=append:/var/log/inertia-ssr.log
+StandardError=append:/var/log/inertia-ssr.log
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-Активировать:
+Активировать (от root):
 
 ```bash
+sudo touch /var/log/inertia-ssr.log
+sudo chown deploy:deploy /var/log/inertia-ssr.log
 sudo systemctl daemon-reload
 sudo systemctl enable --now inertia-ssr
 sudo systemctl status inertia-ssr   # должен быть active (running)
 ```
 
-#### B.4. В `deploy.sh` после `# 8. SWITCH RELEASE` добавить одну строку
+`Restart=always` — если процесс упадёт, systemd поднимет его за 3 секунды.
+
+#### B.4. Sudoers для deploy-юзера
+
+Один раз. Чтобы `deploy.sh` мог рестартовать SSR без пароля:
 
 ```bash
-sudo systemctl restart inertia-ssr
+sudo visudo -f /etc/sudoers.d/deploy-inertia-ssr
 ```
 
-Чтобы deploy-юзеру не вводить пароль для этой команды — `sudo visudo`:
+Содержимое:
 
 ```
 deploy ALL=(ALL) NOPASSWD: /bin/systemctl restart inertia-ssr
 ```
 
-#### B.5. Проверка после деплоя
+#### B.5. Хук в `deploy.sh`
+
+В `deploy.sh` после блока `# 8. SWITCH RELEASE` добавить одну строку:
 
 ```bash
-sudo systemctl status inertia-ssr
-curl -s https://demo.haccpilot.eu/en | grep -E "<title>|<meta name=\"description\""
+sudo systemctl restart inertia-ssr
 ```
 
-В выводе curl должен быть полный HTML с title и description — это и есть цель SEO-миграции. Если есть — задача выполнена.
+Это перечитывает свежий `bootstrap/ssr/ssr.js` после переключения `current` на новый release.
+
+В `release.tar.gz` (билд CI) папка `bootstrap/ssr/` уже включена через `rsync -av ./` — менять воркфлоу не надо. Локально проверить:
+
+```bash
+tar -tzf release.tar.gz | grep "bootstrap/ssr/ssr.js"
+```
+
+#### B.6. Управление процессом
+
+```bash
+sudo systemctl status inertia-ssr      # статус (active / failed)
+sudo systemctl restart inertia-ssr     # рестарт
+sudo systemctl stop inertia-ssr        # остановить
+sudo systemctl start inertia-ssr       # запустить
+sudo journalctl -u inertia-ssr -f      # live-логи
+sudo tail -f /var/log/inertia-ssr.log  # альтернатива (file logging)
+```
+
+#### B.7. Проверка после деплоя
+
+Три команды:
+
+```bash
+# 1. Процесс жив:
+sudo systemctl is-active inertia-ssr
+# Ожидаемо: active
+
+# 2. Порт слушается localhost:
+ss -tlnp | grep 13714
+# Ожидаемо: одна строка LISTEN 127.0.0.1:13714
+
+# 3. SSR отдаёт реальный HTML с meta-тегами:
+curl -s https://demo.haccpilot.eu/en | grep -E "<title>|<meta name=\"description\"|<link rel=\"canonical\""
+# Ожидаемо: три строки с реальным title, description, canonical
+```
+
+Если `curl` показывает meta-теги в выводе — SSR работает end-to-end.
+
+#### B.8. Аварийный откат на client-only
+
+Если SSR начал падать и нужно срочно вернуть сайт без SSR (без downtime):
+
+```bash
+# В .env заменить:
+INERTIA_SSR_ENABLED=false
+
+# Применить:
+cd /var/www/demo.haccpilot.eu/current && php artisan config:clear
+```
+
+Сайт сразу перестанет ходить за HTML в SSR-сервис. Node-процесс можно не убивать — он просто перестанет получать запросы. Дальше спокойно разбирать, что сломалось, без давления downtime.
+
+Когда починили — поставить `INERTIA_SSR_ENABLED=true` обратно, `php artisan config:clear`, `sudo systemctl restart inertia-ssr`.
 
 ---## Регрессионное тестирование
 

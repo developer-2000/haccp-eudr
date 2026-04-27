@@ -1322,6 +1322,12 @@ const { locale: locale$1, messages } = readInertiaInitial();
 const isServer = typeof document === "undefined";
 const i18n = createI18n({
   legacy: false,
+  /**
+   * Глобально регистрируем `$t` в шаблонах. С `legacy:false` без этого `_ctx.$t`
+   * не определён на сервере (SSR падает с `_ctx.$t is not a function`). На клиенте
+   * прокатывало по случайности, на сервере строгий рендер — обязательно.
+   */
+  globalInjection: true,
   locale: locale$1,
   fallbackLocale: "en",
   messages,
@@ -10457,6 +10463,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
           const { status, code, message } = response.data;
           if (status === "success") {
             toast.info(message, { autoClose: 5e3 });
+            await persistSurveySubmissionState(answers.email);
             finalizeSurveyLocally();
           } else if (status === "warning") {
             if (code === 3) {
@@ -11058,9 +11065,9 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="survey-page container" data-v-82910d20>`);
+      _push(`<div class="survey-page container" data-v-c22c7eb8>`);
       if (questionsLoadError.value) {
-        _push(`<div class="survey-page__api-error" role="alert" data-v-82910d20>${ssrInterpolate(questionsLoadError.value)}</div>`);
+        _push(`<div class="survey-page__api-error" role="alert" data-v-c22c7eb8>${ssrInterpolate(questionsLoadError.value)}</div>`);
       } else {
         _push(`<!---->`);
       }
@@ -11165,11 +11172,14 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Survey.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const Survey = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-82910d20"]]);
+const Survey = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c22c7eb8"]]);
 const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Survey
 }, Symbol.toStringTag, { value: "Module" }));
+globalThis.__VUE_PROD_DEVTOOLS__ = false;
+globalThis.__VUE_OPTIONS_API__ = true;
+globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
 const pages = /* @__PURE__ */ Object.assign({ "./Pages/About.vue": __vite_glob_0_0, "./Pages/BatchPublic.vue": __vite_glob_0_1, "./Pages/Contact.vue": __vite_glob_0_2, "./Pages/DailyReportPublic.vue": __vite_glob_0_3, "./Pages/Demo.vue": __vite_glob_0_4, "./Pages/Home.vue": __vite_glob_0_5, "./Pages/HowWorks.vue": __vite_glob_0_6, "./Pages/PrivacyPolicy.vue": __vite_glob_0_7, "./Pages/Survey.vue": __vite_glob_0_8 });
 createServer(
   (page) => createInertiaApp({

@@ -1,3 +1,13 @@
+/**
+ * Vue-флаги, которые в client-билде Vite подставляет автоматически. На SSR-сервере
+ * Node грузит vue-i18n / @vue/runtime-core как external из node_modules — там Vite
+ * `define` не работает, и без этих globals прод-сборка падает с
+ * `ReferenceError: __VUE_PROD_DEVTOOLS__ is not defined` ещё на `app.use(i18n)`.
+ */
+globalThis.__VUE_PROD_DEVTOOLS__ = false;
+globalThis.__VUE_OPTIONS_API__ = true;
+globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
+
 import { createSSRApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import createServer from "@inertiajs/vue3/server";

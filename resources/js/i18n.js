@@ -38,6 +38,12 @@ const isServer = typeof document === "undefined";
 
 export const i18n = createI18n({
     legacy: false,
+    /**
+     * Глобально регистрируем `$t` в шаблонах. С `legacy:false` без этого `_ctx.$t`
+     * не определён на сервере (SSR падает с `_ctx.$t is not a function`). На клиенте
+     * прокатывало по случайности, на сервере строгий рендер — обязательно.
+     */
+    globalInjection: true,
     locale,
     fallbackLocale: "en",
     messages,
