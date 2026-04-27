@@ -140,6 +140,11 @@ const { t } = useI18n();
                 width: 1.125rem;
                 height: 1.125rem;
                 flex-shrink: 0;
+
+                :deep(svg) {
+                    width: 100%;
+                    height: 100%;
+                }
             }
 
             .survey-main-flow__nav-back-text {

@@ -102,9 +102,6 @@ body {
     cursor: default;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    // iOS Safari: запрет double-tap zoom по кнопке, оставляя обычный pinch/scroll.
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
 }
 
 * {
@@ -112,6 +109,8 @@ body {
     font-family: $font-family-rubik;
     margin: 0;
     padding: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 // ============================================
