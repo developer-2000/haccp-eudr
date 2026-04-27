@@ -153,6 +153,103 @@ cd /var/www/demo.haccpilot.eu/current && php artisan config:clear
 
 Когда починили — поставить `INERTIA_SSR_ENABLED=true` обратно, `php artisan config:clear`, `sudo systemctl restart inertia-ssr`.
 
+---
+
+#### B.9. Известные грабли при первом запуске SSR на проде
+
+Это шесть проблем, с которыми мы столкнулись на проде в процессе включения SSR. Каждая — реальная (не теоретическая), даю симптом → причина → фикс с указанием файла.
+
+##### 9.1. `route:cache` ломает Inertia-роуты на closure'ах
+
+**Симптом:** все публичные страницы возвращают **HTTP 500**, в `storage/logs/laravel.log`:
+
+```
+TypeError: Illuminate\Routing\RouteFileRegistrar::{closure}(): Argument #1 ($component) must be of type string, null given
+```
+
+**Причина:** `routes/web.php` использует closure-фабрику `$inertiaPage = fn (string $component, ...) => function (...) use ($component, ...) { return Inertia::render($component, ...); }`. Это **nested closure**. `php artisan route:cache` сериализует роуты через `SerializableClosure`, и при сериализации nested-closure теряет значение `use ($component)` → при выполнении `$component = null` → `Inertia::render(null, ...)` → TypeError.
+
+**Фикс:** в [deploy.sh](deploy.sh) (раздел `# 6. LARAVEL CACHE`) закомментирован `php artisan route:cache`. `config:cache` оставлен — он работает.
+
+```bash
+php artisan optimize:clear
+php artisan config:cache
+# php artisan route:cache  # отключено: closure-routes несовместимы с SerializableClosure
+```
+
+**Когда вернуть:** после переписывания `routes/web.php` на классические `Controller@action` (без closure-фабрики).
+
+##### 9.2. `config:cache` держит абсолютный путь к старому release
+
+**Симптом:** после деплоя `config('inertia.ssr.bundle')` указывает на путь от **прошлого** release (`/var/www/.../releases/20260427_113725/...`), хотя `current` уже указывает на новый release. Inertia рендерит страницу через bundle старой версии (без последних SSR-фиксов) или вовсе не находит файл (если release уже почистили).
+
+**Причина:** `config/inertia.php` использует `base_path('bootstrap/ssr/ssr.js')`. `base_path()` резолвится в **момент** выполнения `php artisan config:cache` — туда вписывается **абсолютный** путь текущего PWD. После `config:cache` файл `bootstrap/cache/config.php` зафризован с этим путём.
+
+**Фикс деплоя:** `php artisan optimize:clear` в `deploy.sh` стоит **до** `config:cache`. Очистка нормально пересоздаёт кэш с новым путём, но **PHP-FPM воркеры** (через OPcache) могут продолжать читать старую версию `config.php`. Решение — после деплоя при первом проявлении проблемы:
+
+```bash
+cd /var/www/demo.haccpilot.eu/current && php artisan config:clear && php artisan config:cache
+sudo systemctl restart php8.2-fpm
+```
+
+(Если хочется фиксировать в `deploy.sh` — добавить `sudo systemctl reload php8.2-fpm` в раздел 11; потребует NOPASSWD для команды `reload php8.2-fpm`.)
+
+##### 9.3. SSR-сервис не перезапускается из deploy.sh без NOPASSWD-правила
+
+**Симптом:** в `deploy.sh` после `# 8. SWITCH RELEASE` стоит `sudo systemctl restart inertia-ssr || true`, но в логе деплоя нет строки `Restarting SSR service...` — Node-процесс продолжает читать **старый** `bootstrap/ssr/ssr.js` (через старый release path в памяти), хотя на диске уже новый bundle.
+
+**Причина:** sudo требует пароль для `deploy`-юзера, в неинтерактивном режиме `sudo` тихо падает, `|| true` маскирует ошибку.
+
+**Фикс:** см. раздел [B.4 Sudoers для deploy-юзера](#b4-sudoers-для-deploy-юзера). Файл `/etc/sudoers.d/deploy-inertia-ssr`:
+
+```
+deploy ALL=(ALL) NOPASSWD: /bin/systemctl restart inertia-ssr
+```
+
+##### 9.4. `npm ci --omit=dev` требует чтобы Vue/Inertia/Pinia/i18n были в `dependencies`
+
+**Симптом:** на проде SSR-процесс падает на `Cannot find module 'vue'` или подобном при первом запросе — модули не установлены потому что `npm ci --omit=dev` пропустил `devDependencies`.
+
+**Причина:** Vite SSR-build с `noExternal` не вкладывает Vue/Inertia/etc. в bundle — они остаются external, грузятся из `node_modules` в Node-процессе. Если они в `devDependencies`, на проде их нет.
+
+**Фикс:** [package.json](package.json) — `vue`, `vue-i18n`, `pinia`, `@inertiajs/vue3`, `@vue/server-renderer`, `naive-ui`, `axios` должны быть в `"dependencies"`. (У нас сейчас так — фикса делать не нужно, но при добавлении новых runtime-зависимостей помнить.)
+
+##### 9.5. CloudFlare кэширует старый HTML после деплоя SSR
+
+**Симптом:** прямой curl на сервер (`--resolve demo.haccpilot.eu:443:127.0.0.1`) возвращает SSR-HTML с meta-тегами, но через настоящий https://demo.haccpilot.eu/en — старая страница без них.
+
+**Причина:** CloudFlare CDN держит закэшированную версию страницы из времени, когда SSR ещё не работал.
+
+**Фикс:** один раз после первого включения SSR — в Cloudflare dashboard → demo.haccpilot.eu → Caching → Configuration → **Purge Everything**. Дальнейшие правки контента сами инвалидируют CF-кэш через стандартный TTL.
+
+Также рекомендуется на nginx-уровне отдавать `Cache-Control: public, max-age=300` для публичных страниц — чтобы CF не держал HTML дольше 5 минут.
+
+##### 9.6. `view:clear` в `optimize:clear` обязателен
+
+**Симптом:** `@inertia` директива blade компилируется в `storage/framework/views/<hash>.php`. Storage **shared** между релизами (`ln -sfn $SHARED/storage`), значит компилированный blade переживает deploy. Если он создан до перехода на SSR (без вызова `Gateway::dispatch`) — даже после деплоя он продолжает рендерить старый формат без SSR.
+
+**Причина:** Blade-cache не пересоздаётся автоматически между релизами.
+
+**Фикс:** уже есть. `php artisan optimize:clear` в `deploy.sh` (раздел 6) очищает `storage/framework/views`. Тоже самое делает явный `php artisan view:clear`. Главное — **не заменять `optimize:clear` на отдельный `cache:clear`**, иначе view-cache не очистится.
+
+---
+
+#### B.10. Чек-лист первого запуска SSR на проде
+
+После того как всё это сделано **один раз**, последующие деплои должны проходить чисто. Финальный чек-лист первого запуска:
+
+- [ ] Node 20 установлен (B.1)
+- [ ] `INERTIA_SSR_ENABLED=true` в shared `.env` (B.2)
+- [ ] systemd-юнит `inertia-ssr.service` создан и `enable --now`-нут (B.3)
+- [ ] sudoers `/etc/sudoers.d/deploy-inertia-ssr` для NOPASSWD restart (B.4)
+- [ ] В `deploy.sh` хук `sudo systemctl restart inertia-ssr` (B.5)
+- [ ] **`route:cache` в `deploy.sh` отключён** (B.9.1) ⚠
+- [ ] CloudFlare `Purge Everything` после первого деплоя (B.9.5)
+- [ ] `curl -s https://demo.haccpilot.eu/en | grep -c "data-inertia"` возвращает >30
+- [ ] `curl -s https://demo.haccpilot.eu/en | grep -c "data-server-rendered"` возвращает 1
+
+Если все пункты выполнены — Googlebot и пользователи получают полный HTML с meta-тегами и контентом на первом byte.
+
 ---## Регрессионное тестирование
 
 Прогнать вручную после миграции каждой фазы:

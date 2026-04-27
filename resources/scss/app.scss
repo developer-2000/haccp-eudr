@@ -378,6 +378,9 @@ input.n-base-selection-input {
     font-weight: 500;
     color: $bg-style-white;
     letter-spacing: 0.01em;
+    // iOS Safari: запрет double-tap zoom по кнопке, оставляя обычный pinch/scroll.
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover,
     &:focus-visible,
