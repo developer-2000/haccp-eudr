@@ -25,25 +25,15 @@ defineOptions({
     name: "SurveyCtaSection",
 });
 
-import { useRouter, useRoute } from "vue-router";
-
-const router = useRouter();
-const route = useRoute();
+import { router as inertiaRouter } from "@inertiajs/vue3";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 
 /**
- * Возвращает текущую локаль из параметров маршрута.
- * Используется для формирования локализованного URL перехода.
- */
-function getCurrentLocale() {
-    return route.params.locale ?? "en";
-}
-
-/**
- * Переходит на страницу опроса с учётом локали.
+ * Переходит на опрос через Inertia router без полной перезагрузки.
  * Используется в CTA-кнопке.
  */
 function goToSurvey() {
-    router.push("/" + getCurrentLocale() + "/survey");
+    inertiaRouter.visit(`/${useCurrentLocale()}/survey`);
 }
 </script>
 

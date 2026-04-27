@@ -6,8 +6,8 @@
             role="button"
             aria-haspopup="true"
         >
-            <router-link
-                :to="itemLink"
+            <Link
+                :href="itemLink"
                 class="nav-link"
                 :class="{ 'nav-link--exact-page': isExactPageLink }"
                 :aria-label="
@@ -22,21 +22,21 @@
                     class="nav-arrow"
                     aria-hidden="true"
                 />
-            </router-link>
+            </Link>
             <DropdownMenu
                 v-if="itemDropdown"
                 :item="props.item"
                 variant="desktop"
             />
         </div>
-        <router-link
+        <Link
             v-else
-            :to="itemLink"
+            :href="itemLink"
             class="nav-link"
             :class="{ 'nav-link--exact-page': isExactPageLink }"
         >
             {{ $t(item.label) }}
-        </router-link>
+        </Link>
     </template>
     <template v-else>
         <div
@@ -71,15 +71,15 @@
                 />
             </div>
         </div>
-        <router-link
+        <Link
             v-else
-            :to="itemLink"
+            :href="itemLink"
             class="mobile-menu-item-simple"
             :class="{ 'mobile-menu-item-simple--exact-page': isExactPageLink }"
             @click="handleItemClick"
         >
             {{ $t(item.label) }}
-        </router-link>
+        </Link>
     </template>
 </template>
 
@@ -92,11 +92,18 @@ defineOptions({
     name: "NavMenuItem",
 });
 import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { Link, usePage } from "@inertiajs/vue3";
 import Icon from "../../Icon.vue";
 import DropdownMenu from "./DropdownMenu.vue";
 
-const route = useRoute();
+const page = usePage();
+
+/** Реактивный путь без query/hash; обновляется на каждый Inertia-визит (Header — persistent layout, onMounted сработал бы один раз). */
+const currentPath = computed(() => {
+    const url = page.url || "/";
+    const qIdx = url.search(/[?#]/);
+    return qIdx === -1 ? url : url.slice(0, qIdx);
+});
 
 /**
  * @typedef {Object} Props
@@ -146,17 +153,16 @@ const itemDropdown = computed(() => props.item?.dropdown || null);
 
 /** Активная страница без хеша: только тогда подсвечиваем и делаем некликабельной (на /en не подсвечиваем якоря /en#...) */
 const isExactPageLink = computed(() => {
+    const path = currentPath.value;
     const prefix = props.item?.activePathPrefix;
     if (prefix) {
-        return (
-            route.path === prefix || route.path.startsWith(`${prefix}/`)
-        );
+        return path === prefix || path.startsWith(`${prefix}/`);
     }
     const link = itemLink.value;
     const pathname = link.includes("#")
         ? link.slice(0, link.indexOf("#"))
         : link;
-    return route.path === pathname && !link.includes("#");
+    return path === pathname && !link.includes("#");
 });
 
 const handleToggle = () => {

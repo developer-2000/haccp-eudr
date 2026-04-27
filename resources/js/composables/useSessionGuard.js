@@ -1,7 +1,7 @@
 import { onBeforeUnmount, onMounted } from "vue";
 import apiAxios from "@/utils/apiAxios.js";
 
-/** Минимальный интервал между пингами — не дёргаем сервер при быстром переключении вкладок. */
+/** Не дёргаем сервер при быстром переключении вкладок (30 сек) */
 const PING_THROTTLE_MS = 30_000;
 
 /**
@@ -41,10 +41,20 @@ export function useSessionGuard() {
 
     const pingSession = async () => {
         const now = Date.now();
-        if (inflight) return;
-        if (now - lastPingAt < PING_THROTTLE_MS) return;
+
+        // Без дублей запроса
+        if (inflight) {
+            return;
+        }
+
+        // Не дёргаем сервер (30 сек)
+        if (now - lastPingAt < PING_THROTTLE_MS) {
+            return;
+        }
+
         lastPingAt = now;
         inflight = true;
+
         try {
             const result = await apiAxios.get("/session/ping", {}, true);
             // Ошибка сети/сервера — apiAxios вернёт строку. Тихо игнорируем:
@@ -65,7 +75,7 @@ export function useSessionGuard() {
 
     const onVisibilityChange = () => {
         if (!document.hidden) {
-            pingSession();
+            void pingSession();
         }
     };
 

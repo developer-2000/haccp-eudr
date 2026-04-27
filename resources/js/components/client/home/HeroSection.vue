@@ -40,19 +40,15 @@ defineOptions({
     name: "Hero",
 });
 
-import { useRouter, useRoute } from "vue-router";
-
-const router = useRouter();
-const route = useRoute();
-
-const getCurrentLocale = () => route.params.locale ?? "en";
+import { router as inertiaRouter } from "@inertiajs/vue3";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 
 const goToSurvey = () => {
-    router.push("/" + getCurrentLocale() + "/survey");
+    inertiaRouter.visit(`/${useCurrentLocale()}/survey`);
 };
 
 const goToDemo = () => {
-    router.push("/" + getCurrentLocale() + "/demo/dashboard");
+    inertiaRouter.visit(`/${useCurrentLocale()}/demo/dashboard`);
 };
 </script>
 

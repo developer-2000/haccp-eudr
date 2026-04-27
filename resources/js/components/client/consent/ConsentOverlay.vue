@@ -9,9 +9,9 @@
             <p>{{ t('consent.description_2', { name: appName }) }}</p>
 
             <div class="box-checkbox">
-                <router-link :to="privacyLink" rel="nofollow">
+                <Link :href="privacyLink" rel="nofollow">
                     {{ t('consent.privacy_link') }}
-                </router-link>
+                </Link>
                 <n-space class="checkbox" @click="accepted = !accepted">
                     <n-switch size="medium" v-model:value="accepted" />
                     <span class="switch-label">
@@ -35,29 +35,34 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { Link, usePage } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 import { NButton, NSpace, NSwitch } from "naive-ui";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 import { LS_CONSENT_VERSION } from "@/config/storageNames";
 
 defineOptions({ name: "ConsentOverlay" });
 
 const { t } = useI18n();
-const route = useRoute();
 
+const page = usePage();
+const appName = computed(() => page.props.siteConfig?.name || "");
 const visible = ref(false);
 const accepted = ref(false);
-const appName = window.appName || "";
+const currentLocale = ref(useCurrentLocale());
+const currentPath = ref(typeof window !== "undefined" ? window.location.pathname : "");
 
-const privacyLink = computed(() => {
-    const locale = route?.params?.locale || "en";
-    return `/${locale}/privacy-policy`;
-});
+const privacyLink = computed(() => `/${currentLocale.value}/privacy-policy`);
 
-const isPrivacyRoute = computed(() => route?.name === "PrivacyPolicy");
+/**
+ * На странице privacy-policy сам overlay не нужен — иначе закрыть консент можно
+ * только через ту же ссылку, которая уже открыта (безвыходная петля).
+ */
+const isPrivacyRoute = computed(() => /\/privacy-policy\/?$/.test(currentPath.value));
 
 onMounted(() => {
-    // localStorage.removeItem(LS_CONSENT_VERSION);
+    currentLocale.value = useCurrentLocale();
+    currentPath.value = window.location.pathname;
     const consent = localStorage.getItem(LS_CONSENT_VERSION);
     if (!consent) {
         visible.value = true;
@@ -68,7 +73,6 @@ function continueToApp() {
     localStorage.setItem(LS_CONSENT_VERSION, "true");
     visible.value = false;
 }
-
 </script>
 
 <style lang="scss">

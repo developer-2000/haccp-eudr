@@ -1,12 +1,17 @@
-import router from "@/router";
 import { i18n } from "@/i18n";
 import { task_grain_cooling } from "./config";
 import { useGrainCoolingStore } from "./grainCoolingDemoEntry";
 
+/**
+ * Достаёт локаль из URL-сегмента `/{locale}/...`. Fallback — текущая i18n-локаль или "en".
+ * Используется для построения URL перехода на Demo без vue-router.
+ */
 function resolveLocale() {
-    const fromRoute = router.currentRoute.value.params.locale;
-    if (typeof fromRoute === "string" && fromRoute.length) {
-        return fromRoute;
+    if (typeof window !== "undefined") {
+        const first = window.location.pathname.split("/").filter(Boolean)[0];
+        if (typeof first === "string" && first.length) {
+            return first;
+        }
     }
     return i18n.global.locale.value || "en";
 }
@@ -30,13 +35,8 @@ export function navigateGrainCoolingToDemoChecklists(options = {}) {
     grain.requestOpenTaskOnChecklists(task_grain_cooling.id, task_grain_cooling.niche, {
         autoOpenPending: task_grain_cooling.deepLinkAutoOpenPending,
     });
-    router.push({
-        name: task_grain_cooling.demoRouteName,
-        params: {
-            locale: resolveLocale(),
-            section: task_grain_cooling.demoRouteSection,
-        },
-    });
+    const locale = resolveLocale();
+    window.location.href = `/${locale}/demo/${task_grain_cooling.demoRouteSection}`;
     if (typeof options.closeToast === "function") {
         options.closeToast();
     }

@@ -9,25 +9,27 @@
         @after-leave="onModalAfterLeave"
     >
         <n-form
+            ref="formRef"
             class="create-edit-staff-modal__form"
             :model="form"
+            :rules="rules"
             label-placement="top"
             label-width="auto"
         >
-            <n-form-item :label="t('demo.staff_modal.site')" path="siteId">
+            <n-form-item :label="t('demo.staff_modal.site')" path="siteId" required>
                 <n-select
                     :key="siteSelectResetKey"
                     v-model:value="form.siteId"
                     :options="siteOptions"
                 />
             </n-form-item>
-            <n-form-item :label="t('demo.staff_modal.full_name')" path="fullName">
+            <n-form-item :label="t('demo.staff_modal.full_name')" path="fullName" required>
                 <n-input
                     v-model:value="form.fullName"
                     :placeholder="t('demo.staff_modal.full_name_placeholder')"
                 />
             </n-form-item>
-            <n-form-item :label="t('demo.staff_modal.role')" path="role">
+            <n-form-item :label="t('demo.staff_modal.role')" path="role" required>
                 <n-input v-model:value="form.role" :placeholder="t('demo.staff_modal.role_placeholder')" />
             </n-form-item>
             <n-form-item :label="t('demo.staff_modal.phone')" path="phone">
@@ -122,6 +124,8 @@ const editingId = ref(null);
 /** Сброс экземпляра NSelect при каждом открытии модалки (иначе остаётся визуально/внутреннее состояние). */
 const siteSelectResetKey = ref(0);
 
+const formRef = ref(null);
+
 const form = ref({
     siteId: "",
     fullName: "",
@@ -130,6 +134,27 @@ const form = ref({
     email: "",
     active: true,
 });
+
+/** Naive-правила: `required` ловит пустую строку/null, `whitespace` — строки только из пробелов. Сообщение — общий ключ из словарей. */
+const rules = {
+    siteId: {
+        required: true,
+        message: () => t("demo.staff_modal.fill_required"),
+        trigger: ["blur", "change"],
+    },
+    fullName: {
+        required: true,
+        whitespace: true,
+        message: () => t("demo.staff_modal.fill_required"),
+        trigger: ["blur", "input"],
+    },
+    role: {
+        required: true,
+        whitespace: true,
+        message: () => t("demo.staff_modal.fill_required"),
+        trigger: ["blur", "input"],
+    },
+};
 
 const modalTitle = computed(() =>
     editingId.value ? t('demo.staff_modal.title_edit') : t('demo.staff_modal.title_create'),
@@ -175,6 +200,7 @@ watch(
                 props.defaultSiteId || sites.value[0]?.id || "";
         }
         siteSelectResetKey.value += 1;
+        formRef.value?.restoreValidation();
     },
 );
 
@@ -195,56 +221,59 @@ const onModalAfterLeave = () => {
     editingId.value = null;
     editTarget.value = null;
     form.value = emptyForm();
+    formRef.value?.restoreValidation();
 };
 
 /**
- * Валидирует поля и вызывает addStaff / updateStaff.
+ * Валидирует через Naive (подсветка полей + inline-ошибки) и вызывает addStaff / updateStaff.
  */
 const submitForm = () => {
-    if (
-        !form.value.siteId ||
-        !String(form.value.fullName ?? "").trim() ||
-        !String(form.value.role ?? "").trim()
-    ) {
-        message.warning(t('demo.staff_modal.validation_required'));
-        return;
-    }
-    submitLoading.value = true;
-    try {
-        if (editingId.value) {
-            const ok = updateStaff({
-                id: editingId.value,
-                siteId: form.value.siteId,
-                fullName: form.value.fullName,
-                role: form.value.role,
-                phone: form.value.phone || undefined,
-                email: form.value.email || undefined,
-                active: form.value.active,
-            });
-            if (!ok) {
-                message.error(t('demo.staff_modal.save_error'));
+    formRef.value
+        ?.validate((errors) => {
+            if (errors) {
+                message.warning(t("demo.staff_modal.validation_required"));
                 return;
             }
-            message.success(t('demo.staff_modal.save_success'));
-        } else {
-            const id = addStaff({
-                siteId: form.value.siteId,
-                fullName: form.value.fullName,
-                role: form.value.role,
-                phone: form.value.phone || undefined,
-                email: form.value.email || undefined,
-                active: form.value.active,
-            });
-            if (!id) {
-                message.error(t('demo.staff_modal.fill_required'));
-                return;
+            submitLoading.value = true;
+            try {
+                if (editingId.value) {
+                    const ok = updateStaff({
+                        id: editingId.value,
+                        siteId: form.value.siteId,
+                        fullName: form.value.fullName,
+                        role: form.value.role,
+                        phone: form.value.phone || undefined,
+                        email: form.value.email || undefined,
+                        active: form.value.active,
+                    });
+                    if (!ok) {
+                        message.error(t("demo.staff_modal.save_error"));
+                        return;
+                    }
+                    message.success(t("demo.staff_modal.save_success"));
+                } else {
+                    const id = addStaff({
+                        siteId: form.value.siteId,
+                        fullName: form.value.fullName,
+                        role: form.value.role,
+                        phone: form.value.phone || undefined,
+                        email: form.value.email || undefined,
+                        active: form.value.active,
+                    });
+                    if (!id) {
+                        message.error(t("demo.staff_modal.save_error"));
+                        return;
+                    }
+                    message.success(t("demo.staff_modal.add_success"));
+                }
+                modalShow.value = false;
+            } finally {
+                submitLoading.value = false;
             }
-            message.success(t('demo.staff_modal.add_success'));
-        }
-        modalShow.value = false;
-    } finally {
-        submitLoading.value = false;
-    }
+        })
+        .catch(() => {
+            /* errors уже отрисованы под полями */
+        });
 };
 
 /**

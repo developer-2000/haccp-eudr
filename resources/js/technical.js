@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { i18n } from "./i18n";
-import TechnicalPage from "@/pages/technical/TechnicalPage.vue";
+import TechnicalPage from "@/admin/TechnicalPage.vue";
 
 const root = document.getElementById("technical-app");
 

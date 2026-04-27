@@ -268,7 +268,7 @@ export class ApiAxios {
 }
 
 /**
- * Инстанс по умолчанию (тот же origin, без тостов и редиректов). Для публичных GET вроде `/survey/questions`.
+ * Инстанс по умолчанию (тот же origin, без тостов и редиректов). Для лёгких публичных GET-эндпоинтов.
  */
 const defaultApiAxios = new ApiAxios({
     baseURL: "",

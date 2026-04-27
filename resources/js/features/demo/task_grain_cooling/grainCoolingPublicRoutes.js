@@ -2,33 +2,23 @@
  * Публичные страницы (карточка партии, дневной отчёт) — без сценария «Охлаждение зерна»:
  * не касаются персонального чек-листа пользователя.
  *
- * @param {import('vue-router').RouteLocationNormalizedLoaded | null | undefined} route
+ * @param {string | null | undefined} pathname — `window.location.pathname` или Inertia `page.url`.
  * @returns {boolean}
  */
-export function isGrainCoolingScenarioSuppressedForRoute(route) {
-    if (!route) {
+export function isGrainCoolingScenarioSuppressedForPath(pathname) {
+    if (typeof pathname !== "string" || pathname === "") {
         return false;
     }
-    const n = route.name;
-    if (
-        n === "BatchPublic" ||
-        n === "BatchPublicRoot" ||
-        n === "DailyReportPublic" ||
-        n === "DailyReportPublicRoot"
-    ) {
+    if (/^\/batch(\/|$)/.test(pathname)) {
         return true;
     }
-    const p = route.path || "";
-    if (/^\/batch(\/|$)/.test(p)) {
+    if (/^\/[^/]+\/batch\//.test(pathname)) {
         return true;
     }
-    if (/^\/[^/]+\/batch\//.test(p)) {
+    if (/^\/report\/\d{4}-\d{2}-\d{2}/.test(pathname)) {
         return true;
     }
-    if (/^\/report\/\d{4}-\d{2}-\d{2}/.test(p)) {
-        return true;
-    }
-    if (/^\/[^/]+\/report\/\d{4}-\d{2}-\d{2}/.test(p)) {
+    if (/^\/[^/]+\/report\/\d{4}-\d{2}-\d{2}/.test(pathname)) {
         return true;
     }
     return false;

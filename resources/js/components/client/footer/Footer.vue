@@ -6,12 +6,20 @@
                 <span class="logo-app">demo</span>
             </div>
             <nav class="footer-nav" aria-label="Footer">
-                <router-link :to="privacyLink" class="footer-link">
+                <Link
+                    :href="privacyLink"
+                    class="footer-link"
+                    :class="{ 'footer-link--exact-page': currentPath === privacyLink }"
+                >
                     {{ t('privacy_policy.page.title') }}
-                </router-link>
-                <router-link :to="contactLink" class="footer-link">
+                </Link>
+                <Link
+                    :href="contactLink"
+                    class="footer-link"
+                    :class="{ 'footer-link--exact-page': currentPath === contactLink }"
+                >
                     {{ t('contact.title') }}
-                </router-link>
+                </Link>
             </nav>
             <div class="footer-copyright">© {{ yearLabel }} {{ siteConfig.name }}</div>
         </div>
@@ -30,43 +38,52 @@
 <script setup>
 defineOptions({ name: "Footer" });
 
-import { computed } from "vue";
+import { computed, ref, onMounted } from "vue";
+import { Link, usePage } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
-import { useRoute } from "vue-router";
-import { useSiteConfigStore } from "@/stores";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 
 const { t } = useI18n();
 
-const siteConfig = useSiteConfigStore();
+const page = usePage();
+const siteConfig = computed(() => page.props.siteConfig || { name: "", adminEmail: "" });
 
 const START_YEAR = 2026;
-const route = useRoute();
 
 const yearLabel = computed(() => {
     const current = new Date().getFullYear();
     return current > START_YEAR ? `${START_YEAR}—${current}` : `${START_YEAR}`;
 });
 
-// Текущая локаль из URL-параметра маршрута, fallback на 'en'
-const currentLocale = computed(() =>
-    (typeof route.params.locale === "string" && route.params.locale) || "en"
-);
+const currentLocale = ref(useCurrentLocale());
+
+/** Реактивный путь без query/hash; обновляется на каждый Inertia-визит (Footer — persistent layout, onMounted сработал бы один раз). */
+const currentPath = computed(() => {
+    const url = page.url || "/";
+    const qIdx = url.search(/[?#]/);
+    return qIdx === -1 ? url : url.slice(0, qIdx);
+});
+
+onMounted(() => {
+    currentLocale.value = useCurrentLocale();
+});
 
 const privacyLink = computed(() => `/${currentLocale.value}/privacy-policy`);
 const contactLink = computed(() => `/${currentLocale.value}/contact`);
 
-// SEO: ссылки на языковые версии, которых НЕТ в переключателе (header уже ссылается на свои 2)
+/**
+ * Скрытые SEO-ссылки на все остальные локали текущей страницы (для языков,
+ * которых нет в переключателе). Используется ботами для индексации, людям не видно.
+ */
 const seoLocaleLinks = computed(() => {
-    const allLocales = window.availableLocales || [];
-    const countries = window.localeCountries || {};
-    const currentPath = route.path;
+    const allLocales = page.props.availableLocales || [];
+    const countries = page.props.localeCountries || {};
+    const switcherCodes = new Set(
+        (page.props.switcherLocales || []).map((l) => l.code),
+    );
     const locale = currentLocale.value;
 
-    // Коды языков из переключателя (data-languages на #app)
-    const switcherCodes = getSwitcherCodes();
-
-    // Путь без текущей локали: /en/contact → /contact, /en → ""
-    const pathWithoutLocale = currentPath.replace(new RegExp(`^/${locale}(/|$)`), '$1') || '/';
+    const pathWithoutLocale = currentPath.value.replace(new RegExp(`^/${locale}(/|$)`), '$1') || '/';
 
     return allLocales
         .filter((code) => !switcherCodes.has(code))
@@ -76,16 +93,6 @@ const seoLocaleLinks = computed(() => {
             href: `/${code}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`,
         }));
 });
-
-function getSwitcherCodes() {
-    try {
-        const raw = document.getElementById('app')?.getAttribute('data-languages');
-        const list = raw ? JSON.parse(raw) : [];
-        return new Set(list.map((l) => l.code));
-    } catch {
-        return new Set();
-    }
-}
 </script>
 
 <style scoped lang="scss">
@@ -166,6 +173,12 @@ function getSwitcherCodes() {
                 &:hover {
                     color: $accent-primary;
                 }
+            }
+
+            .footer-link.footer-link--exact-page {
+                color: $accent-primary;
+                pointer-events: none;
+                cursor: default;
             }
         }
 

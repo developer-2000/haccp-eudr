@@ -43,20 +43,14 @@
                             <tr>
                                 <td>{{ t('demo.eudr_qr_modal.row_link') }}</td>
                                 <td>
-                                    <RouterLink
+                                    <a
                                         class="eudr-qr-modal__batch-link"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        :to="{
-                                            name: 'BatchPublic',
-                                            params: {
-                                                locale: batchPageLocale,
-                                                batchId: batch.id,
-                                            },
-                                        }"
+                                        :href="`/${batchPageLocale}/batch/${batch.id}`"
                                     >
                                         {{ displayedBatchUrl }}
-                                    </RouterLink>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -81,7 +75,6 @@
                 <n-button type="info" @click="copyPageUrl">
                     {{ t('demo.eudr_qr_modal.copy') }}
                 </n-button>
-                <n-button type="info" @click="openBatchPdf">{{ t('demo.eudr_qr_modal.pdf') }}</n-button>
             </div>
         </template>
     </n-modal>
@@ -90,9 +83,9 @@
 <script setup>
 import QRCode from "qrcode";
 import { computed, ref, watch } from "vue";
-import { useRoute } from "vue-router";
 import { NButton, NModal, useMessage } from "naive-ui";
 import { useI18n } from "vue-i18n";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 import { buildBatchPublicUrl } from "@/features/demo/data/eudrBatchPublic";
 
 defineOptions({ name: "EudrQrModal" });
@@ -112,21 +105,11 @@ const props = defineProps({
 
 const emit = defineEmits(["close", "action"]);
 const message = useMessage();
-const route = useRoute();
 const qrImageUrl = ref("");
 const copyField = ref(null);
 
-/** Локаль из URL демо (`/ro/demo/...`) или `window.locale` / fallback. */
-const batchPageLocale = computed(() => {
-    const p = route.params.locale;
-    if (typeof p === "string" && p.length) {
-        return p;
-    }
-    if (typeof window !== "undefined" && typeof window.locale === "string") {
-        return window.locale;
-    }
-    return "en";
-});
+/** Локаль из URL `/{locale}/demo/...` через единый composable; fallback на "en". */
+const batchPageLocale = computed(() => useCurrentLocale());
 
 const displayedBatchUrl = computed(() =>
     props.batch?.id
@@ -232,23 +215,6 @@ const copyPageUrl = async () => {
     }
 };
 
-/**
- * Открывает публичную страницу партии с print=1: в новой вкладке откроется документ и диалог печати (Сохранить как PDF).
- */
-const openBatchPdf = () => {
-    const href = resolveAbsoluteBatchUrl().trim();
-    if (!href) {
-        return;
-    }
-    try {
-        const url = new URL(href, window.location.origin);
-        url.searchParams.set("print", "1");
-        window.open(url.toString(), "_blank", "noopener,noreferrer");
-    } catch {
-        const sep = href.includes("?") ? "&" : "?";
-        window.open(`${href}${sep}print=1`, "_blank", "noopener,noreferrer");
-    }
-};
 </script>
 
 <style scoped lang="scss">

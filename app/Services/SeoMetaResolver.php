@@ -73,6 +73,58 @@ class SeoMetaResolver
     }
 
     /**
+     * Возвращает SEO-данные в структуре, удобной для Inertia-prop'а: вложенные объекты
+     * `og` и `twitter` вместо плоских `og_title` / `og_description`, абсолютные URL'ы
+     * для og:image / twitter:image (требование OpenGraph и Twitter Cards).
+     * Используется в Laravel-роутах при `Inertia::render('PageName', ['seo' => …])`,
+     * на фронте читается из `<Head>` без правки legacy-blade, который продолжает
+     * работать со старым `resolve()`.
+     *
+     * @return array<string, mixed>
+     */
+    public function resolveForInertia(string $path, string $locale): array
+    {
+        return $this->nestSeo($this->resolve($path, $locale));
+    }
+
+    /**
+     * Переоборачивает плоский SEO-массив из `resolve()` в Inertia-friendly структуру:
+     * `{ title, description, canonical, hreflang, og: {...}, twitter: {...} }`.
+     * og.image / twitter.image приводятся к абсолютному URL — иначе соцсети
+     * отбрасывают превью при шейринге.
+     *
+     * @param  array<string, mixed>  $flat  результат `resolve()`
+     * @return array<string, mixed>
+     */
+    private function nestSeo(array $flat): array
+    {
+        $baseUrl = rtrim(config('app.url'), '/');
+        $rawImage = $flat['og_image'] ?? self::DEFAULT_OG_IMAGE;
+        $absoluteImage = str_starts_with($rawImage, 'http') ? $rawImage : $baseUrl.$rawImage;
+
+        $title = $flat['title'] ?? self::SITE_NAME;
+        $description = $flat['description'] ?? '';
+
+        return [
+            'title' => $title,
+            'description' => $description,
+            'canonical' => $flat['canonical'] ?? '',
+            'hreflang' => $flat['hreflang'] ?? [],
+            'og' => [
+                'title' => $flat['og_title'] ?? $title,
+                'description' => $flat['og_description'] ?? $description,
+                'image' => $absoluteImage,
+                'type' => $flat['og_type'] ?? 'website',
+            ],
+            'twitter' => [
+                'title' => $flat['twitter_title'] ?? $title,
+                'description' => $flat['twitter_description'] ?? $description,
+                'image' => $absoluteImage,
+            ],
+        ];
+    }
+
+    /**
      * Формирует массив hreflang-ссылок для всех доступных локалей + x-default.
      * Каждая языковая версия ссылается на все остальные (полный граф).
      *

@@ -52,12 +52,12 @@
             </div>
         </header>
 
-        <RouterLink
-            :to="surveyPath"
+        <Link
+            :href="surveyPath"
             class="btn-client btn-success demo-topbar-cta"
         >
             {{ t('demo.page.cta_survey') }}
-        </RouterLink>
+        </Link>
 
         <div class="container demo-layout">
             <aside class="demo-sidebar">
@@ -67,12 +67,12 @@
                     :active-id="activeSectionId"
                     @select="setActiveSection"
                 />
-                <RouterLink
-                    :to="surveyPath"
+                <Link
+                    :href="surveyPath"
                     class="btn-client btn-success demo-sidebar__cta"
                 >
                     {{ t('demo.page.cta_survey') }}
-                </RouterLink>
+                </Link>
             </aside>
 
             <main class="demo-main">
@@ -95,9 +95,10 @@
 </template>
 
 <script setup>
-import { computed, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { computed } from "vue";
+import { Link, router as inertiaRouter } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 import DemoSectionNavigation from "@/features/demo/components/nav/DemoSectionNavigation.vue";
 import DashboardSection from "@/features/demo/components/sections/DashboardSection.vue";
 import ChecklistsSection from "@/features/demo/components/sections/ChecklistsSection.vue";
@@ -106,19 +107,17 @@ import EudrSection from "@/features/demo/components/sections/EudrSection.vue";
 import ReportsSection from "@/features/demo/components/sections/ReportsSection.vue";
 import { useDemoDashboardViewModel } from "@/features/demo/composables/useDemoDashboardViewModel";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
-import { usePageSeo } from "@/composables/usePageSeo";
 
 defineOptions({ name: "Demo" });
 
-const route = useRoute();
-const router = useRouter();
-const { t } = useI18n();
-
-const demoSeoKey = computed(() => {
-    const section = route.params.section || "dashboard";
-    return `seo.demo_${section}`;
+const props = defineProps({
+    section: {
+        type: String,
+        required: true,
+    },
 });
-usePageSeo({ i18nKey: demoSeoKey });
+
+const { t } = useI18n();
 
 /** Допустимые сегменты URL после `/demo/` — совпадают с `id` в sectionLinks. */
 const DEMO_SECTION_IDS = new Set([
@@ -129,34 +128,14 @@ const DEMO_SECTION_IDS = new Set([
     "reports",
 ]);
 
-const locale = computed(() => {
-    const paramLocale = route.params.locale;
-    return typeof paramLocale === "string" && paramLocale ? paramLocale : "en";
-});
+const locale = computed(() => useCurrentLocale());
 
 const surveyPath = computed(() => `/${locale.value}/survey`);
 const { demoState } = useDemoState();
 const { dashboardPanelData } = useDemoDashboardViewModel(demoState);
 
-const activeSectionId = computed(() => {
-    const s = route.params.section;
-    if (typeof s === "string" && DEMO_SECTION_IDS.has(s)) {
-        return s;
-    }
-    return "dashboard";
-});
-
-watch(
-    () => route.params.section,
-    (s) => {
-        if (typeof s === "string" && s && !DEMO_SECTION_IDS.has(s)) {
-            router.replace({
-                name: "Demo",
-                params: { locale: locale.value, section: "dashboard" },
-            });
-        }
-    },
-    { immediate: true },
+const activeSectionId = computed(() =>
+    DEMO_SECTION_IDS.has(props.section) ? props.section : "dashboard",
 );
 
 const sectionLinks = computed(() => [
@@ -222,11 +201,16 @@ const activeSectionProps = computed(() => {
     return {};
 });
 
+/**
+ * Переход на другую секцию Demo через Inertia router без полной перезагрузки.
+ * `preserveState: true` сохраняет локальный state Vue (открытые модалки, scroll-position),
+ * `preserveScroll: true` не сбрасывает позицию прокрутки при partial-reload.
+ */
 const setActiveSection = (sectionId) => {
     if (!DEMO_SECTION_IDS.has(sectionId)) return;
-    router.push({
-        name: "Demo",
-        params: { locale: locale.value, section: sectionId },
+    inertiaRouter.visit(`/${locale.value}/demo/${sectionId}`, {
+        preserveState: true,
+        preserveScroll: true,
     });
 };
 

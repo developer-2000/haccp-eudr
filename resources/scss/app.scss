@@ -344,6 +344,20 @@ input.n-base-selection-input {
 }
 
 // ============================================
+// Icon wrapper (.xicon)
+// Замена @vicons/utils <Icon>: тащил css-render с обращением к `window` на этапе импорта
+// и валил SSR. Класс `xicon` сохранён, потому что :deep(.xicon) уже используется
+// в Header / MetricsSection / StepsSection / show_task для размеров и цвета.
+// ============================================
+
+.xicon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+// ============================================
 // Buttons
 // ============================================
 

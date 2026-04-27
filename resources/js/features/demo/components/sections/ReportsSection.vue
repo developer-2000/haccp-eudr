@@ -187,9 +187,9 @@
 
 <script setup>
 import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { useMessage } from "naive-ui";
+import { NButton, useMessage } from "naive-ui";
 import { useI18n } from "vue-i18n";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 import { buildDailyReportPublicUrl } from "@/features/demo/data/dailyReportPublic";
 import { taskDisplayStatusKey } from "@/features/demo/domain/checklistTaskModel";
 import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
@@ -198,18 +198,8 @@ defineOptions({ name: "ReportsSection" });
 
 const { t } = useI18n();
 const message = useMessage();
-const route = useRoute();
 
-const reportPageLocale = computed(() => {
-    const p = route.params.locale;
-    if (typeof p === "string" && p.length) {
-        return p;
-    }
-    if (typeof window !== "undefined" && typeof window.locale === "string") {
-        return window.locale;
-    }
-    return "en";
-});
+const reportPageLocale = computed(() => useCurrentLocale());
 
 const props = defineProps({
     report: {

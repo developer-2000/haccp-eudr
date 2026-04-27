@@ -4,12 +4,31 @@ use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\SurveyQuestionsController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\Technical\MailTestController;
+use App\Services\SeoMetaResolver;
+use App\Services\SurveyQuestionsClientService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 $localePattern = implode('|', available_locales());
 if ($localePattern === '') {
     $localePattern = 'en';
 }
+
+/**
+ * Универсальный обработчик публичной Inertia-страницы: рендерит компонент `$component`
+ * и подмешивает SEO-данные через `SeoMetaResolver::resolveForInertia()`. Опциональный
+ * `$extraPropsResolver` — функция, получающая `$request` и возвращающая дополнительные
+ * Inertia-props (например `questions` для Survey, `batchId` для BatchPublic). Используется
+ * для всех мигрированных постраничных роутов — убирает дубликат `Inertia::render(...)`.
+ */
+$inertiaPage = fn (string $component, ?callable $extraPropsResolver = null) => function (Request $request, SeoMetaResolver $seoResolver) use ($component, $extraPropsResolver) {
+    $extra = $extraPropsResolver ? $extraPropsResolver($request) : [];
+
+    return Inertia::render($component, array_merge([
+        'seo' => $seoResolver->resolveForInertia($request->path(), app()->getLocale()),
+    ], $extra));
+};
 
 // Смена локали с фронта: body.locale, запись в session и cookie, ответ JSON.
 Route::post('/locale', [LocaleController::class, 'set'])
@@ -29,22 +48,27 @@ Route::get('/session/ping', function () {
         ->header('Cache-Control', 'no-store');
 })->middleware('throttle:60,1')->name('client.session.ping');
 
-// Переход на язык по умолчанию
-Route::get('/', fn () => view('index-client'))
+// Корневой URL: рендерит Home без префикса локали. SetLocale middleware сам определяет
+// активную локаль (URL → X-Locale → app.locale), canonical в SEO-meta указывает
+// на `/{locale}` — Google не индексирует `/` как дубликат `/en`.
+Route::get('/', $inertiaPage('Home'))
     ->middleware(['setLocale']);
 
-// Публичная карточка партии закупки.
-Route::get('/batch/{batchId}', fn () => view('index-client'))
-    ->where('batchId', '[A-Za-z0-9_-]+');
+// Публичная карточка партии закупки (без префикса локали — старые QR-коды).
+Route::get('/batch/{batchId}', $inertiaPage('BatchPublic', fn (Request $request) => [
+    'batchId' => (string) $request->route('batchId'),
+    'print' => $request->boolean('print'),
+]))
+    ->where('batchId', '[A-Za-z0-9_-]+')
+    ->middleware(['setLocale']);
 
-// Публичный дневной отчёт задач
-Route::get('/report/{date}', fn () => view('index-client'))
-    ->where('date', '[0-9]{4}-[0-9]{2}-[0-9]{2}');
-
-// JSON вопросов опроса для SPA: без префикса локали (перевод на клиенте, vue-i18n).
-Route::get('/survey/questions', [SurveyQuestionsController::class, 'index'])
-    ->middleware('throttle:20,1')
-    ->name('client.survey.questions');
+// Публичный дневной отчёт задач (без префикса локали).
+Route::get('/report/{date}', $inertiaPage('DailyReportPublic', fn (Request $request) => [
+    'date' => (string) $request->route('date'),
+    'print' => $request->boolean('print'),
+]))
+    ->where('date', '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+    ->middleware(['setLocale']);
 
 // Ответы на вопросы
 Route::prefix('survey')->group(function () {
@@ -73,16 +97,30 @@ Route::prefix('technical')->as('technical.')->middleware('throttle:30,1')->group
         Route::post('/mail-test/send-all', [MailTestController::class, 'sendAllQueued'])->name('mail-test.send-all');
     });
 
-// SPA: маршруты с префиксом {locale}, middleware SetLocale, отдача index-client.
+// Публичные маршруты с префиксом {locale}, middleware SetLocale.
+// Все рендерятся через Inertia; неизвестные пути отдают 404 (catchall'а на legacy больше нет).
 Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => $localePattern],
     'middleware' => ['setLocale'],
-], function () {
-    Route::get('/', function () {
-        return view('index-client');
-    });
-    Route::get('/{any}', function () {
-        return view('index-client');
-    })->where('any', '.*');
+], function () use ($inertiaPage) {
+    Route::get('/', $inertiaPage('Home'));
+    Route::get('/about', $inertiaPage('About'));
+    Route::get('/how-it-works', $inertiaPage('HowWorks'));
+    Route::get('/privacy-policy', $inertiaPage('PrivacyPolicy'));
+    Route::get('/contact', $inertiaPage('Contact'));
+    Route::get('/survey', $inertiaPage('Survey', fn () => [
+        'questions' => app(SurveyQuestionsClientService::class)->getActiveQuestionsKeyedByStableId(),
+    ]));
+    Route::get('/demo/{section?}', $inertiaPage('Demo', fn (Request $request) => [
+        'section' => (string) ($request->route('section') ?? 'dashboard'),
+    ]))->where('section', 'dashboard|checklists|personnel|eudr|reports');
+    Route::get('/batch/{batchId}', $inertiaPage('BatchPublic', fn (Request $request) => [
+        'batchId' => (string) $request->route('batchId'),
+        'print' => $request->boolean('print'),
+    ]))->where('batchId', '[A-Za-z0-9_-]+');
+    Route::get('/report/{date}', $inertiaPage('DailyReportPublic', fn (Request $request) => [
+        'date' => (string) $request->route('date'),
+        'print' => $request->boolean('print'),
+    ]))->where('date', '[0-9]{4}-[0-9]{2}-[0-9]{2}');
 });

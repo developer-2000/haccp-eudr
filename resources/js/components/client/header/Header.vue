@@ -3,10 +3,10 @@
         <nav class="nav" role="navigation" :aria-label="$t('header.nav.aria_label')">
             <div class="container nav-container">
                 <div class="nav-logo">
-                    <router-link :to="safeLogo.link" class="logo-link">
+                    <Link :href="safeLogo.link" class="logo-link">
                         <span class="logo-site">{{ siteConfig.name }}</span>
                         <span class="logo-app">demo</span>
-                    </router-link>
+                    </Link>
                 </div>
                 <div v-if="!isMobile" class="nav-menu">
                     <NavMenuItem
@@ -148,23 +148,28 @@ defineOptions({
     name: "Header",
 });
 
-// ============================================
-// Импорты
-// ============================================
+import {
+    ref,
+    onMounted,
+    onBeforeUnmount,
+    computed,
+    watch,
+    shallowRef,
+} from "vue";
+import { Link, router as inertiaRouter, usePage } from "@inertiajs/vue3";
 import Icon from "../../Icon.vue";
 /** @type {NavConfig} */
 import navConfig from "@/config/nav";
-import { useSiteConfigStore } from "@/stores";
-const siteConfig = useSiteConfigStore();
 import { useMobileMenu } from "./composables/useMobileMenu";
 import { useBreakpoint } from "./composables/useBreakpoint";
 import NavMenuItem from "./NavMenuItem.vue";
-import { useRouter, useRoute } from "vue-router";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 import axios from "axios";
 
-// ============================================
-// Composables
-// ============================================
+const page = usePage();
+const siteConfig = computed(() => page.props.siteConfig || { name: "", adminEmail: "" });
+const languagesList = computed(() => page.props.switcherLocales || []);
+
 const {
     /** @type {import('vue').Ref<boolean>} */
     isOpen: isMobileMenuOpen,
@@ -184,47 +189,18 @@ const { isMobile: isCtaIconOnly } = useBreakpoint(1350);
 /** true при ширине <= 580px — переключатель языков скрыт в шапке, показываем в моб. меню */
 const { isMobile: isLangSwitcherHidden } = useBreakpoint(581);
 
-const router = useRouter();
-const route = useRoute();
-
-// ============================================
-// Locale (из URL :locale или data-locale)
-// ============================================
-import {
-    ref,
-    onMounted,
-    onBeforeUnmount,
-    computed,
-    watch,
-    shallowRef,
-} from "vue";
-
-const initialLocale = ref(window.locale || "en");
-const defaultLanguages = [];
-
-const languagesList = ref(getLanguagesList());
-const currentLocale = computed(() => {
-    const fromRoute = route.params.locale;
-    const allLocales = window.availableLocales || [];
-    if (typeof fromRoute === "string" && allLocales.includes(fromRoute)) {
-        return fromRoute;
-    }
-    if (allLocales.includes(initialLocale.value)) {
-        return initialLocale.value;
-    }
-    return "en";
-});
+const initialLocale = ref(useCurrentLocale());
+const currentLocale = computed(() => initialLocale.value);
 
 /**
- * SERVER - Смена языка: POST /locale (session, cookie, лог), затем переход на /{locale}/путь.
+ * SERVER - Смена языка: POST /locale (session, cookie, лог), затем full reload на /{locale}/путь.
+ * Полный reload нужен, чтобы middleware SetLocale пересобрал shared-props и i18n клиента переинициализировался.
  */
 async function setLocale(locale) {
     if (locale === currentLocale.value) return;
     const pathname = window.location.pathname;
-    // Используем полный список доступных языков, а не только те 2, что в переключателе
-    const allLocales = window.availableLocales || languagesList.value.map((l) => l.code);
+    const allLocales = page.props.availableLocales || languagesList.value.map((l) => l.code);
     const segments = pathname.split("/").filter(Boolean);
-    // Если первый сегмент — это какой-то язык из всех доступных, убираем его
     const rest = (
         allLocales.includes(segments[0]) ? segments.slice(1) : segments
     ).join("/");
@@ -250,24 +226,21 @@ async function setLocale(locale) {
 }
 
 const goToSurvey = () => {
-    router.push("/" + currentLocale.value + "/survey");
+    inertiaRouter.visit(`/${currentLocale.value}/survey`);
 };
 
-// Валидация navConfig выполняется один раз при инициализации
 const defaultConfig = {
     logo: { text: "", link: "/" },
     menu: [],
     actions: { buttons: [] },
 };
 
-// navConfig импортируется статически, поэтому проверяем только на существование
 const validatedNavConfig =
     navConfig ||
     (() => {
         return defaultConfig;
     })();
 
-// Используем shallowRef для статической конфигурации (не требует глубокой реактивности)
 /** @type {import('vue').ShallowRef<NavConfig>} */
 const navConfigRef = shallowRef(validatedNavConfig);
 
@@ -308,27 +281,8 @@ const safeMenu = computed(() => {
     }));
 });
 
-function getLanguagesList() {
-    const el = document.getElementById("app");
-    const raw = el?.getAttribute("data-languages");
-    if (!raw) return defaultLanguages;
-    try {
-        const list = JSON.parse(raw);
-        return Array.isArray(list) && list.length ? list : defaultLanguages;
-    } catch {
-        return defaultLanguages;
-    }
-}
-
-function getInitialLocale() {
-    const el = document.getElementById("app");
-    const locale = (el?.getAttribute("data-locale") || "en").toLowerCase();
-    const codes = languagesList.value.map((l) => l.code);
-    return codes.includes(locale) ? locale : codes[0] || "en";
-}
-
 onMounted(() => {
-    initialLocale.value = getInitialLocale();
+    initialLocale.value = useCurrentLocale();
 });
 
 // При открытом моб. меню — убираем скролл страницы и полосу прокрутки

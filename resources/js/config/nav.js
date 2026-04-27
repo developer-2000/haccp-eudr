@@ -1,8 +1,5 @@
 const navConfig = {
     logo: {
-        get text() {
-            return window.appName || "";
-        },
         link: "/",
     },
     menu: [

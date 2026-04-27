@@ -26,7 +26,7 @@ export {
     readGrainCoolingSessionStorage,
     writeGrainCoolingSessionStorage,
 } from "./grainCoolingSessionStorage";
-export { isGrainCoolingScenarioSuppressedForRoute } from "./grainCoolingPublicRoutes";
+export { isGrainCoolingScenarioSuppressedForPath } from "./grainCoolingPublicRoutes";
 export {
     findMeasurementRowIndexByTime,
     getCurrentMeasurementRowStatus,

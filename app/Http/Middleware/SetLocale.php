@@ -97,6 +97,8 @@ class SetLocale
         View::share('languagesForFrontend', $languagesForFrontend);
         View::share('translationsForFrontend', $translationsForFrontend);
 
+        $request->attributes->set('languagesForFrontend', $languagesForFrontend);
+
         return $next($request);
     }
 }

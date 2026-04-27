@@ -22,7 +22,7 @@ export const LS_CONSENT_VERSION = "consent_version_1";
 /**
  * Post-submit состояние страницы Survey (submitted, timestamp, хеш email).
  * Позволяет после перезагрузки восстановить экран «Спасибо» вместо формы.
- * @see resources/js/pages/client/Survey.vue
+ * @see resources/js/Pages/Survey.vue
  */
 export const LS_SURVEY_SUBMISSION_STATE = "survey_submission_state_v1";
 
@@ -31,7 +31,7 @@ export const LS_SURVEY_SUBMISSION_STATE = "survey_submission_state_v1";
 /**
  * Токен верификации email на странице Survey.
  * Живёт только в рамках текущей вкладки/сессии; после закрытия — сбрасывается.
- * @see resources/js/pages/client/Survey.vue
+ * @see resources/js/Pages/Survey.vue
  */
 export const SS_VERIFICATION_TOKEN = "verification_token";
 

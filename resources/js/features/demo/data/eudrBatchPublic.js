@@ -9,7 +9,7 @@ const tt = (...args) => i18n.global.t(...args);
 const origin =
     typeof window !== "undefined" && window.location?.origin
         ? window.location.origin
-        : `https://${window.appName || "app"}.eu`;
+        : "https://haccpilot.eu";
 
 const formatDateToRu = (date) => {
     const day = String(date.getDate()).padStart(2, "0");

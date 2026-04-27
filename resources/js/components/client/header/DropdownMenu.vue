@@ -14,12 +14,12 @@
                     v-for="dropdownItem in column.items"
                     :key="`${dropdownItem.title}-${dropdownItem.link || ''}`"
                 >
-                    <router-link
+                    <Link
                         v-if="
                             hasValidLink(dropdownItem) &&
                             !isDropdownLink(dropdownItem)
                         "
-                        :to="dropdownItem.link"
+                        :href="dropdownItem.link"
                         class="dropdown-item"
                     >
                         <div class="dropdown-title">
@@ -31,14 +31,14 @@
                         >
                             {{ dropdownItem.description }}
                         </div>
-                    </router-link>
-                    <router-link
+                    </Link>
+                    <Link
                         v-else-if="isDropdownLink(dropdownItem)"
-                        :to="dropdownItem.link"
+                        :href="dropdownItem.link"
                         class="dropdown-link"
                     >
                         {{ dropdownItem.title }} →
-                    </router-link>
+                    </Link>
                     <div v-else class="dropdown-item">
                         <div class="dropdown-title">
                             {{ dropdownItem.title }}
@@ -66,12 +66,12 @@
                         v-for="dropdownItem in column.items"
                         :key="`${dropdownItem.title}-${dropdownItem.link || ''}`"
                     >
-                        <router-link
+                        <Link
                             v-if="
                                 hasValidLink(dropdownItem) &&
                                 !isDropdownLink(dropdownItem)
                             "
-                            :to="dropdownItem.link"
+                            :href="dropdownItem.link"
                             class="mobile-menu-subitem"
                             @click="handleClick"
                         >
@@ -84,15 +84,15 @@
                             >
                                 {{ dropdownItem.description }}
                             </div>
-                        </router-link>
-                        <router-link
+                        </Link>
+                        <Link
                             v-else-if="isDropdownLink(dropdownItem)"
-                            :to="dropdownItem.link"
+                            :href="dropdownItem.link"
                             class="mobile-menu-subitem-link"
                             @click="handleClick"
                         >
                             {{ dropdownItem.title }} →
-                        </router-link>
+                        </Link>
                         <div v-else class="mobile-menu-subitem">
                             <div class="mobile-menu-subitem-title">
                                 {{ dropdownItem.title }}
@@ -120,9 +120,9 @@
                     v-for="dropdownItem in firstColumnItems"
                     :key="`${dropdownItem.title}-${dropdownItem.link || ''}`"
                 >
-                    <router-link
+                    <Link
                         v-if="hasValidLink(dropdownItem)"
-                        :to="dropdownItem.link"
+                        :href="dropdownItem.link"
                         class="dropdown-item"
                     >
                         <div class="dropdown-title">
@@ -131,7 +131,7 @@
                         <div class="dropdown-desc">
                             {{ dropdownItem.description }}
                         </div>
-                    </router-link>
+                    </Link>
                     <div v-else class="dropdown-item">
                         <div class="dropdown-title">
                             {{ dropdownItem.title }}
@@ -147,9 +147,9 @@
                     v-for="dropdownItem in secondColumnItems"
                     :key="`${dropdownItem.title}-${dropdownItem.link || ''}`"
                 >
-                    <router-link
+                    <Link
                         v-if="hasValidLink(dropdownItem)"
-                        :to="dropdownItem.link"
+                        :href="dropdownItem.link"
                         class="dropdown-item"
                     >
                         <div class="dropdown-title">
@@ -158,7 +158,7 @@
                         <div class="dropdown-desc">
                             {{ dropdownItem.description }}
                         </div>
-                    </router-link>
+                    </Link>
                     <div v-else class="dropdown-item">
                         <div class="dropdown-title">
                             {{ dropdownItem.title }}
@@ -175,9 +175,9 @@
                 v-for="dropdownItem in item.dropdown"
                 :key="`${dropdownItem.title}-${dropdownItem.link || ''}`"
             >
-                <router-link
+                <Link
                     v-if="hasValidLink(dropdownItem)"
-                    :to="dropdownItem.link"
+                    :href="dropdownItem.link"
                     class="mobile-menu-subitem"
                     @click="handleClick"
                 >
@@ -190,7 +190,7 @@
                     >
                         {{ dropdownItem.description }}
                     </div>
-                </router-link>
+                </Link>
                 <div v-else class="mobile-menu-subitem">
                     <div class="mobile-menu-subitem-title">
                         {{ dropdownItem.title }}
@@ -216,6 +216,7 @@ defineOptions({
     name: "DropdownMenu",
 });
 import { computed } from "vue";
+import { Link } from "@inertiajs/vue3";
 import {
     hasDropdownColumns,
     isSimpleDropdown,

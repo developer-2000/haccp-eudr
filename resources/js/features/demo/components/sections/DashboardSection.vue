@@ -51,12 +51,12 @@
             </div>
         </div>
 
-        <RouterLink
+        <Link
             class="dashboard-section__checklists-cta"
-            :to="checklistsDemoRoute"
+            :href="checklistsDemoRoute"
         >
             {{ t('demo.dashboard.checklists') }}
-        </RouterLink>
+        </Link>
 
         <ShowTaskModal
             v-if="isTaskModalOpen"
@@ -72,18 +72,15 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { useRoute } from "vue-router";
+import { Link } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 import ShowTaskModal from "@/features/demo/components/modals/show_task/ShowTaskModal.vue";
 import TaskCard from "./TaskCard.vue";
 
-const route = useRoute();
 const { t } = useI18n();
 
-const checklistsDemoRoute = computed(() => ({
-    name: "Demo",
-    params: { ...route.params, section: "checklists" },
-}));
+const checklistsDemoRoute = computed(() => `/${useCurrentLocale()}/demo/checklists`);
 
 defineOptions({ name: "DashboardSection" });
 

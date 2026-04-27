@@ -1,7 +1,7 @@
 <template>
-    <ViconsIcon v-if="isViconsIcon" v-bind="$attrs">
+    <span v-if="isViconsIcon" class="xicon" v-bind="$attrs">
         <component :is="iconComponent" />
-    </ViconsIcon>
+    </span>
     <component :is="iconComponent" v-else v-bind="$attrs" />
 </template>
 
@@ -62,7 +62,7 @@ import {
     EyeSlashIcon,
 } from "@heroicons/vue/24/outline";
 
-import { IconReportSearch } from "@tabler/icons-vue";
+import { IconReportSearch, IconArrowBigDownLines } from "@tabler/icons-vue";
 
 /**
  * Иконки из библиотеки @vicons/antd
@@ -121,12 +121,6 @@ import {
     TargetArrow24Regular,
 } from "@vicons/fluent";
 
-/**
- * ViconsIcon - компонент-обертка из @vicons/utils
- * Используется для правильного рендеринга иконок из библиотек @vicons
- */
-import { Icon as ViconsIcon } from "@vicons/utils";
-
 /** FA6 `faHandPointRight` — другой глиф; здесь путь как в FA5 / сайте Font Awesome. */
 const HAND_POINT_RIGHT_PATH_D =
     "M512 199.652c0 23.625-20.65 43.826-44.8 43.826h-99.851c16.34 17.048 18.346 49.766-6.299 70.944c14.288 22.829 2.147 53.017-16.45 62.315C353.574 425.878 322.654 448 272 448c-2.746 0-13.276-.203-16-.195c-61.971.168-76.894-31.065-123.731-38.315C120.596 407.683 112 397.599 112 385.786V214.261l.002-.001c.011-18.366 10.607-35.889 28.464-43.845c28.886-12.994 95.413-49.038 107.534-77.323c7.797-18.194 21.384-29.084 40-29.092c34.222-.014 57.752 35.098 44.119 66.908c-3.583 8.359-8.312 16.67-14.153 24.918H467.2c23.45 0 44.8 20.543 44.8 43.826zM96 200v192c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V200c0-13.255 10.745-24 24-24h48c13.255 0 24 10.745 24 24zM68 368c0-11.046-8.954-20-20-20s-20 8.954-20 20s8.954 20 20 20s20-8.954 20-20z";
@@ -179,6 +173,7 @@ const icons = Object.freeze({
     "eye-slash": EyeSlashIcon,
     // Tabler (@tabler/icons-vue), рендер напрямую
     "report-search": IconReportSearch,
+    "arrow-big-down-lines": IconArrowBigDownLines,
     // Встроенный SVG (классический hand-point-right)
     "hand-point-right": HandPointRightIcon,
     // Иконки из @vicons (требуют обертки ViconsIcon)

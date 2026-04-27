@@ -28,12 +28,12 @@
             >
                 {{ tr(successCopy.updateViaEmailHint) }}
             </p>
-            <RouterLink
+            <a
                 class="survey-page__success-home survey-primary-action"
-                :to="homeRouteLocation"
+                :href="homeHref"
             >
                 {{ t("survey.success.home_link") }}
-            </RouterLink>
+            </a>
         </div>
     </div>
 </template>
@@ -50,9 +50,9 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-    /** Объект маршрута для RouterLink на главную страницу. */
-    homeRouteLocation: {
-        type: Object,
+    /** URL главной страницы с учётом текущей локали — рендерится в `<a href>` без зависимости от vue-router/Inertia. */
+    homeHref: {
+        type: String,
         required: true,
     },
 });

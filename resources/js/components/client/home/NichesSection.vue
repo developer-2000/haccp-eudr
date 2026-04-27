@@ -57,35 +57,26 @@ defineOptions({
     name: "NichesSection",
 });
 
-import { useRouter, useRoute } from "vue-router";
+import { router as inertiaRouter } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
+import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
 
-const router = useRouter();
-const route = useRoute();
 const { t } = useI18n();
 
 /**
- * Возвращает текущую локаль из параметров маршрута.
- * Используется для формирования локализованных ссылок.
- */
-function getCurrentLocale() {
-    return route.params.locale ?? "en";
-}
-
-/**
- * Переходит на страницу демо с учётом локали.
+ * Переходит на демо через Inertia router без полной перезагрузки.
  * Используется в карточках ниш.
  */
 function goToDemo() {
-    router.push("/" + getCurrentLocale() + "/demo/dashboard");
+    inertiaRouter.visit(`/${useCurrentLocale()}/demo/dashboard`);
 }
 
 /**
- * Переходит на страницу опроса с учётом локали.
+ * Переходит на опрос через Inertia router без полной перезагрузки.
  * Используется в карточке «Другие ниши».
  */
 function goToSurvey() {
-    router.push("/" + getCurrentLocale() + "/survey");
+    inertiaRouter.visit(`/${useCurrentLocale()}/survey`);
 }
 
 const niches = [

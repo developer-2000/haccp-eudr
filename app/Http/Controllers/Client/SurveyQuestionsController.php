@@ -7,20 +7,9 @@ use App\Http\Requests\Client\SurveySubmitRequest;
 use App\Http\Requests\Client\SurveyVerifyRequest;
 use App\Services\SurveyResponseService;
 use Illuminate\Http\JsonResponse;
-use App\Services\SurveyQuestionsClientService;
 
 class SurveyQuestionsController extends BaseController
 {
-    /**
-     * Активные вопросы для SPA: строки как в БД (ключи survey.*); перевод на клиенте через vue-i18n.
-     */
-    public function index(SurveyQuestionsClientService $surveyQuestions): JsonResponse
-    {
-        $questions = $surveyQuestions->getActiveQuestionsKeyedByStableId();
-
-        return $this->getSuccessResponse('', compact('questions'));
-    }
-
     /**
      * Принимает ответы опроса и сохраняет их в БД через сервис.
      */

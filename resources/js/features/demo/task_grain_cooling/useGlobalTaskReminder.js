@@ -1,7 +1,14 @@
-import { h, onUnmounted, watch } from "vue";
+import { defineAsyncComponent, h, onUnmounted, watch } from "vue";
 import { toast } from "vue3-toastify";
 import { useDemoState } from "@/features/demo/composables/useDemoState";
-import GlobalTaskReminderToast from "./GlobalTaskReminderToast.vue";
+/**
+ * Lazy: иначе naive-ui (зависимость GlobalTaskReminderToast) тянется в SSR-бандл и валит запуск
+ * Node-процесса (`window` обращается css-render на этапе импорта). Reminder сам по себе срабатывает
+ * только на клиенте через watch, так что отложенная загрузка ничего не ломает.
+ */
+const GlobalTaskReminderToast = defineAsyncComponent(
+    () => import("./GlobalTaskReminderToast.vue"),
+);
 import {
     lockGrainCoolingMeasurementIndex,
     task_grain_cooling,

@@ -1,6 +1,6 @@
 import { task_grain_cooling, unlockGrainCoolingMeasurementIndex } from "./config";
 import { getGrainCoolingTaskAndMeasurementByRowIndex } from "./grainCoolingIndexedAccess";
-import { isGrainCoolingScenarioSuppressedForRoute } from "./grainCoolingPublicRoutes";
+import { isGrainCoolingScenarioSuppressedForPath } from "./grainCoolingPublicRoutes";
 import { isGrainCoolingScenarioStorageCompleted } from "./grainCoolingStorageStatus";
 import { getGrainCoolingTaskFromDemoState } from "./resolveGrainCoolingTaskFromDemoState";
 import { LS_CONSENT_VERSION } from "@/config/storageNames";
@@ -56,23 +56,23 @@ export function grainCoolingScenarioShouldRun(demoStateRef) {
  * Сценарий разрешён только при выполнении **всех** условий:
  * 1. Пользователь принял consent-баннер (`LS_CONSENT_VERSION === "true"` в localStorage).
  * 2. У целевой задачи есть хотя бы один замер со статусом `pending` (первый с начала массива).
- * 3. Текущий маршрут — не публичная страница партии/отчёта (`grainCoolingPublicRoutes`).
+ * 3. Текущий путь — не публичная страница партии/отчёта (`grainCoolingPublicRoutes`).
  * 4. В `sessionStorage` ещё не зафиксировано логическое завершение сценария (`status: "completed"`).
  *
  * `false` — `useGlobalTaskReminder` не вешает оповещение и таймеры; `useGrainCoolingStore()` может вернуть `null`.
  *
  * @param {import('vue').Ref<object>} demoStateRef
- * @param {import('vue-router').RouteLocationNormalizedLoaded | null | undefined} [route]
+ * @param {string | null | undefined} [pathname] — `window.location.pathname` или Inertia `page.url`.
  * @returns {void}
  */
-export function syncGrainCoolingScenarioProcessAllowed(demoStateRef, route) {
+export function syncGrainCoolingScenarioProcessAllowed(demoStateRef, pathname) {
 
     const consentAccepted =
         typeof localStorage !== "undefined" &&
         localStorage.getItem(LS_CONSENT_VERSION) === "true";
 
     const dataOk = grainCoolingScenarioShouldRun(demoStateRef);
-    const suppressed = route ? isGrainCoolingScenarioSuppressedForRoute(route) : false;
+    const suppressed = pathname ? isGrainCoolingScenarioSuppressedForPath(pathname) : false;
     const storedDone = isGrainCoolingScenarioStorageCompleted();
     task_grain_cooling.scenarioProcessAllowed =
         consentAccepted && dataOk && !suppressed && !storedDone;
