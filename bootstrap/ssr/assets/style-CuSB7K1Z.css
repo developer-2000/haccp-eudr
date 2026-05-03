@@ -2326,16 +2326,16 @@
 .niche-card.niche-card--other[data-v-72b0ae19] > * {
   position: relative;
   z-index: 1;
-}.section-container-home[data-v-d5bd1c45] {
+}.section-container-home[data-v-a4d26774] {
   padding: 3.75rem 0;
 }
-.section-container--home-hero[data-v-d5bd1c45] {
+.section-container--home-hero[data-v-a4d26774] {
   background-color: #fbfbfb;
 }
-.section-container--home-metrics[data-v-d5bd1c45] {
+.section-container--home-metrics[data-v-a4d26774] {
   background-color: #e9e9e9;
 }
-.section-container--home-survey-cta[data-v-d5bd1c45] {
+.section-container--home-survey-cta[data-v-a4d26774] {
   background-color: #1062b9;
 }.steps-section[data-v-4238c459] {
   min-height: 1000px;
@@ -3031,20 +3031,20 @@
 .survey-step-transition.survey-step-instant-enter-from[data-v-446b7dde], .survey-step-transition.survey-step-instant-leave-to[data-v-446b7dde] {
   opacity: 1;
   transform: none;
-}.survey-main-flow__header-stack[data-v-76ae5bf8] {
+}.survey-main-flow__header-stack[data-v-86dae012] {
   display: flex;
   flex-direction: column;
   gap: 8px;
   width: 100%;
   min-width: 0;
 }
-.survey-main-flow__header-stack .survey-main-flow__top-nav[data-v-76ae5bf8] {
+.survey-main-flow__header-stack .survey-main-flow__top-nav[data-v-86dae012] {
   min-height: 48px;
   display: flex;
   align-items: center;
   margin-bottom: 8px;
 }
-.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back[data-v-76ae5bf8] {
+.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back[data-v-86dae012] {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -3059,20 +3059,24 @@
   -webkit-tap-highlight-color: transparent;
   transition: color 250ms ease;
 }
-.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back[data-v-76ae5bf8]:hover {
+.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back[data-v-86dae012]:hover {
   color: #1058a4;
 }
-.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back[data-v-76ae5bf8]:focus-visible {
+.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back[data-v-86dae012]:focus-visible {
   outline: 2px solid #1062b9;
   outline-offset: 2px;
   border-radius: 4px;
 }
-.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back .survey-main-flow__nav-back-icon[data-v-76ae5bf8] {
+.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back .survey-main-flow__nav-back-icon[data-v-86dae012] {
   width: 1.125rem;
   height: 1.125rem;
   flex-shrink: 0;
 }
-.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back .survey-main-flow__nav-back-text[data-v-76ae5bf8] {
+.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back .survey-main-flow__nav-back-icon[data-v-86dae012] svg {
+  width: 100%;
+  height: 100%;
+}
+.survey-main-flow__header-stack .survey-main-flow__top-nav .survey-main-flow__nav-back .survey-main-flow__nav-back-text[data-v-86dae012] {
   line-height: 1.2;
 }.survey-page__block[data-v-fab06fc9] {
   display: flex;

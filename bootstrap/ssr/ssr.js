@@ -5977,7 +5977,7 @@ function applyGrainCoolingProblemIfPending(demoStateRef) {
   return true;
 }
 const GlobalTaskReminderToast = defineAsyncComponent(
-  () => import("./assets/GlobalTaskReminderToast-BB35q0ZE.js")
+  () => import("./assets/GlobalTaskReminderToast-BebLEOGt.js")
 );
 function useGlobalTaskReminder() {
   const { demoState: demoState2 } = useDemoState();
@@ -7910,7 +7910,7 @@ const _sfc_main$o = /* @__PURE__ */ Object.assign({
       () => import("./assets/index-CBaioSHH.js").then((m) => m.NMessageProvider)
     );
     const DemoPage = defineAsyncComponent(
-      () => import("./assets/DemoPage-C7BooJT6.js")
+      () => import("./assets/DemoPage-qCAFukiH.js")
     );
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
@@ -8202,13 +8202,13 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="section-container-home section-container--home-hero" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(` test 1 <div class="section-container-home section-container--home-hero" data-v-a4d26774><div class="container" data-v-a4d26774>`);
       _push(ssrRenderComponent(HeroSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-metrics" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(`</div></div><div class="section-container-home section-container--home-metrics" data-v-a4d26774><div class="container" data-v-a4d26774>`);
       _push(ssrRenderComponent(MetricsSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-niches" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(`</div></div><div class="section-container-home section-container--home-niches" data-v-a4d26774><div class="container" data-v-a4d26774>`);
       _push(ssrRenderComponent(NichesSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-survey-cta" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(`</div></div><div class="section-container-home section-container--home-survey-cta" data-v-a4d26774><div class="container" data-v-a4d26774>`);
       _push(ssrRenderComponent(SurveyCtaSection, null, null, _parent));
       _push(`</div></div><!--]-->`);
     };
@@ -8220,7 +8220,7 @@ _sfc_main$k.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Home.vue");
   return _sfc_setup$k ? _sfc_setup$k(props, ctx) : void 0;
 };
-const Home = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-d5bd1c45"]]);
+const Home = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-a4d26774"]]);
 const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Home
@@ -9940,7 +9940,7 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "SurveyMainFlow" }, {
       _push(ssrRenderComponent(SurveyLayout, _attrs, {
         header: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="survey-main-flow__header-stack" data-v-76ae5bf8${_scopeId}>`);
+            _push2(`<div class="survey-main-flow__header-stack" data-v-86dae012${_scopeId}>`);
             _push2(ssrRenderComponent(SurveyProgressBar, {
               numerator: __props.progressNumerator,
               denominator: __props.progressDenominator,
@@ -9948,13 +9948,13 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "SurveyMainFlow" }, {
               "aria-label": __props.progressBarAriaLabel
             }, null, _parent2, _scopeId));
             if (__props.canGoBack) {
-              _push2(`<div class="survey-main-flow__top-nav" data-v-76ae5bf8${_scopeId}><button type="button" class="survey-main-flow__nav-back"${ssrRenderAttr("aria-label", unref(t)("survey.nav.back_aria"))} data-v-76ae5bf8${_scopeId}>`);
+              _push2(`<div class="survey-main-flow__top-nav" data-v-86dae012${_scopeId}><button type="button" class="survey-main-flow__nav-back"${ssrRenderAttr("aria-label", unref(t)("survey.nav.back_aria"))} data-v-86dae012${_scopeId}>`);
               _push2(ssrRenderComponent(_sfc_main$C, {
                 class: "survey-main-flow__nav-back-icon",
                 name: "left-outlined",
                 "aria-hidden": "true"
               }, null, _parent2, _scopeId));
-              _push2(`<span class="survey-main-flow__nav-back-text" data-v-76ae5bf8${_scopeId}>${ssrInterpolate(unref(t)("survey.nav.back"))}</span></button></div>`);
+              _push2(`<span class="survey-main-flow__nav-back-text" data-v-86dae012${_scopeId}>${ssrInterpolate(unref(t)("survey.nav.back"))}</span></button></div>`);
             } else {
               _push2(`<!---->`);
             }
@@ -10037,7 +10037,7 @@ _sfc_main$6.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/screens/SurveyMainFlow.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const SurveyMainFlow = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-76ae5bf8"]]);
+const SurveyMainFlow = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-86dae012"]]);
 const _sfc_main$5 = /* @__PURE__ */ Object.assign({ name: "SurveyIntroScreen" }, {
   __name: "SurveyIntroScreen",
   __ssrInlineRender: true,

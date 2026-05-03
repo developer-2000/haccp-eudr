@@ -1,6 +1,7 @@
 import { unref, mergeProps, withCtx, createTextVNode, toDisplayString, createVNode, useSSRContext } from "vue";
 import { ssrRenderComponent, ssrInterpolate } from "vue/server-renderer";
 import { t as task_grain_cooling, u as useGrainCoolingStore, j as i18n, _ as _export_sfc } from "../ssr.js";
+import { router } from "@inertiajs/vue3";
 import { N as NConfigProvider, d as darkTheme } from "./dark-IQH-hZ2R.js";
 import { B as Button } from "./_common-Dc_o1R5u.js";
 import "vue-i18n";
@@ -12,7 +13,6 @@ import "@tabler/icons-vue";
 import "@vicons/ionicons4";
 import "@vicons/carbon";
 import "@vicons/fluent";
-import "@inertiajs/vue3";
 import "pinia";
 import "uuid";
 import "vue3-toastify";
@@ -43,11 +43,14 @@ function navigateGrainCoolingToDemoChecklists(options = {}) {
   grain.requestOpenTaskOnChecklists(task_grain_cooling.id, task_grain_cooling.niche, {
     autoOpenPending: task_grain_cooling.deepLinkAutoOpenPending
   });
-  const locale = resolveLocale();
-  window.location.href = `/${locale}/demo/${task_grain_cooling.demoRouteSection}`;
   if (typeof options.closeToast === "function") {
     options.closeToast();
   }
+  const locale = resolveLocale();
+  router.visit(`/${locale}/demo/${task_grain_cooling.demoRouteSection}`, {
+    preserveState: true,
+    preserveScroll: true
+  });
 }
 const _sfc_main = /* @__PURE__ */ Object.assign({ name: "GlobalTaskReminderToast" }, {
   __name: "GlobalTaskReminderToast",

@@ -1,6 +1,6 @@
 <template>
     <SeoHead :seo="seo" />
-test 1
+
     <div class="section-container-home section-container--home-hero">
         <div class="container">
             <HeroSection />
