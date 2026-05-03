@@ -1,19 +1,29 @@
+import { usePage } from "@inertiajs/vue3";
+
 /**
- * Возвращает текущую локаль из URL (`/{locale}/...`) с фолбэком на `en`.
- * Универсальный для legacy SPA (через Vue Router) и Inertia: читает напрямую из
- * `window.location.pathname`, не требует `useRoute()` / `usePage()`.
- * Используется в Header / Footer / NavMenuItem / DropdownMenu / ConsentOverlay,
- * которые рендерятся в обоих контекстах.
+ * Возвращает текущую локаль. Источник истины — `usePage().props.locale`
+ * (выставляется бэкендом в `HandleInertiaRequests::share()` на основе
+ * `App::setLocale()` из middleware `SetLocale`). Работает одинаково в SSR
+ * и в браузере, поэтому переключатель языка корректно отображает активный
+ * язык на серверном рендере.
+ *
+ * Фолбэк на `window.location.pathname` оставлен для legacy-SPA контекста,
+ * где Inertia не инициализирована и `usePage()` бросает.
  */
 export function useCurrentLocale() {
+    try {
+        const page = usePage();
+        const locale = page?.props?.locale;
+        if (locale) return locale;
+    } catch {
+        // Inertia-контекст недоступен (legacy SPA) — идём в URL-фолбэк.
+    }
+
     if (typeof window === "undefined") {
         return "en";
     }
+
     const segments = window.location.pathname.split("/").filter(Boolean);
-    const available = window.availableLocales || [];
-    if (available.length > 0 && available.includes(segments[0])) {
-        return segments[0];
-    }
     if (segments[0] && /^[a-z]{2}$/.test(segments[0])) {
         return segments[0];
     }
@@ -21,16 +31,24 @@ export function useCurrentLocale() {
 }
 
 /**
- * Возвращает текущий путь без префикса локали. Полезен для language-switcher
- * (нужно сохранить текущую страницу при смене языка) и для определения
- * активной ссылки в навигации.
+ * Возвращает текущий путь без префикса локали. Используется в
+ * language-switcher (нужно сохранить страницу при смене языка) и для
+ * определения активной ссылки в навигации.
  */
 export function useCurrentPathWithoutLocale() {
-    if (typeof window === "undefined") {
-        return "/";
-    }
-    const path = window.location.pathname;
     const locale = useCurrentLocale();
+
+    let path = "/";
+    if (typeof window !== "undefined") {
+        path = window.location.pathname || "/";
+    } else {
+        try {
+            path = usePage()?.url || "/";
+        } catch {
+            path = "/";
+        }
+    }
+
     if (path === `/${locale}` || path.startsWith(`/${locale}/`)) {
         return path.slice(locale.length + 1) || "/";
     }

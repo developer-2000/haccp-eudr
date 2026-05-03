@@ -13,28 +13,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # PHP
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
 
-      - name: Install Composer dependencies
-        run: |
-          composer install --no-dev --optimize-autoloader --no-interaction
-
-      # Node
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Build frontend
+      - name: Build frontend (client + SSR)
         run: |
           npm ci
           npm run build
 
-      # Prepare release
       - name: Prepare release folder
         run: |
           rm -rf release
@@ -42,18 +35,17 @@ jobs:
 
           rsync -av \
             --exclude=node_modules \
+            --exclude=vendor \
             --exclude=.git \
             --exclude=tests \
             --exclude=.env \
+            --exclude=release \
+            --exclude=release.tar.gz \
             ./ release/
 
-          cp -r vendor release/
-
-      # Archive
       - name: Create artifact
         run: tar -czf release.tar.gz release
 
-      # Upload artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -70,7 +62,6 @@ jobs:
         with:
           name: app-release
 
-      # КЛЮЧЕВОЙ ФИКС — ПЕРЕДАЧА НА СЕРВЕР
       - name: Upload to server
         uses: appleboy/scp-action@v0.1.7
         with:
