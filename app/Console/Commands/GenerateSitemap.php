@@ -3,114 +3,87 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use SimpleXMLElement;
+use Carbon\Carbon;
 
-/**
- * Генерирует public/sitemap.xml со всеми публичными страницами.
- * Включает hreflang-альтернативы для каждой локали и lastmod.
- * Запуск: php artisan sitemap:generate
- */
 class GenerateSitemap extends Command
 {
     protected $signature = 'sitemap:generate';
+    protected $description = 'Generate multilingual sitemap';
 
-    protected $description = 'Generate public/sitemap.xml with all public pages and hreflang alternates';
-
-    /**
-     * Статические пути (без префикса локали).
-     */
-    private const STATIC_PATHS = [
-        ''               => ['changefreq' => 'weekly',  'priority' => '1.0'],
-        'about'          => ['changefreq' => 'monthly', 'priority' => '0.7'],
-        'how-it-works'   => ['changefreq' => 'monthly', 'priority' => '0.7'],
-        'survey'         => ['changefreq' => 'monthly', 'priority' => '0.6'],
-        'demo/dashboard' => ['changefreq' => 'weekly',  'priority' => '0.8'],
-        'demo/checklists'=> ['changefreq' => 'weekly',  'priority' => '0.8'],
-        'demo/eudr'      => ['changefreq' => 'weekly',  'priority' => '0.8'],
-        'demo/personnel' => ['changefreq' => 'weekly',  'priority' => '0.7'],
-        'demo/reports'   => ['changefreq' => 'weekly',  'priority' => '0.7'],
-        'privacy-policy' => ['changefreq' => 'yearly',  'priority' => '0.3'],
-        'contact'        => ['changefreq' => 'monthly', 'priority' => '0.5'],
-    ];
-
-    public function handle(): int
+    public function handle()
     {
         $baseUrl = rtrim(config('app.url'), '/');
-        $countries = config('site.languages.countries', []);
-        $lastmod = now()->toDateString();
 
-        $urls = [];
+        // ✔ ТВОЙ КОНФИГ
+        $langs = config('site.languages.countries', []);
 
-        foreach (self::STATIC_PATHS as $path => $meta) {
-            $suffix = $path !== '' ? '/' . $path : '';
-            $alternates = $this->buildAlternates($baseUrl, $suffix, $countries);
+        if (empty($langs) || !is_array($langs)) {
+            $this->error('Languages config missing: site.languages.countries');
+            return 1;
+        }
 
-            foreach (array_keys($countries) as $code) {
-                $loc = $baseUrl . '/' . $code . $suffix;
-                $urls[] = $this->buildUrlEntry($loc, $lastmod, $meta, $alternates);
+        // ✔ страницы сайта
+        $pages = [
+            '/',
+            '/about',
+            '/how-it-works',
+            '/survey',
+            '/demo/dashboard',
+            '/demo/checklists',
+            '/demo/eudr',
+            '/demo/personnel',
+            '/demo/reports',
+            '/privacy-policy',
+            '/contact',
+        ];
+
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset/>');
+        $xml->addAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+
+        $date = Carbon::now()->toDateString();
+
+        foreach ($pages as $page) {
+            foreach ($langs as $lang => $meta) {
+
+                $url = $xml->addChild('url');
+
+                // ✔ ВСЕГДА /{lang}/page
+                $loc = $baseUrl . '/' . $lang . $page;
+
+                $url->addChild('loc', $loc);
+                $url->addChild('lastmod', $date);
+                $url->addChild('changefreq', $this->freq($page));
+                $url->addChild('priority', $this->priority($page));
             }
         }
 
-        $xml = $this->buildXml($urls);
+        $path = public_path('sitemap.xml');
+        $xml->asXML($path);
 
-        $outputPath = public_path('sitemap.xml');
-        file_put_contents($outputPath, $xml);
+        $this->info("Sitemap generated: {$path}");
 
-        $this->info('Sitemap generated: ' . $outputPath . ' (' . count($urls) . ' URLs)');
-
-        return self::SUCCESS;
+        return 0;
     }
 
-    /**
-     * Формирует массив hreflang-альтернатив для одного URL.
-     * Использует поле hreflang из конфига для корректных ISO 639-1 кодов языков.
-     *
-     * @return array<int, array{locale: string, href: string}>
-     */
-    private function buildAlternates(string $baseUrl, string $suffix, array $countries): array
+    private function freq($page)
     {
-        $alternates = [];
-        foreach ($countries as $code => $meta) {
-            $alternates[] = [
-                'locale' => $meta['hreflang'] ?? $code,
-                'href'   => $baseUrl . '/' . $code . $suffix,
-            ];
-        }
-        $alternates[] = ['locale' => 'x-default', 'href' => $baseUrl . '/en' . $suffix];
-
-        return $alternates;
+        return match (true) {
+            $page === '/' => 'weekly',
+            str_contains($page, 'demo') => 'weekly',
+            str_contains($page, 'privacy') => 'yearly',
+            default => 'monthly',
+        };
     }
 
-    /**
-     * Формирует XML-блок одного <url> с lastmod, changefreq, priority и xhtml:link.
-     */
-    private function buildUrlEntry(string $loc, string $lastmod, array $meta, array $alternates): string
+    private function priority($page)
     {
-        $lines = [];
-        $lines[] = '  <url>';
-        $lines[] = '    <loc>' . htmlspecialchars($loc) . '</loc>';
-        $lines[] = '    <lastmod>' . $lastmod . '</lastmod>';
-        $lines[] = '    <changefreq>' . $meta['changefreq'] . '</changefreq>';
-        $lines[] = '    <priority>' . $meta['priority'] . '</priority>';
-
-        foreach ($alternates as $alt) {
-            $lines[] = '    <xhtml:link rel="alternate" hreflang="'
-                . $alt['locale'] . '" href="' . htmlspecialchars($alt['href']) . '"/>';
-        }
-
-        $lines[] = '  </url>';
-
-        return implode("\n", $lines);
-    }
-
-    /**
-     * Оборачивает массив URL-блоков в полный XML-документ sitemap.
-     */
-    private function buildXml(array $urls): string
-    {
-        $header = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
-            . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
-            . ' xmlns:xhtml="http://www.w3.org/1999/xhtml">';
-
-        return $header . "\n" . implode("\n", $urls) . "\n" . '</urlset>' . "\n";
+        return match (true) {
+            $page === '/' => '1.0',
+            str_contains($page, 'demo') => '0.8',
+            str_contains($page, 'contact') => '0.5',
+            str_contains($page, 'privacy') => '0.3',
+            default => '0.7',
+        };
     }
 }
