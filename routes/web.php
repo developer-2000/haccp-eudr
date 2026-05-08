@@ -7,6 +7,7 @@ use App\Http\Controllers\Technical\MailTestController;
 use App\Services\SeoMetaResolver;
 use App\Services\SurveyQuestionsClientService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -109,9 +110,15 @@ Route::group([
     Route::get('/how-it-works', $inertiaPage('HowWorks'));
     Route::get('/privacy-policy', $inertiaPage('PrivacyPolicy'));
     Route::get('/contact', $inertiaPage('Contact'));
-    Route::get('/survey', $inertiaPage('Survey', fn () => [
-        'questions' => app(SurveyQuestionsClientService::class)->getActiveQuestionsKeyedByStableId(),
-    ]));
+    Route::get('/survey', $inertiaPage('Survey', function () {
+        // Honeypot: серверный timestamp в шифрованной HttpOnly-куке (TTL 120 мин).
+        // Перезаписывается на каждом GET страницы; читается на /survey/submit.
+        Cookie::queue(cookie('hp_started_at', (string) now()->timestamp, 120));
+
+        return [
+            'questions' => app(SurveyQuestionsClientService::class)->getActiveQuestionsKeyedByStableId(),
+        ];
+    }));
     Route::get('/demo/{section?}', $inertiaPage('Demo', fn (Request $request) => [
         'section' => (string) ($request->route('section') ?? 'dashboard'),
     ]))->where('section', 'dashboard|checklists|personnel|eudr|reports');

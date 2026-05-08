@@ -174,7 +174,6 @@ const currentIndex = ref(0);
 const skipIntroQuestionTransitionOnce = ref(false);
 const surveySubmitted = ref(false);
 const leadSubmitting = ref(false);
-const honeypotStartedAt = ref(null);
 
 const validation = reactive({
     leadFormAttempted: false,
@@ -380,10 +379,6 @@ async function markSurveySubmitted() {
     }
 }
 
-function nowUnixSeconds() {
-    return Math.floor(Date.now() / 1000);
-}
-
 /**
  * Собирает payload отправки: контакты и ответы по вопросам.
  * Используется для передачи на бэкенд и сохранения в БД.
@@ -407,7 +402,6 @@ function buildSurveySubmitPayload() {
     }
     return {
         company: String(answers.hp_company ?? ""),
-        hp_started_at: honeypotStartedAt.value,
         contacts,
         answers: answersMap,
         question_answers: questionAnswers,
@@ -684,27 +678,6 @@ watch(transitionStepKey, async () => {
     observer.observe(el);
     focusSurveyStepHeading();
 });
-
-watch(
-    () => currentStepId.value,
-    (stepId) => {
-        if (!stepId) {
-            return;
-        }
-
-        if (stepId === "1" && honeypotStartedAt.value === null) {
-            honeypotStartedAt.value = nowUnixSeconds();
-        }
-
-        const startedAt = honeypotStartedAt.value;
-        if (startedAt === null) {
-            return;
-        }
-
-        const seconds = Math.max(0, nowUnixSeconds() - startedAt);
-    },
-    { flush: "post" },
-);
 
 applyServerProvidedQuestions();
 
@@ -1107,7 +1080,6 @@ function resetSurveyStateToIntro() {
     for (const field of staticLeadFields) {
         answers[field] = "";
     }
-    honeypotStartedAt.value = Math.floor(Date.now() / 1000);
     const questionIds = Object.keys(getSurveyQuestionsById());
     for (const questionId of questionIds) {
         delete answers[questionId];
@@ -1119,8 +1091,6 @@ function resetSurveyStateToIntro() {
     validation.leadFormAttempted = false;
     validation.leadEmailError = "";
     validation.leadSubmitError = "";
-
-    honeypotStartedAt.value = null;
 }
 
 /**

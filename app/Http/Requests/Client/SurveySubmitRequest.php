@@ -15,7 +15,6 @@ class SurveySubmitRequest extends FormRequest
     {
         return [
             'company' => ['nullable', 'string', 'max:255'],
-            'hp_started_at' => ['nullable', 'integer', 'min:0'],
             'contacts' => ['required', 'array'],
             'contacts.name' => ['nullable', 'string', 'max:255'],
             // 🔥 улучшенная валидация email
@@ -64,7 +63,6 @@ class SurveySubmitRequest extends FormRequest
 
         $this->merge([
             'company' => $this->nullableString($this->input('company')),
-            'hp_started_at' => $this->nullableInt($this->input('hp_started_at')),
             'contacts' => [
                 'name' => $contacts['name'] ?? null,
                 // 🔥 нормализация email
@@ -91,22 +89,6 @@ class SurveySubmitRequest extends FormRequest
         $text = trim((string) $value);
 
         return $text === '' ? null : $text;
-    }
-
-    /**
-     * Приводит входное значение к целому числу или null для единообразной валидации.
-     */
-    private function nullableInt(mixed $value): ?int
-    {
-        if ($value === null || $value === '') {
-            return null;
-        }
-
-        if (is_numeric($value)) {
-            return (int) $value;
-        }
-
-        return null;
     }
 
     /**

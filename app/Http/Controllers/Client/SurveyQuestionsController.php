@@ -16,9 +16,10 @@ class SurveyQuestionsController extends BaseController
     public function submitAnswersQuestions(SurveySubmitRequest $request, SurveyResponseService $surveyResponses): JsonResponse
     {
         $payload = $request->validated();
+        $startedAt = (int) $request->cookie('hp_started_at', 0);
 
         // 1 Проверка скрытого поля и таймера для бота
-        if ($this->isHoneypotTriggered($payload)) {
+        if ($this->isHoneypotTriggered($payload, $startedAt)) {
             return $this->getSuccessResponse(__('survey.ui.response_saved'));
         }
 
@@ -42,29 +43,27 @@ class SurveyQuestionsController extends BaseController
     }
 
     /**
-     * Используется для раннего завершения запроса без записи в БД.
-     * Если проверочное поле заполнено Или таймер меньше 50 сек
+     * Honeypot: проверяет скрытое поле company и серверный таймер из шифрованной куки.
+     * $startedAt — расшифрованное значение куки hp_started_at, поставленной на GET /survey.
      *
      * @param array<string, mixed> $payload
      */
-    private function isHoneypotTriggered(array $payload): bool
+    private function isHoneypotTriggered(array $payload, int $startedAt): bool
     {
         // 1 Поле для бота - если заполнено
         $company = trim((string) ($payload['company'] ?? ''));
-        $startedAt = (int) ($payload['hp_started_at'] ?? 0);
-        $elapsed = now()->timestamp - $startedAt;
-
         if ($company !== '') {
             return true;
         }
 
-        // 2 Таймер заполнения ответов для бота - либо бот либо тот кто не думает над вопросами
-        $minSeconds = 30;
+        // 2 Куки нет (бот без cookies / прямой POST / истёк TTL) — пропускаем
         if ($startedAt <= 0) {
             return false;
         }
 
-        return $elapsed <= $minSeconds;
+        // 3 Таймер: бот либо тот, кто не думает над вопросами
+        $minSeconds = (int) config('site.survey.min_seconds');
+        return (now()->timestamp - $startedAt) <= $minSeconds;
     }
 
 }
