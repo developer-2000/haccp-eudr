@@ -10,7 +10,7 @@ import { IconArrowBigDownLines, IconReportSearch } from "@tabler/icons-vue";
 import { IosMailUnread } from "@vicons/ionicons4";
 import { TaskComplete, TagExport } from "@vicons/carbon";
 import { TargetArrow24Regular, PeopleCommunity24Filled } from "@vicons/fluent";
-import { Head, Link, usePage, createInertiaApp } from "@inertiajs/vue3";
+import { usePage, Head, Link, createInertiaApp } from "@inertiajs/vue3";
 import { defineStore, storeToRefs, createPinia } from "pinia";
 import { v4 } from "uuid";
 import { toast } from "vue3-toastify";
@@ -183,14 +183,17 @@ _sfc_main$C.setup = (props, ctx) => {
   return _sfc_setup$C ? _sfc_setup$C(props, ctx) : void 0;
 };
 function useCurrentLocale() {
+  var _a2;
+  try {
+    const page = usePage();
+    const locale2 = (_a2 = page == null ? void 0 : page.props) == null ? void 0 : _a2.locale;
+    if (locale2) return locale2;
+  } catch {
+  }
   if (typeof window === "undefined") {
     return "en";
   }
   const segments = window.location.pathname.split("/").filter(Boolean);
-  const available = window.availableLocales || [];
-  if (available.length > 0 && available.includes(segments[0])) {
-    return segments[0];
-  }
   if (segments[0] && /^[a-z]{2}$/.test(segments[0])) {
     return segments[0];
   }
@@ -8202,13 +8205,13 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(` test 1 <div class="section-container-home section-container--home-hero" data-v-a4d26774><div class="container" data-v-a4d26774>`);
+      _push(`<div class="section-container-home section-container--home-hero" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
       _push(ssrRenderComponent(HeroSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-metrics" data-v-a4d26774><div class="container" data-v-a4d26774>`);
+      _push(`</div></div><div class="section-container-home section-container--home-metrics" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
       _push(ssrRenderComponent(MetricsSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-niches" data-v-a4d26774><div class="container" data-v-a4d26774>`);
+      _push(`</div></div><div class="section-container-home section-container--home-niches" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
       _push(ssrRenderComponent(NichesSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-survey-cta" data-v-a4d26774><div class="container" data-v-a4d26774>`);
+      _push(`</div></div><div class="section-container-home section-container--home-survey-cta" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
       _push(ssrRenderComponent(SurveyCtaSection, null, null, _parent));
       _push(`</div></div><!--]-->`);
     };
@@ -8220,7 +8223,7 @@ _sfc_main$k.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Home.vue");
   return _sfc_setup$k ? _sfc_setup$k(props, ctx) : void 0;
 };
-const Home = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-a4d26774"]]);
+const Home = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-d5bd1c45"]]);
 const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Home
@@ -10370,7 +10373,6 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
     const skipIntroQuestionTransitionOnce = ref(false);
     const surveySubmitted = ref(false);
     const leadSubmitting = ref(false);
-    const honeypotStartedAt = ref(null);
     const validation = reactive({
       leadFormAttempted: false,
       leadEmailError: "",
@@ -10510,9 +10512,6 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
         leadSubmitting.value = false;
       }
     }
-    function nowUnixSeconds() {
-      return Math.floor(Date.now() / 1e3);
-    }
     function buildSurveySubmitPayload() {
       const contacts = collectSurveyLeadContacts();
       const questionAnswers = collectSurveyQuestionAnswers();
@@ -10527,7 +10526,6 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
       }
       return {
         company: String(answers.hp_company ?? ""),
-        hp_started_at: honeypotStartedAt.value,
         contacts,
         answers: answersMap,
         question_answers: questionAnswers
@@ -10733,22 +10731,6 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
       observer.observe(el);
       focusSurveyStepHeading();
     });
-    watch(
-      () => currentStepId.value,
-      (stepId) => {
-        if (!stepId) {
-          return;
-        }
-        if (stepId === "1" && honeypotStartedAt.value === null) {
-          honeypotStartedAt.value = nowUnixSeconds();
-        }
-        const startedAt = honeypotStartedAt.value;
-        if (startedAt === null) {
-          return;
-        }
-      },
-      { flush: "post" }
-    );
     applyServerProvidedQuestions();
     onMounted(() => {
       var _a2;
@@ -11040,7 +11022,6 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
       for (const field of staticLeadFields) {
         answers[field] = "";
       }
-      honeypotStartedAt.value = Math.floor(Date.now() / 1e3);
       const questionIds = Object.keys(getSurveyQuestionsById());
       for (const questionId of questionIds) {
         delete answers[questionId];
@@ -11052,7 +11033,6 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
       validation.leadFormAttempted = false;
       validation.leadEmailError = "";
       validation.leadSubmitError = "";
-      honeypotStartedAt.value = null;
     }
     function resetSurveyFromSubmittedState() {
       submittedStateActive.value = false;
@@ -11065,9 +11045,9 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="survey-page container" data-v-c22c7eb8>`);
+      _push(`<div class="survey-page container" data-v-e13ba245>`);
       if (questionsLoadError.value) {
-        _push(`<div class="survey-page__api-error" role="alert" data-v-c22c7eb8>${ssrInterpolate(questionsLoadError.value)}</div>`);
+        _push(`<div class="survey-page__api-error" role="alert" data-v-e13ba245>${ssrInterpolate(questionsLoadError.value)}</div>`);
       } else {
         _push(`<!---->`);
       }
@@ -11172,7 +11152,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Survey.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const Survey = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c22c7eb8"]]);
+const Survey = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-e13ba245"]]);
 const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Survey

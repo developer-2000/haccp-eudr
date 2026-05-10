@@ -23,6 +23,29 @@ if (import.meta.env.PROD) {
     });
 }
 
+// Inertia GET-навигация упала с HttpNetworkError (XHR не получил ответ —
+// мигнул Wi-Fi, RST_STREAM от CF, залип HTTP/2 keep-alive). Retry через
+// тот же XHR-канал бесполезен — браузер переиспользует дохлый сокет.
+// Делаем full-reload на target URL: новое browser-соединение, заголовки
+// без X-Inertia (Laravel вернёт полный HTML), пользователь попадает туда,
+// куда хотел. Защита от петли — 30 сек между reload'ами: если CF реально
+// лежит, пусть отработает дефолт Inertia (стандартный alert).
+// POST/PUT не трогаем — silent-retry создал бы дубль, а apiAxios._handleError
+// уже показывает toast. Prefetch (hover-предзагрузку) тоже игнорируем —
+// пользователь не инициировал явную навигацию.
+if (typeof window !== "undefined") {
+    let lastReloadAt = 0;
+    document.addEventListener("inertia:networkError", (event) => {
+        const visit = event.detail?.visit;
+        const method = (visit?.method || "get").toLowerCase();
+        if (method !== "get" || visit?.prefetch) return;
+        if (Date.now() - lastReloadAt < 30_000) return;
+        lastReloadAt = Date.now();
+        event.preventDefault();
+        window.location.href = visit?.url?.toString?.() || window.location.href;
+    });
+}
+
 const pages = import.meta.glob("./Pages/**/*.vue", { eager: false });
 
 createInertiaApp({
