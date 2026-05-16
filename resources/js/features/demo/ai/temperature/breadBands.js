@@ -15,33 +15,33 @@
  */
 
 // ═══════════════════════════════════════════════════════════════════════════
-import { i18n } from "@/i18n";
+import { i18n } from '@/i18n';
 const tt = (...args) => i18n.global.t(...args);
 
 // ═══════════════════════════════════════════════════════════════════════════
 
 /** Опарка / замес. */
 export const BREAD_SPONGE_MIX_EQUIPMENT_IDS = Object.freeze([
-    "eq-bread-spiral-mixer",
-    "eq-bread-preferment-vat",
+    'eq-bread-spiral-mixer',
+    'eq-bread-preferment-vat',
 ]);
 
 /** Расстойка. */
 export const BREAD_PROOFING_EQUIPMENT_IDS = Object.freeze([
-    "eq-bread-proofing-cabinet",
-    "eq-bread-proofing-trays",
+    'eq-bread-proofing-cabinet',
+    'eq-bread-proofing-trays',
 ]);
 
 /** Выпечка. */
 export const BREAD_BAKING_EQUIPMENT_IDS = Object.freeze([
-    "eq-bread-rotary-oven",
-    "eq-bread-crumb-probe",
+    'eq-bread-rotary-oven',
+    'eq-bread-crumb-probe',
 ]);
 
 /** Охлаждение после выпечки. */
 export const BREAD_COOLING_EQUIPMENT_IDS = Object.freeze([
-    "eq-bread-cooling-conveyor",
-    "eq-bread-ventilated-racks",
+    'eq-bread-cooling-conveyor',
+    'eq-bread-ventilated-racks',
 ]);
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -99,19 +99,19 @@ const CL = BREAD_TEMP.cooling;
  * @returns {{ min: number, max: number } | null}
  */
 export function getBreadModeCcpWindow(mode) {
-    const m = String(mode ?? "")
+    const m = String(mode ?? '')
         .trim()
         .toLowerCase();
-    if (m === "sponge_mix") {
+    if (m === 'sponge_mix') {
         return { min: SM.normalMin, max: SM.normalMax };
     }
-    if (m === "proofing") {
+    if (m === 'proofing') {
         return { min: PF.normalMin, max: PF.normalMax };
     }
-    if (m === "baking") {
+    if (m === 'baking') {
         return { min: BK.ccpMin, max: BK.ccpMax };
     }
-    if (m === "cooling") {
+    if (m === 'cooling') {
         return { min: CL.normalMin, max: CL.normalMax };
     }
     return null;
@@ -124,28 +124,28 @@ export function getBreadModeCcpWindow(mode) {
 /** Опарка / замес — ровно три строки исходной таблицы (без дополнительных полос). */
 export const BREAD_SPONGE_MIX_BANDS = Object.freeze([
     Object.freeze({
-        id: "bread_sponge_gt_35",
+        id: 'bread_sponge_gt_35',
         processLabel: tt('demo.bread_bands.process_sponge'),
-        temperatureLabel: "> 35°C",
-        status: "critical",
+        temperatureLabel: '> 35°C',
+        status: 'critical',
         threat: tt('demo.bread_bands.sponge_hot_threat'),
         action: tt('demo.bread_bands.sponge_hot_action'),
         equipmentTargetIds: BREAD_SPONGE_MIX_EQUIPMENT_IDS,
     }),
     Object.freeze({
-        id: "bread_sponge_26_34",
+        id: 'bread_sponge_26_34',
         processLabel: tt('demo.bread_bands.process_sponge'),
-        temperatureLabel: "26…34°C",
-        status: "normal",
+        temperatureLabel: '26…34°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.sponge_normal_threat'),
-        action: "—",
+        action: '—',
         equipmentTargetIds: BREAD_SPONGE_MIX_EQUIPMENT_IDS,
     }),
     Object.freeze({
-        id: "bread_sponge_lt_25",
+        id: 'bread_sponge_lt_25',
         processLabel: tt('demo.bread_bands.process_sponge'),
-        temperatureLabel: "< 25°C",
-        status: "warning",
+        temperatureLabel: '< 25°C',
+        status: 'warning',
         threat: tt('demo.bread_bands.sponge_cold_threat'),
         action: tt('demo.bread_bands.sponge_cold_action'),
         equipmentTargetIds: BREAD_SPONGE_MIX_EQUIPMENT_IDS,
@@ -155,28 +155,28 @@ export const BREAD_SPONGE_MIX_BANDS = Object.freeze([
 /** Расстойка — ровно три строки таблицы. */
 export const BREAD_PROOFING_BANDS = Object.freeze([
     Object.freeze({
-        id: "bread_proof_gt_40",
+        id: 'bread_proof_gt_40',
         processLabel: tt('demo.bread_bands.process_proofing'),
-        temperatureLabel: "> 41°C",
-        status: "critical",
+        temperatureLabel: '> 41°C',
+        status: 'critical',
         threat: tt('demo.bread_bands.proofing_hot_threat'),
         action: tt('demo.bread_bands.proofing_hot_action'),
         equipmentTargetIds: BREAD_PROOFING_EQUIPMENT_IDS,
     }),
     Object.freeze({
-        id: "bread_proof_32_40",
+        id: 'bread_proof_32_40',
         processLabel: tt('demo.bread_bands.process_proofing'),
-        temperatureLabel: "32…40°C",
-        status: "normal",
+        temperatureLabel: '32…40°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.proofing_normal_threat'),
-        action: "—",
+        action: '—',
         equipmentTargetIds: BREAD_PROOFING_EQUIPMENT_IDS,
     }),
     Object.freeze({
-        id: "bread_proof_lt_30",
+        id: 'bread_proof_lt_30',
         processLabel: tt('demo.bread_bands.process_proofing'),
-        temperatureLabel: "< 31°C",
-        status: "warning",
+        temperatureLabel: '< 31°C',
+        status: 'warning',
         threat: tt('demo.bread_bands.proofing_cold_threat'),
         action: tt('demo.bread_bands.proofing_cold_action'),
         equipmentTargetIds: BREAD_PROOFING_EQUIPMENT_IDS,
@@ -187,10 +187,10 @@ export const BREAD_PROOFING_BANDS = Object.freeze([
 export const BREAD_BAKING_BANDS = Object.freeze([
     // 36-94°C — недопечённое
     Object.freeze({
-        id: "bread_undercook_36_94",
+        id: 'bread_undercook_36_94',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "36…94°C",
-        status: "critical",
+        temperatureLabel: '36…94°C',
+        status: 'critical',
         threat: tt('demo.bread_bands.baking_raw_threat'),
         action: tt('demo.bread_bands.baking_raw_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
@@ -198,10 +198,10 @@ export const BREAD_BAKING_BANDS = Object.freeze([
 
     // 95-180°C — стерильно, но не выпечено
     Object.freeze({
-        id: "bread_sterile_95_180",
+        id: 'bread_sterile_95_180',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "95…180°C",
-        status: "normal",
+        temperatureLabel: '95…180°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.baking_sterile_threat'),
         action: tt('demo.bread_bands.baking_sterile_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
@@ -209,10 +209,10 @@ export const BREAD_BAKING_BANDS = Object.freeze([
 
     // 181-260°C — стандартная выпечка
     Object.freeze({
-        id: "bread_bake_normal_181_260",
+        id: 'bread_bake_normal_181_260',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "181…260°C",
-        status: "normal",
+        temperatureLabel: '181…260°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.baking_normal_threat'),
         action: tt('demo.bread_bands.baking_normal_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
@@ -220,10 +220,10 @@ export const BREAD_BAKING_BANDS = Object.freeze([
 
     // > 260°C — перегрев
     Object.freeze({
-        id: "bread_overheat_gt_260",
+        id: 'bread_overheat_gt_260',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "> 260°C",
-        status: "warning",
+        temperatureLabel: '> 260°C',
+        status: 'warning',
         threat: tt('demo.bread_bands.baking_burn_threat'),
         action: tt('demo.bread_bands.baking_burn_action'),
         equipmentTargetIds: BREAD_BAKING_EQUIPMENT_IDS,
@@ -233,28 +233,28 @@ export const BREAD_BAKING_BANDS = Object.freeze([
 /** Охлаждение — ровно три строки таблицы (время «>2 ч» — только в подписи, не в логике). */
 export const BREAD_COOLING_BANDS = Object.freeze([
     Object.freeze({
-        id: "bread_cool_gt_35",
+        id: 'bread_cool_gt_35',
         processLabel: tt('demo.bread_bands.process_cooling'),
-        temperatureLabel: "> 35°C (>2ч)",
-        status: "critical",
+        temperatureLabel: '> 35°C (>2ч)',
+        status: 'critical',
         threat: tt('demo.bread_bands.cooling_hot_threat'),
         action: tt('demo.bread_bands.cooling_hot_action'),
         equipmentTargetIds: BREAD_COOLING_EQUIPMENT_IDS,
     }),
     Object.freeze({
-        id: "bread_cool_25_35",
+        id: 'bread_cool_25_35',
         processLabel: tt('demo.bread_bands.process_cooling'),
-        temperatureLabel: "25…35°C",
-        status: "normal",
+        temperatureLabel: '25…35°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.cooling_normal_threat'),
         action: tt('demo.bread_bands.cooling_normal_action'),
         equipmentTargetIds: BREAD_COOLING_EQUIPMENT_IDS,
     }),
     Object.freeze({
-        id: "bread_cool_lt_25",
+        id: 'bread_cool_lt_25',
         processLabel: tt('demo.bread_bands.process_cooling'),
-        temperatureLabel: "< 25°C",
-        status: "warning",
+        temperatureLabel: '< 25°C',
+        status: 'warning',
         threat: tt('demo.bread_bands.cooling_cold_threat'),
         action: tt('demo.bread_bands.cooling_cold_action'),
         equipmentTargetIds: BREAD_COOLING_EQUIPMENT_IDS,
@@ -264,50 +264,50 @@ export const BREAD_COOLING_BANDS = Object.freeze([
 /** Это Default массив температур в том случае если в задаче не оборудование для хлеба! */
 export const DEFAULT_BREAD_AI_PROFILE_FALLBACK = Object.freeze([
     Object.freeze({
-        id: "bread_cool_lt_25",
+        id: 'bread_cool_lt_25',
         processLabel: tt('demo.bread_bands.process_cooling'),
-        temperatureLabel: "< 25°C",
-        status: "warning",
+        temperatureLabel: '< 25°C',
+        status: 'warning',
         threat: tt('demo.bread_bands.fallback_cold_threat'),
         action: tt('demo.bread_bands.fallback_cold_action'),
     }),
     Object.freeze({
-        id: "bread_cool_25_35",
+        id: 'bread_cool_25_35',
         processLabel: tt('demo.bread_bands.process_cooling'),
-        temperatureLabel: "25…35°C",
-        status: "normal",
+        temperatureLabel: '25…35°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.fallback_cool_threat'),
         action: tt('demo.bread_bands.fallback_cool_action'),
     }),
     Object.freeze({
-        id: "bread_undercook_36_94",
+        id: 'bread_undercook_36_94',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "36…94°C",
-        status: "critical",
+        temperatureLabel: '36…94°C',
+        status: 'critical',
         threat: tt('demo.bread_bands.baking_raw_threat'),
         action: tt('demo.bread_bands.baking_raw_action'),
     }),
     Object.freeze({
-        id: "bread_sterile_95_180",
+        id: 'bread_sterile_95_180',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "95…180°C",
-        status: "normal",
+        temperatureLabel: '95…180°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.baking_sterile_threat'),
         action: tt('demo.bread_bands.baking_sterile_action'),
     }),
     Object.freeze({
-        id: "bread_bake_normal_181_260",
+        id: 'bread_bake_normal_181_260',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "181…260°C",
-        status: "normal",
+        temperatureLabel: '181…260°C',
+        status: 'normal',
         threat: tt('demo.bread_bands.baking_normal_threat'),
         action: tt('demo.bread_bands.baking_normal_action'),
     }),
     Object.freeze({
-        id: "bread_overheat_gt_260",
+        id: 'bread_overheat_gt_260',
         processLabel: tt('demo.bread_bands.process_baking'),
-        temperatureLabel: "> 260°C",
-        status: "warning",
+        temperatureLabel: '> 260°C',
+        status: 'warning',
         threat: tt('demo.bread_bands.baking_burn_threat'),
         action: tt('demo.bread_bands.baking_burn_action'),
     }),
@@ -323,7 +323,7 @@ export const DEFAULT_BREAD_AI_PROFILE_FALLBACK = Object.freeze([
  */
 export function taskHasBreadEquipment(taskEquipmentTargetIds) {
     const ids = Array.isArray(taskEquipmentTargetIds) ? taskEquipmentTargetIds : [];
-    return ids.some((id) => String(id).startsWith("eq-bread-"));
+    return ids.some((id) => String(id).startsWith('eq-bread-'));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -506,16 +506,11 @@ function pickBreadCoolingBand(t) {
 }
 
 function normalizeBreadMode(mode) {
-    if (mode == null || mode === "") {
-        return "proofing";
+    if (mode == null || mode === '') {
+        return 'proofing';
     }
     const m = String(mode).toLowerCase();
-    if (
-        m === "sponge_mix" ||
-        m === "proofing" ||
-        m === "baking" ||
-        m === "cooling"
-    ) {
+    if (m === 'sponge_mix' || m === 'proofing' || m === 'baking' || m === 'cooling') {
         return m;
     }
     return null;
@@ -527,16 +522,16 @@ function normalizeBreadMode(mode) {
  */
 export function resolveBreadBand(t, mode) {
     const m = normalizeBreadMode(mode);
-    if (m === "sponge_mix") {
+    if (m === 'sponge_mix') {
         return pickSpongeMixBand(t);
     }
-    if (m === "proofing") {
+    if (m === 'proofing') {
         return pickProofingBand(t);
     }
-    if (m === "baking") {
+    if (m === 'baking') {
         return pickBakingBand(t);
     }
-    if (m === "cooling") {
+    if (m === 'cooling') {
         return pickBreadCoolingBand(t);
     }
     return null;

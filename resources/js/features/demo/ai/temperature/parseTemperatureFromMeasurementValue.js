@@ -5,15 +5,15 @@
  * @returns {number|null}
  */
 export function parseTemperatureFromMeasurementValue(rawValue) {
-    const source = String(rawValue ?? "").trim();
+    const source = String(rawValue ?? '').trim();
     if (!source) {
         return null;
     }
     const normalized = source
-        .replace(/\s+/g, "")
-        .replace("°C", "")
-        .replace("°c", "")
-        .replace(",", ".");
+        .replace(/\s+/g, '')
+        .replace('°C', '')
+        .replace('°c', '')
+        .replace(',', '.');
     const match = normalized.match(/^[+-]?\d+(?:\.\d+)?$/);
     if (!match) {
         return null;

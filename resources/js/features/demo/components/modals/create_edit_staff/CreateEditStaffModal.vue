@@ -30,7 +30,10 @@
                 />
             </n-form-item>
             <n-form-item :label="t('demo.staff_modal.role')" path="role" required>
-                <n-input v-model:value="form.role" :placeholder="t('demo.staff_modal.role_placeholder')" />
+                <n-input
+                    v-model:value="form.role"
+                    :placeholder="t('demo.staff_modal.role_placeholder')"
+                />
             </n-form-item>
             <n-form-item :label="t('demo.staff_modal.phone')" path="phone">
                 <n-input
@@ -53,11 +56,7 @@
                 <n-button type="warning" @click="modalShow = false">
                     {{ t('demo.staff_modal.cancel') }}
                 </n-button>
-                <n-button
-                    type="info"
-                    :loading="submitLoading"
-                    @click="submitForm"
-                >
+                <n-button type="info" :loading="submitLoading" @click="submitForm">
                     {{ t('demo.staff_modal.save') }}
                 </n-button>
             </div>
@@ -66,22 +65,13 @@
 </template>
 
 <script setup>
-import { computed, nextTick, ref, watch } from "vue";
-import {
-    NButton,
-    NForm,
-    NFormItem,
-    NInput,
-    NModal,
-    NSelect,
-    NSwitch,
-    useMessage,
-} from "naive-ui";
-import { useI18n } from "vue-i18n";
-import { siteEmojiForDemo } from "@/features/demo/data/demoPersonnel";
-import { useDemoState } from "@/features/demo/composables/useDemoState";
+import { computed, nextTick, ref, watch } from 'vue';
+import { NButton, NForm, NFormItem, NInput, NModal, NSelect, NSwitch, useMessage } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+import { siteEmojiForDemo } from '@/features/demo/data/demoPersonnel';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
 
-defineOptions({ name: "CreateEditStaffModal" });
+defineOptions({ name: 'CreateEditStaffModal' });
 
 const { t } = useI18n();
 
@@ -89,7 +79,7 @@ const props = defineProps({
     /** Площадка по умолчанию для режима «Новый сотрудник» (активный таб секции). */
     defaultSiteId: {
         type: String,
-        default: "",
+        default: '',
     },
 });
 
@@ -101,8 +91,8 @@ const { demoState, addStaff, updateStaff } = useDemoState();
  * scoped-класс на `n-modal` на размер карточки не влияет так же надёжно.
  */
 const modalCardStyle = {
-    width: "520px",
-    maxWidth: "calc(100vw - 32px)",
+    width: '520px',
+    maxWidth: 'calc(100vw - 32px)',
 };
 
 const sites = computed(() => demoState.value.sites ?? []);
@@ -127,11 +117,11 @@ const siteSelectResetKey = ref(0);
 const formRef = ref(null);
 
 const form = ref({
-    siteId: "",
-    fullName: "",
-    role: "",
-    phone: "",
-    email: "",
+    siteId: '',
+    fullName: '',
+    role: '',
+    phone: '',
+    email: '',
     active: true,
 });
 
@@ -139,20 +129,20 @@ const form = ref({
 const rules = {
     siteId: {
         required: true,
-        message: () => t("demo.staff_modal.fill_required"),
-        trigger: ["blur", "change"],
+        message: () => t('demo.staff_modal.fill_required'),
+        trigger: ['blur', 'change'],
     },
     fullName: {
         required: true,
         whitespace: true,
-        message: () => t("demo.staff_modal.fill_required"),
-        trigger: ["blur", "input"],
+        message: () => t('demo.staff_modal.fill_required'),
+        trigger: ['blur', 'input'],
     },
     role: {
         required: true,
         whitespace: true,
-        message: () => t("demo.staff_modal.fill_required"),
-        trigger: ["blur", "input"],
+        message: () => t('demo.staff_modal.fill_required'),
+        trigger: ['blur', 'input'],
     },
 };
 
@@ -161,24 +151,24 @@ const modalTitle = computed(() =>
 );
 
 const emptyForm = () => ({
-    siteId: props.defaultSiteId || sites.value[0]?.id || "",
-    fullName: "",
-    role: "",
-    phone: "",
-    email: "",
+    siteId: props.defaultSiteId || sites.value[0]?.id || '',
+    fullName: '',
+    role: '',
+    phone: '',
+    email: '',
     active: true,
 });
 
 const applyFormFromEditTarget = () => {
     const m = editTarget.value;
-    if (m && typeof m === "object" && m.id) {
+    if (m && typeof m === 'object' && m.id) {
         editingId.value = m.id;
         form.value = {
             siteId: m.siteId,
             fullName: m.fullName,
             role: m.role,
-            phone: m.phone ?? "",
-            email: m.email ?? "",
+            phone: m.phone ?? '',
+            email: m.email ?? '',
             active: m.active !== false,
         };
         return;
@@ -196,8 +186,7 @@ watch(
         applyFormFromEditTarget();
         await nextTick();
         if (!editingId.value) {
-            form.value.siteId =
-                props.defaultSiteId || sites.value[0]?.id || "";
+            form.value.siteId = props.defaultSiteId || sites.value[0]?.id || '';
         }
         siteSelectResetKey.value += 1;
         formRef.value?.restoreValidation();
@@ -208,8 +197,7 @@ watch(
     () => props.defaultSiteId,
     () => {
         if (modalShow.value && !editingId.value) {
-            form.value.siteId =
-                props.defaultSiteId || sites.value[0]?.id || "";
+            form.value.siteId = props.defaultSiteId || sites.value[0]?.id || '';
         }
     },
 );
@@ -231,7 +219,7 @@ const submitForm = () => {
     formRef.value
         ?.validate((errors) => {
             if (errors) {
-                message.warning(t("demo.staff_modal.validation_required"));
+                message.warning(t('demo.staff_modal.validation_required'));
                 return;
             }
             submitLoading.value = true;
@@ -247,10 +235,10 @@ const submitForm = () => {
                         active: form.value.active,
                     });
                     if (!ok) {
-                        message.error(t("demo.staff_modal.save_error"));
+                        message.error(t('demo.staff_modal.save_error'));
                         return;
                     }
-                    message.success(t("demo.staff_modal.save_success"));
+                    message.success(t('demo.staff_modal.save_success'));
                 } else {
                     const id = addStaff({
                         siteId: form.value.siteId,
@@ -261,10 +249,10 @@ const submitForm = () => {
                         active: form.value.active,
                     });
                     if (!id) {
-                        message.error(t("demo.staff_modal.save_error"));
+                        message.error(t('demo.staff_modal.save_error'));
                         return;
                     }
-                    message.success(t("demo.staff_modal.add_success"));
+                    message.success(t('demo.staff_modal.add_success'));
                 }
                 modalShow.value = false;
             } finally {
@@ -297,7 +285,7 @@ defineExpose({ openCreate, openEdit });
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .create-edit-staff-modal__form {
     :deep(.n-select) {

@@ -14,8 +14,7 @@
                 type="button"
                 class="checklist-modal__single-choice-option"
                 :class="{
-                    'checklist-modal__single-choice-option--active':
-                        answer === option,
+                    'checklist-modal__single-choice-option--active': answer === option,
                 }"
                 @click="$emit('update:answer', option)"
             >
@@ -51,16 +50,16 @@
 </template>
 
 <script setup>
-import { NButton, NInput } from "naive-ui";
-import { useI18n } from "vue-i18n";
+import { NButton, NInput } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-import PendingPhotoCaptureBlock from "../show_task/PendingPhotoCaptureBlock.vue";
+import PendingPhotoCaptureBlock from '../show_task/PendingPhotoCaptureBlock.vue';
 
 defineProps({
     question: {
         type: String,
-        default: "",
+        default: '',
     },
     options: {
         type: Array,
@@ -68,15 +67,15 @@ defineProps({
     },
     answer: {
         type: String,
-        default: "",
+        default: '',
     },
     comment: {
         type: String,
-        default: "",
+        default: '',
     },
     reportFileName: {
         type: String,
-        default: "",
+        default: '',
     },
     photoNames: {
         type: Array,
@@ -84,17 +83,11 @@ defineProps({
     },
 });
 
-defineEmits([
-    "update:answer",
-    "update:comment",
-    "submit",
-    "attach-report",
-    "camera",
-]);
+defineEmits(['update:answer', 'update:comment', 'submit', 'attach-report', 'camera']);
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklist-modal__pending-input {
     display: flex;

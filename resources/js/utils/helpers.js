@@ -10,7 +10,7 @@
  * getBaseUrl() // '/'
  */
 export const getBaseUrl = () => {
-    return import.meta.env.BASE_URL || "/";
+    return import.meta.env.BASE_URL || '/';
 };
 
 /**
@@ -24,7 +24,7 @@ export const getBaseUrl = () => {
 export const getPublicPath = (path) => {
     const baseUrl = getBaseUrl();
     // Убираем начальный слеш из path если он есть
-    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
     return `${baseUrl}${cleanPath}`;
 };
 
@@ -37,10 +37,10 @@ export const getPublicPath = (path) => {
  * getDomainUrl() // 'http://localhost:5179'
  */
 export const getDomainUrl = () => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
         return `${window.location.protocol}//${window.location.host}`;
     }
-    return "";
+    return '';
 };
 
 /**
@@ -50,7 +50,7 @@ export const getDomainUrl = () => {
  */
 export const getFullUrl = (path) => {
     const domain = getDomainUrl();
-    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
     return `${domain}${cleanPath}`;
 };
 
@@ -79,13 +79,13 @@ const TEMPERATURE_DRAFT_MAX_FRACTION_DIGITS = 2;
  * После «-» или в начале строки точка без нуля недопустима: -.33 → -0.33, .5 → 0.5, «-»/«.» сами по себе не оставляем.
  */
 const normalizeTemperatureDraftLeadingZeroBeforeDot = (out) => {
-    if (out === "." || out === "-.") {
-        return out === "-." ? "-0." : "0.";
+    if (out === '.' || out === '-.') {
+        return out === '-.' ? '-0.' : '0.';
     }
-    if (out.startsWith("-.")) {
+    if (out.startsWith('-.')) {
         return `-0.${out.slice(2)}`;
     }
-    if (out.startsWith(".")) {
+    if (out.startsWith('.')) {
         return `0.${out.slice(1)}`;
     }
     return out;
@@ -101,18 +101,18 @@ const normalizeTemperatureDraftLeadingZeroBeforeDot = (out) => {
  * @returns {string}
  */
 export const sanitizeTemperatureNumericDraft = (raw) => {
-    const s = String(raw ?? "");
-    let out = "";
+    const s = String(raw ?? '');
+    let out = '';
     let i = 0;
-    if (s.charAt(0) === "-") {
-        out = "-";
+    if (s.charAt(0) === '-') {
+        out = '-';
         i = 1;
     }
     let hasSep = false;
     let fracDigits = 0;
     for (; i < s.length; i += 1) {
         const c = s.charAt(i);
-        if (c >= "0" && c <= "9") {
+        if (c >= '0' && c <= '9') {
             if (hasSep) {
                 if (fracDigits >= TEMPERATURE_DRAFT_MAX_FRACTION_DIGITS) {
                     continue;
@@ -122,8 +122,8 @@ export const sanitizeTemperatureNumericDraft = (raw) => {
             out += c;
             continue;
         }
-        if ((c === "." || c === ",") && !hasSep) {
-            out += ".";
+        if ((c === '.' || c === ',') && !hasSep) {
+            out += '.';
             hasSep = true;
         }
     }
@@ -141,25 +141,25 @@ export const sanitizeTemperatureNumericDraft = (raw) => {
  * @returns {string}
  */
 export const applyKeyboardSignToTemperatureDraft = (sanitized, raw) => {
-    const s = String(sanitized ?? "");
-    const r = String(raw ?? "");
-    if (s === "") {
+    const s = String(sanitized ?? '');
+    const r = String(raw ?? '');
+    if (s === '') {
         return s;
     }
     const last = r.charAt(r.length - 1);
     const first = r.charAt(0);
-    const endsWithSign = last === "+" || last === "-";
+    const endsWithSign = last === '+' || last === '-';
     if (endsWithSign) {
-        if (last === "+") {
-            return s.startsWith("-") ? s.slice(1) : s;
+        if (last === '+') {
+            return s.startsWith('-') ? s.slice(1) : s;
         }
-        return s.startsWith("-") ? s : `-${s}`;
+        return s.startsWith('-') ? s : `-${s}`;
     }
-    if (first === "+") {
-        return s.startsWith("-") ? s.slice(1) : s;
+    if (first === '+') {
+        return s.startsWith('-') ? s.slice(1) : s;
     }
-    if (first === "-") {
-        return s.startsWith("-") ? s : `-${s}`;
+    if (first === '-') {
+        return s.startsWith('-') ? s : `-${s}`;
     }
     return s;
 };

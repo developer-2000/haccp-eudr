@@ -32,7 +32,7 @@ class ContactController extends BaseController
             'user_agent' => (string) $request->userAgent(),
         ]);
 
-        if (($result['status'] ?? null) === 'error') {
+        if ($result['status'] === 'error') {
             return $this->getErrorResponse(__('contact.response_error'), [], 500);
         }
 
@@ -65,10 +65,7 @@ class ContactController extends BaseController
 
         // 3 Возвращает true, если заполнил письмо бот (меньше 5 секунд на заполнение)
         if ((int) $elapsed < 5) {
-            $this->logFormEvent(
-//                "Contact: Bot — форма отправлена быстрее 5 секунд (hp_elapsed={$elapsed})",
-                $payload
-            );
+//            $this->logFormEvent("Contact: Bot — форма отправлена быстрее 5 секунд (hp_elapsed={$elapsed})", $payload);
             return true;
         }
 

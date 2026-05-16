@@ -1,20 +1,19 @@
 <template>
     <div class="checklist-modal__card-header">
-        <span class="checklist-modal__card-header-title" role="heading">{{
-            headerText
-        }}</span>
+        <span class="checklist-modal__card-header-title" role="heading">{{ headerText }}</span>
         <span
             v-if="hasTask"
             class="checklist-modal__card-header-type"
             :aria-label="taskTypeAria"
             role="img"
-        >{{ taskTypeDisplay }}</span>
+            >{{ taskTypeDisplay }}</span
+        >
     </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
@@ -25,28 +24,28 @@ const props = defineProps({
     },
     taskTitle: {
         type: String,
-        default: "",
+        default: '',
     },
     taskTypeDisplay: {
         type: String,
-        default: "",
+        default: '',
     },
     taskTypeAria: {
         type: String,
-        default: "",
+        default: '',
     },
 });
 
 const headerText = computed(() => {
-    const t = String(props.taskTitle ?? "").trim();
-    if (props.hasTask && t) {
-        return t;
+    const trimmedTitle = String(props.taskTitle ?? '').trim();
+    if (props.hasTask && trimmedTitle) {
+        return trimmedTitle;
     }
     return t('demo.show_task_modal.task_details');
 });
 </script>
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklist-modal__card-header {
     display: flex;
@@ -72,4 +71,3 @@ const headerText = computed(() => {
     flex-shrink: 0;
 }
 </style>
-

@@ -1,0 +1,36 @@
+# Зависимости
+node_modules
+vendor
+
+# Сборка / артефакты
+bootstrap/cache
+bootstrap/ssr
+public/build
+public/hot
+public/sitemap.xml
+storage
+
+# Логи
+*.log
+
+# Lock-файлы
+package-lock.json
+composer.lock
+yarn.lock
+pnpm-lock.yaml
+
+# IDE / OS
+.idea
+.vscode
+.DS_Store
+
+# Env
+.env
+.env.*
+
+# Документация — рукописные планы, Prettier ломает выравнивание/таблицы
+Documents
+
+# PHP — форматирует Pint, не Prettier
+*.php
+*.blade.php

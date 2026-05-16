@@ -4,10 +4,10 @@
  */
 
 export const FREQUENCY_CODE = {
-    WEEKLY: "weekly",
-    DAILY: "daily",
-    UNSPECIFIED: "unspecified",
-    CUSTOM: "custom",
+    WEEKLY: 'weekly',
+    DAILY: 'daily',
+    UNSPECIFIED: 'unspecified',
+    CUSTOM: 'custom',
 };
 
 /**
@@ -18,8 +18,8 @@ export const FREQUENCY_CODE = {
  * localStorage приводим к `weekly`, чтобы не терять задачу.
  */
 export const normalizeFrequency = (raw) => {
-    const v = raw == null ? "" : String(raw);
-    if (v === "monthly" || v === "yearly") {
+    const v = raw == null ? '' : String(raw);
+    if (v === 'monthly' || v === 'yearly') {
         return FREQUENCY_CODE.WEEKLY;
     }
     const allowed = new Set(Object.values(FREQUENCY_CODE));
@@ -36,12 +36,12 @@ export const normalizeFrequency = (raw) => {
 export const frequencyLabel = (code) => {
     switch (normalizeFrequency(code)) {
         case FREQUENCY_CODE.WEEKLY:
-            return "Раз в неделю";
+            return 'Раз в неделю';
         case FREQUENCY_CODE.DAILY:
-            return "Один раз в день";
+            return 'Один раз в день';
         case FREQUENCY_CODE.CUSTOM:
-            return "Регулярно";
+            return 'Регулярно';
         default:
-            return "Не указан";
+            return 'Не указан';
     }
 };

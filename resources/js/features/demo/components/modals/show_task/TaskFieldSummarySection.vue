@@ -2,11 +2,7 @@
     <div v-if="lines.length" class="checklist-modal__task-fields">
         <p class="checklist-modal__assignee-label">{{ t('demo.task_fields.section_title') }}</p>
         <ul class="checklist-modal__task-fields-list">
-            <li
-                v-for="(line, idx) in lines"
-                :key="idx"
-                class="checklist-modal__task-fields-item"
-            >
+            <li v-for="(line, idx) in lines" :key="idx" class="checklist-modal__task-fields-item">
                 {{ line }}
             </li>
         </ul>
@@ -14,7 +10,7 @@
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 
 defineProps({
@@ -26,7 +22,7 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklist-modal__task-fields {
     display: flex;
@@ -58,4 +54,3 @@ defineProps({
     margin-bottom: 0;
 }
 </style>
-

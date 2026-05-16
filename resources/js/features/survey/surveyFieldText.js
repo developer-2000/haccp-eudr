@@ -7,11 +7,11 @@
  * @returns {string}
  */
 export function surveyFieldText(t, value) {
-    if (value == null || value === "") {
-        return "";
+    if (value == null || value === '') {
+        return '';
     }
     const s = String(value);
-    if (s.startsWith("survey.")) {
+    if (s.startsWith('survey.')) {
         return t(s);
     }
     return s;

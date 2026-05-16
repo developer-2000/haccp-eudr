@@ -1,18 +1,18 @@
-import { reactive } from "vue";
-import { SS_TASK_GRAIN_COOLING } from "@/config/storageNames";
+import { reactive } from 'vue';
+import { SS_TASK_GRAIN_COOLING } from '@/config/storageNames';
 
 /**
  * Контракт полей `task.aiContext` для демо temperature-v1.
  * Рантайм-значения живут только на объекте задачи; здесь — фиксированный набор ключей (не дублировать «с нуля» в коде).
  */
 export const DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE = Object.freeze({
-    engine: "temperature-v1",
+    engine: 'temperature-v1',
     niche: null,
     mode: null,
-    taskType: "temperature",
+    taskType: 'temperature',
     ccpMin: null,
     ccpMax: null,
-    ccpLabel: "",
+    ccpLabel: '',
     updatedAt: null,
 });
 
@@ -21,19 +21,19 @@ export const DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE = Object.freeze({
  * При норме / нет числа — на строке `null`.
  */
 export const DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE = Object.freeze({
-    title: "",
+    title: '',
     /** Уровень UI: `ok` | `warning` | `problem` (порог для problem/ warning — в `TemperatureAiAnalyzer`). Не путать с `measurement.status` строки замера. */
-    ai_status: "warning",
+    ai_status: 'warning',
     risk: 0,
     niche: null,
     mode: null,
-    ccpLabel: "",
-    currentLine: "",
-    deviationLine: "",
-    threat: "",
-    economy: "",
-    inspector: "",
-    action: "",
+    ccpLabel: '',
+    currentLine: '',
+    deviationLine: '',
+    threat: '',
+    economy: '',
+    inspector: '',
+    action: '',
     direction: null,
     value: null,
     ccpMin: null,
@@ -42,11 +42,11 @@ export const DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE = Object.freeze({
 
 export const task_grain_cooling = reactive({
     /** Уникальный id задачи в демо-чеклистах (`checklistsByNiche[niche]`), совпадает с карточкой CCP. */
-    id: "coffee-2",
+    id: 'coffee-2',
     /** Ключ ниши в демо-state: `coffee` | `bakery` | `meat`. */
-    niche: "coffee",
+    niche: 'coffee',
     /** i18n-ключ названия задачи (используется в `task.title` через `t()` в компонентах). */
-    taskTitleKey: "demo_ai.grain_cooling.task_title",
+    taskTitleKey: 'demo_ai.grain_cooling.task_title',
     /**
      * Индекс элемента в массиве `measurements` целевой задачи.
      * В файле изначально `null`; при старте сценария сюда мутируется индекс первого `pending` (`lockGrainCoolingMeasurementIndex`).
@@ -63,13 +63,13 @@ export const task_grain_cooling = reactive({
      */
     measurementProblemDelayMs: 300000,
     /** i18n-ключ первой строки оповещения. */
-    toastTitleKey: "demo_ai.grain_cooling.toast_title",
+    toastTitleKey: 'demo_ai.grain_cooling.toast_title',
     /** i18n-ключ имени задачи в оповещении. */
-    toastTaskNameKey: "demo_ai.grain_cooling.task_title",
+    toastTaskNameKey: 'demo_ai.grain_cooling.task_title',
     /** i18n-ключ кнопки закрытия оповещения. */
-    toastButtonCloseLabelKey: "demo_ai.grain_cooling.toast_button_close",
+    toastButtonCloseLabelKey: 'demo_ai.grain_cooling.toast_button_close',
     /** i18n-ключ кнопки перехода к задаче. */
-    toastButtonNavigateLabelKey: "demo_ai.grain_cooling.toast_button_navigate",
+    toastButtonNavigateLabelKey: 'demo_ai.grain_cooling.toast_button_navigate',
     /** Ключ `sessionStorage` для персиста «глобальное оповещение уже показывали в этой вкладке». */
     sessionStorageKey: SS_TASK_GRAIN_COOLING,
     /**
@@ -79,13 +79,13 @@ export const task_grain_cooling = reactive({
     // clearGrainCoolingSessionStorageBeforeLoad: true,
     clearGrainCoolingSessionStorageBeforeLoad: false,
     /** Строковый id Pinia-store сценария (первый аргумент `defineStore`). */
-    piniaStoreId: "taskGrainCooling",
+    piniaStoreId: 'taskGrainCooling',
     /** Имя именованного роута Vue Router при переходе из оповещения на демо. */
-    demoRouteName: "Demo",
+    demoRouteName: 'Demo',
     /** Значение `params.section` при переходе: сегмент URL демо-секции с чек-листами. */
-    demoRouteSection: "checklists",
+    demoRouteSection: 'checklists',
     /** CSS-класс на корне toast vue3-toastify; стили в `task-grain-cooling-toastify.scss`. */
-    toastifyToastClassName: "global-task-reminder-toast-wrap",
+    toastifyToastClassName: 'global-task-reminder-toast-wrap',
     /** После перехода по диплинку: запросить автооткрытие drawer по первому `pending` в модалке задачи. */
     deepLinkAutoOpenPending: true,
     /**
@@ -142,7 +142,7 @@ export const task_grain_cooling = reactive({
  */
 export function lockGrainCoolingMeasurementIndex(index) {
     task_grain_cooling.lastProblemAppliedMeasurementIndex = null;
-    if (typeof index !== "number" || index < 0 || !Number.isFinite(index)) {
+    if (typeof index !== 'number' || index < 0 || !Number.isFinite(index)) {
         task_grain_cooling.measurementIndex = null;
         return;
     }

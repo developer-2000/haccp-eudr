@@ -249,9 +249,11 @@ class SurveyResponseService
 
     /**
      * Возвращает плоский объект ответов questionId -> value / value[].
+     * Ключ — stable ID вопроса (приходит строкой, но PHP коллапсирует числовые-строки в int),
+     * поэтому тип ключа — array-key, а не строго string.
      *
      * @param array<string, mixed> $payload
-     * @return array<string, mixed>
+     * @return array<array-key, mixed>
      */
     private function extractAnswersMap(array $payload): array
     {
@@ -289,7 +291,7 @@ class SurveyResponseService
      * Формирует JSON-структуру хранения ответов с техническим контекстом.
      * Это делает запись в БД самодостаточной: видно что ответил пользователь и откуда пришёл запрос.
      *
-     * @param array<string, mixed> $answersMap
+     * @param array<array-key, mixed> $answersMap
      * @param array<int, array{id: string, value: mixed, other: ?string}> $questionAnswers
      * @param array{ip: string|null, user_agent: string|null} $meta
      * @return array<string, mixed>
@@ -311,7 +313,7 @@ class SurveyResponseService
     /**
      * Определяет тип бизнеса из ответа на вопрос 1.
      *
-     * @param array<string, mixed> $answersMap
+     * @param array<array-key, mixed> $answersMap
      */
     private function detectBusinessType(array $answersMap): ?string
     {
@@ -321,7 +323,7 @@ class SurveyResponseService
     /**
      * Определяет страну по коду ISO alpha-2 из ответа на вопрос 3.
      *
-     * @param array<string, mixed> $answersMap
+     * @param array<array-key, mixed> $answersMap
      */
     private function detectCountry(array $answersMap): ?string
     {

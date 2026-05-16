@@ -1,9 +1,6 @@
 <template>
     <template v-if="hasColumns">
-        <div
-            v-if="variant === 'desktop'"
-            class="dropdown-menu dropdown-menu-with-headers"
-        >
+        <div v-if="variant === 'desktop'" class="dropdown-menu dropdown-menu-with-headers">
             <div
                 v-for="column in item.dropdown.columns"
                 :key="column.title"
@@ -15,20 +12,14 @@
                     :key="`${dropdownItem.title}-${dropdownItem.link || ''}`"
                 >
                     <Link
-                        v-if="
-                            hasValidLink(dropdownItem) &&
-                            !isDropdownLink(dropdownItem)
-                        "
+                        v-if="hasValidLink(dropdownItem) && !isDropdownLink(dropdownItem)"
                         :href="dropdownItem.link"
                         class="dropdown-item"
                     >
                         <div class="dropdown-title">
                             {{ dropdownItem.title }}
                         </div>
-                        <div
-                            v-if="dropdownItem.description"
-                            class="dropdown-desc"
-                        >
+                        <div v-if="dropdownItem.description" class="dropdown-desc">
                             {{ dropdownItem.description }}
                         </div>
                     </Link>
@@ -43,10 +34,7 @@
                         <div class="dropdown-title">
                             {{ dropdownItem.title }}
                         </div>
-                        <div
-                            v-if="dropdownItem.description"
-                            class="dropdown-desc"
-                        >
+                        <div v-if="dropdownItem.description" class="dropdown-desc">
                             {{ dropdownItem.description }}
                         </div>
                     </div>
@@ -54,10 +42,7 @@
             </div>
         </div>
         <template v-else>
-            <template
-                v-for="column in item.dropdown.columns"
-                :key="column.title"
-            >
+            <template v-for="column in item.dropdown.columns" :key="column.title">
                 <div class="mobile-menu-column">
                     <div class="mobile-menu-column-title">
                         {{ column.title }}
@@ -67,10 +52,7 @@
                         :key="`${dropdownItem.title}-${dropdownItem.link || ''}`"
                     >
                         <Link
-                            v-if="
-                                hasValidLink(dropdownItem) &&
-                                !isDropdownLink(dropdownItem)
-                            "
+                            v-if="hasValidLink(dropdownItem) && !isDropdownLink(dropdownItem)"
                             :href="dropdownItem.link"
                             class="mobile-menu-subitem"
                             @click="handleClick"
@@ -78,10 +60,7 @@
                             <div class="mobile-menu-subitem-title">
                                 {{ dropdownItem.title }}
                             </div>
-                            <div
-                                v-if="dropdownItem.description"
-                                class="mobile-menu-subitem-desc"
-                            >
+                            <div v-if="dropdownItem.description" class="mobile-menu-subitem-desc">
                                 {{ dropdownItem.description }}
                             </div>
                         </Link>
@@ -97,10 +76,7 @@
                             <div class="mobile-menu-subitem-title">
                                 {{ dropdownItem.title }}
                             </div>
-                            <div
-                                v-if="dropdownItem.description"
-                                class="mobile-menu-subitem-desc"
-                            >
+                            <div v-if="dropdownItem.description" class="mobile-menu-subitem-desc">
                                 {{ dropdownItem.description }}
                             </div>
                         </div>
@@ -184,10 +160,7 @@
                     <div class="mobile-menu-subitem-title">
                         {{ dropdownItem.title }}
                     </div>
-                    <div
-                        v-if="dropdownItem.description"
-                        class="mobile-menu-subitem-desc"
-                    >
+                    <div v-if="dropdownItem.description" class="mobile-menu-subitem-desc">
                         {{ dropdownItem.description }}
                     </div>
                 </Link>
@@ -195,10 +168,7 @@
                     <div class="mobile-menu-subitem-title">
                         {{ dropdownItem.title }}
                     </div>
-                    <div
-                        v-if="dropdownItem.description"
-                        class="mobile-menu-subitem-desc"
-                    >
+                    <div v-if="dropdownItem.description" class="mobile-menu-subitem-desc">
                         {{ dropdownItem.description }}
                     </div>
                 </div>
@@ -213,16 +183,16 @@
  * @typedef {import('./types/nav.types.js').NavMenuItem} NavMenuItem
  */
 defineOptions({
-    name: "DropdownMenu",
+    name: 'DropdownMenu',
 });
-import { computed } from "vue";
-import { Link } from "@inertiajs/vue3";
+import { computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import {
     hasDropdownColumns,
     isSimpleDropdown,
     hasValidLink,
     isDropdownLink,
-} from "./utils/dropdownHelpers";
+} from './utils/dropdownHelpers';
 
 /**
  * @typedef {Object} Props
@@ -239,8 +209,8 @@ const props = defineProps({
     },
     variant: {
         type: String,
-        default: "desktop",
-        validator: (value) => ["desktop", "mobile"].includes(value),
+        default: 'desktop',
+        validator: (value) => ['desktop', 'mobile'].includes(value),
     },
     onItemClick: {
         type: Function,
@@ -282,9 +252,7 @@ const secondColumnItems = computed(() => {
 
 /** @type {import('vue').ComputedRef<boolean>} */
 const hasSecondColumn = computed(() => {
-    return (
-        Array.isArray(props.item?.dropdown) && props.item.dropdown.length > 4
-    );
+    return Array.isArray(props.item?.dropdown) && props.item.dropdown.length > 4;
 });
 
 /**
@@ -296,7 +264,7 @@ const handleClick = () => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 // ============================================
 // Desktop стили

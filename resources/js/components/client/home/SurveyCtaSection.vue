@@ -2,9 +2,9 @@
     <section class="survey-cta" aria-label="Survey CTA">
         <div class="survey-cta__content">
             <h2 class="survey-cta__title">
-                {{ $t("home.survey_cta.title") }}
+                {{ $t('home.survey_cta.title') }}
                 <span class="survey-cta__title-secondary">
-                    {{ $t("home.survey_cta.title_secondary") }}
+                    {{ $t('home.survey_cta.title_secondary') }}
                 </span>
             </h2>
 
@@ -14,7 +14,7 @@
                 :aria-label="$t('home.survey_cta.button_aria_label')"
                 @click="goToSurvey"
             >
-                {{ $t("home.survey_cta.button_text") }}
+                {{ $t('home.survey_cta.button_text') }}
             </button>
         </div>
     </section>
@@ -22,11 +22,11 @@
 
 <script setup>
 defineOptions({
-    name: "SurveyCtaSection",
+    name: 'SurveyCtaSection',
 });
 
-import { router as inertiaRouter } from "@inertiajs/vue3";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
+import { router as inertiaRouter } from '@inertiajs/vue3';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
 
 /**
  * Переходит на опрос через Inertia router без полной перезагрузки.
@@ -38,7 +38,7 @@ function goToSurvey() {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-cta {
     min-height: 300px;

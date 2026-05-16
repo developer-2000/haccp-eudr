@@ -23,9 +23,7 @@
                     :key="opt.value"
                     class="survey-multi-choice__row"
                     :class="{
-                        'survey-multi-choice__row--selected': isSelected(
-                            opt.value,
-                        ),
+                        'survey-multi-choice__row--selected': isSelected(opt.value),
                     }"
                 >
                     <input
@@ -34,9 +32,7 @@
                         :checked="isSelected(opt.value)"
                         @change="$emit('toggle', opt.value)"
                     />
-                    <span class="survey-multi-choice__label-text">{{
-                        tr(opt.label)
-                    }}</span>
+                    <span class="survey-multi-choice__label-text">{{ tr(opt.label) }}</span>
                 </label>
             </div>
         </template>
@@ -55,20 +51,18 @@
                     :checked="isSelected(opt.value)"
                     @change="$emit('toggle', opt.value)"
                 />
-                <span class="survey-multi-choice__label-text">{{
-                    tr(opt.label)
-                }}</span>
+                <span class="survey-multi-choice__label-text">{{ tr(opt.label) }}</span>
             </label>
         </template>
     </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { createSurveyFieldTextTranslator } from "@/features/survey/surveyFieldText.js";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { createSurveyFieldTextTranslator } from '@/features/survey/surveyFieldText.js';
 
-defineOptions({ name: "SurveyMultiChoice" });
+defineOptions({ name: 'SurveyMultiChoice' });
 
 const { t } = useI18n();
 const tr = createSurveyFieldTextTranslator(t);
@@ -82,7 +76,7 @@ const props = defineProps({
     /** id подзаголовка (несколько вариантов) — `aria-describedby`. */
     subtitleId: {
         type: String,
-        default: "",
+        default: '',
     },
     /** Плоский список вариантов, если не заданы секции `optionGroups`. */
     options: {
@@ -114,7 +108,7 @@ const useOptionGroups = computed(
 
 defineEmits({
     /** Клик по чекбоксу варианта — родитель обновляет answers и сброс «Другое». */
-    toggle: (value) => typeof value === "string",
+    toggle: (value) => typeof value === 'string',
 });
 
 /**
@@ -128,7 +122,7 @@ function isSelected(value) {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-multi-choice {
     .survey-multi-choice__group-block {
@@ -163,10 +157,12 @@ function isSelected(value) {
         width: 100%;
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
-        transition: background-color $transition-fast, border-color $transition-fast;
+        transition:
+            background-color $transition-fast,
+            border-color $transition-fast;
         margin-bottom: 10px;
 
-        &:last-child{
+        &:last-child {
             margin-bottom: 0;
         }
 

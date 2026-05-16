@@ -1,5 +1,5 @@
-import { i18n } from "@/i18n";
-import { DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE } from "@/features/demo/task_grain_cooling/config";
+import { i18n } from '@/i18n';
+import { DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE } from '@/features/demo/task_grain_cooling/config';
 
 const tt = (...args) => i18n.global.t(...args);
 import {
@@ -7,18 +7,18 @@ import {
     breadBandMatchesTaskEquipment,
     resolveBreadRowForTaskMeasurement,
     taskHasBreadEquipment,
-} from "./breadBands";
+} from './breadBands';
 import {
     coffeeBandMatchesTaskEquipment,
     resolveCoffeeRowForTaskMeasurement,
     taskHasCoffeeEquipment,
-} from "./coffeeBands";
+} from './coffeeBands';
 import {
     MEAT_MODE_ANALYZER_PROFILES,
     meatBandMatchesTaskEquipment,
     resolveMeatRowForTaskMeasurement,
     taskHasMeatEquipment,
-} from "./meatBands";
+} from './meatBands';
 
 /**
  * Окна CCP по режимам только при **`eq-coffee-*`** в задаче.
@@ -31,7 +31,9 @@ import {
 function getCoffeeTemperatureProfiles() {
     return {
         storage: {
-            ccpMin: 15, ccpMax: 24, riskSlope: 12,
+            ccpMin: 15,
+            ccpMax: 24,
+            riskSlope: 12,
             ccpLabel: tt('demo.temperature_ai.storage_ccp_label'),
             threatHigh: tt('demo.temperature_ai.storage_threat_high'),
             threatLow: tt('demo.temperature_ai.storage_threat_low'),
@@ -43,7 +45,9 @@ function getCoffeeTemperatureProfiles() {
             actionLow: tt('demo.temperature_ai.storage_action_low'),
         },
         roasting: {
-            ccpMin: 195, ccpMax: 230, riskSlope: 14,
+            ccpMin: 195,
+            ccpMax: 230,
+            riskSlope: 14,
             ccpLabel: tt('demo.temperature_ai.roasting_ccp_label'),
             threatHigh: tt('demo.temperature_ai.roasting_threat_high'),
             threatLow: tt('demo.temperature_ai.roasting_threat_low'),
@@ -55,7 +59,9 @@ function getCoffeeTemperatureProfiles() {
             actionLow: tt('demo.temperature_ai.roasting_action_low'),
         },
         cooling: {
-            ccpMin: 15, ccpMax: 24, riskSlope: 12,
+            ccpMin: 15,
+            ccpMax: 24,
+            riskSlope: 12,
             ccpLabel: tt('demo.temperature_ai.cooling_ccp_label'),
             threatHigh: tt('demo.temperature_ai.cooling_threat_high'),
             threatLow: tt('demo.temperature_ai.cooling_threat_low'),
@@ -90,15 +96,15 @@ function getTemperatureProfiles() {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function parseFiniteNumber(value) {
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
         return Number.isFinite(value) ? value : null;
     }
 
-    if (typeof value !== "string") {
+    if (typeof value !== 'string') {
         return null;
     }
 
-    const normalized = value.replace(",", ".").trim();
+    const normalized = value.replace(',', '.').trim();
     if (!normalized) {
         return null;
     }
@@ -128,11 +134,11 @@ function calculateRiskFromDeviation(deviationFromLimit, riskSlope) {
 function formatTemperatureValueForUi(value, withPlusSign = true) {
     const numeric = parseFiniteNumber(value);
     if (numeric == null) {
-        return "—";
+        return '—';
     }
 
     const rounded = roundToTwoDecimals(numeric);
-    const sign = rounded > 0 && withPlusSign ? "+" : "";
+    const sign = rounded > 0 && withPlusSign ? '+' : '';
     return `${sign}${rounded}°C`;
 }
 
@@ -148,7 +154,7 @@ function deviationFromTaskCcpRange(current, rangeMin, rangeMax) {
     const min = parseFiniteNumber(rangeMin);
     const max = parseFiniteNumber(rangeMax);
     if (min == null || max == null || current == null || !Number.isFinite(current)) {
-        return { line: "" };
+        return { line: '' };
     }
     if (current >= min && current <= max) {
         return {
@@ -158,12 +164,16 @@ function deviationFromTaskCcpRange(current, rangeMin, rangeMax) {
     if (current > max) {
         const mag = roundToTwoDecimals(current - max);
         return {
-            line: tt('demo.temperature_ai.exceeded_by', { value: formatTemperatureValueForUi(mag, true) }),
+            line: tt('demo.temperature_ai.exceeded_by', {
+                value: formatTemperatureValueForUi(mag, true),
+            }),
         };
     }
     const delta = roundToTwoDecimals(current - min);
     return {
-        line: tt('demo.temperature_ai.below_by', { value: formatTemperatureValueForUi(delta, false) }),
+        line: tt('demo.temperature_ai.below_by', {
+            value: formatTemperatureValueForUi(delta, false),
+        }),
     };
 }
 
@@ -172,11 +182,7 @@ function deviationFromTaskCcpRange(current, rangeMin, rangeMax) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function meatOutOfRangeBandTexts(temperatureC, mode, equipmentTargetIds) {
-    const band = resolveMeatRowForTaskMeasurement(
-        temperatureC,
-        equipmentTargetIds,
-        mode,
-    );
+    const band = resolveMeatRowForTaskMeasurement(temperatureC, equipmentTargetIds, mode);
     if (band && !meatBandMatchesTaskEquipment(band, equipmentTargetIds)) {
         return {
             threat: null,
@@ -197,19 +203,14 @@ function meatOutOfRangeBandTexts(temperatureC, mode, equipmentTargetIds) {
 // КОФЕ — `DEFAULT_COFFEE_AI_PROFILE_FALLBACK` без оборудования; при `eq-coffee-*` — полосы + `COFFEE_TEMPERATURE_PROFILES` (локально)
 // ═══════════════════════════════════════════════════════════════════════════
 
-function coffeeOutOfRangeBandTexts(
-    profileContext,
-    direction,
-    temperatureC,
-    equipmentTargetIds,
-) {
+function coffeeOutOfRangeBandTexts(profileContext, direction, temperatureC, equipmentTargetIds) {
     const p = profileContext.profile;
-    const high = direction === "too_high";
+    const high = direction === 'too_high';
     const fromCoffeeProfile = () => ({
-        threat: high ? p?.threatHigh ?? null : p?.threatLow ?? null,
-        economy: high ? p?.economyHigh ?? null : p?.economyLow ?? null,
-        inspector: high ? p?.inspectorHigh ?? null : p?.inspectorLow ?? null,
-        action: high ? p?.actionHigh ?? null : p?.actionLow ?? null,
+        threat: high ? (p?.threatHigh ?? null) : (p?.threatLow ?? null),
+        economy: high ? (p?.economyHigh ?? null) : (p?.economyLow ?? null),
+        inspector: high ? (p?.inspectorHigh ?? null) : (p?.inspectorLow ?? null),
+        action: high ? (p?.actionHigh ?? null) : (p?.actionLow ?? null),
     });
 
     const row = resolveCoffeeRowForTaskMeasurement(
@@ -232,12 +233,7 @@ function coffeeOutOfRangeBandTexts(
 // ТЕСТО (хлеб) — полосы `breadTemperatureThreatBands`; без `eq-bread-*` — `DEFAULT_BREAD_AI_PROFILE_FALLBACK`
 // ═══════════════════════════════════════════════════════════════════════════
 
-function breadOutOfRangeBandTexts(
-    profileContext,
-    direction,
-    temperatureC,
-    equipmentTargetIds,
-) {
+function breadOutOfRangeBandTexts(profileContext, direction, temperatureC, equipmentTargetIds) {
     const row = resolveBreadRowForTaskMeasurement(
         temperatureC,
         equipmentTargetIds,
@@ -252,12 +248,12 @@ function breadOutOfRangeBandTexts(
         };
     }
     const p = profileContext.profile;
-    const high = direction === "too_high";
+    const high = direction === 'too_high';
     return {
-        threat: high ? p?.threatHigh ?? null : p?.threatLow ?? null,
-        economy: high ? p?.economyHigh ?? null : p?.economyLow ?? null,
-        inspector: high ? p?.inspectorHigh ?? null : p?.inspectorLow ?? null,
-        action: high ? p?.actionHigh ?? null : p?.actionLow ?? null,
+        threat: high ? (p?.threatHigh ?? null) : (p?.threatLow ?? null),
+        economy: high ? (p?.economyHigh ?? null) : (p?.economyLow ?? null),
+        inspector: high ? (p?.inspectorHigh ?? null) : (p?.inspectorLow ?? null),
+        action: high ? (p?.actionHigh ?? null) : (p?.actionLow ?? null),
     };
 }
 
@@ -267,12 +263,12 @@ function breadOutOfRangeBandTexts(
 
 function profileOutOfRangeTexts(profile, direction) {
     const p = profile;
-    const high = direction === "too_high";
+    const high = direction === 'too_high';
     return {
-        threat: high ? p?.threatHigh ?? null : p?.threatLow ?? null,
-        economy: high ? p?.economyHigh ?? null : p?.economyLow ?? null,
-        inspector: high ? p?.inspectorHigh ?? null : p?.inspectorLow ?? null,
-        action: high ? p?.actionHigh ?? null : p?.actionLow ?? null,
+        threat: high ? (p?.threatHigh ?? null) : (p?.threatLow ?? null),
+        economy: high ? (p?.economyHigh ?? null) : (p?.economyLow ?? null),
+        inspector: high ? (p?.inspectorHigh ?? null) : (p?.inspectorLow ?? null),
+        action: high ? (p?.actionHigh ?? null) : (p?.actionLow ?? null),
     };
 }
 
@@ -285,14 +281,10 @@ function resolveOutOfRangeTextsForNiche(
     temperatureC,
     equipmentTargetIds,
 ) {
-    if (profileContext.niche === "meat") {
-        return meatOutOfRangeBandTexts(
-            temperatureC,
-            profileContext.mode,
-            equipmentTargetIds,
-        );
+    if (profileContext.niche === 'meat') {
+        return meatOutOfRangeBandTexts(temperatureC, profileContext.mode, equipmentTargetIds);
     }
-    if (profileContext.niche === "coffee") {
+    if (profileContext.niche === 'coffee') {
         return coffeeOutOfRangeBandTexts(
             profileContext,
             direction,
@@ -300,7 +292,7 @@ function resolveOutOfRangeTextsForNiche(
             equipmentTargetIds,
         );
     }
-    if (profileContext.niche === "bread") {
+    if (profileContext.niche === 'bread') {
         return breadOutOfRangeBandTexts(
             profileContext,
             direction,
@@ -321,12 +313,9 @@ function shouldForceProblemForMeatCriticalBand(value, mode, equipmentTargetIds) 
         return false;
     }
     if (!taskHasMeatEquipment(equipmentTargetIds)) {
-        return row.status === "critical";
+        return row.status === 'critical';
     }
-    return (
-        meatBandMatchesTaskEquipment(row, equipmentTargetIds) &&
-        row.status === "critical"
-    );
+    return meatBandMatchesTaskEquipment(row, equipmentTargetIds) && row.status === 'critical';
 }
 
 function shouldForceProblemForCoffeeCriticalBand(value, mode, equipmentTargetIds) {
@@ -335,12 +324,9 @@ function shouldForceProblemForCoffeeCriticalBand(value, mode, equipmentTargetIds
         return false;
     }
     if (!taskHasCoffeeEquipment(equipmentTargetIds)) {
-        return row.status === "critical";
+        return row.status === 'critical';
     }
-    return (
-        coffeeBandMatchesTaskEquipment(row, equipmentTargetIds) &&
-        row.status === "critical"
-    );
+    return coffeeBandMatchesTaskEquipment(row, equipmentTargetIds) && row.status === 'critical';
 }
 
 function shouldForceProblemForBreadCriticalBand(value, mode, equipmentTargetIds) {
@@ -349,12 +335,9 @@ function shouldForceProblemForBreadCriticalBand(value, mode, equipmentTargetIds)
         return false;
     }
     if (!taskHasBreadEquipment(equipmentTargetIds)) {
-        return row.status === "critical";
+        return row.status === 'critical';
     }
-    return (
-        breadBandMatchesTaskEquipment(row, equipmentTargetIds) &&
-        row.status === "critical"
-    );
+    return breadBandMatchesTaskEquipment(row, equipmentTargetIds) && row.status === 'critical';
 }
 
 export class TemperatureAiAnalyzer {
@@ -377,8 +360,8 @@ export class TemperatureAiAnalyzer {
      * [ОБЩЕЕ] Ниша + режим → объект профиля из `TEMPERATURE_PROFILES`.
      */
     resolveProfileContext(niche, mode) {
-        const normalizedNiche = String(niche ?? "").trim();
-        const normalizedMode = String(mode ?? "").trim();
+        const normalizedNiche = String(niche ?? '').trim();
+        const normalizedMode = String(mode ?? '').trim();
         const nicheConfig = getTemperatureProfiles()[normalizedNiche] ?? null;
 
         if (!nicheConfig) {
@@ -426,13 +409,10 @@ export class TemperatureAiAnalyzer {
         }
 
         const boundsFromTask =
-            inMin != null &&
-            inMax != null &&
-            Number.isFinite(inMin) &&
-            Number.isFinite(inMax);
+            inMin != null && inMax != null && Number.isFinite(inMin) && Number.isFinite(inMax);
         const ccpLabel = boundsFromTask
             ? buildRangeLabel(rangeMin, rangeMax)
-            : profile?.ccpLabel ?? buildRangeLabel(rangeMin, rangeMax);
+            : (profile?.ccpLabel ?? buildRangeLabel(rangeMin, rangeMax));
 
         return {
             ccpMin: rangeMin,
@@ -463,21 +443,17 @@ export class TemperatureAiAnalyzer {
         const ccpMin = parseFiniteNumber(inputCcpMin);
         const ccpMax = parseFiniteNumber(inputCcpMax);
 
-        if (profileContext.niche === "bread" && current != null) {
-            const row = resolveBreadRowForTaskMeasurement(
-                current,
-                equipmentTargetIds,
-                mode,
-            );
+        if (profileContext.niche === 'bread' && current != null) {
+            const row = resolveBreadRowForTaskMeasurement(current, equipmentTargetIds, mode);
             if (!row) {
                 return {
-                    status: "invalid",
+                    status: 'invalid',
                     niche: profileContext.niche,
                     mode: profileContext.mode,
                     value: current,
                     ccpMin: null,
                     ccpMax: null,
-                    ccpLabel: profileContext.profile?.ccpLabel ?? "",
+                    ccpLabel: profileContext.profile?.ccpLabel ?? '',
                     inRange: null,
                     direction: null,
                     deviationFromLimit: null,
@@ -486,7 +462,7 @@ export class TemperatureAiAnalyzer {
                     economy: null,
                     inspector: null,
                     action: null,
-                    taskCcpDeviationLine: "",
+                    taskCcpDeviationLine: '',
                 };
             }
             const taskRange = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
@@ -495,14 +471,14 @@ export class TemperatureAiAnalyzer {
                 taskRange?.ccpMin,
                 taskRange?.ccpMax,
             );
-            const labelFromRow = row.temperatureLabel ?? "";
+            const labelFromRow = row.temperatureLabel ?? '';
             const ccpLabelForUi =
-                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ""
+                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ''
                     ? taskRange.ccpLabel
-                    : labelFromRow || profileContext.profile?.ccpLabel || "";
-            if (row.status === "normal") {
+                    : labelFromRow || profileContext.profile?.ccpLabel || '';
+            if (row.status === 'normal') {
                 return {
-                    status: "ok",
+                    status: 'ok',
                     niche: profileContext.niche,
                     mode: profileContext.mode,
                     value: current,
@@ -510,7 +486,7 @@ export class TemperatureAiAnalyzer {
                     ccpMax: taskRange?.ccpMax ?? null,
                     ccpLabel: ccpLabelForUi,
                     inRange: true,
-                    direction: "in_range",
+                    direction: 'in_range',
                     deviationFromLimit: 0,
                     risk: 0,
                     threat: null,
@@ -520,9 +496,9 @@ export class TemperatureAiAnalyzer {
                     taskCcpDeviationLine: taskCcpDev.line,
                 };
             }
-            const riskForUi = row.status === "critical" ? 100 : 55;
+            const riskForUi = row.status === 'critical' ? 100 : 55;
             return {
-                status: "problem",
+                status: 'problem',
                 niche: profileContext.niche,
                 mode: profileContext.mode,
                 value: current,
@@ -530,7 +506,7 @@ export class TemperatureAiAnalyzer {
                 ccpMax: taskRange?.ccpMax ?? null,
                 ccpLabel: ccpLabelForUi,
                 inRange: false,
-                direction: row.status === "critical" ? "too_high" : "too_low",
+                direction: row.status === 'critical' ? 'too_high' : 'too_low',
                 deviationFromLimit: roundToTwoDecimals(0),
                 risk: riskForUi,
                 threat: row.threat ?? null,
@@ -543,21 +519,17 @@ export class TemperatureAiAnalyzer {
 
         // Мясо: вердикт по полосе (`resolveMeatRowForTaskMeasurement`), как хлеб — иначе при попадании в min/max
         // задачи, но не в «норме» полосы, `getHaccpWarning` получал `analysis.status === "ok"` и возвращал `null`.
-        if (profileContext.niche === "meat" && current != null) {
-            const row = resolveMeatRowForTaskMeasurement(
-                current,
-                equipmentTargetIds,
-                mode,
-            );
+        if (profileContext.niche === 'meat' && current != null) {
+            const row = resolveMeatRowForTaskMeasurement(current, equipmentTargetIds, mode);
             if (!row) {
                 return {
-                    status: "invalid",
+                    status: 'invalid',
                     niche: profileContext.niche,
                     mode: profileContext.mode,
                     value: current,
                     ccpMin: null,
                     ccpMax: null,
-                    ccpLabel: profileContext.profile?.ccpLabel ?? "",
+                    ccpLabel: profileContext.profile?.ccpLabel ?? '',
                     inRange: null,
                     direction: null,
                     deviationFromLimit: null,
@@ -566,7 +538,7 @@ export class TemperatureAiAnalyzer {
                     economy: null,
                     inspector: null,
                     action: null,
-                    taskCcpDeviationLine: "",
+                    taskCcpDeviationLine: '',
                 };
             }
             const taskRange = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
@@ -575,14 +547,14 @@ export class TemperatureAiAnalyzer {
                 taskRange?.ccpMin,
                 taskRange?.ccpMax,
             );
-            const labelFromRow = row.temperatureLabel ?? "";
+            const labelFromRow = row.temperatureLabel ?? '';
             const ccpLabelForUi =
-                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ""
+                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ''
                     ? taskRange.ccpLabel
-                    : labelFromRow || profileContext.profile?.ccpLabel || "";
-            if (row.status === "normal") {
+                    : labelFromRow || profileContext.profile?.ccpLabel || '';
+            if (row.status === 'normal') {
                 return {
-                    status: "ok",
+                    status: 'ok',
                     niche: profileContext.niche,
                     mode: profileContext.mode,
                     value: current,
@@ -590,7 +562,7 @@ export class TemperatureAiAnalyzer {
                     ccpMax: taskRange?.ccpMax ?? null,
                     ccpLabel: ccpLabelForUi,
                     inRange: true,
-                    direction: "in_range",
+                    direction: 'in_range',
                     deviationFromLimit: 0,
                     risk: 0,
                     threat: null,
@@ -600,9 +572,9 @@ export class TemperatureAiAnalyzer {
                     taskCcpDeviationLine: taskCcpDev.line,
                 };
             }
-            const riskForUi = row.status === "critical" ? 100 : 55;
+            const riskForUi = row.status === 'critical' ? 100 : 55;
             return {
-                status: "problem",
+                status: 'problem',
                 niche: profileContext.niche,
                 mode: profileContext.mode,
                 value: current,
@@ -610,7 +582,7 @@ export class TemperatureAiAnalyzer {
                 ccpMax: taskRange?.ccpMax ?? null,
                 ccpLabel: ccpLabelForUi,
                 inRange: false,
-                direction: row.status === "critical" ? "too_high" : "too_low",
+                direction: row.status === 'critical' ? 'too_high' : 'too_low',
                 deviationFromLimit: roundToTwoDecimals(0),
                 risk: riskForUi,
                 threat: row.threat ?? null,
@@ -621,21 +593,17 @@ export class TemperatureAiAnalyzer {
             };
         }
 
-        if (profileContext.niche === "coffee" && current != null) {
-            const row = resolveCoffeeRowForTaskMeasurement(
-                current,
-                equipmentTargetIds,
-                mode,
-            );
+        if (profileContext.niche === 'coffee' && current != null) {
+            const row = resolveCoffeeRowForTaskMeasurement(current, equipmentTargetIds, mode);
             if (!row) {
                 return {
-                    status: "invalid",
+                    status: 'invalid',
                     niche: profileContext.niche,
                     mode: profileContext.mode,
                     value: current,
                     ccpMin: null,
                     ccpMax: null,
-                    ccpLabel: profileContext.profile?.ccpLabel ?? "",
+                    ccpLabel: profileContext.profile?.ccpLabel ?? '',
                     inRange: null,
                     direction: null,
                     deviationFromLimit: null,
@@ -644,7 +612,7 @@ export class TemperatureAiAnalyzer {
                     economy: null,
                     inspector: null,
                     action: null,
-                    taskCcpDeviationLine: "",
+                    taskCcpDeviationLine: '',
                 };
             }
             const taskRange = this.resolveCcpRange(ccpMin, ccpMax, profileContext.profile);
@@ -653,14 +621,14 @@ export class TemperatureAiAnalyzer {
                 taskRange?.ccpMin,
                 taskRange?.ccpMax,
             );
-            const labelFromRow = row.temperatureLabel ?? "";
+            const labelFromRow = row.temperatureLabel ?? '';
             const ccpLabelForUi =
-                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ""
+                taskRange?.ccpLabel && String(taskRange.ccpLabel).trim() !== ''
                     ? taskRange.ccpLabel
-                    : labelFromRow || profileContext.profile?.ccpLabel || "";
-            if (row.status === "normal") {
+                    : labelFromRow || profileContext.profile?.ccpLabel || '';
+            if (row.status === 'normal') {
                 return {
-                    status: "ok",
+                    status: 'ok',
                     niche: profileContext.niche,
                     mode: profileContext.mode,
                     value: current,
@@ -668,7 +636,7 @@ export class TemperatureAiAnalyzer {
                     ccpMax: taskRange?.ccpMax ?? null,
                     ccpLabel: ccpLabelForUi,
                     inRange: true,
-                    direction: "in_range",
+                    direction: 'in_range',
                     deviationFromLimit: 0,
                     risk: 0,
                     threat: null,
@@ -678,9 +646,9 @@ export class TemperatureAiAnalyzer {
                     taskCcpDeviationLine: taskCcpDev.line,
                 };
             }
-            const riskForUi = row.status === "critical" ? 100 : 55;
+            const riskForUi = row.status === 'critical' ? 100 : 55;
             return {
-                status: "problem",
+                status: 'problem',
                 niche: profileContext.niche,
                 mode: profileContext.mode,
                 value: current,
@@ -688,7 +656,7 @@ export class TemperatureAiAnalyzer {
                 ccpMax: taskRange?.ccpMax ?? null,
                 ccpLabel: ccpLabelForUi,
                 inRange: false,
-                direction: row.status === "critical" ? "too_high" : "too_low",
+                direction: row.status === 'critical' ? 'too_high' : 'too_low',
                 deviationFromLimit: roundToTwoDecimals(0),
                 risk: riskForUi,
                 threat: row.threat ?? null,
@@ -703,13 +671,13 @@ export class TemperatureAiAnalyzer {
 
         if (current == null || range == null) {
             return {
-                status: "invalid",
+                status: 'invalid',
                 niche: profileContext.niche,
                 mode: profileContext.mode,
                 value: current,
                 ccpMin: range?.ccpMin ?? null,
                 ccpMax: range?.ccpMax ?? null,
-                ccpLabel: range?.ccpLabel ?? profileContext.profile?.ccpLabel ?? "",
+                ccpLabel: range?.ccpLabel ?? profileContext.profile?.ccpLabel ?? '',
                 inRange: null,
                 direction: null,
                 deviationFromLimit: null,
@@ -725,13 +693,9 @@ export class TemperatureAiAnalyzer {
         const inRange = current >= range.ccpMin && current <= range.ccpMax;
 
         if (inRange) {
-            const taskCcpDev = deviationFromTaskCcpRange(
-                current,
-                range.ccpMin,
-                range.ccpMax,
-            );
+            const taskCcpDev = deviationFromTaskCcpRange(current, range.ccpMin, range.ccpMax);
             return {
-                status: "ok",
+                status: 'ok',
                 niche: profileContext.niche,
                 mode: profileContext.mode,
                 value: current,
@@ -739,7 +703,7 @@ export class TemperatureAiAnalyzer {
                 ccpMax: range.ccpMax,
                 ccpLabel,
                 inRange: true,
-                direction: "in_range",
+                direction: 'in_range',
                 deviationFromLimit: 0,
                 risk: 0,
                 threat: null,
@@ -750,11 +714,9 @@ export class TemperatureAiAnalyzer {
             };
         }
 
-        const direction = current > range.ccpMax ? "too_high" : "too_low";
+        const direction = current > range.ccpMax ? 'too_high' : 'too_low';
         const deviationFromLimit =
-            direction === "too_high"
-                ? current - range.ccpMax
-                : range.ccpMin - current;
+            direction === 'too_high' ? current - range.ccpMax : range.ccpMin - current;
         const risk = calculateRiskFromDeviation(
             deviationFromLimit,
             profileContext.profile?.riskSlope,
@@ -766,13 +728,9 @@ export class TemperatureAiAnalyzer {
             equipmentTargetIds,
         );
 
-        const taskCcpDev = deviationFromTaskCcpRange(
-            current,
-            range.ccpMin,
-            range.ccpMax,
-        );
+        const taskCcpDev = deviationFromTaskCcpRange(current, range.ccpMin, range.ccpMax);
         return {
-            status: "problem",
+            status: 'problem',
             niche: profileContext.niche,
             mode: profileContext.mode,
             value: current,
@@ -799,14 +757,13 @@ export class TemperatureAiAnalyzer {
     getHaccpWarning(params = {}) {
         const analysis = this.analyzeTemperature(params);
 
-        if (!analysis || analysis.status !== "problem") {
+        if (!analysis || analysis.status !== 'problem') {
             return null;
         }
 
         const risk = clampValue(Math.round(analysis.risk ?? 0), 0, 100);
-        let ai_status =
-            risk >= AI_STATUS_PROBLEM_MIN_RISK_PERCENT ? "problem" : "warning";
-        if (analysis.niche === "meat") {
+        let ai_status = risk >= AI_STATUS_PROBLEM_MIN_RISK_PERCENT ? 'problem' : 'warning';
+        if (analysis.niche === 'meat') {
             if (
                 shouldForceProblemForMeatCriticalBand(
                     analysis.value,
@@ -814,9 +771,9 @@ export class TemperatureAiAnalyzer {
                     params.equipmentTargetIds,
                 )
             ) {
-                ai_status = "problem";
+                ai_status = 'problem';
             }
-        } else if (analysis.niche === "coffee") {
+        } else if (analysis.niche === 'coffee') {
             if (
                 shouldForceProblemForCoffeeCriticalBand(
                     analysis.value,
@@ -824,9 +781,9 @@ export class TemperatureAiAnalyzer {
                     params.equipmentTargetIds,
                 )
             ) {
-                ai_status = "problem";
+                ai_status = 'problem';
             }
-        } else if (analysis.niche === "bread") {
+        } else if (analysis.niche === 'bread') {
             if (
                 shouldForceProblemForBreadCriticalBand(
                     analysis.value,
@@ -834,36 +791,36 @@ export class TemperatureAiAnalyzer {
                     params.equipmentTargetIds,
                 )
             ) {
-                ai_status = "problem";
+                ai_status = 'problem';
             }
         }
         const directionLabel =
-            analysis.direction === "too_high"
+            analysis.direction === 'too_high'
                 ? tt('demo.temperature_ai.direction_high')
-                : analysis.direction === "too_low"
+                : analysis.direction === 'too_low'
                   ? tt('demo.temperature_ai.direction_low')
                   : tt('demo.temperature_ai.direction_deviation');
         const headlineWord =
-            analysis.direction === "too_high"
+            analysis.direction === 'too_high'
                 ? tt('demo.temperature_ai.headline_high')
-                : analysis.direction === "too_low"
+                : analysis.direction === 'too_low'
                   ? tt('demo.temperature_ai.headline_low')
                   : tt('demo.temperature_ai.headline_deviation');
         const currentFormatted = formatTemperatureValueForUi(analysis.value);
         const mag = analysis.deviationFromLimit;
         const deviationFormatted =
-            analysis.direction === "too_high"
+            analysis.direction === 'too_high'
                 ? formatTemperatureValueForUi(mag, true)
-                : analysis.direction === "too_low"
+                : analysis.direction === 'too_low'
                   ? formatTemperatureValueForUi(-mag, false)
                   : formatTemperatureValueForUi(mag, false);
 
         const deviationLineFromTaskCcp =
-            (analysis.niche === "bread" ||
-                analysis.niche === "meat" ||
-                analysis.niche === "coffee") &&
-            typeof analysis.taskCcpDeviationLine === "string" &&
-            analysis.taskCcpDeviationLine.trim() !== ""
+            (analysis.niche === 'bread' ||
+                analysis.niche === 'meat' ||
+                analysis.niche === 'coffee') &&
+            typeof analysis.taskCcpDeviationLine === 'string' &&
+            analysis.taskCcpDeviationLine.trim() !== ''
                 ? analysis.taskCcpDeviationLine
                 : null;
         const deviationLineBread =
@@ -876,13 +833,13 @@ export class TemperatureAiAnalyzer {
             risk,
             niche: analysis.niche,
             mode: analysis.mode,
-            ccpLabel: analysis.ccpLabel ?? "",
+            ccpLabel: analysis.ccpLabel ?? '',
             currentLine: currentFormatted,
             deviationLine: deviationLineBread,
-            threat: analysis.threat ?? "",
-            economy: analysis.economy ?? "",
-            inspector: analysis.inspector ?? "",
-            action: analysis.action ?? "",
+            threat: analysis.threat ?? '',
+            economy: analysis.economy ?? '',
+            inspector: analysis.inspector ?? '',
+            action: analysis.action ?? '',
             direction: analysis.direction,
             value: analysis.value,
             ccpMin: analysis.ccpMin,
@@ -900,18 +857,18 @@ export class TemperatureAiAnalyzer {
      */
     getHaccpInRangeDisplay(params = {}) {
         const analysis = this.analyzeTemperature(params);
-        if (!analysis || analysis.status !== "ok") {
+        if (!analysis || analysis.status !== 'ok') {
             return null;
         }
         if (
-            analysis.niche !== "meat" &&
-            analysis.niche !== "coffee" &&
-            analysis.niche !== "bread"
+            analysis.niche !== 'meat' &&
+            analysis.niche !== 'coffee' &&
+            analysis.niche !== 'bread'
         ) {
             return null;
         }
         const currentFormatted = formatTemperatureValueForUi(analysis.value);
-        if (analysis.niche === "meat") {
+        if (analysis.niche === 'meat') {
             const row = resolveMeatRowForTaskMeasurement(
                 analysis.value,
                 params.equipmentTargetIds,
@@ -924,31 +881,30 @@ export class TemperatureAiAnalyzer {
                 !taskHasMeatEquipment(params.equipmentTargetIds) ||
                 meatBandMatchesTaskEquipment(row, params.equipmentTargetIds);
             const taskDevLine =
-                analysis.taskCcpDeviationLine &&
-                analysis.taskCcpDeviationLine.trim() !== ""
+                analysis.taskCcpDeviationLine && analysis.taskCcpDeviationLine.trim() !== ''
                     ? analysis.taskCcpDeviationLine
-                    : "—";
+                    : '—';
             return {
                 ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
                 title: tt('demo.temperature_ai.within_ccp'),
-                ai_status: "ok",
+                ai_status: 'ok',
                 risk: 0,
                 niche: analysis.niche,
                 mode: analysis.mode,
-                ccpLabel: analysis.ccpLabel ?? "",
+                ccpLabel: analysis.ccpLabel ?? '',
                 currentLine: currentFormatted,
                 deviationLine: taskDevLine,
-                threat: useBandNarrative ? row.threat ?? "" : "",
-                economy: "",
-                inspector: "",
-                action: useBandNarrative ? row.action ?? "" : "",
-                direction: "in_range",
+                threat: useBandNarrative ? (row.threat ?? '') : '',
+                economy: '',
+                inspector: '',
+                action: useBandNarrative ? (row.action ?? '') : '',
+                direction: 'in_range',
                 value: analysis.value,
                 ccpMin: analysis.ccpMin,
                 ccpMax: analysis.ccpMax,
             };
         }
-        if (analysis.niche === "bread") {
+        if (analysis.niche === 'bread') {
             const row = resolveBreadRowForTaskMeasurement(
                 analysis.value,
                 params.equipmentTargetIds,
@@ -961,30 +917,30 @@ export class TemperatureAiAnalyzer {
                 !taskHasBreadEquipment(params.equipmentTargetIds) ||
                 breadBandMatchesTaskEquipment(row, params.equipmentTargetIds);
             const taskDevLine =
-                analysis.taskCcpDeviationLine && analysis.taskCcpDeviationLine.trim() !== ""
+                analysis.taskCcpDeviationLine && analysis.taskCcpDeviationLine.trim() !== ''
                     ? analysis.taskCcpDeviationLine
-                    : "—";
+                    : '—';
             return {
                 ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
                 title: tt('demo.temperature_ai.within_ccp'),
-                ai_status: "ok",
+                ai_status: 'ok',
                 risk: 0,
                 niche: analysis.niche,
                 mode: analysis.mode,
-                ccpLabel: analysis.ccpLabel ?? "",
+                ccpLabel: analysis.ccpLabel ?? '',
                 currentLine: currentFormatted,
                 deviationLine: taskDevLine,
-                threat: useBandNarrative ? row.threat ?? "" : "",
-                economy: "",
-                inspector: "",
-                action: useBandNarrative ? row.action ?? "" : "",
-                direction: "in_range",
+                threat: useBandNarrative ? (row.threat ?? '') : '',
+                economy: '',
+                inspector: '',
+                action: useBandNarrative ? (row.action ?? '') : '',
+                direction: 'in_range',
                 value: analysis.value,
                 ccpMin: analysis.ccpMin,
                 ccpMax: analysis.ccpMax,
             };
         }
-        if (analysis.niche === "coffee") {
+        if (analysis.niche === 'coffee') {
             const row = resolveCoffeeRowForTaskMeasurement(
                 analysis.value,
                 params.equipmentTargetIds,
@@ -997,25 +953,24 @@ export class TemperatureAiAnalyzer {
                 !taskHasCoffeeEquipment(params.equipmentTargetIds) ||
                 coffeeBandMatchesTaskEquipment(row, params.equipmentTargetIds);
             const taskDevLine =
-                analysis.taskCcpDeviationLine &&
-                analysis.taskCcpDeviationLine.trim() !== ""
+                analysis.taskCcpDeviationLine && analysis.taskCcpDeviationLine.trim() !== ''
                     ? analysis.taskCcpDeviationLine
-                    : "—";
+                    : '—';
             return {
                 ...DEMO_TEMPERATURE_MEASUREMENT_AI_WARNING_SHAPE,
                 title: tt('demo.temperature_ai.within_ccp'),
-                ai_status: "ok",
+                ai_status: 'ok',
                 risk: 0,
                 niche: analysis.niche,
                 mode: analysis.mode,
-                ccpLabel: analysis.ccpLabel ?? "",
+                ccpLabel: analysis.ccpLabel ?? '',
                 currentLine: currentFormatted,
                 deviationLine: taskDevLine,
-                threat: useBandNarrative ? row.threat ?? "" : "",
-                economy: "",
-                inspector: "",
-                action: useBandNarrative ? row.action ?? "" : "",
-                direction: "in_range",
+                threat: useBandNarrative ? (row.threat ?? '') : '',
+                economy: '',
+                inspector: '',
+                action: useBandNarrative ? (row.action ?? '') : '',
+                direction: 'in_range',
                 value: analysis.value,
                 ccpMin: analysis.ccpMin,
                 ccpMax: analysis.ccpMax,
@@ -1062,5 +1017,4 @@ export class TemperatureAiAnalyzer {
 /**
  * [ОБЩЕЕ] Фабрика экземпляра для UI-слоя.
  */
-export const createTemperatureAiAnalyzer = (options = {}) =>
-    new TemperatureAiAnalyzer(options);
+export const createTemperatureAiAnalyzer = (options = {}) => new TemperatureAiAnalyzer(options);

@@ -2,16 +2,11 @@
  * Mock-справочник единиц оборудования для конструктора задачи «тип: оборудование».
  * Стабильные id — латиница; подписи — для UI.
  */
-import {
-    EQUIPMENT_GROUPS,
-    equipmentGroupsForChecklistNiche,
-} from "@/config/tasks";
+import { EQUIPMENT_GROUPS, equipmentGroupsForChecklistNiche } from '@/config/tasks';
 
 export { EQUIPMENT_GROUPS, equipmentGroupsForChecklistNiche };
 
-const KNOWN_EQUIPMENT_IDS = new Set(
-    EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => it.id)),
-);
+const KNOWN_EQUIPMENT_IDS = new Set(EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => it.id)));
 
 const LABEL_BY_EQUIPMENT_ID = new Map(
     EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => [it.id, it.label])),
@@ -28,7 +23,7 @@ export const normalizeEquipmentTargetIds = (raw) => {
     const seen = new Set();
     const out = [];
     for (const x of raw) {
-        const id = typeof x === "string" ? x.trim() : "";
+        const id = typeof x === 'string' ? x.trim() : '';
         if (!id || !KNOWN_EQUIPMENT_IDS.has(id) || seen.has(id)) {
             continue;
         }
@@ -45,10 +40,10 @@ export const normalizeEquipmentTargetIds = (raw) => {
 export const equipmentTargetsSummary = (ids) => {
     const list = normalizeEquipmentTargetIds(ids);
     if (!list.length) {
-        return "";
+        return '';
     }
     if (list.length <= 2) {
-        return list.map((id) => LABEL_BY_EQUIPMENT_ID.get(id) ?? id).join(", ");
+        return list.map((id) => LABEL_BY_EQUIPMENT_ID.get(id) ?? id).join(', ');
     }
     return `${list.length} выбрано`;
 };

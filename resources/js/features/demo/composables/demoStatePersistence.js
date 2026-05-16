@@ -1,8 +1,8 @@
-import { createDefaultState } from "@/features/demo/composables/demoDefaultState";
-import { buildDemoBatches } from "@/features/demo/data/eudrBatchPublic";
-import { normalizeAllChecklistTaskMeasurementStatuses } from "@/features/demo/domain/checklistTaskModel";
-import { seedChecklistsTemperatureAi } from "@/features/demo/ai/temperature/seedChecklistsTemperatureAi";
-import { LS_DEMO_STATE } from "@/config/storageNames";
+import { createDefaultState } from '@/features/demo/composables/demoDefaultState';
+import { buildDemoBatches } from '@/features/demo/data/eudrBatchPublic';
+import { normalizeAllChecklistTaskMeasurementStatuses } from '@/features/demo/domain/checklistTaskModel';
+import { seedChecklistsTemperatureAi } from '@/features/demo/ai/temperature/seedChecklistsTemperatureAi';
+import { LS_DEMO_STATE } from '@/config/storageNames';
 
 export const STORAGE_KEY = LS_DEMO_STATE;
 
@@ -43,15 +43,13 @@ export const loadStateFromStorage = () => {
         }
         const parsed = JSON.parse(raw);
         return normalizeHydratedStateDates(parsed);
-    }
-    catch {
+    } catch {
         return null;
     }
 };
 
 /** Экспорт для внешних consumers (например, публичный daily report). */
-export const loadPersistedDemoState = () =>
-    loadStateFromStorage() ?? createDefaultState();
+export const loadPersistedDemoState = () => loadStateFromStorage() ?? createDefaultState();
 
 export const saveStateToStorage = (state) => {
     try {

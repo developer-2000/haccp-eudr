@@ -1,9 +1,9 @@
-import { task_grain_cooling, unlockGrainCoolingMeasurementIndex } from "./config";
-import { getGrainCoolingTaskAndMeasurementByRowIndex } from "./grainCoolingIndexedAccess";
-import { isGrainCoolingScenarioSuppressedForPath } from "./grainCoolingPublicRoutes";
-import { isGrainCoolingScenarioStorageCompleted } from "./grainCoolingStorageStatus";
-import { getGrainCoolingTaskFromDemoState } from "./resolveGrainCoolingTaskFromDemoState";
-import { LS_CONSENT_VERSION } from "@/config/storageNames";
+import { task_grain_cooling, unlockGrainCoolingMeasurementIndex } from './config';
+import { getGrainCoolingTaskAndMeasurementByRowIndex } from './grainCoolingIndexedAccess';
+import { isGrainCoolingScenarioSuppressedForPath } from './grainCoolingPublicRoutes';
+import { isGrainCoolingScenarioStorageCompleted } from './grainCoolingStorageStatus';
+import { getGrainCoolingTaskFromDemoState } from './resolveGrainCoolingTaskFromDemoState';
+import { LS_CONSENT_VERSION } from '@/config/storageNames';
 
 /**
  * Обход `measurements` **по порядку с начала массива** (индекс 0, 1, …): первый элемент со
@@ -17,7 +17,7 @@ export function findFirstPendingMeasurementIndex(measurements) {
         return -1;
     }
     for (let i = 0; i < measurements.length; i++) {
-        if (measurements[i]?.status === "pending") {
+        if (measurements[i]?.status === 'pending') {
             return i;
         }
     }
@@ -66,10 +66,8 @@ export function grainCoolingScenarioShouldRun(demoStateRef) {
  * @returns {void}
  */
 export function syncGrainCoolingScenarioProcessAllowed(demoStateRef, pathname) {
-
     const consentAccepted =
-        typeof localStorage !== "undefined" &&
-        localStorage.getItem(LS_CONSENT_VERSION) === "true";
+        typeof localStorage !== 'undefined' && localStorage.getItem(LS_CONSENT_VERSION) === 'true';
 
     const dataOk = grainCoolingScenarioShouldRun(demoStateRef);
     const suppressed = pathname ? isGrainCoolingScenarioSuppressedForPath(pathname) : false;
@@ -99,7 +97,7 @@ export function getGrainCoolingFirstPendingMeasurementIndex(demoStateRef) {
 function formatLocalTimeHHmm(date = new Date()) {
     const h = date.getHours();
     const m = date.getMinutes();
-    return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
 /**
@@ -117,16 +115,17 @@ export function syncGrainCoolingPendingMeasurementTimeToUserLocal(demoStateRef) 
         return false;
     }
 
-    const { task, measurementRow: current, measurements } = getGrainCoolingTaskAndMeasurementByRowIndex(
-        demoStateRef,
-        measurementIndex,
-    );
+    const {
+        task,
+        measurementRow: current,
+        measurements,
+    } = getGrainCoolingTaskAndMeasurementByRowIndex(demoStateRef, measurementIndex);
 
     if (!task || measurementIndex >= measurements.length || current == null) {
         return false;
     }
 
-    if (current?.status !== "pending") {
+    if (current?.status !== 'pending') {
         return false;
     }
 
@@ -173,10 +172,11 @@ export function applyGrainCoolingProblemIfPending(demoStateRef) {
     }
 
     // Снимок задачи и массива measurements из demoState по зафиксированному индексу
-    const { task, measurementRow: current, measurements } = getGrainCoolingTaskAndMeasurementByRowIndex(
-        demoStateRef,
-        measurementIndex,
-    );
+    const {
+        task,
+        measurementRow: current,
+        measurements,
+    } = getGrainCoolingTaskAndMeasurementByRowIndex(demoStateRef, measurementIndex);
 
     // Задача с taskId не найдена в нише (или ниша пуста)
     if (!task) {
@@ -191,7 +191,7 @@ export function applyGrainCoolingProblemIfPending(demoStateRef) {
     }
 
     // Меняем только pending → problem
-    if (current?.status !== "pending") {
+    if (current?.status !== 'pending') {
         unlockGrainCoolingMeasurementIndex();
         return false;
     }
@@ -206,7 +206,7 @@ export function applyGrainCoolingProblemIfPending(demoStateRef) {
 
     // Новый массив measurements: только у нужного индекса status → "problem", остальные строки копируем как есть
     const nextMeasurements = measurements.map((m, idx) =>
-        idx === measurementIndex ? { ...m, status: "problem" } : m,
+        idx === measurementIndex ? { ...m, status: 'problem' } : m,
     );
     // Подменяем measurements только у целевой задачи по id
     const nextTasks = tasks.map((t) =>

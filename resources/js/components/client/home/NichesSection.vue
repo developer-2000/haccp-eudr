@@ -54,12 +54,12 @@
 
 <script setup>
 defineOptions({
-    name: "NichesSection",
+    name: 'NichesSection',
 });
 
-import { router as inertiaRouter } from "@inertiajs/vue3";
-import { useI18n } from "vue-i18n";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
+import { router as inertiaRouter } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
 
 const { t } = useI18n();
 
@@ -81,62 +81,62 @@ function goToSurvey() {
 
 const niches = [
     {
-        id: "coffee",
-        emoji: "☕",
-        title: t("home.niches.coffee.title"),
-        subtitle: t("home.niches.coffee.subtitle"),
+        id: 'coffee',
+        emoji: '☕',
+        title: t('home.niches.coffee.title'),
+        subtitle: t('home.niches.coffee.subtitle'),
         points: [
-            t("home.niches.coffee.points.roaster_195C"),
-            t("home.niches.coffee.points.grain_plus_15C"),
-            t("home.niches.coffee.points.eudr_qr"),
+            t('home.niches.coffee.points.roaster_195C'),
+            t('home.niches.coffee.points.grain_plus_15C'),
+            t('home.niches.coffee.points.eudr_qr'),
         ],
-        result: t("home.niches.coffee.result"),
-        cta: t("home.niches.coffee.cta"),
+        result: t('home.niches.coffee.result'),
+        cta: t('home.niches.coffee.cta'),
     },
     {
-        id: "bakery",
-        emoji: "🍞",
-        title: t("home.niches.bakery.title"),
-        subtitle: t("home.niches.bakery.subtitle"),
+        id: 'bakery',
+        emoji: '🍞',
+        title: t('home.niches.bakery.title'),
+        subtitle: t('home.niches.bakery.subtitle'),
         points: [
-            t("home.niches.bakery.points.dough_26C"),
-            t("home.niches.bakery.points.core_95C"),
-            t("home.niches.bakery.points.starter_plus21C"),
+            t('home.niches.bakery.points.dough_26C'),
+            t('home.niches.bakery.points.core_95C'),
+            t('home.niches.bakery.points.starter_plus21C'),
         ],
-        result: t("home.niches.bakery.result"),
-        cta: t("home.niches.bakery.cta"),
+        result: t('home.niches.bakery.result'),
+        cta: t('home.niches.bakery.cta'),
     },
     {
-        id: "meat",
-        emoji: "🥩",
-        title: t("home.niches.meat.title"),
-        subtitle: t("home.niches.meat.subtitle"),
+        id: 'meat',
+        emoji: '🥩',
+        title: t('home.niches.meat.title'),
+        subtitle: t('home.niches.meat.subtitle'),
         points: [
-            t("home.niches.meat.points.frozen_minus18C"),
-            t("home.niches.meat.points.disinfection"),
-            t("home.niches.meat.points.eudr_qr"),
+            t('home.niches.meat.points.frozen_minus18C'),
+            t('home.niches.meat.points.disinfection'),
+            t('home.niches.meat.points.eudr_qr'),
         ],
-        result: t("home.niches.meat.result"),
-        cta: t("home.niches.meat.cta"),
+        result: t('home.niches.meat.result'),
+        cta: t('home.niches.meat.cta'),
     },
     {
-        id: "other",
-        emoji: "💼",
-        title: t("home.niches.other.title"),
-        subtitle: t("home.niches.other.subtitle"),
+        id: 'other',
+        emoji: '💼',
+        title: t('home.niches.other.title'),
+        subtitle: t('home.niches.other.subtitle'),
         points: [
-            t("home.niches.other.points.survey_5_min"),
-            t("home.niches.other.points.ccp_for_your_business"),
-            t("home.niches.other.points.discount_30_forever"),
+            t('home.niches.other.points.survey_5_min'),
+            t('home.niches.other.points.ccp_for_your_business'),
+            t('home.niches.other.points.discount_30_forever'),
         ],
-        result: t("home.niches.other.result"),
-        cta: t("home.niches.other.cta"),
+        result: t('home.niches.other.result'),
+        cta: t('home.niches.other.cta'),
     },
 ];
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .niches {
     .niches__grid {
@@ -256,11 +256,11 @@ const niches = [
 }
 
 .niche-card.niche-card--other::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url("/images/man.jpg");
+    background-image: url('/images/man.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

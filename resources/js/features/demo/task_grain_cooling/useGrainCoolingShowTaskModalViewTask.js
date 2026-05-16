@@ -1,6 +1,6 @@
-import { computed } from "vue";
-import { task_grain_cooling } from "./config";
-import { getGrainCoolingTaskFromDemoState } from "./resolveGrainCoolingTaskFromDemoState";
+import { computed } from 'vue';
+import { task_grain_cooling } from './config';
+import { getGrainCoolingTaskFromDemoState } from './resolveGrainCoolingTaskFromDemoState';
 
 /**
  * Актуальная задача для UI модалки «Детали задачи»: для `task_grain_cooling.id` — только снимок из `demoState`.

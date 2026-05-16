@@ -13,14 +13,14 @@
 </template>
 
 <script setup>
-import StepsSection from "@/components/client/how-it-works/StepsSection.vue";
-import AdvantagesSection from "@/components/client/how-it-works/AdvantagesSection.vue";
-import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
-import SeoHead from "@/components/SeoHead.vue";
-import PublicLayout from "@/Layouts/PublicLayout.vue";
+import StepsSection from '@/components/client/how-it-works/StepsSection.vue';
+import AdvantagesSection from '@/components/client/how-it-works/AdvantagesSection.vue';
+import SurveyCtaSection from '@/components/client/home/SurveyCtaSection.vue';
+import SeoHead from '@/components/SeoHead.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineOptions({
-    name: "HowItWorks",
+    name: 'HowItWorks',
     layout: PublicLayout,
 });
 
@@ -33,7 +33,7 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .section-container-home {
     padding: $font-size-4xl 0;

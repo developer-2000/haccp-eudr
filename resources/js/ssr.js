@@ -8,14 +8,14 @@ globalThis.__VUE_PROD_DEVTOOLS__ = false;
 globalThis.__VUE_OPTIONS_API__ = true;
 globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
 
-import { createSSRApp, h } from "vue";
-import { createInertiaApp } from "@inertiajs/vue3";
-import createServer from "@inertiajs/vue3/server";
-import { renderToString } from "@vue/server-renderer";
-import { createPinia } from "pinia";
-import { i18n } from "./i18n";
+import { createSSRApp, h } from 'vue';
+import { createInertiaApp } from '@inertiajs/vue3';
+import createServer from '@inertiajs/vue3/server';
+import { renderToString } from '@vue/server-renderer';
+import { createPinia } from 'pinia';
+import { i18n } from './i18n';
 
-const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
+const pages = import.meta.glob('./Pages/**/*.vue', { eager: true });
 
 createServer((page) =>
     createInertiaApp({
@@ -24,9 +24,7 @@ createServer((page) =>
         resolve: (name) => {
             const path = `./Pages/${name}.vue`;
             if (!pages[path]) {
-                throw new Error(
-                    `Inertia page not found: "${name}" (expected at ${path})`,
-                );
+                throw new Error(`Inertia page not found: "${name}" (expected at ${path})`);
             }
             return pages[path];
         },

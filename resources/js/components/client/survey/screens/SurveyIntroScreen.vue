@@ -6,13 +6,13 @@
                 class="survey-page__title survey-page__title--hero survey-page__text-wrap"
                 tabindex="-1"
             >
-                {{ t("survey.intro.title") }}
+                {{ t('survey.intro.title') }}
             </h1>
             <p class="survey-page__subtitle survey-page__text-wrap">
-                {{ t("survey.intro.subtitle") }}
+                {{ t('survey.intro.subtitle') }}
             </p>
             <p class="survey-page__trust survey-page__text-wrap">
-                {{ t("survey.intro.trust") }}
+                {{ t('survey.intro.trust') }}
             </p>
         </div>
         <footer class="survey-page__footer">
@@ -21,24 +21,24 @@
                 class="survey-page__primary survey-primary-action"
                 @click="emit('start')"
             >
-                {{ t("survey.intro.start") }}
+                {{ t('survey.intro.start') }}
             </button>
         </footer>
     </div>
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
-defineOptions({ name: "SurveyIntroScreen" });
+defineOptions({ name: 'SurveyIntroScreen' });
 
-const emit = defineEmits(["start"]);
+const emit = defineEmits(['start']);
 
 const { t } = useI18n();
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .survey-page__block {
     display: flex;

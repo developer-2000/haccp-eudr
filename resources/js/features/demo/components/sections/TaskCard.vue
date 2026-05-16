@@ -47,21 +47,25 @@
                 v-for="item in task.measurements"
                 :key="`${task.id}-${item.time}-${item.status}`"
                 class="ccp-card__repeat-line"
-                :class="
-                    [
-                        isHotMode ? 'hot-task-row__repeat-line' : '',
-                        item.status === 'success'
-                            ? 'ccp-card__repeat-line--ok'
-                            : item.status === 'pending'
-                              ? 'ccp-card__repeat-line--pending'
-                              : 'ccp-card__repeat-line--alert',
-                        item.status === 'success'
-                            ? (isHotMode ? 'hot-task-row__repeat-line--ok' : '')
-                            : item.status === 'pending'
-                              ? (isHotMode ? 'hot-task-row__repeat-line--pending' : '')
-                              : (isHotMode ? 'hot-task-row__repeat-line--alert' : ''),
-                    ]
-                "
+                :class="[
+                    isHotMode ? 'hot-task-row__repeat-line' : '',
+                    item.status === 'success'
+                        ? 'ccp-card__repeat-line--ok'
+                        : item.status === 'pending'
+                          ? 'ccp-card__repeat-line--pending'
+                          : 'ccp-card__repeat-line--alert',
+                    item.status === 'success'
+                        ? isHotMode
+                            ? 'hot-task-row__repeat-line--ok'
+                            : ''
+                        : item.status === 'pending'
+                          ? isHotMode
+                              ? 'hot-task-row__repeat-line--pending'
+                              : ''
+                          : isHotMode
+                            ? 'hot-task-row__repeat-line--alert'
+                            : '',
+                ]"
             />
         </span>
 
@@ -138,20 +142,20 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { NButton, NPopconfirm } from "naive-ui";
-import { useI18n } from "vue-i18n";
-import Icon from "@/components/Icon.vue";
-import { firstPendingMeasurementTime } from "@/features/demo/domain/checklistTaskModel";
-import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
-import { equipmentTargetsSummary } from "@/features/demo/data/demoChecklistEquipment";
-import { roomTargetsSummary } from "@/features/demo/data/demoChecklistRooms";
+import { computed } from 'vue';
+import { NButton, NPopconfirm } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+import Icon from '@/components/Icon.vue';
+import { firstPendingMeasurementTime } from '@/features/demo/domain/checklistTaskModel';
+import { resolveStaffFullName } from '@/features/demo/utils/demoStaff';
+import { equipmentTargetsSummary } from '@/features/demo/data/demoChecklistEquipment';
+import { roomTargetsSummary } from '@/features/demo/data/demoChecklistRooms';
 import {
     normalizeTaskScopeType,
     TASK_SCOPE_TYPE,
-} from "@/features/demo/data/demoChecklistTaskScope";
+} from '@/features/demo/data/demoChecklistTaskScope';
 
-defineOptions({ name: "TaskCard" });
+defineOptions({ name: 'TaskCard' });
 
 const { t } = useI18n();
 
@@ -160,48 +164,44 @@ const props = defineProps({
     staff: { type: Array, default: () => [] },
     mode: {
         type: String,
-        default: "checklists",
+        default: 'checklists',
     },
     showDeleteAction: { type: Boolean, default: false },
     showNicheIcon: { type: Boolean, default: false },
 });
 
-const emit = defineEmits(["select", "remove"]);
+const emit = defineEmits(['select', 'remove']);
 
 const NICHE_LABEL_KEYS = { coffee: 'niche_coffee', bakery: 'niche_bakery', meat: 'niche_meat' };
 
 const NICHE_EMOJI = {
-    coffee: "☕",
-    bakery: "🥐",
-    meat: "🥩",
+    coffee: '☕',
+    bakery: '🥐',
+    meat: '🥩',
 };
 
-const isHotMode = computed(() => props.mode === "hot");
+const isHotMode = computed(() => props.mode === 'hot');
 
 const hasMultipleRepeatSlots = computed(() => {
-    const n = Array.isArray(props.task?.repeatTimes)
-        ? props.task.repeatTimes.length
-        : 0;
+    const n = Array.isArray(props.task?.repeatTimes) ? props.task.repeatTimes.length : 0;
     return n > 1;
 });
 
 const borderClass = computed(() => {
     if (hasMultipleRepeatSlots.value) {
-        return "ccp-card--repeat";
+        return 'ccp-card--repeat';
     }
-    return "ccp-card--ok";
+    return 'ccp-card--ok';
 });
 
-const showRepeatLines = computed(
-    () => {
-        if (!Array.isArray(props.task?.measurements)) {
-            return false;
-        }
-        return isHotMode.value
-            ? props.task.measurements.length > 1
-            : props.task.measurements.length > 0;
-    },
-);
+const showRepeatLines = computed(() => {
+    if (!Array.isArray(props.task?.measurements)) {
+        return false;
+    }
+    return isHotMode.value
+        ? props.task.measurements.length > 1
+        : props.task.measurements.length > 0;
+});
 
 const startOfTodayTs = () => {
     const d = new Date();
@@ -210,53 +210,51 @@ const startOfTodayTs = () => {
 };
 
 const formatEuDate = (ts) =>
-    new Intl.DateTimeFormat("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
+    new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
     }).format(new Date(ts));
 
 const scheduledLine = computed(() => {
     const startDate = props.task?.startDate;
     const isFuture =
-        typeof startDate === "number" &&
-        Number.isFinite(startDate) &&
-        startDate > startOfTodayTs();
-    return isFuture ? t('demo.task_card.scheduled_from', { date: formatEuDate(startDate) }) : "";
+        typeof startDate === 'number' && Number.isFinite(startDate) && startDate > startOfTodayTs();
+    return isFuture ? t('demo.task_card.scheduled_from', { date: formatEuDate(startDate) }) : '';
 });
 
 const assigneeDisplay = computed(() => {
     const id = props.task?.assignedStaffId;
     if (!id) {
-        return "";
+        return '';
     }
     const name = resolveStaffFullName(props.staff, id);
-    return name === "—" ? "" : name;
+    return name === '—' ? '' : name;
 });
 
-const assigneeEmptyText = computed(() => (isHotMode.value ? "—" : t('demo.task_card.assignee_empty')));
-
-const normalizedScopeType = computed(() =>
-    normalizeTaskScopeType(props.task?.taskScopeType),
+const assigneeEmptyText = computed(() =>
+    isHotMode.value ? '—' : t('demo.task_card.assignee_empty'),
 );
+
+const normalizedScopeType = computed(() => normalizeTaskScopeType(props.task?.taskScopeType));
 
 const targetsLine = computed(() => {
     if (normalizedScopeType.value === TASK_SCOPE_TYPE.EQUIPMENT) {
         const s = equipmentTargetsSummary(props.task?.equipmentTargetIds);
-        return s || "";
+        return s || '';
     }
     if (normalizedScopeType.value === TASK_SCOPE_TYPE.ROOMS) {
         const s = roomTargetsSummary(props.task?.roomTargetIds);
-        return s || "";
+        return s || '';
     }
-    return "";
+    return '';
 });
 
 const pendingTime = computed(() => firstPendingMeasurementTime(props.task));
 
 const nicheEmoji = computed(() => {
     const type = props.task?.type;
-    return type ? (NICHE_EMOJI[type] ?? "") : "";
+    return type ? (NICHE_EMOJI[type] ?? '') : '';
 });
 
 const nicheAria = computed(() => {
@@ -264,11 +262,10 @@ const nicheAria = computed(() => {
     const key = NICHE_LABEL_KEYS[type];
     return key ? t(`demo.task_card.${key}`) : String(type);
 });
-
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .task-card.ccp-card {
     position: relative;

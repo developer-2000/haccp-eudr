@@ -6,10 +6,10 @@
                 class="survey-submitted-state__title survey-page__text-wrap"
                 tabindex="-1"
             >
-                {{ t("survey.submitted_state.title") }}
+                {{ t('survey.submitted_state.title') }}
             </h2>
             <p class="survey-submitted-state__text survey-page__text-wrap">
-                {{ t("survey.submitted_state.subtitle") }}
+                {{ t('survey.submitted_state.subtitle') }}
             </p>
             <img
                 class="survey-submitted-state__image"
@@ -18,14 +18,14 @@
                 loading="lazy"
             />
             <p class="survey-submitted-state__email survey-page__text-wrap">
-                {{ t("survey.submitted_state.email_label") }}
+                {{ t('survey.submitted_state.email_label') }}
                 <strong>{{ maskedEmail }}</strong>
             </p>
             <p
                 v-if="formattedSubmittedAt"
                 class="survey-submitted-state__meta survey-page__text-wrap"
             >
-                {{ t("survey.submitted_state.sent_label") }}
+                {{ t('survey.submitted_state.sent_label') }}
                 {{ formattedSubmittedAt }}
             </p>
             <footer class="survey-page__footer">
@@ -34,7 +34,7 @@
                     class="survey-submitted-state__reset survey-primary-action"
                     @click="$emit('reset-survey')"
                 >
-                    {{ t("survey.submitted_state.reset_button") }}
+                    {{ t('survey.submitted_state.reset_button') }}
                 </button>
             </footer>
         </div>
@@ -42,10 +42,10 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-defineOptions({ name: "SurveySubmittedState" });
+defineOptions({ name: 'SurveySubmittedState' });
 const { t } = useI18n();
 
 const props = defineProps({
@@ -59,12 +59,12 @@ const props = defineProps({
     },
     stepHeadingId: {
         type: String,
-        default: "survey-step-heading",
+        default: 'survey-step-heading',
     },
 });
 
 defineEmits({
-    "reset-survey": () => true,
+    'reset-survey': () => true,
 });
 
 /**
@@ -75,22 +75,20 @@ defineEmits({
  */
 function formatSubmittedAt(isoValue) {
     if (!isoValue) {
-        return "";
+        return '';
     }
     const date = new Date(isoValue);
     if (Number.isNaN(date.getTime())) {
-        return "";
+        return '';
     }
     return date.toLocaleString();
 }
 
-const formattedSubmittedAt = computed(() =>
-    formatSubmittedAt(props.submittedAt),
-);
+const formattedSubmittedAt = computed(() => formatSubmittedAt(props.submittedAt));
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-submitted-state {
     display: flex;

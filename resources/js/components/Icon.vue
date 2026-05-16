@@ -37,13 +37,13 @@
  */
 
 defineOptions({
-    name: "Icon",
+    name: 'Icon',
 });
 
 // ============================================
 // Импорты
 // ============================================
-import { computed, h } from "vue";
+import { computed, h } from 'vue';
 
 /**
  * Иконки из библиотеки @heroicons/vue
@@ -60,9 +60,9 @@ import {
     InformationCircleIcon,
     EyeIcon,
     EyeSlashIcon,
-} from "@heroicons/vue/24/outline";
+} from '@heroicons/vue/24/outline';
 
-import { IconReportSearch, IconArrowBigDownLines } from "@tabler/icons-vue";
+import { IconReportSearch, IconArrowBigDownLines } from '@tabler/icons-vue';
 
 /**
  * Иконки из библиотеки @vicons/antd
@@ -80,20 +80,20 @@ import {
     SettingOutlined,
     RightOutlined,
     LeftOutlined,
-} from "@vicons/antd";
+} from '@vicons/antd';
 
 /**
  * Иконки из библиотеки @vicons/ionicons4
  * Требуют обертки в ViconsIcon для корректного отображения
  */
-import { IosMailUnread } from "@vicons/ionicons4";
+import { IosMailUnread } from '@vicons/ionicons4';
 
 /**
  * Иконки из библиотеки @vicons/ionicons5
  * Требуют обертки в ViconsIcon для корректного отображения
  */
-import { ExitOutline } from "@vicons/ionicons5";
-import { TagExport, TaskComplete } from "@vicons/carbon";
+import { ExitOutline } from '@vicons/ionicons5';
+import { TagExport, TaskComplete } from '@vicons/carbon';
 
 /**
  * Иконки из библиотеки @vicons/material
@@ -113,33 +113,30 @@ import {
     EventRepeatTwotone,
     DeleteForeverTwotone,
     MarkEmailReadTwotone,
-} from "@vicons/material";
+} from '@vicons/material';
 
 /** Fluent UI System Icons (Microsoft), через @vicons/fluent */
-import {
-    PeopleCommunity24Filled,
-    TargetArrow24Regular,
-} from "@vicons/fluent";
+import { PeopleCommunity24Filled, TargetArrow24Regular } from '@vicons/fluent';
 
 /** FA6 `faHandPointRight` — другой глиф; здесь путь как в FA5 / сайте Font Awesome. */
 const HAND_POINT_RIGHT_PATH_D =
-    "M512 199.652c0 23.625-20.65 43.826-44.8 43.826h-99.851c16.34 17.048 18.346 49.766-6.299 70.944c14.288 22.829 2.147 53.017-16.45 62.315C353.574 425.878 322.654 448 272 448c-2.746 0-13.276-.203-16-.195c-61.971.168-76.894-31.065-123.731-38.315C120.596 407.683 112 397.599 112 385.786V214.261l.002-.001c.011-18.366 10.607-35.889 28.464-43.845c28.886-12.994 95.413-49.038 107.534-77.323c7.797-18.194 21.384-29.084 40-29.092c34.222-.014 57.752 35.098 44.119 66.908c-3.583 8.359-8.312 16.67-14.153 24.918H467.2c23.45 0 44.8 20.543 44.8 43.826zM96 200v192c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V200c0-13.255 10.745-24 24-24h48c13.255 0 24 10.745 24 24zM68 368c0-11.046-8.954-20-20-20s-20 8.954-20 20s8.954 20 20 20s20-8.954 20-20z";
+    'M512 199.652c0 23.625-20.65 43.826-44.8 43.826h-99.851c16.34 17.048 18.346 49.766-6.299 70.944c14.288 22.829 2.147 53.017-16.45 62.315C353.574 425.878 322.654 448 272 448c-2.746 0-13.276-.203-16-.195c-61.971.168-76.894-31.065-123.731-38.315C120.596 407.683 112 397.599 112 385.786V214.261l.002-.001c.011-18.366 10.607-35.889 28.464-43.845c28.886-12.994 95.413-49.038 107.534-77.323c7.797-18.194 21.384-29.084 40-29.092c34.222-.014 57.752 35.098 44.119 66.908c-3.583 8.359-8.312 16.67-14.153 24.918H467.2c23.45 0 44.8 20.543 44.8 43.826zM96 200v192c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V200c0-13.255 10.745-24 24-24h48c13.255 0 24 10.745 24 24zM68 368c0-11.046-8.954-20-20-20s-20 8.954-20 20s8.954 20 20 20s20-8.954 20-20z';
 
 const HandPointRightIcon = {
-    name: "HandPointRightIcon",
+    name: 'HandPointRightIcon',
     inheritAttrs: false,
     setup(_, { attrs }) {
         return () =>
             h(
-                "svg",
+                'svg',
                 {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    viewBox: "0 0 512 512",
-                    fill: "currentColor",
+                    xmlns: 'http://www.w3.org/2000/svg',
+                    viewBox: '0 0 512 512',
+                    fill: 'currentColor',
                     ...attrs,
                 },
                 [
-                    h("path", {
+                    h('path', {
                         d: HAND_POINT_RIGHT_PATH_D,
                     }),
                 ],
@@ -161,52 +158,52 @@ const HandPointRightIcon = {
  */
 const icons = Object.freeze({
     // Иконки из @heroicons/vue (рендерятся напрямую)
-    "chevron-down": ChevronDownIcon,
+    'chevron-down': ChevronDownIcon,
     search: MagnifyingGlassIcon,
     bars: Bars3Icon,
     close: XMarkIcon,
     check: CheckIconOutline,
-    "x-circle": XCircleIcon,
-    "check-circle": CheckCircleIcon,
+    'x-circle': XCircleIcon,
+    'check-circle': CheckCircleIcon,
     info: InformationCircleIcon,
     eye: EyeIcon,
-    "eye-slash": EyeSlashIcon,
+    'eye-slash': EyeSlashIcon,
     // Tabler (@tabler/icons-vue), рендер напрямую
-    "report-search": IconReportSearch,
-    "arrow-big-down-lines": IconArrowBigDownLines,
+    'report-search': IconReportSearch,
+    'arrow-big-down-lines': IconArrowBigDownLines,
     // Встроенный SVG (классический hand-point-right)
-    "hand-point-right": HandPointRightIcon,
+    'hand-point-right': HandPointRightIcon,
     // Иконки из @vicons (требуют обертки ViconsIcon)
-    "info-circle-twotone": InfoCircleTwotone,
-    "schedule-twotone": ScheduleTwotone,
-    "control-twotone": ControlTwotone,
-    "ios-mail-unread": IosMailUnread,
-    "user-outlined": UserOutlined,
-    "dashboard-outlined": DashboardOutlined,
-    "file-text-outlined": FileTextOutlined,
-    "database-outlined": DatabaseOutlined,
-    "setting-outlined": SettingOutlined,
-    "logout-outlined": LogoutOutlined,
-    "right-outlined": RightOutlined,
-    "left-outlined": LeftOutlined,
-    "exit-outline": ExitOutline,
-    "tag-export": TagExport,
-    "task-complete": TaskComplete,
-    "business-center-round": BusinessCenterRound,
-    "battery-charging-90-round": BatteryCharging90Round,
-    "account-balance-twotone": AccountBalanceTwotone,
-    "account-balance-wallet-twotone": AccountBalanceWalletTwotone,
-    "coffee-maker-twotone": CoffeeMakerTwotone,
-    "dashboard-twotone": DashboardTwotone,
-    "laptop-mac-twotone": LaptopMacTwotone,
-    "smartphone-twotone": SmartphoneTwotone,
-    "watch-later-twotone": WatchLaterTwotone,
-    "qr-code-twotone": QrCodeTwotone,
-    "event-repeat-twotone": EventRepeatTwotone,
-    "delete-forever-twotone": DeleteForeverTwotone,
-    "mark-email-read-twotone": MarkEmailReadTwotone,
-    "people-community-24-filled": PeopleCommunity24Filled,
-    "target-arrow-24-regular": TargetArrow24Regular,
+    'info-circle-twotone': InfoCircleTwotone,
+    'schedule-twotone': ScheduleTwotone,
+    'control-twotone': ControlTwotone,
+    'ios-mail-unread': IosMailUnread,
+    'user-outlined': UserOutlined,
+    'dashboard-outlined': DashboardOutlined,
+    'file-text-outlined': FileTextOutlined,
+    'database-outlined': DatabaseOutlined,
+    'setting-outlined': SettingOutlined,
+    'logout-outlined': LogoutOutlined,
+    'right-outlined': RightOutlined,
+    'left-outlined': LeftOutlined,
+    'exit-outline': ExitOutline,
+    'tag-export': TagExport,
+    'task-complete': TaskComplete,
+    'business-center-round': BusinessCenterRound,
+    'battery-charging-90-round': BatteryCharging90Round,
+    'account-balance-twotone': AccountBalanceTwotone,
+    'account-balance-wallet-twotone': AccountBalanceWalletTwotone,
+    'coffee-maker-twotone': CoffeeMakerTwotone,
+    'dashboard-twotone': DashboardTwotone,
+    'laptop-mac-twotone': LaptopMacTwotone,
+    'smartphone-twotone': SmartphoneTwotone,
+    'watch-later-twotone': WatchLaterTwotone,
+    'qr-code-twotone': QrCodeTwotone,
+    'event-repeat-twotone': EventRepeatTwotone,
+    'delete-forever-twotone': DeleteForeverTwotone,
+    'mark-email-read-twotone': MarkEmailReadTwotone,
+    'people-community-24-filled': PeopleCommunity24Filled,
+    'target-arrow-24-regular': TargetArrow24Regular,
 });
 
 // ============================================
@@ -257,34 +254,34 @@ const iconComponent = computed(() => icons[props.name] || null);
  * конкретную иконку в ViconsIcon или рендерить напрямую.
  */
 const viconsIcons = [
-    "info-circle-twotone", // @vicons/antd
-    "ios-mail-unread", // @vicons/ionicons4
-    "control-twotone", // @vicons/antd
-    "user-outlined", // @vicons/antd
-    "dashboard-outlined", // @vicons/antd
-    "file-text-outlined", // @vicons/antd
-    "database-outlined", // @vicons/antd
-    "setting-outlined", // @vicons/antd
-    "logout-outlined", // @vicons/antd
-    "right-outlined", // @vicons/antd
-    "left-outlined", // @vicons/antd
-    "exit-outline", // @vicons/ionicons5
-    "tag-export", // @vicons/carbon
-    "task-complete", // @vicons/carbon
-    "business-center-round", // @vicons/material
-    "battery-charging-90-round", // @vicons/material
-    "account-balance-twotone", // @vicons/material
-    "account-balance-wallet-twotone", // @vicons/material
-    "coffee-maker-twotone", // @vicons/material
-    "dashboard-twotone", // @vicons/material
-    "laptop-mac-twotone", // @vicons/material
-    "smartphone-twotone", // @vicons/material
-    "watch-later-twotone", // @vicons/material
-    "event-repeat-twotone", // @vicons/material
-    "delete-forever-twotone", // @vicons/material
-    "mark-email-read-twotone", // @vicons/material
-    "people-community-24-filled", // @vicons/fluent
-    "target-arrow-24-regular", // @vicons/fluent
+    'info-circle-twotone', // @vicons/antd
+    'ios-mail-unread', // @vicons/ionicons4
+    'control-twotone', // @vicons/antd
+    'user-outlined', // @vicons/antd
+    'dashboard-outlined', // @vicons/antd
+    'file-text-outlined', // @vicons/antd
+    'database-outlined', // @vicons/antd
+    'setting-outlined', // @vicons/antd
+    'logout-outlined', // @vicons/antd
+    'right-outlined', // @vicons/antd
+    'left-outlined', // @vicons/antd
+    'exit-outline', // @vicons/ionicons5
+    'tag-export', // @vicons/carbon
+    'task-complete', // @vicons/carbon
+    'business-center-round', // @vicons/material
+    'battery-charging-90-round', // @vicons/material
+    'account-balance-twotone', // @vicons/material
+    'account-balance-wallet-twotone', // @vicons/material
+    'coffee-maker-twotone', // @vicons/material
+    'dashboard-twotone', // @vicons/material
+    'laptop-mac-twotone', // @vicons/material
+    'smartphone-twotone', // @vicons/material
+    'watch-later-twotone', // @vicons/material
+    'event-repeat-twotone', // @vicons/material
+    'delete-forever-twotone', // @vicons/material
+    'mark-email-read-twotone', // @vicons/material
+    'people-community-24-filled', // @vicons/fluent
+    'target-arrow-24-regular', // @vicons/fluent
 ];
 
 /**

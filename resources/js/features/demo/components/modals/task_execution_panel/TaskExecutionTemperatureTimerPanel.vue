@@ -12,18 +12,14 @@
             @update:value="onTemperatureDraftInput"
         >
             <template #prefix>
-                <span
-                    class="checklist-modal__pending-temp-prefix"
-                    aria-hidden="true"
-                    >{{ inputPrefix }}</span
-                >
+                <span class="checklist-modal__pending-temp-prefix" aria-hidden="true">{{
+                    inputPrefix
+                }}</span>
             </template>
             <template #suffix>
-                <span
-                    class="checklist-modal__pending-temp-suffix"
-                    aria-hidden="true"
-                    >{{ inputSuffix }}</span
-                >
+                <span class="checklist-modal__pending-temp-suffix" aria-hidden="true">{{
+                    inputSuffix
+                }}</span>
             </template>
         </n-input>
         <div class="checklist-modal__keypad" role="group">
@@ -65,58 +61,44 @@
 </template>
 
 <script setup>
-import { NInput } from "naive-ui";
+import { NInput } from 'naive-ui';
 import {
     applyKeyboardSignToTemperatureDraft,
     sanitizeTemperatureNumericDraft,
-} from "@/utils/helpers";
-import PendingPhotoCaptureBlock from "../show_task/PendingPhotoCaptureBlock.vue";
+} from '@/utils/helpers';
+import PendingPhotoCaptureBlock from '../show_task/PendingPhotoCaptureBlock.vue';
 
-defineOptions({ name: "TaskExecutionTemperatureTimerPanel" });
+defineOptions({ name: 'TaskExecutionTemperatureTimerPanel' });
 
-const emit = defineEmits(["update:temperatureDraft", "keypad-press", "camera-shot"]);
+const emit = defineEmits(['update:temperatureDraft', 'keypad-press', 'camera-shot']);
 
 /**
  * Ввод с клавиатуры и вставка: цифры, ведущий минус, одна точка или запятая (в черновике — точка), до 2 знаков после точки; +/− по краям — знак.
  */
 const onTemperatureDraftInput = (value) => {
     const sanitized = sanitizeTemperatureNumericDraft(value);
-    emit(
-        "update:temperatureDraft",
-        applyKeyboardSignToTemperatureDraft(sanitized, value),
-    );
+    emit('update:temperatureDraft', applyKeyboardSignToTemperatureDraft(sanitized, value));
 };
 
-const keypadDigitKeys = Object.freeze([
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
-]);
-const keypadToolKeys = Object.freeze([".", "DEL", "+/-", "✓"]);
+const keypadDigitKeys = Object.freeze(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
+const keypadToolKeys = Object.freeze(['.', 'DEL', '+/-', '✓']);
 
 defineProps({
     fieldTypeDisplay: {
         type: String,
-        default: "—",
+        default: '—',
     },
     temperatureDraft: {
         type: String,
-        default: "",
+        default: '',
     },
     inputPrefix: {
         type: String,
-        default: "",
+        default: '',
     },
     inputSuffix: {
         type: String,
-        default: "",
+        default: '',
     },
     photoNames: {
         type: Array,
@@ -128,11 +110,10 @@ defineProps({
         default: true,
     },
 });
-
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklist-modal__pending-input {
     display: flex;

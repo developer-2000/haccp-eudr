@@ -9,16 +9,28 @@
                     </div>
                     <div class="step-block__content">
                         <h2 class="step-block__title">
-                            <Icon v-if="step.iconName" :name="step.iconName" :class="['step-block__icon', step.iconClass]" aria-hidden="true"/>
+                            <Icon
+                                v-if="step.iconName"
+                                :name="step.iconName"
+                                :class="['step-block__icon', step.iconClass]"
+                                aria-hidden="true"
+                            />
                             <span class="step-block__title-text">
                                 {{ step.title }}
                             </span>
                         </h2>
-                        <h3 class="step-block__desc" :class="{ 'step-block__desc--accent': step.accent }">
+                        <h3
+                            class="step-block__desc"
+                            :class="{ 'step-block__desc--accent': step.accent }"
+                        >
                             {{ step.desc }}
                         </h3>
                         <ul v-if="step.benefits?.length" class="step-block__benefits">
-                            <li v-for="(benefit, i) in step.benefits" :key="i" class="step-block__benefit">
+                            <li
+                                v-for="(benefit, i) in step.benefits"
+                                :key="i"
+                                class="step-block__benefit"
+                            >
                                 {{ benefit }}
                             </li>
                         </ul>
@@ -30,15 +42,15 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
-import {useI18n} from "vue-i18n";
-import Icon from "@/components/Icon.vue";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import Icon from '@/components/Icon.vue';
 
 defineOptions({
-    name: "StepsSection",
+    name: 'StepsSection',
 });
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 /**
  * Шаги процесса для секции "Как это работает".
@@ -48,7 +60,7 @@ const steps = computed(() => [
     {
         id: 1,
         title: t('how_it_work.steps.step1_title'),
-        iconName: "laptop-mac-twotone",
+        iconName: 'laptop-mac-twotone',
         desc: t('how_it_work.steps.step1_desc'),
         accent: false,
         benefits: [
@@ -62,7 +74,7 @@ const steps = computed(() => [
     {
         id: 2,
         title: t('how_it_work.steps.step2_title'),
-        iconName: "control-twotone",
+        iconName: 'control-twotone',
         desc: t('how_it_work.steps.step2_desc'),
         accent: false,
         benefits: [
@@ -77,7 +89,7 @@ const steps = computed(() => [
     {
         id: 3,
         title: t('how_it_work.steps.step3_title'),
-        iconName: "coffee-maker-twotone",
+        iconName: 'coffee-maker-twotone',
         desc: t('how_it_work.steps.step3_desc'),
         accent: false,
         benefits: [
@@ -91,8 +103,8 @@ const steps = computed(() => [
     {
         id: 4,
         title: t('how_it_work.steps.step4_title'),
-        iconName: "schedule-twotone",
-        iconClass: "metric-icon--inspection",
+        iconName: 'schedule-twotone',
+        iconClass: 'metric-icon--inspection',
         desc: t('how_it_work.steps.step4_desc'),
         accent: false,
         benefits: [
@@ -108,8 +120,8 @@ const steps = computed(() => [
     {
         id: 5,
         title: t('how_it_work.steps.step5_title'),
-        iconName: "qr-code-twotone",
-        iconClass: "metric-icon--eudr",
+        iconName: 'qr-code-twotone',
+        iconClass: 'metric-icon--eudr',
         desc: t('how_it_work.steps.step5_desc'),
         accent: false,
         benefits: [
@@ -121,7 +133,7 @@ const steps = computed(() => [
     {
         id: 6,
         title: t('how_it_work.steps.step6_title'),
-        iconName: "dashboard-twotone",
+        iconName: 'dashboard-twotone',
         desc: t('how_it_work.steps.step6_desc'),
         accent: false,
         benefits: [
@@ -137,7 +149,7 @@ const steps = computed(() => [
     {
         id: 7,
         title: t('how_it_work.steps.step7_title'),
-        iconName: "tag-export",
+        iconName: 'tag-export',
         desc: t('how_it_work.steps.step7_desc'),
         accent: false,
         benefits: [
@@ -150,7 +162,7 @@ const steps = computed(() => [
 </script>
 
 <style lang="scss" scoped>
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .steps-section {
     min-height: 1000px;
@@ -182,7 +194,7 @@ const steps = computed(() => [
 }
 
 .steps-section__list::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 52px;
     top: 88px;
@@ -316,7 +328,7 @@ const steps = computed(() => [
     padding-left: 18px;
 
     &::before {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         top: 0.62em;

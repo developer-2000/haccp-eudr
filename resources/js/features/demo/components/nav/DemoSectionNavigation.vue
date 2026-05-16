@@ -14,27 +14,24 @@
                 class="demo-section-nav__icon"
                 aria-hidden="true"
             />
-            <span
-                v-if="showNavTextLabel(item)"
-                class="demo-section-nav__label"
-                >{{ item.label }}</span
-            >
+            <span v-if="showNavTextLabel(item)" class="demo-section-nav__label">{{
+                item.label
+            }}</span>
         </button>
     </nav>
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from "vue";
-import Icon from "@/components/Icon.vue";
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import Icon from '@/components/Icon.vue';
 
-defineOptions({ name: "DemoSectionNavigation" });
+defineOptions({ name: 'DemoSectionNavigation' });
 
 /** Совпадает с `$breakpoint-lg`: пока видна `demo-bottom-nav` вместо сайдбара — только иконки */
-const BOTTOM_ICONS_ONLY_MQ = "(max-width: 1024px)";
+const BOTTOM_ICONS_ONLY_MQ = '(max-width: 1024px)';
 
 const isBottomIconsOnly = ref(
-    typeof window !== "undefined" &&
-        window.matchMedia(BOTTOM_ICONS_ONLY_MQ).matches,
+    typeof window !== 'undefined' && window.matchMedia(BOTTOM_ICONS_ONLY_MQ).matches,
 );
 
 let bottomNavMq = null;
@@ -47,12 +44,12 @@ onMounted(() => {
         isBottomIconsOnly.value = bottomNavMq.matches;
     };
     syncBottomNavMq();
-    bottomNavMq.addEventListener("change", syncBottomNavMq);
+    bottomNavMq.addEventListener('change', syncBottomNavMq);
 });
 
 onUnmounted(() => {
     if (bottomNavMq && syncBottomNavMq) {
-        bottomNavMq.removeEventListener("change", syncBottomNavMq);
+        bottomNavMq.removeEventListener('change', syncBottomNavMq);
     }
 });
 
@@ -60,7 +57,7 @@ const props = defineProps({
     variant: {
         type: String,
         required: true,
-        validator: (value) => value === "sidebar" || value === "bottom",
+        validator: (value) => value === 'sidebar' || value === 'bottom',
     },
     links: {
         type: Array,
@@ -72,38 +69,32 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(["select"]);
+const emit = defineEmits(['select']);
 
 /**
  * Сайдбар: всегда текст. Полоса снизу/сверху: при «компактном» брейкпинте без span,
  * если есть `svg` (иначе остаётся подпись — нет иконки в Icon).
  */
 const showNavTextLabel = (item) => {
-    if (props.variant === "sidebar") return true;
-    if (props.variant !== "bottom") return false;
+    if (props.variant === 'sidebar') return true;
+    if (props.variant !== 'bottom') return false;
     if (!isBottomIconsOnly.value) return true;
     return !item.svg;
 };
 
 const bottomButtonAriaLabel = (item) => {
-    if (
-        props.variant === "bottom" &&
-        isBottomIconsOnly.value &&
-        item.svg
-    ) {
+    if (props.variant === 'bottom' && isBottomIconsOnly.value && item.svg) {
         return item.label;
     }
     return undefined;
 };
 
 const rootNavClass = computed(() =>
-    props.variant === "sidebar" ? "demo-sidebar__nav" : "demo-bottom-nav",
+    props.variant === 'sidebar' ? 'demo-sidebar__nav' : 'demo-bottom-nav',
 );
 
 const ariaLabel = computed(() =>
-    props.variant === "sidebar"
-        ? "Demo sections"
-        : "Demo mobile navigation",
+    props.variant === 'sidebar' ? 'Demo sections' : 'Demo mobile navigation',
 );
 
 /**
@@ -112,15 +103,15 @@ const ariaLabel = computed(() =>
  */
 const buttonClassList = (itemId) => {
     const active = props.activeId === itemId;
-    if (props.variant === "sidebar") {
+    if (props.variant === 'sidebar') {
         return {
-            "demo-sidebar__link": true,
-            "demo-sidebar__link--active": active,
+            'demo-sidebar__link': true,
+            'demo-sidebar__link--active': active,
         };
     }
     return {
-        "demo-bottom-nav__link": true,
-        "demo-bottom-nav__link--active": active,
+        'demo-bottom-nav__link': true,
+        'demo-bottom-nav__link--active': active,
     };
 };
 
@@ -129,12 +120,12 @@ const buttonClassList = (itemId) => {
  * Используется при клике по пунктам боковой и нижней навигации.
  */
 const handleSelect = (sectionId) => {
-    emit("select", sectionId);
+    emit('select', sectionId);
 };
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .demo-sidebar__nav {
     background-color: $bg-style-white;

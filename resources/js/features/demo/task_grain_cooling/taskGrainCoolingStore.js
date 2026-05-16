@@ -1,10 +1,10 @@
-import { defineStore } from "pinia";
-import { task_grain_cooling } from "./config";
+import { defineStore } from 'pinia';
+import { task_grain_cooling } from './config';
 import {
     finalizeGrainCoolingNotificationStorage,
     mergeGrainCoolingSessionStorage,
     readGrainCoolingSessionStorage,
-} from "./grainCoolingSessionStorage";
+} from './grainCoolingSessionStorage';
 
 const STORAGE_KEY = task_grain_cooling.sessionStorageKey;
 
@@ -30,7 +30,7 @@ const STORAGE_KEY = task_grain_cooling.sessionStorageKey;
  */
 function loadPersistedNotification() {
     try {
-        if (typeof sessionStorage === "undefined") {
+        if (typeof sessionStorage === 'undefined') {
             return null;
         }
 
@@ -41,39 +41,38 @@ function loadPersistedNotification() {
         }
 
         const data = readGrainCoolingSessionStorage();
-        if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
+        if (!data || typeof data !== 'object' || Object.keys(data).length === 0) {
             return null;
         }
         const launched = Boolean(data.notificationLaunched);
         const countdownDone = Boolean(data.notificationCountdownCompleted);
-        const scenarioTaskDone = data.status === "completed";
+        const scenarioTaskDone = data.status === 'completed';
         /**
          * Полный цикл оповещения: тост + отсчёт до конца **или** пользователь внёс замер раньше таймера
          * (`status: "completed"` в storage через `finalizeGrainCoolingNotificationStorage`).
          */
-        const flowComplete =
-            (launched && countdownDone) || scenarioTaskDone;
+        const flowComplete = (launched && countdownDone) || scenarioTaskDone;
         const rawWindow = data.notificationProblemWindowMs;
         const notificationProblemWindowMs =
-            typeof rawWindow === "number" && Number.isFinite(rawWindow) && rawWindow >= 0
+            typeof rawWindow === 'number' && Number.isFinite(rawWindow) && rawWindow >= 0
                 ? rawWindow
                 : null;
         const out = {
             notificationLaunched: launched,
             notificationLaunchedAt:
-                typeof data.notificationLaunchedAt === "string"
+                typeof data.notificationLaunchedAt === 'string'
                     ? data.notificationLaunchedAt
                     : null,
             notificationCountdownCompleted: countdownDone,
             notificationFlowLogicallyComplete: flowComplete,
             notificationProblemWindowMs,
             notificationLogicalCycleCompletedAt:
-                typeof data.notificationLogicalCycleCompletedAt === "string"
+                typeof data.notificationLogicalCycleCompletedAt === 'string'
                     ? data.notificationLogicalCycleCompletedAt
                     : null,
         };
         return out;
-    } catch (e) {
+    } catch {
         return null;
     }
 }
@@ -86,7 +85,7 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
         const persisted = loadPersistedNotification();
         const logicalComplete = Boolean(persisted?.notificationFlowLogicallyComplete);
         const launchedAtForUi =
-            logicalComplete && typeof persisted?.notificationLaunchedAt === "string"
+            logicalComplete && typeof persisted?.notificationLaunchedAt === 'string'
                 ? persisted.notificationLaunchedAt
                 : null;
         task_grain_cooling.notificationLaunchedAt = launchedAtForUi;
@@ -126,14 +125,14 @@ export const useTaskGrainCoolingStore = defineStore(task_grain_cooling.piniaStor
              * `null` — до первого показа; после reload подтягивается из sessionStorage.
              */
             notificationProblemWindowMs:
-                typeof persisted?.notificationProblemWindowMs === "number"
+                typeof persisted?.notificationProblemWindowMs === 'number'
                     ? persisted.notificationProblemWindowMs
                     : null,
             /**
              * ISO-время срабатывания таймера после оповещения (единственное «логическое завершение» цикла); пишется только там.
              */
             notificationLogicalCycleCompletedAt:
-                typeof persisted?.notificationLogicalCycleCompletedAt === "string"
+                typeof persisted?.notificationLogicalCycleCompletedAt === 'string'
                     ? persisted.notificationLogicalCycleCompletedAt
                     : null,
         };

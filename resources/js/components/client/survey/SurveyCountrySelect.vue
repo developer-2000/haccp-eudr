@@ -27,9 +27,7 @@
                 @click="onTriggerClick"
                 @keydown="onTriggerKeydown"
             >
-                <span class="survey-country-select__trigger-text">{{
-                    selectedLabel
-                }}</span>
+                <span class="survey-country-select__trigger-text">{{ selectedLabel }}</span>
             </button>
             <button
                 v-if="modelValue"
@@ -39,20 +37,12 @@
                 :tabindex="open ? -1 : 0"
                 @click="onClearClick"
             >
-                <Icon
-                    name="close"
-                    class="survey-country-select__clear-icon"
-                    aria-hidden="true"
-                />
+                <Icon name="close" class="survey-country-select__clear-icon" aria-hidden="true" />
             </button>
             <span class="survey-country-select__chevron" aria-hidden="true" />
         </div>
 
-        <div
-            v-show="open"
-            class="survey-country-select__popover"
-            @focusout="onPopoverFocusOut"
-        >
+        <div v-show="open" class="survey-country-select__popover" @focusout="onPopoverFocusOut">
             <input
                 ref="filterRef"
                 v-model="filterQuery"
@@ -72,8 +62,8 @@
                 @keydown="onFilterKeydown"
             />
             <ul
-                ref="listRef"
                 :id="listboxId"
+                ref="listRef"
                 role="listbox"
                 class="survey-country-select__list"
                 tabindex="-1"
@@ -86,8 +76,7 @@
                     :aria-selected="modelValue === opt.value ? 'true' : 'false'"
                     class="survey-country-select__option"
                     :class="{
-                        'survey-country-select__option--active':
-                            idx === activeIndex,
+                        'survey-country-select__option--active': idx === activeIndex,
                     }"
                     @mousedown.prevent="selectOption(opt.value)"
                 >
@@ -99,18 +88,18 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
-import { useI18n } from "vue-i18n";
-import Icon from "../../Icon.vue";
-import { filterCountryOptionsByLabel } from "../../../features/survey/surveyCountryComboboxUtils.js";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import Icon from '../../Icon.vue';
+import { filterCountryOptionsByLabel } from '../../../features/survey/surveyCountryComboboxUtils.js';
 
-defineOptions({ name: "SurveyCountrySelect" });
+defineOptions({ name: 'SurveyCountrySelect' });
 
 const props = defineProps({
     /** Значение ответа: ISO 3166-1 alpha-2. */
     modelValue: {
         type: String,
-        default: "",
+        default: '',
     },
     /** Список { value, label } из того же источника, что и конфиг вопроса. */
     options: {
@@ -140,11 +129,11 @@ const props = defineProps({
 });
 
 const emit = defineEmits({
-    "update:modelValue": (v) => typeof v === "string",
+    'update:modelValue': (v) => typeof v === 'string',
 });
 const { t } = useI18n();
 
-const PLACEHOLDER = computed(() => t("survey.ui.select_placeholder"));
+const PLACEHOLDER = computed(() => t('survey.ui.select_placeholder'));
 
 const rootRef = ref(null);
 const triggerRef = ref(null);
@@ -152,7 +141,7 @@ const filterRef = ref(null);
 const listRef = ref(null);
 
 const open = ref(false);
-const filterQuery = ref("");
+const filterQuery = ref('');
 const activeIndex = ref(-1);
 let activeOptionScrollRafId = null;
 
@@ -205,7 +194,7 @@ watch(open, (isOpen) => {
     if (!isOpen) {
         return;
     }
-    filterQuery.value = "";
+    filterQuery.value = '';
     activeIndex.value = filteredOptions.value.length > 0 ? 0 : -1;
     nextTick(() => {
         filterRef.value?.focus();
@@ -265,7 +254,7 @@ watch(activeIndex, () => {
  */
 function closePanel() {
     open.value = false;
-    filterQuery.value = "";
+    filterQuery.value = '';
     activeIndex.value = -1;
 }
 
@@ -274,7 +263,7 @@ function closePanel() {
  * @param {string} value
  */
 function selectOption(value) {
-    emit("update:modelValue", value);
+    emit('update:modelValue', value);
     closePanel();
     nextTick(() => triggerRef.value?.focus());
 }
@@ -288,22 +277,14 @@ function onDocumentPointerDownCapture(e) {
         return;
     }
     const root = rootRef.value;
-    if (
-        root &&
-        e.target instanceof globalThis.Node &&
-        root.contains(e.target)
-    ) {
+    if (root && e.target instanceof globalThis.Node && root.contains(e.target)) {
         return;
     }
     closePanel();
 }
 
 onMounted(() => {
-    document.addEventListener(
-        "pointerdown",
-        onDocumentPointerDownCapture,
-        true,
-    );
+    document.addEventListener('pointerdown', onDocumentPointerDownCapture, true);
 });
 
 onUnmounted(() => {
@@ -311,11 +292,7 @@ onUnmounted(() => {
         cancelAnimationFrame(activeOptionScrollRafId);
         activeOptionScrollRafId = null;
     }
-    document.removeEventListener(
-        "pointerdown",
-        onDocumentPointerDownCapture,
-        true,
-    );
+    document.removeEventListener('pointerdown', onDocumentPointerDownCapture, true);
 });
 
 function onTriggerClick() {
@@ -331,8 +308,8 @@ function onTriggerClick() {
  */
 function onClearClick(e) {
     e.stopPropagation();
-    emit("update:modelValue", "");
-    filterQuery.value = "";
+    emit('update:modelValue', '');
+    filterQuery.value = '';
     const list = filteredOptions.value;
     activeIndex.value = list.length > 0 ? 0 : -1;
     open.value = true;
@@ -344,12 +321,7 @@ function onClearClick(e) {
  * @param {KeyboardEvent} e
  */
 function onTriggerKeydown(e) {
-    if (
-        e.key === "Enter" ||
-        e.key === " " ||
-        e.key === "ArrowDown" ||
-        e.key === "ArrowUp"
-    ) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
         if (!open.value) {
             open.value = true;
@@ -363,13 +335,13 @@ function onTriggerKeydown(e) {
  */
 function onFilterKeydown(e) {
     const list = filteredOptions.value;
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
         e.preventDefault();
         closePanel();
         nextTick(() => triggerRef.value?.focus());
         return;
     }
-    if (e.key === "ArrowDown") {
+    if (e.key === 'ArrowDown') {
         e.preventDefault();
         if (list.length === 0) {
             return;
@@ -377,14 +349,11 @@ function onFilterKeydown(e) {
         if (activeIndex.value < 0) {
             activeIndex.value = 0;
         } else {
-            activeIndex.value = Math.min(
-                list.length - 1,
-                activeIndex.value + 1,
-            );
+            activeIndex.value = Math.min(list.length - 1, activeIndex.value + 1);
         }
         return;
     }
-    if (e.key === "ArrowUp") {
+    if (e.key === 'ArrowUp') {
         e.preventDefault();
         if (list.length === 0) {
             return;
@@ -396,15 +365,12 @@ function onFilterKeydown(e) {
         }
         return;
     }
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
         e.preventDefault();
         if (list.length === 0) {
             return;
         }
-        const i =
-            activeIndex.value >= 0 && activeIndex.value < list.length
-                ? activeIndex.value
-                : 0;
+        const i = activeIndex.value >= 0 && activeIndex.value < list.length ? activeIndex.value : 0;
         selectOption(list[i].value);
     }
 }
@@ -427,7 +393,7 @@ function onPopoverFocusOut(e) {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-country-select {
     position: relative;
@@ -474,8 +440,7 @@ function onPopoverFocusOut(e) {
             }
         }
 
-        &.survey-country-select__trigger-shell--has-value
-            .survey-country-select__trigger {
+        &.survey-country-select__trigger-shell--has-value .survey-country-select__trigger {
             padding-right: calc(2.75rem + 28px);
         }
 

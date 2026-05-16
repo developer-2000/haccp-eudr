@@ -1,30 +1,19 @@
 <template>
     <div class="personnel-section">
         <div class="personnel-section__toolbar">
-            <n-button
-                type="primary"
-                size="large"
-                @click="openCreateModal"
-            >
+            <n-button type="primary" size="large" @click="openCreateModal">
                 {{ personnelSectionText.add }}
             </n-button>
         </div>
 
-        <n-tabs
-            v-model:value="activeSiteId"
-            type="line"
-            class="personnel-section__tabs"
-            animated
-        >
+        <n-tabs v-model:value="activeSiteId" type="line" class="personnel-section__tabs" animated>
             <n-tab-pane v-for="site in sites" :key="site.id" :name="site.id">
                 <template #tab>
                     <span class="personnel-section__tab-label">
                         {{ site.name }}
-                        <span
-                            class="personnel-section__tab-emoji"
-                            aria-hidden="true"
-                            >{{ siteEmoji(site.id) }}</span
-                        >
+                        <span class="personnel-section__tab-emoji" aria-hidden="true">{{
+                            siteEmoji(site.id)
+                        }}</span>
                     </span>
                 </template>
                 <p v-if="site.address" class="personnel-section__site-address">
@@ -45,10 +34,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="member in staffBySite(site.id)"
-                                    :key="member.id"
-                                >
+                                <tr v-for="member in staffBySite(site.id)" :key="member.id">
                                     <td>{{ member.fullName }}</td>
                                     <td>{{ member.role }}</td>
                                     <td>{{ member.phone || personnelSectionText.empty }}</td>
@@ -88,10 +74,7 @@
                                                 :negative-button-props="{
                                                     type: 'warning',
                                                 }"
-                                                @positive-click="
-                                                    () =>
-                                                        onConfirmRemove(member)
-                                                "
+                                                @positive-click="() => onConfirmRemove(member)"
                                             >
                                                 <template #trigger>
                                                     <n-button
@@ -142,9 +125,7 @@
                             }}</span>
                             {{ member.email || personnelSectionText.empty }}
                         </p>
-                        <p
-                            class="personnel-card__line personnel-card__line--status"
-                        >
+                        <p class="personnel-card__line personnel-card__line--status">
                             <span class="personnel-card__label">{{
                                 personnelSectionText.labelStatus
                             }}</span>
@@ -198,22 +179,19 @@
             </n-tab-pane>
         </n-tabs>
 
-        <CreateEditStaffModal
-            ref="staffModalRef"
-            :default-site-id="activeSiteId"
-        />
+        <CreateEditStaffModal ref="staffModalRef" :default-site-id="activeSiteId" />
     </div>
 </template>
 
 <script setup>
-import { computed, onActivated, ref, watch } from "vue";
-import { NButton, NPopconfirm, NTabs, NTabPane, useMessage } from "naive-ui";
-import { useI18n } from "vue-i18n";
-import CreateEditStaffModal from "@/features/demo/components/modals/create_edit_staff/CreateEditStaffModal.vue";
-import { siteEmojiForDemo } from "@/features/demo/data/demoPersonnel";
-import { useDemoState } from "@/features/demo/composables/useDemoState";
+import { computed, onActivated, ref, watch } from 'vue';
+import { NButton, NPopconfirm, NTabs, NTabPane, useMessage } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+import CreateEditStaffModal from '@/features/demo/components/modals/create_edit_staff/CreateEditStaffModal.vue';
+import { siteEmojiForDemo } from '@/features/demo/data/demoPersonnel';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
 
-defineOptions({ name: "PersonnelSection" });
+defineOptions({ name: 'PersonnelSection' });
 
 const { t } = useI18n();
 
@@ -245,7 +223,7 @@ const message = useMessage();
 const { demoState, removeStaff } = useDemoState();
 
 const sites = computed(() => demoState.value.sites ?? []);
-const activeSiteId = ref("");
+const activeSiteId = ref('');
 
 /** Эмодзи площадки во вкладках — общая функция с модалкой сотрудника (`demoPersonnel.js`). */
 const siteEmoji = siteEmojiForDemo;
@@ -255,7 +233,7 @@ const staffModalRef = ref(null);
 function resetActiveSiteToFirst() {
     const list = sites.value;
     if (!list.length) {
-        activeSiteId.value = "";
+        activeSiteId.value = '';
         return;
     }
     activeSiteId.value = list[0].id;
@@ -265,7 +243,7 @@ watch(
     sites,
     (list) => {
         if (!list.length) {
-            activeSiteId.value = "";
+            activeSiteId.value = '';
             return;
         }
         if (!list.some((s) => s.id === activeSiteId.value)) {
@@ -284,8 +262,7 @@ onActivated(() => {
  * Возвращает сотрудников выбранной площадки в стабильном порядке.
  * Используется в табах и в мобильной вёрстке.
  */
-const staffBySite = (siteId) =>
-    demoState.value.staff.filter((m) => m.siteId === siteId);
+const staffBySite = (siteId) => demoState.value.staff.filter((m) => m.siteId === siteId);
 
 /**
  * Считает задачи чек-листов, где указан этот сотрудник как ответственный.
@@ -293,9 +270,7 @@ const staffBySite = (siteId) =>
  */
 const countAssignedTasks = (staffId) => {
     let n = 0;
-    for (const tasks of Object.values(
-        demoState.value.checklistsByNiche ?? {},
-    )) {
+    for (const tasks of Object.values(demoState.value.checklistsByNiche ?? {})) {
         for (const t of tasks) {
             if (t.assignedStaffId === staffId) {
                 n += 1;
@@ -341,7 +316,7 @@ const openEditModal = (member) => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .personnel-section__toolbar {
     display: flex;
@@ -375,7 +350,8 @@ const openEditModal = (member) => {
     border-collapse: collapse;
     font-size: $font-size-sm;
 
-    th, td {
+    th,
+    td {
         padding: $spacing-sm $spacing-md;
         text-align: left;
         border-bottom: 1px solid $text-light-grey;

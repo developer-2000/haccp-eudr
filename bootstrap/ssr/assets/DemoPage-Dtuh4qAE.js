@@ -6,7 +6,7 @@ import { _ as _export_sfc, a as _sfc_main$o, E as EQUIPMENT_GROUPS, R as ROOM_GR
 import { e as NAlert, G as NIcon, J as NInput, u as NDrawer, w as NDrawerContent, _ as NSelect, P as NModal, Q as NPopconfirm, D as NFormItem, L as NInputNumber, M as useMessage, B as NForm, Y as NRadioGroup, V as NRadio, n as NDatePicker, a8 as NTimePicker, l as NCheckboxGroup, j as NCheckbox, a4 as NTabs, a2 as NTabPane } from "./Tabs-vrLIIUBX.js";
 import { AddAPhotoTwotone } from "@vicons/material";
 import { B as Button } from "./_common-Dc_o1R5u.js";
-import "./GlobalTaskReminderToast-BebLEOGt.js";
+import "./GlobalTaskReminderToast-CAl4DcGv.js";
 import { v4 } from "uuid";
 import { N as NSwitch } from "./Switch-tnSHOxTf.js";
 import QRCode from "qrcode";
@@ -106,9 +106,9 @@ const _sfc_main$n = /* @__PURE__ */ Object.assign({ name: "DemoSectionNavigation
       _push(`<nav${ssrRenderAttrs(mergeProps({
         class: rootNavClass.value,
         "aria-label": ariaLabel.value
-      }, _attrs))} data-v-6cf63420><!--[-->`);
+      }, _attrs))} data-v-73938881><!--[-->`);
       ssrRenderList(__props.links, (item) => {
-        _push(`<button type="button" class="${ssrRenderClass(buttonClassList(item.id))}"${ssrRenderAttr("aria-label", bottomButtonAriaLabel(item))} data-v-6cf63420>`);
+        _push(`<button type="button" class="${ssrRenderClass(buttonClassList(item.id))}"${ssrRenderAttr("aria-label", bottomButtonAriaLabel(item))} data-v-73938881>`);
         if (item.svg && props.variant === "bottom") {
           _push(ssrRenderComponent(_sfc_main$o, {
             name: item.svg,
@@ -119,7 +119,7 @@ const _sfc_main$n = /* @__PURE__ */ Object.assign({ name: "DemoSectionNavigation
           _push(`<!---->`);
         }
         if (showNavTextLabel(item)) {
-          _push(`<span class="demo-section-nav__label" data-v-6cf63420>${ssrInterpolate(item.label)}</span>`);
+          _push(`<span class="demo-section-nav__label" data-v-73938881>${ssrInterpolate(item.label)}</span>`);
         } else {
           _push(`<!---->`);
         }
@@ -135,7 +135,7 @@ _sfc_main$n.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/nav/DemoSectionNavigation.vue");
   return _sfc_setup$n ? _sfc_setup$n(props, ctx) : void 0;
 };
-const DemoSectionNavigation = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-6cf63420"]]);
+const DemoSectionNavigation = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-73938881"]]);
 const _sfc_main$m = {
   __name: "CompleteTaskModalHeader",
   __ssrInlineRender: true,
@@ -161,16 +161,16 @@ const _sfc_main$m = {
     const { t } = useI18n();
     const props = __props;
     const headerText = computed(() => {
-      const t2 = String(props.taskTitle ?? "").trim();
-      if (props.hasTask && t2) {
-        return t2;
+      const trimmedTitle = String(props.taskTitle ?? "").trim();
+      if (props.hasTask && trimmedTitle) {
+        return trimmedTitle;
       }
-      return t2("demo.show_task_modal.task_details");
+      return t("demo.show_task_modal.task_details");
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__card-header" }, _attrs))} data-v-54d7f7d8><span class="checklist-modal__card-header-title" role="heading" data-v-54d7f7d8>${ssrInterpolate(headerText.value)}</span>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__card-header" }, _attrs))} data-v-96162d4b><span class="checklist-modal__card-header-title" role="heading" data-v-96162d4b>${ssrInterpolate(headerText.value)}</span>`);
       if (__props.hasTask) {
-        _push(`<span class="checklist-modal__card-header-type"${ssrRenderAttr("aria-label", __props.taskTypeAria)} role="img" data-v-54d7f7d8>${ssrInterpolate(__props.taskTypeDisplay)}</span>`);
+        _push(`<span class="checklist-modal__card-header-type"${ssrRenderAttr("aria-label", __props.taskTypeAria)} role="img" data-v-96162d4b>${ssrInterpolate(__props.taskTypeDisplay)}</span>`);
       } else {
         _push(`<!---->`);
       }
@@ -184,7 +184,7 @@ _sfc_main$m.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/show_task/CompleteTaskModalHeader.vue");
   return _sfc_setup$m ? _sfc_setup$m(props, ctx) : void 0;
 };
-const CompleteTaskModalHeader = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-54d7f7d8"]]);
+const CompleteTaskModalHeader = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-96162d4b"]]);
 const _sfc_main$l = {
   __name: "TaskExecutionMetaBlock",
   __ssrInlineRender: true,
@@ -221,7 +221,7 @@ const _sfc_main$l = {
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="checklist-modal__pending-meta" data-v-89e811a7><b class="checklist-modal__pending-meta-line" data-v-89e811a7>${ssrInterpolate(__props.targetsDisplay)}</b></div><!--]-->`);
+      _push(`<div class="checklist-modal__pending-meta" data-v-2aa279cc><b class="checklist-modal__pending-meta-line" data-v-2aa279cc>${ssrInterpolate(__props.targetsDisplay)}</b></div><!--]-->`);
     };
   }
 };
@@ -231,7 +231,7 @@ _sfc_main$l.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionMetaBlock.vue");
   return _sfc_setup$l ? _sfc_setup$l(props, ctx) : void 0;
 };
-const TaskExecutionMetaBlock = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-89e811a7"]]);
+const TaskExecutionMetaBlock = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-2aa279cc"]]);
 const _sfc_main$k = /* @__PURE__ */ Object.assign({ name: "PendingPhotoCaptureBlock" }, {
   __name: "PendingPhotoCaptureBlock",
   __ssrInlineRender: true,
@@ -257,7 +257,7 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({ name: "PendingPhotoCaptureBl
   setup(__props) {
     const { t } = useI18n();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "box-bottom-panel-content pending-photo-capture-block" }, _attrs))} data-v-fcd7dc0b><div class="pending-photo-capture-block__section checklist-modal__pending-photo-row checklist-modal__pending-photo-row--labeled" style="${ssrRenderStyle(__props.showCamera ? null : { display: "none" })}" data-v-fcd7dc0b><div class="label_for_element" data-v-fcd7dc0b>${ssrInterpolate(unref(t)("demo.photo_capture.take_photo"))}</div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "box-bottom-panel-content pending-photo-capture-block" }, _attrs))} data-v-89a321c8><div class="pending-photo-capture-block__section checklist-modal__pending-photo-row checklist-modal__pending-photo-row--labeled" style="${ssrRenderStyle(__props.showCamera ? null : { display: "none" })}" data-v-89a321c8><div class="label_for_element" data-v-89a321c8>${ssrInterpolate(unref(t)("demo.photo_capture.take_photo"))}</div>`);
       _push(ssrRenderComponent(unref(Button), {
         type: "primary",
         secondary: "",
@@ -297,11 +297,11 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({ name: "PendingPhotoCaptureBl
         }),
         _: 1
       }, _parent));
-      _push(`<ul class="checklist-modal__pending-photo-list" style="${ssrRenderStyle(__props.photoNames.length ? null : { display: "none" })}" data-v-fcd7dc0b><!--[-->`);
+      _push(`<ul class="checklist-modal__pending-photo-list" style="${ssrRenderStyle(__props.photoNames.length ? null : { display: "none" })}" data-v-89a321c8><!--[-->`);
       ssrRenderList(__props.photoNames, (name, idx) => {
-        _push(`<li data-v-fcd7dc0b>${ssrInterpolate(name)}</li>`);
+        _push(`<li data-v-89a321c8>${ssrInterpolate(name)}</li>`);
       });
-      _push(`<!--]--></ul></div><div class="pending-photo-capture-block__section checklist-modal__pending-photo-row checklist-modal__pending-photo-row--labeled checklist-modal__document" style="${ssrRenderStyle(__props.showDocument ? null : { display: "none" })}" data-v-fcd7dc0b><div class="label_for_element" data-v-fcd7dc0b>${ssrInterpolate(unref(t)("demo.photo_capture.report_document"))}</div>`);
+      _push(`<!--]--></ul></div><div class="pending-photo-capture-block__section checklist-modal__pending-photo-row checklist-modal__pending-photo-row--labeled checklist-modal__document" style="${ssrRenderStyle(__props.showDocument ? null : { display: "none" })}" data-v-89a321c8><div class="label_for_element" data-v-89a321c8>${ssrInterpolate(unref(t)("demo.photo_capture.report_document"))}</div>`);
       _push(ssrRenderComponent(unref(Button), {
         type: "primary",
         secondary: "",
@@ -319,7 +319,7 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({ name: "PendingPhotoCaptureBl
         }),
         _: 1
       }, _parent));
-      _push(`<p class="checklist-modal__pending-photo-name" data-v-fcd7dc0b>${ssrInterpolate(__props.reportFileName || "")}</p></div></div>`);
+      _push(`<p class="checklist-modal__pending-photo-name" data-v-89a321c8>${ssrInterpolate(__props.reportFileName || "")}</p></div></div>`);
     };
   }
 });
@@ -329,7 +329,7 @@ _sfc_main$k.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/show_task/PendingPhotoCaptureBlock.vue");
   return _sfc_setup$k ? _sfc_setup$k(props, ctx) : void 0;
 };
-const PendingPhotoCaptureBlock = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-fcd7dc0b"]]);
+const PendingPhotoCaptureBlock = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-89a321c8"]]);
 const _sfc_main$j = {
   __name: "TaskExecutionSingleChoicePanel",
   __ssrInlineRender: true,
@@ -359,21 +359,15 @@ const _sfc_main$j = {
       default: () => []
     }
   },
-  emits: [
-    "update:answer",
-    "update:comment",
-    "submit",
-    "attach-report",
-    "camera"
-  ],
+  emits: ["update:answer", "update:comment", "submit", "attach-report", "camera"],
   setup(__props) {
     const { t } = useI18n();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__pending-input" }, _attrs))} data-v-a5f720c2><p class="checklist-modal__one-answer" data-v-a5f720c2>${ssrInterpolate(__props.question)}</p><div class="checklist-modal__single-choice-options" role="radiogroup"${ssrRenderAttr("aria-label", unref(t)("demo.single_choice_panel.options_aria"))} data-v-a5f720c2><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__pending-input" }, _attrs))} data-v-795220d8><p class="checklist-modal__one-answer" data-v-795220d8>${ssrInterpolate(__props.question)}</p><div class="checklist-modal__single-choice-options" role="radiogroup"${ssrRenderAttr("aria-label", unref(t)("demo.single_choice_panel.options_aria"))} data-v-795220d8><!--[-->`);
       ssrRenderList(__props.options, (option) => {
         _push(`<button type="button" class="${ssrRenderClass([{
           "checklist-modal__single-choice-option--active": __props.answer === option
-        }, "checklist-modal__single-choice-option"])}" data-v-a5f720c2><span class="checklist-modal__single-choice-radio" data-v-a5f720c2></span><span data-v-a5f720c2>${ssrInterpolate(option)}</span></button>`);
+        }, "checklist-modal__single-choice-option"])}" data-v-795220d8><span class="checklist-modal__single-choice-radio" data-v-795220d8></span><span data-v-795220d8>${ssrInterpolate(option)}</span></button>`);
       });
       _push(`<!--]--></div>`);
       _push(ssrRenderComponent(unref(NInput), {
@@ -418,7 +412,7 @@ _sfc_main$j.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionSingleChoicePanel.vue");
   return _sfc_setup$j ? _sfc_setup$j(props, ctx) : void 0;
 };
-const TaskExecutionSingleChoicePanel = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-a5f720c2"]]);
+const TaskExecutionSingleChoicePanel = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-795220d8"]]);
 const TEMPERATURE_DRAFT_MAX_FRACTION_DIGITS = 2;
 const normalizeTemperatureDraftLeadingZeroBeforeDot = (out) => {
   if (out === "." || out === "-.") {
@@ -519,26 +513,12 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign({ name: "TaskExecutionTemperat
     const emit = __emit;
     const onTemperatureDraftInput = (value) => {
       const sanitized = sanitizeTemperatureNumericDraft(value);
-      emit(
-        "update:temperatureDraft",
-        applyKeyboardSignToTemperatureDraft(sanitized, value)
-      );
+      emit("update:temperatureDraft", applyKeyboardSignToTemperatureDraft(sanitized, value));
     };
-    const keypadDigitKeys = Object.freeze([
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "0"
-    ]);
+    const keypadDigitKeys = Object.freeze(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]);
     const keypadToolKeys = Object.freeze([".", "DEL", "+/-", "✓"]);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__pending-input" }, _attrs))} data-v-7d8ee883><p class="checklist-modal__pending-input-label" data-v-7d8ee883>${ssrInterpolate(__props.fieldTypeDisplay)}</p>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__pending-input" }, _attrs))} data-v-920f48d0><p class="checklist-modal__pending-input-label" data-v-920f48d0>${ssrInterpolate(__props.fieldTypeDisplay)}</p>`);
       _push(ssrRenderComponent(unref(NInput), {
         value: __props.temperatureDraft,
         size: "large",
@@ -549,7 +529,7 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign({ name: "TaskExecutionTemperat
       }, {
         prefix: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<span class="checklist-modal__pending-temp-prefix" aria-hidden="true" data-v-7d8ee883${_scopeId}>${ssrInterpolate(__props.inputPrefix)}</span>`);
+            _push2(`<span class="checklist-modal__pending-temp-prefix" aria-hidden="true" data-v-920f48d0${_scopeId}>${ssrInterpolate(__props.inputPrefix)}</span>`);
           } else {
             return [
               createVNode("span", {
@@ -561,7 +541,7 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign({ name: "TaskExecutionTemperat
         }),
         suffix: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<span class="checklist-modal__pending-temp-suffix" aria-hidden="true" data-v-7d8ee883${_scopeId}>${ssrInterpolate(__props.inputSuffix)}</span>`);
+            _push2(`<span class="checklist-modal__pending-temp-suffix" aria-hidden="true" data-v-920f48d0${_scopeId}>${ssrInterpolate(__props.inputSuffix)}</span>`);
           } else {
             return [
               createVNode("span", {
@@ -573,16 +553,16 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign({ name: "TaskExecutionTemperat
         }),
         _: 1
       }, _parent));
-      _push(`<div class="checklist-modal__keypad" role="group" data-v-7d8ee883><div class="checklist-modal__keypad-digits" data-v-7d8ee883><!--[-->`);
+      _push(`<div class="checklist-modal__keypad" role="group" data-v-920f48d0><div class="checklist-modal__keypad-digits" data-v-920f48d0><!--[-->`);
       ssrRenderList(unref(keypadDigitKeys), (key) => {
-        _push(`<button type="button" class="checklist-modal__keypad-btn" data-v-7d8ee883>${ssrInterpolate(key)}</button>`);
+        _push(`<button type="button" class="checklist-modal__keypad-btn" data-v-920f48d0>${ssrInterpolate(key)}</button>`);
       });
-      _push(`<!--]--></div><div class="checklist-modal__keypad-tools" data-v-7d8ee883><!--[-->`);
+      _push(`<!--]--></div><div class="checklist-modal__keypad-tools" data-v-920f48d0><!--[-->`);
       ssrRenderList(unref(keypadToolKeys), (key) => {
         _push(`<button type="button" class="${ssrRenderClass([{
           "checklist-modal__keypad-btn--danger": key === "DEL",
           "checklist-modal__keypad-btn--ok": key === "✓"
-        }, "checklist-modal__keypad-btn"])}" data-v-7d8ee883>${ssrInterpolate(key)}</button>`);
+        }, "checklist-modal__keypad-btn"])}" data-v-920f48d0>${ssrInterpolate(key)}</button>`);
       });
       _push(`<!--]--></div></div>`);
       _push(ssrRenderComponent(PendingPhotoCaptureBlock, {
@@ -601,7 +581,7 @@ _sfc_main$i.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTemperatureTimerPanel.vue");
   return _sfc_setup$i ? _sfc_setup$i(props, ctx) : void 0;
 };
-const TaskExecutionTemperatureTimerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-7d8ee883"]]);
+const TaskExecutionTemperatureTimerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-920f48d0"]]);
 const _sfc_main$h = {
   __name: "TaskExecutionTicketPanel",
   __ssrInlineRender: true,
@@ -627,22 +607,16 @@ const _sfc_main$h = {
       default: () => []
     }
   },
-  emits: [
-    "update:ticketStatus",
-    "update:ticketComment",
-    "submit",
-    "attach-report",
-    "camera"
-  ],
+  emits: ["update:ticketStatus", "update:ticketComment", "submit", "attach-report", "camera"],
   setup(__props) {
     const { t } = useI18n();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__pending-input" }, _attrs))} data-v-16af8ea9><div class="checklist-modal__ticket-description" data-v-16af8ea9><p class="checklist-modal__ticket-description-title" data-v-16af8ea9>${ssrInterpolate(unref(t)("demo.ticket_panel.description_label"))}</p><p class="checklist-modal__ticket-description-text" data-v-16af8ea9>${ssrInterpolate(__props.description)}</p></div><div class="checklist-modal__single-choice-options" role="radiogroup"${ssrRenderAttr("aria-label", unref(t)("demo.ticket_panel.status_aria"))} data-v-16af8ea9><button type="button" class="${ssrRenderClass([{
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__pending-input" }, _attrs))} data-v-ab09e0f4><div class="checklist-modal__ticket-description" data-v-ab09e0f4><p class="checklist-modal__ticket-description-title" data-v-ab09e0f4>${ssrInterpolate(unref(t)("demo.ticket_panel.description_label"))}</p><p class="checklist-modal__ticket-description-text" data-v-ab09e0f4>${ssrInterpolate(__props.description)}</p></div><div class="checklist-modal__single-choice-options" role="radiogroup"${ssrRenderAttr("aria-label", unref(t)("demo.ticket_panel.status_aria"))} data-v-ab09e0f4><button type="button" class="${ssrRenderClass([{
         "checklist-modal__single-choice-option--active": __props.ticketStatus === "not_completed",
         "checklist-modal__single-choice-option--warning": __props.ticketStatus === "not_completed"
-      }, "checklist-modal__single-choice-option"])}" data-v-16af8ea9><span class="checklist-modal__single-choice-radio" data-v-16af8ea9></span><span data-v-16af8ea9>${ssrInterpolate(unref(t)("demo.ticket_panel.not_completed"))}</span></button><button type="button" class="${ssrRenderClass([{
+      }, "checklist-modal__single-choice-option"])}" data-v-ab09e0f4><span class="checklist-modal__single-choice-radio" data-v-ab09e0f4></span><span data-v-ab09e0f4>${ssrInterpolate(unref(t)("demo.ticket_panel.not_completed"))}</span></button><button type="button" class="${ssrRenderClass([{
         "checklist-modal__single-choice-option--active": __props.ticketStatus === "completed"
-      }, "checklist-modal__single-choice-option"])}" data-v-16af8ea9><span class="checklist-modal__single-choice-radio" data-v-16af8ea9></span><span data-v-16af8ea9>${ssrInterpolate(unref(t)("demo.ticket_panel.completed"))}</span></button></div>`);
+      }, "checklist-modal__single-choice-option"])}" data-v-ab09e0f4><span class="checklist-modal__single-choice-radio" data-v-ab09e0f4></span><span data-v-ab09e0f4>${ssrInterpolate(unref(t)("demo.ticket_panel.completed"))}</span></button></div>`);
       _push(ssrRenderComponent(unref(NInput), {
         value: __props.ticketComment,
         type: "textarea",
@@ -684,7 +658,7 @@ _sfc_main$h.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTicketPanel.vue");
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
-const TaskExecutionTicketPanel = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-16af8ea9"]]);
+const TaskExecutionTicketPanel = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-ab09e0f4"]]);
 const EQUIPMENT_LABEL_BY_ID = new Map(
   EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => [it.id, it.label]))
 );
@@ -729,11 +703,10 @@ function buildReportFileNameStamp() {
   const stamp = `${ts.getFullYear()}-${String(ts.getMonth() + 1).padStart(
     2,
     "0"
-  )}-${String(ts.getDate()).padStart(2, "0")}_${String(
-    ts.getHours()
-  ).padStart(2, "0")}${String(ts.getMinutes()).padStart(2, "0")}${String(
-    ts.getSeconds()
-  ).padStart(2, "0")}`;
+  )}-${String(ts.getDate()).padStart(2, "0")}_${String(ts.getHours()).padStart(
+    2,
+    "0"
+  )}${String(ts.getMinutes()).padStart(2, "0")}${String(ts.getSeconds()).padStart(2, "0")}`;
   return `report_${stamp}.pdf`;
 }
 function buildPhotoFileNameStamp() {
@@ -741,11 +714,10 @@ function buildPhotoFileNameStamp() {
   return `${ts.getFullYear()}-${String(ts.getMonth() + 1).padStart(
     2,
     "0"
-  )}-${String(ts.getDate()).padStart(2, "0")}_${String(
-    ts.getHours()
-  ).padStart(2, "0")}${String(ts.getMinutes()).padStart(2, "0")}${String(
-    ts.getSeconds()
-  ).padStart(2, "0")}`;
+  )}-${String(ts.getDate()).padStart(2, "0")}_${String(ts.getHours()).padStart(
+    2,
+    "0"
+  )}${String(ts.getMinutes()).padStart(2, "0")}${String(ts.getSeconds()).padStart(2, "0")}`;
 }
 function getCurrentMeasurementRowStatus(task, rowRef) {
   const rows = Array.isArray(task == null ? void 0 : task.measurements) ? task.measurements : [];
@@ -767,15 +739,8 @@ function findMeasurementRowIndexByTime(task, rowRef) {
   return rows.findIndex((row) => String((row == null ? void 0 : row.time) ?? "") === String((rowRef == null ? void 0 : rowRef.time) ?? ""));
 }
 const temperatureAiAnalyzer = createTemperatureAiAnalyzer();
-function applyPendingMeasurementFromKeypadOk({
-  task,
-  measurementRow,
-  draft,
-  fieldType
-}) {
+function applyPendingMeasurementFromKeypadOk({ task, measurementRow, draft, fieldType }) {
   const m = measurementRow;
-  m && typeof m === "object" ? findMeasurementRowIndexByTime(task, m) : -1;
-  m && typeof m === "object" ? { ...m } : null;
   if (!m || typeof m !== "object") {
     return false;
   }
@@ -815,38 +780,22 @@ function applyPendingMeasurementFromKeypadOk({
   const display = String(normalized).replace(".", ",");
   m.value = `${display} °C`;
   const currentValueFromMeasurement = parseTemperatureFromMeasurementValue(m.value);
-  const aiMode = resolveTemperatureAiMode(
-    task,
-    analyzerNiche,
-    currentValueFromMeasurement
-  );
+  const aiMode = resolveTemperatureAiMode(task, analyzerNiche, currentValueFromMeasurement);
   let statusOk = limits == null ? true : inRange;
   if (analyzerNiche === "bread") {
-    const bandRow = resolveBreadRowForTaskMeasurement(
-      n,
-      task == null ? void 0 : task.equipmentTargetIds,
-      aiMode
-    );
+    const bandRow = resolveBreadRowForTaskMeasurement(n, task == null ? void 0 : task.equipmentTargetIds, aiMode);
     if (bandRow) {
       statusOk = bandRow.status === "normal";
     }
   }
   if (analyzerNiche === "meat") {
-    const bandRow = resolveMeatRowForTaskMeasurement(
-      n,
-      task == null ? void 0 : task.equipmentTargetIds,
-      aiMode
-    );
+    const bandRow = resolveMeatRowForTaskMeasurement(n, task == null ? void 0 : task.equipmentTargetIds, aiMode);
     if (bandRow) {
       statusOk = bandRow.status === "normal";
     }
   }
   if (analyzerNiche === "coffee") {
-    const bandRow = resolveCoffeeRowForTaskMeasurement(
-      n,
-      task == null ? void 0 : task.equipmentTargetIds,
-      aiMode
-    );
+    const bandRow = resolveCoffeeRowForTaskMeasurement(n, task == null ? void 0 : task.equipmentTargetIds, aiMode);
     if (bandRow) {
       statusOk = bandRow.status === "normal";
     }
@@ -901,9 +850,7 @@ function useTaskExecutionDrawerState(props) {
   const pendingSingleChoiceComment = ref("");
   const pendingTicketStatus = ref("not_completed");
   const pendingTicketComment = ref("");
-  const viewportWidth = ref(
-    typeof window !== "undefined" ? window.innerWidth : 1024
-  );
+  const viewportWidth = ref(typeof window !== "undefined" ? window.innerWidth : 1024);
   const onResize = () => {
     viewportWidth.value = window.innerWidth;
   };
@@ -974,10 +921,7 @@ function useTaskExecutionDrawerState(props) {
     return text || "—";
   });
   const pendingDrawerFieldType = computed(
-    () => pendingDrawerFieldTypeFromTask.value ?? inferPendingDrawerFieldType(
-      pendingDrawerMeasurement.value,
-      props.task
-    )
+    () => pendingDrawerFieldTypeFromTask.value ?? inferPendingDrawerFieldType(pendingDrawerMeasurement.value, props.task)
   );
   const showBluetoothAlert = computed(() => {
     const ft = pendingDrawerFieldType.value;
@@ -1201,7 +1145,7 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign({ name: "TaskExecutionPanelMod
             _push2(ssrRenderComponent(unref(NDrawerContent), { closable: "" }, {
               header: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<span class="checklist-modal__pending-header-title" data-v-40d13446${_scopeId2}>${ssrInterpolate(unref(pendingDrawerTitle))}</span>`);
+                  _push3(`<span class="checklist-modal__pending-header-title" data-v-0ff4c7cf${_scopeId2}>${ssrInterpolate(unref(pendingDrawerTitle))}</span>`);
                 } else {
                   return [
                     createVNode("span", { class: "checklist-modal__pending-header-title" }, toDisplayString(unref(pendingDrawerTitle)), 1)
@@ -1210,16 +1154,16 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign({ name: "TaskExecutionPanelMod
               }),
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<div class="checklist-modal__pending-drawer" data-v-40d13446${_scopeId2}>`);
+                  _push3(`<div class="checklist-modal__pending-drawer" data-v-0ff4c7cf${_scopeId2}>`);
                   _push3(ssrRenderComponent(TaskExecutionMetaBlock, {
                     "show-alert": unref(showBluetoothAlert),
                     "targets-display": unref(pendingDrawerTargetsDisplay)
                   }, null, _parent3, _scopeId2));
                   if (unref(showBluetoothAlert)) {
                     _push3(ssrRenderComponent(TaskExecutionTemperatureTimerPanel, {
-                      "field-type-display": unref(pendingDrawerFieldTypeDisplay),
                       "temperature-draft": unref(pendingTemperatureDraft),
                       "onUpdate:temperatureDraft": ($event) => isRef(pendingTemperatureDraft) ? pendingTemperatureDraft.value = $event : null,
+                      "field-type-display": unref(pendingDrawerFieldTypeDisplay),
                       "input-prefix": unref(pendingInputPrefix),
                       "input-suffix": unref(pendingInputSuffix),
                       "photo-names": unref(pendingPhotoNames),
@@ -1229,12 +1173,12 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign({ name: "TaskExecutionPanelMod
                     }, null, _parent3, _scopeId2));
                   } else if (unref(pendingDrawerFieldType) === "single_choice") {
                     _push3(ssrRenderComponent(TaskExecutionSingleChoicePanel, {
-                      question: unref(pendingSingleChoiceQuestion),
-                      options: unref(pendingSingleChoiceOptions),
                       answer: unref(pendingSingleChoiceAnswer),
                       "onUpdate:answer": ($event) => isRef(pendingSingleChoiceAnswer) ? pendingSingleChoiceAnswer.value = $event : null,
                       comment: unref(pendingSingleChoiceComment),
                       "onUpdate:comment": ($event) => isRef(pendingSingleChoiceComment) ? pendingSingleChoiceComment.value = $event : null,
+                      question: unref(pendingSingleChoiceQuestion),
+                      options: unref(pendingSingleChoiceOptions),
                       "report-file-name": unref(pendingReportFileName),
                       "photo-names": unref(pendingPhotoNames),
                       onSubmit: unref(submitSingleChoiceAnswer),
@@ -1243,11 +1187,11 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign({ name: "TaskExecutionPanelMod
                     }, null, _parent3, _scopeId2));
                   } else if (unref(pendingDrawerFieldType) === "ticket") {
                     _push3(ssrRenderComponent(TaskExecutionTicketPanel, {
-                      description: unref(pendingTicketDescription),
                       "ticket-status": unref(pendingTicketStatus),
                       "onUpdate:ticketStatus": ($event) => isRef(pendingTicketStatus) ? pendingTicketStatus.value = $event : null,
                       "ticket-comment": unref(pendingTicketComment),
                       "onUpdate:ticketComment": ($event) => isRef(pendingTicketComment) ? pendingTicketComment.value = $event : null,
+                      description: unref(pendingTicketDescription),
                       "report-file-name": unref(pendingReportFileName),
                       "photo-names": unref(pendingPhotoNames),
                       onSubmit: unref(submitTicketResult),
@@ -1267,41 +1211,41 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign({ name: "TaskExecutionPanelMod
                       }, null, 8, ["show-alert", "targets-display"]),
                       unref(showBluetoothAlert) ? (openBlock(), createBlock(TaskExecutionTemperatureTimerPanel, {
                         key: 0,
-                        "field-type-display": unref(pendingDrawerFieldTypeDisplay),
                         "temperature-draft": unref(pendingTemperatureDraft),
                         "onUpdate:temperatureDraft": ($event) => isRef(pendingTemperatureDraft) ? pendingTemperatureDraft.value = $event : null,
+                        "field-type-display": unref(pendingDrawerFieldTypeDisplay),
                         "input-prefix": unref(pendingInputPrefix),
                         "input-suffix": unref(pendingInputSuffix),
                         "photo-names": unref(pendingPhotoNames),
                         "show-camera": unref(pendingShowCamera),
                         onKeypadPress: unref(onKeypadPress),
                         onCameraShot: unref(simulateCameraShot)
-                      }, null, 8, ["field-type-display", "temperature-draft", "onUpdate:temperatureDraft", "input-prefix", "input-suffix", "photo-names", "show-camera", "onKeypadPress", "onCameraShot"])) : unref(pendingDrawerFieldType) === "single_choice" ? (openBlock(), createBlock(TaskExecutionSingleChoicePanel, {
+                      }, null, 8, ["temperature-draft", "onUpdate:temperatureDraft", "field-type-display", "input-prefix", "input-suffix", "photo-names", "show-camera", "onKeypadPress", "onCameraShot"])) : unref(pendingDrawerFieldType) === "single_choice" ? (openBlock(), createBlock(TaskExecutionSingleChoicePanel, {
                         key: 1,
-                        question: unref(pendingSingleChoiceQuestion),
-                        options: unref(pendingSingleChoiceOptions),
                         answer: unref(pendingSingleChoiceAnswer),
                         "onUpdate:answer": ($event) => isRef(pendingSingleChoiceAnswer) ? pendingSingleChoiceAnswer.value = $event : null,
                         comment: unref(pendingSingleChoiceComment),
                         "onUpdate:comment": ($event) => isRef(pendingSingleChoiceComment) ? pendingSingleChoiceComment.value = $event : null,
+                        question: unref(pendingSingleChoiceQuestion),
+                        options: unref(pendingSingleChoiceOptions),
                         "report-file-name": unref(pendingReportFileName),
                         "photo-names": unref(pendingPhotoNames),
                         onSubmit: unref(submitSingleChoiceAnswer),
                         onAttachReport: unref(simulateReportFileAttach),
                         onCamera: unref(simulateCameraShot)
-                      }, null, 8, ["question", "options", "answer", "onUpdate:answer", "comment", "onUpdate:comment", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : unref(pendingDrawerFieldType) === "ticket" ? (openBlock(), createBlock(TaskExecutionTicketPanel, {
+                      }, null, 8, ["answer", "onUpdate:answer", "comment", "onUpdate:comment", "question", "options", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : unref(pendingDrawerFieldType) === "ticket" ? (openBlock(), createBlock(TaskExecutionTicketPanel, {
                         key: 2,
-                        description: unref(pendingTicketDescription),
                         "ticket-status": unref(pendingTicketStatus),
                         "onUpdate:ticketStatus": ($event) => isRef(pendingTicketStatus) ? pendingTicketStatus.value = $event : null,
                         "ticket-comment": unref(pendingTicketComment),
                         "onUpdate:ticketComment": ($event) => isRef(pendingTicketComment) ? pendingTicketComment.value = $event : null,
+                        description: unref(pendingTicketDescription),
                         "report-file-name": unref(pendingReportFileName),
                         "photo-names": unref(pendingPhotoNames),
                         onSubmit: unref(submitTicketResult),
                         onAttachReport: unref(simulateReportFileAttach),
                         onCamera: unref(simulateCameraShot)
-                      }, null, 8, ["description", "ticket-status", "onUpdate:ticketStatus", "ticket-comment", "onUpdate:ticketComment", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : createCommentVNode("", true)
+                      }, null, 8, ["ticket-status", "onUpdate:ticketStatus", "ticket-comment", "onUpdate:ticketComment", "description", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : createCommentVNode("", true)
                     ])
                   ];
                 }
@@ -1322,41 +1266,41 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign({ name: "TaskExecutionPanelMod
                     }, null, 8, ["show-alert", "targets-display"]),
                     unref(showBluetoothAlert) ? (openBlock(), createBlock(TaskExecutionTemperatureTimerPanel, {
                       key: 0,
-                      "field-type-display": unref(pendingDrawerFieldTypeDisplay),
                       "temperature-draft": unref(pendingTemperatureDraft),
                       "onUpdate:temperatureDraft": ($event) => isRef(pendingTemperatureDraft) ? pendingTemperatureDraft.value = $event : null,
+                      "field-type-display": unref(pendingDrawerFieldTypeDisplay),
                       "input-prefix": unref(pendingInputPrefix),
                       "input-suffix": unref(pendingInputSuffix),
                       "photo-names": unref(pendingPhotoNames),
                       "show-camera": unref(pendingShowCamera),
                       onKeypadPress: unref(onKeypadPress),
                       onCameraShot: unref(simulateCameraShot)
-                    }, null, 8, ["field-type-display", "temperature-draft", "onUpdate:temperatureDraft", "input-prefix", "input-suffix", "photo-names", "show-camera", "onKeypadPress", "onCameraShot"])) : unref(pendingDrawerFieldType) === "single_choice" ? (openBlock(), createBlock(TaskExecutionSingleChoicePanel, {
+                    }, null, 8, ["temperature-draft", "onUpdate:temperatureDraft", "field-type-display", "input-prefix", "input-suffix", "photo-names", "show-camera", "onKeypadPress", "onCameraShot"])) : unref(pendingDrawerFieldType) === "single_choice" ? (openBlock(), createBlock(TaskExecutionSingleChoicePanel, {
                       key: 1,
-                      question: unref(pendingSingleChoiceQuestion),
-                      options: unref(pendingSingleChoiceOptions),
                       answer: unref(pendingSingleChoiceAnswer),
                       "onUpdate:answer": ($event) => isRef(pendingSingleChoiceAnswer) ? pendingSingleChoiceAnswer.value = $event : null,
                       comment: unref(pendingSingleChoiceComment),
                       "onUpdate:comment": ($event) => isRef(pendingSingleChoiceComment) ? pendingSingleChoiceComment.value = $event : null,
+                      question: unref(pendingSingleChoiceQuestion),
+                      options: unref(pendingSingleChoiceOptions),
                       "report-file-name": unref(pendingReportFileName),
                       "photo-names": unref(pendingPhotoNames),
                       onSubmit: unref(submitSingleChoiceAnswer),
                       onAttachReport: unref(simulateReportFileAttach),
                       onCamera: unref(simulateCameraShot)
-                    }, null, 8, ["question", "options", "answer", "onUpdate:answer", "comment", "onUpdate:comment", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : unref(pendingDrawerFieldType) === "ticket" ? (openBlock(), createBlock(TaskExecutionTicketPanel, {
+                    }, null, 8, ["answer", "onUpdate:answer", "comment", "onUpdate:comment", "question", "options", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : unref(pendingDrawerFieldType) === "ticket" ? (openBlock(), createBlock(TaskExecutionTicketPanel, {
                       key: 2,
-                      description: unref(pendingTicketDescription),
                       "ticket-status": unref(pendingTicketStatus),
                       "onUpdate:ticketStatus": ($event) => isRef(pendingTicketStatus) ? pendingTicketStatus.value = $event : null,
                       "ticket-comment": unref(pendingTicketComment),
                       "onUpdate:ticketComment": ($event) => isRef(pendingTicketComment) ? pendingTicketComment.value = $event : null,
+                      description: unref(pendingTicketDescription),
                       "report-file-name": unref(pendingReportFileName),
                       "photo-names": unref(pendingPhotoNames),
                       onSubmit: unref(submitTicketResult),
                       onAttachReport: unref(simulateReportFileAttach),
                       onCamera: unref(simulateCameraShot)
-                    }, null, 8, ["description", "ticket-status", "onUpdate:ticketStatus", "ticket-comment", "onUpdate:ticketComment", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : createCommentVNode("", true)
+                    }, null, 8, ["ticket-status", "onUpdate:ticketStatus", "ticket-comment", "onUpdate:ticketComment", "description", "report-file-name", "photo-names", "onSubmit", "onAttachReport", "onCamera"])) : createCommentVNode("", true)
                   ])
                 ]),
                 _: 1
@@ -1375,7 +1319,7 @@ _sfc_main$g.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionPanelModal.vue");
   return _sfc_setup$g ? _sfc_setup$g(props, ctx) : void 0;
 };
-const TaskExecutionPanelModal = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-40d13446"]]);
+const TaskExecutionPanelModal = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-0ff4c7cf"]]);
 const _sfc_main$f = {
   __name: "TaskAssigneeSection",
   __ssrInlineRender: true,
@@ -1447,15 +1391,15 @@ const _sfc_main$f = {
       }
     );
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__assignee-block border-bottom-dashed" }, _attrs))} data-v-f25279a0>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__assignee-block border-bottom-dashed" }, _attrs))} data-v-4e0b8cdc>`);
       if (isHotMode.value) {
-        _push(`<p class="checklist-modal__hot-assignee-label" data-v-f25279a0><span data-v-f25279a0>${ssrInterpolate(unref(t)("demo.task_assignee.label_colon"))}</span><span class="${ssrRenderClass([{
+        _push(`<p class="checklist-modal__hot-assignee-label" data-v-4e0b8cdc><span data-v-4e0b8cdc>${ssrInterpolate(unref(t)("demo.task_assignee.label_colon"))}</span><span class="${ssrRenderClass([{
           "checklist-modal__hot-assignee-text--empty": !modalAssigneeDisplay.value
-        }, "checklist-modal__hot-assignee-text"])}" data-v-f25279a0>${ssrInterpolate(modalAssigneeDisplay.value || unref(t)("demo.task_assignee.not_assigned"))}</span></p>`);
+        }, "checklist-modal__hot-assignee-text"])}" data-v-4e0b8cdc>${ssrInterpolate(modalAssigneeDisplay.value || unref(t)("demo.task_assignee.not_assigned"))}</span></p>`);
       } else {
-        _push(`<!--[--><p class="checklist-modal__assignee-label" data-v-f25279a0>${ssrInterpolate(unref(t)("demo.task_assignee.label"))}</p>`);
+        _push(`<!--[--><p class="checklist-modal__assignee-label" data-v-4e0b8cdc>${ssrInterpolate(unref(t)("demo.task_assignee.label"))}</p>`);
         if (!__props.task.assignedStaffId && !assigneePickerOpen.value) {
-          _push(`<div class="checklist-modal__assignee-row" data-v-f25279a0><span class="checklist-modal__assignee-empty" data-v-f25279a0>${ssrInterpolate(unref(t)("demo.task_assignee.not_assigned"))}</span>`);
+          _push(`<div class="checklist-modal__assignee-row" data-v-4e0b8cdc><span class="checklist-modal__assignee-empty" data-v-4e0b8cdc>${ssrInterpolate(unref(t)("demo.task_assignee.not_assigned"))}</span>`);
           _push(ssrRenderComponent(unref(Button), {
             type: "primary",
             onClick: ($event) => assigneePickerOpen.value = true
@@ -1494,7 +1438,7 @@ _sfc_main$f.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/show_task/TaskAssigneeSection.vue");
   return _sfc_setup$f ? _sfc_setup$f(props, ctx) : void 0;
 };
-const TaskAssigneeSection = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-f25279a0"]]);
+const TaskAssigneeSection = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-4e0b8cdc"]]);
 const _sfc_main$e = {
   __name: "TaskFieldSummarySection",
   __ssrInlineRender: true,
@@ -1508,9 +1452,9 @@ const _sfc_main$e = {
     const { t } = useI18n();
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.lines.length) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__task-fields" }, _attrs))} data-v-61be1c73><p class="checklist-modal__assignee-label" data-v-61be1c73>${ssrInterpolate(unref(t)("demo.task_fields.section_title"))}</p><ul class="checklist-modal__task-fields-list" data-v-61be1c73><!--[-->`);
+        _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__task-fields" }, _attrs))} data-v-81c8f39c><p class="checklist-modal__assignee-label" data-v-81c8f39c>${ssrInterpolate(unref(t)("demo.task_fields.section_title"))}</p><ul class="checklist-modal__task-fields-list" data-v-81c8f39c><!--[-->`);
         ssrRenderList(__props.lines, (line, idx) => {
-          _push(`<li class="checklist-modal__task-fields-item" data-v-61be1c73>${ssrInterpolate(line)}</li>`);
+          _push(`<li class="checklist-modal__task-fields-item" data-v-81c8f39c>${ssrInterpolate(line)}</li>`);
         });
         _push(`<!--]--></ul></div>`);
       } else {
@@ -1525,7 +1469,7 @@ _sfc_main$e.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/show_task/TaskFieldSummarySection.vue");
   return _sfc_setup$e ? _sfc_setup$e(props, ctx) : void 0;
 };
-const TaskFieldSummarySection = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-61be1c73"]]);
+const TaskFieldSummarySection = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-81c8f39c"]]);
 const _sfc_main$d = {
   __name: "TaskMeasurementsTable",
   __ssrInlineRender: true,
@@ -1562,7 +1506,7 @@ const _sfc_main$d = {
     return (_ctx, _push, _parent, _attrs) => {
       var _a;
       if ((_a = __props.task.measurements) == null ? void 0 : _a.length) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__table-wrap" }, _attrs))} data-v-dfca90e7><table class="checklist-modal__table checklist-modal__table--measurements" data-v-dfca90e7><colgroup data-v-dfca90e7><col class="checklist-modal__col-time" data-v-dfca90e7><col class="checklist-modal__col-decision" data-v-dfca90e7><col class="checklist-modal__col-status" data-v-dfca90e7></colgroup><thead data-v-dfca90e7><tr data-v-dfca90e7><th data-v-dfca90e7>${ssrInterpolate(unref(t)("demo.measurements.col_time"))}</th><th data-v-dfca90e7>${ssrInterpolate(unref(t)("demo.measurements.col_decision"))}</th><th data-v-dfca90e7>${ssrInterpolate(unref(t)("demo.measurements.col_status"))}</th></tr></thead><!--[-->`);
+        _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__table-wrap" }, _attrs))} data-v-bd852456><table class="checklist-modal__table checklist-modal__table--measurements" data-v-bd852456><colgroup data-v-bd852456><col class="checklist-modal__col-time" data-v-bd852456><col class="checklist-modal__col-decision" data-v-bd852456><col class="checklist-modal__col-status" data-v-bd852456></colgroup><thead data-v-bd852456><tr data-v-bd852456><th data-v-bd852456>${ssrInterpolate(unref(t)("demo.measurements.col_time"))}</th><th data-v-bd852456>${ssrInterpolate(unref(t)("demo.measurements.col_decision"))}</th><th data-v-bd852456>${ssrInterpolate(unref(t)("demo.measurements.col_status"))}</th></tr></thead><!--[-->`);
         ssrRenderList(__props.task.measurements, (item) => {
           var _a2, _b, _c;
           _push(`<tbody class="${ssrRenderClass([[
@@ -1571,26 +1515,26 @@ const _sfc_main$d = {
               "checklist-modal__measurement-group--ai-warning": ((_a2 = item.aiWarning) == null ? void 0 : _a2.ai_status) === "warning",
               "checklist-modal__measurement-group--pending-neutral": (item.status || "pending") === "pending" && item.aiWarning == null
             }
-          ], "checklist-modal__measurement-group"])}" data-v-dfca90e7><tr data-v-dfca90e7><td class="checklist-modal__measurement-row-cell" data-label="Время" data-v-dfca90e7><span class="checklist-modal__bolt-text" data-v-dfca90e7>${ssrInterpolate(item.time)}</span></td><td class="checklist-modal__measurement-row-cell" data-label="Решение" data-v-dfca90e7>`);
+          ], "checklist-modal__measurement-group"])}" data-v-bd852456><tr data-v-bd852456><td class="checklist-modal__measurement-row-cell" data-label="Время" data-v-bd852456><span class="checklist-modal__bolt-text" data-v-bd852456>${ssrInterpolate(item.time)}</span></td><td class="checklist-modal__measurement-row-cell" data-label="Решение" data-v-bd852456>`);
           if (item.aiWarning) {
-            _push(`<table class="checklist-modal__decision-nested" data-v-dfca90e7><tbody data-v-dfca90e7><tr data-v-dfca90e7><td class="checklist-modal__decision-nested__value" data-v-dfca90e7><span class="checklist-modal__bolt-text metric-value" data-v-dfca90e7>${ssrInterpolate(item.value)}</span></td></tr>`);
+            _push(`<table class="checklist-modal__decision-nested" data-v-bd852456><tbody data-v-bd852456><tr data-v-bd852456><td class="checklist-modal__decision-nested__value" data-v-bd852456><span class="checklist-modal__bolt-text metric-value" data-v-bd852456>${ssrInterpolate(item.value)}</span></td></tr>`);
             if (item.aiWarning.threat) {
-              _push(`<tr data-v-dfca90e7><td class="checklist-modal__decision-nested__threat" data-v-dfca90e7>${ssrInterpolate(item.aiWarning.threat)}</td></tr>`);
+              _push(`<tr data-v-bd852456><td class="checklist-modal__decision-nested__threat" data-v-bd852456>${ssrInterpolate(item.aiWarning.threat)}</td></tr>`);
             } else {
               _push(`<!---->`);
             }
             if (item.aiWarning.action) {
-              _push(`<tr data-v-dfca90e7><td class="checklist-modal__decision-nested__action" data-v-dfca90e7>${ssrInterpolate(item.aiWarning.action)}</td></tr>`);
+              _push(`<tr data-v-bd852456><td class="checklist-modal__decision-nested__action" data-v-bd852456>${ssrInterpolate(item.aiWarning.action)}</td></tr>`);
             } else {
               _push(`<!---->`);
             }
             _push(`</tbody></table>`);
           } else {
-            _push(`<span class="checklist-modal__measurement-value" data-v-dfca90e7>${ssrInterpolate(item.value)}</span>`);
+            _push(`<span class="checklist-modal__measurement-value" data-v-bd852456>${ssrInterpolate(item.value)}</span>`);
           }
-          _push(`</td><td class="checklist-modal__measurement-row-cell" data-label="Статус" data-v-dfca90e7><span class="checklist-modal__measurement-value checklist-modal__measurement-value--status" data-v-dfca90e7>`);
+          _push(`</td><td class="checklist-modal__measurement-row-cell" data-label="Статус" data-v-bd852456><span class="checklist-modal__measurement-value checklist-modal__measurement-value--status" data-v-bd852456>`);
           if ((_b = item.aiWarning) == null ? void 0 : _b.deviationLine) {
-            _push(`<p class="checklist-modal__status-deviation-line checklist-modal__bolt-text metric-value" data-v-dfca90e7>${ssrInterpolate(item.aiWarning.deviationLine)}</p>`);
+            _push(`<p class="checklist-modal__status-deviation-line checklist-modal__bolt-text metric-value" data-v-bd852456>${ssrInterpolate(item.aiWarning.deviationLine)}</p>`);
           } else {
             _push(`<!---->`);
           }
@@ -1598,25 +1542,27 @@ const _sfc_main$d = {
             _push(`<button type="button" class="${ssrRenderClass([[
               ((_c = item.aiWarning) == null ? void 0 : _c.ai_status) === "warning" ? "checklist-modal__status-trigger--warning" : "checklist-modal__status-trigger--problem",
               {
-                "checklist-modal__status-trigger--with-action": Boolean(item.correctiveAction)
+                "checklist-modal__status-trigger--with-action": Boolean(
+                  item.correctiveAction
+                )
               }
-            ], "checklist-modal__status-trigger"])}"${ssrRenderAttr("aria-label", unref(t)("demo.measurements.respond"))} data-v-dfca90e7>${ssrInterpolate(unref(t)("demo.measurements.respond"))}</button>`);
+            ], "checklist-modal__status-trigger"])}"${ssrRenderAttr("aria-label", unref(t)("demo.measurements.respond"))} data-v-bd852456>${ssrInterpolate(unref(t)("demo.measurements.respond"))}</button>`);
           } else if (!__props.isHotMode && item.status === "pending" && !__props.taskScheduledForFuture) {
             _push(`<button type="button" class="${ssrRenderClass([
               item.aiWarning == null ? "checklist-modal__status-trigger--pending-neutral" : "checklist-modal__status-trigger--pending",
               "checklist-modal__status-trigger"
-            ])}"${ssrRenderAttr("aria-label", unref(t)("demo.measurements.resolve"))} data-v-dfca90e7>${ssrInterpolate(unref(t)("demo.measurements.resolve"))}</button>`);
+            ])}"${ssrRenderAttr("aria-label", unref(t)("demo.measurements.resolve"))} data-v-bd852456>${ssrInterpolate(unref(t)("demo.measurements.resolve"))}</button>`);
           } else {
             _push(`<!---->`);
           }
           if (item.status === "problem" && item.correctiveAction) {
-            _push(`<p class="checklist-modal__selected-action" data-v-dfca90e7>${ssrInterpolate(item.correctiveAction)}</p>`);
+            _push(`<p class="checklist-modal__selected-action" data-v-bd852456>${ssrInterpolate(item.correctiveAction)}</p>`);
           } else {
             _push(`<!---->`);
           }
           _push(`</span></td></tr>`);
           if (!__props.isHotMode && __props.expandedActionRowKey === item.time && item.status === "problem") {
-            _push(`<tr data-v-dfca90e7><td colspan="3" class="checklist-modal__action-row" data-v-dfca90e7><div class="checklist-modal__action-box" data-v-dfca90e7><p class="checklist-modal__action-title" data-v-dfca90e7>${ssrInterpolate(unref(t)("demo.measurements.corrective_actions"))}</p>`);
+            _push(`<tr data-v-bd852456><td colspan="3" class="checklist-modal__action-row" data-v-bd852456><div class="checklist-modal__action-box" data-v-bd852456><p class="checklist-modal__action-title" data-v-bd852456>${ssrInterpolate(unref(t)("demo.measurements.corrective_actions"))}</p>`);
             _push(ssrRenderComponent(unref(NSelect), {
               value: item.correctiveAction ?? null,
               options: resolveActionOptions(__props.task),
@@ -1628,7 +1574,7 @@ const _sfc_main$d = {
             _push(`<!---->`);
           }
           if (String(item.comment ?? "").trim()) {
-            _push(`<tr data-v-dfca90e7><td colspan="3" class="checklist-modal__comment-row" data-v-dfca90e7>${ssrInterpolate(item.comment)}</td></tr>`);
+            _push(`<tr data-v-bd852456><td colspan="3" class="checklist-modal__comment-row" data-v-bd852456>${ssrInterpolate(item.comment)}</td></tr>`);
           } else {
             _push(`<!---->`);
           }
@@ -1647,7 +1593,7 @@ _sfc_main$d.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/show_task/TaskMeasurementsTable.vue");
   return _sfc_setup$d ? _sfc_setup$d(props, ctx) : void 0;
 };
-const TaskMeasurementsTable = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-dfca90e7"]]);
+const TaskMeasurementsTable = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-bd852456"]]);
 const _sfc_main$c = {
   __name: "TaskTargetsLine",
   __ssrInlineRender: true,
@@ -1664,7 +1610,7 @@ const _sfc_main$c = {
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       if (__props.targetsLine) {
-        _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__targets-line border-bottom-dashed" }, _attrs))} data-v-ec59e554>`);
+        _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklist-modal__targets-line border-bottom-dashed" }, _attrs))} data-v-70de8bb2>`);
         if (__props.taskScopeType === "equipment") {
           _push(ssrRenderComponent(_sfc_main$o, {
             name: "battery-charging-90-round",
@@ -1680,7 +1626,7 @@ const _sfc_main$c = {
         } else {
           _push(`<!---->`);
         }
-        _push(`<span class="checklist-modal__targets-text" data-v-ec59e554>${ssrInterpolate(__props.targetsLine)}</span></div>`);
+        _push(`<span class="checklist-modal__targets-text" data-v-70de8bb2>${ssrInterpolate(__props.targetsLine)}</span></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -1693,7 +1639,7 @@ _sfc_main$c.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/show_task/TaskTargetsLine.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
-const TaskTargetsLine = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-ec59e554"]]);
+const TaskTargetsLine = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-70de8bb2"]]);
 const MAX_OPEN_ATTEMPTS = 24;
 async function openShowTaskModalPendingDrawer({
   getTask,
@@ -1893,13 +1839,15 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "ShowTaskModal" }, {
     const taskScheduledForFuture = computed(
       () => viewTask.value ? isTaskScheduledForFutureCheck(viewTask.value) : false
     );
-    const { onOpenPending, tryAutoOpenPendingDrawerAfterDeepLink } = useGrainCoolingShowTaskModalBridge({
-      getShow: () => props.show,
-      getTask: () => viewTask.value,
-      taskScheduledForFuture,
-      isHotMode,
-      pendingDrawerRef
-    });
+    const { onOpenPending, tryAutoOpenPendingDrawerAfterDeepLink } = useGrainCoolingShowTaskModalBridge(
+      {
+        getShow: () => props.show,
+        getTask: () => viewTask.value,
+        taskScheduledForFuture,
+        isHotMode,
+        pendingDrawerRef
+      }
+    );
     const modalTargetsLine = computed(() => {
       const t = viewTask.value ?? null;
       if (!t) {
@@ -1941,9 +1889,7 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "ShowTaskModal" }, {
       bakery: "🥐",
       meat: "🥩"
     };
-    const taskTypeDisplay = computed(
-      () => NICHE_EMOJI[props.taskType] ?? props.taskType
-    );
+    const taskTypeDisplay = computed(() => NICHE_EMOJI[props.taskType] ?? props.taskType);
     const taskTypeAria = computed(() => {
       const key = NICHE_LABEL_KEYS[props.taskType];
       return key ? tr(`demo.show_task_modal.${key}`) : props.taskType;
@@ -2052,7 +1998,7 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "ShowTaskModal" }, {
         }),
         footer: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="checklist-modal__footer" data-v-dfc19919${_scopeId}>`);
+            _push2(`<div class="checklist-modal__footer" data-v-46d1e00f${_scopeId}>`);
             if (!isHotMode.value && unref(viewTask)) {
               _push2(ssrRenderComponent(unref(Button), {
                 type: "warning",
@@ -2071,7 +2017,7 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "ShowTaskModal" }, {
                 _: 1
               }, _parent2, _scopeId));
             } else {
-              _push2(`<div data-v-dfc19919${_scopeId}></div>`);
+              _push2(`<div data-v-46d1e00f${_scopeId}></div>`);
             }
             _push2(ssrRenderComponent(unref(Button), {
               size: "large",
@@ -2121,7 +2067,7 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "ShowTaskModal" }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (unref(viewTask)) {
-              _push2(`<div class="checklist-modal__content" data-v-dfc19919${_scopeId}>`);
+              _push2(`<div class="checklist-modal__content" data-v-46d1e00f${_scopeId}>`);
               _push2(ssrRenderComponent(TaskAssigneeSection, {
                 task: unref(viewTask),
                 staff: __props.staff,
@@ -2135,11 +2081,11 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "ShowTaskModal" }, {
               }, null, _parent2, _scopeId));
               _push2(ssrRenderComponent(TaskFieldSummarySection, { lines: taskFieldSummaryLines.value }, null, _parent2, _scopeId));
               _push2(ssrRenderComponent(TaskMeasurementsTable, {
+                "expanded-action-row-key": expandedActionRowKey.value,
+                "onUpdate:expandedActionRowKey": ($event) => expandedActionRowKey.value = $event,
                 task: unref(viewTask),
                 "is-hot-mode": isHotMode.value,
                 "task-scheduled-for-future": taskScheduledForFuture.value,
-                "expanded-action-row-key": expandedActionRowKey.value,
-                "onUpdate:expandedActionRowKey": ($event) => expandedActionRowKey.value = $event,
                 onOpenPending: (row) => unref(onOpenPending)(row, "click: pending badge in Status column")
               }, null, _parent2, _scopeId));
               _push2(`</div>`);
@@ -2170,13 +2116,13 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "ShowTaskModal" }, {
                 }, null, 8, ["task-scope-type", "targets-line"]),
                 createVNode(TaskFieldSummarySection, { lines: taskFieldSummaryLines.value }, null, 8, ["lines"]),
                 createVNode(TaskMeasurementsTable, {
+                  "expanded-action-row-key": expandedActionRowKey.value,
+                  "onUpdate:expandedActionRowKey": ($event) => expandedActionRowKey.value = $event,
                   task: unref(viewTask),
                   "is-hot-mode": isHotMode.value,
                   "task-scheduled-for-future": taskScheduledForFuture.value,
-                  "expanded-action-row-key": expandedActionRowKey.value,
-                  "onUpdate:expandedActionRowKey": ($event) => expandedActionRowKey.value = $event,
                   onOpenPending: (row) => unref(onOpenPending)(row, "click: pending badge in Status column")
-                }, null, 8, ["task", "is-hot-mode", "task-scheduled-for-future", "expanded-action-row-key", "onUpdate:expandedActionRowKey", "onOpenPending"])
+                }, null, 8, ["expanded-action-row-key", "onUpdate:expandedActionRowKey", "task", "is-hot-mode", "task-scheduled-for-future", "onOpenPending"])
               ])) : createCommentVNode("", true),
               createVNode(TaskExecutionPanelModal, {
                 ref_key: "pendingDrawerRef",
@@ -2197,7 +2143,7 @@ _sfc_main$b.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/show_task/ShowTaskModal.vue");
   return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
-const ShowTaskModal = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-dfc19919"]]);
+const ShowTaskModal = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-46d1e00f"]]);
 const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
   __name: "TaskCard",
   __ssrInlineRender: true,
@@ -2234,15 +2180,13 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
       }
       return "ccp-card--ok";
     });
-    const showRepeatLines = computed(
-      () => {
-        var _a;
-        if (!Array.isArray((_a = props.task) == null ? void 0 : _a.measurements)) {
-          return false;
-        }
-        return isHotMode.value ? props.task.measurements.length > 1 : props.task.measurements.length > 0;
+    const showRepeatLines = computed(() => {
+      var _a;
+      if (!Array.isArray((_a = props.task) == null ? void 0 : _a.measurements)) {
+        return false;
       }
-    );
+      return isHotMode.value ? props.task.measurements.length > 1 : props.task.measurements.length > 0;
+    });
     const startOfTodayTs = () => {
       const d = /* @__PURE__ */ new Date();
       d.setHours(0, 0, 0, 0);
@@ -2268,13 +2212,13 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
       const name = resolveStaffFullName(props.staff, id);
       return name === "—" ? "" : name;
     });
-    const assigneeEmptyText = computed(() => isHotMode.value ? "—" : t("demo.task_card.assignee_empty"));
-    const normalizedScopeType = computed(
-      () => {
-        var _a;
-        return normalizeTaskScopeType((_a = props.task) == null ? void 0 : _a.taskScopeType);
-      }
+    const assigneeEmptyText = computed(
+      () => isHotMode.value ? "—" : t("demo.task_card.assignee_empty")
     );
+    const normalizedScopeType = computed(() => {
+      var _a;
+      return normalizeTaskScopeType((_a = props.task) == null ? void 0 : _a.taskScopeType);
+    });
     const targetsLine = computed(() => {
       var _a, _b;
       if (normalizedScopeType.value === TASK_SCOPE_TYPE.EQUIPMENT) {
@@ -2308,9 +2252,9 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
           isHotMode.value ? `hot-task-row--${__props.task.status}` : ""
         ]],
         "data-task-id": __props.task.id
-      }, _attrs))} data-v-3c3e92fe>`);
+      }, _attrs))} data-v-df10fe32>`);
       if (__props.showDeleteAction) {
-        _push(`<div class="ccp-card__actions" data-v-3c3e92fe>`);
+        _push(`<div class="ccp-card__actions" data-v-df10fe32>`);
         _push(ssrRenderComponent(unref(NPopconfirm), {
           "positive-text": unref(t)("demo.task_card.delete"),
           "negative-text": unref(t)("demo.task_card.cancel"),
@@ -2383,24 +2327,21 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
         _push(`<!---->`);
       }
       if (showRepeatLines.value) {
-        _push(`<span class="${ssrRenderClass([{ "hot-task-row__repeat-lines": isHotMode.value }, "ccp-card__repeat-lines"])}" aria-hidden="true" data-v-3c3e92fe><!--[-->`);
+        _push(`<span class="${ssrRenderClass([{ "hot-task-row__repeat-lines": isHotMode.value }, "ccp-card__repeat-lines"])}" aria-hidden="true" data-v-df10fe32><!--[-->`);
         ssrRenderList(__props.task.measurements, (item) => {
-          _push(`<span class="${ssrRenderClass([
-            [
-              isHotMode.value ? "hot-task-row__repeat-line" : "",
-              item.status === "success" ? "ccp-card__repeat-line--ok" : item.status === "pending" ? "ccp-card__repeat-line--pending" : "ccp-card__repeat-line--alert",
-              item.status === "success" ? isHotMode.value ? "hot-task-row__repeat-line--ok" : "" : item.status === "pending" ? isHotMode.value ? "hot-task-row__repeat-line--pending" : "" : isHotMode.value ? "hot-task-row__repeat-line--alert" : ""
-            ],
-            "ccp-card__repeat-line"
-          ])}" data-v-3c3e92fe></span>`);
+          _push(`<span class="${ssrRenderClass([[
+            isHotMode.value ? "hot-task-row__repeat-line" : "",
+            item.status === "success" ? "ccp-card__repeat-line--ok" : item.status === "pending" ? "ccp-card__repeat-line--pending" : "ccp-card__repeat-line--alert",
+            item.status === "success" ? isHotMode.value ? "hot-task-row__repeat-line--ok" : "" : item.status === "pending" ? isHotMode.value ? "hot-task-row__repeat-line--pending" : "" : isHotMode.value ? "hot-task-row__repeat-line--alert" : ""
+          ], "ccp-card__repeat-line"])}" data-v-df10fe32></span>`);
         });
         _push(`<!--]--></span>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="ccp-card__head" data-v-3c3e92fe>`);
+      _push(`<div class="ccp-card__head" data-v-df10fe32>`);
       if (scheduledLine.value) {
-        _push(`<p class="ccp-card__scheduled-line" data-v-3c3e92fe>${ssrInterpolate(scheduledLine.value)}</p>`);
+        _push(`<p class="ccp-card__scheduled-line" data-v-df10fe32>${ssrInterpolate(scheduledLine.value)}</p>`);
       } else {
         _push(`<!---->`);
       }
@@ -2408,9 +2349,9 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
         "ccp-card__title--hot": isHotMode.value,
         "hot-task-row__top": isHotMode.value,
         "hot-task-row__top--with-repeat": isHotMode.value && showRepeatLines.value
-      }, "ccp-card__title"])}" data-v-3c3e92fe><span class="${ssrRenderClass([{ "hot-task-row__title": isHotMode.value }, "ccp-card__title-text"])}" data-v-3c3e92fe>${ssrInterpolate(__props.task.title)}</span>`);
+      }, "ccp-card__title"])}" data-v-df10fe32><span class="${ssrRenderClass([{ "hot-task-row__title": isHotMode.value }, "ccp-card__title-text"])}" data-v-df10fe32>${ssrInterpolate(__props.task.title)}</span>`);
       if (__props.showNicheIcon && nicheEmoji.value) {
-        _push(`<span class="${ssrRenderClass([{ "hot-task-row__niche": isHotMode.value }, "ccp-card__niche"])}" role="img"${ssrRenderAttr("aria-label", nicheAria.value)} data-v-3c3e92fe>${ssrInterpolate(nicheEmoji.value)}</span>`);
+        _push(`<span class="${ssrRenderClass([{ "hot-task-row__niche": isHotMode.value }, "ccp-card__niche"])}" role="img"${ssrRenderAttr("aria-label", nicheAria.value)} data-v-df10fe32>${ssrInterpolate(nicheEmoji.value)}</span>`);
       } else {
         _push(`<!---->`);
       }
@@ -2418,9 +2359,9 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
         "ccp-card__assignee--empty": !assigneeDisplay.value,
         "hot-task-row__assignee": isHotMode.value,
         "hot-task-row__assignee--empty": isHotMode.value && !assigneeDisplay.value
-      }, "ccp-card__assignee"])}" data-v-3c3e92fe>${ssrInterpolate(unref(t)("demo.task_card.assignee_label"))} ${ssrInterpolate(assigneeDisplay.value || assigneeEmptyText.value)}</p>`);
+      }, "ccp-card__assignee"])}" data-v-df10fe32>${ssrInterpolate(unref(t)("demo.task_card.assignee_label"))} ${ssrInterpolate(assigneeDisplay.value || assigneeEmptyText.value)}</p>`);
       if (targetsLine.value) {
-        _push(`<p class="${ssrRenderClass([{ "hot-task-row__targets": isHotMode.value }, "ccp-card__model-summary"])}" data-v-3c3e92fe>`);
+        _push(`<p class="${ssrRenderClass([{ "hot-task-row__targets": isHotMode.value }, "ccp-card__model-summary"])}" data-v-df10fe32>`);
         if (normalizedScopeType.value === unref(TASK_SCOPE_TYPE).EQUIPMENT) {
           _push(ssrRenderComponent(_sfc_main$o, {
             name: "battery-charging-90-round",
@@ -2436,12 +2377,12 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "TaskCard" }, {
         } else {
           _push(`<!---->`);
         }
-        _push(`<span class="${ssrRenderClass([{ "hot-task-row__targets-text": isHotMode.value }, "ccp-card__model-summary-text"])}" data-v-3c3e92fe>${ssrInterpolate(targetsLine.value)}</span></p>`);
+        _push(`<span class="${ssrRenderClass([{ "hot-task-row__targets-text": isHotMode.value }, "ccp-card__model-summary-text"])}" data-v-df10fe32>${ssrInterpolate(targetsLine.value)}</span></p>`);
       } else {
         _push(`<!---->`);
       }
       if (pendingTime.value) {
-        _push(`<p class="${ssrRenderClass([{ "hot-task-row__value": isHotMode.value }, "ccp-card__value"])}" data-v-3c3e92fe>${ssrInterpolate(pendingTime.value)}</p>`);
+        _push(`<p class="${ssrRenderClass([{ "hot-task-row__value": isHotMode.value }, "ccp-card__value"])}" data-v-df10fe32>${ssrInterpolate(pendingTime.value)}</p>`);
       } else {
         _push(`<!---->`);
       }
@@ -2455,7 +2396,7 @@ _sfc_main$a.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/sections/TaskCard.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
-const TaskCard = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-3c3e92fe"]]);
+const TaskCard = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-df10fe32"]]);
 const _sfc_main$9 = /* @__PURE__ */ Object.assign({ name: "DashboardSection" }, {
   __name: "DashboardSection",
   __ssrInlineRender: true,
@@ -2505,7 +2446,7 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ name: "DashboardSection" }, 
       selectedNiche.value = null;
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "dashboard-section" }, _attrs))} data-v-37c7b14c><div class="dashboard-metrics" data-v-37c7b14c><article class="metric-card" data-v-37c7b14c><p class="metric-card__label metric-card__label--success" data-v-37c7b14c>${ssrInterpolate(unref(t)("demo.dashboard.completed"))}</p><p class="metric-card__value" data-v-37c7b14c>${ssrInterpolate(__props.metrics.tasksDone)}/${ssrInterpolate(__props.metrics.tasksTotal)}</p></article><article class="metric-card metric-card--success" data-v-37c7b14c><p class="metric-card__label" data-v-37c7b14c>${ssrInterpolate(unref(t)("demo.dashboard.compliance"))}</p><p class="metric-card__value" data-v-37c7b14c>${ssrInterpolate(__props.metrics.compliance)}%</p></article><article class="metric-card metric-card--danger" data-v-37c7b14c><p class="metric-card__label" data-v-37c7b14c>${ssrInterpolate(unref(t)("demo.dashboard.critical_ccp"))}</p><p class="metric-card__value" data-v-37c7b14c>${ssrInterpolate(__props.metrics.criticalCount)}</p></article><article class="metric-card metric-card--warn" data-v-37c7b14c><p class="metric-card__label" data-v-37c7b14c>${ssrInterpolate(unref(t)("demo.dashboard.no_assignee"))}</p><p class="metric-card__value" data-v-37c7b14c>${ssrInterpolate(__props.metrics.tasksWithoutAssignee ?? 0)}</p></article><article class="metric-card" data-v-37c7b14c><p class="metric-card__label" data-v-37c7b14c>${ssrInterpolate(unref(t)("demo.dashboard.inspection"))}</p><p class="metric-card__value" data-v-37c7b14c>${ssrInterpolate(__props.metrics.inspectionDate)}</p></article></div><div class="hot-tasks" data-v-37c7b14c><div class="hot-tasks__header" data-v-37c7b14c><h2 class="hot-tasks__title" data-v-37c7b14c>${ssrInterpolate(unref(t)("demo.dashboard.hot_tasks"))}</h2></div><div class="hot-tasks__list" data-v-37c7b14c><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "dashboard-section" }, _attrs))} data-v-158d5cd5><div class="dashboard-metrics" data-v-158d5cd5><article class="metric-card" data-v-158d5cd5><p class="metric-card__label metric-card__label--success" data-v-158d5cd5>${ssrInterpolate(unref(t)("demo.dashboard.completed"))}</p><p class="metric-card__value" data-v-158d5cd5>${ssrInterpolate(__props.metrics.tasksDone)}/${ssrInterpolate(__props.metrics.tasksTotal)}</p></article><article class="metric-card metric-card--success" data-v-158d5cd5><p class="metric-card__label" data-v-158d5cd5>${ssrInterpolate(unref(t)("demo.dashboard.compliance"))}</p><p class="metric-card__value" data-v-158d5cd5>${ssrInterpolate(__props.metrics.compliance)}%</p></article><article class="metric-card metric-card--danger" data-v-158d5cd5><p class="metric-card__label" data-v-158d5cd5>${ssrInterpolate(unref(t)("demo.dashboard.critical_ccp"))}</p><p class="metric-card__value" data-v-158d5cd5>${ssrInterpolate(__props.metrics.criticalCount)}</p></article><article class="metric-card metric-card--warn" data-v-158d5cd5><p class="metric-card__label" data-v-158d5cd5>${ssrInterpolate(unref(t)("demo.dashboard.no_assignee"))}</p><p class="metric-card__value" data-v-158d5cd5>${ssrInterpolate(__props.metrics.tasksWithoutAssignee ?? 0)}</p></article><article class="metric-card" data-v-158d5cd5><p class="metric-card__label" data-v-158d5cd5>${ssrInterpolate(unref(t)("demo.dashboard.inspection"))}</p><p class="metric-card__value" data-v-158d5cd5>${ssrInterpolate(__props.metrics.inspectionDate)}</p></article></div><div class="hot-tasks" data-v-158d5cd5><div class="hot-tasks__header" data-v-158d5cd5><h2 class="hot-tasks__title" data-v-158d5cd5>${ssrInterpolate(unref(t)("demo.dashboard.hot_tasks"))}</h2></div><div class="hot-tasks__list" data-v-158d5cd5><!--[-->`);
       ssrRenderList(__props.hotTasks, (task) => {
         _push(ssrRenderComponent(TaskCard, {
           key: task.id,
@@ -2554,7 +2495,7 @@ _sfc_main$9.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/sections/DashboardSection.vue");
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
-const DashboardSection = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-37c7b14c"]]);
+const DashboardSection = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-158d5cd5"]]);
 const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSection" }, {
   __name: "ChecklistTaskFieldsSection",
   __ssrInlineRender: true,
@@ -2592,10 +2533,7 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSe
       if (correctiveActionRows.value.length >= 30) {
         return;
       }
-      correctiveActionRows.value = [
-        ...correctiveActionRows.value,
-        { id: v4(), text: "" }
-      ];
+      correctiveActionRows.value = [...correctiveActionRows.value, { id: v4(), text: "" }];
     };
     const removeExceptionRow = (index) => {
       const next = [...correctiveActionRows.value];
@@ -2636,9 +2574,9 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSe
       row.config.options = next.length ? next : [""];
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "task-fields-section" }, _attrs))} data-v-7d34599d><p class="task-fields-section__title" data-v-7d34599d>${ssrInterpolate(unref(t)("demo.task_fields.section_title"))}</p><p class="task-fields-section__lead" data-v-7d34599d>${ssrInterpolate(unref(t)("demo.task_fields.section_lead"))}</p><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "task-fields-section" }, _attrs))} data-v-9f54bc37><p class="task-fields-section__title" data-v-9f54bc37>${ssrInterpolate(unref(t)("demo.task_fields.section_title"))}</p><p class="task-fields-section__lead" data-v-9f54bc37>${ssrInterpolate(unref(t)("demo.task_fields.section_lead"))}</p><!--[-->`);
       ssrRenderList(model.value, (row, index) => {
-        _push(`<div class="task-fields-section__row"${ssrRenderAttr("data-field-row-index", index)} data-v-7d34599d><div class="task-fields-section__row-head" data-v-7d34599d>`);
+        _push(`<div class="task-fields-section__row"${ssrRenderAttr("data-field-row-index", index)} data-v-9f54bc37><div class="task-fields-section__row-head" data-v-9f54bc37>`);
         _push(ssrRenderComponent(unref(NSelect), {
           value: row.fieldType,
           options: taskFieldTypeOptions.value,
@@ -2666,9 +2604,9 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSe
         }, _parent));
         _push(`</div>`);
         if (row.fieldType) {
-          _push(`<div class="task-fields-section__panel" data-v-7d34599d>`);
+          _push(`<div class="task-fields-section__panel" data-v-9f54bc37>`);
           if (row.fieldType === unref(TASK_FIELD_TYPE).TEMPERATURE) {
-            _push(`<div class="task-fields-section__temp-row" data-v-7d34599d>`);
+            _push(`<div class="task-fields-section__temp-row" data-v-9f54bc37>`);
             _push(ssrRenderComponent(unref(NFormItem), {
               required: "",
               label: unref(t)("demo.task_fields.min_c"),
@@ -2731,7 +2669,7 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSe
             }, _parent));
             _push(`</div>`);
           } else if (row.fieldType === unref(TASK_FIELD_TYPE).SINGLE_CHOICE) {
-            _push(`<!--[--><div class="task-fields-section__single-choice-row" data-v-7d34599d>`);
+            _push(`<!--[--><div class="task-fields-section__single-choice-row" data-v-9f54bc37>`);
             _push(ssrRenderComponent(unref(NFormItem), {
               required: "",
               label: unref(t)("demo.task_fields.question"),
@@ -2760,7 +2698,7 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSe
             }, _parent));
             _push(`</div><!--[-->`);
             ssrRenderList(row.config.options, (option, optionIndex) => {
-              _push(`<div class="task-fields-section__single-choice-row" data-v-7d34599d>`);
+              _push(`<div class="task-fields-section__single-choice-row" data-v-9f54bc37>`);
               _push(ssrRenderComponent(unref(NFormItem), {
                 required: "",
                 label: unref(t)("demo.task_fields.answer"),
@@ -2830,7 +2768,7 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSe
             }, _parent));
             _push(`<!--]-->`);
           } else if (row.fieldType === unref(TASK_FIELD_TYPE).TICKET) {
-            _push(`<!--[--><p class="task-fields-section__hint" data-v-7d34599d>${ssrInterpolate(unref(t)("demo.task_fields.ticket_hint"))}</p>`);
+            _push(`<!--[--><p class="task-fields-section__hint" data-v-9f54bc37>${ssrInterpolate(unref(t)("demo.task_fields.ticket_hint"))}</p>`);
             _push(ssrRenderComponent(unref(NFormItem), {
               required: "",
               label: unref(t)("demo.task_fields.ticket_description"),
@@ -2892,9 +2830,9 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "ChecklistTaskFieldsSe
         _push(`<!---->`);
       }
       if (hasSelectedTaskFieldType.value) {
-        _push(`<div class="task-fields-section__exception-block" data-v-7d34599d><p class="task-fields-section__exception-block__title" data-v-7d34599d>${ssrInterpolate(unref(t)("demo.task_fields.exceptions_title"))}</p><p class="task-fields-section__exception-block__lead" data-v-7d34599d>${ssrInterpolate(unref(t)("demo.task_fields.exceptions_lead"))}</p><!--[-->`);
+        _push(`<div class="task-fields-section__exception-block" data-v-9f54bc37><p class="task-fields-section__exception-block__title" data-v-9f54bc37>${ssrInterpolate(unref(t)("demo.task_fields.exceptions_title"))}</p><p class="task-fields-section__exception-block__lead" data-v-9f54bc37>${ssrInterpolate(unref(t)("demo.task_fields.exceptions_lead"))}</p><!--[-->`);
         ssrRenderList(correctiveActionRows.value, (row, index) => {
-          _push(`<div class="task-fields-section__exception-block__row" data-v-7d34599d>`);
+          _push(`<div class="task-fields-section__exception-block__row" data-v-9f54bc37>`);
           _push(ssrRenderComponent(unref(NInput), {
             value: row.text,
             "onUpdate:value": ($event) => row.text = $event,
@@ -2954,7 +2892,7 @@ _sfc_main$8.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/checklist/ChecklistTaskFieldsSection.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
-const ChecklistTaskFieldsSection = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-7d34599d"]]);
+const ChecklistTaskFieldsSection = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-9f54bc37"]]);
 const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
   __name: "CreateTaskModal",
   __ssrInlineRender: true,
@@ -3077,9 +3015,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
       if (!groups.length) {
         return { groupTitle: "", items: [] };
       }
-      const found = groups.find(
-        (g) => g.groupTitle === equipmentPickerGroupTitle.value
-      );
+      const found = groups.find((g) => g.groupTitle === equipmentPickerGroupTitle.value);
       return found ?? groups[0];
     });
     const normalizedScheduleSlotCount = computed(() => {
@@ -3089,9 +3025,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
       }
       return Math.max(1, Math.trunc(n));
     });
-    const isSingleWeekdayFrequency = computed(
-      () => addForm.frequency === FREQUENCY_CODE.WEEKLY
-    );
+    const isSingleWeekdayFrequency = computed(() => addForm.frequency === FREQUENCY_CODE.WEEKLY);
     watch(
       () => equipmentPickerGroupTitle.value,
       () => {
@@ -3154,9 +3088,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
     watch(
       () => addForm.repeatTimes,
       (times) => {
-        const generated = buildRepeatTimesByCount(
-          normalizedScheduleSlotCount.value
-        );
+        const generated = buildRepeatTimesByCount(normalizedScheduleSlotCount.value);
         const current = Array.isArray(times) ? [...times] : [];
         let changed = false;
         for (let i = 0; i < generated.length; i += 1) {
@@ -3331,9 +3263,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
         return;
       }
       target.classList.remove("checklists-validation-error-control");
-      activeValidationErrorElements = activeValidationErrorElements.filter(
-        (el) => el !== target
-      );
+      activeValidationErrorElements = activeValidationErrorElements.filter((el) => el !== target);
     };
     const clearValidationErrorForSelectorControls = (selector) => {
       const controls = Array.from(document.querySelectorAll(selector));
@@ -3429,9 +3359,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
       }
       if (hasSelectedFieldTypeRequiringExceptions) {
         const exceptionRows = Array.isArray(addForm.correctiveActionRows) ? addForm.correctiveActionRows : [];
-        const hasAny = exceptionRows.some(
-          (r) => String((r == null ? void 0 : r.text) ?? "").trim().length > 0
-        );
+        const hasAny = exceptionRows.some((r) => String((r == null ? void 0 : r.text) ?? "").trim().length > 0);
         if (!hasAny) {
           scrollToModalField(".task-fields-section__exception-block", true);
           message.warning(t("demo.create_task.warn_corrective_actions"));
@@ -3549,7 +3477,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
       }, _attrs), {
         footer: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="checklists-modal-footer" data-v-941f5eec${_scopeId}>`);
+            _push2(`<div class="checklists-modal-footer" data-v-cbfe94b2${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Button), {
               type: "warning",
               size: "large",
@@ -3679,11 +3607,11 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
         }),
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="checklists-add-modal__body" style="${ssrRenderStyle(addModalBodyScrollStyle)}" data-v-941f5eec${_scopeId}><nav class="checklists-add-wizard__rail"${ssrRenderAttr("aria-label", unref(t)("demo.create_task.wizard_aria"))} data-v-941f5eec${_scopeId}><!--[-->`);
+            _push2(`<div class="checklists-add-modal__body" style="${ssrRenderStyle(addModalBodyScrollStyle)}" data-v-cbfe94b2${_scopeId}><nav class="checklists-add-wizard__rail"${ssrRenderAttr("aria-label", unref(t)("demo.create_task.wizard_aria"))} data-v-cbfe94b2${_scopeId}><!--[-->`);
             ssrRenderList(unref(ADD_WIZARD_STEPS), (stepId, stepIdx) => {
               _push2(`<!--[-->`);
               if (addWizardStep.value > stepId) {
-                _push2(`<button type="button" class="checklists-add-wizard__step-btn checklists-add-wizard__step-btn--done"${ssrRenderAttr("aria-label", addWizardStepAriaLabel(stepId))} data-v-941f5eec${_scopeId}>`);
+                _push2(`<button type="button" class="checklists-add-wizard__step-btn checklists-add-wizard__step-btn--done"${ssrRenderAttr("aria-label", addWizardStepAriaLabel(stepId))} data-v-cbfe94b2${_scopeId}>`);
                 _push2(ssrRenderComponent(_sfc_main$o, {
                   name: "check-circle",
                   class: "checklists-add-wizard__step-icon checklists-add-wizard__step-icon--ok",
@@ -3691,12 +3619,12 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                 }, null, _parent2, _scopeId));
                 _push2(`</button>`);
               } else if (addWizardStep.value === stepId) {
-                _push2(`<div class="checklists-add-wizard__step-btn checklists-add-wizard__step-btn--active" aria-current="step"${ssrRenderAttr("aria-label", addWizardStepAriaLabel(stepId))} data-v-941f5eec${_scopeId}><span class="checklists-add-wizard__digit" aria-hidden="true" data-v-941f5eec${_scopeId}>${ssrInterpolate(stepId)}</span></div>`);
+                _push2(`<div class="checklists-add-wizard__step-btn checklists-add-wizard__step-btn--active" aria-current="step"${ssrRenderAttr("aria-label", addWizardStepAriaLabel(stepId))} data-v-cbfe94b2${_scopeId}><span class="checklists-add-wizard__digit" aria-hidden="true" data-v-cbfe94b2${_scopeId}>${ssrInterpolate(stepId)}</span></div>`);
               } else {
-                _push2(`<div class="checklists-add-wizard__step-btn checklists-add-wizard__step-btn--future" aria-disabled="true"${ssrRenderAttr("aria-label", addWizardStepAriaLabel(stepId))} data-v-941f5eec${_scopeId}><span class="checklists-add-wizard__digit" aria-hidden="true" data-v-941f5eec${_scopeId}>${ssrInterpolate(stepId)}</span></div>`);
+                _push2(`<div class="checklists-add-wizard__step-btn checklists-add-wizard__step-btn--future" aria-disabled="true"${ssrRenderAttr("aria-label", addWizardStepAriaLabel(stepId))} data-v-cbfe94b2${_scopeId}><span class="checklists-add-wizard__digit" aria-hidden="true" data-v-cbfe94b2${_scopeId}>${ssrInterpolate(stepId)}</span></div>`);
               }
               if (stepIdx < unref(ADD_WIZARD_STEPS).length - 1) {
-                _push2(`<div class="checklists-add-wizard__connector" aria-hidden="true" data-v-941f5eec${_scopeId}></div>`);
+                _push2(`<div class="checklists-add-wizard__connector" aria-hidden="true" data-v-cbfe94b2${_scopeId}></div>`);
               } else {
                 _push2(`<!---->`);
               }
@@ -3760,7 +3688,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                                   }, {
                                     default: withCtx((_5, _push6, _parent6, _scopeId5) => {
                                       if (_push6) {
-                                        _push6(`<span class="checklists-scope-label" data-v-941f5eec${_scopeId5}>${ssrInterpolate(opt.label)}</span><p class="checklists-scope-hint" data-v-941f5eec${_scopeId5}>${ssrInterpolate(opt.hint)}</p>`);
+                                        _push6(`<span class="checklists-scope-label" data-v-cbfe94b2${_scopeId5}>${ssrInterpolate(opt.label)}</span><p class="checklists-scope-hint" data-v-cbfe94b2${_scopeId5}>${ssrInterpolate(opt.hint)}</p>`);
                                       } else {
                                         return [
                                           createVNode("span", { class: "checklists-scope-label" }, toDisplayString(opt.label), 1),
@@ -3821,7 +3749,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                       }),
                       _: 1
                     }, _parent3, _scopeId2));
-                    _push3(`<div class="checklists-details-block" data-v-941f5eec${_scopeId2}><p class="checklists-details-heading" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.task_details"))}</p>`);
+                    _push3(`<div class="checklists-details-block" data-v-cbfe94b2${_scopeId2}><p class="checklists-details-heading" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.task_details"))}</p>`);
                     if (isEquipmentOrRooms.value) {
                       _push3(ssrRenderComponent(unref(NFormItem), {
                         label: unref(t)("demo.create_task.assignee_required"),
@@ -3888,7 +3816,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                         }),
                         _: 1
                       }, _parent3, _scopeId2));
-                      _push3(`<p class="checklists-standalone-hint" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.assign_hint"))}</p><!--]-->`);
+                      _push3(`<p class="checklists-standalone-hint" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.assign_hint"))}</p><!--]-->`);
                     }
                     _push3(ssrRenderComponent(unref(NFormItem), {
                       label: unref(t)("demo.create_task.frequency")
@@ -3914,13 +3842,13 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                       }),
                       _: 1
                     }, _parent3, _scopeId2));
-                    _push3(`<div class="checklists-working-days-block" data-v-941f5eec${_scopeId2}><p class="checklists-working-days-block__title" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.working_days"))}</p><div class="checklists-working-days-block__list" data-v-941f5eec${_scopeId2}><!--[-->`);
+                    _push3(`<div class="checklists-working-days-block" data-v-cbfe94b2${_scopeId2}><p class="checklists-working-days-block__title" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.working_days"))}</p><div class="checklists-working-days-block__list" data-v-cbfe94b2${_scopeId2}><!--[-->`);
                     ssrRenderList(WEEKDAY_OPTIONS.value, (day) => {
                       _push3(`<button type="button" class="${ssrRenderClass([{
                         "checklists-working-days-block__day--active": addForm.activeWeekdays.includes(day.value)
-                      }, "checklists-working-days-block__day"])}" data-v-941f5eec${_scopeId2}>${ssrInterpolate(day.short)}</button>`);
+                      }, "checklists-working-days-block__day"])}" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(day.short)}</button>`);
                     });
-                    _push3(`<!--]--></div></div><div class="checklists-details-schedule-row" data-v-941f5eec${_scopeId2}>`);
+                    _push3(`<!--]--></div></div><div class="checklists-details-schedule-row" data-v-cbfe94b2${_scopeId2}>`);
                     _push3(ssrRenderComponent(unref(NFormItem), {
                       label: unref(t)("demo.create_task.start_date"),
                       required: "",
@@ -3989,7 +3917,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                       }),
                       _: 1
                     }, _parent3, _scopeId2));
-                    _push3(`</div><div class="checklists-repeat-times-block" data-v-941f5eec${_scopeId2}><p class="checklists-repeat-times-block__title" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.execution_time"))}</p><div class="checklists-repeat-times-block__list" data-v-941f5eec${_scopeId2}><!--[-->`);
+                    _push3(`</div><div class="checklists-repeat-times-block" data-v-cbfe94b2${_scopeId2}><p class="checklists-repeat-times-block__title" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.execution_time"))}</p><div class="checklists-repeat-times-block__list" data-v-cbfe94b2${_scopeId2}><!--[-->`);
                     ssrRenderList(normalizedScheduleSlotCount.value, (idx) => {
                       _push3(ssrRenderComponent(unref(NFormItem), {
                         key: `repeat-time-${idx}`,
@@ -4029,7 +3957,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                   } else {
                     _push3(`<!--[-->`);
                     if (addForm.taskScopeType === unref(TASK_SCOPE_TYPE).EQUIPMENT) {
-                      _push3(`<div class="checklists-equipment-block" data-v-941f5eec${_scopeId2}><p class="checklists-details-heading" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.task_subject"))}</p>`);
+                      _push3(`<div class="checklists-equipment-block" data-v-cbfe94b2${_scopeId2}><p class="checklists-details-heading" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.task_subject"))}</p>`);
                       _push3(ssrRenderComponent(unref(NFormItem), {
                         label: unref(t)("demo.create_task.group"),
                         class: "checklists-equipment-group-select"
@@ -4063,7 +3991,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                           if (_push4) {
                             _push4(`<!--[-->`);
                             ssrRenderList(equipmentGroupForPicker.value.items, (item) => {
-                              _push4(`<div class="checklists-equipment-item" data-v-941f5eec${_scopeId3}>`);
+                              _push4(`<div class="checklists-equipment-item" data-v-cbfe94b2${_scopeId3}>`);
                               _push4(ssrRenderComponent(unref(NCheckbox), {
                                 value: item.id,
                                 label: item.label,
@@ -4096,7 +4024,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                       _push3(`<!---->`);
                     }
                     if (addForm.taskScopeType === unref(TASK_SCOPE_TYPE).ROOMS) {
-                      _push3(`<div class="checklists-equipment-block" data-v-941f5eec${_scopeId2}><p class="checklists-details-heading" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.task_subject"))}</p>`);
+                      _push3(`<div class="checklists-equipment-block" data-v-cbfe94b2${_scopeId2}><p class="checklists-details-heading" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.task_subject"))}</p>`);
                       _push3(ssrRenderComponent(unref(NCheckboxGroup), {
                         value: addForm.roomTargetIds,
                         "onUpdate:value": ($event) => addForm.roomTargetIds = $event
@@ -4105,9 +4033,9 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                           if (_push4) {
                             _push4(`<!--[-->`);
                             ssrRenderList(unref(ROOM_GROUPS), (group) => {
-                              _push4(`<div class="checklists-equipment-group" data-v-941f5eec${_scopeId3}><p class="checklists-equipment-group-title" data-v-941f5eec${_scopeId3}>${ssrInterpolate(group.groupTitle)}</p><!--[-->`);
+                              _push4(`<div class="checklists-equipment-group" data-v-cbfe94b2${_scopeId3}><p class="checklists-equipment-group-title" data-v-cbfe94b2${_scopeId3}>${ssrInterpolate(group.groupTitle)}</p><!--[-->`);
                               ssrRenderList(group.items, (item) => {
-                                _push4(`<div class="checklists-equipment-item" data-v-941f5eec${_scopeId3}>`);
+                                _push4(`<div class="checklists-equipment-item" data-v-cbfe94b2${_scopeId3}>`);
                                 _push4(ssrRenderComponent(unref(NCheckbox), {
                                   value: item.id,
                                   label: item.label,
@@ -4149,20 +4077,20 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                     } else {
                       _push3(`<!---->`);
                     }
-                    _push3(`<div class="checklists-task-fields-block" data-v-941f5eec${_scopeId2}>`);
+                    _push3(`<div class="checklists-task-fields-block" data-v-cbfe94b2${_scopeId2}>`);
                     _push3(ssrRenderComponent(ChecklistTaskFieldsSection, {
                       modelValue: addForm.taskFieldDefinitions,
                       "onUpdate:modelValue": ($event) => addForm.taskFieldDefinitions = $event,
-                      "task-field-type-options": taskFieldTypeOptionsForCurrentScope.value,
                       "corrective-action-rows": addForm.correctiveActionRows,
-                      "onUpdate:correctiveActionRows": ($event) => addForm.correctiveActionRows = $event
+                      "onUpdate:correctiveActionRows": ($event) => addForm.correctiveActionRows = $event,
+                      "task-field-type-options": taskFieldTypeOptionsForCurrentScope.value
                     }, null, _parent3, _scopeId2));
-                    _push3(`</div><div class="checklists-report-corrections" data-v-941f5eec${_scopeId2}><div class="header-checklists-report-corrections" data-v-941f5eec${_scopeId2}><p class="checklists-report-corrections__title" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.report_corrections"))}</p>`);
+                    _push3(`</div><div class="checklists-report-corrections" data-v-cbfe94b2${_scopeId2}><div class="header-checklists-report-corrections" data-v-cbfe94b2${_scopeId2}><p class="checklists-report-corrections__title" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.report_corrections"))}</p>`);
                     _push3(ssrRenderComponent(unref(NSwitch), {
                       value: addForm.allowAssigneeReportCorrections,
                       "onUpdate:value": ($event) => addForm.allowAssigneeReportCorrections = $event
                     }, null, _parent3, _scopeId2));
-                    _push3(`</div><p class="checklists-report-corrections__text" data-v-941f5eec${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.report_corrections_text"))}</p></div><!--]-->`);
+                    _push3(`</div><p class="checklists-report-corrections__text" data-v-cbfe94b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.create_task.report_corrections_text"))}</p></div><!--]-->`);
                   }
                 } else {
                   return [
@@ -4425,10 +4353,10 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                         createVNode(ChecklistTaskFieldsSection, {
                           modelValue: addForm.taskFieldDefinitions,
                           "onUpdate:modelValue": ($event) => addForm.taskFieldDefinitions = $event,
-                          "task-field-type-options": taskFieldTypeOptionsForCurrentScope.value,
                           "corrective-action-rows": addForm.correctiveActionRows,
-                          "onUpdate:correctiveActionRows": ($event) => addForm.correctiveActionRows = $event
-                        }, null, 8, ["modelValue", "onUpdate:modelValue", "task-field-type-options", "corrective-action-rows", "onUpdate:correctiveActionRows"])
+                          "onUpdate:correctiveActionRows": ($event) => addForm.correctiveActionRows = $event,
+                          "task-field-type-options": taskFieldTypeOptionsForCurrentScope.value
+                        }, null, 8, ["modelValue", "onUpdate:modelValue", "corrective-action-rows", "onUpdate:correctiveActionRows", "task-field-type-options"])
                       ]),
                       createVNode("div", { class: "checklists-report-corrections" }, [
                         createVNode("div", { class: "header-checklists-report-corrections" }, [
@@ -4766,10 +4694,10 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "CreateTaskModal" }, {
                         createVNode(ChecklistTaskFieldsSection, {
                           modelValue: addForm.taskFieldDefinitions,
                           "onUpdate:modelValue": ($event) => addForm.taskFieldDefinitions = $event,
-                          "task-field-type-options": taskFieldTypeOptionsForCurrentScope.value,
                           "corrective-action-rows": addForm.correctiveActionRows,
-                          "onUpdate:correctiveActionRows": ($event) => addForm.correctiveActionRows = $event
-                        }, null, 8, ["modelValue", "onUpdate:modelValue", "task-field-type-options", "corrective-action-rows", "onUpdate:correctiveActionRows"])
+                          "onUpdate:correctiveActionRows": ($event) => addForm.correctiveActionRows = $event,
+                          "task-field-type-options": taskFieldTypeOptionsForCurrentScope.value
+                        }, null, 8, ["modelValue", "onUpdate:modelValue", "corrective-action-rows", "onUpdate:correctiveActionRows", "task-field-type-options"])
                       ]),
                       createVNode("div", { class: "checklists-report-corrections" }, [
                         createVNode("div", { class: "header-checklists-report-corrections" }, [
@@ -4800,7 +4728,7 @@ _sfc_main$7.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/create_task_modal/CreateTaskModal.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
-const CreateTaskModal = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-941f5eec"]]);
+const CreateTaskModal = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-cbfe94b2"]]);
 const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "ChecklistsSection" }, {
   __name: "ChecklistsSection",
   __ssrInlineRender: true,
@@ -4906,7 +4834,7 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "ChecklistsSection" },
       }
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklists-section" }, _attrs))} data-v-bb0ad6b2><div class="checklists-toolbar" data-v-bb0ad6b2>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "checklists-section" }, _attrs))} data-v-51d5a59a><div class="checklists-toolbar" data-v-51d5a59a>`);
       _push(ssrRenderComponent(unref(Button), {
         type: "primary",
         class: "checklists-add-btn",
@@ -4942,7 +4870,7 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "ChecklistsSection" },
               }, {
                 tab: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<span class="checklists-section__tab-label" data-v-bb0ad6b2${_scopeId2}>${ssrInterpolate(tab.label)} <span class="checklists-section__tab-emoji" aria-hidden="true" data-v-bb0ad6b2${_scopeId2}>${ssrInterpolate(nicheEmoji(tab.id))}</span></span>`);
+                    _push3(`<span class="checklists-section__tab-label" data-v-51d5a59a${_scopeId2}>${ssrInterpolate(tab.label)} <span class="checklists-section__tab-emoji" aria-hidden="true" data-v-51d5a59a${_scopeId2}>${ssrInterpolate(nicheEmoji(tab.id))}</span></span>`);
                   } else {
                     return [
                       createVNode("span", { class: "checklists-section__tab-label" }, [
@@ -4958,9 +4886,9 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "ChecklistsSection" },
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     if (!tasksByNiche(tab.id).length) {
-                      _push3(`<div class="checklists-empty" data-v-bb0ad6b2${_scopeId2}>${ssrInterpolate(unref(t)("demo.checklists.empty_state"))}</div>`);
+                      _push3(`<div class="checklists-empty" data-v-51d5a59a${_scopeId2}>${ssrInterpolate(unref(t)("demo.checklists.empty_state"))}</div>`);
                     } else {
-                      _push3(`<div class="checklists-grid" data-v-bb0ad6b2${_scopeId2}><!--[-->`);
+                      _push3(`<div class="checklists-grid" data-v-51d5a59a${_scopeId2}><!--[-->`);
                       ssrRenderList(tasksByNiche(tab.id), (task) => {
                         _push3(ssrRenderComponent(TaskCard, {
                           key: task.id,
@@ -5076,7 +5004,7 @@ _sfc_main$6.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/sections/ChecklistsSection.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const ChecklistsSection = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-bb0ad6b2"]]);
+const ChecklistsSection = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-51d5a59a"]]);
 const _sfc_main$5 = /* @__PURE__ */ Object.assign({ name: "CreateEditStaffModal" }, {
   __name: "CreateEditStaffModal",
   __ssrInlineRender: true,
@@ -5267,7 +5195,7 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign({ name: "CreateEditStaffModal"
       }, _attrs), {
         footer: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="create-edit-staff-modal__footer" data-v-e7e49f24${_scopeId}>`);
+            _push2(`<div class="create-edit-staff-modal__footer" data-v-3a009fd7${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Button), {
               type: "warning",
               onClick: ($event) => modalShow.value = false
@@ -5678,7 +5606,7 @@ _sfc_main$5.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/create_edit_staff/CreateEditStaffModal.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const CreateEditStaffModal = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-e7e49f24"]]);
+const CreateEditStaffModal = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-3a009fd7"]]);
 const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "PersonnelSection" }, {
   __name: "PersonnelSection",
   __ssrInlineRender: true,
@@ -5739,9 +5667,7 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "PersonnelSection" }, 
     const staffBySite = (siteId) => demoState.value.staff.filter((m) => m.siteId === siteId);
     const countAssignedTasks = (staffId) => {
       let n = 0;
-      for (const tasks of Object.values(
-        demoState.value.checklistsByNiche ?? {}
-      )) {
+      for (const tasks of Object.values(demoState.value.checklistsByNiche ?? {})) {
         for (const t2 of tasks) {
           if (t2.assignedStaffId === staffId) {
             n += 1;
@@ -5771,7 +5697,7 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "PersonnelSection" }, 
       (_a = staffModalRef.value) == null ? void 0 : _a.openEdit(member);
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "personnel-section" }, _attrs))} data-v-41558d20><div class="personnel-section__toolbar" data-v-41558d20>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "personnel-section" }, _attrs))} data-v-c1028781><div class="personnel-section__toolbar" data-v-c1028781>`);
       _push(ssrRenderComponent(unref(Button), {
         type: "primary",
         size: "large",
@@ -5806,7 +5732,7 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "PersonnelSection" }, 
               }, {
                 tab: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<span class="personnel-section__tab-label" data-v-41558d20${_scopeId2}>${ssrInterpolate(site.name)} <span class="personnel-section__tab-emoji" aria-hidden="true" data-v-41558d20${_scopeId2}>${ssrInterpolate(unref(siteEmoji)(site.id))}</span></span>`);
+                    _push3(`<span class="personnel-section__tab-label" data-v-c1028781${_scopeId2}>${ssrInterpolate(site.name)} <span class="personnel-section__tab-emoji" aria-hidden="true" data-v-c1028781${_scopeId2}>${ssrInterpolate(unref(siteEmoji)(site.id))}</span></span>`);
                   } else {
                     return [
                       createVNode("span", { class: "personnel-section__tab-label" }, [
@@ -5822,16 +5748,16 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "PersonnelSection" }, 
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
                     if (site.address) {
-                      _push3(`<p class="personnel-section__site-address" data-v-41558d20${_scopeId2}>${ssrInterpolate(site.address)}</p>`);
+                      _push3(`<p class="personnel-section__site-address" data-v-c1028781${_scopeId2}>${ssrInterpolate(site.address)}</p>`);
                     } else {
                       _push3(`<!---->`);
                     }
-                    _push3(`<div class="personnel-section__desktop" data-v-41558d20${_scopeId2}><div class="personnel-section__table-wrap" data-v-41558d20${_scopeId2}><table class="personnel-section__table" data-v-41558d20${_scopeId2}><thead data-v-41558d20${_scopeId2}><tr data-v-41558d20${_scopeId2}><th data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colFullName)}</th><th data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colRole)}</th><th data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colPhone)}</th><th data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colEmail)}</th><th data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colStatus)}</th><th data-v-41558d20${_scopeId2}></th></tr></thead><tbody data-v-41558d20${_scopeId2}><!--[-->`);
+                    _push3(`<div class="personnel-section__desktop" data-v-c1028781${_scopeId2}><div class="personnel-section__table-wrap" data-v-c1028781${_scopeId2}><table class="personnel-section__table" data-v-c1028781${_scopeId2}><thead data-v-c1028781${_scopeId2}><tr data-v-c1028781${_scopeId2}><th data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colFullName)}</th><th data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colRole)}</th><th data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colPhone)}</th><th data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colEmail)}</th><th data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.colStatus)}</th><th data-v-c1028781${_scopeId2}></th></tr></thead><tbody data-v-c1028781${_scopeId2}><!--[-->`);
                     ssrRenderList(staffBySite(site.id), (member) => {
-                      _push3(`<tr data-v-41558d20${_scopeId2}><td data-v-41558d20${_scopeId2}>${ssrInterpolate(member.fullName)}</td><td data-v-41558d20${_scopeId2}>${ssrInterpolate(member.role)}</td><td data-v-41558d20${_scopeId2}>${ssrInterpolate(member.phone || personnelSectionText.value.empty)}</td><td data-v-41558d20${_scopeId2}>${ssrInterpolate(member.email || personnelSectionText.value.empty)}</td><td data-v-41558d20${_scopeId2}><span class="${ssrRenderClass([
+                      _push3(`<tr data-v-c1028781${_scopeId2}><td data-v-c1028781${_scopeId2}>${ssrInterpolate(member.fullName)}</td><td data-v-c1028781${_scopeId2}>${ssrInterpolate(member.role)}</td><td data-v-c1028781${_scopeId2}>${ssrInterpolate(member.phone || personnelSectionText.value.empty)}</td><td data-v-c1028781${_scopeId2}>${ssrInterpolate(member.email || personnelSectionText.value.empty)}</td><td data-v-c1028781${_scopeId2}><span class="${ssrRenderClass([
                         member.active === false ? "personnel-section__status--inactive" : "personnel-section__status--active",
                         "personnel-section__status"
-                      ])}" data-v-41558d20${_scopeId2}>${ssrInterpolate(member.active === false ? personnelSectionText.value.statusInactive : personnelSectionText.value.statusActive)}</span></td><td class="personnel-section__actions" data-v-41558d20${_scopeId2}><div class="box-button" data-v-41558d20${_scopeId2}>`);
+                      ])}" data-v-c1028781${_scopeId2}>${ssrInterpolate(member.active === false ? personnelSectionText.value.statusInactive : personnelSectionText.value.statusActive)}</span></td><td class="personnel-section__actions" data-v-c1028781${_scopeId2}><div class="box-button" data-v-c1028781${_scopeId2}>`);
                       _push3(ssrRenderComponent(unref(Button), {
                         type: "info",
                         class: "personnel-section__action-btn",
@@ -5906,12 +5832,12 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "PersonnelSection" }, 
                       }, _parent3, _scopeId2));
                       _push3(`</div></td></tr>`);
                     });
-                    _push3(`<!--]--></tbody></table></div></div><div class="personnel-section__mobile" data-v-41558d20${_scopeId2}><!--[-->`);
+                    _push3(`<!--]--></tbody></table></div></div><div class="personnel-section__mobile" data-v-c1028781${_scopeId2}><!--[-->`);
                     ssrRenderList(staffBySite(site.id), (member) => {
-                      _push3(`<article class="personnel-card" data-v-41558d20${_scopeId2}><p class="personnel-card__line" data-v-41558d20${_scopeId2}><span class="personnel-card__label" data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelFullName)}</span> ${ssrInterpolate(member.fullName)}</p><p class="personnel-card__line" data-v-41558d20${_scopeId2}><span class="personnel-card__label" data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelRole)}</span> ${ssrInterpolate(member.role)}</p><p class="personnel-card__line" data-v-41558d20${_scopeId2}><span class="personnel-card__label" data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelPhone)}</span> ${ssrInterpolate(member.phone || personnelSectionText.value.empty)}</p><p class="personnel-card__line" data-v-41558d20${_scopeId2}><span class="personnel-card__label" data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelEmail)}</span> ${ssrInterpolate(member.email || personnelSectionText.value.empty)}</p><p class="personnel-card__line personnel-card__line--status" data-v-41558d20${_scopeId2}><span class="personnel-card__label" data-v-41558d20${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelStatus)}</span><span class="${ssrRenderClass([
+                      _push3(`<article class="personnel-card" data-v-c1028781${_scopeId2}><p class="personnel-card__line" data-v-c1028781${_scopeId2}><span class="personnel-card__label" data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelFullName)}</span> ${ssrInterpolate(member.fullName)}</p><p class="personnel-card__line" data-v-c1028781${_scopeId2}><span class="personnel-card__label" data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelRole)}</span> ${ssrInterpolate(member.role)}</p><p class="personnel-card__line" data-v-c1028781${_scopeId2}><span class="personnel-card__label" data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelPhone)}</span> ${ssrInterpolate(member.phone || personnelSectionText.value.empty)}</p><p class="personnel-card__line" data-v-c1028781${_scopeId2}><span class="personnel-card__label" data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelEmail)}</span> ${ssrInterpolate(member.email || personnelSectionText.value.empty)}</p><p class="personnel-card__line personnel-card__line--status" data-v-c1028781${_scopeId2}><span class="personnel-card__label" data-v-c1028781${_scopeId2}>${ssrInterpolate(personnelSectionText.value.labelStatus)}</span><span class="${ssrRenderClass([
                         member.active === false ? "personnel-section__status--inactive" : "personnel-section__status--active",
                         "personnel-section__status"
-                      ])}" data-v-41558d20${_scopeId2}>${ssrInterpolate(member.active === false ? personnelSectionText.value.statusInactive : personnelSectionText.value.statusActive)}</span></p><div class="personnel-card__actions" data-v-41558d20${_scopeId2}>`);
+                      ])}" data-v-c1028781${_scopeId2}>${ssrInterpolate(member.active === false ? personnelSectionText.value.statusInactive : personnelSectionText.value.statusActive)}</span></p><div class="personnel-card__actions" data-v-c1028781${_scopeId2}>`);
                       _push3(ssrRenderComponent(unref(Button), {
                         type: "info",
                         block: "",
@@ -6348,7 +6274,7 @@ _sfc_main$4.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/sections/PersonnelSection.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
-const PersonnelSection = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-41558d20"]]);
+const PersonnelSection = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-c1028781"]]);
 const _sfc_main$3 = /* @__PURE__ */ Object.assign({ name: "EudrQrModal" }, {
   __name: "EudrQrModal",
   __ssrInlineRender: true,
@@ -6468,7 +6394,7 @@ const _sfc_main$3 = /* @__PURE__ */ Object.assign({ name: "EudrQrModal" }, {
       }, _attrs), {
         footer: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="eudr-qr-modal__actions" data-v-29f303b3${_scopeId}>`);
+            _push2(`<div class="eudr-qr-modal__actions" data-v-31dccae0${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Button), {
               type: "warning",
               onClick: ($event) => emitAction("close")
@@ -6528,9 +6454,9 @@ const _sfc_main$3 = /* @__PURE__ */ Object.assign({ name: "EudrQrModal" }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (__props.batch) {
-              _push2(`<!--[--><textarea class="eudr-qr-modal__copy-field" tabindex="-1" aria-hidden="true" data-v-29f303b3${_scopeId}></textarea><div class="eudr-qr-modal__content" data-v-29f303b3${_scopeId}><h3 class="eudr-qr-modal__title" data-v-29f303b3${_scopeId}>${ssrInterpolate(__props.batch.id)}</h3><div class="eudr-qr-modal__table-wrap" data-v-29f303b3${_scopeId}><table class="eudr-qr-modal__table" data-v-29f303b3${_scopeId}><thead data-v-29f303b3${_scopeId}><tr data-v-29f303b3${_scopeId}><th data-v-29f303b3${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.col_parameter"))}</th><th data-v-29f303b3${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.col_value"))}</th></tr></thead><tbody data-v-29f303b3${_scopeId}><tr data-v-29f303b3${_scopeId}><td data-v-29f303b3${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_product"))}</td><td data-v-29f303b3${_scopeId}>${ssrInterpolate(__props.batch.product)}</td></tr><tr data-v-29f303b3${_scopeId}><td data-v-29f303b3${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_supplier"))}</td><td data-v-29f303b3${_scopeId}>${ssrInterpolate(__props.batch.supplier)}</td></tr><tr data-v-29f303b3${_scopeId}><td data-v-29f303b3${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_date"))}</td><td data-v-29f303b3${_scopeId}>${ssrInterpolate(__props.batch.date)}</td></tr><tr data-v-29f303b3${_scopeId}><td data-v-29f303b3${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_link"))}</td><td data-v-29f303b3${_scopeId}><a class="eudr-qr-modal__batch-link" target="_blank" rel="noopener noreferrer"${ssrRenderAttr("href", `/${batchPageLocale.value}/batch/${__props.batch.id}`)} data-v-29f303b3${_scopeId}>${ssrInterpolate(displayedBatchUrl.value)}</a></td></tr></tbody></table></div><div class="eudr-qr-modal__code" data-v-29f303b3${_scopeId}>`);
+              _push2(`<!--[--><textarea class="eudr-qr-modal__copy-field" tabindex="-1" aria-hidden="true" data-v-31dccae0${_scopeId}></textarea><div class="eudr-qr-modal__content" data-v-31dccae0${_scopeId}><h3 class="eudr-qr-modal__title" data-v-31dccae0${_scopeId}>${ssrInterpolate(__props.batch.id)}</h3><div class="eudr-qr-modal__table-wrap" data-v-31dccae0${_scopeId}><table class="eudr-qr-modal__table" data-v-31dccae0${_scopeId}><thead data-v-31dccae0${_scopeId}><tr data-v-31dccae0${_scopeId}><th data-v-31dccae0${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.col_parameter"))}</th><th data-v-31dccae0${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.col_value"))}</th></tr></thead><tbody data-v-31dccae0${_scopeId}><tr data-v-31dccae0${_scopeId}><td data-v-31dccae0${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_product"))}</td><td data-v-31dccae0${_scopeId}>${ssrInterpolate(__props.batch.product)}</td></tr><tr data-v-31dccae0${_scopeId}><td data-v-31dccae0${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_supplier"))}</td><td data-v-31dccae0${_scopeId}>${ssrInterpolate(__props.batch.supplier)}</td></tr><tr data-v-31dccae0${_scopeId}><td data-v-31dccae0${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_date"))}</td><td data-v-31dccae0${_scopeId}>${ssrInterpolate(__props.batch.date)}</td></tr><tr data-v-31dccae0${_scopeId}><td data-v-31dccae0${_scopeId}>${ssrInterpolate(unref(t)("demo.eudr_qr_modal.row_link"))}</td><td data-v-31dccae0${_scopeId}><a class="eudr-qr-modal__batch-link" target="_blank" rel="noopener noreferrer"${ssrRenderAttr("href", `/${batchPageLocale.value}/batch/${__props.batch.id}`)} data-v-31dccae0${_scopeId}>${ssrInterpolate(displayedBatchUrl.value)}</a></td></tr></tbody></table></div><div class="eudr-qr-modal__code" data-v-31dccae0${_scopeId}>`);
               if (qrImageUrl.value) {
-                _push2(`<img${ssrRenderAttr("src", qrImageUrl.value)} alt="EUDR QR code" data-v-29f303b3${_scopeId}>`);
+                _push2(`<img${ssrRenderAttr("src", qrImageUrl.value)} alt="EUDR QR code" data-v-31dccae0${_scopeId}>`);
               } else {
                 _push2(`<!---->`);
               }
@@ -6608,7 +6534,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/modals/EudrQrModal.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const EudrQrModal = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-29f303b3"]]);
+const EudrQrModal = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-31dccae0"]]);
 const _sfc_main$2 = /* @__PURE__ */ Object.assign({ name: "EudrSection" }, {
   __name: "EudrSection",
   __ssrInlineRender: true,
@@ -6631,13 +6557,13 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ name: "EudrSection" }, {
       isQrModalOpen.value = false;
       selectedBatch.value = null;
     };
-    const handleQrAction = (action) => {
+    const handleQrAction = (_action) => {
       closeQrModal();
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "eudr-section" }, _attrs))} data-v-becddf3b><div class="eudr-section__desktop" data-v-becddf3b><div class="eudr-table-wrap" data-v-becddf3b><table class="eudr-table" data-v-becddf3b><thead data-v-becddf3b><tr data-v-becddf3b><th data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_id"))}</th><th data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_product"))}</th><th data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_supplier"))}</th><th data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_date"))}</th><th data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_status"))}</th><th data-v-becddf3b></th></tr></thead><tbody data-v-becddf3b><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "eudr-section" }, _attrs))} data-v-150ac51a><div class="eudr-section__desktop" data-v-150ac51a><div class="eudr-table-wrap" data-v-150ac51a><table class="eudr-table" data-v-150ac51a><thead data-v-150ac51a><tr data-v-150ac51a><th data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_id"))}</th><th data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_product"))}</th><th data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_supplier"))}</th><th data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_date"))}</th><th data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_status"))}</th><th data-v-150ac51a></th></tr></thead><tbody data-v-150ac51a><!--[-->`);
       ssrRenderList(props.batches, (batch) => {
-        _push(`<tr data-v-becddf3b><td data-v-becddf3b>${ssrInterpolate(batch.id)}</td><td data-v-becddf3b>${ssrInterpolate(batch.product)}</td><td data-v-becddf3b>${ssrInterpolate(batch.supplier)}</td><td data-v-becddf3b>${ssrInterpolate(batch.date)}</td><td data-v-becddf3b><span class="${ssrRenderClass([`eudr-status--${batch.status}`, "eudr-status"])}" data-v-becddf3b>${ssrInterpolate(batch.statusLabel)}</span></td><td data-v-becddf3b>`);
+        _push(`<tr data-v-150ac51a><td data-v-150ac51a>${ssrInterpolate(batch.id)}</td><td data-v-150ac51a>${ssrInterpolate(batch.product)}</td><td data-v-150ac51a>${ssrInterpolate(batch.supplier)}</td><td data-v-150ac51a>${ssrInterpolate(batch.date)}</td><td data-v-150ac51a><span class="${ssrRenderClass([`eudr-status--${batch.status}`, "eudr-status"])}" data-v-150ac51a>${ssrInterpolate(batch.statusLabel)}</span></td><td data-v-150ac51a>`);
         _push(ssrRenderComponent(unref(Button), {
           type: "info",
           onClick: ($event) => openQrModal(batch)
@@ -6655,9 +6581,9 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ name: "EudrSection" }, {
         }, _parent));
         _push(`</td></tr>`);
       });
-      _push(`<!--]--></tbody></table></div></div><div class="eudr-section__mobile" data-v-becddf3b><!--[-->`);
+      _push(`<!--]--></tbody></table></div></div><div class="eudr-section__mobile" data-v-150ac51a><!--[-->`);
       ssrRenderList(props.batches, (batch) => {
-        _push(`<article class="eudr-card" data-v-becddf3b><p class="eudr-card__line" data-v-becddf3b><span class="eudr-card__label" data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_id"))}:</span> ${ssrInterpolate(batch.id)}</p><p class="eudr-card__line" data-v-becddf3b><span class="eudr-card__label" data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_product"))}:</span> ${ssrInterpolate(batch.product)}</p><p class="eudr-card__line" data-v-becddf3b><span class="eudr-card__label" data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_supplier"))}:</span> ${ssrInterpolate(batch.supplier)}</p><p class="eudr-card__line" data-v-becddf3b><span class="eudr-card__label" data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_date"))}:</span> ${ssrInterpolate(batch.date)}</p><p class="eudr-card__line eudr-card__line--status" data-v-becddf3b><span class="eudr-card__label" data-v-becddf3b>${ssrInterpolate(unref(t)("demo.eudr.col_status"))}:</span><span class="${ssrRenderClass([`eudr-status--${batch.status}`, "eudr-status"])}" data-v-becddf3b>${ssrInterpolate(batch.statusLabel)}</span></p><div class="eudr-card__actions" data-v-becddf3b>`);
+        _push(`<article class="eudr-card" data-v-150ac51a><p class="eudr-card__line" data-v-150ac51a><span class="eudr-card__label" data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_id"))}:</span> ${ssrInterpolate(batch.id)}</p><p class="eudr-card__line" data-v-150ac51a><span class="eudr-card__label" data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_product"))}:</span> ${ssrInterpolate(batch.product)}</p><p class="eudr-card__line" data-v-150ac51a><span class="eudr-card__label" data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_supplier"))}:</span> ${ssrInterpolate(batch.supplier)}</p><p class="eudr-card__line" data-v-150ac51a><span class="eudr-card__label" data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_date"))}:</span> ${ssrInterpolate(batch.date)}</p><p class="eudr-card__line eudr-card__line--status" data-v-150ac51a><span class="eudr-card__label" data-v-150ac51a>${ssrInterpolate(unref(t)("demo.eudr.col_status"))}:</span><span class="${ssrRenderClass([`eudr-status--${batch.status}`, "eudr-status"])}" data-v-150ac51a>${ssrInterpolate(batch.statusLabel)}</span></p><div class="eudr-card__actions" data-v-150ac51a>`);
         _push(ssrRenderComponent(unref(Button), {
           type: "info",
           block: "",
@@ -6693,7 +6619,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/sections/EudrSection.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const EudrSection = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-becddf3b"]]);
+const EudrSection = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-150ac51a"]]);
 const _sfc_main$1 = /* @__PURE__ */ Object.assign({ name: "ReportsSection" }, {
   __name: "ReportsSection",
   __ssrInlineRender: true,
@@ -6761,9 +6687,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ name: "ReportsSection" }, {
     }
     function taskStatusRow(task) {
       if (Array.isArray(task.measurements) && task.measurements.length > 0) {
-        const hasPending = task.measurements.some(
-          (m) => m.status === "pending"
-        );
+        const hasPending = task.measurements.some((m) => m.status === "pending");
         if (hasPending) {
           return { label: t("demo.reports.status_pending"), key: "review" };
         }
@@ -6777,9 +6701,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ name: "ReportsSection" }, {
     const taskPreviewRows = computed(() => {
       const dayLabel = isoToRuDots(props.report.reportDayIso ?? todayIso());
       const rows = [];
-      for (const [niche, tasks] of Object.entries(
-        props.checklistsByNiche ?? {}
-      )) {
+      for (const [niche, tasks] of Object.entries(props.checklistsByNiche ?? {})) {
         const nicheLbl = nicheLabel(niche);
         for (const task of tasks) {
           const st = taskStatusRow(task);
@@ -6788,10 +6710,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ name: "ReportsSection" }, {
             date: dayLabel,
             point: `${nicheLbl} — ${task.title}`,
             value: formatTaskValue(task),
-            assignee: resolveStaffFullName(
-              props.staff,
-              task.assignedStaffId
-            ),
+            assignee: resolveStaffFullName(props.staff, task.assignedStaffId),
             photo: taskPhotoLabel(task),
             statusLabel: st.label,
             statusKey: st.key
@@ -6812,10 +6731,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ name: "ReportsSection" }, {
       }))
     );
     const publicReportUrl = computed(
-      () => buildDailyReportPublicUrl(
-        props.report.reportDayIso ?? todayIso(),
-        reportPageLocale.value
-      )
+      () => buildDailyReportPublicUrl(props.report.reportDayIso ?? todayIso(), reportPageLocale.value)
     );
     const goToPublicReport = () => {
       const url = publicReportUrl.value;
@@ -6859,7 +6775,7 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ name: "ReportsSection" }, {
       }
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "reports-section" }, _attrs))} data-v-ea870366><div class="reports-public-link" data-v-ea870366><h3 data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.public_report"))}</h3><div class="reports-public-link__row" data-v-ea870366><code class="reports-public-link__url" data-v-ea870366><span class="reports-public-link__url-text" data-v-ea870366>${ssrInterpolate(publicReportUrl.value)}</span></code><div class="reports-public-link__actions" data-v-ea870366>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "reports-section" }, _attrs))} data-v-9d7bf845><div class="reports-public-link" data-v-9d7bf845><h3 data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.public_report"))}</h3><div class="reports-public-link__row" data-v-9d7bf845><code class="reports-public-link__url" data-v-9d7bf845><span class="reports-public-link__url-text" data-v-9d7bf845>${ssrInterpolate(publicReportUrl.value)}</span></code><div class="reports-public-link__actions" data-v-9d7bf845>`);
       _push(ssrRenderComponent(unref(Button), {
         type: "success",
         size: "large",
@@ -6892,23 +6808,23 @@ const _sfc_main$1 = /* @__PURE__ */ Object.assign({ name: "ReportsSection" }, {
         }),
         _: 1
       }, _parent));
-      _push(`</div></div></div><div class="report-preview" data-v-ea870366><h2 data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.daily_report"))}</h2><h3 class="report-preview__category" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.tasks"))}</h3><div class="report-preview__desktop" data-v-ea870366><div class="report-preview__table-wrap" data-v-ea870366><table class="report-preview__table" data-v-ea870366><thead data-v-ea870366><tr data-v-ea870366><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_date"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_point"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_value"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_assignee"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_status"))}</th></tr></thead><tbody data-v-ea870366><!--[-->`);
+      _push(`</div></div></div><div class="report-preview" data-v-9d7bf845><h2 data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.daily_report"))}</h2><h3 class="report-preview__category" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.tasks"))}</h3><div class="report-preview__desktop" data-v-9d7bf845><div class="report-preview__table-wrap" data-v-9d7bf845><table class="report-preview__table" data-v-9d7bf845><thead data-v-9d7bf845><tr data-v-9d7bf845><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_date"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_point"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_value"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_assignee"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_status"))}</th></tr></thead><tbody data-v-9d7bf845><!--[-->`);
       ssrRenderList(taskPreviewRows.value, (row) => {
-        _push(`<tr data-v-ea870366><td data-v-ea870366>${ssrInterpolate(row.date)}</td><td data-v-ea870366>${ssrInterpolate(row.point)}</td><td data-v-ea870366>${ssrInterpolate(row.value)}</td><td data-v-ea870366>${ssrInterpolate(row.assignee)}</td><td data-v-ea870366>${ssrInterpolate(row.photo)}</td><td data-v-ea870366><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-ea870366>${ssrInterpolate(row.statusLabel)}</span></td></tr>`);
+        _push(`<tr data-v-9d7bf845><td data-v-9d7bf845>${ssrInterpolate(row.date)}</td><td data-v-9d7bf845>${ssrInterpolate(row.point)}</td><td data-v-9d7bf845>${ssrInterpolate(row.value)}</td><td data-v-9d7bf845>${ssrInterpolate(row.assignee)}</td><td data-v-9d7bf845>${ssrInterpolate(row.photo)}</td><td data-v-9d7bf845><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-9d7bf845>${ssrInterpolate(row.statusLabel)}</span></td></tr>`);
       });
-      _push(`<!--]--></tbody></table></div></div><div class="report-preview__mobile" data-v-ea870366><!--[-->`);
+      _push(`<!--]--></tbody></table></div></div><div class="report-preview__mobile" data-v-9d7bf845><!--[-->`);
       ssrRenderList(taskPreviewRows.value, (row) => {
-        _push(`<article class="report-preview-card" data-v-ea870366><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_date"))}:</span> ${ssrInterpolate(row.date)}</p><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_point"))}:</span> ${ssrInterpolate(row.point)}</p><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_value"))}:</span> ${ssrInterpolate(row.value)}</p><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_assignee"))}:</span> ${ssrInterpolate(row.assignee)}</p><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}:</span> ${ssrInterpolate(row.photo)}</p><p class="report-preview-card__line report-preview-card__line--status" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_status"))}:</span><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-ea870366>${ssrInterpolate(row.statusLabel)}</span></p></article>`);
+        _push(`<article class="report-preview-card" data-v-9d7bf845><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_date"))}:</span> ${ssrInterpolate(row.date)}</p><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_point"))}:</span> ${ssrInterpolate(row.point)}</p><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_value"))}:</span> ${ssrInterpolate(row.value)}</p><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_assignee"))}:</span> ${ssrInterpolate(row.assignee)}</p><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}:</span> ${ssrInterpolate(row.photo)}</p><p class="report-preview-card__line report-preview-card__line--status" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_status"))}:</span><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-9d7bf845>${ssrInterpolate(row.statusLabel)}</span></p></article>`);
       });
-      _push(`<!--]--></div><h3 class="report-preview__category" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.raw_materials"))}</h3><div class="report-preview__desktop" data-v-ea870366><div class="report-preview__table-wrap" data-v-ea870366><table class="report-preview__table" data-v-ea870366><thead data-v-ea870366><tr data-v-ea870366><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_date"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_point"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_value"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}</th><th data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_status"))}</th></tr></thead><tbody data-v-ea870366><!--[-->`);
+      _push(`<!--]--></div><h3 class="report-preview__category" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.raw_materials"))}</h3><div class="report-preview__desktop" data-v-9d7bf845><div class="report-preview__table-wrap" data-v-9d7bf845><table class="report-preview__table" data-v-9d7bf845><thead data-v-9d7bf845><tr data-v-9d7bf845><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_date"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_point"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_value"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}</th><th data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_status"))}</th></tr></thead><tbody data-v-9d7bf845><!--[-->`);
       ssrRenderList(batchPreviewRows.value, (row) => {
-        _push(`<tr data-v-ea870366><td data-v-ea870366>${ssrInterpolate(row.date)}</td><td data-v-ea870366>${ssrInterpolate(row.point)}</td><td data-v-ea870366>${ssrInterpolate(row.value)}</td><td data-v-ea870366>${ssrInterpolate(row.photo)}</td><td data-v-ea870366><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-ea870366>${ssrInterpolate(row.statusLabel)}</span></td></tr>`);
+        _push(`<tr data-v-9d7bf845><td data-v-9d7bf845>${ssrInterpolate(row.date)}</td><td data-v-9d7bf845>${ssrInterpolate(row.point)}</td><td data-v-9d7bf845>${ssrInterpolate(row.value)}</td><td data-v-9d7bf845>${ssrInterpolate(row.photo)}</td><td data-v-9d7bf845><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-9d7bf845>${ssrInterpolate(row.statusLabel)}</span></td></tr>`);
       });
-      _push(`<!--]--></tbody></table></div></div><div class="report-preview__mobile" data-v-ea870366><!--[-->`);
+      _push(`<!--]--></tbody></table></div></div><div class="report-preview__mobile" data-v-9d7bf845><!--[-->`);
       ssrRenderList(batchPreviewRows.value, (row) => {
-        _push(`<article class="report-preview-card" data-v-ea870366><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_date"))}:</span> ${ssrInterpolate(row.date)}</p><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_point"))}:</span> ${ssrInterpolate(row.point)}</p><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_value"))}:</span> ${ssrInterpolate(row.value)}</p><p class="report-preview-card__line" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}:</span> ${ssrInterpolate(row.photo)}</p><p class="report-preview-card__line report-preview-card__line--status" data-v-ea870366><span class="report-preview-card__label" data-v-ea870366>${ssrInterpolate(unref(t)("demo.reports.col_status"))}:</span><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-ea870366>${ssrInterpolate(row.statusLabel)}</span></p></article>`);
+        _push(`<article class="report-preview-card" data-v-9d7bf845><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_date"))}:</span> ${ssrInterpolate(row.date)}</p><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_point"))}:</span> ${ssrInterpolate(row.point)}</p><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_value"))}:</span> ${ssrInterpolate(row.value)}</p><p class="report-preview-card__line" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_photo"))}:</span> ${ssrInterpolate(row.photo)}</p><p class="report-preview-card__line report-preview-card__line--status" data-v-9d7bf845><span class="report-preview-card__label" data-v-9d7bf845>${ssrInterpolate(unref(t)("demo.reports.col_status"))}:</span><span class="${ssrRenderClass([`report-status--${row.statusKey}`, "report-status"])}" data-v-9d7bf845>${ssrInterpolate(row.statusLabel)}</span></p></article>`);
       });
-      _push(`<!--]--></div></div><div class="reports-footer-actions" data-v-ea870366>`);
+      _push(`<!--]--></div></div><div class="reports-footer-actions" data-v-9d7bf845>`);
       _push(ssrRenderComponent(unref(Button), {
         type: "info",
         size: "large",
@@ -6935,7 +6851,7 @@ _sfc_main$1.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/components/sections/ReportsSection.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
-const ReportsSection = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-ea870366"]]);
+const ReportsSection = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-9d7bf845"]]);
 const getTodayStartTimestamp = () => {
   const d = /* @__PURE__ */ new Date();
   d.setHours(0, 0, 0, 0);
@@ -6965,9 +6881,7 @@ const useDemoDashboardViewModel = (demoState) => {
   const dashboardChecklistTasks = computed(() => {
     const todayStartTs = getTodayStartTimestamp();
     const source = allChecklistTasks.value;
-    const filtered = source.filter(
-      (task) => !isTaskScheduledForFuture(task, todayStartTs)
-    );
+    const filtered = source.filter((task) => !isTaskScheduledForFuture(task, todayStartTs));
     return filtered;
   });
   const dashboardDerivedData = computed(() => {
@@ -7046,13 +6960,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ name: "Demo" }, {
   setup(__props) {
     const props = __props;
     const { t } = useI18n();
-    const DEMO_SECTION_IDS = /* @__PURE__ */ new Set([
-      "dashboard",
-      "checklists",
-      "personnel",
-      "eudr",
-      "reports"
-    ]);
+    const DEMO_SECTION_IDS = /* @__PURE__ */ new Set(["dashboard", "checklists", "personnel", "eudr", "reports"]);
     const locale = computed(() => useCurrentLocale());
     const surveyPath = computed(() => `/${locale.value}/survey`);
     const { demoState } = useDemoState();
@@ -7081,12 +6989,8 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ name: "Demo" }, {
       eudr: { id: "eudr", title: t("demo.page.section_eudr"), inlineTitle: false },
       reports: { id: "reports", title: t("demo.page.section_reports"), inlineTitle: true }
     }));
-    const activeSectionComponent = computed(
-      () => sectionComponentMap[activeSectionId.value] ?? null
-    );
-    const activeSectionConfig = computed(
-      () => sectionConfigMap.value[activeSectionId.value] ?? null
-    );
+    const activeSectionComponent = computed(() => sectionComponentMap[activeSectionId.value] ?? null);
+    const activeSectionConfig = computed(() => sectionConfigMap.value[activeSectionId.value] ?? null);
     const activeSectionProps = computed(() => {
       if (activeSectionId.value === "dashboard") {
         return {
@@ -7139,14 +7043,14 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ name: "Demo" }, {
       }).format(/* @__PURE__ */ new Date());
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "demo-page" }, _attrs))} data-v-2c6b1c6b>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "demo-page" }, _attrs))} data-v-61b836de>`);
       _push(ssrRenderComponent(DemoSectionNavigation, {
         variant: "bottom",
         links: sectionLinks.value,
         "active-id": activeSectionId.value,
         onSelect: setActiveSection
       }, null, _parent));
-      _push(`<header class="demo-topbar" data-v-2c6b1c6b><div class="container demo-topbar__inner" data-v-2c6b1c6b><button type="button" class="demo-date-picker"${ssrRenderAttr("title", unref(t)("demo.page.calendar_day"))}${ssrRenderAttr("aria-label", unref(t)("demo.page.calendar_day"))} data-v-2c6b1c6b><span class="demo-date-picker__icon" aria-hidden="true" data-v-2c6b1c6b><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" data-v-2c6b1c6b><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.75" data-v-2c6b1c6b></rect><path stroke="currentColor" stroke-width="1.75" stroke-linecap="round" d="M16 3v4M8 3v4M3 11h18" data-v-2c6b1c6b></path><circle cx="8" cy="16" r="1" fill="currentColor" data-v-2c6b1c6b></circle><circle cx="12" cy="16" r="1" fill="currentColor" data-v-2c6b1c6b></circle><circle cx="16" cy="16" r="1" fill="currentColor" data-v-2c6b1c6b></circle></svg></span><span class="demo-date-picker__text" data-v-2c6b1c6b>${ssrInterpolate(unref(t)("demo.page.calendar_day"))}</span></button><div class="demo-topbar__date" data-v-2c6b1c6b><time class="demo-topbar__date-value"${ssrRenderAttr("datetime", todayIso.value)} data-v-2c6b1c6b>${ssrInterpolate(todayFormatted.value)}</time></div></div></header>`);
+      _push(`<header class="demo-topbar" data-v-61b836de><div class="container demo-topbar__inner" data-v-61b836de><button type="button" class="demo-date-picker"${ssrRenderAttr("title", unref(t)("demo.page.calendar_day"))}${ssrRenderAttr("aria-label", unref(t)("demo.page.calendar_day"))} data-v-61b836de><span class="demo-date-picker__icon" aria-hidden="true" data-v-61b836de><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" data-v-61b836de><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.75" data-v-61b836de></rect><path stroke="currentColor" stroke-width="1.75" stroke-linecap="round" d="M16 3v4M8 3v4M3 11h18" data-v-61b836de></path><circle cx="8" cy="16" r="1" fill="currentColor" data-v-61b836de></circle><circle cx="12" cy="16" r="1" fill="currentColor" data-v-61b836de></circle><circle cx="16" cy="16" r="1" fill="currentColor" data-v-61b836de></circle></svg></span><span class="demo-date-picker__text" data-v-61b836de>${ssrInterpolate(unref(t)("demo.page.calendar_day"))}</span></button><div class="demo-topbar__date" data-v-61b836de><time class="demo-topbar__date-value"${ssrRenderAttr("datetime", todayIso.value)} data-v-61b836de>${ssrInterpolate(todayFormatted.value)}</time></div></div></header>`);
       _push(ssrRenderComponent(unref(Link), {
         href: surveyPath.value,
         class: "btn-client btn-success demo-topbar-cta"
@@ -7162,7 +7066,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ name: "Demo" }, {
         }),
         _: 1
       }, _parent));
-      _push(`<div class="container demo-layout" data-v-2c6b1c6b><aside class="demo-sidebar" data-v-2c6b1c6b>`);
+      _push(`<div class="container demo-layout" data-v-61b836de><aside class="demo-sidebar" data-v-61b836de>`);
       _push(ssrRenderComponent(DemoSectionNavigation, {
         variant: "sidebar",
         links: sectionLinks.value,
@@ -7184,7 +7088,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ name: "Demo" }, {
         }),
         _: 1
       }, _parent));
-      _push(`</aside><main class="demo-main" data-v-2c6b1c6b><section class="demo-section"${ssrRenderAttr("id", activeSectionConfig.value.id)} data-v-2c6b1c6b><h1 class="demo-section__title" data-v-2c6b1c6b>${ssrInterpolate(activeSectionConfig.value.title)}</h1>`);
+      _push(`</aside><main class="demo-main" data-v-61b836de><section${ssrRenderAttr("id", activeSectionConfig.value.id)} class="demo-section" data-v-61b836de><h1 class="demo-section__title" data-v-61b836de>${ssrInterpolate(activeSectionConfig.value.title)}</h1>`);
       ssrRenderVNode(_push, createVNode(resolveDynamicComponent(activeSectionComponent.value), mergeProps({ key: activeSectionId.value }, activeSectionProps.value), null), _parent);
       _push(`</section></main></div></div>`);
     };
@@ -7196,7 +7100,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/page/DemoPage.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const DemoPage = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2c6b1c6b"]]);
+const DemoPage = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-61b836de"]]);
 export {
   DemoPage as default
 };

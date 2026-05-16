@@ -3,9 +3,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref } from 'vue';
 
-defineOptions({ name: "ClientOnly" });
+defineOptions({ name: 'ClientOnly' });
 
 /**
  * Обёртка, рендерящая дочерние элементы только после mount на клиенте.

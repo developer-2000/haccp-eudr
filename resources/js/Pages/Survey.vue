@@ -20,10 +20,7 @@
             @reset-survey="resetSurveyFromSubmittedState"
         />
 
-        <SurveyIntroScreen
-            v-else-if="activeScreen === 'intro'"
-            @start="goNextSurveyStep"
-        />
+        <SurveyIntroScreen v-else-if="activeScreen === 'intro'" @start="goNextSurveyStep" />
 
         <SurveySuccessScreen
             v-else-if="activeScreen === 'success'"
@@ -71,18 +68,10 @@
 </template>
 
 <script setup>
-import {
-    computed,
-    nextTick,
-    onMounted,
-    onUnmounted,
-    reactive,
-    ref,
-    watch,
-} from "vue";
-import apiAxios from "@/utils/apiAxios.js";
-import { toast } from "vue3-toastify";
-import { useI18n } from "vue-i18n";
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
+import apiAxios from '@/utils/apiAxios.js';
+import { toast } from 'vue3-toastify';
+import { useI18n } from 'vue-i18n';
 import {
     SURVEY_FLOW_STEP_INTRO,
     SURVEY_DIGITAL_CODE_VERIFICATION,
@@ -98,7 +87,7 @@ import {
     surveyQuestionUsesNextButton,
     surveyLeadEmailErrorMessage,
     maskSurveyEmail,
-} from "@/features/survey/surveyFlow.js";
+} from '@/features/survey/surveyFlow.js';
 import {
     SURVEY_PAGE_SUCCESS,
     getSurveyQuestionByStepId,
@@ -107,22 +96,22 @@ import {
     replaceSurveyQuestionsById,
     surveyOtherDetailKey,
     surveyQuestionAllOptions,
-} from "@/features/survey/surveyQuestionsStub.js";
-import SurveyQuestionStep from "@/components/client/survey/SurveyQuestionStep.vue";
-import SurveySubmittedState from "@/components/client/survey/SurveySubmittedState.vue";
-import SurveyMainFlow from "@/components/client/survey/screens/SurveyMainFlow.vue";
-import SurveyIntroScreen from "@/components/client/survey/screens/SurveyIntroScreen.vue";
-import SurveySuccessScreen from "@/components/client/survey/screens/SurveySuccessScreen.vue";
-import SurveyLeadScreen from "@/components/client/survey/screens/SurveyLeadScreen.vue";
+} from '@/features/survey/surveyQuestionsStub.js';
+import SurveyQuestionStep from '@/components/client/survey/SurveyQuestionStep.vue';
+import SurveySubmittedState from '@/components/client/survey/SurveySubmittedState.vue';
+import SurveyMainFlow from '@/components/client/survey/screens/SurveyMainFlow.vue';
+import SurveyIntroScreen from '@/components/client/survey/screens/SurveyIntroScreen.vue';
+import SurveySuccessScreen from '@/components/client/survey/screens/SurveySuccessScreen.vue';
+import SurveyLeadScreen from '@/components/client/survey/screens/SurveyLeadScreen.vue';
 
-import SurveyDigitalCodeVerification from "@/components/client/survey/SurveyDigitalCodeVerification.vue";
-import { LS_SURVEY_SUBMISSION_STATE, SS_VERIFICATION_TOKEN } from "@/config/storageNames";
-import SeoHead from "@/components/SeoHead.vue";
-import PublicLayout from "@/Layouts/PublicLayout.vue";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
+import SurveyDigitalCodeVerification from '@/components/client/survey/SurveyDigitalCodeVerification.vue';
+import { LS_SURVEY_SUBMISSION_STATE, SS_VERIFICATION_TOKEN } from '@/config/storageNames';
+import SeoHead from '@/components/SeoHead.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
 
 defineOptions({
-    name: "Survey",
+    name: 'Survey',
     layout: PublicLayout,
 });
 
@@ -144,12 +133,11 @@ const surveyHomeHref = computed(() => `/${useCurrentLocale()}`);
 // =============================================================================
 // Константы
 // =============================================================================
-const SURVEY_LEAD_EMAIL_INPUT_ID = "survey-lead-email";
+const SURVEY_LEAD_EMAIL_INPUT_ID = 'survey-lead-email';
 const SURVEY_SUBMISSION_STATE_KEY = LS_SURVEY_SUBMISSION_STATE;
 
 /** П. 7.4: запас при прокрутке к полю (клавиатура на мобильных). */
-const SURVEY_MOBILE_SCROLL_PADDING_BOTTOM =
-    "calc(env(safe-area-inset-bottom, 0px) + 96px)";
+const SURVEY_MOBILE_SCROLL_PADDING_BOTTOM = 'calc(env(safe-area-inset-bottom, 0px) + 96px)';
 
 // =============================================================================
 // Данные страницы
@@ -160,13 +148,13 @@ const successCopy = SURVEY_PAGE_SUCCESS;
 // Состояние (reactive/ref)
 // =============================================================================
 const answers = reactive({
-    name: "",
-    email: "",
-    business_name: "",
-    phone: "",
-    whatsapp: "",
-    telegram: "",
-    hp_company: "",
+    name: '',
+    email: '',
+    business_name: '',
+    phone: '',
+    whatsapp: '',
+    telegram: '',
+    hp_company: '',
 });
 
 const currentIndex = ref(0);
@@ -177,15 +165,15 @@ const leadSubmitting = ref(false);
 
 const validation = reactive({
     leadFormAttempted: false,
-    leadEmailError: "",
-    leadSubmitError: "",
+    leadEmailError: '',
+    leadSubmitError: '',
 });
-const questionsLoadError = ref("");
+const questionsLoadError = ref('');
 const questionsLoadFailed = ref(false);
 const questionsVersion = ref(0);
 const submittedStateActive = ref(false);
 const submittedState = reactive({
-    maskedEmail: "",
+    maskedEmail: '',
     submittedAt: null,
 });
 const submittedStateResolved = ref(false);
@@ -208,27 +196,27 @@ let autoNextTimer = null;
 function applyServerProvidedQuestions() {
     try {
         const questions = props.questions;
-        if (!questions || typeof questions !== "object" || Array.isArray(questions)) {
-            throw new Error("bad_questions_shape");
+        if (!questions || typeof questions !== 'object' || Array.isArray(questions)) {
+            throw new Error('bad_questions_shape');
         }
         const entries = Object.entries(questions);
         if (entries.length === 0) {
-            throw new Error("empty_questions");
+            throw new Error('empty_questions');
         }
         const normalized = {};
         for (const [stableId, question] of entries) {
-            if (!question || typeof question !== "object") {
-                throw new Error("bad_question_item");
+            if (!question || typeof question !== 'object') {
+                throw new Error('bad_question_item');
             }
-            if (typeof question.id !== "string" || question.id !== stableId) {
-                throw new Error("bad_question_id");
+            if (typeof question.id !== 'string' || question.id !== stableId) {
+                throw new Error('bad_question_id');
             }
             normalized[stableId] = question;
         }
         replaceSurveyQuestionsById(normalized);
         questionsVersion.value++;
     } catch {
-        questionsLoadError.value = t("survey.ui.questions_load_error");
+        questionsLoadError.value = t('survey.ui.questions_load_error');
         questionsLoadFailed.value = true;
     }
 }
@@ -239,21 +227,21 @@ function applyServerProvidedQuestions() {
  * @returns {Promise<boolean>}
  */
 async function submitSurveyResponse(data = null) {
-
     const request = data !== null ? data : buildSurveySubmitPayload();
 
-    const response = await apiAxios.post( "/survey/submit", request, true, );
+    const response = await apiAxios.post('/survey/submit', request, true);
 
     // Создал впервые -                           status = success, update_record = false
     // Ограничение между отправками ответов 1 min - status = warning, update_record = false, alert = cooldown
     // Обновление ответов указанного email -      status = success, update_record = true, attempt_counter = 2, verification_token = 'abc123'
-    if(response?.status === "success"){
-        const { status } = response.data
-        if(status === "success"){
-            const { update_record, attempt_counter, total_attempts, verification_token } = response.data
+    if (response?.status === 'success') {
+        const { status } = response.data;
+        if (status === 'success') {
+            const { update_record, attempt_counter, total_attempts, verification_token } =
+                response.data;
 
             // 1 Создал впервые
-            if(!update_record){
+            if (!update_record) {
                 // Сообщение для пользователя
                 toast.info(t('survey.ui.response_saved'), { autoClose: 5000 });
                 // Запомнить указанный email
@@ -262,7 +250,7 @@ async function submitSurveyResponse(data = null) {
                 finalizeSurveyLocally();
             }
             // 2 Обновление ответов (с лимитом попыток из конфига бэка)
-            else{
+            else {
                 // Сообщение для пользователя
                 toast.info(t('survey.ui.verification_sent'), { autoClose: 5000 });
                 // Сохранение токена доступа к его записи ответов draft
@@ -272,7 +260,7 @@ async function submitSurveyResponse(data = null) {
                 pinAttemptsTotal.value = Number(total_attempts) || attempt_counter;
 
                 // Показ 4 значного цифрового блока верификации кода
-                if(attempt_counter > 0){
+                if (attempt_counter > 0) {
                     const ids = visibleStepIds.value;
                     const idx = ids.indexOf(SURVEY_DIGITAL_CODE_VERIFICATION);
                     if (idx !== -1) {
@@ -280,12 +268,11 @@ async function submitSurveyResponse(data = null) {
                     }
                 }
             }
-        }
-        else if(status === "warning"){
-            const { update_record, alert } = response.data
+        } else if (status === 'warning') {
+            const { update_record, alert } = response.data;
 
             // Ограничение между отправками ответов
-            if(!update_record && alert === "cooldown"){
+            if (!update_record && alert === 'cooldown') {
                 // Сообщение для пользователя
                 toast.info(t('survey.ui.cooldown_wait'), { autoClose: 5000 });
                 // Сбрасывает клиентские ответы и служебные флаги до стартового состояния intro.
@@ -293,7 +280,6 @@ async function submitSurveyResponse(data = null) {
             }
         }
     }
-
 }
 
 /**
@@ -302,7 +288,6 @@ async function submitSurveyResponse(data = null) {
  * @param {string} pin
  */
 async function handlePinComplete(pin) {
-
     const token = sessionStorage.getItem(SS_VERIFICATION_TOKEN);
     if (!token) {
         toast.error(t('survey.ui.token_not_found'), { autoClose: 5000 });
@@ -310,14 +295,14 @@ async function handlePinComplete(pin) {
     }
 
     try {
-        const params = { token, code: pin }
-        const response = await apiAxios.post("/survey/verify", params, true);
+        const params = { token, code: pin };
+        const response = await apiAxios.post('/survey/verify', params, true);
 
-        if (response?.status === "success") {
-            const { status, code, message } = response.data
+        if (response?.status === 'success') {
+            const { status, code, message } = response.data;
 
             // 1 Обновление произошло
-            if(status === "success"){
+            if (status === 'success') {
                 toast.info(message, { autoClose: 5000 });
                 // Записать факт успешного прохождения опроса в localStorage
                 await persistSurveySubmissionState(answers.email);
@@ -325,15 +310,15 @@ async function handlePinComplete(pin) {
                 finalizeSurveyLocally();
             }
             // 2 Различные несовпадения
-            else if(status === "warning"){
+            else if (status === 'warning') {
                 // 1 Если код введен неверно
-                if(code === 3){
+                if (code === 3) {
                     pinAttemptsLeft.value--;
                     pinVerificationRef.value?.clearDigits();
                     toast.info(message, { autoClose: 5000 });
                 }
                 // 2 Если попытки закончились Или токен не совпадает
-                else if(code === 1 || code === 2){
+                else if (code === 1 || code === 2) {
                     sessionStorage.removeItem(SS_VERIFICATION_TOKEN);
                     toast.info(message, { autoClose: 5000 });
                     resetSurveyStateToIntro();
@@ -358,7 +343,7 @@ async function markSurveySubmitted() {
     }
     clearAutoNextTimer();
     validation.leadFormAttempted = true;
-    if (String(answers.hp_company ?? "").trim() !== "") {
+    if (String(answers.hp_company ?? '').trim() !== '') {
         finalizeSurveyLocally();
         return;
     }
@@ -367,13 +352,13 @@ async function markSurveySubmitted() {
         validation.leadEmailError = t(emailErr);
         return;
     }
-    validation.leadEmailError = "";
-    validation.leadSubmitError = "";
+    validation.leadEmailError = '';
+    validation.leadSubmitError = '';
     leadSubmitting.value = true;
     try {
         await submitSurveyResponse();
     } catch {
-        validation.leadSubmitError = t("survey.ui.submit_failed");
+        validation.leadSubmitError = t('survey.ui.submit_failed');
     } finally {
         leadSubmitting.value = false;
     }
@@ -396,12 +381,12 @@ function buildSurveySubmitPayload() {
         if (row.value !== null) {
             answersMap[row.id] = row.value;
         }
-        if (row.other !== null && row.other.trim() !== "") {
+        if (row.other !== null && row.other.trim() !== '') {
             answersMap[`${row.id}__other`] = row.other;
         }
     }
     return {
-        company: String(answers.hp_company ?? ""),
+        company: String(answers.hp_company ?? ''),
         contacts,
         answers: answersMap,
         question_answers: questionAnswers,
@@ -418,13 +403,9 @@ const visibleStepIds = computed(() => {
     return buildVisibleSurveyStepIds(surveySubmitted.value, branchAnswers);
 });
 
-const currentStepId = computed(
-    () => visibleStepIds.value[currentIndex.value] ?? null,
-);
+const currentStepId = computed(() => visibleStepIds.value[currentIndex.value] ?? null);
 
-const transitionStepKey = computed(
-    () => currentStepId.value ?? `idx-${currentIndex.value}`,
-);
+const transitionStepKey = computed(() => currentStepId.value ?? `idx-${currentIndex.value}`);
 
 const currentQuestion = computed(() => {
     const id = currentStepId.value;
@@ -440,7 +421,7 @@ const currentQuestion = computed(() => {
 });
 
 const otherDetailAnswerKey = computed(() =>
-    currentQuestion.value ? surveyOtherDetailKey(currentQuestion.value.id) : "",
+    currentQuestion.value ? surveyOtherDetailKey(currentQuestion.value.id) : '',
 );
 
 const currentQuestionOptionsMap = computed(() => {
@@ -458,12 +439,12 @@ const showOtherDetailField = computed(() => {
     if (optionsMap.size === 0) {
         return false;
     }
-    if (q.type === "radio" || q.type === "select") {
+    if (q.type === 'radio' || q.type === 'select') {
         const value = answers[q.id];
         const opt = optionsMap.get(value);
         return opt?.is_other === true;
     }
-    if (q.type === "checkbox") {
+    if (q.type === 'checkbox') {
         const arr = answers[q.id];
         if (!Array.isArray(arr)) {
             return false;
@@ -496,17 +477,11 @@ const questionStepNextDisabled = computed(() => {
 });
 
 const leadSubmitButtonLabel = computed(() =>
-    leadSubmitting.value
-        ? t("survey.ui.submit_sending")
-        : t("survey.ui.submit"),
+    leadSubmitting.value ? t('survey.ui.submit_sending') : t('survey.ui.submit'),
 );
 
-const isSubmittedStateStep = computed(
-    () => submittedStateActive.value && !surveySubmitted.value,
-);
-const isSurveyRenderReady = computed(
-    () => submittedStateResolved.value || surveySubmitted.value,
-);
+const isSubmittedStateStep = computed(() => submittedStateActive.value && !surveySubmitted.value);
+const isSurveyRenderReady = computed(() => submittedStateResolved.value || surveySubmitted.value);
 
 /**
  * Определяет какой единственный экран показать на странице.
@@ -523,20 +498,15 @@ const activeScreen = computed(() => {
     return 'survey';
 });
 
-const progressDenominator = computed(() =>
-    surveySubmitted.value ? 1 : getSurveyProgressTotal(),
-);
+const progressDenominator = computed(() => (surveySubmitted.value ? 1 : getSurveyProgressTotal()));
 
-const progressNumerator = computed(() =>
-    surveySubmitted.value ? 1 : currentIndex.value + 1,
-);
+const progressNumerator = computed(() => (surveySubmitted.value ? 1 : currentIndex.value + 1));
 
-const progressBarAriaLabel = computed(
-    () =>
-        t("survey.progress.aria", {
-            current: progressNumerator.value,
-            total: progressDenominator.value,
-        }),
+const progressBarAriaLabel = computed(() =>
+    t('survey.progress.aria', {
+        current: progressNumerator.value,
+        total: progressDenominator.value,
+    }),
 );
 
 /**
@@ -562,9 +532,7 @@ const progressPercent = computed(() => {
 });
 
 const canGoBack = computed(
-    () =>
-        currentIndex.value > 0 &&
-        currentStepId.value !== SURVEY_FLOW_STEP_SUCCESS,
+    () => currentIndex.value > 0 && currentStepId.value !== SURVEY_FLOW_STEP_SUCCESS,
 );
 
 // =============================================================================
@@ -581,21 +549,21 @@ function clampCurrentIndexToVisibleSteps() {
     }
 }
 
-watch(visibleStepIds, clampCurrentIndexToVisibleSteps, { flush: "sync" });
+watch(visibleStepIds, clampCurrentIndexToVisibleSteps, { flush: 'sync' });
 
 watch(
     () => [currentStepId.value, currentQuestion.value?.type],
     ([stepId, qType]) => {
-        const needsEmptyStringInit = qType === "select" || qType === "text";
+        const needsEmptyStringInit = qType === 'select' || qType === 'text';
         if (
             needsEmptyStringInit &&
             stepId &&
             (answers[stepId] === undefined || answers[stepId] === null)
         ) {
-            answers[stepId] = "";
+            answers[stepId] = '';
         }
     },
-    { flush: "post" },
+    { flush: 'post' },
 );
 
 let previousBranchParentAnswer = undefined;
@@ -609,10 +577,7 @@ watch(
         return id ? answers[id] : undefined;
     },
     (next) => {
-        if (
-            previousBranchParentAnswer !== undefined &&
-            next !== previousBranchParentAnswer
-        ) {
+        if (previousBranchParentAnswer !== undefined && next !== previousBranchParentAnswer) {
             clearBranchDerivedAnswers(answers);
         }
         previousBranchParentAnswer = next;
@@ -622,7 +587,7 @@ watch(
 watch(
     () => answers.email,
     () => {
-        validation.leadEmailError = "";
+        validation.leadEmailError = '';
     },
 );
 
@@ -633,12 +598,10 @@ watch(
             return;
         }
         nextTick(() => {
-            document
-                .getElementById(SURVEY_LEAD_EMAIL_INPUT_ID)
-                ?.scrollIntoView?.({
-                    block: "center",
-                    behavior: "smooth",
-                });
+            document.getElementById(SURVEY_LEAD_EMAIL_INPUT_ID)?.scrollIntoView?.({
+                block: 'center',
+                behavior: 'smooth',
+            });
         });
     },
 );
@@ -651,7 +614,7 @@ watch(
  */
 function focusSurveyStepHeading() {
     requestAnimationFrame(() => {
-        document.getElementById("survey-step-heading")?.focus?.({
+        document.getElementById('survey-step-heading')?.focus?.({
             preventScroll: true,
         });
     });
@@ -661,16 +624,16 @@ function focusSurveyStepHeading() {
 watch(transitionStepKey, async () => {
     await nextTick();
 
-    const el = document.querySelector(".app-wrapper .main-content");
+    const el = document.querySelector('.app-wrapper .main-content');
     if (!el) return;
 
     const observer = new ResizeObserver(() => {
-        el.scrollTo({ top: 0, behavior: "smooth" });
+        el.scrollTo({ top: 0, behavior: 'smooth' });
         observer.disconnect();
 
         setTimeout(() => {
             if (el.scrollTop > 0) {
-                el.scrollTo({ top: 0, behavior: "smooth" });
+                el.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }, 500);
     });
@@ -690,12 +653,10 @@ onMounted(() => {
     const branchId = getSurveyBranchParentId();
     previousBranchParentAnswer = branchId ? answers[branchId] : undefined;
     clampCurrentIndexToVisibleSteps();
-    if (typeof document !== "undefined") {
-        document.querySelector(".app-wrapper .main-content")
-            ?.style.setProperty(
-                "scroll-padding-bottom",
-                SURVEY_MOBILE_SCROLL_PADDING_BOTTOM,
-            );
+    if (typeof document !== 'undefined') {
+        document
+            .querySelector('.app-wrapper .main-content')
+            ?.style.setProperty('scroll-padding-bottom', SURVEY_MOBILE_SCROLL_PADDING_BOTTOM);
     }
     nextTick(() => {
         focusSurveyStepHeading();
@@ -720,9 +681,10 @@ function isSurveyFlowBlocked() {
 
 onUnmounted(() => {
     clearAutoNextTimer();
-    if (typeof document !== "undefined") {
-        document.querySelector(".app-wrapper .main-content")
-            ?.style.removeProperty("scroll-padding-bottom");
+    if (typeof document !== 'undefined') {
+        document
+            .querySelector('.app-wrapper .main-content')
+            ?.style.removeProperty('scroll-padding-bottom');
     }
 });
 
@@ -733,10 +695,7 @@ function scheduleAutoNext(stepIdWhenScheduled) {
     clearAutoNextTimer();
     autoNextTimer = setTimeout(() => {
         autoNextTimer = null;
-        if (
-            !surveySubmitted.value &&
-            currentStepId.value === stepIdWhenScheduled
-        ) {
+        if (!surveySubmitted.value && currentStepId.value === stepIdWhenScheduled) {
             goNextSurveyStep();
         }
     }, SURVEY_RADIO_AUTO_ADVANCE_MS);
@@ -915,15 +874,8 @@ function collectSurveyQuestionAnswers() {
         return {
             id,
             value:
-                rawValue === undefined
-                    ? null
-                    : Array.isArray(rawValue)
-                      ? [...rawValue]
-                      : rawValue,
-            other:
-                typeof answers[otherKey] === "string"
-                    ? answers[otherKey]
-                    : null,
+                rawValue === undefined ? null : Array.isArray(rawValue) ? [...rawValue] : rawValue,
+            other: typeof answers[otherKey] === 'string' ? answers[otherKey] : null,
         };
     });
 }
@@ -935,12 +887,12 @@ function collectSurveyQuestionAnswers() {
  */
 function collectSurveyLeadContacts() {
     return {
-        name: String(answers.name ?? ""),
-        email: String(answers.email ?? ""),
-        business_name: String(answers.business_name ?? ""),
-        phone: String(answers.phone ?? ""),
-        whatsapp: String(answers.whatsapp ?? ""),
-        telegram: String(answers.telegram ?? ""),
+        name: String(answers.name ?? ''),
+        email: String(answers.email ?? ''),
+        business_name: String(answers.business_name ?? ''),
+        phone: String(answers.phone ?? ''),
+        whatsapp: String(answers.whatsapp ?? ''),
+        telegram: String(answers.telegram ?? ''),
     };
 }
 
@@ -962,15 +914,17 @@ function finalizeSurveyLocally() {
  * @returns {Promise<string>}
  */
 async function buildSubmissionEmailHash(email) {
-    const normalizedEmail = String(email ?? "").trim().toLowerCase();
-    if (typeof crypto === "undefined" || !crypto?.subtle) {
-        return "";
+    const normalizedEmail = String(email ?? '')
+        .trim()
+        .toLowerCase();
+    if (typeof crypto === 'undefined' || !crypto?.subtle) {
+        return '';
     }
     const bytes = new TextEncoder().encode(normalizedEmail);
-    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
     return Array.from(new Uint8Array(digest))
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("");
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
 }
 
 /**
@@ -980,7 +934,7 @@ async function buildSubmissionEmailHash(email) {
  * @returns {Promise<void>}
  */
 async function persistSurveySubmissionState(email) {
-    if (typeof window === "undefined" || !window?.localStorage) {
+    if (typeof window === 'undefined' || !window?.localStorage) {
         return;
     }
 
@@ -992,11 +946,10 @@ async function persistSurveySubmissionState(email) {
     };
 
     try {
-        window.localStorage.setItem(
-            SURVEY_SUBMISSION_STATE_KEY,
-            JSON.stringify(statePayload),
-        );
-    } catch {}
+        window.localStorage.setItem(SURVEY_SUBMISSION_STATE_KEY, JSON.stringify(statePayload));
+    } catch {
+        // localStorage недоступен (private mode / quota / SecurityError) — пропускаем
+    }
 }
 
 /**
@@ -1005,7 +958,7 @@ async function persistSurveySubmissionState(email) {
  * @returns {void}
  */
 function hydrateSubmittedStateFromStorage() {
-    if (typeof window === "undefined" || !window?.localStorage) {
+    if (typeof window === 'undefined' || !window?.localStorage) {
         return;
     }
     let parsedState = null;
@@ -1022,14 +975,10 @@ function hydrateSubmittedStateFromStorage() {
         return;
     }
     const maskedEmailRaw =
-        typeof parsedState.email_masked === "string"
-            ? parsedState.email_masked.trim()
-            : "";
+        typeof parsedState.email_masked === 'string' ? parsedState.email_masked.trim() : '';
     submittedState.maskedEmail = normalizeMaskedEmailForUi(maskedEmailRaw);
     submittedState.submittedAt =
-        typeof parsedState.submitted_at === "string"
-            ? parsedState.submitted_at
-            : null;
+        typeof parsedState.submitted_at === 'string' ? parsedState.submitted_at : null;
     submittedStateActive.value = true;
 }
 
@@ -1040,26 +989,28 @@ function hydrateSubmittedStateFromStorage() {
  * @returns {string}
  */
 function normalizeMaskedEmailForUi(maskedEmail) {
-    const source = String(maskedEmail ?? "").trim().toLowerCase();
-    const atIndex = source.indexOf("@");
+    const source = String(maskedEmail ?? '')
+        .trim()
+        .toLowerCase();
+    const atIndex = source.indexOf('@');
     if (atIndex > 0 && atIndex < source.length - 1) {
-        const localPart = source.slice(0, atIndex).replace(/\*/g, "");
+        const localPart = source.slice(0, atIndex).replace(/\*/g, '');
         const domainPart = source.slice(atIndex + 1);
-        const dotIndex = domainPart.lastIndexOf(".");
+        const dotIndex = domainPart.lastIndexOf('.');
         if (dotIndex <= 0 || dotIndex === domainPart.length - 1) {
-            return "***";
+            return '***';
         }
-        const domainName = domainPart.slice(0, dotIndex).replace(/\*/g, "");
-        const domainZone = domainPart.slice(dotIndex + 1).replace(/\*/g, "");
+        const domainName = domainPart.slice(0, dotIndex).replace(/\*/g, '');
+        const domainZone = domainPart.slice(dotIndex + 1).replace(/\*/g, '');
         const localPrefix = localPart.slice(0, Math.min(3, localPart.length));
         const domainTail = domainName.slice(Math.max(0, domainName.length - 3));
         const zoneHead = domainZone.slice(0, Math.min(3, domainZone.length));
         if (!localPrefix || !domainTail || !zoneHead) {
-            return "***";
+            return '***';
         }
         return `${localPrefix}*******${domainTail}.${zoneHead}`;
     }
-    return source || "***";
+    return source || '***';
 }
 
 /**
@@ -1069,16 +1020,16 @@ function normalizeMaskedEmailForUi(maskedEmail) {
  */
 function resetSurveyStateToIntro() {
     const staticLeadFields = [
-        "name",
-        "email",
-        "business_name",
-        "phone",
-        "whatsapp",
-        "telegram",
-        "hp_company",
+        'name',
+        'email',
+        'business_name',
+        'phone',
+        'whatsapp',
+        'telegram',
+        'hp_company',
     ];
     for (const field of staticLeadFields) {
-        answers[field] = "";
+        answers[field] = '';
     }
     const questionIds = Object.keys(getSurveyQuestionsById());
     for (const questionId of questionIds) {
@@ -1089,8 +1040,8 @@ function resetSurveyStateToIntro() {
     surveySubmitted.value = false;
     skipIntroQuestionTransitionOnce.value = false;
     validation.leadFormAttempted = false;
-    validation.leadEmailError = "";
-    validation.leadSubmitError = "";
+    validation.leadEmailError = '';
+    validation.leadSubmitError = '';
 }
 
 /**
@@ -1108,11 +1059,10 @@ function resetSurveyFromSubmittedState() {
         focusSurveyStepHeading();
     });
 }
-
 </script>
 
 <style scoped lang="scss">
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .survey-page {
     display: flex;
@@ -1217,8 +1167,7 @@ function resetSurveyFromSubmittedState() {
 
     :deep(.survey-lead-form__fields .survey-page__control) {
         scroll-margin-bottom: calc(
-            #{$spacing-2xl} + #{$spacing-md-lg} +
-                env(safe-area-inset-bottom, 0px)
+            #{$spacing-2xl} + #{$spacing-md-lg} + env(safe-area-inset-bottom, 0px)
         );
     }
 

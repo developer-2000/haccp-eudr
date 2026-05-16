@@ -1,10 +1,10 @@
-import countries from "i18n-iso-countries";
-import enLocale from "i18n-iso-countries/langs/en.json";
+import countries from 'i18n-iso-countries';
+import enLocale from 'i18n-iso-countries/langs/en.json';
 
 countries.registerLocale(enLocale);
 
-const englishCountryNamesByAlpha2 = countries.getNames("en", {
-    select: "official",
+const englishCountryNamesByAlpha2 = countries.getNames('en', {
+    select: 'official',
 });
 
 /**
@@ -17,9 +17,7 @@ const englishCountryNamesByAlpha2 = countries.getNames("en", {
 function buildSortedEnglishCountrySelectOptions(namesByAlpha2) {
     return Object.entries(namesByAlpha2)
         .map(([value, label]) => ({ value, label }))
-        .sort((a, b) =>
-            a.label.localeCompare(b.label, "en", { sensitivity: "base" }),
-        );
+        .sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' }));
 }
 
 /**
@@ -28,8 +26,9 @@ function buildSortedEnglishCountrySelectOptions(namesByAlpha2) {
  *
  * @type {ReadonlyArray<{ value: string, label: string }>}
  */
-export const SURVEY_ENGLISH_COUNTRY_SELECT_OPTIONS =
-    buildSortedEnglishCountrySelectOptions(englishCountryNamesByAlpha2);
+export const SURVEY_ENGLISH_COUNTRY_SELECT_OPTIONS = buildSortedEnglishCountrySelectOptions(
+    englishCountryNamesByAlpha2,
+);
 
 /**
  * Возвращает официальные английские названия стран по коду ISO 3166-1 alpha-2.
@@ -49,11 +48,8 @@ export function getEnglishCountryNamesByAlpha2() {
  * @returns {boolean}
  */
 export function isSurveyCountryAlpha2Valid(value) {
-    if (typeof value !== "string" || value === "") {
+    if (typeof value !== 'string' || value === '') {
         return false;
     }
-    return Object.prototype.hasOwnProperty.call(
-        englishCountryNamesByAlpha2,
-        value,
-    );
+    return Object.prototype.hasOwnProperty.call(englishCountryNamesByAlpha2, value);
 }

@@ -1,8 +1,8 @@
-import { computed } from "vue";
+import { computed } from 'vue';
 import {
     firstPendingMeasurementTime,
     taskDisplayStatusKey,
-} from "@/features/demo/domain/checklistTaskModel";
+} from '@/features/demo/domain/checklistTaskModel';
 
 /**
  * Возвращает timestamp начала текущих суток (локальное время).
@@ -19,7 +19,7 @@ const getTodayStartTimestamp = () => {
  * Используется при фильтрации задач для дашборда; границу суток передают снаружи один раз на проход.
  */
 const isTaskScheduledForFuture = (task, todayStartTs) =>
-    typeof task?.startDate === "number" &&
+    typeof task?.startDate === 'number' &&
     Number.isFinite(task.startDate) &&
     task.startDate > todayStartTs;
 
@@ -33,10 +33,10 @@ const getTaskMeasurementStats = (task) => {
     let problemCount = 0;
 
     for (const row of rows) {
-        if (row?.status === "pending") {
+        if (row?.status === 'pending') {
             hasPending = true;
         }
-        if (row?.status === "problem") {
+        if (row?.status === 'problem') {
             problemCount += 1;
         }
     }
@@ -50,17 +50,15 @@ const getTaskMeasurementStats = (task) => {
  */
 export const useDemoDashboardViewModel = (demoState) => {
     const allChecklistTasks = computed(() =>
-        Object.entries(demoState.value.checklistsByNiche).flatMap(
-            ([niche, tasks]) => tasks.map((task) => ({ ...task, niche })),
+        Object.entries(demoState.value.checklistsByNiche).flatMap(([niche, tasks]) =>
+            tasks.map((task) => ({ ...task, niche })),
         ),
     );
 
     const dashboardChecklistTasks = computed(() => {
         const todayStartTs = getTodayStartTimestamp();
         const source = allChecklistTasks.value;
-        const filtered = source.filter(
-            (task) => !isTaskScheduledForFuture(task, todayStartTs),
-        );
+        const filtered = source.filter((task) => !isTaskScheduledForFuture(task, todayStartTs));
 
         return filtered;
     });
@@ -88,7 +86,7 @@ export const useDemoDashboardViewModel = (demoState) => {
                     id: task.id,
                     title: task.title,
                     value: firstPendingMeasurementTime(task),
-                    status: displayKey === "problem" ? "warning" : displayKey,
+                    status: displayKey === 'problem' ? 'warning' : displayKey,
                     type: task.niche,
                     assignedStaffId: task.assignedStaffId ?? null,
                     measurements: task.measurements ?? [],
@@ -100,16 +98,13 @@ export const useDemoDashboardViewModel = (demoState) => {
                     equipmentTargetIds: Array.isArray(task.equipmentTargetIds)
                         ? task.equipmentTargetIds
                         : [],
-                    roomTargetIds: Array.isArray(task.roomTargetIds)
-                        ? task.roomTargetIds
-                        : [],
+                    roomTargetIds: Array.isArray(task.roomTargetIds) ? task.roomTargetIds : [],
                 });
             }
         }
 
         const tasksTotal = tasks.length;
-        const compliance =
-            tasksTotal > 0 ? Math.round((tasksDone / tasksTotal) * 100) : 0;
+        const compliance = tasksTotal > 0 ? Math.round((tasksDone / tasksTotal) * 100) : 0;
 
         return {
             tasksTotal,

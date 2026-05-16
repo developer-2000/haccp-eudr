@@ -1,8 +1,8 @@
-import { nextTick } from "vue";
+import { nextTick } from 'vue';
 import {
     findMeasurementRowIndexByTime,
     getCurrentMeasurementRowStatus,
-} from "./grainCoolingMeasurementRow";
+} from './grainCoolingMeasurementRow';
 
 const MAX_OPEN_ATTEMPTS = 24;
 
@@ -20,13 +20,13 @@ const MAX_OPEN_ATTEMPTS = 24;
 export async function openShowTaskModalPendingDrawer({
     getTask,
     item,
-    source: _source = "неизвестно",
+    source: _source = 'неизвестно',
     pendingDrawerRef,
     demoStateRef: _demoStateRef,
 }) {
     const task = getTask();
     const statusNow = getCurrentMeasurementRowStatus(task, item);
-    if (statusNow !== "pending") {
+    if (statusNow !== 'pending') {
         return;
     }
     const idx = findMeasurementRowIndexByTime(task, item);
@@ -39,7 +39,7 @@ export async function openShowTaskModalPendingDrawer({
     for (let attempt = 0; attempt < MAX_OPEN_ATTEMPTS; attempt++) {
         const inst = pendingDrawerRef.value;
         const openFn = inst?.open;
-        if (typeof openFn === "function") {
+        if (typeof openFn === 'function') {
             openFn.call(inst, rowForDrawer);
             return;
         }

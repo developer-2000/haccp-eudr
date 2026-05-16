@@ -216,7 +216,7 @@ const _sfc_main$B = /* @__PURE__ */ Object.assign({
       _push(`<section${ssrRenderAttrs(mergeProps({
         class: "survey-cta",
         "aria-label": "Survey CTA"
-      }, _attrs))} data-v-3b9f780b><div class="survey-cta__content" data-v-3b9f780b><h2 class="survey-cta__title" data-v-3b9f780b>${ssrInterpolate(_ctx.$t("home.survey_cta.title"))} <span class="survey-cta__title-secondary" data-v-3b9f780b>${ssrInterpolate(_ctx.$t("home.survey_cta.title_secondary"))}</span></h2><button type="button" class="btn-client btn-success survey-cta__button"${ssrRenderAttr("aria-label", _ctx.$t("home.survey_cta.button_aria_label"))} data-v-3b9f780b>${ssrInterpolate(_ctx.$t("home.survey_cta.button_text"))}</button></div></section>`);
+      }, _attrs))} data-v-26fc5f9c><div class="survey-cta__content" data-v-26fc5f9c><h2 class="survey-cta__title" data-v-26fc5f9c>${ssrInterpolate(_ctx.$t("home.survey_cta.title"))} <span class="survey-cta__title-secondary" data-v-26fc5f9c>${ssrInterpolate(_ctx.$t("home.survey_cta.title_secondary"))}</span></h2><button type="button" class="btn-client btn-success survey-cta__button"${ssrRenderAttr("aria-label", _ctx.$t("home.survey_cta.button_aria_label"))} data-v-26fc5f9c>${ssrInterpolate(_ctx.$t("home.survey_cta.button_text"))}</button></div></section>`);
     };
   }
 });
@@ -226,7 +226,7 @@ _sfc_main$B.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/home/SurveyCtaSection.vue");
   return _sfc_setup$B ? _sfc_setup$B(props, ctx) : void 0;
 };
-const SurveyCtaSection = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-3b9f780b"]]);
+const SurveyCtaSection = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-26fc5f9c"]]);
 const _sfc_main$A = /* @__PURE__ */ Object.assign({ name: "SeoHead" }, {
   __name: "SeoHead",
   __ssrInlineRender: true,
@@ -346,9 +346,7 @@ const navConfig = {
 function useMobileMenu() {
   const isOpen = ref(false);
   const openedDropdownsSet = ref(/* @__PURE__ */ new Set());
-  const openedDropdowns = computed(
-    () => Array.from(openedDropdownsSet.value)
-  );
+  const openedDropdowns = computed(() => Array.from(openedDropdownsSet.value));
   const hasDropdown = (identifier) => {
     return openedDropdownsSet.value.has(identifier);
   };
@@ -466,9 +464,9 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
       if (hasColumns.value) {
         _push(`<!--[-->`);
         if (__props.variant === "desktop") {
-          _push(`<div class="dropdown-menu dropdown-menu-with-headers" data-v-06f250b6><!--[-->`);
+          _push(`<div class="dropdown-menu dropdown-menu-with-headers" data-v-01759dc7><!--[-->`);
           ssrRenderList(__props.item.dropdown.columns, (column) => {
-            _push(`<div class="dropdown-column" data-v-06f250b6><div class="dropdown-column-title" data-v-06f250b6>${ssrInterpolate(column.title)}</div><!--[-->`);
+            _push(`<div class="dropdown-column" data-v-01759dc7><div class="dropdown-column-title" data-v-01759dc7>${ssrInterpolate(column.title)}</div><!--[-->`);
             ssrRenderList(column.items, (dropdownItem) => {
               _push(`<!--[-->`);
               if (unref(hasValidLink)(dropdownItem) && !unref(isDropdownLink)(dropdownItem)) {
@@ -478,9 +476,9 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                 }, {
                   default: withCtx((_, _push2, _parent2, _scopeId) => {
                     if (_push2) {
-                      _push2(`<div class="dropdown-title" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div>`);
+                      _push2(`<div class="dropdown-title" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div>`);
                       if (dropdownItem.description) {
-                        _push2(`<div class="dropdown-desc" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
+                        _push2(`<div class="dropdown-desc" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
                       } else {
                         _push2(`<!---->`);
                       }
@@ -513,9 +511,9 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                   _: 2
                 }, _parent));
               } else {
-                _push(`<div class="dropdown-item" data-v-06f250b6><div class="dropdown-title" data-v-06f250b6>${ssrInterpolate(dropdownItem.title)}</div>`);
+                _push(`<div class="dropdown-item" data-v-01759dc7><div class="dropdown-title" data-v-01759dc7>${ssrInterpolate(dropdownItem.title)}</div>`);
                 if (dropdownItem.description) {
-                  _push(`<div class="dropdown-desc" data-v-06f250b6>${ssrInterpolate(dropdownItem.description)}</div>`);
+                  _push(`<div class="dropdown-desc" data-v-01759dc7>${ssrInterpolate(dropdownItem.description)}</div>`);
                 } else {
                   _push(`<!---->`);
                 }
@@ -529,7 +527,7 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
         } else {
           _push(`<!--[-->`);
           ssrRenderList(__props.item.dropdown.columns, (column) => {
-            _push(`<div class="mobile-menu-column" data-v-06f250b6><div class="mobile-menu-column-title" data-v-06f250b6>${ssrInterpolate(column.title)}</div><!--[-->`);
+            _push(`<div class="mobile-menu-column" data-v-01759dc7><div class="mobile-menu-column-title" data-v-01759dc7>${ssrInterpolate(column.title)}</div><!--[-->`);
             ssrRenderList(column.items, (dropdownItem) => {
               _push(`<!--[-->`);
               if (unref(hasValidLink)(dropdownItem) && !unref(isDropdownLink)(dropdownItem)) {
@@ -540,9 +538,9 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                 }, {
                   default: withCtx((_, _push2, _parent2, _scopeId) => {
                     if (_push2) {
-                      _push2(`<div class="mobile-menu-subitem-title" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div>`);
+                      _push2(`<div class="mobile-menu-subitem-title" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div>`);
                       if (dropdownItem.description) {
-                        _push2(`<div class="mobile-menu-subitem-desc" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
+                        _push2(`<div class="mobile-menu-subitem-desc" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
                       } else {
                         _push2(`<!---->`);
                       }
@@ -576,9 +574,9 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                   _: 2
                 }, _parent));
               } else {
-                _push(`<div class="mobile-menu-subitem" data-v-06f250b6><div class="mobile-menu-subitem-title" data-v-06f250b6>${ssrInterpolate(dropdownItem.title)}</div>`);
+                _push(`<div class="mobile-menu-subitem" data-v-01759dc7><div class="mobile-menu-subitem-title" data-v-01759dc7>${ssrInterpolate(dropdownItem.title)}</div>`);
                 if (dropdownItem.description) {
-                  _push(`<div class="mobile-menu-subitem-desc" data-v-06f250b6>${ssrInterpolate(dropdownItem.description)}</div>`);
+                  _push(`<div class="mobile-menu-subitem-desc" data-v-01759dc7>${ssrInterpolate(dropdownItem.description)}</div>`);
                 } else {
                   _push(`<!---->`);
                 }
@@ -594,7 +592,7 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
       } else if (isSimple.value) {
         _push(`<!--[-->`);
         if (__props.variant === "desktop") {
-          _push(`<div class="${ssrRenderClass([{ "dropdown-menu-columns": hasSecondColumn.value }, "dropdown-menu"])}" data-v-06f250b6><div class="dropdown-column" data-v-06f250b6><!--[-->`);
+          _push(`<div class="${ssrRenderClass([{ "dropdown-menu-columns": hasSecondColumn.value }, "dropdown-menu"])}" data-v-01759dc7><div class="dropdown-column" data-v-01759dc7><!--[-->`);
           ssrRenderList(firstColumnItems.value, (dropdownItem) => {
             _push(`<!--[-->`);
             if (unref(hasValidLink)(dropdownItem)) {
@@ -604,7 +602,7 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
               }, {
                 default: withCtx((_, _push2, _parent2, _scopeId) => {
                   if (_push2) {
-                    _push2(`<div class="dropdown-title" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
+                    _push2(`<div class="dropdown-title" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
                   } else {
                     return [
                       createVNode("div", { class: "dropdown-title" }, toDisplayString(dropdownItem.title), 1),
@@ -615,13 +613,13 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                 _: 2
               }, _parent));
             } else {
-              _push(`<div class="dropdown-item" data-v-06f250b6><div class="dropdown-title" data-v-06f250b6>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-06f250b6>${ssrInterpolate(dropdownItem.description)}</div></div>`);
+              _push(`<div class="dropdown-item" data-v-01759dc7><div class="dropdown-title" data-v-01759dc7>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-01759dc7>${ssrInterpolate(dropdownItem.description)}</div></div>`);
             }
             _push(`<!--]-->`);
           });
           _push(`<!--]--></div>`);
           if (hasSecondColumn.value) {
-            _push(`<div class="dropdown-column" data-v-06f250b6><!--[-->`);
+            _push(`<div class="dropdown-column" data-v-01759dc7><!--[-->`);
             ssrRenderList(secondColumnItems.value, (dropdownItem) => {
               _push(`<!--[-->`);
               if (unref(hasValidLink)(dropdownItem)) {
@@ -631,7 +629,7 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                 }, {
                   default: withCtx((_, _push2, _parent2, _scopeId) => {
                     if (_push2) {
-                      _push2(`<div class="dropdown-title" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
+                      _push2(`<div class="dropdown-title" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
                     } else {
                       return [
                         createVNode("div", { class: "dropdown-title" }, toDisplayString(dropdownItem.title), 1),
@@ -642,7 +640,7 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                   _: 2
                 }, _parent));
               } else {
-                _push(`<div class="dropdown-item" data-v-06f250b6><div class="dropdown-title" data-v-06f250b6>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-06f250b6>${ssrInterpolate(dropdownItem.description)}</div></div>`);
+                _push(`<div class="dropdown-item" data-v-01759dc7><div class="dropdown-title" data-v-01759dc7>${ssrInterpolate(dropdownItem.title)}</div><div class="dropdown-desc" data-v-01759dc7>${ssrInterpolate(dropdownItem.description)}</div></div>`);
               }
               _push(`<!--]-->`);
             });
@@ -663,9 +661,9 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
               }, {
                 default: withCtx((_, _push2, _parent2, _scopeId) => {
                   if (_push2) {
-                    _push2(`<div class="mobile-menu-subitem-title" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div>`);
+                    _push2(`<div class="mobile-menu-subitem-title" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.title)}</div>`);
                     if (dropdownItem.description) {
-                      _push2(`<div class="mobile-menu-subitem-desc" data-v-06f250b6${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
+                      _push2(`<div class="mobile-menu-subitem-desc" data-v-01759dc7${_scopeId}>${ssrInterpolate(dropdownItem.description)}</div>`);
                     } else {
                       _push2(`<!---->`);
                     }
@@ -682,9 +680,9 @@ const _sfc_main$z = /* @__PURE__ */ Object.assign({
                 _: 2
               }, _parent));
             } else {
-              _push(`<div class="mobile-menu-subitem" data-v-06f250b6><div class="mobile-menu-subitem-title" data-v-06f250b6>${ssrInterpolate(dropdownItem.title)}</div>`);
+              _push(`<div class="mobile-menu-subitem" data-v-01759dc7><div class="mobile-menu-subitem-title" data-v-01759dc7>${ssrInterpolate(dropdownItem.title)}</div>`);
               if (dropdownItem.description) {
-                _push(`<div class="mobile-menu-subitem-desc" data-v-06f250b6>${ssrInterpolate(dropdownItem.description)}</div>`);
+                _push(`<div class="mobile-menu-subitem-desc" data-v-01759dc7>${ssrInterpolate(dropdownItem.description)}</div>`);
               } else {
                 _push(`<!---->`);
               }
@@ -707,7 +705,7 @@ _sfc_main$z.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/header/DropdownMenu.vue");
   return _sfc_setup$z ? _sfc_setup$z(props, ctx) : void 0;
 };
-const DropdownMenu = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-06f250b6"]]);
+const DropdownMenu = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-01759dc7"]]);
 const _sfc_main$y = /* @__PURE__ */ Object.assign({
   name: "NavMenuItem"
 }, {
@@ -779,7 +777,7 @@ const _sfc_main$y = /* @__PURE__ */ Object.assign({
       if (__props.variant === "desktop") {
         _push(`<!--[-->`);
         if (hasDropdown.value) {
-          _push(`<div class="nav-dropdown" role="button" aria-haspopup="true" data-v-f4d0ee2a>`);
+          _push(`<div class="nav-dropdown" role="button" aria-haspopup="true" data-v-e35a8f26>`);
           _push(ssrRenderComponent(unref(Link), {
             href: itemLink.value,
             class: ["nav-link", { "nav-link--exact-page": isExactPageLink.value }],
@@ -838,18 +836,18 @@ const _sfc_main$y = /* @__PURE__ */ Object.assign({
       } else {
         _push(`<!--[-->`);
         if (hasDropdown.value) {
-          _push(`<div class="${ssrRenderClass([{ "mobile-menu-item-open": __props.isOpen }, "mobile-menu-item"])}" data-v-f4d0ee2a><button class="mobile-menu-item-header"${ssrRenderAttr("aria-expanded", __props.isOpen)}${ssrRenderAttr(
+          _push(`<div class="${ssrRenderClass([{ "mobile-menu-item-open": __props.isOpen }, "mobile-menu-item"])}" data-v-e35a8f26><button class="mobile-menu-item-header"${ssrRenderAttr("aria-expanded", __props.isOpen)}${ssrRenderAttr(
             "aria-label",
             _ctx.$t("header.nav.toggle_submenu_aria", {
               item: _ctx.$t(__props.item.label)
             })
-          )} role="menuitem" data-v-f4d0ee2a><span data-v-f4d0ee2a>${ssrInterpolate(_ctx.$t(__props.item.label))}</span>`);
+          )} role="menuitem" data-v-e35a8f26><span data-v-e35a8f26>${ssrInterpolate(_ctx.$t(__props.item.label))}</span>`);
           _push(ssrRenderComponent(_sfc_main$C, {
             name: "chevron-down",
             class: "mobile-menu-item-arrow",
             "aria-hidden": "true"
           }, null, _parent));
-          _push(`</button><div class="mobile-menu-item-content" data-v-f4d0ee2a>`);
+          _push(`</button><div class="mobile-menu-item-content" data-v-e35a8f26>`);
           if (itemDropdown.value) {
             _push(ssrRenderComponent(DropdownMenu, {
               item: props.item,
@@ -889,7 +887,7 @@ _sfc_main$y.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/header/NavMenuItem.vue");
   return _sfc_setup$y ? _sfc_setup$y(props, ctx) : void 0;
 };
-const NavMenuItem = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__scopeId", "data-v-f4d0ee2a"]]);
+const NavMenuItem = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__scopeId", "data-v-e35a8f26"]]);
 const _sfc_main$x = /* @__PURE__ */ Object.assign({
   name: "Header"
 }, {
@@ -957,14 +955,14 @@ const _sfc_main$x = /* @__PURE__ */ Object.assign({
       document.body.style.overflow = "";
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<header${ssrRenderAttrs(mergeProps({ class: "header" }, _attrs))} data-v-7318535f><nav class="nav" role="navigation"${ssrRenderAttr("aria-label", _ctx.$t("header.nav.aria_label"))} data-v-7318535f><div class="container nav-container" data-v-7318535f><div class="nav-logo" data-v-7318535f>`);
+      _push(`<header${ssrRenderAttrs(mergeProps({ class: "header" }, _attrs))} data-v-d5b3b20c><nav class="nav" role="navigation"${ssrRenderAttr("aria-label", _ctx.$t("header.nav.aria_label"))} data-v-d5b3b20c><div class="container nav-container" data-v-d5b3b20c><div class="nav-logo" data-v-d5b3b20c>`);
       _push(ssrRenderComponent(unref(Link), {
         href: safeLogo.value.link,
         class: "logo-link"
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<span class="logo-site" data-v-7318535f${_scopeId}>${ssrInterpolate(siteConfig.value.name)}</span><span class="logo-app" data-v-7318535f${_scopeId}>demo</span>`);
+            _push2(`<span class="logo-site" data-v-d5b3b20c${_scopeId}>${ssrInterpolate(siteConfig.value.name)}</span><span class="logo-app" data-v-d5b3b20c${_scopeId}>demo</span>`);
           } else {
             return [
               createVNode("span", { class: "logo-site" }, toDisplayString(siteConfig.value.name), 1),
@@ -976,7 +974,7 @@ const _sfc_main$x = /* @__PURE__ */ Object.assign({
       }, _parent));
       _push(`</div>`);
       if (!unref(isMobile)) {
-        _push(`<div class="nav-menu" data-v-7318535f><!--[-->`);
+        _push(`<div class="nav-menu" data-v-d5b3b20c><!--[-->`);
         ssrRenderList(safeMenu.value, (item) => {
           _push(ssrRenderComponent(NavMenuItem, {
             key: `${item.label}-${item.link}`,
@@ -989,7 +987,7 @@ const _sfc_main$x = /* @__PURE__ */ Object.assign({
         _push(`<!---->`);
       }
       if (unref(isMobile)) {
-        _push(`<button class="mobile-menu-toggle"${ssrRenderAttr("aria-expanded", unref(isMobileMenuOpen))}${ssrRenderAttr("aria-label", _ctx.$t("header.nav.toggle_mobile_menu"))} data-v-7318535f>`);
+        _push(`<button class="mobile-menu-toggle"${ssrRenderAttr("aria-expanded", unref(isMobileMenuOpen))}${ssrRenderAttr("aria-label", _ctx.$t("header.nav.toggle_mobile_menu"))} data-v-d5b3b20c>`);
         _push(ssrRenderComponent(_sfc_main$C, {
           name: unref(isMobileMenuOpen) ? "close" : "bars",
           class: "mobile-menu-icon"
@@ -999,16 +997,16 @@ const _sfc_main$x = /* @__PURE__ */ Object.assign({
         _push(`<!---->`);
       }
       if (unref(isMobile)) {
-        _push(`<div class="${ssrRenderClass([{ "mobile-menu-open": unref(isMobileMenuOpen) }, "mobile-menu"])}" role="menu"${ssrRenderAttr("aria-hidden", !unref(isMobileMenuOpen))} data-v-7318535f><div class="box-switch-lang-mobile-menu" data-v-7318535f>`);
+        _push(`<div class="${ssrRenderClass([{ "mobile-menu-open": unref(isMobileMenuOpen) }, "mobile-menu"])}" role="menu"${ssrRenderAttr("aria-hidden", !unref(isMobileMenuOpen))} data-v-d5b3b20c><div class="box-switch-lang-mobile-menu" data-v-d5b3b20c>`);
         if (unref(isLangSwitcherHidden) && languagesList.value.length > 1) {
-          _push(`<div class="mobile-menu__lang" role="group"${ssrRenderAttr("aria-label", _ctx.$t("header.nav.language_group_aria"))} data-v-7318535f><!--[-->`);
+          _push(`<div class="mobile-menu__lang" role="group"${ssrRenderAttr("aria-label", _ctx.$t("header.nav.language_group_aria"))} data-v-d5b3b20c><!--[-->`);
           ssrRenderList(languagesList.value, (lang) => {
             _push(`<button type="button" class="${ssrRenderClass([
               "lang-switcher__btn",
               {
                 "lang-switcher__btn--active": currentLocale.value === lang.code
               }
-            ])}"${ssrRenderAttr("aria-pressed", currentLocale.value === lang.code)}${ssrRenderAttr("title", lang.name)} data-v-7318535f>${ssrInterpolate(lang.prefix)}</button>`);
+            ])}"${ssrRenderAttr("aria-pressed", currentLocale.value === lang.code)}${ssrRenderAttr("title", lang.name)} data-v-d5b3b20c>${ssrInterpolate(lang.prefix)}</button>`);
           });
           _push(`<!--]--></div>`);
         } else {
@@ -1021,9 +1019,7 @@ const _sfc_main$x = /* @__PURE__ */ Object.assign({
             item,
             variant: "mobile",
             "is-open": unref(hasMobileDropdown)(`${item.label}-${item.link}`),
-            "on-toggle": () => unref(toggleMobileDropdown)(
-              `${item.label}-${item.link}`
-            ),
+            "on-toggle": () => unref(toggleMobileDropdown)(`${item.label}-${item.link}`),
             "on-item-click": unref(closeMobileMenu)
           }, null, _parent));
         });
@@ -1031,32 +1027,29 @@ const _sfc_main$x = /* @__PURE__ */ Object.assign({
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="nav-actions" data-v-7318535f>`);
+      _push(`<div class="nav-actions" data-v-d5b3b20c>`);
       if (languagesList.value.length > 1) {
-        _push(`<div class="lang-switcher" role="group"${ssrRenderAttr("aria-label", _ctx.$t("header.nav.language_group_aria"))} data-v-7318535f><!--[-->`);
+        _push(`<div class="lang-switcher" role="group"${ssrRenderAttr("aria-label", _ctx.$t("header.nav.language_group_aria"))} data-v-d5b3b20c><!--[-->`);
         ssrRenderList(languagesList.value, (lang) => {
           _push(`<button type="button" class="${ssrRenderClass([
             "lang-switcher__btn",
             {
               "lang-switcher__btn--active": currentLocale.value === lang.code
             }
-          ])}"${ssrRenderAttr("aria-pressed", currentLocale.value === lang.code)}${ssrRenderAttr("title", lang.name)} data-v-7318535f>${ssrInterpolate(lang.prefix)}</button>`);
+          ])}"${ssrRenderAttr("aria-pressed", currentLocale.value === lang.code)}${ssrRenderAttr("title", lang.name)} data-v-d5b3b20c>${ssrInterpolate(lang.prefix)}</button>`);
         });
         _push(`<!--]--></div>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<button type="button" class="${ssrRenderClass([{ "nav-cta--icon-only": unref(isCtaIconOnly) }, "btn-client btn-primary nav-cta"])}"${ssrRenderAttr(
-        "aria-label",
-        unref(isCtaIconOnly) ? _ctx.$t("header.cta.aria_icon_only") : void 0
-      )} data-v-7318535f>`);
+      _push(`<button type="button" class="${ssrRenderClass([{ "nav-cta--icon-only": unref(isCtaIconOnly) }, "btn-client btn-primary nav-cta"])}"${ssrRenderAttr("aria-label", unref(isCtaIconOnly) ? _ctx.$t("header.cta.aria_icon_only") : void 0)} data-v-d5b3b20c>`);
       if (unref(isCtaIconOnly)) {
         _push(ssrRenderComponent(_sfc_main$C, {
           name: "business-center-round",
           class: "nav-cta-icon"
         }, null, _parent));
       } else {
-        _push(`<!--[--><span class="nav-cta-line" data-v-7318535f>${ssrInterpolate(_ctx.$t("header.cta.leave_request"))}</span><span class="nav-cta-line nav-cta-line--accent" data-v-7318535f>${ssrInterpolate(_ctx.$t("header.cta.tell_about_business"))}</span><!--]-->`);
+        _push(`<!--[--><span class="nav-cta-line" data-v-d5b3b20c>${ssrInterpolate(_ctx.$t("header.cta.leave_request"))}</span><span class="nav-cta-line nav-cta-line--accent" data-v-d5b3b20c>${ssrInterpolate(_ctx.$t("header.cta.tell_about_business"))}</span><!--]-->`);
       }
       _push(`</button></div></div></nav></header>`);
     };
@@ -1068,7 +1061,7 @@ _sfc_main$x.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/header/Header.vue");
   return _sfc_setup$x ? _sfc_setup$x(props, ctx) : void 0;
 };
-const Header = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-7318535f"]]);
+const Header = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-d5b3b20c"]]);
 const START_YEAR = 2026;
 const _sfc_main$w = /* @__PURE__ */ Object.assign({ name: "Footer" }, {
   __name: "Footer",
@@ -1095,9 +1088,7 @@ const _sfc_main$w = /* @__PURE__ */ Object.assign({ name: "Footer" }, {
     const seoLocaleLinks = computed(() => {
       const allLocales = page.props.availableLocales || [];
       const countries2 = page.props.localeCountries || {};
-      const switcherCodes = new Set(
-        (page.props.switcherLocales || []).map((l) => l.code)
-      );
+      const switcherCodes = new Set((page.props.switcherLocales || []).map((l) => l.code));
       const locale2 = currentLocale.value;
       const pathWithoutLocale = currentPath.value.replace(new RegExp(`^/${locale2}(/|$)`), "$1") || "/";
       return allLocales.filter((code) => !switcherCodes.has(code)).map((code) => {
@@ -1113,7 +1104,7 @@ const _sfc_main$w = /* @__PURE__ */ Object.assign({ name: "Footer" }, {
       _push(`<footer${ssrRenderAttrs(mergeProps({
         class: "footer",
         role: "contentinfo"
-      }, _attrs))} data-v-33e3cb7b><div class="container footer-container" data-v-33e3cb7b><div class="footer-brand" data-v-33e3cb7b><span class="logo-site" data-v-33e3cb7b>${ssrInterpolate(siteConfig.value.name)}</span><span class="logo-app" data-v-33e3cb7b>demo</span></div><nav class="footer-nav" aria-label="Footer" data-v-33e3cb7b>`);
+      }, _attrs))} data-v-16885eea><div class="container footer-container" data-v-16885eea><div class="footer-brand" data-v-16885eea><span class="logo-site" data-v-16885eea>${ssrInterpolate(siteConfig.value.name)}</span><span class="logo-app" data-v-16885eea>demo</span></div><nav class="footer-nav" aria-label="Footer" data-v-16885eea>`);
       _push(ssrRenderComponent(unref(Link), {
         href: privacyLink.value,
         class: ["footer-link", { "footer-link--exact-page": currentPath.value === privacyLink.value }]
@@ -1144,11 +1135,11 @@ const _sfc_main$w = /* @__PURE__ */ Object.assign({ name: "Footer" }, {
         }),
         _: 1
       }, _parent));
-      _push(`</nav><div class="footer-copyright" data-v-33e3cb7b>© ${ssrInterpolate(yearLabel.value)} ${ssrInterpolate(siteConfig.value.name)}</div></div>`);
+      _push(`</nav><div class="footer-copyright" data-v-16885eea>© ${ssrInterpolate(yearLabel.value)} ${ssrInterpolate(siteConfig.value.name)}</div></div>`);
       if (seoLocaleLinks.value.length) {
-        _push(`<nav class="footer-seo-locales" aria-hidden="true" data-v-33e3cb7b><!--[-->`);
+        _push(`<nav class="footer-seo-locales" aria-hidden="true" data-v-16885eea><!--[-->`);
         ssrRenderList(seoLocaleLinks.value, (link) => {
-          _push(`<a${ssrRenderAttr("href", link.href)}${ssrRenderAttr("hreflang", link.code)} data-v-33e3cb7b>${ssrInterpolate(link.name)}</a>`);
+          _push(`<a${ssrRenderAttr("href", link.href)}${ssrRenderAttr("hreflang", link.code)} data-v-16885eea>${ssrInterpolate(link.name)}</a>`);
         });
         _push(`<!--]--></nav>`);
       } else {
@@ -1164,7 +1155,7 @@ _sfc_main$w.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/footer/Footer.vue");
   return _sfc_setup$w ? _sfc_setup$w(props, ctx) : void 0;
 };
-const Footer = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__scopeId", "data-v-33e3cb7b"]]);
+const Footer = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__scopeId", "data-v-16885eea"]]);
 const LS_DEMO_STATE = "haccp-demo-state";
 const LS_CONSENT_VERSION = "consent_version_1";
 const LS_SURVEY_SUBMISSION_STATE = "survey_submission_state_v1";
@@ -1375,95 +1366,158 @@ function getTaskFieldTypeOptionsEquipment() {
 const TASK_FIELD_TYPE_OPTIONS = getTaskFieldTypeOptionsEquipment;
 const taskFieldTypeOptionsByScopeType = (taskScopeType) => taskScopeType === "rooms" ? getTaskFieldTypeOptionsBase() : getTaskFieldTypeOptionsEquipment();
 const EQUIPMENT_GROUPS = [
-  { groupTitle: tt$a("demo.equipment.group_coffee_roasting"), typeEquipment: "coffee", items: [
-    { id: "eq-coffee-roaster", label: tt$a("demo.equipment.eq_roaster") },
-    { id: "eq-coffee-destoner", label: tt$a("demo.equipment.eq_destoner") },
-    { id: "eq-coffee-machine", label: tt$a("demo.equipment.eq_coffee_machine") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_coffee_cooling"), typeEquipment: "coffee", items: [
-    { id: "eq-coffee-bean-cooler", label: tt$a("demo.equipment.eq_bean_cooler") },
-    { id: "eq-coffee-shock-cooler", label: tt$a("demo.equipment.eq_shock_cooler") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_coffee_storage"), typeEquipment: "coffee", items: [
-    { id: "eq-coffee-vacuum-containers", label: tt$a("demo.equipment.eq_vacuum_containers") },
-    { id: "eq-coffee-warehouse-shelving", label: tt$a("demo.equipment.eq_storage_racks") },
-    { id: "eq-coffee-grain-canisters", label: tt$a("demo.equipment.eq_bean_canisters") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_bread_sponge"), typeEquipment: "bread", items: [
-    { id: "eq-bread-spiral-mixer", label: tt$a("demo.equipment.eq_dough_mixer") },
-    { id: "eq-bread-preferment-vat", label: tt$a("demo.equipment.eq_sponge_vat") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_bread_proofing"), typeEquipment: "bread", items: [
-    { id: "eq-bread-proofing-cabinet", label: tt$a("demo.equipment.eq_proofing_cabinet") },
-    { id: "eq-bread-proofing-trays", label: tt$a("demo.equipment.eq_proofing_trays") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_bread_baking"), typeEquipment: "bread", items: [
-    { id: "eq-bread-rotary-oven", label: tt$a("demo.equipment.eq_rotary_oven") },
-    { id: "eq-bread-crumb-probe", label: tt$a("demo.equipment.eq_core_thermometer") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_bread_cooling"), typeEquipment: "bread", items: [
-    { id: "eq-bread-cooling-conveyor", label: tt$a("demo.equipment.eq_cooling_conveyor") },
-    { id: "eq-bread-ventilated-racks", label: tt$a("demo.equipment.eq_ventilation_racks") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_meat_chilled"), typeEquipment: "meat", items: [
-    { id: "eq-meat-chilled-room", label: tt$a("demo.equipment.eq_cold_chamber") },
-    { id: "eq-meat-chilled-cabinet", label: tt$a("demo.equipment.eq_cold_cabinet") },
-    { id: "eq-meat-chilled-display", label: tt$a("demo.equipment.eq_cold_display") },
-    { id: "eq-meat-chilled-semi-finished", label: tt$a("demo.equipment.eq_semi_finished_chamber") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_meat_frozen"), typeEquipment: "meat", items: [
-    { id: "eq-meat-freezer-room", label: tt$a("demo.equipment.eq_freezer_chamber") },
-    { id: "eq-meat-shock-freezer", label: tt$a("demo.equipment.eq_shock_freezer") },
-    { id: "eq-meat-freezer-cabinet", label: tt$a("demo.equipment.eq_freezer_cabinet") },
-    { id: "eq-meat-deep-freezer", label: tt$a("demo.equipment.eq_deep_freezer") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_cooking"), typeEquipment: "different", items: [
-    { id: "eq-stove", label: tt$a("demo.equipment.eq_stove") },
-    { id: "eq-combi-oven", label: tt$a("demo.equipment.eq_combi_oven") },
-    { id: "eq-fryer", label: tt$a("demo.equipment.eq_fryer") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_cold_storage"), typeEquipment: "different", items: [
-    { id: "eq-fridge-1", label: tt$a("demo.equipment.eq_fridge_1") },
-    { id: "eq-fridge-2", label: tt$a("demo.equipment.eq_fridge_2") },
-    { id: "eq-freezer", label: tt$a("demo.equipment.eq_freezer") },
-    { id: "eq-cold-storage", label: tt$a("demo.equipment.eq_cold_storage") },
-    { id: "eq-frozen-storage", label: tt$a("demo.equipment.eq_frozen_storage") },
-    { id: "eq-cold-display", label: tt$a("demo.equipment.eq_cold_display_gen") },
-    { id: "eq-dry-goods", label: tt$a("demo.equipment.eq_dry_goods") },
-    { id: "eq-vacuum-packer", label: tt$a("demo.equipment.eq_vacuum_packer") },
-    { id: "eq-ice-maker", label: tt$a("demo.equipment.eq_ice_maker") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_control"), typeEquipment: "different", items: [
-    { id: "eq-probe-1", label: tt$a("demo.equipment.eq_probe_1") },
-    { id: "eq-probe-2", label: tt$a("demo.equipment.eq_probe_2") },
-    { id: "eq-scale", label: tt$a("demo.equipment.eq_scale") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_surfaces"), typeEquipment: "different", items: [
-    { id: "eq-countertop", label: tt$a("demo.equipment.eq_countertop") },
-    { id: "eq-cutting-boards", label: tt$a("demo.equipment.eq_cutting_boards") },
-    { id: "eq-door-handles", label: tt$a("demo.equipment.eq_door_handles") },
-    { id: "eq-switches", label: tt$a("demo.equipment.eq_switches") },
-    { id: "eq-windows", label: tt$a("demo.equipment.eq_windows") },
-    { id: "eq-ceiling", label: tt$a("demo.equipment.eq_ceiling") },
-    { id: "eq-floors", label: tt$a("demo.equipment.eq_floors") },
-    { id: "eq-tables", label: tt$a("demo.equipment.eq_tables") },
-    { id: "eq-toilet", label: tt$a("demo.equipment.eq_toilet") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_sanitation"), typeEquipment: "different", items: [
-    { id: "eq-sinks", label: tt$a("demo.equipment.eq_sinks") },
-    { id: "eq-handwash", label: tt$a("demo.equipment.eq_handwash") },
-    { id: "eq-dishwasher", label: tt$a("demo.equipment.eq_dishwasher") },
-    { id: "eq-pre-rinse", label: tt$a("demo.equipment.eq_pre_rinse") },
-    { id: "eq-dishes", label: tt$a("demo.equipment.eq_dishes") },
-    { id: "eq-cutlery-containers", label: tt$a("demo.equipment.eq_cutlery_containers") }
-  ] },
-  { groupTitle: tt$a("demo.equipment.group_logistics"), typeEquipment: "different", items: [
-    { id: "eq-transport-box", label: tt$a("demo.equipment.eq_transport_box") },
-    { id: "eq-trolley", label: tt$a("demo.equipment.eq_trolley") },
-    { id: "eq-trash-bins", label: tt$a("demo.equipment.eq_trash_bins") },
-    { id: "eq-wall-shelf", label: tt$a("demo.equipment.eq_wall_shelf") },
-    { id: "eq-cleaning-cabinet", label: tt$a("demo.equipment.eq_cleaning_cabinet") }
-  ] }
+  {
+    groupTitle: tt$a("demo.equipment.group_coffee_roasting"),
+    typeEquipment: "coffee",
+    items: [
+      { id: "eq-coffee-roaster", label: tt$a("demo.equipment.eq_roaster") },
+      { id: "eq-coffee-destoner", label: tt$a("demo.equipment.eq_destoner") },
+      { id: "eq-coffee-machine", label: tt$a("demo.equipment.eq_coffee_machine") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_coffee_cooling"),
+    typeEquipment: "coffee",
+    items: [
+      { id: "eq-coffee-bean-cooler", label: tt$a("demo.equipment.eq_bean_cooler") },
+      { id: "eq-coffee-shock-cooler", label: tt$a("demo.equipment.eq_shock_cooler") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_coffee_storage"),
+    typeEquipment: "coffee",
+    items: [
+      { id: "eq-coffee-vacuum-containers", label: tt$a("demo.equipment.eq_vacuum_containers") },
+      { id: "eq-coffee-warehouse-shelving", label: tt$a("demo.equipment.eq_storage_racks") },
+      { id: "eq-coffee-grain-canisters", label: tt$a("demo.equipment.eq_bean_canisters") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_bread_sponge"),
+    typeEquipment: "bread",
+    items: [
+      { id: "eq-bread-spiral-mixer", label: tt$a("demo.equipment.eq_dough_mixer") },
+      { id: "eq-bread-preferment-vat", label: tt$a("demo.equipment.eq_sponge_vat") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_bread_proofing"),
+    typeEquipment: "bread",
+    items: [
+      { id: "eq-bread-proofing-cabinet", label: tt$a("demo.equipment.eq_proofing_cabinet") },
+      { id: "eq-bread-proofing-trays", label: tt$a("demo.equipment.eq_proofing_trays") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_bread_baking"),
+    typeEquipment: "bread",
+    items: [
+      { id: "eq-bread-rotary-oven", label: tt$a("demo.equipment.eq_rotary_oven") },
+      { id: "eq-bread-crumb-probe", label: tt$a("demo.equipment.eq_core_thermometer") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_bread_cooling"),
+    typeEquipment: "bread",
+    items: [
+      { id: "eq-bread-cooling-conveyor", label: tt$a("demo.equipment.eq_cooling_conveyor") },
+      { id: "eq-bread-ventilated-racks", label: tt$a("demo.equipment.eq_ventilation_racks") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_meat_chilled"),
+    typeEquipment: "meat",
+    items: [
+      { id: "eq-meat-chilled-room", label: tt$a("demo.equipment.eq_cold_chamber") },
+      { id: "eq-meat-chilled-cabinet", label: tt$a("demo.equipment.eq_cold_cabinet") },
+      { id: "eq-meat-chilled-display", label: tt$a("demo.equipment.eq_cold_display") },
+      {
+        id: "eq-meat-chilled-semi-finished",
+        label: tt$a("demo.equipment.eq_semi_finished_chamber")
+      }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_meat_frozen"),
+    typeEquipment: "meat",
+    items: [
+      { id: "eq-meat-freezer-room", label: tt$a("demo.equipment.eq_freezer_chamber") },
+      { id: "eq-meat-shock-freezer", label: tt$a("demo.equipment.eq_shock_freezer") },
+      { id: "eq-meat-freezer-cabinet", label: tt$a("demo.equipment.eq_freezer_cabinet") },
+      { id: "eq-meat-deep-freezer", label: tt$a("demo.equipment.eq_deep_freezer") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_cooking"),
+    typeEquipment: "different",
+    items: [
+      { id: "eq-stove", label: tt$a("demo.equipment.eq_stove") },
+      { id: "eq-combi-oven", label: tt$a("demo.equipment.eq_combi_oven") },
+      { id: "eq-fryer", label: tt$a("demo.equipment.eq_fryer") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_cold_storage"),
+    typeEquipment: "different",
+    items: [
+      { id: "eq-fridge-1", label: tt$a("demo.equipment.eq_fridge_1") },
+      { id: "eq-fridge-2", label: tt$a("demo.equipment.eq_fridge_2") },
+      { id: "eq-freezer", label: tt$a("demo.equipment.eq_freezer") },
+      { id: "eq-cold-storage", label: tt$a("demo.equipment.eq_cold_storage") },
+      { id: "eq-frozen-storage", label: tt$a("demo.equipment.eq_frozen_storage") },
+      { id: "eq-cold-display", label: tt$a("demo.equipment.eq_cold_display_gen") },
+      { id: "eq-dry-goods", label: tt$a("demo.equipment.eq_dry_goods") },
+      { id: "eq-vacuum-packer", label: tt$a("demo.equipment.eq_vacuum_packer") },
+      { id: "eq-ice-maker", label: tt$a("demo.equipment.eq_ice_maker") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_control"),
+    typeEquipment: "different",
+    items: [
+      { id: "eq-probe-1", label: tt$a("demo.equipment.eq_probe_1") },
+      { id: "eq-probe-2", label: tt$a("demo.equipment.eq_probe_2") },
+      { id: "eq-scale", label: tt$a("demo.equipment.eq_scale") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_surfaces"),
+    typeEquipment: "different",
+    items: [
+      { id: "eq-countertop", label: tt$a("demo.equipment.eq_countertop") },
+      { id: "eq-cutting-boards", label: tt$a("demo.equipment.eq_cutting_boards") },
+      { id: "eq-door-handles", label: tt$a("demo.equipment.eq_door_handles") },
+      { id: "eq-switches", label: tt$a("demo.equipment.eq_switches") },
+      { id: "eq-windows", label: tt$a("demo.equipment.eq_windows") },
+      { id: "eq-ceiling", label: tt$a("demo.equipment.eq_ceiling") },
+      { id: "eq-floors", label: tt$a("demo.equipment.eq_floors") },
+      { id: "eq-tables", label: tt$a("demo.equipment.eq_tables") },
+      { id: "eq-toilet", label: tt$a("demo.equipment.eq_toilet") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_sanitation"),
+    typeEquipment: "different",
+    items: [
+      { id: "eq-sinks", label: tt$a("demo.equipment.eq_sinks") },
+      { id: "eq-handwash", label: tt$a("demo.equipment.eq_handwash") },
+      { id: "eq-dishwasher", label: tt$a("demo.equipment.eq_dishwasher") },
+      { id: "eq-pre-rinse", label: tt$a("demo.equipment.eq_pre_rinse") },
+      { id: "eq-dishes", label: tt$a("demo.equipment.eq_dishes") },
+      { id: "eq-cutlery-containers", label: tt$a("demo.equipment.eq_cutlery_containers") }
+    ]
+  },
+  {
+    groupTitle: tt$a("demo.equipment.group_logistics"),
+    typeEquipment: "different",
+    items: [
+      { id: "eq-transport-box", label: tt$a("demo.equipment.eq_transport_box") },
+      { id: "eq-trolley", label: tt$a("demo.equipment.eq_trolley") },
+      { id: "eq-trash-bins", label: tt$a("demo.equipment.eq_trash_bins") },
+      { id: "eq-wall-shelf", label: tt$a("demo.equipment.eq_wall_shelf") },
+      { id: "eq-cleaning-cabinet", label: tt$a("demo.equipment.eq_cleaning_cabinet") }
+    ]
+  }
 ];
 function checklistNicheToEquipmentGroupType(checklistNiche) {
   const n = String(checklistNiche ?? "").trim();
@@ -1481,9 +1535,7 @@ function equipmentGroupsForChecklistNiche(checklistNiche) {
     (g) => g.typeEquipment === want || g.typeEquipment === "different"
   );
 }
-const KNOWN_EQUIPMENT_IDS = new Set(
-  EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => it.id))
-);
+const KNOWN_EQUIPMENT_IDS = new Set(EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => it.id)));
 const LABEL_BY_EQUIPMENT_ID = new Map(
   EQUIPMENT_GROUPS.flatMap((g) => g.items.map((it) => [it.id, it.label]))
 );
@@ -1515,27 +1567,39 @@ const equipmentTargetsSummary = (ids) => {
 };
 const tt$9 = (...args) => i18n.global.t(...args);
 const ROOM_STRUCTURE = [
-  { groupKey: "group_production", items: [
-    { id: "room-production-hall", labelKey: "room_production_hall" },
-    { id: "room-shock-freezer", labelKey: "room_shock_freezer" },
-    { id: "room-glazing", labelKey: "room_glazing_zone" }
-  ] },
-  { groupKey: "group_storage", items: [
-    { id: "room-raw-storage", labelKey: "room_raw_storage" },
-    { id: "room-finished-storage", labelKey: "room_finished_storage" },
-    { id: "room-receiving", labelKey: "room_receiving" },
-    { id: "room-cold-chamber", labelKey: "room_cold_chamber" },
-    { id: "room-waste", labelKey: "room_waste" }
-  ] },
-  { groupKey: "group_sanitation", items: [
-    { id: "room-wash", labelKey: "room_wash" },
-    { id: "room-wc-staff", labelKey: "room_wc_staff" },
-    { id: "room-locker", labelKey: "room_locker" }
-  ] },
-  { groupKey: "group_infrastructure", items: [
-    { id: "room-corridor", labelKey: "room_corridor" },
-    { id: "room-office-qc", labelKey: "room_office_qc" }
-  ] }
+  {
+    groupKey: "group_production",
+    items: [
+      { id: "room-production-hall", labelKey: "room_production_hall" },
+      { id: "room-shock-freezer", labelKey: "room_shock_freezer" },
+      { id: "room-glazing", labelKey: "room_glazing_zone" }
+    ]
+  },
+  {
+    groupKey: "group_storage",
+    items: [
+      { id: "room-raw-storage", labelKey: "room_raw_storage" },
+      { id: "room-finished-storage", labelKey: "room_finished_storage" },
+      { id: "room-receiving", labelKey: "room_receiving" },
+      { id: "room-cold-chamber", labelKey: "room_cold_chamber" },
+      { id: "room-waste", labelKey: "room_waste" }
+    ]
+  },
+  {
+    groupKey: "group_sanitation",
+    items: [
+      { id: "room-wash", labelKey: "room_wash" },
+      { id: "room-wc-staff", labelKey: "room_wc_staff" },
+      { id: "room-locker", labelKey: "room_locker" }
+    ]
+  },
+  {
+    groupKey: "group_infrastructure",
+    items: [
+      { id: "room-corridor", labelKey: "room_corridor" },
+      { id: "room-office-qc", labelKey: "room_office_qc" }
+    ]
+  }
 ];
 function getRoomGroups() {
   return ROOM_STRUCTURE.map((g) => ({
@@ -1544,9 +1608,7 @@ function getRoomGroups() {
   }));
 }
 const ROOM_GROUPS = getRoomGroups();
-const KNOWN_ROOM_IDS = new Set(
-  ROOM_STRUCTURE.flatMap((g) => g.items.map((it) => it.id))
-);
+const KNOWN_ROOM_IDS = new Set(ROOM_STRUCTURE.flatMap((g) => g.items.map((it) => it.id)));
 function getRoomLabelById(id) {
   for (const g of ROOM_STRUCTURE) {
     const item = g.items.find((it) => it.id === id);
@@ -1690,11 +1752,19 @@ const formatTaskFieldSummaryLine = (def) => {
   const c = def.config ?? {};
   switch (def.fieldType) {
     case TASK_FIELD_TYPE.TEMPERATURE:
-      return tt$8("demo.task_field_summary.temperature_line", { min: c.minC ?? "—", max: c.maxC ?? "—" });
+      return tt$8("demo.task_field_summary.temperature_line", {
+        min: c.minC ?? "—",
+        max: c.maxC ?? "—"
+      });
     case TASK_FIELD_TYPE.SINGLE_CHOICE:
-      return tt$8("demo.task_field_summary.single_choice_line", { question: c.question || "—", count: Array.isArray(c.options) ? c.options.length : 0 });
+      return tt$8("demo.task_field_summary.single_choice_line", {
+        question: c.question || "—",
+        count: Array.isArray(c.options) ? c.options.length : 0
+      });
     case TASK_FIELD_TYPE.TICKET:
-      return tt$8("demo.task_field_summary.ticket_line", { description: c.description || tt$8("demo.task_field_summary.ticket_no_desc") });
+      return tt$8("demo.task_field_summary.ticket_line", {
+        description: c.description || tt$8("demo.task_field_summary.ticket_no_desc")
+      });
     default:
       return def.fieldType;
   }
@@ -2768,12 +2838,7 @@ function resolveMeatRowForTaskMeasurement(t, taskEquipmentTargetIds, mode) {
   }
   return pickDefaultMeatNoEquipmentBand(t);
 }
-const BREAD_MODE_INFER_ORDER = Object.freeze([
-  "cooling",
-  "sponge_mix",
-  "proofing",
-  "baking"
-]);
+const BREAD_MODE_INFER_ORDER = Object.freeze(["cooling", "sponge_mix", "proofing", "baking"]);
 function inferBreadModeFromCcpRange(tmin, tmax) {
   if (!Number.isFinite(tmin) || !Number.isFinite(tmax) || tmin > tmax) {
     return null;
@@ -2914,12 +2979,8 @@ function resolveTemperatureAiMode(task, analyzerNiche, measurementC) {
       return explicitMode;
     }
     const targets = Array.isArray(task == null ? void 0 : task.equipmentTargetIds) ? task.equipmentTargetIds : [];
-    const hasChilledEq = targets.some(
-      (id) => MEAT_CHILLED_EQUIPMENT_IDS.includes(id)
-    );
-    const hasFreezerEq = targets.some(
-      (id) => MEAT_FREEZER_EQUIPMENT_IDS.includes(id)
-    );
+    const hasChilledEq = targets.some((id) => MEAT_CHILLED_EQUIPMENT_IDS.includes(id));
+    const hasFreezerEq = targets.some((id) => MEAT_FREEZER_EQUIPMENT_IDS.includes(id));
     if (hasFreezerEq && !hasChilledEq) {
       return "freezer";
     }
@@ -2941,19 +3002,9 @@ function resolveTemperatureAiMode(task, analyzerNiche, measurementC) {
   return null;
 }
 const tt$4 = (...args) => i18n.global.t(...args);
-const DEFAULT_TASK_ACTIVE_WEEKDAYS = Object.freeze([
-  "mon",
-  "tue",
-  "wed",
-  "thu",
-  "fri"
-]);
+const DEFAULT_TASK_ACTIVE_WEEKDAYS = Object.freeze(["mon", "tue", "wed", "thu", "fri"]);
 const DEFAULT_TASK_REPEAT_TIMES = Object.freeze(["00:00"]);
-const ALLOWED_MEASUREMENT_ROW_STATUSES = /* @__PURE__ */ new Set([
-  "success",
-  "problem",
-  "pending"
-]);
+const ALLOWED_MEASUREMENT_ROW_STATUSES = /* @__PURE__ */ new Set(["success", "problem", "pending"]);
 function normalizeMeasurementRowStatus(raw) {
   const s = typeof raw === "string" ? raw.trim() : "";
   if (ALLOWED_MEASUREMENT_ROW_STATUSES.has(s)) {
@@ -3086,11 +3137,7 @@ const DEMO_HEAT_PROCESS_EQ = /* @__PURE__ */ new Set([
   "eq-immersion-circ"
 ]);
 const DEMO_PROBE_EQ = /* @__PURE__ */ new Set(["eq-probe-1", "eq-probe-2"]);
-const DEMO_DRY_STORAGE_EQ = /* @__PURE__ */ new Set([
-  "eq-dry-goods",
-  "eq-transport-box",
-  "eq-vacuum-packer"
-]);
+const DEMO_DRY_STORAGE_EQ = /* @__PURE__ */ new Set(["eq-dry-goods", "eq-transport-box", "eq-vacuum-packer"]);
 const DEMO_SURFACE_SANITARY_EQ = /* @__PURE__ */ new Set([
   "eq-countertop",
   "eq-cutting-boards",
@@ -3102,10 +3149,7 @@ const DEMO_SURFACE_SANITARY_EQ = /* @__PURE__ */ new Set([
   "eq-tables",
   "eq-toilet"
 ]);
-const inferDefaultOkMeasurementDisplayValue = ({
-  equipmentTargetIds = [],
-  roomTargetIds = []
-}) => {
+const inferDefaultOkMeasurementDisplayValue = ({ equipmentTargetIds = [], roomTargetIds = [] }) => {
   const eq = Array.isArray(equipmentTargetIds) ? equipmentTargetIds : [];
   const rooms = Array.isArray(roomTargetIds) ? roomTargetIds : [];
   for (const id of eq) {
@@ -3325,33 +3369,21 @@ const parseMeasurementTemperatureCAndSyncRowStatusToCcp = (task, row) => {
   const analyzerNiche = mapTaskNicheToAnalyzerNiche(taskNiche);
   if (analyzerNiche === "bread") {
     const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
-    const band = resolveBreadRowForTaskMeasurement(
-      current,
-      task == null ? void 0 : task.equipmentTargetIds,
-      mode
-    );
+    const band = resolveBreadRowForTaskMeasurement(current, task == null ? void 0 : task.equipmentTargetIds, mode);
     if (band) {
       statusOk = band.status === "normal";
     }
   }
   if (analyzerNiche === "meat") {
     const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
-    const band = resolveMeatRowForTaskMeasurement(
-      current,
-      task == null ? void 0 : task.equipmentTargetIds,
-      mode
-    );
+    const band = resolveMeatRowForTaskMeasurement(current, task == null ? void 0 : task.equipmentTargetIds, mode);
     if (band) {
       statusOk = band.status === "normal";
     }
   }
   if (analyzerNiche === "coffee") {
     const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
-    const band = resolveCoffeeRowForTaskMeasurement(
-      current,
-      task == null ? void 0 : task.equipmentTargetIds,
-      mode
-    );
+    const band = resolveCoffeeRowForTaskMeasurement(current, task == null ? void 0 : task.equipmentTargetIds, mode);
     if (band) {
       statusOk = band.status === "normal";
     }
@@ -3401,7 +3433,7 @@ const buildDefaultNonRepeatMeasurementsFromRepeatTimes = (repeatTimes, aggregate
     aiWarning: null
   }));
 };
-const buildCustomPendingMeasurementsFromRepeatTimes = (repeatTimes, measurementHintCtx) => {
+const buildCustomPendingMeasurementsFromRepeatTimes = (repeatTimes, _measurementHintCtx) => {
   const list = Array.isArray(repeatTimes) ? repeatTimes : [];
   const value = "-";
   return list.map((time) => ({
@@ -3425,11 +3457,7 @@ const normalizeModalDraft = (draft = {}) => {
   const legacyRepeats = Number(draft.repeatsPerDay);
   const legacySlots = Number.isFinite(legacyRepeats) && legacyRepeats >= 1 ? Math.trunc(legacyRepeats) : null;
   let repeatTimes = (Array.isArray(draft.repeatTimes) ? draft.repeatTimes : []).map((time) => String(time ?? "").trim()).filter((time) => /^\d{2}:\d{2}$/.test(time));
-  const slotCount = Math.max(
-    1,
-    repeatTimes.length,
-    legacySlots ?? 0
-  );
+  const slotCount = Math.max(1, repeatTimes.length, legacySlots ?? 0);
   const generatedRepeatTimes = buildRepeatTimesByCount(slotCount);
   while (repeatTimes.length < slotCount) {
     repeatTimes.push(generatedRepeatTimes[repeatTimes.length]);
@@ -3452,12 +3480,8 @@ const normalizeModalDraft = (draft = {}) => {
     activeWeekdays: uniqueWeekdays,
     equipmentTargetIds: normalizeEquipmentTargetIds(draft.equipmentTargetIds),
     roomTargetIds: normalizeRoomTargetIds(draft.roomTargetIds),
-    taskFieldDefinitions: normalizeTaskFieldDefinitions(
-      draft.taskFieldDefinitions
-    ),
-    allowAssigneeReportCorrections: Boolean(
-      draft.allowAssigneeReportCorrections
-    ),
+    taskFieldDefinitions: normalizeTaskFieldDefinitions(draft.taskFieldDefinitions),
+    allowAssigneeReportCorrections: Boolean(draft.allowAssigneeReportCorrections),
     correctiveActions
   };
 };
@@ -3498,9 +3522,7 @@ const buildTaskFromPayload = ({
   if (usePresetMeasurements) {
     repeatMeasurements = readPresetMeasurementsPayload(payload);
     const slotCount = repeatsPerDayFromMeasurements(repeatMeasurements);
-    const timesFromM = repeatMeasurements.map(
-      (m) => String((m == null ? void 0 : m.time) ?? "").trim()
-    );
+    const timesFromM = repeatMeasurements.map((m) => String((m == null ? void 0 : m.time) ?? "").trim());
     const allValid = repeatMeasurements.length > 0 && timesFromM.length === repeatMeasurements.length && timesFromM.every((t) => REPEAT_MEASUREMENT_TIME_RE.test(t));
     repeatTimes = allValid ? timesFromM : resolveTaskRepeatTimes({ payload: normalized, slotCount });
   } else {
@@ -3540,7 +3562,9 @@ const buildTaskFromPayload = ({
     startDate: resolveTaskStartDate({ payload: normalized }),
     repeatTimes,
     activeWeekdays,
-    allowAssigneeReportCorrections: resolveTaskAllowAssigneeReportCorrections({ payload: normalized })
+    allowAssigneeReportCorrections: resolveTaskAllowAssigneeReportCorrections({
+      payload: normalized
+    })
   };
   const aiContext = buildTaskAiContext({
     niche,
@@ -3889,7 +3913,10 @@ function buildBatchRecord(id) {
         }
       ],
       evidence: [
-        { label: tt$2("batch.evidence_labels.supplier_declarations"), ref: "DECL-AB123-2026-03" },
+        {
+          label: tt$2("batch.evidence_labels.supplier_declarations"),
+          ref: "DECL-AB123-2026-03"
+        },
         { label: tt$2("batch.evidence_labels.traceability"), ref: "TB-AB123-2026-02" },
         { label: tt$2("batch.evidence_labels.risk_assessment"), ref: "RA-AB123-2026-01" }
       ],
@@ -3943,7 +3970,10 @@ function buildBatchRecord(id) {
         }
       ],
       evidence: [
-        { label: tt$2("batch.evidence_labels.initial_supplier_declaration"), ref: "DECL-CF762-2026-01" },
+        {
+          label: tt$2("batch.evidence_labels.initial_supplier_declaration"),
+          ref: "DECL-CF762-2026-01"
+        },
         { label: tt$2("batch.evidence_labels.verification_queue"), ref: "VQ-CF762-OPEN" }
       ],
       generatedAt: "15.03.2026",
@@ -3990,7 +4020,10 @@ function buildBatchRecord(id) {
         }
       ],
       evidence: [
-        { label: tt$2("batch.evidence_labels.supplier_declarations"), ref: "DECL-BR041-2026-01" },
+        {
+          label: tt$2("batch.evidence_labels.supplier_declarations"),
+          ref: "DECL-BR041-2026-01"
+        },
         { label: tt$2("batch.evidence_labels.mass_balance"), ref: "MB-BR041-2026-01" }
       ],
       generatedAt: "15.03.2026",
@@ -4046,9 +4079,7 @@ const resolveAssigneeIdForNiche = (staff, niche, staffId) => {
   if (!siteId) {
     return null;
   }
-  const m = staff.find(
-    (s) => s && s.id === sid && s.siteId === siteId && s.active !== false
-  );
+  const m = staff.find((s) => s && s.id === sid && s.siteId === siteId && s.active !== false);
   return m ? m.id : null;
 };
 const resolveStaffFullName = (staff, staffId) => {
@@ -4172,7 +4203,10 @@ const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
       fieldType: "single_choice",
       config: {
         question: tt$1("demo.seed_field_descriptions.coffee_3_question"),
-        options: [tt$1("demo.seed_field_descriptions.coffee_3_opt_yes"), tt$1("demo.seed_field_descriptions.coffee_3_opt_no")]
+        options: [
+          tt$1("demo.seed_field_descriptions.coffee_3_opt_yes"),
+          tt$1("demo.seed_field_descriptions.coffee_3_opt_no")
+        ]
       }
     }
   ],
@@ -4210,7 +4244,10 @@ const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
       fieldType: "single_choice",
       config: {
         question: tt$1("demo.seed_field_descriptions.bakery_5_question"),
-        options: [tt$1("demo.seed_field_descriptions.bakery_5_opt_yes"), tt$1("demo.seed_field_descriptions.bakery_5_opt_no")]
+        options: [
+          tt$1("demo.seed_field_descriptions.bakery_5_opt_yes"),
+          tt$1("demo.seed_field_descriptions.bakery_5_opt_no")
+        ]
       }
     }
   ],
@@ -4227,7 +4264,10 @@ const TASK_FIELD_DEFINITIONS_BY_TASK_ID = {
       fieldType: "single_choice",
       config: {
         question: tt$1("demo.seed_field_descriptions.meat_2_question"),
-        options: [tt$1("demo.seed_field_descriptions.meat_2_opt_yes"), tt$1("demo.seed_field_descriptions.meat_2_opt_no")]
+        options: [
+          tt$1("demo.seed_field_descriptions.meat_2_opt_yes"),
+          tt$1("demo.seed_field_descriptions.meat_2_opt_no")
+        ]
       }
     }
   ],
@@ -4386,20 +4426,20 @@ function deviationFromTaskCcpRange(current, rangeMin, rangeMax) {
   if (current > max) {
     const mag = roundToTwoDecimals(current - max);
     return {
-      line: tt("demo.temperature_ai.exceeded_by", { value: formatTemperatureValueForUi(mag, true) })
+      line: tt("demo.temperature_ai.exceeded_by", {
+        value: formatTemperatureValueForUi(mag, true)
+      })
     };
   }
   const delta = roundToTwoDecimals(current - min);
   return {
-    line: tt("demo.temperature_ai.below_by", { value: formatTemperatureValueForUi(delta, false) })
+    line: tt("demo.temperature_ai.below_by", {
+      value: formatTemperatureValueForUi(delta, false)
+    })
   };
 }
 function meatOutOfRangeBandTexts(temperatureC, mode, equipmentTargetIds) {
-  const band = resolveMeatRowForTaskMeasurement(
-    temperatureC,
-    equipmentTargetIds,
-    mode
-  );
+  const band = resolveMeatRowForTaskMeasurement(temperatureC, equipmentTargetIds, mode);
   if (band && !meatBandMatchesTaskEquipment(band, equipmentTargetIds)) {
     return {
       threat: null,
@@ -4474,11 +4514,7 @@ function profileOutOfRangeTexts(profile, direction) {
 }
 function resolveOutOfRangeTextsForNiche(profileContext, direction, temperatureC, equipmentTargetIds) {
   if (profileContext.niche === "meat") {
-    return meatOutOfRangeBandTexts(
-      temperatureC,
-      profileContext.mode,
-      equipmentTargetIds
-    );
+    return meatOutOfRangeBandTexts(temperatureC, profileContext.mode, equipmentTargetIds);
   }
   if (profileContext.niche === "coffee") {
     return coffeeOutOfRangeBandTexts(
@@ -4614,11 +4650,7 @@ class TemperatureAiAnalyzer {
     const ccpMin = parseFiniteNumber(inputCcpMin);
     const ccpMax = parseFiniteNumber(inputCcpMax);
     if (profileContext.niche === "bread" && current != null) {
-      const row = resolveBreadRowForTaskMeasurement(
-        current,
-        equipmentTargetIds,
-        mode
-      );
+      const row = resolveBreadRowForTaskMeasurement(current, equipmentTargetIds, mode);
       if (!row) {
         return {
           status: "invalid",
@@ -4688,11 +4720,7 @@ class TemperatureAiAnalyzer {
       };
     }
     if (profileContext.niche === "meat" && current != null) {
-      const row = resolveMeatRowForTaskMeasurement(
-        current,
-        equipmentTargetIds,
-        mode
-      );
+      const row = resolveMeatRowForTaskMeasurement(current, equipmentTargetIds, mode);
       if (!row) {
         return {
           status: "invalid",
@@ -4762,11 +4790,7 @@ class TemperatureAiAnalyzer {
       };
     }
     if (profileContext.niche === "coffee" && current != null) {
-      const row = resolveCoffeeRowForTaskMeasurement(
-        current,
-        equipmentTargetIds,
-        mode
-      );
+      const row = resolveCoffeeRowForTaskMeasurement(current, equipmentTargetIds, mode);
       if (!row) {
         return {
           status: "invalid",
@@ -4858,11 +4882,7 @@ class TemperatureAiAnalyzer {
     const ccpLabel = range.ccpLabel || buildRangeLabel(range.ccpMin, range.ccpMax);
     const inRange = current >= range.ccpMin && current <= range.ccpMax;
     if (inRange) {
-      const taskCcpDev2 = deviationFromTaskCcpRange(
-        current,
-        range.ccpMin,
-        range.ccpMax
-      );
+      const taskCcpDev2 = deviationFromTaskCcpRange(current, range.ccpMin, range.ccpMax);
       return {
         status: "ok",
         niche: profileContext.niche,
@@ -4894,11 +4914,7 @@ class TemperatureAiAnalyzer {
       current,
       equipmentTargetIds
     );
-    const taskCcpDev = deviationFromTaskCcpRange(
-      current,
-      range.ccpMin,
-      range.ccpMax
-    );
+    const taskCcpDev = deviationFromTaskCcpRange(current, range.ccpMin, range.ccpMax);
     return {
       status: "problem",
       niche: profileContext.niche,
@@ -5216,11 +5232,7 @@ const createDefaultState = () => {
         measurements: REPEAT_MEASUREMENTS_BY_TASK_ID["coffee-1"],
         correctiveActions: CORRECTIVE_ACTIONS_BY_TASK_ID["coffee-1"],
         taskFieldDefinitions: TASK_FIELD_DEFINITIONS_BY_TASK_ID["coffee-1"],
-        roomTargetIds: [
-          "room-production-hall",
-          "room-raw-storage",
-          "room-receiving"
-        ]
+        roomTargetIds: ["room-production-hall", "room-raw-storage", "room-receiving"]
       },
       {
         id: "coffee-2",
@@ -5330,9 +5342,7 @@ const createDefaultState = () => {
   const checklistsByNicheRaw = Object.fromEntries(
     Object.entries(checklistsByNicheBase).map(([niche, tasks]) => [
       niche,
-      tasks.map(
-        (task, index) => buildDefaultTask(task, niche, { startDate, index })
-      )
+      tasks.map((task, index) => buildDefaultTask(task, niche, { startDate, index }))
     ])
   );
   const checklistsByNiche = applyDefaultAssigneesToChecklists(checklistsByNicheRaw);
@@ -5642,7 +5652,7 @@ function loadPersistedNotification() {
       notificationLogicalCycleCompletedAt: typeof data.notificationLogicalCycleCompletedAt === "string" ? data.notificationLogicalCycleCompletedAt : null
     };
     return out;
-  } catch (e) {
+  } catch {
     return null;
   }
 }
@@ -5902,10 +5912,11 @@ function syncGrainCoolingPendingMeasurementTimeToUserLocal(demoStateRef) {
   if (measurementIndex == null || measurementIndex < 0) {
     return false;
   }
-  const { task, measurementRow: current, measurements } = getGrainCoolingTaskAndMeasurementByRowIndex(
-    demoStateRef,
-    measurementIndex
-  );
+  const {
+    task,
+    measurementRow: current,
+    measurements
+  } = getGrainCoolingTaskAndMeasurementByRowIndex(demoStateRef, measurementIndex);
   if (!task || measurementIndex >= measurements.length || current == null) {
     return false;
   }
@@ -5940,10 +5951,11 @@ function applyGrainCoolingProblemIfPending(demoStateRef) {
   if (measurementIndex == null || measurementIndex < 0) {
     return false;
   }
-  const { task, measurementRow: current, measurements } = getGrainCoolingTaskAndMeasurementByRowIndex(
-    demoStateRef,
-    measurementIndex
-  );
+  const {
+    task,
+    measurementRow: current,
+    measurements
+  } = getGrainCoolingTaskAndMeasurementByRowIndex(demoStateRef, measurementIndex);
   if (!task) {
     unlockGrainCoolingMeasurementIndex();
     return false;
@@ -5979,9 +5991,7 @@ function applyGrainCoolingProblemIfPending(demoStateRef) {
   unlockGrainCoolingMeasurementIndex();
   return true;
 }
-const GlobalTaskReminderToast = defineAsyncComponent(
-  () => import("./assets/GlobalTaskReminderToast-BebLEOGt.js")
-);
+const GlobalTaskReminderToast = defineAsyncComponent(() => import("./assets/GlobalTaskReminderToast-CAl4DcGv.js"));
 function useGlobalTaskReminder() {
   const { demoState: demoState2 } = useDemoState();
   let toastTimerId = null;
@@ -6039,7 +6049,6 @@ function useGlobalTaskReminder() {
         unlockGrainCoolingMeasurementIndex();
         return;
       }
-      readGrainCoolingSessionStorage();
       syncGrainCoolingPendingMeasurementTimeToUserLocal(demoState2);
       grainStore.markNotificationLaunched();
       const problemDelayMs = grainStore.notificationProblemWindowMs ?? task_grain_cooling.measurementProblemDelayMs;
@@ -6110,11 +6119,7 @@ function useGrainCoolingDemoEntry() {
     }
   }
   syncAndReact();
-  watch(
-    () => [demoState2.value, page.url],
-    syncAndReact,
-    { deep: true, immediate: false }
-  );
+  watch(() => [demoState2.value, page.url], syncAndReact, { deep: true, immediate: false });
   useGlobalTaskReminder();
   onUnmounted(() => {
     demoGrainCoolingEntryActive = false;
@@ -6248,7 +6253,7 @@ const _sfc_main$v = /* @__PURE__ */ Object.assign({ name: "GrainCoolingNotificat
           class: "grain-cooling-notification-banner",
           role: "status",
           "aria-live": "polite"
-        }, _attrs))} data-v-1f8dc3e0><div class="grain-cooling-notification-banner__inner container" data-v-1f8dc3e0><p class="grain-cooling-notification-banner__text" data-v-1f8dc3e0>${ssrInterpolate(unref(t)(unref(task_grain_cooling).toastTitleKey))} — ${ssrInterpolate(unref(t)(unref(task_grain_cooling).toastTaskNameKey))}: <span class="grain-cooling-notification-banner__countdown" data-v-1f8dc3e0>${ssrInterpolate(countdownLabel.value)}</span></p><button type="button" class="grain-cooling-notification-banner__go" data-v-1f8dc3e0>${ssrInterpolate(unref(t)(unref(task_grain_cooling).toastButtonNavigateLabelKey))}</button></div></div>`);
+        }, _attrs))} data-v-71fcb69f><div class="grain-cooling-notification-banner__inner container" data-v-71fcb69f><p class="grain-cooling-notification-banner__text" data-v-71fcb69f>${ssrInterpolate(unref(t)(unref(task_grain_cooling).toastTitleKey))} — ${ssrInterpolate(unref(t)(unref(task_grain_cooling).toastTaskNameKey))}: <span class="grain-cooling-notification-banner__countdown" data-v-71fcb69f>${ssrInterpolate(countdownLabel.value)}</span></p><button type="button" class="grain-cooling-notification-banner__go" data-v-71fcb69f>${ssrInterpolate(unref(t)(unref(task_grain_cooling).toastButtonNavigateLabelKey))}</button></div></div>`);
       } else {
         _push(`<!---->`);
       }
@@ -6261,7 +6266,7 @@ _sfc_main$v.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/task_grain_cooling/GrainCoolingNotificationBanner.vue");
   return _sfc_setup$v ? _sfc_setup$v(props, ctx) : void 0;
 };
-const GrainCoolingNotificationBanner = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__scopeId", "data-v-1f8dc3e0"]]);
+const GrainCoolingNotificationBanner = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__scopeId", "data-v-71fcb69f"]]);
 const _sfc_main$u = /* @__PURE__ */ Object.assign({ name: "ClientOnly" }, {
   __name: "ClientOnly",
   __ssrInlineRender: true,
@@ -6292,9 +6297,7 @@ function getApiErrors(error) {
   if (typeof errorData.errors !== "undefined") {
     if (errorData.errors) {
       if (Array.isArray(errorData.errors) && errorData.errors.length) {
-        if (errorData.errors.every(
-          (item) => typeof item === "object" && item !== null
-        )) {
+        if (errorData.errors.every((item) => typeof item === "object" && item !== null)) {
           errorMessages = errorData.errors.map((obj) => Object.values(obj).join("\n")).join("\n");
         } else if (errorData.errors.every((item) => typeof item === "string")) {
           errorMessages = errorData.errors.join("\n");
@@ -6306,9 +6309,7 @@ function getApiErrors(error) {
           (value) => Array.isArray(value) && value.length > 0
         );
         if (hasArrays) {
-          errorMessages = Object.values(errorData.errors).flat().map(
-            (item) => Array.isArray(item) ? item.join("\n") : String(item)
-          ).join("\n");
+          errorMessages = Object.values(errorData.errors).flat().map((item) => Array.isArray(item) ? item.join("\n") : String(item)).join("\n");
         } else {
           errorMessages = Object.values(errorData.errors).flat().join("\n") || errorData.message || "Validation failed";
         }
@@ -6387,10 +6388,7 @@ class ApiAxios {
   /** Готовит конфиг запроса: выносит служебные флаги и добавляет `signal` для отмены. */
   _prepareConfig(config = {}) {
     const { unloadAbort, signal: userSignal, ...axiosConfig } = config;
-    const { signal, detach } = this._attachUnloadAbort(
-      userSignal,
-      unloadAbort !== false
-    );
+    const { signal, detach } = this._attachUnloadAbort(userSignal, unloadAbort !== false);
     return { axiosConfig: { ...axiosConfig, signal }, detach };
   }
   /** Единая обработка ошибок: либо возвращает строку, либо показывает toast. */
@@ -6401,25 +6399,16 @@ class ApiAxios {
     }
     const showToast = this.options.showToast;
     if ((error == null ? void 0 : error.message) === "Network Error") {
-      showToast == null ? void 0 : showToast(
-        "Error",
-        "No internet connection or the server is unavailable."
-      );
+      showToast == null ? void 0 : showToast("Error", "No internet connection or the server is unavailable.");
       return returnError ? "Network Error" : null;
     }
     if ((error == null ? void 0 : error.code) === "ECONNABORTED") {
-      showToast == null ? void 0 : showToast(
-        "Error",
-        "The request took too long, the server might be unavailable."
-      );
+      showToast == null ? void 0 : showToast("Error", "The request took too long, the server might be unavailable.");
       return returnError ? "Timeout" : null;
     }
     const status = ((_a2 = error == null ? void 0 : error.response) == null ? void 0 : _a2.status) ?? "Error";
     if (status === 419) {
-      showToast == null ? void 0 : showToast(
-        "Session expired",
-        "The page will reload to refresh the session."
-      );
+      showToast == null ? void 0 : showToast("Session expired", "The page will reload to refresh the session.");
       setTimeout(() => window.location.reload(), 1500);
       return returnError ? "Session expired" : null;
     }
@@ -6553,7 +6542,7 @@ const _sfc_main$t = /* @__PURE__ */ Object.assign({ name: "PublicLayout" }, {
   __ssrInlineRender: true,
   setup(__props) {
     const ConsentOverlay = defineAsyncComponent(
-      () => import("./assets/ConsentOverlay-C2YbvSyu.js")
+      () => import("./assets/ConsentOverlay-DG8aLeTM.js")
     );
     const page = usePage();
     const isAboutPage = computed(() => page.component === "About");
@@ -6615,15 +6604,7 @@ const _sfc_main$s = /* @__PURE__ */ Object.assign({
   },
   setup(__props) {
     const { t } = useI18n();
-    const WELCOME_MARKERS = Object.freeze([
-      "W",
-      "E",
-      "L",
-      "C",
-      "O",
-      "M",
-      "E"
-    ]);
+    const WELCOME_MARKERS = Object.freeze(["W", "E", "L", "C", "O", "M", "E"]);
     ref(null);
     const scrollRef = ref(null);
     const activeIndex = ref(0);
@@ -6679,10 +6660,7 @@ const _sfc_main$s = /* @__PURE__ */ Object.assign({
         const el = sections[i];
         const top = el.offsetTop;
         const bottom = top + el.offsetHeight;
-        const overlap = Math.max(
-          0,
-          Math.min(bottom, viewportBottom) - Math.max(top, viewportTop)
-        );
+        const overlap = Math.max(0, Math.min(bottom, viewportBottom) - Math.max(top, viewportTop));
         const secCenter = (top + bottom) / 2;
         const centerDist = Math.abs(vCenter - secCenter);
         if (overlap > bestOverlap || overlap === bestOverlap && overlap > 0 && centerDist < bestCenterDist) {
@@ -6804,75 +6782,72 @@ const _sfc_main$s = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="container about-page" data-v-58da0643><header class="about-page__title-bar" data-v-58da0643><h1 class="about-page__heading" data-v-58da0643>${ssrInterpolate(unref(t)("about.page.heading"))}</h1></header><div class="about-page__split" data-v-58da0643><aside class="about-page__photo" aria-hidden="true" data-v-58da0643><img class="about-page__photo-img"${ssrRenderAttr("src", "/images/avatar_500_500.jpg")} alt="" decoding="async" data-v-58da0643></aside><div class="about-page__fp" data-v-58da0643><div class="about-page__fp-scroll" tabindex="0" role="region"${ssrRenderAttr("aria-label", unref(t)("about.page.aria_sections"))} data-v-58da0643><section class="about-fp-section" data-v-58da0643><div class="about-fp" data-v-58da0643><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.intro.p1"))}</p><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.intro.p2"))}</p><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.intro.p3"))}</p>`);
+      _push(`<div class="container about-page" data-v-6ebbea98><header class="about-page__title-bar" data-v-6ebbea98><h1 class="about-page__heading" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.page.heading"))}</h1></header><div class="about-page__split" data-v-6ebbea98><aside class="about-page__photo" aria-hidden="true" data-v-6ebbea98><img class="about-page__photo-img"${ssrRenderAttr("src", "/images/avatar_500_500.jpg")} alt="" decoding="async" data-v-6ebbea98></aside><div class="about-page__fp" data-v-6ebbea98><div class="about-page__fp-scroll" tabindex="0" role="region"${ssrRenderAttr("aria-label", unref(t)("about.page.aria_sections"))} data-v-6ebbea98><section class="about-fp-section" data-v-6ebbea98><div class="about-fp" data-v-6ebbea98><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.intro.p1"))}</p><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.intro.p2"))}</p><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.intro.p3"))}</p>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "arrow-big-down-lines",
         class: "about-fp__intro-arrow",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`</div></section><section class="about-fp-section" data-v-58da0643><div class="about-fp" data-v-58da0643><h2 class="about-fp__title about-fp__title--with-icon" data-v-58da0643>`);
+      _push(`</div></section><section class="about-fp-section" data-v-6ebbea98><div class="about-fp" data-v-6ebbea98><h2 class="about-fp__title about-fp__title--with-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(unref(ExclamationCircleTwotone), {
         class: "about-fp__title-icon about-fp__title-icon--danger",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span class="about-fp__title-label" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.title"))}</span></h2><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.lead"))}</p><ul class="about-fp__list" data-v-58da0643><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.item_1"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.item_2"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.item_3"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.item_4"))}</li></ul><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.as_result"))}</p><ul class="about-fp__list" data-v-58da0643><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.result_1"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.result_2"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.result_3"))}</li></ul><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.two_options"))}</p><ul class="about-fp__list" data-v-58da0643><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.option_1"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.problem.option_2"))}</li></ul></div></section><section class="about-fp-section" data-v-58da0643><div class="about-fp" data-v-58da0643><h2 class="about-fp__title about-fp__title--with-icon" data-v-58da0643>`);
+      _push(`<span class="about-fp__title-label" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.title"))}</span></h2><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.lead"))}</p><ul class="about-fp__list" data-v-6ebbea98><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.item_1"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.item_2"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.item_3"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.item_4"))}</li></ul><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.as_result"))}</p><ul class="about-fp__list" data-v-6ebbea98><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.result_1"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.result_2"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.result_3"))}</li></ul><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.two_options"))}</p><ul class="about-fp__list" data-v-6ebbea98><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.option_1"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.problem.option_2"))}</li></ul></div></section><section class="about-fp-section" data-v-6ebbea98><div class="about-fp" data-v-6ebbea98><h2 class="about-fp__title about-fp__title--with-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(unref(Bulb), {
         class: "about-fp__title-icon about-fp__title-icon--accent-orange",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span class="about-fp__title-label" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.title"))}</span></h2><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.p1"))}</p><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.every_action"))}</p><ul class="about-fp__list" data-v-58da0643><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.item_1"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.item_2"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.item_3"))}</li></ul><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.task_not_done"))}</p><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.main_thing"))}</p><p class="about-fp__text about-fp__text--with-inline-icon" data-v-58da0643>`);
+      _push(`<span class="about-fp__title-label" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.title"))}</span></h2><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.p1"))}</p><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.every_action"))}</p><ul class="about-fp__list" data-v-6ebbea98><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.item_1"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.item_2"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.item_3"))}</li></ul><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.task_not_done"))}</p><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.main_thing"))}</p><p class="about-fp__text about-fp__text--with-inline-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "hand-point-right",
         class: "about-fp__title-icon about-fp__title-icon--accent-orange",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span data-v-58da0643>${ssrInterpolate(unref(t)("about.what_i_do.highlight"))}</span></p></div></section><section class="about-fp-section" data-v-58da0643><div class="about-fp" data-v-58da0643><h2 class="about-fp__title about-fp__title--with-icon" data-v-58da0643>`);
+      _push(`<span data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_i_do.highlight"))}</span></p></div></section><section class="about-fp-section" data-v-6ebbea98><div class="about-fp" data-v-6ebbea98><h2 class="about-fp__title about-fp__title--with-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(unref(ManageAccountsTwotone), {
         class: "about-fp__title-icon about-fp__title-icon--accent-success-dark",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span class="about-fp__title-label" data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.title"))}</span></h2><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.p1"))}</p><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.p2"))}</p><ul class="about-fp__list" data-v-58da0643><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.item_1"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.item_2"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.item_3"))}</li></ul><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.simple_thing"))}</p><p class="about-fp__text about-fp__text--with-inline-icon" data-v-58da0643>`);
+      _push(`<span class="about-fp__title-label" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.title"))}</span></h2><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.p1"))}</p><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.p2"))}</p><ul class="about-fp__list" data-v-6ebbea98><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.item_1"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.item_2"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.item_3"))}</li></ul><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.simple_thing"))}</p><p class="about-fp__text about-fp__text--with-inline-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "hand-point-right",
         class: "about-fp__title-icon about-fp__title-icon--accent-orange",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span data-v-58da0643>${ssrInterpolate(unref(t)("about.why_me.highlight"))}</span></p></div></section><section class="about-fp-section" data-v-58da0643><div class="about-fp" data-v-58da0643><h2 class="about-fp__title about-fp__title--with-icon" data-v-58da0643>`);
+      _push(`<span data-v-6ebbea98>${ssrInterpolate(unref(t)("about.why_me.highlight"))}</span></p></div></section><section class="about-fp-section" data-v-6ebbea98><div class="about-fp" data-v-6ebbea98><h2 class="about-fp__title about-fp__title--with-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "schedule-twotone",
         class: "about-fp__title-icon about-fp__title-icon--accent-primary",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span class="about-fp__title-label" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.title"))}</span></h2><ul class="about-fp__list" data-v-58da0643><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.item_1"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.item_2"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.item_3"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.item_4"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.item_5"))}</li></ul><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.additional"))}</p><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.what_you_get.extra"))}</p></div></section><section class="about-fp-section" data-v-58da0643><div class="about-fp" data-v-58da0643><h2 class="about-fp__title about-fp__title--with-icon" data-v-58da0643>`);
+      _push(`<span class="about-fp__title-label" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.title"))}</span></h2><ul class="about-fp__list" data-v-6ebbea98><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.item_1"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.item_2"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.item_3"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.item_4"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.item_5"))}</li></ul><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.additional"))}</p><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.what_you_get.extra"))}</p></div></section><section class="about-fp-section" data-v-6ebbea98><div class="about-fp" data-v-6ebbea98><h2 class="about-fp__title about-fp__title--with-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "target-arrow-24-regular",
         class: "about-fp__title-icon about-fp__title-icon--danger",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span class="about-fp__title-label" data-v-58da0643>${ssrInterpolate(unref(t)("about.survey.title"))}</span></h2><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.survey.p1"))}</p><p class="about-fp__text" data-v-58da0643>${ssrInterpolate(unref(t)("about.survey.if_complete"))}</p><ul class="about-fp__list" data-v-58da0643><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.survey.item_1"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.survey.item_2"))}</li><li class="about-fp__list-item" data-v-58da0643>${ssrInterpolate(unref(t)("about.survey.item_3"))}</li></ul><p class="about-fp__text about-fp__text--with-inline-icon" data-v-58da0643>`);
+      _push(`<span class="about-fp__title-label" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.survey.title"))}</span></h2><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.survey.p1"))}</p><p class="about-fp__text" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.survey.if_complete"))}</p><ul class="about-fp__list" data-v-6ebbea98><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.survey.item_1"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.survey.item_2"))}</li><li class="about-fp__list-item" data-v-6ebbea98>${ssrInterpolate(unref(t)("about.survey.item_3"))}</li></ul><p class="about-fp__text about-fp__text--with-inline-icon" data-v-6ebbea98>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "watch-later-twotone",
         class: "about-fp__text-icon",
         "aria-hidden": "true"
       }, null, _parent));
-      _push(`<span data-v-58da0643>${ssrInterpolate(unref(t)("about.survey.time_estimate"))}</span></p></div></section><section class="about-fp-section about-fp-section--cta" data-v-58da0643><div class="about-fp about-fp--cta" data-v-58da0643><div class="about-fp__cta-surface" data-v-58da0643>`);
+      _push(`<span data-v-6ebbea98>${ssrInterpolate(unref(t)("about.survey.time_estimate"))}</span></p></div></section><section class="about-fp-section about-fp-section--cta" data-v-6ebbea98><div class="about-fp about-fp--cta" data-v-6ebbea98><div class="about-fp__cta-surface" data-v-6ebbea98>`);
       _push(ssrRenderComponent(SurveyCtaSection, null, null, _parent));
-      _push(`</div></div></section></div><nav class="about-page__nav-dots"${ssrRenderAttr("aria-label", unref(t)("about.page.aria_navigation"))} data-v-58da0643><!--[-->`);
+      _push(`</div></div></section></div><nav class="about-page__nav-dots"${ssrRenderAttr("aria-label", unref(t)("about.page.aria_navigation"))} data-v-6ebbea98><!--[-->`);
       ssrRenderList(sectionCount.value, (i) => {
-        _push(`<div class="about-page__nav-dot-wrap" data-v-58da0643>`);
+        _push(`<div class="about-page__nav-dot-wrap" data-v-6ebbea98>`);
         if (activeIndex.value === i - 1 && sectionCount.value > 1 && i > 1) {
-          _push(`<span class="about-page__nav-arrow about-page__nav-arrow--up" aria-hidden="true" data-v-58da0643></span>`);
+          _push(`<span class="about-page__nav-arrow about-page__nav-arrow--up" aria-hidden="true" data-v-6ebbea98></span>`);
         } else {
           _push(`<!---->`);
         }
         _push(`<button type="button" class="${ssrRenderClass([{
           "about-page__nav-dot--active": activeIndex.value === i - 1
-        }, "about-page__nav-dot"])}"${ssrRenderAttr("aria-label", navDotAriaLabel(i - 1))}${ssrRenderAttr(
-          "aria-current",
-          activeIndex.value === i - 1 ? "true" : void 0
-        )} data-v-58da0643><span class="about-page__nav-dot-letter" aria-hidden="true" data-v-58da0643>${ssrInterpolate(navDotLetter(i - 1))}</span></button>`);
+        }, "about-page__nav-dot"])}"${ssrRenderAttr("aria-label", navDotAriaLabel(i - 1))}${ssrRenderAttr("aria-current", activeIndex.value === i - 1 ? "true" : void 0)} data-v-6ebbea98><span class="about-page__nav-dot-letter" aria-hidden="true" data-v-6ebbea98>${ssrInterpolate(navDotLetter(i - 1))}</span></button>`);
         if (activeIndex.value === i - 1 && sectionCount.value > 1 && i < sectionCount.value) {
-          _push(`<span class="about-page__nav-arrow about-page__nav-arrow--down" aria-hidden="true" data-v-58da0643></span>`);
+          _push(`<span class="about-page__nav-arrow about-page__nav-arrow--down" aria-hidden="true" data-v-6ebbea98></span>`);
         } else {
           _push(`<!---->`);
         }
@@ -6888,7 +6863,7 @@ _sfc_main$s.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/About.vue");
   return _sfc_setup$s ? _sfc_setup$s(props, ctx) : void 0;
 };
-const About = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__scopeId", "data-v-58da0643"]]);
+const About = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["__scopeId", "data-v-6ebbea98"]]);
 const __vite_glob_0_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: About
@@ -6918,9 +6893,7 @@ const _sfc_main$r = /* @__PURE__ */ Object.assign({
     const page = usePage();
     const batchId = computed(() => props.batchId);
     const record = computed(() => getBatchPublicRecord(batchId.value));
-    const canonicalUrl = computed(
-      () => buildBatchPublicUrl(batchId.value, page.props.locale ?? null)
-    );
+    const canonicalUrl = computed(() => buildBatchPublicUrl(batchId.value, page.props.locale ?? null));
     const wantsAutoPrint = computed(() => props.print === true);
     const runAutoPrint = () => {
       if (!record.value || !wantsAutoPrint.value) {
@@ -6943,29 +6916,29 @@ const _sfc_main$r = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="batch-public" data-v-fd02a8b6><div class="batch-public__toolbar no-print" data-v-fd02a8b6><button type="button" class="btn-client btn-outline-primary" data-v-fd02a8b6>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button>`);
+      _push(`<div class="batch-public" data-v-2d92898d><div class="batch-public__toolbar no-print" data-v-2d92898d><button type="button" class="btn-client btn-outline-primary" data-v-2d92898d>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button>`);
       if (record.value) {
-        _push(`<button type="button" class="batch-public__print btn-client btn-outline-primary" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.print_pdf"))}</button>`);
+        _push(`<button type="button" class="batch-public__print btn-client btn-outline-primary" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.print_pdf"))}</button>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div>`);
       if (!record.value) {
-        _push(`<div class="batch-public__missing container" data-v-fd02a8b6><h1 class="batch-public__missing-title" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.not_found_title"))}</h1><p class="batch-public__missing-text" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.not_found_text", { batchId: batchId.value }))}</p><button type="button" class="btn-client btn-outline-primary elem-right" data-v-fd02a8b6>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button></div>`);
+        _push(`<div class="batch-public__missing container" data-v-2d92898d><h1 class="batch-public__missing-title" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.not_found_title"))}</h1><p class="batch-public__missing-text" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.not_found_text", { batchId: batchId.value }))}</p><button type="button" class="btn-client btn-outline-primary elem-right" data-v-2d92898d>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button></div>`);
       } else {
-        _push(`<article class="batch-public__paper" data-v-fd02a8b6><header class="batch-public__head" data-v-fd02a8b6><div class="batch-public__eu-band" aria-hidden="true" data-v-fd02a8b6></div><p class="batch-public__kicker" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.kicker"))}</p><h1 class="batch-public__title" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.title"))}</h1><p class="batch-public__sub" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.subtitle"))}</p><div class="batch-public__refs" data-v-fd02a8b6><div data-v-fd02a8b6><span class="batch-public__label" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.batch_id_label"))}</span><strong data-v-fd02a8b6>${ssrInterpolate(record.value.id)}</strong></div><div data-v-fd02a8b6><span class="batch-public__label" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.dds_reference_label"))}</span><strong data-v-fd02a8b6>${ssrInterpolate(record.value.ddsReference)}</strong></div><div data-v-fd02a8b6><span class="batch-public__label" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.status_label"))}</span><span class="${ssrRenderClass([`batch-public__status--${record.value.status}`, "batch-public__status"])}" data-v-fd02a8b6>${ssrInterpolate(record.value.statusLabel)}</span></div></div></header><section class="batch-public__section" data-v-fd02a8b6><h2 data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.section_operator"))}</h2><dl class="batch-public__dl" data-v-fd02a8b6><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.operator_name"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.operator.name)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.operator_address"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.operator.address)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.operator_role"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.operator.role)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.operator_eori"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.operator.eori)}</dd></div></dl></section><section class="batch-public__section" data-v-fd02a8b6><h2 data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.section_product"))}</h2><dl class="batch-public__dl" data-v-fd02a8b6><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.product_description"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.product.name)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.product_cn_code"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.product.cnCode)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.product_category"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.product.category)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.product_quantity"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.product.quantity)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.product_lot"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.product.lot)}</dd></div></dl></section><section class="batch-public__section" data-v-fd02a8b6><h2 data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.section_origin"))}</h2><dl class="batch-public__dl" data-v-fd02a8b6><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.plot_country"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.plot.country)}</dd></div><div data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.plot_region"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.plot.region)}</dd></div><div class="batch-public__dl-wide" data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.plot_geo"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.plot.geo)}</dd></div><div class="batch-public__dl-wide" data-v-fd02a8b6><dt data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.plot_harvest"))}</dt><dd data-v-fd02a8b6>${ssrInterpolate(record.value.harvestPeriod)}</dd></div></dl></section><section class="batch-public__section" data-v-fd02a8b6><h2 data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.section_supply_chain"))}</h2><div class="batch-public__table-wrap" data-v-fd02a8b6><div class="batch-public__chain-desktop" data-v-fd02a8b6><table class="batch-public__table" data-v-fd02a8b6><thead data-v-fd02a8b6><tr data-v-fd02a8b6><th data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_role"))}</th><th data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_participant"))}</th><th data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_country"))}</th><th data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_ref"))}</th></tr></thead><tbody data-v-fd02a8b6><!--[-->`);
+        _push(`<article class="batch-public__paper" data-v-2d92898d><header class="batch-public__head" data-v-2d92898d><div class="batch-public__eu-band" aria-hidden="true" data-v-2d92898d></div><p class="batch-public__kicker" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.kicker"))}</p><h1 class="batch-public__title" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.title"))}</h1><p class="batch-public__sub" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.subtitle"))}</p><div class="batch-public__refs" data-v-2d92898d><div data-v-2d92898d><span class="batch-public__label" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.batch_id_label"))}</span><strong data-v-2d92898d>${ssrInterpolate(record.value.id)}</strong></div><div data-v-2d92898d><span class="batch-public__label" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.dds_reference_label"))}</span><strong data-v-2d92898d>${ssrInterpolate(record.value.ddsReference)}</strong></div><div data-v-2d92898d><span class="batch-public__label" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.status_label"))}</span><span class="${ssrRenderClass([`batch-public__status--${record.value.status}`, "batch-public__status"])}" data-v-2d92898d>${ssrInterpolate(record.value.statusLabel)}</span></div></div></header><section class="batch-public__section" data-v-2d92898d><h2 data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.section_operator"))}</h2><dl class="batch-public__dl" data-v-2d92898d><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.operator_name"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.operator.name)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.operator_address"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.operator.address)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.operator_role"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.operator.role)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.operator_eori"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.operator.eori)}</dd></div></dl></section><section class="batch-public__section" data-v-2d92898d><h2 data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.section_product"))}</h2><dl class="batch-public__dl" data-v-2d92898d><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.product_description"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.product.name)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.product_cn_code"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.product.cnCode)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.product_category"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.product.category)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.product_quantity"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.product.quantity)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.product_lot"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.product.lot)}</dd></div></dl></section><section class="batch-public__section" data-v-2d92898d><h2 data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.section_origin"))}</h2><dl class="batch-public__dl" data-v-2d92898d><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.plot_country"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.plot.country)}</dd></div><div data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.plot_region"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.plot.region)}</dd></div><div class="batch-public__dl-wide" data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.plot_geo"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.plot.geo)}</dd></div><div class="batch-public__dl-wide" data-v-2d92898d><dt data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.plot_harvest"))}</dt><dd data-v-2d92898d>${ssrInterpolate(record.value.harvestPeriod)}</dd></div></dl></section><section class="batch-public__section" data-v-2d92898d><h2 data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.section_supply_chain"))}</h2><div class="batch-public__table-wrap" data-v-2d92898d><div class="batch-public__chain-desktop" data-v-2d92898d><table class="batch-public__table" data-v-2d92898d><thead data-v-2d92898d><tr data-v-2d92898d><th data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_role"))}</th><th data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_participant"))}</th><th data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_country"))}</th><th data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_ref"))}</th></tr></thead><tbody data-v-2d92898d><!--[-->`);
         ssrRenderList(record.value.supplierChain, (row, idx) => {
-          _push(`<tr data-v-fd02a8b6><td data-v-fd02a8b6>${ssrInterpolate(row.role)}</td><td data-v-fd02a8b6>${ssrInterpolate(row.name)}</td><td data-v-fd02a8b6>${ssrInterpolate(row.country)}</td><td data-v-fd02a8b6>${ssrInterpolate(row.ref)}</td></tr>`);
+          _push(`<tr data-v-2d92898d><td data-v-2d92898d>${ssrInterpolate(row.role)}</td><td data-v-2d92898d>${ssrInterpolate(row.name)}</td><td data-v-2d92898d>${ssrInterpolate(row.country)}</td><td data-v-2d92898d>${ssrInterpolate(row.ref)}</td></tr>`);
         });
-        _push(`<!--]--></tbody></table></div><div class="batch-public__chain-mobile" data-v-fd02a8b6><!--[-->`);
+        _push(`<!--]--></tbody></table></div><div class="batch-public__chain-mobile" data-v-2d92898d><!--[-->`);
         ssrRenderList(record.value.supplierChain, (row, idx) => {
-          _push(`<article class="batch-public__chain-card" data-v-fd02a8b6><p class="batch-public__chain-line" data-v-fd02a8b6><span class="batch-public__chain-label" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_role"))}:</span> ${ssrInterpolate(row.role)}</p><p class="batch-public__chain-line" data-v-fd02a8b6><span class="batch-public__chain-label" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_participant"))}:</span> ${ssrInterpolate(row.name)}</p><p class="batch-public__chain-line" data-v-fd02a8b6><span class="batch-public__chain-label" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_country"))}:</span> ${ssrInterpolate(row.country)}</p><p class="batch-public__chain-line" data-v-fd02a8b6><span class="batch-public__chain-label" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.chain_ref"))}:</span> ${ssrInterpolate(row.ref)}</p></article>`);
+          _push(`<article class="batch-public__chain-card" data-v-2d92898d><p class="batch-public__chain-line" data-v-2d92898d><span class="batch-public__chain-label" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_role"))}:</span> ${ssrInterpolate(row.role)}</p><p class="batch-public__chain-line" data-v-2d92898d><span class="batch-public__chain-label" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_participant"))}:</span> ${ssrInterpolate(row.name)}</p><p class="batch-public__chain-line" data-v-2d92898d><span class="batch-public__chain-label" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_country"))}:</span> ${ssrInterpolate(row.country)}</p><p class="batch-public__chain-line" data-v-2d92898d><span class="batch-public__chain-label" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.chain_ref"))}:</span> ${ssrInterpolate(row.ref)}</p></article>`);
         });
-        _push(`<!--]--></div></div></section><section class="batch-public__section" data-v-fd02a8b6><h2 data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.section_evidence"))}</h2><p class="batch-public__lead" data-v-fd02a8b6>${ssrInterpolate(record.value.statusDetail)}</p><ul class="batch-public__evidence" data-v-fd02a8b6><!--[-->`);
+        _push(`<!--]--></div></div></section><section class="batch-public__section" data-v-2d92898d><h2 data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.section_evidence"))}</h2><p class="batch-public__lead" data-v-2d92898d>${ssrInterpolate(record.value.statusDetail)}</p><ul class="batch-public__evidence" data-v-2d92898d><!--[-->`);
         ssrRenderList(record.value.evidence, (ev, idx) => {
-          _push(`<li data-v-fd02a8b6><strong data-v-fd02a8b6>${ssrInterpolate(ev.label)}</strong><span class="batch-public__evidence-ref" data-v-fd02a8b6>${ssrInterpolate(ev.ref)}</span></li>`);
+          _push(`<li data-v-2d92898d><strong data-v-2d92898d>${ssrInterpolate(ev.label)}</strong><span class="batch-public__evidence-ref" data-v-2d92898d>${ssrInterpolate(ev.ref)}</span></li>`);
         });
-        _push(`<!--]--></ul></section><footer class="batch-public__footer" data-v-fd02a8b6><div class="batch-public__meta" data-v-fd02a8b6><span data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.document_version", { version: record.value.documentVersion }))}</span><span data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.generated_at", { date: record.value.generatedAt }))}</span></div><p class="batch-public__disclaimer" data-v-fd02a8b6>${ssrInterpolate(record.value.disclaimer)}</p><p class="batch-public__url no-print" data-v-fd02a8b6>${ssrInterpolate(unref(t)("batch.public.public_link", { url: canonicalUrl.value }))}</p></footer></article>`);
+        _push(`<!--]--></ul></section><footer class="batch-public__footer" data-v-2d92898d><div class="batch-public__meta" data-v-2d92898d><span data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.document_version", { version: record.value.documentVersion }))}</span><span data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.generated_at", { date: record.value.generatedAt }))}</span></div><p class="batch-public__disclaimer" data-v-2d92898d>${ssrInterpolate(record.value.disclaimer)}</p><p class="batch-public__url no-print" data-v-2d92898d>${ssrInterpolate(unref(t)("batch.public.public_link", { url: canonicalUrl.value }))}</p></footer></article>`);
       }
       _push(`</div><!--]-->`);
     };
@@ -6977,7 +6950,7 @@ _sfc_main$r.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/BatchPublic.vue");
   return _sfc_setup$r ? _sfc_setup$r(props, ctx) : void 0;
 };
-const BatchPublic = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-fd02a8b6"]]);
+const BatchPublic = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-2d92898d"]]);
 const __vite_glob_0_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: BatchPublic
@@ -7015,16 +6988,28 @@ const _sfc_main$q = /* @__PURE__ */ Object.assign({
       hp_company: ""
     });
     const rules = {
-      name: { required: true, trigger: ["blur", "input"], message: t("contact.validation_name_required") },
+      name: {
+        required: true,
+        trigger: ["blur", "input"],
+        message: t("contact.validation_name_required")
+      },
       email: [
-        { required: true, trigger: ["blur", "input"], message: t("contact.validation_email_required") },
+        {
+          required: true,
+          trigger: ["blur", "input"],
+          message: t("contact.validation_email_required")
+        },
         {
           trigger: ["blur", "input"],
           validator: (_, value) => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? true : new Error(t("contact.validation_email_invalid"))
         }
       ],
       message: [
-        { required: true, trigger: ["blur", "input"], message: t("contact.validation_message_required") },
+        {
+          required: true,
+          trigger: ["blur", "input"],
+          message: t("contact.validation_message_required")
+        },
         { min: 10, trigger: ["blur", "input"], message: t("contact.validation_message_min") }
       ]
     };
@@ -7062,9 +7047,9 @@ const _sfc_main$q = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="section-container-contact" data-v-0e8fa41c><div class="container" data-v-0e8fa41c><div class="contact-grid" data-v-0e8fa41c><div class="contact-intro" data-v-0e8fa41c><span class="contact-intro__eyebrow" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.eyebrow"))}</span><h1 class="contact-intro__title" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.title"))}</h1><div class="box-contact-intro" data-v-0e8fa41c><p class="contact-intro__lead" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.lead"))}</p></div><div class="box-contact-intro" data-v-0e8fa41c><p class="contact-intro__text" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.text_intro"))}</p><ul class="contact-intro__list" data-v-0e8fa41c><li data-v-0e8fa41c><span class="point-dot-shadow" aria-hidden="true" data-v-0e8fa41c></span><span data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.list_1"))}</span></li><li data-v-0e8fa41c><span class="point-dot-shadow" aria-hidden="true" data-v-0e8fa41c></span><span data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.list_2"))}</span></li><li data-v-0e8fa41c><span class="point-dot-shadow" aria-hidden="true" data-v-0e8fa41c></span><span data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.list_3"))}</span></li></ul></div><div class="box-contact-intro" data-v-0e8fa41c><div class="contact-intro__badge" data-v-0e8fa41c><span class="point-dot-shadow animate-pulse" aria-hidden="true" data-v-0e8fa41c></span> ${ssrInterpolate(unref(t)("contact.badge_response"))}</div><div class="contact-intro__author" data-v-0e8fa41c><div class="contact-intro__author-avatar" data-v-0e8fa41c><img${ssrRenderAttr("src", "/images/avatar_120_120.jpg")}${ssrRenderAttr("alt", unref(t)("contact.author_name"))} class="contact-intro__author-photo" data-v-0e8fa41c></div><div class="contact-intro__author-info" data-v-0e8fa41c><p class="contact-intro__author-name" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.author_name"))}</p><p class="contact-intro__author-role" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.author_role"))}</p></div></div></div></div><div class="contact-form-wrap" data-v-0e8fa41c>`);
+      _push(`<div class="section-container-contact" data-v-0a2f7b82><div class="container" data-v-0a2f7b82><div class="contact-grid" data-v-0a2f7b82><div class="contact-intro" data-v-0a2f7b82><span class="contact-intro__eyebrow" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.eyebrow"))}</span><h1 class="contact-intro__title" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.title"))}</h1><div class="box-contact-intro" data-v-0a2f7b82><p class="contact-intro__lead" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.lead"))}</p></div><div class="box-contact-intro" data-v-0a2f7b82><p class="contact-intro__text" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.text_intro"))}</p><ul class="contact-intro__list" data-v-0a2f7b82><li data-v-0a2f7b82><span class="point-dot-shadow" aria-hidden="true" data-v-0a2f7b82></span><span data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.list_1"))}</span></li><li data-v-0a2f7b82><span class="point-dot-shadow" aria-hidden="true" data-v-0a2f7b82></span><span data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.list_2"))}</span></li><li data-v-0a2f7b82><span class="point-dot-shadow" aria-hidden="true" data-v-0a2f7b82></span><span data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.list_3"))}</span></li></ul></div><div class="box-contact-intro" data-v-0a2f7b82><div class="contact-intro__badge" data-v-0a2f7b82><span class="point-dot-shadow animate-pulse" aria-hidden="true" data-v-0a2f7b82></span> ${ssrInterpolate(unref(t)("contact.badge_response"))}</div><div class="contact-intro__author" data-v-0a2f7b82><div class="contact-intro__author-avatar" data-v-0a2f7b82><img${ssrRenderAttr("src", "/images/avatar_120_120.jpg")}${ssrRenderAttr("alt", unref(t)("contact.author_name"))} class="contact-intro__author-photo" data-v-0a2f7b82></div><div class="contact-intro__author-info" data-v-0a2f7b82><p class="contact-intro__author-name" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.author_name"))}</p><p class="contact-intro__author-role" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.author_role"))}</p></div></div></div></div><div class="contact-form-wrap" data-v-0a2f7b82>`);
       if (sent.value) {
-        _push(`<div class="contact-sent-card" data-v-0e8fa41c><h2 class="contact-sent-card__title" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.sent_title"))}</h2><p class="contact-sent-card__text" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.sent_line_1"))}</p><p class="contact-sent-card__text" data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.sent_line_2"))}</p>`);
+        _push(`<div class="contact-sent-card" data-v-0a2f7b82><h2 class="contact-sent-card__title" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.sent_title"))}</h2><p class="contact-sent-card__text" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.sent_line_1"))}</p><p class="contact-sent-card__text" data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.sent_line_2"))}</p>`);
         _push(ssrRenderComponent(_sfc_main$C, {
           name: "mark-email-read-twotone",
           class: "contact-sent-card__icon"
@@ -7077,7 +7062,7 @@ const _sfc_main$q = /* @__PURE__ */ Object.assign({
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             if (!sent.value) {
-              _push2(`<div class="contact-form-card" data-v-0e8fa41c${_scopeId}>`);
+              _push2(`<div class="contact-form-card" data-v-0a2f7b82${_scopeId}>`);
               _push2(ssrRenderComponent(unref(NForm), {
                 ref_key: "formRef",
                 ref: formRef,
@@ -7090,7 +7075,7 @@ const _sfc_main$q = /* @__PURE__ */ Object.assign({
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`<input${ssrRenderAttr("value", form.hp_company)} type="text" name="company_hp" class="contact-form__honeypot" tabindex="-1" autocomplete="new-password" aria-hidden="true" data-v-0e8fa41c${_scopeId2}><div class="contact-form__row" data-v-0e8fa41c${_scopeId2}>`);
+                    _push3(`<input${ssrRenderAttr("value", form.hp_company)} type="text" name="company_hp" class="contact-form__honeypot" tabindex="-1" autocomplete="new-password" aria-hidden="true" data-v-0a2f7b82${_scopeId2}><div class="contact-form__row" data-v-0a2f7b82${_scopeId2}>`);
                     _push3(ssrRenderComponent(unref(NFormItem), {
                       label: unref(t)("contact.name_label"),
                       path: "name",
@@ -7211,7 +7196,7 @@ const _sfc_main$q = /* @__PURE__ */ Object.assign({
                       }),
                       _: 1
                     }, _parent3, _scopeId2));
-                    _push3(`<div class="contact-form__submit" data-v-0e8fa41c${_scopeId2}>`);
+                    _push3(`<div class="contact-form__submit" data-v-0a2f7b82${_scopeId2}>`);
                     _push3(ssrRenderComponent(unref(NButton), {
                       type: "primary",
                       size: "large",
@@ -7230,7 +7215,7 @@ const _sfc_main$q = /* @__PURE__ */ Object.assign({
                       }),
                       _: 1
                     }, _parent3, _scopeId2));
-                    _push3(`<p class="contact-form__hint" data-v-0e8fa41c${_scopeId2}>`);
+                    _push3(`<p class="contact-form__hint" data-v-0a2f7b82${_scopeId2}>`);
                     _push3(ssrRenderComponent(_sfc_main$C, {
                       name: "check-circle",
                       class: "contact-form__hint-icon"
@@ -7475,17 +7460,17 @@ const _sfc_main$q = /* @__PURE__ */ Object.assign({
         }),
         _: 1
       }, _parent));
-      _push(`<div class="contact-trust" data-v-0e8fa41c><div class="contact-trust__card" data-v-0e8fa41c>`);
+      _push(`<div class="contact-trust" data-v-0a2f7b82><div class="contact-trust__card" data-v-0a2f7b82>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "check-circle",
         class: "contact-trust__icon"
       }, null, _parent));
-      _push(`<div data-v-0e8fa41c><h4 data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.trust_compliance_title"))}</h4><p data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.trust_compliance_subtitle"))}</p></div></div><div class="contact-trust__card" data-v-0e8fa41c>`);
+      _push(`<div data-v-0a2f7b82><h4 data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.trust_compliance_title"))}</h4><p data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.trust_compliance_subtitle"))}</p></div></div><div class="contact-trust__card" data-v-0a2f7b82>`);
       _push(ssrRenderComponent(_sfc_main$C, {
         name: "info",
         class: "contact-trust__icon"
       }, null, _parent));
-      _push(`<div data-v-0e8fa41c><h4 data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.trust_privacy_title"))}</h4><p data-v-0e8fa41c>${ssrInterpolate(unref(t)("contact.trust_privacy_subtitle"))}</p></div></div></div></div></div></div></div><!--]-->`);
+      _push(`<div data-v-0a2f7b82><h4 data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.trust_privacy_title"))}</h4><p data-v-0a2f7b82>${ssrInterpolate(unref(t)("contact.trust_privacy_subtitle"))}</p></div></div></div></div></div></div></div><!--]-->`);
     };
   }
 });
@@ -7495,7 +7480,7 @@ _sfc_main$q.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Contact.vue");
   return _sfc_setup$q ? _sfc_setup$q(props, ctx) : void 0;
 };
-const Contact = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__scopeId", "data-v-0e8fa41c"]]);
+const Contact = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__scopeId", "data-v-0a2f7b82"]]);
 const __vite_glob_0_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Contact
@@ -7612,10 +7597,7 @@ const buildNicheSections = (state) => NICHE_ORDER.map((nicheKey) => {
         value: firstPendingMeasurementTime(task) || "—",
         statusPillKey: reportStatus.key,
         statusLabel: reportStatus.label,
-        assigneeName: resolveStaffFullName(
-          state.staff,
-          task.assignedStaffId
-        ),
+        assigneeName: resolveStaffFullName(state.staff, task.assignedStaffId),
         measurements: Array.isArray(task.measurements) ? task.measurements.map((m) => ({
           time: m.time,
           value: m.value,
@@ -7630,9 +7612,7 @@ const buildNicheSections = (state) => NICHE_ORDER.map((nicheKey) => {
 });
 const flattenCcpRows = (state) => {
   const rows = [];
-  for (const [niche, tasks] of Object.entries(
-    state.checklistsByNiche ?? {}
-  )) {
+  for (const [niche, tasks] of Object.entries(state.checklistsByNiche ?? {})) {
     const nicheLabel = NICHE_LABEL[niche] ?? niche;
     for (const task of tasks) {
       const reportStatus = reportTaskStatus(task);
@@ -7648,10 +7628,7 @@ const flattenCcpRows = (state) => {
         niche: nicheLabel,
         ccp: task.title,
         detail,
-        assigneeName: resolveStaffFullName(
-          state.staff,
-          task.assignedStaffId
-        ),
+        assigneeName: resolveStaffFullName(state.staff, task.assignedStaffId),
         statusPillKey: reportStatus.key,
         statusLabel: reportStatus.label
       });
@@ -7796,50 +7773,50 @@ const _sfc_main$p = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="${ssrRenderClass([{ "daily-report--pdf-open": wantsAutoPrint.value }, "daily-report"])}" data-v-049cf019><div class="daily-report__toolbar no-print" data-v-049cf019><button type="button" class="btn-client btn-outline-primary" data-v-049cf019>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button>`);
+      _push(`<div class="${ssrRenderClass([{ "daily-report--pdf-open": wantsAutoPrint.value }, "daily-report"])}" data-v-58222b21><div class="daily-report__toolbar no-print" data-v-58222b21><button type="button" class="btn-client btn-outline-primary" data-v-58222b21>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button>`);
       if (snapshot.value) {
-        _push(`<button type="button" class="daily-report__print btn-client btn-outline-primary" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.print_pdf"))}</button>`);
+        _push(`<button type="button" class="daily-report__print btn-client btn-outline-primary" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.print_pdf"))}</button>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div>`);
       if (!snapshot.value) {
-        _push(`<div class="daily-report__missing container" data-v-049cf019><h1 class="daily-report__missing-title" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.invalid_title"))}</h1><p class="daily-report__missing-text" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.invalid_text", { date: unref(reportReferenceIso) }))}</p><button type="button" class="btn-client btn-outline-primary elem-right" data-v-049cf019>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button></div>`);
+        _push(`<div class="daily-report__missing container" data-v-58222b21><h1 class="daily-report__missing-title" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.invalid_title"))}</h1><p class="daily-report__missing-text" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.invalid_text", { date: unref(reportReferenceIso) }))}</p><button type="button" class="btn-client btn-outline-primary elem-right" data-v-58222b21>${ssrInterpolate(unref(t)("demo.show_task_modal.close"))}</button></div>`);
       } else {
-        _push(`<article class="daily-report__paper" data-v-049cf019><header class="daily-report__head" data-v-049cf019><div class="daily-report__eu-band" aria-hidden="true" data-v-049cf019></div><p class="daily-report__kicker" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.kicker"))}</p><h1 class="daily-report__title" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.title"))}</h1><p class="daily-report__sub" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.subtitle"))}</p><div class="daily-report__refs" data-v-049cf019><div data-v-049cf019><span class="daily-report__label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.report_reference"))}</span><strong data-v-049cf019>${ssrInterpolate(snapshot.value.documentRef)}</strong></div><div data-v-049cf019><span class="daily-report__label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.calendar_date_utc"))}</span><strong data-v-049cf019>${ssrInterpolate(snapshot.value.dateIso)}</strong></div><div data-v-049cf019><span class="daily-report__label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.localized"))}</span><strong data-v-049cf019>${ssrInterpolate(snapshot.value.dateLongRu)}</strong></div></div></header><section class="daily-report__section" data-v-049cf019><h2 data-v-049cf019>${ssrInterpolate(unref(t)("report.public.section_establishment"))}</h2><dl class="daily-report__dl" data-v-049cf019><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.legal_name"))}</dt><dd data-v-049cf019>${ssrInterpolate(snapshot.value.establishment.legalName)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.registered_address"))}</dt><dd data-v-049cf019>${ssrInterpolate(snapshot.value.establishment.address)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.eori_eu"))}</dt><dd data-v-049cf019>${ssrInterpolate(snapshot.value.establishment.eori)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.fda_note"))}</dt><dd data-v-049cf019>${ssrInterpolate(snapshot.value.establishment.fdaRegistration)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.competent_authority"))}</dt><dd data-v-049cf019>${ssrInterpolate(snapshot.value.establishment.competentAuthorityEu)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.operating_name"))}</dt><dd data-v-049cf019>${ssrInterpolate(snapshot.value.companyShort)}</dd></div></dl></section>`);
+        _push(`<article class="daily-report__paper" data-v-58222b21><header class="daily-report__head" data-v-58222b21><div class="daily-report__eu-band" aria-hidden="true" data-v-58222b21></div><p class="daily-report__kicker" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.kicker"))}</p><h1 class="daily-report__title" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.title"))}</h1><p class="daily-report__sub" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.subtitle"))}</p><div class="daily-report__refs" data-v-58222b21><div data-v-58222b21><span class="daily-report__label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.report_reference"))}</span><strong data-v-58222b21>${ssrInterpolate(snapshot.value.documentRef)}</strong></div><div data-v-58222b21><span class="daily-report__label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.calendar_date_utc"))}</span><strong data-v-58222b21>${ssrInterpolate(snapshot.value.dateIso)}</strong></div><div data-v-58222b21><span class="daily-report__label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.localized"))}</span><strong data-v-58222b21>${ssrInterpolate(snapshot.value.dateLongRu)}</strong></div></div></header><section class="daily-report__section" data-v-58222b21><h2 data-v-58222b21>${ssrInterpolate(unref(t)("report.public.section_establishment"))}</h2><dl class="daily-report__dl" data-v-58222b21><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.legal_name"))}</dt><dd data-v-58222b21>${ssrInterpolate(snapshot.value.establishment.legalName)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.registered_address"))}</dt><dd data-v-58222b21>${ssrInterpolate(snapshot.value.establishment.address)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.eori_eu"))}</dt><dd data-v-58222b21>${ssrInterpolate(snapshot.value.establishment.eori)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.fda_note"))}</dt><dd data-v-58222b21>${ssrInterpolate(snapshot.value.establishment.fdaRegistration)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.competent_authority"))}</dt><dd data-v-58222b21>${ssrInterpolate(snapshot.value.establishment.competentAuthorityEu)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.operating_name"))}</dt><dd data-v-58222b21>${ssrInterpolate(snapshot.value.companyShort)}</dd></div></dl></section>`);
         if (!snapshot.value.hasFullRecord) {
-          _push(`<section class="daily-report__section daily-report__section--muted" data-v-049cf019><h2 data-v-049cf019>${ssrInterpolate(unref(t)("report.public.section_no_records"))}</h2><p class="daily-report__lead" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.no_records_text"))}</p></section>`);
+          _push(`<section class="daily-report__section daily-report__section--muted" data-v-58222b21><h2 data-v-58222b21>${ssrInterpolate(unref(t)("report.public.section_no_records"))}</h2><p class="daily-report__lead" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.no_records_text"))}</p></section>`);
         } else {
-          _push(`<!--[--><section class="daily-report__section" data-v-049cf019><h2 data-v-049cf019>${ssrInterpolate(unref(t)("report.public.section_scope"))}</h2><p class="daily-report__lead" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.scope_lead"))}</p><div class="daily-report__summary" data-v-049cf019><div class="daily-report__summary-item" data-v-049cf019><span class="daily-report__label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.total_ccp_tasks"))}</span><strong data-v-049cf019>${ssrInterpolate(snapshot.value.totalCcpTasks)}</strong></div><div class="daily-report__summary-item" data-v-049cf019><span class="daily-report__label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.reporting_date"))}</span><strong data-v-049cf019>${ssrInterpolate(snapshot.value.inspectionDateLabel)}</strong></div></div><div class="daily-report__table-wrap daily-report__table-wrap--mt" data-v-049cf019><p class="daily-report__register-caption-mobile" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.register_caption"))}</p><div class="daily-report__register-desktop" data-v-049cf019><table class="daily-report__table daily-report__table--compact" data-v-049cf019><caption class="daily-report__caption" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.register_caption"))}</caption><thead data-v-049cf019><tr data-v-049cf019><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_process"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_control_point"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_recorded_value"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_assignee"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_status"))}</th></tr></thead><tbody data-v-049cf019><!--[-->`);
+          _push(`<!--[--><section class="daily-report__section" data-v-58222b21><h2 data-v-58222b21>${ssrInterpolate(unref(t)("report.public.section_scope"))}</h2><p class="daily-report__lead" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.scope_lead"))}</p><div class="daily-report__summary" data-v-58222b21><div class="daily-report__summary-item" data-v-58222b21><span class="daily-report__label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.total_ccp_tasks"))}</span><strong data-v-58222b21>${ssrInterpolate(snapshot.value.totalCcpTasks)}</strong></div><div class="daily-report__summary-item" data-v-58222b21><span class="daily-report__label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.reporting_date"))}</span><strong data-v-58222b21>${ssrInterpolate(snapshot.value.inspectionDateLabel)}</strong></div></div><div class="daily-report__table-wrap daily-report__table-wrap--mt" data-v-58222b21><p class="daily-report__register-caption-mobile" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.register_caption"))}</p><div class="daily-report__register-desktop" data-v-58222b21><table class="daily-report__table daily-report__table--compact" data-v-58222b21><caption class="daily-report__caption" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.register_caption"))}</caption><thead data-v-58222b21><tr data-v-58222b21><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_process"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_control_point"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_recorded_value"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_assignee"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_status"))}</th></tr></thead><tbody data-v-58222b21><!--[-->`);
           ssrRenderList(snapshot.value.ccpRows, (row) => {
-            _push(`<tr data-v-049cf019><td data-v-049cf019>${ssrInterpolate(row.niche)}</td><td data-v-049cf019>${ssrInterpolate(row.ccp)}</td><td data-v-049cf019>${ssrInterpolate(row.detail)}</td><td data-v-049cf019>${ssrInterpolate(row.assigneeName)}</td><td data-v-049cf019><span class="${ssrRenderClass([`daily-report__pill--${row.statusPillKey}`, "daily-report__pill"])}" data-v-049cf019>${ssrInterpolate(row.statusLabel)}</span></td></tr>`);
+            _push(`<tr data-v-58222b21><td data-v-58222b21>${ssrInterpolate(row.niche)}</td><td data-v-58222b21>${ssrInterpolate(row.ccp)}</td><td data-v-58222b21>${ssrInterpolate(row.detail)}</td><td data-v-58222b21>${ssrInterpolate(row.assigneeName)}</td><td data-v-58222b21><span class="${ssrRenderClass([`daily-report__pill--${row.statusPillKey}`, "daily-report__pill"])}" data-v-58222b21>${ssrInterpolate(row.statusLabel)}</span></td></tr>`);
           });
-          _push(`<!--]--></tbody></table></div><div class="daily-report__register-mobile" data-v-049cf019><!--[-->`);
+          _push(`<!--]--></tbody></table></div><div class="daily-report__register-mobile" data-v-58222b21><!--[-->`);
           ssrRenderList(snapshot.value.ccpRows, (row) => {
-            _push(`<article class="daily-report__register-card" data-v-049cf019><p class="daily-report__register-line" data-v-049cf019><span class="daily-report__register-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_process"))}:</span> ${ssrInterpolate(row.niche)}</p><p class="daily-report__register-line" data-v-049cf019><span class="daily-report__register-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_control_point"))}:</span> ${ssrInterpolate(row.ccp)}</p><p class="daily-report__register-line" data-v-049cf019><span class="daily-report__register-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_recorded_value"))}:</span> ${ssrInterpolate(row.detail)}</p><p class="daily-report__register-line" data-v-049cf019><span class="daily-report__register-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_assignee"))}:</span> ${ssrInterpolate(row.assigneeName)}</p><p class="daily-report__register-line daily-report__register-line--status" data-v-049cf019><span class="daily-report__register-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_status"))}:</span><span class="${ssrRenderClass([`daily-report__pill--${row.statusPillKey}`, "daily-report__pill"])}" data-v-049cf019>${ssrInterpolate(row.statusLabel)}</span></p></article>`);
+            _push(`<article class="daily-report__register-card" data-v-58222b21><p class="daily-report__register-line" data-v-58222b21><span class="daily-report__register-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_process"))}:</span> ${ssrInterpolate(row.niche)}</p><p class="daily-report__register-line" data-v-58222b21><span class="daily-report__register-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_control_point"))}:</span> ${ssrInterpolate(row.ccp)}</p><p class="daily-report__register-line" data-v-58222b21><span class="daily-report__register-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_recorded_value"))}:</span> ${ssrInterpolate(row.detail)}</p><p class="daily-report__register-line" data-v-58222b21><span class="daily-report__register-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_assignee"))}:</span> ${ssrInterpolate(row.assigneeName)}</p><p class="daily-report__register-line daily-report__register-line--status" data-v-58222b21><span class="daily-report__register-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_status"))}:</span><span class="${ssrRenderClass([`daily-report__pill--${row.statusPillKey}`, "daily-report__pill"])}" data-v-58222b21>${ssrInterpolate(row.statusLabel)}</span></p></article>`);
           });
           _push(`<!--]--></div></div></section><!--[-->`);
           ssrRenderList(snapshot.value.nicheSections, (section) => {
-            _push(`<section class="daily-report__section daily-report__section--niche" data-v-049cf019><h2 class="daily-report__h2-niche" data-v-049cf019> 3.${ssrInterpolate(section.nicheKey === "coffee" ? "A" : section.nicheKey === "bakery" ? "B" : "C")} ${ssrInterpolate(unref(t)("report.public.haccp_section_title", { label: section.nicheLabel }))}</h2><p class="daily-report__lead" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.haccp_section_lead"))}</p><!--[-->`);
+            _push(`<section class="daily-report__section daily-report__section--niche" data-v-58222b21><h2 class="daily-report__h2-niche" data-v-58222b21> 3.${ssrInterpolate(section.nicheKey === "coffee" ? "A" : section.nicheKey === "bakery" ? "B" : "C")} ${ssrInterpolate(unref(t)("report.public.haccp_section_title", { label: section.nicheLabel }))}</h2><p class="daily-report__lead" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.haccp_section_lead"))}</p><!--[-->`);
             ssrRenderList(section.tasks, (task) => {
-              _push(`<div class="daily-report__task-block" data-v-049cf019><div class="daily-report__task-head" data-v-049cf019><h3 class="daily-report__task-title" data-v-049cf019>${ssrInterpolate(task.title)}</h3><span class="${ssrRenderClass([`daily-report__pill--${task.statusPillKey}`, "daily-report__pill"])}" data-v-049cf019>${ssrInterpolate(task.statusLabel)}</span></div><dl class="daily-report__task-dl" data-v-049cf019><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.control_point_id"))}</dt><dd data-v-049cf019><code class="daily-report__code" data-v-049cf019>${ssrInterpolate(task.id)}</code></dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.last_recorded"))}</dt><dd data-v-049cf019>${ssrInterpolate(task.value)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.person_responsible_demo"))}</dt><dd data-v-049cf019>${ssrInterpolate(task.assigneeName)}</dd></div></dl>`);
+              _push(`<div class="daily-report__task-block" data-v-58222b21><div class="daily-report__task-head" data-v-58222b21><h3 class="daily-report__task-title" data-v-58222b21>${ssrInterpolate(task.title)}</h3><span class="${ssrRenderClass([`daily-report__pill--${task.statusPillKey}`, "daily-report__pill"])}" data-v-58222b21>${ssrInterpolate(task.statusLabel)}</span></div><dl class="daily-report__task-dl" data-v-58222b21><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.control_point_id"))}</dt><dd data-v-58222b21><code class="daily-report__code" data-v-58222b21>${ssrInterpolate(task.id)}</code></dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.last_recorded"))}</dt><dd data-v-58222b21>${ssrInterpolate(task.value)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.person_responsible_demo"))}</dt><dd data-v-58222b21>${ssrInterpolate(task.assigneeName)}</dd></div></dl>`);
               if (task.measurements && task.measurements.length) {
-                _push(`<div class="daily-report__subblock" data-v-049cf019><h4 class="daily-report__h4" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.time_stamped_verification"))}</h4><div class="daily-report__table-wrap daily-report__table-wrap--meas" data-v-049cf019><div class="daily-report__meas-desktop" data-v-049cf019><table class="daily-report__table" data-v-049cf019><thead data-v-049cf019><tr data-v-049cf019><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_time"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_observed_value"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_result"))}</th></tr></thead><tbody data-v-049cf019><!--[-->`);
+                _push(`<div class="daily-report__subblock" data-v-58222b21><h4 class="daily-report__h4" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.time_stamped_verification"))}</h4><div class="daily-report__table-wrap daily-report__table-wrap--meas" data-v-58222b21><div class="daily-report__meas-desktop" data-v-58222b21><table class="daily-report__table" data-v-58222b21><thead data-v-58222b21><tr data-v-58222b21><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_time"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_observed_value"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_result"))}</th></tr></thead><tbody data-v-58222b21><!--[-->`);
                 ssrRenderList(task.measurements, (m, idx) => {
-                  _push(`<tr data-v-049cf019><td data-v-049cf019>${ssrInterpolate(m.time)}</td><td data-v-049cf019>${ssrInterpolate(m.value)}</td><td data-v-049cf019><span class="${ssrRenderClass([`daily-report__pill--${m.resultPillKey}`, "daily-report__pill daily-report__pill--sm"])}" data-v-049cf019>${ssrInterpolate(m.resultLabel)}</span></td></tr>`);
+                  _push(`<tr data-v-58222b21><td data-v-58222b21>${ssrInterpolate(m.time)}</td><td data-v-58222b21>${ssrInterpolate(m.value)}</td><td data-v-58222b21><span class="${ssrRenderClass([`daily-report__pill--${m.resultPillKey}`, "daily-report__pill daily-report__pill--sm"])}" data-v-58222b21>${ssrInterpolate(m.resultLabel)}</span></td></tr>`);
                 });
-                _push(`<!--]--></tbody></table></div><div class="daily-report__meas-mobile" data-v-049cf019><!--[-->`);
+                _push(`<!--]--></tbody></table></div><div class="daily-report__meas-mobile" data-v-58222b21><!--[-->`);
                 ssrRenderList(task.measurements, (m, idx) => {
-                  _push(`<article class="daily-report__meas-card" data-v-049cf019><p class="daily-report__meas-line" data-v-049cf019><span class="daily-report__meas-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_time"))}:</span> ${ssrInterpolate(m.time)}</p><p class="daily-report__meas-line" data-v-049cf019><span class="daily-report__meas-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_observed_value"))}:</span> ${ssrInterpolate(m.value)}</p><p class="daily-report__meas-line daily-report__meas-line--result" data-v-049cf019><span class="daily-report__meas-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_result"))}:</span><span class="${ssrRenderClass([`daily-report__pill--${m.resultPillKey}`, "daily-report__pill daily-report__pill--sm"])}" data-v-049cf019>${ssrInterpolate(m.resultLabel)}</span></p></article>`);
+                  _push(`<article class="daily-report__meas-card" data-v-58222b21><p class="daily-report__meas-line" data-v-58222b21><span class="daily-report__meas-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_time"))}:</span> ${ssrInterpolate(m.time)}</p><p class="daily-report__meas-line" data-v-58222b21><span class="daily-report__meas-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_observed_value"))}:</span> ${ssrInterpolate(m.value)}</p><p class="daily-report__meas-line daily-report__meas-line--result" data-v-58222b21><span class="daily-report__meas-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_result"))}:</span><span class="${ssrRenderClass([`daily-report__pill--${m.resultPillKey}`, "daily-report__pill daily-report__pill--sm"])}" data-v-58222b21>${ssrInterpolate(m.resultLabel)}</span></p></article>`);
                 });
                 _push(`<!--]--></div></div></div>`);
               } else {
                 _push(`<!---->`);
               }
               if (task.correctiveActions && task.correctiveActions.length) {
-                _push(`<div class="daily-report__subblock" data-v-049cf019><h4 class="daily-report__h4" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.corrective_actions_title"))}</h4><ol class="daily-report__ol" data-v-049cf019><!--[-->`);
+                _push(`<div class="daily-report__subblock" data-v-58222b21><h4 class="daily-report__h4" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.corrective_actions_title"))}</h4><ol class="daily-report__ol" data-v-58222b21><!--[-->`);
                 ssrRenderList(task.correctiveActions, (line, idx) => {
-                  _push(`<li data-v-049cf019>${ssrInterpolate(line)}</li>`);
+                  _push(`<li data-v-58222b21>${ssrInterpolate(line)}</li>`);
                 });
                 _push(`<!--]--></ol></div>`);
               } else {
@@ -7849,35 +7826,40 @@ const _sfc_main$p = /* @__PURE__ */ Object.assign({
             });
             _push(`<!--]--></section>`);
           });
-          _push(`<!--]--><section class="daily-report__section" data-v-049cf019><h2 data-v-049cf019>${ssrInterpolate(unref(t)("report.public.section_eudr"))}</h2><p class="daily-report__lead" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.eudr_lead"))}</p>`);
+          _push(`<!--]--><section class="daily-report__section" data-v-58222b21><h2 data-v-58222b21>${ssrInterpolate(unref(t)("report.public.section_eudr"))}</h2><p class="daily-report__lead" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.eudr_lead"))}</p>`);
           if (snapshot.value.supplyRows.length === 0) {
-            _push(`<p class="daily-report__lead daily-report__lead--warn" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.no_eudr_intake"))}</p>`);
+            _push(`<p class="daily-report__lead daily-report__lead--warn" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.no_eudr_intake"))}</p>`);
           } else {
-            _push(`<!--[--><div class="daily-report__table-wrap daily-report__table-wrap--supply" data-v-049cf019><div class="daily-report__supply-desktop" data-v-049cf019><table class="daily-report__table" data-v-049cf019><thead data-v-049cf019><tr data-v-049cf019><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_batch_id"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_product_list"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_status"))}</th><th scope="col" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_public_disclosure"))}</th></tr></thead><tbody data-v-049cf019><!--[-->`);
+            _push(`<!--[--><div class="daily-report__table-wrap daily-report__table-wrap--supply" data-v-58222b21><div class="daily-report__supply-desktop" data-v-58222b21><table class="daily-report__table" data-v-58222b21><thead data-v-58222b21><tr data-v-58222b21><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_batch_id"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_product_list"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_status"))}</th><th scope="col" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_public_disclosure"))}</th></tr></thead><tbody data-v-58222b21><!--[-->`);
             ssrRenderList(snapshot.value.supplyRows, (b) => {
-              _push(`<tr data-v-049cf019><td data-v-049cf019><strong data-v-049cf019>${ssrInterpolate(b.id)}</strong></td><td data-v-049cf019>${ssrInterpolate(b.product)}</td><td data-v-049cf019>${ssrInterpolate(b.statusLabel)}</td><td data-v-049cf019><a class="daily-report__a"${ssrRenderAttr("href", b.url)} target="_blank" rel="noopener" data-v-049cf019>${ssrInterpolate(b.url)}</a></td></tr>`);
+              _push(`<tr data-v-58222b21><td data-v-58222b21><strong data-v-58222b21>${ssrInterpolate(b.id)}</strong></td><td data-v-58222b21>${ssrInterpolate(b.product)}</td><td data-v-58222b21>${ssrInterpolate(b.statusLabel)}</td><td data-v-58222b21><a class="daily-report__a"${ssrRenderAttr("href", b.url)} target="_blank" rel="noopener" data-v-58222b21>${ssrInterpolate(b.url)}</a></td></tr>`);
             });
-            _push(`<!--]--></tbody></table></div><div class="daily-report__supply-mobile" data-v-049cf019><!--[-->`);
+            _push(`<!--]--></tbody></table></div><div class="daily-report__supply-mobile" data-v-58222b21><!--[-->`);
             ssrRenderList(snapshot.value.supplyRows, (b) => {
-              _push(`<article class="daily-report__supply-card" data-v-049cf019><p class="daily-report__supply-line" data-v-049cf019><span class="daily-report__supply-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_batch_id"))}:</span><strong data-v-049cf019>${ssrInterpolate(b.id)}</strong></p><p class="daily-report__supply-line" data-v-049cf019><span class="daily-report__supply-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_product_list"))}:</span> ${ssrInterpolate(b.product)}</p><p class="daily-report__supply-line" data-v-049cf019><span class="daily-report__supply-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_status"))}:</span> ${ssrInterpolate(b.statusLabel)}</p><p class="daily-report__supply-line daily-report__supply-line--url" data-v-049cf019><span class="daily-report__supply-label" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.col_public_disclosure"))}:</span><a class="daily-report__a"${ssrRenderAttr("href", b.url)} target="_blank" rel="noopener" data-v-049cf019>${ssrInterpolate(b.url)}</a></p></article>`);
+              _push(`<article class="daily-report__supply-card" data-v-58222b21><p class="daily-report__supply-line" data-v-58222b21><span class="daily-report__supply-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_batch_id"))}:</span><strong data-v-58222b21>${ssrInterpolate(b.id)}</strong></p><p class="daily-report__supply-line" data-v-58222b21><span class="daily-report__supply-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_product_list"))}:</span> ${ssrInterpolate(b.product)}</p><p class="daily-report__supply-line" data-v-58222b21><span class="daily-report__supply-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_status"))}:</span> ${ssrInterpolate(b.statusLabel)}</p><p class="daily-report__supply-line daily-report__supply-line--url" data-v-58222b21><span class="daily-report__supply-label" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.col_public_disclosure"))}:</span><a class="daily-report__a"${ssrRenderAttr("href", b.url)} target="_blank" rel="noopener" data-v-58222b21>${ssrInterpolate(b.url)}</a></p></article>`);
             });
             _push(`<!--]--></div></div><!--[-->`);
             ssrRenderList(snapshot.value.supplyDetails, (sd, idx) => {
-              _push(`<div class="daily-report__eudr-detail" data-v-049cf019><h3 class="daily-report__h3-eudr" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.eudr_detail_title", { n: idx + 1, id: sd.listRow.id }))}</h3>`);
+              _push(`<div class="daily-report__eudr-detail" data-v-58222b21><h3 class="daily-report__h3-eudr" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.eudr_detail_title", {
+                n: idx + 1,
+                id: sd.listRow.id
+              }))}</h3>`);
               if (sd.eudr) {
-                _push(`<dl class="daily-report__dl daily-report__dl--tight" data-v-049cf019><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.dds_reference"))}</dt><dd data-v-049cf019>${ssrInterpolate(sd.eudr.ddsReference)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.eu_operator"))}</dt><dd data-v-049cf019>${ssrInterpolate(sd.eudr.operator.name)} — ${ssrInterpolate(sd.eudr.operator.address)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.product"))}</dt><dd data-v-049cf019>${ssrInterpolate(sd.eudr.product.name)} (CN ${ssrInterpolate(sd.eudr.product.cnCode)}) — ${ssrInterpolate(sd.eudr.product.quantity)}</dd></div><div data-v-049cf019><dt data-v-049cf019>${ssrInterpolate(unref(t)("report.public.assessment"))}</dt><dd data-v-049cf019>${ssrInterpolate(sd.eudr.statusDetail)}</dd></div></dl>`);
+                _push(`<dl class="daily-report__dl daily-report__dl--tight" data-v-58222b21><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.dds_reference"))}</dt><dd data-v-58222b21>${ssrInterpolate(sd.eudr.ddsReference)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.eu_operator"))}</dt><dd data-v-58222b21>${ssrInterpolate(sd.eudr.operator.name)} — ${ssrInterpolate(sd.eudr.operator.address)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.product"))}</dt><dd data-v-58222b21>${ssrInterpolate(sd.eudr.product.name)} (CN ${ssrInterpolate(sd.eudr.product.cnCode)}) — ${ssrInterpolate(sd.eudr.product.quantity)}</dd></div><div data-v-58222b21><dt data-v-58222b21>${ssrInterpolate(unref(t)("report.public.assessment"))}</dt><dd data-v-58222b21>${ssrInterpolate(sd.eudr.statusDetail)}</dd></div></dl>`);
               } else {
-                _push(`<p class="daily-report__lead" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.extended_record_missing"))}</p>`);
+                _push(`<p class="daily-report__lead" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.extended_record_missing"))}</p>`);
               }
               _push(`</div>`);
             });
             _push(`<!--]--><!--]-->`);
           }
-          _push(`</section><section class="daily-report__section daily-report__section--muted" data-v-049cf019><h2 data-v-049cf019>${ssrInterpolate(unref(t)("report.public.section_integrity"))}</h2><ul class="daily-report__checklist" data-v-049cf019><li data-v-049cf019>${ssrInterpolate(unref(t)("report.public.integrity_item_1"))}</li><li data-v-049cf019>${ssrInterpolate(unref(t)("report.public.integrity_item_2"))}</li><li data-v-049cf019>${ssrInterpolate(unref(t)("report.public.integrity_item_3"))}</li><li data-v-049cf019>${ssrInterpolate(unref(t)("report.public.integrity_item_4"))}</li></ul></section><!--]-->`);
+          _push(`</section><section class="daily-report__section daily-report__section--muted" data-v-58222b21><h2 data-v-58222b21>${ssrInterpolate(unref(t)("report.public.section_integrity"))}</h2><ul class="daily-report__checklist" data-v-58222b21><li data-v-58222b21>${ssrInterpolate(unref(t)("report.public.integrity_item_1"))}</li><li data-v-58222b21>${ssrInterpolate(unref(t)("report.public.integrity_item_2"))}</li><li data-v-58222b21>${ssrInterpolate(unref(t)("report.public.integrity_item_3"))}</li><li data-v-58222b21>${ssrInterpolate(unref(t)("report.public.integrity_item_4"))}</li></ul></section><!--]-->`);
         }
-        _push(`<footer class="daily-report__footer" data-v-049cf019><div class="daily-report__meta" data-v-049cf019><span data-v-049cf019>${ssrInterpolate(unref(t)("report.public.demo_inspection_preview"))}</span><span data-v-049cf019>${ssrInterpolate(unref(t)("report.public.inspection_date_label", { label: snapshot.value.inspectionDateLabel }))}</span><span class="no-print" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.generated_client", { time: generatedAtFormatted.value }))}</span></div><p class="daily-report__disclaimer" data-v-049cf019>${ssrInterpolate(snapshot.value.disclaimer)}</p><p class="daily-report__url no-print" data-v-049cf019>${ssrInterpolate(unref(t)("report.public.public_link", { url: canonicalUrl.value }))}</p></footer></article>`);
+        _push(`<footer class="daily-report__footer" data-v-58222b21><div class="daily-report__meta" data-v-58222b21><span data-v-58222b21>${ssrInterpolate(unref(t)("report.public.demo_inspection_preview"))}</span><span data-v-58222b21>${ssrInterpolate(unref(t)("report.public.inspection_date_label", {
+          label: snapshot.value.inspectionDateLabel
+        }))}</span><span class="no-print" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.generated_client", { time: generatedAtFormatted.value }))}</span></div><p class="daily-report__disclaimer" data-v-58222b21>${ssrInterpolate(snapshot.value.disclaimer)}</p><p class="daily-report__url no-print" data-v-58222b21>${ssrInterpolate(unref(t)("report.public.public_link", { url: canonicalUrl.value }))}</p></footer></article>`);
       }
-      _push(`<button type="button" class="daily-report__to-top no-print" aria-label="Scroll to top" style="${ssrRenderStyle(showToTop.value ? null : { display: "none" })}" data-v-049cf019><svg viewBox="0 0 24 24" aria-hidden="true" data-v-049cf019><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M6 14l6-6 6 6" data-v-049cf019></path></svg></button></div><!--]-->`);
+      _push(`<button type="button" class="daily-report__to-top no-print" aria-label="Scroll to top" style="${ssrRenderStyle(showToTop.value ? null : { display: "none" })}" data-v-58222b21><svg viewBox="0 0 24 24" aria-hidden="true" data-v-58222b21><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M6 14l6-6 6 6" data-v-58222b21></path></svg></button></div><!--]-->`);
     };
   }
 });
@@ -7887,7 +7869,7 @@ _sfc_main$p.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/DailyReportPublic.vue");
   return _sfc_setup$p ? _sfc_setup$p(props, ctx) : void 0;
 };
-const DailyReportPublic = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-049cf019"]]);
+const DailyReportPublic = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-58222b21"]]);
 const __vite_glob_0_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: DailyReportPublic
@@ -7912,9 +7894,7 @@ const _sfc_main$o = /* @__PURE__ */ Object.assign({
     const NMessageProvider = defineAsyncComponent(
       () => import("./assets/index-CBaioSHH.js").then((m) => m.NMessageProvider)
     );
-    const DemoPage = defineAsyncComponent(
-      () => import("./assets/DemoPage-qCAFukiH.js")
-    );
+    const DemoPage = defineAsyncComponent(() => import("./assets/DemoPage-Dtuh4qAE.js"));
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
@@ -7967,7 +7947,7 @@ const _sfc_main$n = /* @__PURE__ */ Object.assign({
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "hero-section__content" }, _attrs))} data-v-209d8e9d><div class="hero-section__left" data-v-209d8e9d><h1 data-v-209d8e9d>${ssrInterpolate(_ctx.$t("home.hero.title_line1"))}</h1><p class="hero-section__description" data-v-209d8e9d><strong data-v-209d8e9d>${ssrInterpolate(_ctx.$t("home.hero.description_prefix"))}</strong> ${ssrInterpolate(_ctx.$t("home.hero.description_emphasis"))}</p><div class="hero-section__buttons" data-v-209d8e9d><button class="btn-client btn-success btn-success-hero" data-v-209d8e9d>${ssrInterpolate(_ctx.$t("home.hero.tell_about_business"))}</button><button class="btn-client btn-outline-primary" data-v-209d8e9d>${ssrInterpolate(_ctx.$t("home.hero.view_demo"))}</button></div></div><div class="hero-section__right" data-v-209d8e9d><img${ssrRenderAttr("src", "/images/tablets.jpg")}${ssrRenderAttr("alt", _ctx.$t("home.hero.devices_alt"))} class="hero-image" fetchpriority="high" data-v-209d8e9d></div></div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "hero-section__content" }, _attrs))} data-v-f9e36dd0><div class="hero-section__left" data-v-f9e36dd0><h1 data-v-f9e36dd0>${ssrInterpolate(_ctx.$t("home.hero.title_line1"))}</h1><p class="hero-section__description" data-v-f9e36dd0><strong data-v-f9e36dd0>${ssrInterpolate(_ctx.$t("home.hero.description_prefix"))}</strong> ${ssrInterpolate(_ctx.$t("home.hero.description_emphasis"))}</p><div class="hero-section__buttons" data-v-f9e36dd0><button class="btn-client btn-success btn-success-hero" data-v-f9e36dd0>${ssrInterpolate(_ctx.$t("home.hero.tell_about_business"))}</button><button class="btn-client btn-outline-primary" data-v-f9e36dd0>${ssrInterpolate(_ctx.$t("home.hero.view_demo"))}</button></div></div><div class="hero-section__right" data-v-f9e36dd0><img${ssrRenderAttr("src", "/images/tablets.jpg")}${ssrRenderAttr("alt", _ctx.$t("home.hero.devices_alt"))} class="hero-image" fetchpriority="high" data-v-f9e36dd0></div></div>`);
     };
   }
 });
@@ -7977,7 +7957,7 @@ _sfc_main$n.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/home/HeroSection.vue");
   return _sfc_setup$n ? _sfc_setup$n(props, ctx) : void 0;
 };
-const HeroSection = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-209d8e9d"]]);
+const HeroSection = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-f9e36dd0"]]);
 const _sfc_main$m = /* @__PURE__ */ Object.assign({
   name: "MetricsSection"
 }, {
@@ -7994,10 +7974,7 @@ const _sfc_main$m = /* @__PURE__ */ Object.assign({
         return value;
       }
       const cssClass = PRICE_HIGHLIGHT_CLASS[highlight];
-      return value.replace(
-        /€[\d,]+(?:\+)?/,
-        (match) => `<span class="${cssClass}">${match}</span>`
-      );
+      return value.replace(/€[\d,]+(?:\+)?/, (match) => `<span class="${cssClass}">${match}</span>`);
     }
     const metricCards = [
       {
@@ -8069,23 +8046,20 @@ const _sfc_main$m = /* @__PURE__ */ Object.assign({
       }
     ];
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<section${ssrRenderAttrs(mergeProps({ class: "metrics-section" }, _attrs))} data-v-076c214d><div class="metrics-grid" data-v-076c214d><!--[-->`);
+      _push(`<section${ssrRenderAttrs(mergeProps({ class: "metrics-section" }, _attrs))} data-v-52cdf282><div class="metrics-grid" data-v-52cdf282><!--[-->`);
       ssrRenderList(metricCards, (metric) => {
-        _push(`<article class="metric-card" data-v-076c214d><div class="metric-card-header" data-v-076c214d><div class="${ssrRenderClass([metric.iconClass, "metric-icon"])}" data-v-076c214d>`);
+        _push(`<article class="metric-card" data-v-52cdf282><div class="metric-card-header" data-v-52cdf282><div class="${ssrRenderClass([metric.iconClass, "metric-icon"])}" data-v-52cdf282>`);
         _push(ssrRenderComponent(_sfc_main$C, {
           name: metric.iconName,
           "aria-hidden": "true"
         }, null, _parent));
-        _push(`</div><h2 class="metric-title" data-v-076c214d>${ssrInterpolate(metric.title)}</h2></div><div class="metric-card-body metric-card-body--savings" data-v-076c214d><div class="metric-card-body-col metric-card-body-col--left" data-v-076c214d><!--[-->`);
+        _push(`</div><h2 class="metric-title" data-v-52cdf282>${ssrInterpolate(metric.title)}</h2></div><div class="metric-card-body metric-card-body--savings" data-v-52cdf282><div class="metric-card-body-col metric-card-body-col--left" data-v-52cdf282><!--[-->`);
         ssrRenderList(metric.lines, (line, idx) => {
-          _push(`<p class="metric-line" data-v-076c214d><span class="metric-bold" data-v-076c214d>${ssrInterpolate(line.word)}</span><span class="metric-text" data-v-076c214d>${formatMetricValue(
-            line.value,
-            line.highlight
-          ) ?? ""}</span></p>`);
+          _push(`<p class="metric-line" data-v-52cdf282><span class="metric-bold" data-v-52cdf282>${ssrInterpolate(line.word)}</span><span class="metric-text" data-v-52cdf282>${formatMetricValue(line.value, line.highlight) ?? ""}</span></p>`);
         });
         _push(`<!--]--></div>`);
         if (metric.right) {
-          _push(`<div class="metric-card-body-col metric-card-body-col--right" data-v-076c214d><p class="metric-line metric-details--accent" data-v-076c214d>${ssrInterpolate(metric.right)}</p></div>`);
+          _push(`<div class="metric-card-body-col metric-card-body-col--right" data-v-52cdf282><p class="metric-line metric-details--accent" data-v-52cdf282>${ssrInterpolate(metric.right)}</p></div>`);
         } else {
           _push(`<!---->`);
         }
@@ -8101,7 +8075,7 @@ _sfc_main$m.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/home/MetricsSection.vue");
   return _sfc_setup$m ? _sfc_setup$m(props, ctx) : void 0;
 };
-const MetricsSection = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-076c214d"]]);
+const MetricsSection = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["__scopeId", "data-v-52cdf282"]]);
 const _sfc_main$l = /* @__PURE__ */ Object.assign({
   name: "NichesSection"
 }, {
@@ -8164,17 +8138,17 @@ const _sfc_main$l = /* @__PURE__ */ Object.assign({
       }
     ];
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<section${ssrRenderAttrs(mergeProps({ class: "niches" }, _attrs))} data-v-72b0ae19><div class="niches__grid" data-v-72b0ae19><!--[-->`);
+      _push(`<section${ssrRenderAttrs(mergeProps({ class: "niches" }, _attrs))} data-v-fbfd243d><div class="niches__grid" data-v-fbfd243d><!--[-->`);
       ssrRenderList(niches, (niche) => {
-        _push(`<article class="${ssrRenderClass([{ "niche-card--other": niche.id === "other" }, "niche-card card-shadow"])}" data-v-72b0ae19><div class="niche-card__header" data-v-72b0ae19><div class="niche-card__emoji" aria-hidden="true" data-v-72b0ae19>${ssrInterpolate(niche.emoji)}</div><div class="niche-card__titles" data-v-72b0ae19><h3 class="niche-card__title" data-v-72b0ae19>${ssrInterpolate(niche.title)}</h3><p class="niche-card__subtitle" data-v-72b0ae19>${ssrInterpolate(niche.subtitle)}</p></div></div><ul class="niche-card__points" data-v-72b0ae19><!--[-->`);
+        _push(`<article class="${ssrRenderClass([{ "niche-card--other": niche.id === "other" }, "niche-card card-shadow"])}" data-v-fbfd243d><div class="niche-card__header" data-v-fbfd243d><div class="niche-card__emoji" aria-hidden="true" data-v-fbfd243d>${ssrInterpolate(niche.emoji)}</div><div class="niche-card__titles" data-v-fbfd243d><h3 class="niche-card__title" data-v-fbfd243d>${ssrInterpolate(niche.title)}</h3><p class="niche-card__subtitle" data-v-fbfd243d>${ssrInterpolate(niche.subtitle)}</p></div></div><ul class="niche-card__points" data-v-fbfd243d><!--[-->`);
         ssrRenderList(niche.points, (point, idx) => {
-          _push(`<li data-v-72b0ae19>${ssrInterpolate(point)}</li>`);
+          _push(`<li data-v-fbfd243d>${ssrInterpolate(point)}</li>`);
         });
-        _push(`<!--]--></ul><p class="niche-card__result" data-v-72b0ae19>${ssrInterpolate(niche.result)}</p>`);
+        _push(`<!--]--></ul><p class="niche-card__result" data-v-fbfd243d>${ssrInterpolate(niche.result)}</p>`);
         if (niche.id !== "other") {
-          _push(`<button type="button" class="btn-client btn-outline-primary niche-card__cta" data-v-72b0ae19>${ssrInterpolate(niche.cta)}</button>`);
+          _push(`<button type="button" class="btn-client btn-outline-primary niche-card__cta" data-v-fbfd243d>${ssrInterpolate(niche.cta)}</button>`);
         } else {
-          _push(`<button type="button" class="btn-client btn-outline-primary niche-card__cta" data-v-72b0ae19>${ssrInterpolate(niche.cta)}</button>`);
+          _push(`<button type="button" class="btn-client btn-outline-primary niche-card__cta" data-v-fbfd243d>${ssrInterpolate(niche.cta)}</button>`);
         }
         _push(`</article>`);
       });
@@ -8188,7 +8162,7 @@ _sfc_main$l.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/home/NichesSection.vue");
   return _sfc_setup$l ? _sfc_setup$l(props, ctx) : void 0;
 };
-const NichesSection = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-72b0ae19"]]);
+const NichesSection = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-fbfd243d"]]);
 const _sfc_main$k = /* @__PURE__ */ Object.assign({
   name: "Home",
   layout: _sfc_main$t
@@ -8205,13 +8179,13 @@ const _sfc_main$k = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="section-container-home section-container--home-hero" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(`<div class="section-container-home section-container--home-hero" data-v-17d8c4b0><div class="container" data-v-17d8c4b0>`);
       _push(ssrRenderComponent(HeroSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-metrics" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(`</div></div><div class="section-container-home section-container--home-metrics" data-v-17d8c4b0><div class="container" data-v-17d8c4b0>`);
       _push(ssrRenderComponent(MetricsSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-niches" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(`</div></div><div class="section-container-home section-container--home-niches" data-v-17d8c4b0><div class="container" data-v-17d8c4b0>`);
       _push(ssrRenderComponent(NichesSection, null, null, _parent));
-      _push(`</div></div><div class="section-container-home section-container--home-survey-cta" data-v-d5bd1c45><div class="container" data-v-d5bd1c45>`);
+      _push(`</div></div><div class="section-container-home section-container--home-survey-cta" data-v-17d8c4b0><div class="container" data-v-17d8c4b0>`);
       _push(ssrRenderComponent(SurveyCtaSection, null, null, _parent));
       _push(`</div></div><!--]-->`);
     };
@@ -8223,7 +8197,7 @@ _sfc_main$k.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Home.vue");
   return _sfc_setup$k ? _sfc_setup$k(props, ctx) : void 0;
 };
-const Home = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-d5bd1c45"]]);
+const Home = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-17d8c4b0"]]);
 const __vite_glob_0_5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Home
@@ -8339,10 +8313,10 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({
       }
     ]);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<section${ssrRenderAttrs(mergeProps({ class: "steps-section" }, _attrs))} data-v-4238c459><div class="container" data-v-4238c459><h1 class="steps-section__heading" data-v-4238c459>${ssrInterpolate(unref(t)("how_it_work.steps.heading"))}</h1><div class="steps-section__list" data-v-4238c459><!--[-->`);
+      _push(`<section${ssrRenderAttrs(mergeProps({ class: "steps-section" }, _attrs))} data-v-ea9576d7><div class="container" data-v-ea9576d7><h1 class="steps-section__heading" data-v-ea9576d7>${ssrInterpolate(unref(t)("how_it_work.steps.heading"))}</h1><div class="steps-section__list" data-v-ea9576d7><!--[-->`);
       ssrRenderList(steps.value, (step) => {
         var _a2;
-        _push(`<article class="step-block" data-v-4238c459><div class="step-block__num" aria-hidden="true" data-v-4238c459>${ssrInterpolate(step.id)}</div><div class="step-block__content" data-v-4238c459><h2 class="step-block__title" data-v-4238c459>`);
+        _push(`<article class="step-block" data-v-ea9576d7><div class="step-block__num" aria-hidden="true" data-v-ea9576d7>${ssrInterpolate(step.id)}</div><div class="step-block__content" data-v-ea9576d7><h2 class="step-block__title" data-v-ea9576d7>`);
         if (step.iconName) {
           _push(ssrRenderComponent(_sfc_main$C, {
             name: step.iconName,
@@ -8352,11 +8326,11 @@ const _sfc_main$j = /* @__PURE__ */ Object.assign({
         } else {
           _push(`<!---->`);
         }
-        _push(`<span class="step-block__title-text" data-v-4238c459>${ssrInterpolate(step.title)}</span></h2><h3 class="${ssrRenderClass([{ "step-block__desc--accent": step.accent }, "step-block__desc"])}" data-v-4238c459>${ssrInterpolate(step.desc)}</h3>`);
+        _push(`<span class="step-block__title-text" data-v-ea9576d7>${ssrInterpolate(step.title)}</span></h2><h3 class="${ssrRenderClass([{ "step-block__desc--accent": step.accent }, "step-block__desc"])}" data-v-ea9576d7>${ssrInterpolate(step.desc)}</h3>`);
         if ((_a2 = step.benefits) == null ? void 0 : _a2.length) {
-          _push(`<ul class="step-block__benefits" data-v-4238c459><!--[-->`);
+          _push(`<ul class="step-block__benefits" data-v-ea9576d7><!--[-->`);
           ssrRenderList(step.benefits, (benefit, i) => {
-            _push(`<li class="step-block__benefit" data-v-4238c459>${ssrInterpolate(benefit)}</li>`);
+            _push(`<li class="step-block__benefit" data-v-ea9576d7>${ssrInterpolate(benefit)}</li>`);
           });
           _push(`<!--]--></ul>`);
         } else {
@@ -8374,7 +8348,7 @@ _sfc_main$j.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/how-it-works/StepsSection.vue");
   return _sfc_setup$j ? _sfc_setup$j(props, ctx) : void 0;
 };
-const StepsSection = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-4238c459"]]);
+const StepsSection = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-ea9576d7"]]);
 const _sfc_main$i = /* @__PURE__ */ Object.assign({
   name: "AdvantagesSection"
 }, {
@@ -8439,11 +8413,11 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign({
       }
     ]);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<section${ssrRenderAttrs(mergeProps({ class: "advantages-section" }, _attrs))} data-v-96a7cf29><div class="container" data-v-96a7cf29><h2 class="advantages-section__heading" data-v-96a7cf29>${ssrInterpolate(unref(t)("how_it_work.advantages.heading"))}</h2><div class="advantages-section__grid" data-v-96a7cf29><!--[-->`);
+      _push(`<section${ssrRenderAttrs(mergeProps({ class: "advantages-section" }, _attrs))} data-v-5f48857f><div class="container" data-v-5f48857f><h2 class="advantages-section__heading" data-v-5f48857f>${ssrInterpolate(unref(t)("how_it_work.advantages.heading"))}</h2><div class="advantages-section__grid" data-v-5f48857f><!--[-->`);
       ssrRenderList(advantageCategories.value, (cat) => {
-        _push(`<article class="advantage-card card-shadow" data-v-96a7cf29><h3 class="advantage-card__title" data-v-96a7cf29>${ssrInterpolate(cat.title)}</h3><ul class="advantage-card__list" data-v-96a7cf29><!--[-->`);
+        _push(`<article class="advantage-card card-shadow" data-v-5f48857f><h3 class="advantage-card__title" data-v-5f48857f>${ssrInterpolate(cat.title)}</h3><ul class="advantage-card__list" data-v-5f48857f><!--[-->`);
         ssrRenderList(cat.points, (point, i) => {
-          _push(`<li data-v-96a7cf29>${ssrInterpolate(point)}</li>`);
+          _push(`<li data-v-5f48857f>${ssrInterpolate(point)}</li>`);
         });
         _push(`<!--]--></ul></article>`);
       });
@@ -8457,7 +8431,7 @@ _sfc_main$i.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/how-it-works/AdvantagesSection.vue");
   return _sfc_setup$i ? _sfc_setup$i(props, ctx) : void 0;
 };
-const AdvantagesSection = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-96a7cf29"]]);
+const AdvantagesSection = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-5f48857f"]]);
 const _sfc_main$h = /* @__PURE__ */ Object.assign({
   name: "HowItWorks",
   layout: _sfc_main$t
@@ -8474,10 +8448,10 @@ const _sfc_main$h = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="how-works-page" data-v-828be139>`);
+      _push(`<div class="how-works-page" data-v-f221e4c3>`);
       _push(ssrRenderComponent(StepsSection, null, null, _parent));
       _push(ssrRenderComponent(AdvantagesSection, null, null, _parent));
-      _push(`<div class="section-container-home section-container--home-survey-cta" data-v-828be139><div class="container" data-v-828be139>`);
+      _push(`<div class="section-container-home section-container--home-survey-cta" data-v-f221e4c3><div class="container" data-v-f221e4c3>`);
       _push(ssrRenderComponent(SurveyCtaSection, null, null, _parent));
       _push(`</div></div></div><!--]-->`);
     };
@@ -8489,7 +8463,7 @@ _sfc_main$h.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/HowWorks.vue");
   return _sfc_setup$h ? _sfc_setup$h(props, ctx) : void 0;
 };
-const HowWorks = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-828be139"]]);
+const HowWorks = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-f221e4c3"]]);
 const __vite_glob_0_6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: HowWorks
@@ -8513,7 +8487,7 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="privacy-page" data-v-6ea916b8><div class="container" data-v-6ea916b8><div class="privacy-header" data-v-6ea916b8><h1 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.page.title"))}</h1><p class="subtitle" data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.page.subtitle", { name: siteConfig.value.name }))}</p></div><div class="privacy-content" data-v-6ea916b8><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.general.heading"))}</h2><p data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.general.text", { name: siteConfig.value.name }))}</p></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.heading"))}</h2><ul data-v-6ea916b8><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_name"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_email"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_business"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_phone"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_type"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_country"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_answers"))}</li></ul></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.purpose.heading"))}</h2><ul data-v-6ea916b8><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_analysis"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_development"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_contact"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_launch"))}</li></ul></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.legal_basis.heading"))}</h2><p data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.legal_basis.text"))}</p></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.storage.heading"))}</h2><p data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.storage.text"))}</p></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.retention.heading"))}</h2><p data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.retention.text"))}</p></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.rights.heading"))}</h2><ul data-v-6ea916b8><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.rights.item_access"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.rights.item_correction"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.rights.item_deletion"))}</li><li data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.rights.item_restriction"))}</li></ul></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.local_storage.heading"))}</h2><p data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.local_storage.text"))}</p></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.changes.heading"))}</h2><p data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.changes.text"))}</p></section><section data-v-6ea916b8><h2 data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.contacts.heading"))}</h2><p data-v-6ea916b8>${ssrInterpolate(unref(t)("privacy_policy.contacts.text"))}</p><p class="contact-email" data-v-6ea916b8>${ssrInterpolate(siteConfig.value.adminEmail)}</p></section></div></div></div><!--]-->`);
+      _push(`<div class="privacy-page" data-v-d0d07cb5><div class="container" data-v-d0d07cb5><div class="privacy-header" data-v-d0d07cb5><h1 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.page.title"))}</h1><p class="subtitle" data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.page.subtitle", { name: siteConfig.value.name }))}</p></div><div class="privacy-content" data-v-d0d07cb5><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.general.heading"))}</h2><p data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.general.text", { name: siteConfig.value.name }))}</p></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.heading"))}</h2><ul data-v-d0d07cb5><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_name"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_email"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_business"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_phone"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_type"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_country"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.collected_data.item_answers"))}</li></ul></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.purpose.heading"))}</h2><ul data-v-d0d07cb5><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_analysis"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_development"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_contact"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.purpose.item_launch"))}</li></ul></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.legal_basis.heading"))}</h2><p data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.legal_basis.text"))}</p></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.storage.heading"))}</h2><p data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.storage.text"))}</p></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.retention.heading"))}</h2><p data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.retention.text"))}</p></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.rights.heading"))}</h2><ul data-v-d0d07cb5><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.rights.item_access"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.rights.item_correction"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.rights.item_deletion"))}</li><li data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.rights.item_restriction"))}</li></ul></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.local_storage.heading"))}</h2><p data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.local_storage.text"))}</p></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.changes.heading"))}</h2><p data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.changes.text"))}</p></section><section data-v-d0d07cb5><h2 data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.contacts.heading"))}</h2><p data-v-d0d07cb5>${ssrInterpolate(unref(t)("privacy_policy.contacts.text"))}</p><p class="contact-email" data-v-d0d07cb5>${ssrInterpolate(siteConfig.value.adminEmail)}</p></section></div></div></div><!--]-->`);
     };
   }
 });
@@ -8523,7 +8497,7 @@ _sfc_main$g.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/PrivacyPolicy.vue");
   return _sfc_setup$g ? _sfc_setup$g(props, ctx) : void 0;
 };
-const PrivacyPolicy = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-6ea916b8"]]);
+const PrivacyPolicy = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-d0d07cb5"]]);
 const __vite_glob_0_7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: PrivacyPolicy
@@ -8859,19 +8833,16 @@ const englishCountryNamesByAlpha2 = countries$1.getNames("en", {
   select: "official"
 });
 function buildSortedEnglishCountrySelectOptions(namesByAlpha2) {
-  return Object.entries(namesByAlpha2).map(([value, label]) => ({ value, label })).sort(
-    (a, b) => a.label.localeCompare(b.label, "en", { sensitivity: "base" })
-  );
+  return Object.entries(namesByAlpha2).map(([value, label]) => ({ value, label })).sort((a, b) => a.label.localeCompare(b.label, "en", { sensitivity: "base" }));
 }
-const SURVEY_ENGLISH_COUNTRY_SELECT_OPTIONS = buildSortedEnglishCountrySelectOptions(englishCountryNamesByAlpha2);
+const SURVEY_ENGLISH_COUNTRY_SELECT_OPTIONS = buildSortedEnglishCountrySelectOptions(
+  englishCountryNamesByAlpha2
+);
 function isSurveyCountryAlpha2Valid(value) {
   if (typeof value !== "string" || value === "") {
     return false;
   }
-  return Object.prototype.hasOwnProperty.call(
-    englishCountryNamesByAlpha2,
-    value
-  );
+  return Object.prototype.hasOwnProperty.call(englishCountryNamesByAlpha2, value);
 }
 const SURVEY_PAGE_LEAD = {
   title: "survey.lead.title",
@@ -9073,9 +9044,7 @@ function surveyRadioAllowsAutoAdvance(question, selectedValue) {
   if (selectedValue == null || selectedValue === "") {
     return false;
   }
-  const opt = surveyQuestionAllOptions(question).find(
-    (o) => o.value === selectedValue
-  );
+  const opt = surveyQuestionAllOptions(question).find((o) => o.value === selectedValue);
   return !(opt == null ? void 0 : opt.is_other);
 }
 function surveyQuestionUsesNextButton(question) {
@@ -9159,11 +9128,11 @@ const _sfc_main$f = /* @__PURE__ */ Object.assign({ name: "SurveyChoiceList" }, 
         role: "radiogroup",
         "aria-labelledby": __props.groupLabelledby,
         "aria-required": "true"
-      }, _attrs))} data-v-632520ce><!--[-->`);
+      }, _attrs))} data-v-c53daaa5><!--[-->`);
       ssrRenderList(__props.options, (opt) => {
         _push(`<button type="button" role="radio"${ssrRenderAttr("aria-checked", __props.selectedValue === opt.value)} class="${ssrRenderClass([{
           "survey-choice-list__btn--selected": __props.selectedValue === opt.value
-        }, "survey-choice-list__btn"])}" data-v-632520ce>${ssrInterpolate(unref(tr)(opt.label))}</button>`);
+        }, "survey-choice-list__btn"])}" data-v-c53daaa5>${ssrInterpolate(unref(tr)(opt.label))}</button>`);
       });
       _push(`<!--]--></div>`);
     };
@@ -9175,7 +9144,7 @@ _sfc_main$f.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyChoiceList.vue");
   return _sfc_setup$f ? _sfc_setup$f(props, ctx) : void 0;
 };
-const SurveyChoiceList = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-632520ce"]]);
+const SurveyChoiceList = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-c53daaa5"]]);
 function foldCountrySearchString(s) {
   return s.normalize("NFKC").normalize("NFD").replace(new RegExp("\\p{M}", "gu"), "").toLowerCase();
 }
@@ -9349,34 +9318,26 @@ const _sfc_main$e = /* @__PURE__ */ Object.assign({ name: "SurveyCountrySelect" 
       closePanel();
     }
     onMounted(() => {
-      document.addEventListener(
-        "pointerdown",
-        onDocumentPointerDownCapture,
-        true
-      );
+      document.addEventListener("pointerdown", onDocumentPointerDownCapture, true);
     });
     onUnmounted(() => {
       if (activeOptionScrollRafId != null) {
         cancelAnimationFrame(activeOptionScrollRafId);
         activeOptionScrollRafId = null;
       }
-      document.removeEventListener(
-        "pointerdown",
-        onDocumentPointerDownCapture,
-        true
-      );
+      document.removeEventListener("pointerdown", onDocumentPointerDownCapture, true);
     });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(mergeProps({
         ref_key: "rootRef",
         ref: rootRef,
         class: ["survey-country-select", { "survey-country-select--open": open.value }]
-      }, _attrs))} data-v-a715e7e4><div class="${ssrRenderClass([{
+      }, _attrs))} data-v-79d94d6b><div class="${ssrRenderClass([{
         "survey-country-select__trigger-shell--open": open.value,
         "survey-country-select__trigger-shell--has-value": __props.modelValue
-      }, "survey-page__control survey-country-select__trigger-shell"])}" data-v-a715e7e4><button${ssrRenderAttr("id", __props.triggerId)} type="button" class="survey-country-select__trigger"${ssrRenderAttr("role", open.value ? void 0 : "combobox")}${ssrRenderAttr("aria-expanded", open.value ? "true" : "false")}${ssrRenderAttr("aria-controls", listboxId.value)} aria-haspopup="listbox"${ssrRenderAttr("aria-label", __props.ariaLabel)}${ssrRenderAttr("aria-describedby", __props.ariaDescribedby || void 0)}${ssrRenderAttr("aria-required", __props.ariaRequired ? "true" : void 0)}${ssrRenderAttr("tabindex", open.value ? -1 : 0)} data-v-a715e7e4><span class="survey-country-select__trigger-text" data-v-a715e7e4>${ssrInterpolate(selectedLabel.value)}</span></button>`);
+      }, "survey-page__control survey-country-select__trigger-shell"])}" data-v-79d94d6b><button${ssrRenderAttr("id", __props.triggerId)} type="button" class="survey-country-select__trigger"${ssrRenderAttr("role", open.value ? void 0 : "combobox")}${ssrRenderAttr("aria-expanded", open.value ? "true" : "false")}${ssrRenderAttr("aria-controls", listboxId.value)} aria-haspopup="listbox"${ssrRenderAttr("aria-label", __props.ariaLabel)}${ssrRenderAttr("aria-describedby", __props.ariaDescribedby || void 0)}${ssrRenderAttr("aria-required", __props.ariaRequired ? "true" : void 0)}${ssrRenderAttr("tabindex", open.value ? -1 : 0)} data-v-79d94d6b><span class="survey-country-select__trigger-text" data-v-79d94d6b>${ssrInterpolate(selectedLabel.value)}</span></button>`);
       if (__props.modelValue) {
-        _push(`<button type="button" class="survey-country-select__clear"${ssrRenderAttr("aria-label", unref(t)("survey.ui.country_clear"))}${ssrRenderAttr("tabindex", open.value ? -1 : 0)} data-v-a715e7e4>`);
+        _push(`<button type="button" class="survey-country-select__clear"${ssrRenderAttr("aria-label", unref(t)("survey.ui.country_clear"))}${ssrRenderAttr("tabindex", open.value ? -1 : 0)} data-v-79d94d6b>`);
         _push(ssrRenderComponent(_sfc_main$C, {
           name: "close",
           class: "survey-country-select__clear-icon",
@@ -9386,11 +9347,11 @@ const _sfc_main$e = /* @__PURE__ */ Object.assign({ name: "SurveyCountrySelect" 
       } else {
         _push(`<!---->`);
       }
-      _push(`<span class="survey-country-select__chevron" aria-hidden="true" data-v-a715e7e4></span></div><div class="survey-country-select__popover" style="${ssrRenderStyle(open.value ? null : { display: "none" })}" data-v-a715e7e4><input${ssrRenderAttr("value", filterQuery.value)} type="search" class="survey-page__control survey-country-select__filter" role="combobox" aria-expanded="true"${ssrRenderAttr("aria-controls", listboxId.value)}${ssrRenderAttr("aria-activedescendant", activeDescendantId.value)} aria-autocomplete="list"${ssrRenderAttr("aria-label", unref(t)("survey.ui.country_search"))} autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search"${ssrRenderAttr("placeholder", unref(t)("survey.ui.country_search_placeholder"))} data-v-a715e7e4><ul${ssrRenderAttr("id", listboxId.value)} role="listbox" class="survey-country-select__list" tabindex="-1" data-v-a715e7e4><!--[-->`);
+      _push(`<span class="survey-country-select__chevron" aria-hidden="true" data-v-79d94d6b></span></div><div class="survey-country-select__popover" style="${ssrRenderStyle(open.value ? null : { display: "none" })}" data-v-79d94d6b><input${ssrRenderAttr("value", filterQuery.value)} type="search" class="survey-page__control survey-country-select__filter" role="combobox" aria-expanded="true"${ssrRenderAttr("aria-controls", listboxId.value)}${ssrRenderAttr("aria-activedescendant", activeDescendantId.value)} aria-autocomplete="list"${ssrRenderAttr("aria-label", unref(t)("survey.ui.country_search"))} autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search"${ssrRenderAttr("placeholder", unref(t)("survey.ui.country_search_placeholder"))} data-v-79d94d6b><ul${ssrRenderAttr("id", listboxId.value)} role="listbox" class="survey-country-select__list" tabindex="-1" data-v-79d94d6b><!--[-->`);
       ssrRenderList(filteredOptions.value, (opt, idx) => {
         _push(`<li${ssrRenderAttr("id", optionElementId(opt.value))} role="option"${ssrRenderAttr("aria-selected", __props.modelValue === opt.value ? "true" : "false")} class="${ssrRenderClass([{
           "survey-country-select__option--active": idx === activeIndex.value
-        }, "survey-country-select__option"])}" data-v-a715e7e4>${ssrInterpolate(opt.label)}</li>`);
+        }, "survey-country-select__option"])}" data-v-79d94d6b>${ssrInterpolate(opt.label)}</li>`);
       });
       _push(`<!--]--></ul></div></div>`);
     };
@@ -9402,7 +9363,7 @@ _sfc_main$e.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyCountrySelect.vue");
   return _sfc_setup$e ? _sfc_setup$e(props, ctx) : void 0;
 };
-const SurveyCountrySelect = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-a715e7e4"]]);
+const SurveyCountrySelect = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-79d94d6b"]]);
 const _sfc_main$d = /* @__PURE__ */ Object.assign({ name: "SurveyCountryPicker" }, {
   __name: "SurveyCountryPicker",
   __ssrInlineRender: true,
@@ -9509,23 +9470,21 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ name: "SurveyMultiChoice" },
         "aria-labelledby": __props.groupLabelledby,
         "aria-describedby": __props.subtitleId || void 0,
         "aria-required": __props.groupAriaRequired ? "true" : void 0
-      }, _attrs))} data-v-9db4f6c4>`);
+      }, _attrs))} data-v-68dc5720>`);
       if (useOptionGroups.value) {
         _push(`<!--[-->`);
         ssrRenderList(__props.optionGroups, (group, gi) => {
-          _push(`<div class="survey-multi-choice__group-block" data-v-9db4f6c4>`);
+          _push(`<div class="survey-multi-choice__group-block" data-v-68dc5720>`);
           if (group.heading) {
-            _push(`<p class="survey-multi-choice__group-heading survey-page__text-wrap" data-v-9db4f6c4>${ssrInterpolate(unref(tr)(group.heading))}</p>`);
+            _push(`<p class="survey-multi-choice__group-heading survey-page__text-wrap" data-v-68dc5720>${ssrInterpolate(unref(tr)(group.heading))}</p>`);
           } else {
             _push(`<!---->`);
           }
           _push(`<!--[-->`);
           ssrRenderList(group.options, (opt) => {
             _push(`<label class="${ssrRenderClass([{
-              "survey-multi-choice__row--selected": isSelected(
-                opt.value
-              )
-            }, "survey-multi-choice__row"])}" data-v-9db4f6c4><input class="survey-multi-choice__input" type="checkbox"${ssrIncludeBooleanAttr(isSelected(opt.value)) ? " checked" : ""} data-v-9db4f6c4><span class="survey-multi-choice__label-text" data-v-9db4f6c4>${ssrInterpolate(unref(tr)(opt.label))}</span></label>`);
+              "survey-multi-choice__row--selected": isSelected(opt.value)
+            }, "survey-multi-choice__row"])}" data-v-68dc5720><input class="survey-multi-choice__input" type="checkbox"${ssrIncludeBooleanAttr(isSelected(opt.value)) ? " checked" : ""} data-v-68dc5720><span class="survey-multi-choice__label-text" data-v-68dc5720>${ssrInterpolate(unref(tr)(opt.label))}</span></label>`);
           });
           _push(`<!--]--></div>`);
         });
@@ -9535,7 +9494,7 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign({ name: "SurveyMultiChoice" },
         ssrRenderList(__props.options, (opt) => {
           _push(`<label class="${ssrRenderClass([{
             "survey-multi-choice__row--selected": isSelected(opt.value)
-          }, "survey-multi-choice__row"])}" data-v-9db4f6c4><input class="survey-multi-choice__input" type="checkbox"${ssrIncludeBooleanAttr(isSelected(opt.value)) ? " checked" : ""} data-v-9db4f6c4><span class="survey-multi-choice__label-text" data-v-9db4f6c4>${ssrInterpolate(unref(tr)(opt.label))}</span></label>`);
+          }, "survey-multi-choice__row"])}" data-v-68dc5720><input class="survey-multi-choice__input" type="checkbox"${ssrIncludeBooleanAttr(isSelected(opt.value)) ? " checked" : ""} data-v-68dc5720><span class="survey-multi-choice__label-text" data-v-68dc5720>${ssrInterpolate(unref(tr)(opt.label))}</span></label>`);
         });
         _push(`<!--]-->`);
       }
@@ -9549,7 +9508,7 @@ _sfc_main$c.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyMultiChoice.vue");
   return _sfc_setup$c ? _sfc_setup$c(props, ctx) : void 0;
 };
-const SurveyMultiChoice = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-9db4f6c4"]]);
+const SurveyMultiChoice = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-68dc5720"]]);
 const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "SurveyQuestionStep" }, {
   __name: "SurveyQuestionStep",
   __ssrInlineRender: true,
@@ -9611,9 +9570,7 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "SurveyQuestionStep" }
       const arr = props.answers[props.question.id];
       return Array.isArray(arr) ? arr : [];
     });
-    const questionSubtitleId = computed(
-      () => `survey-q-subtitle-${props.question.id}`
-    );
+    const questionSubtitleId = computed(() => `survey-q-subtitle-${props.question.id}`);
     const fieldCaptionId = computed(() => `survey-field-caption-${props.question.id}`);
     const selectId = computed(() => `survey-select-${props.question.id}`);
     const otherTextareaId = computed(() => `survey-other-${props.stepId}`);
@@ -9635,14 +9592,14 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "SurveyQuestionStep" }
       return parts.length ? parts.join(" ") : void 0;
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-question-step" }, _attrs))} data-v-8acfebc3><div class="survey-question-step__main" data-v-8acfebc3><h2${ssrRenderAttr("id", __props.stepHeadingId)} class="survey-question-step__title survey-page__text-wrap" tabindex="-1" data-v-8acfebc3>${ssrInterpolate(unref(tr)(__props.question.question_text))}</h2>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-question-step" }, _attrs))} data-v-6812c9d9><div class="survey-question-step__main" data-v-6812c9d9><h2${ssrRenderAttr("id", __props.stepHeadingId)} class="survey-question-step__title survey-page__text-wrap" tabindex="-1" data-v-6812c9d9>${ssrInterpolate(unref(tr)(__props.question.question_text))}</h2>`);
       if (__props.question.subtitle) {
-        _push(`<p${ssrRenderAttr("id", questionSubtitleId.value)} class="survey-question-step__subtitle survey-page__text-wrap" data-v-8acfebc3>${ssrInterpolate(unref(tr)(__props.question.subtitle))}</p>`);
+        _push(`<p${ssrRenderAttr("id", questionSubtitleId.value)} class="survey-question-step__subtitle survey-page__text-wrap" data-v-6812c9d9>${ssrInterpolate(unref(tr)(__props.question.subtitle))}</p>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.question.field_caption && __props.question.type !== "text") {
-        _push(`<label${ssrRenderAttr("id", fieldCaptionId.value)} class="survey-question-step__caption survey-page__text-wrap"${ssrRenderAttr("for", selectId.value)} data-v-8acfebc3>${ssrInterpolate(unref(tr)(__props.question.field_caption))}</label>`);
+        _push(`<label${ssrRenderAttr("id", fieldCaptionId.value)} class="survey-question-step__caption survey-page__text-wrap"${ssrRenderAttr("for", selectId.value)} data-v-6812c9d9>${ssrInterpolate(unref(tr)(__props.question.field_caption))}</label>`);
       } else {
         _push(`<!---->`);
       }
@@ -9654,7 +9611,7 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "SurveyQuestionStep" }
           onPick: ($event) => _ctx.$emit("pick-radio", $event)
         }, null, _parent));
       } else if (__props.question.type === "select" && __props.question.country_iso_select) {
-        _push(`<div class="survey-question-step__select-wrap" data-v-8acfebc3>`);
+        _push(`<div class="survey-question-step__select-wrap" data-v-6812c9d9>`);
         _push(ssrRenderComponent(_sfc_main$d, {
           modelValue: __props.answers[__props.stepId],
           "onUpdate:modelValue": ($event) => __props.answers[__props.stepId] = $event,
@@ -9664,9 +9621,9 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "SurveyQuestionStep" }
         }, null, _parent));
         _push(`</div>`);
       } else if (__props.question.type === "select") {
-        _push(`<div class="survey-question-step__select-wrap" data-v-8acfebc3><select${ssrRenderAttr("id", selectId.value)} class="survey-page__control survey-question-step__select"${ssrRenderAttr("aria-label", unref(tr)(__props.question.question_text))}${ssrRenderAttr("aria-describedby", selectAriaDescribedBy.value)} aria-required="true" data-v-8acfebc3><option disabled value="" data-v-8acfebc3${ssrIncludeBooleanAttr(Array.isArray(__props.answers[__props.stepId]) ? ssrLooseContain(__props.answers[__props.stepId], "") : ssrLooseEqual(__props.answers[__props.stepId], "")) ? " selected" : ""}>${ssrInterpolate(unref(t)("survey.ui.select_placeholder"))}</option><!--[-->`);
+        _push(`<div class="survey-question-step__select-wrap" data-v-6812c9d9><select${ssrRenderAttr("id", selectId.value)} class="survey-page__control survey-question-step__select"${ssrRenderAttr("aria-label", unref(tr)(__props.question.question_text))}${ssrRenderAttr("aria-describedby", selectAriaDescribedBy.value)} aria-required="true" data-v-6812c9d9><option disabled value="" data-v-6812c9d9${ssrIncludeBooleanAttr(Array.isArray(__props.answers[__props.stepId]) ? ssrLooseContain(__props.answers[__props.stepId], "") : ssrLooseEqual(__props.answers[__props.stepId], "")) ? " selected" : ""}>${ssrInterpolate(unref(t)("survey.ui.select_placeholder"))}</option><!--[-->`);
         ssrRenderList(__props.question.options, (opt) => {
-          _push(`<option${ssrRenderAttr("value", opt.value)} data-v-8acfebc3${ssrIncludeBooleanAttr(Array.isArray(__props.answers[__props.stepId]) ? ssrLooseContain(__props.answers[__props.stepId], opt.value) : ssrLooseEqual(__props.answers[__props.stepId], opt.value)) ? " selected" : ""}>${ssrInterpolate(unref(tr)(opt.label))}</option>`);
+          _push(`<option${ssrRenderAttr("value", opt.value)} data-v-6812c9d9${ssrIncludeBooleanAttr(Array.isArray(__props.answers[__props.stepId]) ? ssrLooseContain(__props.answers[__props.stepId], opt.value) : ssrLooseEqual(__props.answers[__props.stepId], opt.value)) ? " selected" : ""}>${ssrInterpolate(unref(tr)(opt.label))}</option>`);
         });
         _push(`<!--]--></select></div>`);
       } else if (__props.question.type === "checkbox") {
@@ -9680,41 +9637,32 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign({ name: "SurveyQuestionStep" }
           onToggle: ($event) => _ctx.$emit("toggle-checkbox", $event)
         }, null, _parent));
       } else if (__props.question.type === "text") {
-        _push(`<div class="survey-question-step__text-wrap" data-v-8acfebc3><label class="survey-page__field"${ssrRenderAttr("for", openTextInputId.value)} data-v-8acfebc3>`);
+        _push(`<div class="survey-question-step__text-wrap" data-v-6812c9d9><label class="survey-page__field"${ssrRenderAttr("for", openTextInputId.value)} data-v-6812c9d9>`);
         if (__props.question.field_caption) {
-          _push(`<span class="survey-page__field-label survey-page__text-wrap" data-v-8acfebc3>${ssrInterpolate(unref(tr)(__props.question.field_caption))}</span>`);
+          _push(`<span class="survey-page__field-label survey-page__text-wrap" data-v-6812c9d9>${ssrInterpolate(unref(tr)(__props.question.field_caption))}</span>`);
         } else {
           _push(`<!---->`);
         }
         if (__props.question.text_multiline !== false) {
-          _push(`<textarea${ssrRenderAttr("id", openTextInputId.value)} class="survey-page__control survey-question-step__textarea survey-question-step__open-text"${ssrRenderAttr("rows", __props.question.text_rows ?? 4)} autocomplete="off"${ssrRenderAttr("aria-label", unref(tr)(__props.question.question_text))}${ssrRenderAttr("aria-describedby", textFieldAriaDescribedBy.value)}${ssrRenderAttr(
-            "aria-required",
-            __props.question.text_allow_empty ? void 0 : "true"
-          )} data-v-8acfebc3>${ssrInterpolate(__props.answers[__props.stepId])}</textarea>`);
+          _push(`<textarea${ssrRenderAttr("id", openTextInputId.value)} class="survey-page__control survey-question-step__textarea survey-question-step__open-text"${ssrRenderAttr("rows", __props.question.text_rows ?? 4)} autocomplete="off"${ssrRenderAttr("aria-label", unref(tr)(__props.question.question_text))}${ssrRenderAttr("aria-describedby", textFieldAriaDescribedBy.value)}${ssrRenderAttr("aria-required", __props.question.text_allow_empty ? void 0 : "true")} data-v-6812c9d9>${ssrInterpolate(__props.answers[__props.stepId])}</textarea>`);
         } else {
-          _push(`<input${ssrRenderAttr("id", openTextInputId.value)}${ssrRenderAttr("value", __props.answers[__props.stepId])} type="text" class="survey-page__control survey-question-step__open-text-input" autocomplete="off"${ssrRenderAttr("aria-label", unref(tr)(__props.question.question_text))}${ssrRenderAttr("aria-describedby", textFieldAriaDescribedBy.value)}${ssrRenderAttr(
-            "aria-required",
-            __props.question.text_allow_empty ? void 0 : "true"
-          )} data-v-8acfebc3>`);
+          _push(`<input${ssrRenderAttr("id", openTextInputId.value)}${ssrRenderAttr("value", __props.answers[__props.stepId])} type="text" class="survey-page__control survey-question-step__open-text-input" autocomplete="off"${ssrRenderAttr("aria-label", unref(tr)(__props.question.question_text))}${ssrRenderAttr("aria-describedby", textFieldAriaDescribedBy.value)}${ssrRenderAttr("aria-required", __props.question.text_allow_empty ? void 0 : "true")} data-v-6812c9d9>`);
         }
         _push(`</label></div>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.showOtherField) {
-        _push(`<label class="survey-page__field survey-question-step__field--other"${ssrRenderAttr("for", otherTextareaId.value)} data-v-8acfebc3><span class="survey-page__field-label" data-v-8acfebc3>${ssrInterpolate(unref(tr)(__props.question.other_detail_field_label) || unref(t)("survey.ui.other_default_label"))}</span><textarea${ssrRenderAttr("id", otherTextareaId.value)} class="survey-page__control survey-question-step__textarea" rows="3" autocomplete="off"${ssrRenderAttr(
+        _push(`<label class="survey-page__field survey-question-step__field--other"${ssrRenderAttr("for", otherTextareaId.value)} data-v-6812c9d9><span class="survey-page__field-label" data-v-6812c9d9>${ssrInterpolate(unref(tr)(__props.question.other_detail_field_label) || unref(t)("survey.ui.other_default_label"))}</span><textarea${ssrRenderAttr("id", otherTextareaId.value)} class="survey-page__control survey-question-step__textarea" rows="3" autocomplete="off"${ssrRenderAttr(
           "aria-label",
           unref(t)("survey.ui.other_aria_prefix") + " " + unref(tr)(__props.question.question_text)
-        )} data-v-8acfebc3>${ssrInterpolate(__props.answers[__props.otherDetailKey])}</textarea></label>`);
+        )} data-v-6812c9d9>${ssrInterpolate(__props.answers[__props.otherDetailKey])}</textarea></label>`);
       } else {
         _push(`<!---->`);
       }
       _push(`</div>`);
       if (__props.showNextButton) {
-        _push(`<footer class="survey-page__footer" data-v-8acfebc3><button type="button" class="survey-question-step__next survey-primary-action"${ssrIncludeBooleanAttr(__props.nextDisabled) ? " disabled" : ""}${ssrRenderAttr("aria-disabled", __props.nextDisabled ? "true" : "false")}${ssrRenderAttr(
-          "aria-label",
-          __props.nextDisabled ? unref(t)("survey.ui.next_disabled_aria") : void 0
-        )} data-v-8acfebc3>${ssrInterpolate(unref(t)("survey.ui.next"))}</button></footer>`);
+        _push(`<footer class="survey-page__footer" data-v-6812c9d9><button type="button" class="survey-question-step__next survey-primary-action"${ssrIncludeBooleanAttr(__props.nextDisabled) ? " disabled" : ""}${ssrRenderAttr("aria-disabled", __props.nextDisabled ? "true" : "false")}${ssrRenderAttr("aria-label", __props.nextDisabled ? unref(t)("survey.ui.next_disabled_aria") : void 0)} data-v-6812c9d9>${ssrInterpolate(unref(t)("survey.ui.next"))}</button></footer>`);
       } else {
         _push(`<!---->`);
       }
@@ -9728,7 +9676,7 @@ _sfc_main$b.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyQuestionStep.vue");
   return _sfc_setup$b ? _sfc_setup$b(props, ctx) : void 0;
 };
-const SurveyQuestionStep = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-8acfebc3"]]);
+const SurveyQuestionStep = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-6812c9d9"]]);
 const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "SurveySubmittedState" }, {
   __name: "SurveySubmittedState",
   __ssrInlineRender: true,
@@ -9762,20 +9710,18 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign({ name: "SurveySubmittedState"
       }
       return date.toLocaleString();
     }
-    const formattedSubmittedAt = computed(
-      () => formatSubmittedAt(props.submittedAt)
-    );
+    const formattedSubmittedAt = computed(() => formatSubmittedAt(props.submittedAt));
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<section${ssrRenderAttrs(mergeProps({
         class: "survey-submitted-state",
         "aria-live": "polite"
-      }, _attrs))} data-v-8f69a8b5><div class="survey-submitted-state__inner" data-v-8f69a8b5><h2${ssrRenderAttr("id", __props.stepHeadingId)} class="survey-submitted-state__title survey-page__text-wrap" tabindex="-1" data-v-8f69a8b5>${ssrInterpolate(unref(t)("survey.submitted_state.title"))}</h2><p class="survey-submitted-state__text survey-page__text-wrap" data-v-8f69a8b5>${ssrInterpolate(unref(t)("survey.submitted_state.subtitle"))}</p><img class="survey-submitted-state__image"${ssrRenderAttr("src", "/images/edit_answer.jpg")}${ssrRenderAttr("alt", unref(t)("survey.submitted_state.image_alt"))} loading="lazy" data-v-8f69a8b5><p class="survey-submitted-state__email survey-page__text-wrap" data-v-8f69a8b5>${ssrInterpolate(unref(t)("survey.submitted_state.email_label"))} <strong data-v-8f69a8b5>${ssrInterpolate(__props.maskedEmail)}</strong></p>`);
+      }, _attrs))} data-v-d93888cd><div class="survey-submitted-state__inner" data-v-d93888cd><h2${ssrRenderAttr("id", __props.stepHeadingId)} class="survey-submitted-state__title survey-page__text-wrap" tabindex="-1" data-v-d93888cd>${ssrInterpolate(unref(t)("survey.submitted_state.title"))}</h2><p class="survey-submitted-state__text survey-page__text-wrap" data-v-d93888cd>${ssrInterpolate(unref(t)("survey.submitted_state.subtitle"))}</p><img class="survey-submitted-state__image"${ssrRenderAttr("src", "/images/edit_answer.jpg")}${ssrRenderAttr("alt", unref(t)("survey.submitted_state.image_alt"))} loading="lazy" data-v-d93888cd><p class="survey-submitted-state__email survey-page__text-wrap" data-v-d93888cd>${ssrInterpolate(unref(t)("survey.submitted_state.email_label"))} <strong data-v-d93888cd>${ssrInterpolate(__props.maskedEmail)}</strong></p>`);
       if (formattedSubmittedAt.value) {
-        _push(`<p class="survey-submitted-state__meta survey-page__text-wrap" data-v-8f69a8b5>${ssrInterpolate(unref(t)("survey.submitted_state.sent_label"))} ${ssrInterpolate(formattedSubmittedAt.value)}</p>`);
+        _push(`<p class="survey-submitted-state__meta survey-page__text-wrap" data-v-d93888cd>${ssrInterpolate(unref(t)("survey.submitted_state.sent_label"))} ${ssrInterpolate(formattedSubmittedAt.value)}</p>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<footer class="survey-page__footer" data-v-8f69a8b5><button type="button" class="survey-submitted-state__reset survey-primary-action" data-v-8f69a8b5>${ssrInterpolate(unref(t)("survey.submitted_state.reset_button"))}</button></footer></div></section>`);
+      _push(`<footer class="survey-page__footer" data-v-d93888cd><button type="button" class="survey-submitted-state__reset survey-primary-action" data-v-d93888cd>${ssrInterpolate(unref(t)("survey.submitted_state.reset_button"))}</button></footer></div></section>`);
     };
   }
 });
@@ -9785,7 +9731,7 @@ _sfc_main$a.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveySubmittedState.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
-const SurveySubmittedState = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-8f69a8b5"]]);
+const SurveySubmittedState = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-d93888cd"]]);
 const _sfc_main$9 = /* @__PURE__ */ Object.assign({ name: "SurveyLayout" }, {
   __name: "SurveyLayout",
   __ssrInlineRender: true,
@@ -9798,15 +9744,15 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign({ name: "SurveyLayout" }, {
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-layout" }, _attrs))} data-v-3167ecbd>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-layout" }, _attrs))} data-v-c42bd8ce>`);
       if (__props.showHeader) {
-        _push(`<header class="survey-layout__top" data-v-3167ecbd>`);
+        _push(`<header class="survey-layout__top" data-v-c42bd8ce>`);
         ssrRenderSlot(_ctx.$slots, "header", {}, null, _push, _parent);
         _push(`</header>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="survey-layout__body" data-v-3167ecbd>`);
+      _push(`<div class="survey-layout__body" data-v-c42bd8ce>`);
       ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
       _push(`</div></div>`);
     };
@@ -9818,7 +9764,7 @@ _sfc_main$9.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyLayout.vue");
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
-const SurveyLayout = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-3167ecbd"]]);
+const SurveyLayout = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-c42bd8ce"]]);
 const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "SurveyProgressBar" }, {
   __name: "SurveyProgressBar",
   __ssrInlineRender: true,
@@ -9846,7 +9792,7 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign({ name: "SurveyProgressBar" },
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-progress" }, _attrs))} data-v-a0446979><div class="survey-progress__bar" role="progressbar"${ssrRenderAttr("aria-valuenow", __props.numerator)}${ssrRenderAttr("aria-valuemin", 1)}${ssrRenderAttr("aria-valuemax", __props.denominator)}${ssrRenderAttr("aria-label", __props.ariaLabel)} data-v-a0446979><div class="survey-progress__fill" style="${ssrRenderStyle({ width: __props.percent + "%" })}" data-v-a0446979></div></div><p class="survey-progress__label" aria-hidden="true" data-v-a0446979>${ssrInterpolate(Math.round(__props.percent))}% </p></div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-progress" }, _attrs))} data-v-91913c79><div class="survey-progress__bar" role="progressbar"${ssrRenderAttr("aria-valuenow", __props.numerator)}${ssrRenderAttr("aria-valuemin", 1)}${ssrRenderAttr("aria-valuemax", __props.denominator)}${ssrRenderAttr("aria-label", __props.ariaLabel)} data-v-91913c79><div class="survey-progress__fill" style="${ssrRenderStyle({ width: __props.percent + "%" })}" data-v-91913c79></div></div><p class="survey-progress__label" aria-hidden="true" data-v-91913c79>${ssrInterpolate(Math.round(__props.percent))}%</p></div>`);
     };
   }
 });
@@ -9856,7 +9802,7 @@ _sfc_main$8.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyProgressBar.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
-const SurveyProgressBar = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-a0446979"]]);
+const SurveyProgressBar = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-91913c79"]]);
 const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "SurveyStepTransition" }, {
   __name: "SurveyStepTransition",
   __ssrInlineRender: true,
@@ -9877,7 +9823,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign({ name: "SurveyStepTransition"
       _push(`<div${ssrRenderAttrs(mergeProps({
         key: __props.stepKey,
         class: "survey-step-transition"
-      }, _attrs))} data-v-446b7dde>`);
+      }, _attrs))} data-v-4255afc1>`);
       ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
       _push(`</div>`);
     };
@@ -9889,7 +9835,7 @@ _sfc_main$7.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyStepTransition.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
-const SurveyStepTransition = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-446b7dde"]]);
+const SurveyStepTransition = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-4255afc1"]]);
 const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "SurveyMainFlow" }, {
   __name: "SurveyMainFlow",
   __ssrInlineRender: true,
@@ -9943,7 +9889,7 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "SurveyMainFlow" }, {
       _push(ssrRenderComponent(SurveyLayout, _attrs, {
         header: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="survey-main-flow__header-stack" data-v-86dae012${_scopeId}>`);
+            _push2(`<div class="survey-main-flow__header-stack" data-v-febc752d${_scopeId}>`);
             _push2(ssrRenderComponent(SurveyProgressBar, {
               numerator: __props.progressNumerator,
               denominator: __props.progressDenominator,
@@ -9951,13 +9897,13 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign({ name: "SurveyMainFlow" }, {
               "aria-label": __props.progressBarAriaLabel
             }, null, _parent2, _scopeId));
             if (__props.canGoBack) {
-              _push2(`<div class="survey-main-flow__top-nav" data-v-86dae012${_scopeId}><button type="button" class="survey-main-flow__nav-back"${ssrRenderAttr("aria-label", unref(t)("survey.nav.back_aria"))} data-v-86dae012${_scopeId}>`);
+              _push2(`<div class="survey-main-flow__top-nav" data-v-febc752d${_scopeId}><button type="button" class="survey-main-flow__nav-back"${ssrRenderAttr("aria-label", unref(t)("survey.nav.back_aria"))} data-v-febc752d${_scopeId}>`);
               _push2(ssrRenderComponent(_sfc_main$C, {
                 class: "survey-main-flow__nav-back-icon",
                 name: "left-outlined",
                 "aria-hidden": "true"
               }, null, _parent2, _scopeId));
-              _push2(`<span class="survey-main-flow__nav-back-text" data-v-86dae012${_scopeId}>${ssrInterpolate(unref(t)("survey.nav.back"))}</span></button></div>`);
+              _push2(`<span class="survey-main-flow__nav-back-text" data-v-febc752d${_scopeId}>${ssrInterpolate(unref(t)("survey.nav.back"))}</span></button></div>`);
             } else {
               _push2(`<!---->`);
             }
@@ -10040,7 +9986,7 @@ _sfc_main$6.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/screens/SurveyMainFlow.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const SurveyMainFlow = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-86dae012"]]);
+const SurveyMainFlow = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-febc752d"]]);
 const _sfc_main$5 = /* @__PURE__ */ Object.assign({ name: "SurveyIntroScreen" }, {
   __name: "SurveyIntroScreen",
   __ssrInlineRender: true,
@@ -10048,7 +9994,7 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign({ name: "SurveyIntroScreen" },
   setup(__props, { emit: __emit }) {
     const { t } = useI18n();
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-page__block survey-page__block--intro" }, _attrs))} data-v-fab06fc9><div class="survey-page__intro-main" data-v-fab06fc9><h1 id="survey-step-heading" class="survey-page__title survey-page__title--hero survey-page__text-wrap" tabindex="-1" data-v-fab06fc9>${ssrInterpolate(unref(t)("survey.intro.title"))}</h1><p class="survey-page__subtitle survey-page__text-wrap" data-v-fab06fc9>${ssrInterpolate(unref(t)("survey.intro.subtitle"))}</p><p class="survey-page__trust survey-page__text-wrap" data-v-fab06fc9>${ssrInterpolate(unref(t)("survey.intro.trust"))}</p></div><footer class="survey-page__footer" data-v-fab06fc9><button type="button" class="survey-page__primary survey-primary-action" data-v-fab06fc9>${ssrInterpolate(unref(t)("survey.intro.start"))}</button></footer></div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-page__block survey-page__block--intro" }, _attrs))} data-v-63f91797><div class="survey-page__intro-main" data-v-63f91797><h1 id="survey-step-heading" class="survey-page__title survey-page__title--hero survey-page__text-wrap" tabindex="-1" data-v-63f91797>${ssrInterpolate(unref(t)("survey.intro.title"))}</h1><p class="survey-page__subtitle survey-page__text-wrap" data-v-63f91797>${ssrInterpolate(unref(t)("survey.intro.subtitle"))}</p><p class="survey-page__trust survey-page__text-wrap" data-v-63f91797>${ssrInterpolate(unref(t)("survey.intro.trust"))}</p></div><footer class="survey-page__footer" data-v-63f91797><button type="button" class="survey-page__primary survey-primary-action" data-v-63f91797>${ssrInterpolate(unref(t)("survey.intro.start"))}</button></footer></div>`);
     };
   }
 });
@@ -10058,7 +10004,7 @@ _sfc_main$5.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/screens/SurveyIntroScreen.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const SurveyIntroScreen = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-fab06fc9"]]);
+const SurveyIntroScreen = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-63f91797"]]);
 const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "SurveySuccessScreen" }, {
   __name: "SurveySuccessScreen",
   __ssrInlineRender: true,
@@ -10078,23 +10024,23 @@ const _sfc_main$4 = /* @__PURE__ */ Object.assign({ name: "SurveySuccessScreen" 
     const { t } = useI18n();
     const tr = createSurveyFieldTextTranslator(t);
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-page__block survey-page__block--success" }, _attrs))} data-v-28045cf2><div class="survey-page__success-inner" data-v-28045cf2><div id="survey-step-heading" class="survey-page__success-heading survey-page__text-wrap survey-page__success-heading--center" tabindex="-1" role="heading" aria-level="1" data-v-28045cf2>${ssrInterpolate(unref(tr)(__props.successCopy.title))}</div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-page__block survey-page__block--success" }, _attrs))} data-v-fced63e0><div class="survey-page__success-inner" data-v-fced63e0><div id="survey-step-heading" class="survey-page__success-heading survey-page__text-wrap survey-page__success-heading--center" tabindex="-1" role="heading" aria-level="1" data-v-fced63e0>${ssrInterpolate(unref(tr)(__props.successCopy.title))}</div>`);
       if (__props.successCopy.bodyParagraphs) {
-        _push(`<p class="survey-page__success-body survey-page__text-wrap" data-v-28045cf2>${ssrInterpolate(unref(tr)(__props.successCopy.bodyParagraphs))}</p>`);
+        _push(`<p class="survey-page__success-body survey-page__text-wrap" data-v-fced63e0>${ssrInterpolate(unref(tr)(__props.successCopy.bodyParagraphs))}</p>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.successCopy.reassurance) {
-        _push(`<p class="survey-page__success-reassurance survey-page__text-wrap" data-v-28045cf2>${ssrInterpolate(unref(tr)(__props.successCopy.reassurance))}</p>`);
+        _push(`<p class="survey-page__success-reassurance survey-page__text-wrap" data-v-fced63e0>${ssrInterpolate(unref(tr)(__props.successCopy.reassurance))}</p>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.successCopy.updateViaEmailHint) {
-        _push(`<p class="survey-page__success-update-hint survey-page__text-wrap" data-v-28045cf2>${ssrInterpolate(unref(tr)(__props.successCopy.updateViaEmailHint))}</p>`);
+        _push(`<p class="survey-page__success-update-hint survey-page__text-wrap" data-v-fced63e0>${ssrInterpolate(unref(tr)(__props.successCopy.updateViaEmailHint))}</p>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<a class="survey-page__success-home survey-primary-action"${ssrRenderAttr("href", __props.homeHref)} data-v-28045cf2>${ssrInterpolate(unref(t)("survey.success.home_link"))}</a></div></div>`);
+      _push(`<a class="survey-page__success-home survey-primary-action"${ssrRenderAttr("href", __props.homeHref)} data-v-fced63e0>${ssrInterpolate(unref(t)("survey.success.home_link"))}</a></div></div>`);
     };
   }
 });
@@ -10104,7 +10050,7 @@ _sfc_main$4.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/screens/SurveySuccessScreen.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
-const SurveySuccessScreen = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-28045cf2"]]);
+const SurveySuccessScreen = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-fced63e0"]]);
 const _sfc_main$3 = /* @__PURE__ */ Object.assign({ name: "SurveyLeadForm" }, {
   __name: "SurveyLeadForm",
   __ssrInlineRender: true,
@@ -10169,36 +10115,36 @@ const _sfc_main$3 = /* @__PURE__ */ Object.assign({ name: "SurveyLeadForm" }, {
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: "survey-lead-form",
         "aria-busy": __props.loading ? "true" : "false"
-      }, _attrs))} data-v-a7756b97><h2${ssrRenderAttr("id", __props.stepHeadingId)} class="survey-lead-form__title survey-page__text-wrap" tabindex="-1" data-v-a7756b97>${ssrInterpolate(__props.title)}</h2>`);
+      }, _attrs))} data-v-3b2cbe2c><h2${ssrRenderAttr("id", __props.stepHeadingId)} class="survey-lead-form__title survey-page__text-wrap" tabindex="-1" data-v-3b2cbe2c>${ssrInterpolate(__props.title)}</h2>`);
       if ((_a2 = __props.bullets) == null ? void 0 : _a2.length) {
-        _push(`<ul class="survey-lead-form__bullets" data-v-a7756b97><!--[-->`);
+        _push(`<ul class="survey-lead-form__bullets" data-v-3b2cbe2c><!--[-->`);
         ssrRenderList(__props.bullets, (line, i) => {
-          _push(`<li class="survey-lead-form__bullet" data-v-a7756b97>${ssrInterpolate(line)}</li>`);
+          _push(`<li class="survey-lead-form__bullet" data-v-3b2cbe2c>${ssrInterpolate(line)}</li>`);
         });
         _push(`<!--]--></ul>`);
       } else {
         _push(`<!---->`);
       }
       if (__props.expectation) {
-        _push(`<p class="survey-lead-form__expectation survey-page__text-wrap" data-v-a7756b97>${ssrInterpolate(__props.expectation)}</p>`);
+        _push(`<p class="survey-lead-form__expectation survey-page__text-wrap" data-v-3b2cbe2c>${ssrInterpolate(__props.expectation)}</p>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="survey-lead-form__fields" data-v-a7756b97><input${ssrRenderAttr("value", __props.answers.hp_company)} type="text" name="company" class="survey-lead-form__honeypot" tabindex="-1" autocomplete="new-password" aria-label="Website" data-v-a7756b97><div class="survey-lead-form__row survey-lead-form__row--two" data-v-a7756b97><label class="survey-page__field" data-v-a7756b97><span class="survey-page__field-label" data-v-a7756b97>${ssrInterpolate(unref(t)("survey.lead.field_name"))}</span><input${ssrRenderAttr("value", __props.answers.name)} type="text" class="survey-page__control" autocomplete="name" data-v-a7756b97></label><label class="survey-page__field" data-v-a7756b97><span class="survey-page__field-label" data-v-a7756b97>${ssrInterpolate(unref(t)("survey.lead.field_business_name"))}</span><input${ssrRenderAttr("value", __props.answers.business_name)} type="text" class="survey-page__control" autocomplete="organization" data-v-a7756b97></label></div><label class="survey-page__field" data-v-a7756b97><span class="survey-page__field-label" data-v-a7756b97>${ssrInterpolate(unref(t)("survey.lead.field_email"))} <span class="survey-lead-form__star" aria-hidden="true" data-v-a7756b97>*</span><span class="survey-lead-form__sr-only" data-v-a7756b97>${ssrInterpolate(unref(t)("survey.lead.field_email_required_sr"))}</span></span><input${ssrRenderAttr("id", __props.emailInputId)}${ssrRenderAttr("value", __props.answers.email)} type="email" name="email" class="${ssrRenderClass([{
+      _push(`<div class="survey-lead-form__fields" data-v-3b2cbe2c><input${ssrRenderAttr("value", __props.answers.hp_company)} type="text" name="company" class="survey-lead-form__honeypot" tabindex="-1" autocomplete="new-password" aria-label="Website" data-v-3b2cbe2c><div class="survey-lead-form__row survey-lead-form__row--two" data-v-3b2cbe2c><label class="survey-page__field" data-v-3b2cbe2c><span class="survey-page__field-label" data-v-3b2cbe2c>${ssrInterpolate(unref(t)("survey.lead.field_name"))}</span><input${ssrRenderAttr("value", __props.answers.name)} type="text" class="survey-page__control" autocomplete="name" data-v-3b2cbe2c></label><label class="survey-page__field" data-v-3b2cbe2c><span class="survey-page__field-label" data-v-3b2cbe2c>${ssrInterpolate(unref(t)("survey.lead.field_business_name"))}</span><input${ssrRenderAttr("value", __props.answers.business_name)} type="text" class="survey-page__control" autocomplete="organization" data-v-3b2cbe2c></label></div><label class="survey-page__field" data-v-3b2cbe2c><span class="survey-page__field-label" data-v-3b2cbe2c>${ssrInterpolate(unref(t)("survey.lead.field_email"))} <span class="survey-lead-form__star" aria-hidden="true" data-v-3b2cbe2c>*</span><span class="survey-lead-form__sr-only" data-v-3b2cbe2c>${ssrInterpolate(unref(t)("survey.lead.field_email_required_sr"))}</span></span><input${ssrRenderAttr("id", __props.emailInputId)}${ssrRenderAttr("value", __props.answers.email)} type="email" name="email" class="${ssrRenderClass([{
         "survey-lead-form__input--invalid": !!__props.emailError
-      }, "survey-page__control"])}" autocomplete="email" inputmode="email" aria-required="true"${ssrRenderAttr("aria-invalid", __props.emailError ? "true" : "false")}${ssrRenderAttr("aria-describedby", __props.emailError ? __props.emailErrorId : void 0)} data-v-a7756b97>`);
+      }, "survey-page__control"])}" autocomplete="email" inputmode="email" aria-required="true"${ssrRenderAttr("aria-invalid", __props.emailError ? "true" : "false")}${ssrRenderAttr("aria-describedby", __props.emailError ? __props.emailErrorId : void 0)} data-v-3b2cbe2c>`);
       if (__props.emailError) {
-        _push(`<p${ssrRenderAttr("id", __props.emailErrorId)} class="survey-lead-form__error" role="alert" data-v-a7756b97>${ssrInterpolate(__props.emailError)}</p>`);
+        _push(`<p${ssrRenderAttr("id", __props.emailErrorId)} class="survey-lead-form__error" role="alert" data-v-3b2cbe2c>${ssrInterpolate(__props.emailError)}</p>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`</label><div class="survey-lead-form__row survey-lead-form__row--three" data-v-a7756b97><label class="survey-page__field" data-v-a7756b97><span class="survey-page__field-label" data-v-a7756b97>${ssrInterpolate(unref(t)("survey.lead.field_phone"))}</span><input${ssrRenderAttr("value", __props.answers.phone)} type="tel" class="survey-page__control" autocomplete="tel" inputmode="tel"${ssrRenderAttr("placeholder", unref(t)("survey.lead.placeholder_phone"))} data-v-a7756b97></label><label class="survey-page__field" data-v-a7756b97><span class="survey-page__field-label" data-v-a7756b97>${ssrInterpolate(unref(t)("survey.lead.field_whatsapp"))}</span><input${ssrRenderAttr("value", __props.answers.whatsapp)} type="text" class="survey-page__control" autocomplete="tel" inputmode="tel"${ssrRenderAttr("placeholder", unref(t)("survey.lead.placeholder_whatsapp"))} data-v-a7756b97></label><label class="survey-page__field" data-v-a7756b97><span class="survey-page__field-label" data-v-a7756b97>${ssrInterpolate(unref(t)("survey.lead.field_telegram"))}</span><input${ssrRenderAttr("value", __props.answers.telegram)} type="text" class="survey-page__control" autocomplete="off" spellcheck="false"${ssrRenderAttr("placeholder", unref(t)("survey.lead.placeholder_telegram"))} data-v-a7756b97></label></div></div>`);
+      _push(`</label><div class="survey-lead-form__row survey-lead-form__row--three" data-v-3b2cbe2c><label class="survey-page__field" data-v-3b2cbe2c><span class="survey-page__field-label" data-v-3b2cbe2c>${ssrInterpolate(unref(t)("survey.lead.field_phone"))}</span><input${ssrRenderAttr("value", __props.answers.phone)} type="tel" class="survey-page__control" autocomplete="tel" inputmode="tel"${ssrRenderAttr("placeholder", unref(t)("survey.lead.placeholder_phone"))} data-v-3b2cbe2c></label><label class="survey-page__field" data-v-3b2cbe2c><span class="survey-page__field-label" data-v-3b2cbe2c>${ssrInterpolate(unref(t)("survey.lead.field_whatsapp"))}</span><input${ssrRenderAttr("value", __props.answers.whatsapp)} type="text" class="survey-page__control" autocomplete="tel" inputmode="tel"${ssrRenderAttr("placeholder", unref(t)("survey.lead.placeholder_whatsapp"))} data-v-3b2cbe2c></label><label class="survey-page__field" data-v-3b2cbe2c><span class="survey-page__field-label" data-v-3b2cbe2c>${ssrInterpolate(unref(t)("survey.lead.field_telegram"))}</span><input${ssrRenderAttr("value", __props.answers.telegram)} type="text" class="survey-page__control" autocomplete="off" spellcheck="false"${ssrRenderAttr("placeholder", unref(t)("survey.lead.placeholder_telegram"))} data-v-3b2cbe2c></label></div></div>`);
       if (__props.submitError) {
-        _push(`<p class="survey-lead-form__submit-error" role="alert" data-v-a7756b97>${ssrInterpolate(__props.submitError)}</p>`);
+        _push(`<p class="survey-lead-form__submit-error" role="alert" data-v-3b2cbe2c>${ssrInterpolate(__props.submitError)}</p>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<footer class="survey-page__footer" data-v-a7756b97><button type="button" class="survey-lead-form__submit survey-primary-action"${ssrIncludeBooleanAttr(__props.loading) ? " disabled" : ""}${ssrRenderAttr("aria-busy", __props.loading ? "true" : "false")} data-v-a7756b97>${ssrInterpolate(__props.submitLabel)}</button></footer></div>`);
+      _push(`<footer class="survey-page__footer" data-v-3b2cbe2c><button type="button" class="survey-lead-form__submit survey-primary-action"${ssrIncludeBooleanAttr(__props.loading) ? " disabled" : ""}${ssrRenderAttr("aria-busy", __props.loading ? "true" : "false")} data-v-3b2cbe2c>${ssrInterpolate(__props.submitLabel)}</button></footer></div>`);
     };
   }
 });
@@ -10208,7 +10154,7 @@ _sfc_main$3.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyLeadForm.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const SurveyLeadForm = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-a7756b97"]]);
+const SurveyLeadForm = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-3b2cbe2c"]]);
 const EMAIL_INPUT_ID = "survey-lead-email";
 const EMAIL_ERROR_ID = "survey-lead-email-err";
 const _sfc_main$2 = /* @__PURE__ */ Object.assign({ name: "SurveyLeadScreen" }, {
@@ -10250,7 +10196,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign({ name: "SurveyLeadScreen" }, 
     const translatedBullets = computed(() => SURVEY_PAGE_LEAD.bullets.map((item) => tr(item)));
     const translatedExpectation = computed(() => tr(SURVEY_PAGE_LEAD.expectation));
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-page__block survey-page__block--lead" }, _attrs))} data-v-ebfae527>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "survey-page__block survey-page__block--lead" }, _attrs))} data-v-9fb3365c>`);
       _push(ssrRenderComponent(SurveyLeadForm, {
         answers: __props.answers,
         title: translatedTitle.value,
@@ -10274,7 +10220,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/screens/SurveyLeadScreen.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const SurveyLeadScreen = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-ebfae527"]]);
+const SurveyLeadScreen = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-9fb3365c"]]);
 const _sfc_main$1 = {
   __name: "SurveyDigitalCodeVerification",
   __ssrInlineRender: true,
@@ -10315,15 +10261,15 @@ const _sfc_main$1 = {
       }
     };
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "technical-section" }, _attrs))} data-v-766728e1><div class="message-pin-code" data-v-766728e1>${ssrInterpolate(unref(t)("survey.ui.pin_instruction"))}</div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "technical-section" }, _attrs))} data-v-6a986e72><div class="message-pin-code" data-v-6a986e72>${ssrInterpolate(unref(t)("survey.ui.pin_instruction"))}</div>`);
       if (__props.attemptsLeft > 0 && __props.attemptsLeft < __props.totalAttempts) {
-        _push(`<div class="pin-header warning" data-v-766728e1>${ssrInterpolate(unref(t)("survey.ui.pin_attempts_left", { used: __props.attemptsLeft, total: __props.totalAttempts }))}</div>`);
+        _push(`<div class="pin-header warning" data-v-6a986e72>${ssrInterpolate(unref(t)("survey.ui.pin_attempts_left", { used: __props.attemptsLeft, total: __props.totalAttempts }))}</div>`);
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="pin-box"${ssrRenderAttr("aria-label", unref(t)("survey.ui.pin_container_aria"))} data-v-766728e1><div class="pin-inputs" role="group"${ssrRenderAttr("aria-label", unref(t)("survey.ui.pin_group_aria"))} data-v-766728e1><!--[-->`);
+      _push(`<div class="pin-box"${ssrRenderAttr("aria-label", unref(t)("survey.ui.pin_container_aria"))} data-v-6a986e72><div class="pin-inputs" role="group"${ssrRenderAttr("aria-label", unref(t)("survey.ui.pin_group_aria"))} data-v-6a986e72><!--[-->`);
       ssrRenderList(digits.value, (_, index) => {
-        _push(`<input${ssrRenderAttr("value", digits.value[index])} class="digit" type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code"${ssrRenderAttr("aria-label", `Digit ${index + 1}`)} data-v-766728e1>`);
+        _push(`<input${ssrRenderAttr("value", digits.value[index])} class="digit" type="text" inputmode="numeric" maxlength="1" autocomplete="one-time-code"${ssrRenderAttr("aria-label", `Digit ${index + 1}`)} data-v-6a986e72>`);
       });
       _push(`<!--]--></div></div></div>`);
     };
@@ -10335,7 +10281,7 @@ _sfc_main$1.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/client/survey/SurveyDigitalCodeVerification.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
-const SurveyDigitalCodeVerification = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-766728e1"]]);
+const SurveyDigitalCodeVerification = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-6a986e72"]]);
 const SURVEY_LEAD_EMAIL_INPUT_ID = "survey-lead-email";
 const SURVEY_MOBILE_SCROLL_PADDING_BOTTOM = "calc(env(safe-area-inset-bottom, 0px) + 96px)";
 const _sfc_main = /* @__PURE__ */ Object.assign({
@@ -10537,12 +10483,8 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
       const branchAnswers = branchParentId ? { [branchParentId]: answers[branchParentId] } : {};
       return buildVisibleSurveyStepIds(surveySubmitted.value, branchAnswers);
     });
-    const currentStepId = computed(
-      () => visibleStepIds.value[currentIndex.value] ?? null
-    );
-    const transitionStepKey = computed(
-      () => currentStepId.value ?? `idx-${currentIndex.value}`
-    );
+    const currentStepId = computed(() => visibleStepIds.value[currentIndex.value] ?? null);
+    const transitionStepKey = computed(() => currentStepId.value ?? `idx-${currentIndex.value}`);
     const currentQuestion = computed(() => {
       const id = currentStepId.value;
       if (!id || id === SURVEY_FLOW_STEP_INTRO || id === SURVEY_FLOW_STEP_LEAD || id === SURVEY_FLOW_STEP_SUCCESS) {
@@ -10604,12 +10546,8 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
     const leadSubmitButtonLabel = computed(
       () => leadSubmitting.value ? t("survey.ui.submit_sending") : t("survey.ui.submit")
     );
-    const isSubmittedStateStep = computed(
-      () => submittedStateActive.value && !surveySubmitted.value
-    );
-    const isSurveyRenderReady = computed(
-      () => submittedStateResolved.value || surveySubmitted.value
-    );
+    const isSubmittedStateStep = computed(() => submittedStateActive.value && !surveySubmitted.value);
+    const isSurveyRenderReady = computed(() => submittedStateResolved.value || surveySubmitted.value);
     const activeScreen = computed(() => {
       if (questionsLoadFailed.value) return null;
       if (currentStepId.value === SURVEY_DIGITAL_CODE_VERIFICATION) return "verification";
@@ -10619,12 +10557,8 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
       if (currentStepId.value === SURVEY_FLOW_STEP_SUCCESS) return "success";
       return "survey";
     });
-    const progressDenominator = computed(
-      () => surveySubmitted.value ? 1 : getSurveyProgressTotal()
-    );
-    const progressNumerator = computed(
-      () => surveySubmitted.value ? 1 : currentIndex.value + 1
-    );
+    const progressDenominator = computed(() => surveySubmitted.value ? 1 : getSurveyProgressTotal());
+    const progressNumerator = computed(() => surveySubmitted.value ? 1 : currentIndex.value + 1);
     const progressBarAriaLabel = computed(
       () => t("survey.progress.aria", {
         current: progressNumerator.value,
@@ -10743,10 +10677,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
       previousBranchParentAnswer = branchId ? answers[branchId] : void 0;
       clampCurrentIndexToVisibleSteps();
       if (typeof document !== "undefined") {
-        (_a2 = document.querySelector(".app-wrapper .main-content")) == null ? void 0 : _a2.style.setProperty(
-          "scroll-padding-bottom",
-          SURVEY_MOBILE_SCROLL_PADDING_BOTTOM
-        );
+        (_a2 = document.querySelector(".app-wrapper .main-content")) == null ? void 0 : _a2.style.setProperty("scroll-padding-bottom", SURVEY_MOBILE_SCROLL_PADDING_BOTTOM);
       }
       nextTick(() => {
         focusSurveyStepHeading();
@@ -10958,10 +10889,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
         email_raw_hash: await buildSubmissionEmailHash(email)
       };
       try {
-        window.localStorage.setItem(
-          SURVEY_SUBMISSION_STATE_KEY,
-          JSON.stringify(statePayload)
-        );
+        window.localStorage.setItem(SURVEY_SUBMISSION_STATE_KEY, JSON.stringify(statePayload));
       } catch {
       }
     }
@@ -11045,9 +10973,9 @@ const _sfc_main = /* @__PURE__ */ Object.assign({
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_sfc_main$A, { seo: __props.seo }, null, _parent));
-      _push(`<div class="survey-page container" data-v-e13ba245>`);
+      _push(`<div class="survey-page container" data-v-c4d7e4f8>`);
       if (questionsLoadError.value) {
-        _push(`<div class="survey-page__api-error" role="alert" data-v-e13ba245>${ssrInterpolate(questionsLoadError.value)}</div>`);
+        _push(`<div class="survey-page__api-error" role="alert" data-v-c4d7e4f8>${ssrInterpolate(questionsLoadError.value)}</div>`);
       } else {
         _push(`<!---->`);
       }
@@ -11152,7 +11080,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Pages/Survey.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const Survey = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-e13ba245"]]);
+const Survey = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c4d7e4f8"]]);
 const __vite_glob_0_8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Survey
@@ -11168,9 +11096,7 @@ createServer(
     resolve: (name) => {
       const path = `./Pages/${name}.vue`;
       if (!pages[path]) {
-        throw new Error(
-          `Inertia page not found: "${name}" (expected at ${path})`
-        );
+        throw new Error(`Inertia page not found: "${name}" (expected at ${path})`);
       }
       return pages[path];
     },

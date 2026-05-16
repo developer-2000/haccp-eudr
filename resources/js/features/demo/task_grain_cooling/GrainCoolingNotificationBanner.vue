@@ -7,14 +7,13 @@
     >
         <div class="grain-cooling-notification-banner__inner container">
             <p class="grain-cooling-notification-banner__text">
-                {{ t(task_grain_cooling.toastTitleKey) }} — {{ t(task_grain_cooling.toastTaskNameKey) }}:
-                <span class="grain-cooling-notification-banner__countdown">{{ countdownLabel }}</span>
+                {{ t(task_grain_cooling.toastTitleKey) }} —
+                {{ t(task_grain_cooling.toastTaskNameKey) }}:
+                <span class="grain-cooling-notification-banner__countdown">{{
+                    countdownLabel
+                }}</span>
             </p>
-            <button
-                type="button"
-                class="grain-cooling-notification-banner__go"
-                @click="onGo"
-            >
+            <button type="button" class="grain-cooling-notification-banner__go" @click="onGo">
                 {{ t(task_grain_cooling.toastButtonNavigateLabelKey) }}
             </button>
         </div>
@@ -22,16 +21,16 @@
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { computed, onUnmounted, ref, watch } from "vue";
-import { useI18n } from "vue-i18n";
-import { task_grain_cooling } from "./config";
+import { storeToRefs } from 'pinia';
+import { computed, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { task_grain_cooling } from './config';
 
 const { t } = useI18n();
-import { navigateGrainCoolingToDemoChecklists } from "./grainCoolingNavigateToDemoChecklists";
-import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
+import { navigateGrainCoolingToDemoChecklists } from './grainCoolingNavigateToDemoChecklists';
+import { useTaskGrainCoolingStore } from './taskGrainCoolingStore';
 
-defineOptions({ name: "GrainCoolingNotificationBanner" });
+defineOptions({ name: 'GrainCoolingNotificationBanner' });
 
 const grainStore = useTaskGrainCoolingStore();
 const { notificationBannerActive, notificationLaunched, notificationProblemWindowMs } =
@@ -42,7 +41,7 @@ let intervalId = null;
 
 function tick() {
     const at = task_grain_cooling.notificationLaunchedAt;
-    if (!at || typeof at !== "string") {
+    if (!at || typeof at !== 'string') {
         remainingMs.value = 0;
         return;
     }
@@ -81,7 +80,7 @@ function startTickLoopIfNeeded() {
         return;
     }
     const at = task_grain_cooling.notificationLaunchedAt;
-    if (!at || typeof at !== "string") {
+    if (!at || typeof at !== 'string') {
         return;
     }
     tick();
@@ -102,7 +101,7 @@ const countdownLabel = computed(() => {
     const totalSec = Math.max(0, Math.ceil(ms / 1000));
     const m = Math.floor(totalSec / 60);
     const s = totalSec % 60;
-    return `${m}:${String(s).padStart(2, "0")}`;
+    return `${m}:${String(s).padStart(2, '0')}`;
 });
 
 function onGo() {
@@ -141,7 +140,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .grain-cooling-notification-banner {
     width: 100%;
@@ -197,5 +196,4 @@ onUnmounted(() => {
         }
     }
 }
-
 </style>

@@ -1,4 +1,4 @@
-import { isSurveyCountryAlpha2Valid } from "./surveyCountryOptions.js";
+import { isSurveyCountryAlpha2Valid } from './surveyCountryOptions.js';
 import {
     getSurveyQuestionsById,
     getSurveyMainQuestionIds,
@@ -6,21 +6,21 @@ import {
     getSurveyBranchChildIds,
     surveyOtherDetailKey,
     surveyQuestionAllOptions,
-} from "./surveyQuestionsStub.js";
+} from './surveyQuestionsStub.js';
 
 const LEAD_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
 /** Служебный шаг: вступление. */
-export const SURVEY_FLOW_STEP_INTRO = "intro";
+export const SURVEY_FLOW_STEP_INTRO = 'intro';
 
 /** Служебный шаг: контакты. */
-export const SURVEY_FLOW_STEP_LEAD = "lead";
+export const SURVEY_FLOW_STEP_LEAD = 'lead';
 
 /** Служебный шаг: завершение. */
-export const SURVEY_FLOW_STEP_SUCCESS = "success";
+export const SURVEY_FLOW_STEP_SUCCESS = 'success';
 
 /** Показ 4 значного цифрового блока верификации кода. */
-export const SURVEY_DIGITAL_CODE_VERIFICATION = "digital_code";
+export const SURVEY_DIGITAL_CODE_VERIFICATION = 'digital_code';
 
 /**
  * Пауза перед автопереходом после одиночного выбора (radio), мс.
@@ -55,11 +55,11 @@ export function resolveBranchStepId(answers) {
     }
     const parent = getSurveyQuestionsById()[branchParentId];
     const value = answers[branchParentId];
-    if (!parent?.branches || value == null || value === "") {
+    if (!parent?.branches || value == null || value === '') {
         return null;
     }
     const nextId = parent.branches[value];
-    return typeof nextId === "string" ? nextId : null;
+    return typeof nextId === 'string' ? nextId : null;
 }
 
 /**
@@ -125,16 +125,16 @@ export function isSurveyQuestionAnswerValid(question, answers) {
     // Проверяем, можно ли идти дальше по текущему ответу.
     const id = question.id;
     // Для текстового вопроса: если поле можно пропустить — сразу ок.
-    if (question.type === "text") {
+    if (question.type === 'text') {
         if (question.text_allow_empty) {
             return true;
         }
         // Если текст обязателен — проверяем, что пользователь что-то ввёл.
         const raw = answers[id];
-        return typeof raw === "string" && raw.trim().length > 0;
+        return typeof raw === 'string' && raw.trim().length > 0;
     }
     // Для выбора страны проверяем, что код страны выглядит валидно.
-    if (question.type === "select" && question.country_iso_select) {
+    if (question.type === 'select' && question.country_iso_select) {
         return isSurveyCountryAlpha2Valid(answers[id]);
     }
     // Если вариантов ответа нет — шаг нельзя считать заполненным.
@@ -143,10 +143,10 @@ export function isSurveyQuestionAnswerValid(question, answers) {
         return false;
     }
     // Для radio/select нужен один выбранный валидный вариант.
-    if (question.type === "radio" || question.type === "select") {
+    if (question.type === 'radio' || question.type === 'select') {
         const value = answers[id];
         // Ничего не выбрано — нельзя идти дальше.
-        if (value == null || value === "") {
+        if (value == null || value === '') {
             return false;
         }
         const opt = opts.find((o) => o.value === value);
@@ -157,13 +157,13 @@ export function isSurveyQuestionAnswerValid(question, answers) {
         // Если выбрано "Другое", просим обязательно заполнить уточнение.
         if (opt.is_other) {
             const detail = answers[surveyOtherDetailKey(id)];
-            return typeof detail === "string" && detail.trim().length > 0;
+            return typeof detail === 'string' && detail.trim().length > 0;
         }
         // Обычный выбранный вариант — этого достаточно.
         return true;
     }
     // Для чекбоксов смотрим массив выбранных пунктов.
-    if (question.type === "checkbox") {
+    if (question.type === 'checkbox') {
         const arr = answers[id];
         const list = Array.isArray(arr) ? arr : [];
         // Если у вопроса разрешён пустой выбор — пустой список принимаем.
@@ -182,7 +182,7 @@ export function isSurveyQuestionAnswerValid(question, answers) {
         // Для "Другое" текст уточнения обязателен.
         if (hasOther) {
             const detail = answers[surveyOtherDetailKey(id)];
-            return typeof detail === "string" && detail.trim().length > 0;
+            return typeof detail === 'string' && detail.trim().length > 0;
         }
         // Если всё выше прошло — ответ валиден.
         return true;
@@ -199,15 +199,13 @@ export function isSurveyQuestionAnswerValid(question, answers) {
  */
 export function surveyRadioAllowsAutoAdvance(question, selectedValue) {
     // Автопереход разрешаем только для обычного radio-выбора.
-    if (question?.type !== "radio") {
+    if (question?.type !== 'radio') {
         return false;
     }
-    if (selectedValue == null || selectedValue === "") {
+    if (selectedValue == null || selectedValue === '') {
         return false;
     }
-    const opt = surveyQuestionAllOptions(question).find(
-        (o) => o.value === selectedValue,
-    );
+    const opt = surveyQuestionAllOptions(question).find((o) => o.value === selectedValue);
     return !opt?.is_other;
 }
 
@@ -221,11 +219,7 @@ export function surveyQuestionUsesNextButton(question) {
     if (!question) {
         return false;
     }
-    return (
-        question.type === "checkbox" ||
-        question.type === "select" ||
-        question.type === "text"
-    );
+    return question.type === 'checkbox' || question.type === 'select' || question.type === 'text';
 }
 
 /**
@@ -235,14 +229,14 @@ export function surveyQuestionUsesNextButton(question) {
  */
 export function surveyLeadEmailErrorMessage(raw) {
     // Отдаем ключ понятной ошибки, если email пустой или кривой.
-    const s = String(raw ?? "").trim();
+    const s = String(raw ?? '').trim();
     if (!s) {
-        return "survey.validation.email_required";
+        return 'survey.validation.email_required';
     }
     if (!LEAD_EMAIL_RE.test(s)) {
-        return "survey.validation.email_invalid";
+        return 'survey.validation.email_invalid';
     }
-    return "";
+    return '';
 }
 
 /**
@@ -253,18 +247,20 @@ export function surveyLeadEmailErrorMessage(raw) {
  */
 export function maskSurveyEmail(email) {
     // Прячем середину email, оставляя только минимально полезный хвост.
-    const normalizedEmail = String(email ?? "").trim().toLowerCase();
-    const atIndex = normalizedEmail.indexOf("@");
+    const normalizedEmail = String(email ?? '')
+        .trim()
+        .toLowerCase();
+    const atIndex = normalizedEmail.indexOf('@');
     // Если email кривой или неполный, безопасно возвращаем заглушку.
     if (atIndex <= 0 || atIndex === normalizedEmail.length - 1) {
-        return "***";
+        return '***';
     }
     const localPart = normalizedEmail.slice(0, atIndex);
     const domainPart = normalizedEmail.slice(atIndex + 1);
-    const dotIndex = domainPart.lastIndexOf(".");
+    const dotIndex = domainPart.lastIndexOf('.');
     // Если в домене нет нормальной зоны (типа .com), тоже отдаём заглушку.
     if (dotIndex <= 0 || dotIndex === domainPart.length - 1) {
-        return "***";
+        return '***';
     }
     const domainName = domainPart.slice(0, dotIndex);
     const domainZone = domainPart.slice(dotIndex + 1);
@@ -274,4 +270,3 @@ export function maskSurveyEmail(email) {
     const zoneHead = domainZone;
     return `${localPrefix}*******${domainTail}.${zoneHead}`;
 }
-

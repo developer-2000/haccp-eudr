@@ -45,12 +45,15 @@
                                 />
                             </div>
                             <div class="contact-intro__author-info">
-                                <p class="contact-intro__author-name">{{ t('contact.author_name') }}</p>
-                                <p class="contact-intro__author-role">{{ t('contact.author_role') }}</p>
+                                <p class="contact-intro__author-name">
+                                    {{ t('contact.author_name') }}
+                                </p>
+                                <p class="contact-intro__author-role">
+                                    {{ t('contact.author_role') }}
+                                </p>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="contact-form-wrap">
@@ -62,80 +65,92 @@
                     </div>
 
                     <ClientOnly>
-                    <div v-if="!sent" class="contact-form-card">
-                        <n-form
-                            ref="formRef"
-                            :model="form"
-                            :rules="rules"
-                            label-placement="top"
-                            label-width="auto"
-                            class="contact-form"
-                            @submit.prevent="submitForm"
-                        >
-                            <input
-                                v-model="form.hp_company"
-                                type="text"
-                                name="company_hp"
-                                class="contact-form__honeypot"
-                                tabindex="-1"
-                                autocomplete="new-password"
-                                aria-hidden="true"
-                            />
-                            <div class="contact-form__row">
-                                <n-form-item :label="t('contact.name_label')" path="name" required>
+                        <div v-if="!sent" class="contact-form-card">
+                            <n-form
+                                ref="formRef"
+                                :model="form"
+                                :rules="rules"
+                                label-placement="top"
+                                label-width="auto"
+                                class="contact-form"
+                                @submit.prevent="submitForm"
+                            >
+                                <input
+                                    v-model="form.hp_company"
+                                    type="text"
+                                    name="company_hp"
+                                    class="contact-form__honeypot"
+                                    tabindex="-1"
+                                    autocomplete="new-password"
+                                    aria-hidden="true"
+                                />
+                                <div class="contact-form__row">
+                                    <n-form-item
+                                        :label="t('contact.name_label')"
+                                        path="name"
+                                        required
+                                    >
+                                        <n-input
+                                            v-model:value="form.name"
+                                            size="large"
+                                            :placeholder="t('contact.name_placeholder')"
+                                        />
+                                    </n-form-item>
+                                    <n-form-item
+                                        :label="t('contact.email_label')"
+                                        path="email"
+                                        required
+                                    >
+                                        <n-input
+                                            v-model:value="form.email"
+                                            size="large"
+                                            :placeholder="t('contact.email_placeholder')"
+                                            :input-props="{
+                                                type: 'email',
+                                                name: 'email',
+                                                autocomplete: 'email',
+                                                inputmode: 'email',
+                                            }"
+                                        />
+                                    </n-form-item>
+                                </div>
+                                <n-form-item :label="t('contact.company_label')" path="company">
                                     <n-input
-                                        v-model:value="form.name"
+                                        v-model:value="form.company"
                                         size="large"
-                                        :placeholder="t('contact.name_placeholder')"
+                                        :placeholder="t('contact.company_placeholder')"
                                     />
                                 </n-form-item>
-                                <n-form-item :label="t('contact.email_label')" path="email" required>
-                                    <n-input
-                                        v-model:value="form.email"
-                                        size="large"
-                                        :placeholder="t('contact.email_placeholder')"
-                                        :input-props="{
-                                            type: 'email',
-                                            name: 'email',
-                                            autocomplete: 'email',
-                                            inputmode: 'email',
-                                        }"
-                                    />
-                                </n-form-item>
-                            </div>
-                            <n-form-item :label="t('contact.company_label')" path="company">
-                                <n-input
-                                    v-model:value="form.company"
-                                    size="large"
-                                    :placeholder="t('contact.company_placeholder')"
-                                />
-                            </n-form-item>
-                            <n-form-item :label="t('contact.message_label')" path="message" required>
-                                <n-input
-                                    v-model:value="form.message"
-                                    type="textarea"
-                                    size="large"
-                                    :placeholder="t('contact.message_placeholder')"
-                                    :autosize="{ minRows: 5, maxRows: 10 }"
-                                />
-                            </n-form-item>
-                            <div class="contact-form__submit">
-                                <n-button
-                                    type="primary"
-                                    size="large"
-                                    block
-                                    attr-type="submit"
-                                    :loading="submitting"
+                                <n-form-item
+                                    :label="t('contact.message_label')"
+                                    path="message"
+                                    required
                                 >
-                                    {{ t('contact.submit') }}
-                                </n-button>
-                                <p class="contact-form__hint">
-                                    <Icon name="check-circle" class="contact-form__hint-icon" />
-                                    {{ t('contact.hint') }}
-                                </p>
-                            </div>
-                        </n-form>
-                    </div>
+                                    <n-input
+                                        v-model:value="form.message"
+                                        type="textarea"
+                                        size="large"
+                                        :placeholder="t('contact.message_placeholder')"
+                                        :autosize="{ minRows: 5, maxRows: 10 }"
+                                    />
+                                </n-form-item>
+                                <div class="contact-form__submit">
+                                    <n-button
+                                        type="primary"
+                                        size="large"
+                                        block
+                                        attr-type="submit"
+                                        :loading="submitting"
+                                    >
+                                        {{ t('contact.submit') }}
+                                    </n-button>
+                                    <p class="contact-form__hint">
+                                        <Icon name="check-circle" class="contact-form__hint-icon" />
+                                        {{ t('contact.hint') }}
+                                    </p>
+                                </div>
+                            </n-form>
+                        </div>
                     </ClientOnly>
 
                     <div class="contact-trust">
@@ -161,26 +176,26 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, defineAsyncComponent } from "vue";
-import { useI18n } from "vue-i18n";
-import { toast } from "vue3-toastify";
-import apiAxios from "@/utils/apiAxios.js";
-import Icon from "@/components/Icon.vue";
-import SeoHead from "@/components/SeoHead.vue";
-import PublicLayout from "@/Layouts/PublicLayout.vue";
-import ClientOnly from "@/components/ClientOnly.vue";
+import { onMounted, reactive, ref, defineAsyncComponent } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { toast } from 'vue3-toastify';
+import apiAxios from '@/utils/apiAxios.js';
+import Icon from '@/components/Icon.vue';
+import SeoHead from '@/components/SeoHead.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
+import ClientOnly from '@/components/ClientOnly.vue';
 
 /**
  * Naive-форма грузится лениво и рендерится ТОЛЬКО на клиенте (`<ClientOnly>` ниже).
  * Статический импорт `naive-ui` уронил бы SSR — css-render обращается к `window` на этапе импорта.
  */
-const NForm = defineAsyncComponent(() => import("naive-ui").then((m) => m.NForm));
-const NFormItem = defineAsyncComponent(() => import("naive-ui").then((m) => m.NFormItem));
-const NInput = defineAsyncComponent(() => import("naive-ui").then((m) => m.NInput));
-const NButton = defineAsyncComponent(() => import("naive-ui").then((m) => m.NButton));
+const NForm = defineAsyncComponent(() => import('naive-ui').then((m) => m.NForm));
+const NFormItem = defineAsyncComponent(() => import('naive-ui').then((m) => m.NFormItem));
+const NInput = defineAsyncComponent(() => import('naive-ui').then((m) => m.NInput));
+const NButton = defineAsyncComponent(() => import('naive-ui').then((m) => m.NButton));
 
 defineOptions({
-    name: "Contact",
+    name: 'Contact',
     layout: PublicLayout,
 });
 
@@ -211,20 +226,28 @@ onMounted(() => {
 
 // Реактивная модель формы: все видимые поля + hp_company (скрытый honeypot-input)
 const form = reactive({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-    hp_company: "",
+    name: '',
+    email: '',
+    company: '',
+    message: '',
+    hp_company: '',
 });
 
 // Правила клиентской валидации naive-ui (срабатывают на blur/input и при formRef.validate())
 const rules = {
-    name: { required: true, trigger: ["blur", "input"], message: t('contact.validation_name_required') },
+    name: {
+        required: true,
+        trigger: ['blur', 'input'],
+        message: t('contact.validation_name_required'),
+    },
     email: [
-        { required: true, trigger: ["blur", "input"], message: t('contact.validation_email_required') },
         {
-            trigger: ["blur", "input"],
+            required: true,
+            trigger: ['blur', 'input'],
+            message: t('contact.validation_email_required'),
+        },
+        {
+            trigger: ['blur', 'input'],
             validator: (_, value) =>
                 !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
                     ? true
@@ -232,8 +255,12 @@ const rules = {
         },
     ],
     message: [
-        { required: true, trigger: ["blur", "input"], message: t('contact.validation_message_required') },
-        { min: 10, trigger: ["blur", "input"], message: t('contact.validation_message_min') },
+        {
+            required: true,
+            trigger: ['blur', 'input'],
+            message: t('contact.validation_message_required'),
+        },
+        { min: 10, trigger: ['blur', 'input'], message: t('contact.validation_message_min') },
     ],
 };
 
@@ -243,7 +270,6 @@ const rules = {
  * для created — success + очистка полей; для любой ошибки — generic error-toast.
  */
 async function submitForm() {
-
     // Валидация полей формы
     try {
         await formRef.value?.validate();
@@ -266,14 +292,14 @@ async function submitForm() {
     };
 
     // POST-запрос; 3-й аргумент true → при ошибке вернёт строку с текстом (а не null)
-    const response = await apiAxios.post("/contact", payload, true);
+    const response = await apiAxios.post('/contact', payload, true);
 
     // Разблокируем кнопку независимо от результата
     submitting.value = false;
 
     // Любой не-success ответ: ошибка apiAxios (строка с текстом бэка) или неожиданный формат
-    if (response?.status !== "success") {
-        const errorText = typeof response === "string" ? response : "";
+    if (response?.status !== 'success') {
+        const errorText = typeof response === 'string' ? response : '';
         toast.error(errorText || t('contact.toast_error'), { autoClose: 5000 });
         return;
     }
@@ -281,16 +307,16 @@ async function submitForm() {
     // Бэк всегда отдаёт одинаковый success.
     sent.value = true;
     toast.success(t('contact.toast_success'), { autoClose: 5000 });
-    form.name = "";
-    form.email = "";
-    form.company = "";
-    form.message = "";
-    form.hp_company = "";
+    form.name = '';
+    form.email = '';
+    form.company = '';
+    form.message = '';
+    form.hp_company = '';
 }
 </script>
 
 <style scoped lang="scss">
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .section-container-contact {
     padding: $spacing-2xl 0;
@@ -311,7 +337,7 @@ async function submitForm() {
             display: flex;
             flex-direction: column;
 
-            .box-contact-intro{
+            .box-contact-intro {
                 margin-bottom: 25px;
             }
 

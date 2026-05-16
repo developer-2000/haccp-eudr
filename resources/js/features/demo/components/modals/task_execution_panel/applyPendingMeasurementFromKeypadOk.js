@@ -1,20 +1,17 @@
-import { task_grain_cooling } from "@/features/demo/task_grain_cooling/config";
-import {
-    findMeasurementRowIndexByTime,
-    isCurrentMeasurementRowPending,
-} from "@/features/demo/task_grain_cooling/grainCoolingMeasurementRow";
-import { markGrainCoolingScenarioStoredCompleted } from "@/features/demo/task_grain_cooling/grainCoolingStorageStatus";
-import { createTemperatureAiAnalyzer } from "@/features/demo/ai/temperature/TemperatureAiAnalyzer";
-import { parseTemperatureFromMeasurementValue } from "@/features/demo/ai/temperature/parseTemperatureFromMeasurementValue";
+import { task_grain_cooling } from '@/features/demo/task_grain_cooling/config';
+import { isCurrentMeasurementRowPending } from '@/features/demo/task_grain_cooling/grainCoolingMeasurementRow';
+import { markGrainCoolingScenarioStoredCompleted } from '@/features/demo/task_grain_cooling/grainCoolingStorageStatus';
+import { createTemperatureAiAnalyzer } from '@/features/demo/ai/temperature/TemperatureAiAnalyzer';
+import { parseTemperatureFromMeasurementValue } from '@/features/demo/ai/temperature/parseTemperatureFromMeasurementValue';
 import {
     mapTaskNicheToAnalyzerNiche,
     resolveTaskNicheForTemperatureAi,
     resolveTemperatureAiMode,
-} from "@/features/demo/ai/temperature/taskTemperatureAiContext";
-import { resolveBreadRowForTaskMeasurement } from "@/features/demo/ai/temperature/breadBands";
-import { resolveCoffeeRowForTaskMeasurement } from "@/features/demo/ai/temperature/coffeeBands";
-import { resolveMeatRowForTaskMeasurement } from "@/features/demo/ai/temperature/meatBands";
-import { readTaskTemperatureMinMaxC } from "@/features/demo/domain/checklistTaskModel";
+} from '@/features/demo/ai/temperature/taskTemperatureAiContext';
+import { resolveBreadRowForTaskMeasurement } from '@/features/demo/ai/temperature/breadBands';
+import { resolveCoffeeRowForTaskMeasurement } from '@/features/demo/ai/temperature/coffeeBands';
+import { resolveMeatRowForTaskMeasurement } from '@/features/demo/ai/temperature/meatBands';
+import { readTaskTemperatureMinMaxC } from '@/features/demo/domain/checklistTaskModel';
 
 const temperatureAiAnalyzer = createTemperatureAiAnalyzer();
 
@@ -30,23 +27,11 @@ const temperatureAiAnalyzer = createTemperatureAiAnalyzer();
  * @param {'temperature'|'timer'|string|null|undefined} params.fieldType — тип поля drawer (`temperature` / `timer`)
  * @returns {boolean} `true`, если запись выполнена и drawer можно закрыть
  */
-export function applyPendingMeasurementFromKeypadOk({
-    task,
-    measurementRow,
-    draft,
-    fieldType,
-}) {
+export function applyPendingMeasurementFromKeypadOk({ task, measurementRow, draft, fieldType }) {
     // Ссылка на элемент task.measurements[i], который мутируем (из drawer).
     const m = measurementRow;
-    // Номер строки в списке замеров: ищем по времени слота (поле time).
-    const measurementIndex = m && typeof m === "object" ? findMeasurementRowIndexByTime(task, m) : -1;
-    // Копия строки замера до правок — чтобы при необходимости сравнить «было / стало».
-    const rowBefore =
-        m && typeof m === "object"
-            ? { ...m }
-            : null;
 
-    if (!m || typeof m !== "object") {
+    if (!m || typeof m !== 'object') {
         return false;
     }
 
@@ -55,24 +40,24 @@ export function applyPendingMeasurementFromKeypadOk({
     }
 
     // Черновик с экранной клавиатуры до нормализации (строка).
-    const raw = String(draft ?? "").trim();
-    if (!raw || raw === "-" || raw === "." || raw === "-.") {
+    const raw = String(draft ?? '').trim();
+    if (!raw || raw === '-' || raw === '.' || raw === '-.') {
         return false;
     }
 
     // Тот же ввод, но запятая заменена на точку — так из строки надёжнее читается число.
-    const normalized = raw.replace(",", ".");
+    const normalized = raw.replace(',', '.');
     // Число из черновика: то же, что пользователь ввёл до форматирования в `… °C` для ячейки.
     const n = Number.parseFloat(normalized);
     if (!Number.isFinite(n)) {
         return false;
     }
 
-    if (fieldType === "timer") {
+    if (fieldType === 'timer') {
         // Целые минуты из введённого числа (таймер, не температура).
         const mins = Math.max(0, Math.trunc(n));
         m.value = `${mins} мин`;
-        m.status = "success";
+        m.status = 'success';
         m.aiWarning = null;
         // Демо-сценарий «охлаждение зерна»: id задачи из config, чтобы закрыть сценарий в хранилище.
         if (task?.id === task_grain_cooling.id) {
@@ -81,7 +66,7 @@ export function applyPendingMeasurementFromKeypadOk({
         return true;
     }
 
-    if (fieldType !== "temperature") {
+    if (fieldType !== 'temperature') {
         return false;
     }
 
@@ -104,46 +89,30 @@ export function applyPendingMeasurementFromKeypadOk({
     const analyzerNiche = mapTaskNicheToAnalyzerNiche(taskNiche);
 
     // Отображаемое значение с запятой как в UI локали задачи.
-    const display = String(normalized).replace(".", ",");
+    const display = String(normalized).replace('.', ',');
     m.value = `${display} °C`;
     const currentValueFromMeasurement = parseTemperatureFromMeasurementValue(m.value);
-    const aiMode = resolveTemperatureAiMode(
-        task,
-        analyzerNiche,
-        currentValueFromMeasurement,
-    );
+    const aiMode = resolveTemperatureAiMode(task, analyzerNiche, currentValueFromMeasurement);
     let statusOk = limits == null ? true : inRange;
-    if (analyzerNiche === "bread") {
-        const bandRow = resolveBreadRowForTaskMeasurement(
-            n,
-            task?.equipmentTargetIds,
-            aiMode,
-        );
+    if (analyzerNiche === 'bread') {
+        const bandRow = resolveBreadRowForTaskMeasurement(n, task?.equipmentTargetIds, aiMode);
         if (bandRow) {
-            statusOk = bandRow.status === "normal";
+            statusOk = bandRow.status === 'normal';
         }
     }
-    if (analyzerNiche === "meat") {
-        const bandRow = resolveMeatRowForTaskMeasurement(
-            n,
-            task?.equipmentTargetIds,
-            aiMode,
-        );
+    if (analyzerNiche === 'meat') {
+        const bandRow = resolveMeatRowForTaskMeasurement(n, task?.equipmentTargetIds, aiMode);
         if (bandRow) {
-            statusOk = bandRow.status === "normal";
+            statusOk = bandRow.status === 'normal';
         }
     }
-    if (analyzerNiche === "coffee") {
-        const bandRow = resolveCoffeeRowForTaskMeasurement(
-            n,
-            task?.equipmentTargetIds,
-            aiMode,
-        );
+    if (analyzerNiche === 'coffee') {
+        const bandRow = resolveCoffeeRowForTaskMeasurement(n, task?.equipmentTargetIds, aiMode);
         if (bandRow) {
-            statusOk = bandRow.status === "normal";
+            statusOk = bandRow.status === 'normal';
         }
     }
-    m.status = statusOk ? "success" : "problem";
+    m.status = statusOk ? 'success' : 'problem';
     // Вердикт AI в `m.aiWarning`: при success — мясо из полос «норма», при problem — предупреждение HACCP.
     let aiDisplay = null;
     if (currentValueFromMeasurement != null) {
@@ -166,19 +135,19 @@ export function applyPendingMeasurementFromKeypadOk({
               });
     }
     m.aiWarning = aiDisplay;
-    if (task && typeof task === "object") {
+    if (task && typeof task === 'object') {
         // Старый aiContext задачи, чтобы не потерять поля при частичном обновлении.
         const previousContext =
-            task.aiContext && typeof task.aiContext === "object" ? task.aiContext : {};
+            task.aiContext && typeof task.aiContext === 'object' ? task.aiContext : {};
         task.aiContext = {
             ...previousContext,
-            engine: "temperature-v1",
+            engine: 'temperature-v1',
             niche: taskNiche,
             mode: aiMode,
-            taskType: "temperature",
+            taskType: 'temperature',
             ccpMin: minC,
             ccpMax: maxC,
-            ccpLabel: aiDisplay?.ccpLabel ?? previousContext.ccpLabel ?? "",
+            ccpLabel: aiDisplay?.ccpLabel ?? previousContext.ccpLabel ?? '',
             updatedAt: new Date().toISOString(),
         };
     }

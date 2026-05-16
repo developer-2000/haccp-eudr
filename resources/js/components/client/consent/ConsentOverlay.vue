@@ -13,44 +13,38 @@
                     {{ t('consent.privacy_link') }}
                 </Link>
                 <n-space class="checkbox" @click="accepted = !accepted">
-                    <n-switch size="medium" v-model:value="accepted" />
+                    <n-switch v-model:value="accepted" size="medium" />
                     <span class="switch-label">
                         {{ t('consent.checkbox_label') }}
                     </span>
                 </n-space>
             </div>
 
-            <n-button
-                type="info"
-                size="large"
-                :disabled="!accepted"
-                @click="continueToApp"
-            >
+            <n-button type="info" size="large" :disabled="!accepted" @click="continueToApp">
                 {{ t('consent.continue') }}
             </n-button>
-
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
-import { Link, usePage } from "@inertiajs/vue3";
-import { useI18n } from "vue-i18n";
-import { NButton, NSpace, NSwitch } from "naive-ui";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
-import { LS_CONSENT_VERSION } from "@/config/storageNames";
+import { ref, computed, onMounted } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { NButton, NSpace, NSwitch } from 'naive-ui';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
+import { LS_CONSENT_VERSION } from '@/config/storageNames';
 
-defineOptions({ name: "ConsentOverlay" });
+defineOptions({ name: 'ConsentOverlay' });
 
 const { t } = useI18n();
 
 const page = usePage();
-const appName = computed(() => page.props.siteConfig?.name || "");
+const appName = computed(() => page.props.siteConfig?.name || '');
 const visible = ref(false);
 const accepted = ref(false);
 const currentLocale = ref(useCurrentLocale());
-const currentPath = ref(typeof window !== "undefined" ? window.location.pathname : "");
+const currentPath = ref(typeof window !== 'undefined' ? window.location.pathname : '');
 
 const privacyLink = computed(() => `/${currentLocale.value}/privacy-policy`);
 
@@ -70,13 +64,13 @@ onMounted(() => {
 });
 
 function continueToApp() {
-    localStorage.setItem(LS_CONSENT_VERSION, "true");
+    localStorage.setItem(LS_CONSENT_VERSION, 'true');
     visible.value = false;
 }
 </script>
 
 <style lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .consent-overlay {
     position: fixed;
@@ -101,7 +95,7 @@ function continueToApp() {
             font-size: 20px;
         }
 
-        .title{
+        .title {
             font-size: 14px;
             font-weight: 500;
             color: $text-logo;
@@ -114,15 +108,15 @@ function continueToApp() {
             margin-bottom: 16px;
         }
 
-        .box-checkbox{
-            a{
+        .box-checkbox {
+            a {
                 display: inline-block;
                 margin-bottom: 15px;
                 font-size: 12px;
                 font-weight: 400;
 
-                &:hover{
-                    color: $accent-primary-dark
+                &:hover {
+                    color: $accent-primary-dark;
                 }
             }
             .checkbox {
@@ -131,7 +125,7 @@ function continueToApp() {
                 margin-bottom: 30px;
                 display: flex;
                 align-items: center;
-                flex-flow: inherit!important;
+                flex-flow: inherit !important;
                 cursor: pointer;
 
                 &:hover {

@@ -6,11 +6,7 @@
  * @returns {string}
  */
 export function foldCountrySearchString(s) {
-    return s
-        .normalize("NFKC")
-        .normalize("NFD")
-        .replace(/\p{M}/gu, "")
-        .toLowerCase();
+    return s.normalize('NFKC').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 }
 
 const foldedCountryOptionsCache = new WeakMap();
@@ -51,7 +47,5 @@ export function filterCountryOptionsByLabel(options, queryRaw) {
     }
     const needle = foldCountrySearchString(q);
     const prepared = getFoldedCountryOptions(options);
-    return prepared
-        .filter((opt) => opt.foldedLabel.startsWith(needle))
-        .map((opt) => opt.source);
+    return prepared.filter((opt) => opt.foldedLabel.startsWith(needle)).map((opt) => opt.source);
 }

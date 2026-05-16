@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: "SurveyLayout" });
+defineOptions({ name: 'SurveyLayout' });
 
 defineProps({
     /** Показывать верхнюю зону (назад + прогресс); на success обычно false. */
@@ -22,7 +22,7 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-layout {
     display: flex;
@@ -41,8 +41,7 @@ defineProps({
         flex-shrink: 0;
         width: 100%;
         margin: 0 auto;
-        padding: $spacing-sm-w clamp(#{$spacing-md}, 4vw, #{$spacing-md-lg})
-            $spacing-sm;
+        padding: $spacing-sm-w clamp(#{$spacing-md}, 4vw, #{$spacing-md-lg}) $spacing-sm;
         box-sizing: border-box;
         background: #f8fafc;
     }

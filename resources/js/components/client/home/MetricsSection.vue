@@ -1,11 +1,7 @@
 <template>
     <section class="metrics-section">
         <div class="metrics-grid">
-            <article
-                v-for="metric in metricCards"
-                :key="metric.id"
-                class="metric-card"
-            >
+            <article v-for="metric in metricCards" :key="metric.id" class="metric-card">
                 <div class="metric-card-header">
                     <div class="metric-icon" :class="metric.iconClass">
                         <Icon :name="metric.iconName" aria-hidden="true" />
@@ -15,25 +11,14 @@
                     </h2>
                 </div>
                 <div class="metric-card-body metric-card-body--savings">
-                    <div
-                        class="metric-card-body-col metric-card-body-col--left"
-                    >
-                        <p
-                            v-for="(line, idx) in metric.lines"
-                            :key="idx"
-                            class="metric-line"
-                        >
+                    <div class="metric-card-body-col metric-card-body-col--left">
+                        <p v-for="(line, idx) in metric.lines" :key="idx" class="metric-line">
                             <span class="metric-bold">
                                 {{ line.word }}
                             </span>
                             <span
                                 class="metric-text"
-                                v-html="
-                                    formatMetricValue(
-                                        line.value,
-                                        line.highlight,
-                                    )
-                                "
+                                v-html="formatMetricValue(line.value, line.highlight)"
                             />
                         </p>
                     </div>
@@ -53,18 +38,18 @@
 
 <script setup>
 defineOptions({
-    name: "MetricsSection",
+    name: 'MetricsSection',
 });
 
-import Icon from "@/components/Icon.vue";
-import { useI18n } from "vue-i18n";
+import Icon from '@/components/Icon.vue';
+import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
 /** Highlight classes for price amounts in metric lines */
 const PRICE_HIGHLIGHT_CLASS = {
-    competitor: "red-text",
-    ours: "green-text",
+    competitor: 'red-text',
+    ours: 'green-text',
 };
 
 /**
@@ -78,10 +63,7 @@ function formatMetricValue(value, highlight) {
         return value;
     }
     const cssClass = PRICE_HIGHLIGHT_CLASS[highlight];
-    return value.replace(
-        /€[\d,]+(?:\+)?/,
-        (match) => `<span class="${cssClass}">${match}</span>`,
-    );
+    return value.replace(/€[\d,]+(?:\+)?/, (match) => `<span class="${cssClass}">${match}</span>`);
 }
 
 /**
@@ -91,69 +73,69 @@ function formatMetricValue(value, highlight) {
  */
 const metricCards = [
     {
-        id: "profit",
-        iconName: "account-balance-wallet-twotone",
-        iconClass: "metric-icon--wallet",
-        title: t("home.metrics.profit.title"),
+        id: 'profit',
+        iconName: 'account-balance-wallet-twotone',
+        iconClass: 'metric-icon--wallet',
+        title: t('home.metrics.profit.title'),
         lines: [
             {
-                word: t("home.metrics.profit.line1.word"),
-                value: t("home.metrics.profit.line1.value"),
-                highlight: "competitor",
+                word: t('home.metrics.profit.line1.word'),
+                value: t('home.metrics.profit.line1.value'),
+                highlight: 'competitor',
             },
             {
-                word: t("home.metrics.profit.line2.word"),
-                value: t("home.metrics.profit.line2.value"),
-                highlight: "ours",
+                word: t('home.metrics.profit.line2.word'),
+                value: t('home.metrics.profit.line2.value'),
+                highlight: 'ours',
             },
         ],
-        right: t("home.metrics.profit.right"),
+        right: t('home.metrics.profit.right'),
     },
     {
-        id: "inspection",
-        iconName: "schedule-twotone",
-        iconClass: "metric-icon--inspection",
-        title: t("home.metrics.inspection.title"),
+        id: 'inspection',
+        iconName: 'schedule-twotone',
+        iconClass: 'metric-icon--inspection',
+        title: t('home.metrics.inspection.title'),
         lines: [
             {
-                word: t("home.metrics.inspection.line1.word"),
-                value: t("home.metrics.inspection.line1.value"),
+                word: t('home.metrics.inspection.line1.word'),
+                value: t('home.metrics.inspection.line1.value'),
             },
             {
-                word: t("home.metrics.inspection.line2.word"),
-                value: t("home.metrics.inspection.line2.value"),
-            },
-        ],
-    },
-    {
-        id: "time",
-        iconName: "watch-later-twotone",
-        iconClass: "metric-icon--time",
-        title: t("home.metrics.time.title"),
-        lines: [
-            {
-                word: t("home.metrics.time.line1.word"),
-                value: t("home.metrics.time.line1.value"),
-            },
-            {
-                word: t("home.metrics.time.line2.word"),
-                value: t("home.metrics.time.line2.value"),
+                word: t('home.metrics.inspection.line2.word'),
+                value: t('home.metrics.inspection.line2.value'),
             },
         ],
     },
     {
-        id: "eudr",
-        iconName: "qr-code-twotone",
-        iconClass: "metric-icon--eudr",
-        title: t("home.metrics.eudr.title"),
+        id: 'time',
+        iconName: 'watch-later-twotone',
+        iconClass: 'metric-icon--time',
+        title: t('home.metrics.time.title'),
         lines: [
             {
-                word: t("home.metrics.eudr.line1.word"),
-                value: t("home.metrics.eudr.line1.value"),
+                word: t('home.metrics.time.line1.word'),
+                value: t('home.metrics.time.line1.value'),
             },
             {
-                word: t("home.metrics.eudr.line2.word"),
-                value: t("home.metrics.eudr.line2.value"),
+                word: t('home.metrics.time.line2.word'),
+                value: t('home.metrics.time.line2.value'),
+            },
+        ],
+    },
+    {
+        id: 'eudr',
+        iconName: 'qr-code-twotone',
+        iconClass: 'metric-icon--eudr',
+        title: t('home.metrics.eudr.title'),
+        lines: [
+            {
+                word: t('home.metrics.eudr.line1.word'),
+                value: t('home.metrics.eudr.line1.value'),
+            },
+            {
+                word: t('home.metrics.eudr.line2.word'),
+                value: t('home.metrics.eudr.line2.value'),
             },
         ],
     },
@@ -161,7 +143,7 @@ const metricCards = [
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .metrics-section {
     .metrics-grid {

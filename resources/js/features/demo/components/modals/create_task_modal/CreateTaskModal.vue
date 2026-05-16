@@ -12,18 +12,12 @@
         @update:show="onUpdateShow"
         @after-leave="resetAddForm"
     >
-        <div
-            class="checklists-add-modal__body"
-            :style="addModalBodyScrollStyle"
-        >
+        <div class="checklists-add-modal__body" :style="addModalBodyScrollStyle">
             <nav
                 class="checklists-add-wizard__rail"
                 :aria-label="t('demo.create_task.wizard_aria')"
             >
-                <template
-                    v-for="(stepId, stepIdx) in ADD_WIZARD_STEPS"
-                    :key="stepId"
-                >
+                <template v-for="(stepId, stepIdx) in ADD_WIZARD_STEPS" :key="stepId">
                     <button
                         v-if="addWizardStep > stepId"
                         type="button"
@@ -43,11 +37,9 @@
                         aria-current="step"
                         :aria-label="addWizardStepAriaLabel(stepId)"
                     >
-                        <span
-                            class="checklists-add-wizard__digit"
-                            aria-hidden="true"
-                            >{{ stepId }}</span
-                        >
+                        <span class="checklists-add-wizard__digit" aria-hidden="true">{{
+                            stepId
+                        }}</span>
                     </div>
                     <div
                         v-else
@@ -55,11 +47,9 @@
                         aria-disabled="true"
                         :aria-label="addWizardStepAriaLabel(stepId)"
                     >
-                        <span
-                            class="checklists-add-wizard__digit"
-                            aria-hidden="true"
-                            >{{ stepId }}</span
-                        >
+                        <span class="checklists-add-wizard__digit" aria-hidden="true">{{
+                            stepId
+                        }}</span>
                     </div>
                     <div
                         v-if="stepIdx < ADD_WIZARD_STEPS.length - 1"
@@ -97,9 +87,7 @@
                                 :value="opt.value"
                                 class="checklists-scope-option"
                             >
-                                <span class="checklists-scope-label">{{
-                                    opt.label
-                                }}</span>
+                                <span class="checklists-scope-label">{{ opt.label }}</span>
                                 <p class="checklists-scope-hint">
                                     {{ opt.hint }}
                                 </p>
@@ -215,9 +203,7 @@
                                     class="checklists-repeat-times-block__item"
                                 >
                                     <n-time-picker
-                                        v-model:formatted-value="
-                                            addForm.repeatTimes[idx - 1]
-                                        "
+                                        v-model:formatted-value="addForm.repeatTimes[idx - 1]"
                                         format="HH:mm"
                                         value-format="HH:mm"
                                         size="large"
@@ -231,10 +217,7 @@
                 </template>
                 <template v-else>
                     <div
-                        v-if="
-                            addForm.taskScopeType ===
-                            TASK_SCOPE_TYPE.EQUIPMENT
-                        "
+                        v-if="addForm.taskScopeType === TASK_SCOPE_TYPE.EQUIPMENT"
                         class="checklists-equipment-block"
                     >
                         <p class="checklists-details-heading">
@@ -250,34 +233,24 @@
                                 size="large"
                             />
                         </n-form-item>
-                        <n-checkbox-group
-                            v-model:value="addForm.equipmentTargetIds"
-                        >
+                        <n-checkbox-group v-model:value="addForm.equipmentTargetIds">
                             <div
                                 v-for="item in equipmentGroupForPicker.items"
                                 :key="item.id"
                                 class="checklists-equipment-item"
                             >
-                                <n-checkbox
-                                    :value="item.id"
-                                    :label="item.label"
-                                    size="large"
-                                />
+                                <n-checkbox :value="item.id" :label="item.label" size="large" />
                             </div>
                         </n-checkbox-group>
                     </div>
                     <div
-                        v-if="
-                            addForm.taskScopeType === TASK_SCOPE_TYPE.ROOMS
-                        "
+                        v-if="addForm.taskScopeType === TASK_SCOPE_TYPE.ROOMS"
                         class="checklists-equipment-block"
                     >
                         <p class="checklists-details-heading">
                             {{ t('demo.create_task.task_subject') }}
                         </p>
-                        <n-checkbox-group
-                            v-model:value="addForm.roomTargetIds"
-                        >
+                        <n-checkbox-group v-model:value="addForm.roomTargetIds">
                             <div
                                 v-for="group in ROOM_GROUPS"
                                 :key="group.groupTitle"
@@ -291,11 +264,7 @@
                                     :key="item.id"
                                     class="checklists-equipment-item"
                                 >
-                                    <n-checkbox
-                                        :value="item.id"
-                                        :label="item.label"
-                                        size="large"
-                                    />
+                                    <n-checkbox :value="item.id" :label="item.label" size="large" />
                                 </div>
                             </div>
                         </n-checkbox-group>
@@ -303,12 +272,8 @@
                     <div class="checklists-task-fields-block">
                         <ChecklistTaskFieldsSection
                             v-model="addForm.taskFieldDefinitions"
-                            :task-field-type-options="
-                                taskFieldTypeOptionsForCurrentScope
-                            "
-                            v-model:corrective-action-rows="
-                                addForm.correctiveActionRows
-                            "
+                            v-model:corrective-action-rows="addForm.correctiveActionRows"
+                            :task-field-type-options="taskFieldTypeOptionsForCurrentScope"
                         />
                     </div>
                     <div class="checklists-report-corrections">
@@ -316,11 +281,7 @@
                             <p class="checklists-report-corrections__title">
                                 {{ t('demo.create_task.report_corrections') }}
                             </p>
-                            <n-switch
-                                v-model:value="
-                                    addForm.allowAssigneeReportCorrections
-                                "
-                            />
+                            <n-switch v-model:value="addForm.allowAssigneeReportCorrections" />
                         </div>
                         <p class="checklists-report-corrections__text">
                             {{ t('demo.create_task.report_corrections_text') }}
@@ -364,8 +325,8 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref, watch } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed, reactive, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import {
     NButton,
     NCheckbox,
@@ -382,33 +343,24 @@ import {
     NSwitch,
     NTimePicker,
     useMessage,
-} from "naive-ui";
-import ChecklistTaskFieldsSection from "@/features/demo/components/checklist/ChecklistTaskFieldsSection.vue";
-import Icon from "@/components/Icon.vue";
-import { useDemoState } from "@/features/demo/composables/useDemoState";
-import { normalizeEquipmentTargetIds } from "@/features/demo/data/demoChecklistEquipment";
-import {
-    normalizeRoomTargetIds,
-    ROOM_GROUPS,
-} from "@/features/demo/data/demoChecklistRooms";
-import { FREQUENCY_CODE } from "@/features/demo/data/demoChecklistTaskFrequency";
-import { TASK_SCOPE_TYPE } from "@/features/demo/data/demoChecklistTaskScope";
-import { TASK_FIELD_TYPE } from "@/features/demo/data/demoChecklistTaskFields";
-import {
-    equipmentGroupsForChecklistNiche,
-    taskFieldTypeOptionsByScopeType,
-} from "@/config/tasks";
-import {
-    NICHE_TO_SITE_ID,
-    resolveAssigneeIdForNiche,
-} from "@/features/demo/utils/demoStaff";
+} from 'naive-ui';
+import ChecklistTaskFieldsSection from '@/features/demo/components/checklist/ChecklistTaskFieldsSection.vue';
+import Icon from '@/components/Icon.vue';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
+import { normalizeEquipmentTargetIds } from '@/features/demo/data/demoChecklistEquipment';
+import { normalizeRoomTargetIds, ROOM_GROUPS } from '@/features/demo/data/demoChecklistRooms';
+import { FREQUENCY_CODE } from '@/features/demo/data/demoChecklistTaskFrequency';
+import { TASK_SCOPE_TYPE } from '@/features/demo/data/demoChecklistTaskScope';
+import { TASK_FIELD_TYPE } from '@/features/demo/data/demoChecklistTaskFields';
+import { equipmentGroupsForChecklistNiche, taskFieldTypeOptionsByScopeType } from '@/config/tasks';
+import { NICHE_TO_SITE_ID, resolveAssigneeIdForNiche } from '@/features/demo/utils/demoStaff';
 import {
     buildTaskPayloadFromDraft,
     createModalDraft,
     DEFAULT_TASK_ACTIVE_WEEKDAYS,
-} from "@/features/demo/domain/checklistTaskModel";
+} from '@/features/demo/domain/checklistTaskModel';
 
-defineOptions({ name: "CreateTaskModal" });
+defineOptions({ name: 'CreateTaskModal' });
 
 const { t } = useI18n();
 
@@ -427,40 +379,40 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(["update:show"]);
+const emit = defineEmits(['update:show']);
 
 /**
  * Инлайн на корень карточки модалки (teleport в body — гарантированно применяется).
  */
 const addModalCardRootStyle = {
-    display: "flex",
-    flexDirection: "column",
-    width: "min(600px, calc(100vw - 32px))",
-    maxWidth: "calc(100vw - 32px)",
-    maxHeight: "calc(100vh - 32px)",
+    display: 'flex',
+    flexDirection: 'column',
+    width: 'min(600px, calc(100vw - 32px))',
+    maxWidth: 'calc(100vw - 32px)',
+    maxHeight: 'calc(100vh - 32px)',
     minHeight: 0,
-    overflow: "hidden",
-    boxSizing: "border-box",
+    overflow: 'hidden',
+    boxSizing: 'border-box',
 };
 
 /**
  * Контейнер слота контента NCard — flex-цепочка до скролла в `.checklists-add-modal__body`.
  */
 const addModalCardContentStyle = {
-    display: "flex",
-    flexDirection: "column",
-    flex: "1 1 auto",
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '1 1 auto',
     minHeight: 0,
     minWidth: 0,
-    overflow: "hidden",
-    padding: "0",
+    overflow: 'hidden',
+    padding: '0',
 };
 
 const addModalBodyScrollStyle = {
-    flex: "1 1 auto",
+    flex: '1 1 auto',
     minHeight: 0,
-    overflowX: "hidden",
-    overflowY: "auto",
+    overflowX: 'hidden',
+    overflowY: 'auto',
 };
 
 const message = useMessage();
@@ -484,13 +436,13 @@ let activeValidationErrorElements = [];
 const ADD_WIZARD_STEPS = Object.freeze([1, 2]);
 const addWizardStep = ref(1);
 const WEEKDAY_OPTIONS = computed(() => [
-    { value: "mon", short: t('demo.create_task.day_mon') },
-    { value: "tue", short: t('demo.create_task.day_tue') },
-    { value: "wed", short: t('demo.create_task.day_wed') },
-    { value: "thu", short: t('demo.create_task.day_thu') },
-    { value: "fri", short: t('demo.create_task.day_fri') },
-    { value: "sat", short: t('demo.create_task.day_sat') },
-    { value: "sun", short: t('demo.create_task.day_sun') },
+    { value: 'mon', short: t('demo.create_task.day_mon') },
+    { value: 'tue', short: t('demo.create_task.day_tue') },
+    { value: 'wed', short: t('demo.create_task.day_wed') },
+    { value: 'thu', short: t('demo.create_task.day_thu') },
+    { value: 'fri', short: t('demo.create_task.day_fri') },
+    { value: 'sat', short: t('demo.create_task.day_sat') },
+    { value: 'sun', short: t('demo.create_task.day_sun') },
 ]);
 const startOfTodayTimestamp = () => {
     const d = new Date();
@@ -500,7 +452,7 @@ const startOfTodayTimestamp = () => {
 const toTimeString = (minutesTotal) => {
     const hours = Math.floor(minutesTotal / 60);
     const minutes = minutesTotal % 60;
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 };
 const buildRepeatTimesByCount = (count) => {
     const n = Number.isFinite(count) ? Math.max(1, Math.trunc(count)) : 1;
@@ -511,7 +463,7 @@ const buildRepeatTimesByCount = (count) => {
 };
 
 const addForm = reactive({
-    ...createModalDraft("coffee", { startDate: startOfTodayTimestamp() }),
+    ...createModalDraft('coffee', { startDate: startOfTodayTimestamp() }),
     scheduleSlotCount: 1,
 });
 
@@ -527,7 +479,7 @@ const equipmentGroupSelectOptions = computed(() =>
     })),
 );
 
-const equipmentPickerGroupTitle = ref("");
+const equipmentPickerGroupTitle = ref('');
 
 watch(
     () => equipmentGroupsForActiveNiche.value,
@@ -546,11 +498,9 @@ watch(
 const equipmentGroupForPicker = computed(() => {
     const groups = equipmentGroupsForActiveNiche.value;
     if (!groups.length) {
-        return { groupTitle: "", items: [] };
+        return { groupTitle: '', items: [] };
     }
-    const found = groups.find(
-        (g) => g.groupTitle === equipmentPickerGroupTitle.value,
-    );
+    const found = groups.find((g) => g.groupTitle === equipmentPickerGroupTitle.value);
     return found ?? groups[0];
 });
 const normalizedScheduleSlotCount = computed(() => {
@@ -561,9 +511,7 @@ const normalizedScheduleSlotCount = computed(() => {
     return Math.max(1, Math.trunc(n));
 });
 /** «Раз в неделю» — один день недели (single-select кнопок). */
-const isSingleWeekdayFrequency = computed(
-    () => addForm.frequency === FREQUENCY_CODE.WEEKLY,
-);
+const isSingleWeekdayFrequency = computed(() => addForm.frequency === FREQUENCY_CODE.WEEKLY);
 
 watch(
     () => equipmentPickerGroupTitle.value,
@@ -587,15 +535,13 @@ watch(
         }
         if (scope === TASK_SCOPE_TYPE.EQUIPMENT) {
             const g = equipmentGroupsForChecklistNiche(props.activeNiche);
-            equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? "";
+            equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? '';
         }
         const allowedFieldTypes = new Set(
             taskFieldTypeOptionsByScopeType(scope).map((o) => o.value),
         );
         addForm.taskFieldDefinitions = (
-            Array.isArray(addForm.taskFieldDefinitions)
-                ? addForm.taskFieldDefinitions
-                : []
+            Array.isArray(addForm.taskFieldDefinitions) ? addForm.taskFieldDefinitions : []
         ).filter((row) => allowedFieldTypes.has(row?.fieldType));
     },
 );
@@ -616,13 +562,10 @@ watch(
             addForm.scheduleSlotCount = 1;
         }
         if (isSingleWeekdayFrequency.value) {
-            addForm.activeWeekdays = ["mon"];
+            addForm.activeWeekdays = ['mon'];
             return;
         }
-        if (
-            frequency === FREQUENCY_CODE.CUSTOM ||
-            frequency === FREQUENCY_CODE.DAILY
-        ) {
+        if (frequency === FREQUENCY_CODE.CUSTOM || frequency === FREQUENCY_CODE.DAILY) {
             addForm.activeWeekdays = [...DEFAULT_TASK_ACTIVE_WEEKDAYS];
         }
     },
@@ -639,13 +582,11 @@ watch(
 watch(
     () => addForm.repeatTimes,
     (times) => {
-        const generated = buildRepeatTimesByCount(
-            normalizedScheduleSlotCount.value,
-        );
+        const generated = buildRepeatTimesByCount(normalizedScheduleSlotCount.value);
         const current = Array.isArray(times) ? [...times] : [];
         let changed = false;
         for (let i = 0; i < generated.length; i += 1) {
-            const value = String(current[i] ?? "").trim();
+            const value = String(current[i] ?? '').trim();
             if (!/^\d{2}:\d{2}$/.test(value)) {
                 current[i] = generated[i];
                 changed = true;
@@ -669,7 +610,7 @@ watch(
             addForm.taskScopeType === TASK_SCOPE_TYPE.EQUIPMENT &&
             normalizeEquipmentTargetIds(ids).length
         ) {
-            clearValidationErrorForElement(".checklists-equipment-block");
+            clearValidationErrorForElement('.checklists-equipment-block');
         }
     },
     { deep: true },
@@ -678,11 +619,8 @@ watch(
 watch(
     () => addForm.roomTargetIds,
     (ids) => {
-        if (
-            addForm.taskScopeType === TASK_SCOPE_TYPE.ROOMS &&
-            normalizeRoomTargetIds(ids).length
-        ) {
-            clearValidationErrorForElement(".checklists-equipment-block");
+        if (addForm.taskScopeType === TASK_SCOPE_TYPE.ROOMS && normalizeRoomTargetIds(ids).length) {
+            clearValidationErrorForElement('.checklists-equipment-block');
         }
     },
     { deep: true },
@@ -693,7 +631,7 @@ watch(
     (value) => {
         if (value != null && String(value).trim()) {
             clearValidationErrorForSelectorControls(
-                ".checklists-add-form__assignee .n-base-selection--selected.checklists-validation-error-control",
+                '.checklists-add-form__assignee .n-base-selection--selected.checklists-validation-error-control',
             );
         }
     },
@@ -703,7 +641,7 @@ watch(
     () => addForm.taskFieldDefinitions,
     () => {
         clearValidationErrorForSelectorControls(
-            ".task-fields-section .n-base-selection--selected.checklists-validation-error-control",
+            '.task-fields-section .n-base-selection--selected.checklists-validation-error-control',
         );
     },
     { deep: true },
@@ -712,7 +650,7 @@ watch(
 watch(
     () => addForm.correctiveActionRows,
     () => {
-        clearValidationErrorForElement(".task-fields-section__exception-block");
+        clearValidationErrorForElement('.task-fields-section__exception-block');
     },
     { deep: true },
 );
@@ -757,11 +695,11 @@ const frequencySelectOptions = computed(() => [
 ]);
 
 const onUpdateShow = (value) => {
-    emit("update:show", value);
+    emit('update:show', value);
 };
 
 const closeModal = () => {
-    emit("update:show", false);
+    emit('update:show', false);
 };
 
 watch(
@@ -785,7 +723,7 @@ watch(
         }
         addForm.equipmentTargetIds = [];
         const g = equipmentGroupsForChecklistNiche(props.activeNiche);
-        equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? "";
+        equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? '';
     },
 );
 
@@ -795,7 +733,7 @@ watch(
 const resetAddForm = () => {
     addWizardStep.value = 1;
     const g = equipmentGroupsForChecklistNiche(props.activeNiche);
-    equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? "";
+    equipmentPickerGroupTitle.value = g[0]?.groupTitle ?? '';
     Object.assign(addForm, {
         ...createModalDraft(props.activeNiche, {
             startDate: startOfTodayTimestamp(),
@@ -823,21 +761,21 @@ const onAddWizardStepClick = (stepId) => {
 
 const validateScheduleFields = () => {
     if (addForm.startDate == null) {
-        scrollToModalField(".checklists-details-start-date");
+        scrollToModalField('.checklists-details-start-date');
         message.warning(t('demo.create_task.warn_start_date'));
         return false;
     }
     const slotCountValue = Number(addForm.scheduleSlotCount);
     if (!Number.isFinite(slotCountValue) || Math.trunc(slotCountValue) < 1) {
-        scrollToModalField(".checklists-details-repeats-per-day");
+        scrollToModalField('.checklists-details-repeats-per-day');
         message.warning(t('demo.create_task.warn_repeats'));
         return false;
     }
     if (
         addForm.repeatTimes.length !== normalizedScheduleSlotCount.value ||
-        addForm.repeatTimes.some((time) => !String(time ?? "").trim())
+        addForm.repeatTimes.some((time) => !String(time ?? '').trim())
     ) {
-        scrollToModalField(".checklists-repeat-times-block");
+        scrollToModalField('.checklists-repeat-times-block');
         message.warning(t('demo.create_task.warn_repeat_times'));
         return false;
     }
@@ -850,7 +788,7 @@ const clearValidationErrorMark = () => {
         return;
     }
     activeValidationErrorElements.forEach((el) =>
-        el.classList.remove("checklists-validation-error-control"),
+        el.classList.remove('checklists-validation-error-control'),
     );
     activeValidationErrorElements = [];
 };
@@ -860,10 +798,8 @@ const clearValidationErrorForElement = (selector) => {
     if (!target) {
         return;
     }
-    target.classList.remove("checklists-validation-error-control");
-    activeValidationErrorElements = activeValidationErrorElements.filter(
-        (el) => el !== target,
-    );
+    target.classList.remove('checklists-validation-error-control');
+    activeValidationErrorElements = activeValidationErrorElements.filter((el) => el !== target);
 };
 
 const clearValidationErrorForSelectorControls = (selector) => {
@@ -871,7 +807,7 @@ const clearValidationErrorForSelectorControls = (selector) => {
     if (!controls.length) {
         return;
     }
-    controls.forEach((el) => el.classList.remove("checklists-validation-error-control"));
+    controls.forEach((el) => el.classList.remove('checklists-validation-error-control'));
     activeValidationErrorElements = activeValidationErrorElements.filter(
         (el) => !controls.includes(el),
     );
@@ -879,7 +815,7 @@ const clearValidationErrorForSelectorControls = (selector) => {
 
 const scrollToModalField = (selector, highlightContainer = false) => {
     requestAnimationFrame(() => {
-        const container = document.querySelector(".checklists-add-modal__body");
+        const container = document.querySelector('.checklists-add-modal__body');
         const target = document.querySelector(selector);
         if (!container || !target) {
             return;
@@ -888,7 +824,7 @@ const scrollToModalField = (selector, highlightContainer = false) => {
         const controls = highlightContainer
             ? []
             : target.querySelectorAll(
-                  ".n-input, .n-base-selection, .n-time-picker, .n-date-picker, .n-input-number",
+                  '.n-input, .n-base-selection, .n-time-picker, .n-date-picker, .n-input-number',
               );
         if (controls.length) {
             activeValidationErrorElements = Array.from(controls);
@@ -896,53 +832,43 @@ const scrollToModalField = (selector, highlightContainer = false) => {
             activeValidationErrorElements = [target];
         }
         activeValidationErrorElements.forEach((el) =>
-            el.classList.add("checklists-validation-error-control"),
+            el.classList.add('checklists-validation-error-control'),
         );
         const containerRect = container.getBoundingClientRect();
         const targetRect = target.getBoundingClientRect();
         const top = targetRect.top - containerRect.top + container.scrollTop - 12;
         container.scrollTo({
             top: Math.max(top, 0),
-            behavior: "smooth",
+            behavior: 'smooth',
         });
     });
 };
 
 const validateTaskFieldsSection = () => {
-    const rows = Array.isArray(addForm.taskFieldDefinitions)
-        ? addForm.taskFieldDefinitions
-        : [];
+    const rows = Array.isArray(addForm.taskFieldDefinitions) ? addForm.taskFieldDefinitions : [];
     if (!rows.length) {
-        scrollToModalField(".task-fields-section", true);
+        scrollToModalField('.task-fields-section', true);
         message.warning(t('demo.create_task.warn_task_field'));
         return false;
     }
     const hasSelectedFieldTypeRequiringExceptions = rows.some(
-        (row) =>
-            Boolean(row?.fieldType) &&
-            row.fieldType !== TASK_FIELD_TYPE.SINGLE_CHOICE,
+        (row) => Boolean(row?.fieldType) && row.fieldType !== TASK_FIELD_TYPE.SINGLE_CHOICE,
     );
     for (let i = 0; i < rows.length; i += 1) {
         const row = rows[i] ?? {};
-        const cfg = row.config && typeof row.config === "object" ? row.config : {};
+        const cfg = row.config && typeof row.config === 'object' ? row.config : {};
         const rowNum = i + 1;
         if (!row.fieldType) {
             scrollToModalField(`[data-field-row-index="${i}"]`);
             message.warning(t('demo.create_task.warn_field_type', { n: rowNum }));
             return false;
         }
-        const hasText = (v) => String(v ?? "").trim().length > 0;
+        const hasText = (v) => String(v ?? '').trim().length > 0;
         const hasRequiredNumber = (v) =>
-            v !== null &&
-            v !== undefined &&
-            String(v).trim() !== "" &&
-            Number.isFinite(Number(v));
+            v !== null && v !== undefined && String(v).trim() !== '' && Number.isFinite(Number(v));
         switch (row.fieldType) {
             case TASK_FIELD_TYPE.TEMPERATURE:
-                if (
-                    !hasRequiredNumber(cfg.minC) ||
-                    !hasRequiredNumber(cfg.maxC)
-                ) {
+                if (!hasRequiredNumber(cfg.minC) || !hasRequiredNumber(cfg.maxC)) {
                     scrollToModalField(`[data-field-row-index="${i}"]`);
                     message.warning(t('demo.create_task.warn_field_temp', { n: rowNum }));
                     return false;
@@ -981,11 +907,9 @@ const validateTaskFieldsSection = () => {
         const exceptionRows = Array.isArray(addForm.correctiveActionRows)
             ? addForm.correctiveActionRows
             : [];
-        const hasAny = exceptionRows.some(
-            (r) => String(r?.text ?? "").trim().length > 0,
-        );
+        const hasAny = exceptionRows.some((r) => String(r?.text ?? '').trim().length > 0);
         if (!hasAny) {
-            scrollToModalField(".task-fields-section__exception-block", true);
+            scrollToModalField('.task-fields-section__exception-block', true);
             message.warning(t('demo.create_task.warn_corrective_actions'));
             return false;
         }
@@ -1021,8 +945,8 @@ const advanceAddWizardStep = () => {
     if (addWizardStep.value === 2) {
         return;
     }
-    if (!String(addForm.title ?? "").trim()) {
-        scrollToModalField(".checklists-add-form__title");
+    if (!String(addForm.title ?? '').trim()) {
+        scrollToModalField('.checklists-add-form__title');
         message.warning(t('demo.create_task.warn_title_required'));
         return;
     }
@@ -1032,7 +956,7 @@ const advanceAddWizardStep = () => {
         addForm.assignedStaffId,
     );
     if (isEquipmentOrRooms.value && !assigneeResolved) {
-        scrollToModalField(".checklists-add-form__assignee");
+        scrollToModalField('.checklists-add-form__assignee');
         message.warning(t('demo.create_task.warn_assignee_required'));
         return;
     }
@@ -1055,7 +979,7 @@ const submitAddTask = () => {
         addForm.assignedStaffId,
     );
     if (isEquipmentOrRooms.value && !assigneeResolved) {
-        scrollToModalField(".checklists-add-form__assignee");
+        scrollToModalField('.checklists-add-form__assignee');
         message.warning(t('demo.create_task.warn_assignee_scope'));
         return;
     }
@@ -1065,7 +989,7 @@ const submitAddTask = () => {
     if (addForm.taskScopeType === TASK_SCOPE_TYPE.EQUIPMENT) {
         const eq = normalizeEquipmentTargetIds(addForm.equipmentTargetIds);
         if (!eq.length) {
-            scrollToModalField(".checklists-equipment-block", true);
+            scrollToModalField('.checklists-equipment-block', true);
             message.warning(t('demo.create_task.warn_scope_required'));
             return;
         }
@@ -1073,7 +997,7 @@ const submitAddTask = () => {
     if (addForm.taskScopeType === TASK_SCOPE_TYPE.ROOMS) {
         const rooms = normalizeRoomTargetIds(addForm.roomTargetIds);
         if (!rooms.length) {
-            scrollToModalField(".checklists-equipment-block", true);
+            scrollToModalField('.checklists-equipment-block', true);
             message.warning(t('demo.create_task.warn_scope_empty'));
             return;
         }
@@ -1091,12 +1015,12 @@ const submitAddTask = () => {
         message.warning(t('demo.create_task.warn_checkpoint_name'));
         return;
     }
-    emit("update:show", false);
+    emit('update:show', false);
 };
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklists-add-modal__body {
     display: flex;
@@ -1273,8 +1197,7 @@ const submitAddTask = () => {
         margin-bottom: 15px;
     }
 
-    .header-checklists-report-corrections
-        .checklists-report-corrections__title {
+    .header-checklists-report-corrections .checklists-report-corrections__title {
         margin: 0;
         flex: 1;
         min-width: 0;
@@ -1481,9 +1404,8 @@ const submitAddTask = () => {
 .checklists-equipment-item {
     margin-bottom: 15px;
 
-    &:last-child{
+    &:last-child {
         margin: 0;
     }
 }
-
 </style>

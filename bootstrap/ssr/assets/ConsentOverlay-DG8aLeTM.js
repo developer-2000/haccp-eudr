@@ -76,17 +76,17 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ name: "ConsentOverlay" }, {
           default: withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
               _push2(ssrRenderComponent(unref(NSwitch), {
-                size: "medium",
                 value: accepted.value,
-                "onUpdate:value": ($event) => accepted.value = $event
+                "onUpdate:value": ($event) => accepted.value = $event,
+                size: "medium"
               }, null, _parent2, _scopeId));
               _push2(`<span class="switch-label"${_scopeId}>${ssrInterpolate(unref(t)("consent.checkbox_label"))}</span>`);
             } else {
               return [
                 createVNode(unref(NSwitch), {
-                  size: "medium",
                   value: accepted.value,
-                  "onUpdate:value": ($event) => accepted.value = $event
+                  "onUpdate:value": ($event) => accepted.value = $event,
+                  size: "medium"
                 }, null, 8, ["value", "onUpdate:value"]),
                 createVNode("span", { class: "switch-label" }, toDisplayString(unref(t)("consent.checkbox_label")), 1)
               ];

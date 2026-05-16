@@ -30,23 +30,24 @@
                 :key="link.code"
                 :href="link.href"
                 :hreflang="link.code"
-            >{{ link.name }}</a>
+                >{{ link.name }}</a
+            >
         </nav>
     </footer>
 </template>
 
 <script setup>
-defineOptions({ name: "Footer" });
+defineOptions({ name: 'Footer' });
 
-import { computed, ref, onMounted } from "vue";
-import { Link, usePage } from "@inertiajs/vue3";
-import { useI18n } from "vue-i18n";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
+import { computed, ref, onMounted } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
 
 const { t } = useI18n();
 
 const page = usePage();
-const siteConfig = computed(() => page.props.siteConfig || { name: "", adminEmail: "" });
+const siteConfig = computed(() => page.props.siteConfig || { name: '', adminEmail: '' });
 
 const START_YEAR = 2026;
 
@@ -59,7 +60,7 @@ const currentLocale = ref(useCurrentLocale());
 
 /** Реактивный путь без query/hash; обновляется на каждый Inertia-визит (Footer — persistent layout, onMounted сработал бы один раз). */
 const currentPath = computed(() => {
-    const url = page.url || "/";
+    const url = page.url || '/';
     const qIdx = url.search(/[?#]/);
     return qIdx === -1 ? url : url.slice(0, qIdx);
 });
@@ -78,12 +79,11 @@ const contactLink = computed(() => `/${currentLocale.value}/contact`);
 const seoLocaleLinks = computed(() => {
     const allLocales = page.props.availableLocales || [];
     const countries = page.props.localeCountries || {};
-    const switcherCodes = new Set(
-        (page.props.switcherLocales || []).map((l) => l.code),
-    );
+    const switcherCodes = new Set((page.props.switcherLocales || []).map((l) => l.code));
     const locale = currentLocale.value;
 
-    const pathWithoutLocale = currentPath.value.replace(new RegExp(`^/${locale}(/|$)`), '$1') || '/';
+    const pathWithoutLocale =
+        currentPath.value.replace(new RegExp(`^/${locale}(/|$)`), '$1') || '/';
 
     return allLocales
         .filter((code) => !switcherCodes.has(code))
@@ -96,7 +96,7 @@ const seoLocaleLinks = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .footer-seo-locales {
     position: absolute;
@@ -193,5 +193,4 @@ const seoLocaleLinks = computed(() => {
         }
     }
 }
-
 </style>

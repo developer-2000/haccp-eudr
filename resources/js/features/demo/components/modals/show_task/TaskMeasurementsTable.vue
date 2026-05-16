@@ -2,9 +2,9 @@
     <div v-if="task.measurements?.length" class="checklist-modal__table-wrap">
         <table class="checklist-modal__table checklist-modal__table--measurements">
             <colgroup>
-                <col class="checklist-modal__col-time">
-                <col class="checklist-modal__col-decision">
-                <col class="checklist-modal__col-status">
+                <col class="checklist-modal__col-time" />
+                <col class="checklist-modal__col-decision" />
+                <col class="checklist-modal__col-status" />
             </colgroup>
             <thead>
                 <tr>
@@ -18,61 +18,46 @@
                 :key="item.time"
                 class="checklist-modal__measurement-group"
                 :class="[
-                    'checklist-modal__measurement-group--' +
-                        (item.status || 'pending'),
+                    'checklist-modal__measurement-group--' + (item.status || 'pending'),
                     {
                         'checklist-modal__measurement-group--ai-warning':
                             item.aiWarning?.ai_status === 'warning',
                         'checklist-modal__measurement-group--pending-neutral':
-                            (item.status || 'pending') === 'pending' &&
-                            item.aiWarning == null,
+                            (item.status || 'pending') === 'pending' && item.aiWarning == null,
                     },
                 ]"
             >
                 <tr>
-                    <td
-                        class="checklist-modal__measurement-row-cell"
-                        data-label="Время"
-                    >
+                    <td class="checklist-modal__measurement-row-cell" data-label="Время">
                         <span class="checklist-modal__bolt-text">{{ item.time }}</span>
                     </td>
-                    <td
-                        class="checklist-modal__measurement-row-cell"
-                        data-label="Решение"
-                    >
-                        <table
-                            v-if="item.aiWarning"
-                            class="checklist-modal__decision-nested"
-                        >
+                    <td class="checklist-modal__measurement-row-cell" data-label="Решение">
+                        <table v-if="item.aiWarning" class="checklist-modal__decision-nested">
                             <tbody>
-                            <tr>
-                                <td class="checklist-modal__decision-nested__value">
-                                    <span class="checklist-modal__bolt-text metric-value">{{
-                                        item.value
-                                    }}</span>
-                                </td>
-                            </tr>
-                            <tr v-if="item.aiWarning.threat">
-                                <td class="checklist-modal__decision-nested__threat">
-                                    {{ item.aiWarning.threat }}
-                                </td>
-                            </tr>
-                            <tr v-if="item.aiWarning.action">
-                                <td class="checklist-modal__decision-nested__action">
-                                    {{ item.aiWarning.action }}
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="checklist-modal__decision-nested__value">
+                                        <span class="checklist-modal__bolt-text metric-value">{{
+                                            item.value
+                                        }}</span>
+                                    </td>
+                                </tr>
+                                <tr v-if="item.aiWarning.threat">
+                                    <td class="checklist-modal__decision-nested__threat">
+                                        {{ item.aiWarning.threat }}
+                                    </td>
+                                </tr>
+                                <tr v-if="item.aiWarning.action">
+                                    <td class="checklist-modal__decision-nested__action">
+                                        {{ item.aiWarning.action }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                        <span
-                            v-else
-                            class="checklist-modal__measurement-value"
-                        >{{ item.value }}</span>
+                        <span v-else class="checklist-modal__measurement-value">{{
+                            item.value
+                        }}</span>
                     </td>
-                    <td
-                        class="checklist-modal__measurement-row-cell"
-                        data-label="Статус"
-                    >
+                    <td class="checklist-modal__measurement-row-cell" data-label="Статус">
                         <span
                             class="checklist-modal__measurement-value checklist-modal__measurement-value--status"
                         >
@@ -91,8 +76,9 @@
                                         ? 'checklist-modal__status-trigger--warning'
                                         : 'checklist-modal__status-trigger--problem',
                                     {
-                                        'checklist-modal__status-trigger--with-action':
-                                            Boolean(item.correctiveAction),
+                                        'checklist-modal__status-trigger--with-action': Boolean(
+                                            item.correctiveAction,
+                                        ),
                                     },
                                 ]"
                                 :aria-label="t('demo.measurements.respond')"
@@ -103,8 +89,8 @@
                             <button
                                 v-else-if="
                                     !isHotMode &&
-                                        item.status === 'pending' &&
-                                        !taskScheduledForFuture
+                                    item.status === 'pending' &&
+                                    !taskScheduledForFuture
                                 "
                                 type="button"
                                 class="checklist-modal__status-trigger"
@@ -127,7 +113,13 @@
                         </span>
                     </td>
                 </tr>
-                <tr v-if=" !isHotMode && expandedActionRowKey === item.time && item.status === 'problem' " >
+                <tr
+                    v-if="
+                        !isHotMode &&
+                        expandedActionRowKey === item.time &&
+                        item.status === 'problem'
+                    "
+                >
                     <td colspan="3" class="checklist-modal__action-row">
                         <div class="checklist-modal__action-box">
                             <p class="checklist-modal__action-title">
@@ -153,10 +145,10 @@
 </template>
 
 <script setup>
-import {NSelect} from "naive-ui";
-import {useI18n} from "vue-i18n";
+import { NSelect } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 const props = defineProps({
     task: {
@@ -177,13 +169,10 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(["update:expandedActionRowKey", "open-pending"]);
+const emit = defineEmits(['update:expandedActionRowKey', 'open-pending']);
 
 const toggleActionRow = (time) => {
-    emit(
-        "update:expandedActionRowKey",
-        props.expandedActionRowKey === time ? null : time,
-    );
+    emit('update:expandedActionRowKey', props.expandedActionRowKey === time ? null : time);
 };
 
 const resolveActionOptions = (task) =>
@@ -194,13 +183,12 @@ const resolveActionOptions = (task) =>
 
 const onCorrectiveActionSelect = (measurement, value) => {
     measurement.correctiveAction = value;
-    emit("update:expandedActionRowKey", null);
+    emit('update:expandedActionRowKey', null);
 };
-
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklist-modal__table-wrap {
     width: 100%;
@@ -234,7 +222,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
         }
     }
 
-    .checklist-modal__table--measurements{
+    .checklist-modal__table--measurements {
         font-weight: 500;
 
         th,
@@ -261,9 +249,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
             width: 25%;
             min-width: 75px;
         }
-
     }
-
 }
 
 .checklist-modal__decision-nested {
@@ -303,25 +289,24 @@ const onCorrectiveActionSelect = (measurement, value) => {
 }
 
 .checklist-modal__bolt-text,
-.metric-value{
+.metric-value {
     font-size: 14px;
     font-weight: 500;
     color: $accent-primary-dark;
 }
 
-.metric-value{
+.metric-value {
     font-size: 16px;
     font-weight: 300;
     color: $text-color;
     background: #f7f6f2;
     padding: 2px 10px;
     display: inline-block;
-    width: auto!important;
+    width: auto !important;
     border-radius: 5px;
 }
 
-.checklist-modal__measurement-row-cell[data-label="Решение"]
-    > .checklist-modal__measurement-value {
+.checklist-modal__measurement-row-cell[data-label='Решение'] > .checklist-modal__measurement-value {
     font-weight: 500;
 }
 
@@ -539,7 +524,7 @@ const onCorrectiveActionSelect = (measurement, value) => {
 
     .checklist-modal__measurement-group
         > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Статус"] {
+        > td.checklist-modal__measurement-row-cell[data-label='Статус'] {
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -563,8 +548,8 @@ const onCorrectiveActionSelect = (measurement, value) => {
     }
 
     .checklist-modal__measurement-group
-    > tr:first-child
-    > td.checklist-modal__measurement-row-cell[data-label="Время"]{
+        > tr:first-child
+        > td.checklist-modal__measurement-row-cell[data-label='Время'] {
         justify-content: flex-end;
 
         &::before {
@@ -576,10 +561,9 @@ const onCorrectiveActionSelect = (measurement, value) => {
         }
     }
 
-
     .checklist-modal__measurement-group
         > tr:first-child
-        > td.checklist-modal__measurement-row-cell[data-label="Решение"]{
+        > td.checklist-modal__measurement-row-cell[data-label='Решение'] {
         justify-content: center;
 
         &::before {
@@ -605,7 +589,6 @@ const onCorrectiveActionSelect = (measurement, value) => {
         }
     }
 }
-
 
 .checklist-modal__status-pill {
     display: inline-flex;
@@ -796,4 +779,3 @@ const onCorrectiveActionSelect = (measurement, value) => {
     }
 }
 </style>
-

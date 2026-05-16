@@ -10,7 +10,7 @@
                 v-if="record"
                 type="button"
                 class="batch-public__print btn-client btn-outline-primary"
-                @click="print"
+                @click="runPrint"
             >
                 {{ t('batch.public.print_pdf') }}
             </button>
@@ -40,15 +40,21 @@
                 </p>
                 <div class="batch-public__refs">
                     <div>
-                        <span class="batch-public__label">{{ t('batch.public.batch_id_label') }}</span>
+                        <span class="batch-public__label">{{
+                            t('batch.public.batch_id_label')
+                        }}</span>
                         <strong>{{ record.id }}</strong>
                     </div>
                     <div>
-                        <span class="batch-public__label">{{ t('batch.public.dds_reference_label') }}</span>
+                        <span class="batch-public__label">{{
+                            t('batch.public.dds_reference_label')
+                        }}</span>
                         <strong>{{ record.ddsReference }}</strong>
                     </div>
                     <div>
-                        <span class="batch-public__label">{{ t('batch.public.status_label') }}</span>
+                        <span class="batch-public__label">{{
+                            t('batch.public.status_label')
+                        }}</span>
                         <span
                             class="batch-public__status"
                             :class="`batch-public__status--${record.status}`"
@@ -143,10 +149,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="(row, idx) in record.supplierChain"
-                                    :key="idx"
-                                >
+                                <tr v-for="(row, idx) in record.supplierChain" :key="idx">
                                     <td>{{ row.role }}</td>
                                     <td>{{ row.name }}</td>
                                     <td>{{ row.country }}</td>
@@ -162,19 +165,27 @@
                             class="batch-public__chain-card"
                         >
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label">{{ t('batch.public.chain_role') }}:</span>
+                                <span class="batch-public__chain-label"
+                                    >{{ t('batch.public.chain_role') }}:</span
+                                >
                                 {{ row.role }}
                             </p>
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label">{{ t('batch.public.chain_participant') }}:</span>
+                                <span class="batch-public__chain-label"
+                                    >{{ t('batch.public.chain_participant') }}:</span
+                                >
                                 {{ row.name }}
                             </p>
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label">{{ t('batch.public.chain_country') }}:</span>
+                                <span class="batch-public__chain-label"
+                                    >{{ t('batch.public.chain_country') }}:</span
+                                >
                                 {{ row.country }}
                             </p>
                             <p class="batch-public__chain-line">
-                                <span class="batch-public__chain-label">{{ t('batch.public.chain_ref') }}:</span>
+                                <span class="batch-public__chain-label"
+                                    >{{ t('batch.public.chain_ref') }}:</span
+                                >
                                 {{ row.ref }}
                             </p>
                         </article>
@@ -188,16 +199,16 @@
                 <ul class="batch-public__evidence">
                     <li v-for="(ev, idx) in record.evidence" :key="idx">
                         <strong>{{ ev.label }}</strong>
-                        <span class="batch-public__evidence-ref">{{
-                            ev.ref
-                        }}</span>
+                        <span class="batch-public__evidence-ref">{{ ev.ref }}</span>
                     </li>
                 </ul>
             </section>
 
             <footer class="batch-public__footer">
                 <div class="batch-public__meta">
-                    <span>{{ t('batch.public.document_version', { version: record.documentVersion }) }}</span>
+                    <span>{{
+                        t('batch.public.document_version', { version: record.documentVersion })
+                    }}</span>
                     <span>{{ t('batch.public.generated_at', { date: record.generatedAt }) }}</span>
                 </div>
                 <p class="batch-public__disclaimer">{{ record.disclaimer }}</p>
@@ -210,17 +221,14 @@
 </template>
 
 <script setup>
-import { computed, nextTick, watch } from "vue";
-import { usePage } from "@inertiajs/vue3";
-import { useI18n } from "vue-i18n";
-import {
-    getBatchPublicRecord,
-    buildBatchPublicUrl,
-} from "@/features/demo/data/eudrBatchPublic";
-import SeoHead from "@/components/SeoHead.vue";
+import { computed, nextTick, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { getBatchPublicRecord, buildBatchPublicUrl } from '@/features/demo/data/eudrBatchPublic';
+import SeoHead from '@/components/SeoHead.vue';
 
 defineOptions({
-    name: "BatchPublic",
+    name: 'BatchPublic',
 });
 
 const props = defineProps({
@@ -243,15 +251,11 @@ const page = usePage();
 const batchId = computed(() => props.batchId);
 const record = computed(() => getBatchPublicRecord(batchId.value));
 
-const homePath = "/en";
-
-const canonicalUrl = computed(() =>
-    buildBatchPublicUrl(batchId.value, page.props.locale ?? null),
-);
+const canonicalUrl = computed(() => buildBatchPublicUrl(batchId.value, page.props.locale ?? null));
 
 const wantsAutoPrint = computed(() => props.print === true);
 
-const print = () => window.print();
+const runPrint = () => window.print();
 
 const close = () => {
     window.close();
@@ -278,20 +282,16 @@ const runAutoPrint = () => {
 watch(
     () => [record.value?.id, props.print],
     () => runAutoPrint(),
-    { flush: "post", immediate: true },
+    { flush: 'post', immediate: true },
 );
 </script>
 
 <style scoped lang="scss">
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .batch-public {
     min-height: 100%;
-    background: linear-gradient(
-        180deg,
-        rgba($bg-light-grey, 0.35) 0%,
-        $bg-gray 40%
-    );
+    background: linear-gradient(180deg, rgba($bg-light-grey, 0.35) 0%, $bg-gray 40%);
     padding: $spacing-lg $spacing-md $spacing-2xl;
 }
 

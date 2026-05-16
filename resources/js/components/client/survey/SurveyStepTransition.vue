@@ -1,8 +1,5 @@
 <template>
-    <Transition
-        :name="instant ? 'survey-step-instant' : 'survey-step'"
-        mode="out-in"
-    >
+    <Transition :name="instant ? 'survey-step-instant' : 'survey-step'" mode="out-in">
         <div :key="stepKey" class="survey-step-transition">
             <slot />
         </div>
@@ -10,7 +7,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: "SurveyStepTransition" });
+defineOptions({ name: 'SurveyStepTransition' });
 
 defineProps({
     /** Ключ смены шага для анимации входа/выхода. */
@@ -27,7 +24,7 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-step-transition {
     display: flex;

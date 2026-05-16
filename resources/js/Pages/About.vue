@@ -46,14 +46,14 @@
 
                     <section class="about-fp-section">
                         <div class="about-fp">
-                            <h2
-                                class="about-fp__title about-fp__title--with-icon"
-                            >
+                            <h2 class="about-fp__title about-fp__title--with-icon">
                                 <ExclamationCircleTwotone
                                     class="about-fp__title-icon about-fp__title-icon--danger"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">{{ t('about.problem.title') }}</span>
+                                <span class="about-fp__title-label">{{
+                                    t('about.problem.title')
+                                }}</span>
                             </h2>
                             <p class="about-fp__text">
                                 {{ t('about.problem.lead') }}
@@ -66,47 +66,61 @@
                             </ul>
                             <p class="about-fp__text">{{ t('about.problem.as_result') }}</p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">{{ t('about.problem.result_1') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.problem.result_2') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.problem.result_3') }}</li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.problem.result_1') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.problem.result_2') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.problem.result_3') }}
+                                </li>
                             </ul>
                             <p class="about-fp__text">
                                 {{ t('about.problem.two_options') }}
                             </p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">{{ t('about.problem.option_1') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.problem.option_2') }}</li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.problem.option_1') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.problem.option_2') }}
+                                </li>
                             </ul>
                         </div>
                     </section>
 
                     <section class="about-fp-section">
                         <div class="about-fp">
-                            <h2
-                                class="about-fp__title about-fp__title--with-icon"
-                            >
+                            <h2 class="about-fp__title about-fp__title--with-icon">
                                 <Bulb
                                     class="about-fp__title-icon about-fp__title-icon--accent-orange"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">{{ t('about.what_i_do.title') }}</span>
+                                <span class="about-fp__title-label">{{
+                                    t('about.what_i_do.title')
+                                }}</span>
                             </h2>
                             <p class="about-fp__text">
                                 {{ t('about.what_i_do.p1') }}
                             </p>
                             <p class="about-fp__text">{{ t('about.what_i_do.every_action') }}</p>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">{{ t('about.what_i_do.item_1') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.what_i_do.item_2') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.what_i_do.item_3') }}</li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_i_do.item_1') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_i_do.item_2') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_i_do.item_3') }}
+                                </li>
                             </ul>
                             <p class="about-fp__text">
                                 {{ t('about.what_i_do.task_not_done') }}
                             </p>
                             <p class="about-fp__text">{{ t('about.what_i_do.main_thing') }}</p>
-                            <p
-                                class="about-fp__text about-fp__text--with-inline-icon"
-                            >
+                            <p class="about-fp__text about-fp__text--with-inline-icon">
                                 <Icon
                                     name="hand-point-right"
                                     class="about-fp__title-icon about-fp__title-icon--accent-orange"
@@ -121,14 +135,14 @@
 
                     <section class="about-fp-section">
                         <div class="about-fp">
-                            <h2
-                                class="about-fp__title about-fp__title--with-icon"
-                            >
+                            <h2 class="about-fp__title about-fp__title--with-icon">
                                 <ManageAccountsTwotone
                                     class="about-fp__title-icon about-fp__title-icon--accent-success-dark"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">{{ t('about.why_me.title') }}</span>
+                                <span class="about-fp__title-label">{{
+                                    t('about.why_me.title')
+                                }}</span>
                             </h2>
                             <p class="about-fp__text">
                                 {{ t('about.why_me.p1') }}
@@ -144,9 +158,7 @@
                             <p class="about-fp__text">
                                 {{ t('about.why_me.simple_thing') }}
                             </p>
-                            <p
-                                class="about-fp__text about-fp__text--with-inline-icon"
-                            >
+                            <p class="about-fp__text about-fp__text--with-inline-icon">
                                 <Icon
                                     name="hand-point-right"
                                     class="about-fp__title-icon about-fp__title-icon--accent-orange"
@@ -161,22 +173,32 @@
 
                     <section class="about-fp-section">
                         <div class="about-fp">
-                            <h2
-                                class="about-fp__title about-fp__title--with-icon"
-                            >
+                            <h2 class="about-fp__title about-fp__title--with-icon">
                                 <Icon
                                     name="schedule-twotone"
                                     class="about-fp__title-icon about-fp__title-icon--accent-primary"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">{{ t('about.what_you_get.title') }}</span>
+                                <span class="about-fp__title-label">{{
+                                    t('about.what_you_get.title')
+                                }}</span>
                             </h2>
                             <ul class="about-fp__list">
-                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_1') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_2') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_3') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_4') }}</li>
-                                <li class="about-fp__list-item">{{ t('about.what_you_get.item_5') }}</li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_you_get.item_1') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_you_get.item_2') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_you_get.item_3') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_you_get.item_4') }}
+                                </li>
+                                <li class="about-fp__list-item">
+                                    {{ t('about.what_you_get.item_5') }}
+                                </li>
                             </ul>
                             <p class="about-fp__text">{{ t('about.what_you_get.additional') }}</p>
                             <p class="about-fp__text">
@@ -187,15 +209,15 @@
 
                     <section class="about-fp-section">
                         <div class="about-fp">
-                            <h2
-                                class="about-fp__title about-fp__title--with-icon"
-                            >
+                            <h2 class="about-fp__title about-fp__title--with-icon">
                                 <Icon
                                     name="target-arrow-24-regular"
                                     class="about-fp__title-icon about-fp__title-icon--danger"
                                     aria-hidden="true"
                                 />
-                                <span class="about-fp__title-label">{{ t('about.survey.title') }}</span>
+                                <span class="about-fp__title-label">{{
+                                    t('about.survey.title')
+                                }}</span>
                             </h2>
                             <p class="about-fp__text">
                                 {{ t('about.survey.p1') }}
@@ -208,9 +230,7 @@
                                 <li class="about-fp__list-item">{{ t('about.survey.item_2') }}</li>
                                 <li class="about-fp__list-item">{{ t('about.survey.item_3') }}</li>
                             </ul>
-                            <p
-                                class="about-fp__text about-fp__text--with-inline-icon"
-                            >
+                            <p class="about-fp__text about-fp__text--with-inline-icon">
                                 <Icon
                                     name="watch-later-twotone"
                                     class="about-fp__text-icon"
@@ -230,21 +250,10 @@
                     </section>
                 </div>
 
-                <nav
-                    class="about-page__nav-dots"
-                    :aria-label="t('about.page.aria_navigation')"
-                >
-                    <div
-                        v-for="i in sectionCount"
-                        :key="i"
-                        class="about-page__nav-dot-wrap"
-                    >
+                <nav class="about-page__nav-dots" :aria-label="t('about.page.aria_navigation')">
+                    <div v-for="i in sectionCount" :key="i" class="about-page__nav-dot-wrap">
                         <span
-                            v-if="
-                                activeIndex === i - 1 &&
-                                sectionCount > 1 &&
-                                i > 1
-                            "
+                            v-if="activeIndex === i - 1 && sectionCount > 1 && i > 1"
                             class="about-page__nav-arrow about-page__nav-arrow--up"
                             aria-hidden="true"
                         />
@@ -252,27 +261,18 @@
                             type="button"
                             class="about-page__nav-dot"
                             :class="{
-                                'about-page__nav-dot--active':
-                                    activeIndex === i - 1,
+                                'about-page__nav-dot--active': activeIndex === i - 1,
                             }"
                             :aria-label="navDotAriaLabel(i - 1)"
-                            :aria-current="
-                                activeIndex === i - 1 ? 'true' : undefined
-                            "
+                            :aria-current="activeIndex === i - 1 ? 'true' : undefined"
                             @click="goToSection(i - 1)"
                         >
-                            <span
-                                class="about-page__nav-dot-letter"
-                                aria-hidden="true"
-                                >{{ navDotLetter(i - 1) }}</span
-                            >
+                            <span class="about-page__nav-dot-letter" aria-hidden="true">{{
+                                navDotLetter(i - 1)
+                            }}</span>
                         </button>
                         <span
-                            v-if="
-                                activeIndex === i - 1 &&
-                                sectionCount > 1 &&
-                                i < sectionCount
-                            "
+                            v-if="activeIndex === i - 1 && sectionCount > 1 && i < sectionCount"
                             class="about-page__nav-arrow about-page__nav-arrow--down"
                             aria-hidden="true"
                         />
@@ -284,18 +284,18 @@
 </template>
 
 <script setup>
-import { nextTick, onMounted, onUnmounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { ExclamationCircleTwotone } from "@vicons/antd";
-import { Bulb } from "@vicons/ionicons5";
-import { ManageAccountsTwotone } from "@vicons/material";
-import Icon from "@/components/Icon.vue";
-import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
-import SeoHead from "@/components/SeoHead.vue";
-import PublicLayout from "@/Layouts/PublicLayout.vue";
+import { nextTick, onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { ExclamationCircleTwotone } from '@vicons/antd';
+import { Bulb } from '@vicons/ionicons5';
+import { ManageAccountsTwotone } from '@vicons/material';
+import Icon from '@/components/Icon.vue';
+import SurveyCtaSection from '@/components/client/home/SurveyCtaSection.vue';
+import SeoHead from '@/components/SeoHead.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineOptions({
-    name: "About",
+    name: 'About',
     layout: PublicLayout,
 });
 
@@ -312,15 +312,7 @@ const { t } = useI18n();
 // Константы
 // =============================================================================
 /** Буквы «welcome» по одной на маркер секции (7 секций) */
-const WELCOME_MARKERS = Object.freeze([
-    "W",
-    "E",
-    "L",
-    "C",
-    "O",
-    "M",
-    "E",
-]);
+const WELCOME_MARKERS = Object.freeze(['W', 'E', 'L', 'C', 'O', 'M', 'E']);
 
 // =============================================================================
 // Состояние (ref)
@@ -373,7 +365,7 @@ function initSections() {
         sectionsRef.value = [];
         return;
     }
-    sectionsRef.value = [...root.querySelectorAll(".about-fp-section")];
+    sectionsRef.value = [...root.querySelectorAll('.about-fp-section')];
 }
 
 /** rAF для синхронизации активной точки со скроллом (без лишних вызовов). */
@@ -422,17 +414,12 @@ function syncActiveFromScroll() {
         const el = sections[i];
         const top = el.offsetTop;
         const bottom = top + el.offsetHeight;
-        const overlap = Math.max(
-            0,
-            Math.min(bottom, viewportBottom) - Math.max(top, viewportTop),
-        );
+        const overlap = Math.max(0, Math.min(bottom, viewportBottom) - Math.max(top, viewportTop));
         const secCenter = (top + bottom) / 2;
         const centerDist = Math.abs(vCenter - secCenter);
         if (
             overlap > bestOverlap ||
-            (overlap === bestOverlap &&
-                overlap > 0 &&
-                centerDist < bestCenterDist)
+            (overlap === bestOverlap && overlap > 0 && centerDist < bestCenterDist)
         ) {
             bestOverlap = overlap;
             bestCenterDist = centerDist;
@@ -485,7 +472,7 @@ function goToSection(index) {
     const rootRect = root.getBoundingClientRect();
     const secRect = sec.getBoundingClientRect();
     const top = root.scrollTop + (secRect.top - rootRect.top);
-    root.scrollTo({ top, behavior: "smooth" });
+    root.scrollTo({ top, behavior: 'smooth' });
 
     const finishProgrammaticNav = () => {
         if (gen !== programmaticNavGen) {
@@ -494,7 +481,7 @@ function goToSection(index) {
         programmaticNavIndex = null;
         syncActiveFromScroll();
     };
-    root.addEventListener("scrollend", finishProgrammaticNav, { once: true });
+    root.addEventListener('scrollend', finishProgrammaticNav, { once: true });
     window.setTimeout(finishProgrammaticNav, 900);
 }
 
@@ -542,7 +529,7 @@ function navDotAriaLabel(index) {
 /** @type {((e: WheelEvent) => void) | null} */
 let wheelForwardHandler = null;
 
-const FP_SCROLL_SNAP_OFF_CLASS = "about-page__fp-scroll--snap-off";
+const FP_SCROLL_SNAP_OFF_CLASS = 'about-page__fp-scroll--snap-off';
 
 /**
  * Колесо вне snap-области (шапка сайта, фото, заголовок About): шаг по секциям как у snap.
@@ -571,10 +558,7 @@ function handleAboutGlobalWheel(e) {
     e.stopPropagation();
     const total = sectionCount.value;
     const cur = activeIndex.value;
-    const nextIdx =
-        dir === 0 || total < 1
-            ? cur
-            : clamp(cur + dir, 0, total - 1);
+    const nextIdx = dir === 0 || total < 1 ? cur : clamp(cur + dir, 0, total - 1);
 
     if (nextIdx === cur) {
         return;
@@ -600,7 +584,7 @@ onMounted(() => {
         }
 
         wheelForwardHandler = handleAboutGlobalWheel;
-        document.addEventListener("wheel", wheelForwardHandler, {
+        document.addEventListener('wheel', wheelForwardHandler, {
             passive: false,
             capture: true,
         });
@@ -621,7 +605,7 @@ onUnmounted(() => {
     sectionsRef.value = [];
 
     if (wheelForwardHandler) {
-        document.removeEventListener("wheel", wheelForwardHandler, {
+        document.removeEventListener('wheel', wheelForwardHandler, {
             passive: false,
             capture: true,
         });
@@ -631,7 +615,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .about-page {
     position: relative;
@@ -646,11 +630,11 @@ onUnmounted(() => {
     min-height: 720px;
 
     &::before {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         z-index: 0;
-        background-image: url("/images/haccp_checklist.jpg");
+        background-image: url('/images/haccp_checklist.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -1002,10 +986,10 @@ onUnmounted(() => {
     .about-page {
         padding: 10px 15px 0 15px;
 
-        .about-page__title-bar{
+        .about-page__title-bar {
             padding-bottom: 5px;
 
-            .about-page__heading{
+            .about-page__heading {
                 text-align: center;
             }
         }

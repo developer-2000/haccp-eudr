@@ -1,9 +1,6 @@
-import { v4 as uuidv4 } from "uuid";
-import { i18n } from "@/i18n";
-import {
-    TASK_FIELD_TYPE,
-    TASK_FIELD_TYPE_OPTIONS,
-} from "@/config/tasks";
+import { v4 as uuidv4 } from 'uuid';
+import { i18n } from '@/i18n';
+import { TASK_FIELD_TYPE, TASK_FIELD_TYPE_OPTIONS } from '@/config/tasks';
 
 const tt = (...args) => i18n.global.t(...args);
 
@@ -18,7 +15,7 @@ const numOrNull = (x) => {
     return Number.isFinite(n) ? n : null;
 };
 
-const strOrEmpty = (x) => (typeof x === "string" ? x.trim() : "");
+const strOrEmpty = (x) => (typeof x === 'string' ? x.trim() : '');
 
 /**
  * Дефолтный объект `config` при выборе типа поля в форме.
@@ -28,15 +25,15 @@ export const defaultConfigForFieldType = (fieldType) => {
     switch (fieldType) {
         case TASK_FIELD_TYPE.TEMPERATURE:
             return {
-                label: "",
+                label: '',
                 minC: null,
                 maxC: null,
             };
         case TASK_FIELD_TYPE.SINGLE_CHOICE:
-            return { question: "", options: [""] };
+            return { question: '', options: [''] };
         case TASK_FIELD_TYPE.TICKET:
             return {
-                description: "",
+                description: '',
             };
         default:
             return {};
@@ -54,7 +51,7 @@ export const createEmptyTaskFieldRow = () => ({
 });
 
 const normalizeConfig = (fieldType, raw) => {
-    const r = raw && typeof raw === "object" ? raw : {};
+    const r = raw && typeof raw === 'object' ? raw : {};
     switch (fieldType) {
         case TASK_FIELD_TYPE.TEMPERATURE: {
             const base = {
@@ -62,17 +59,17 @@ const normalizeConfig = (fieldType, raw) => {
                 minC: numOrNull(r.minC),
                 maxC: numOrNull(r.maxC),
             };
-            if (Object.prototype.hasOwnProperty.call(r, "showCamera")) {
+            if (Object.prototype.hasOwnProperty.call(r, 'showCamera')) {
                 base.showCamera = Boolean(r.showCamera);
             }
             return base;
         }
         case TASK_FIELD_TYPE.SINGLE_CHOICE: {
             let opts = Array.isArray(r.options)
-                ? r.options.map((x) => String(x ?? "").trim()).filter(Boolean)
+                ? r.options.map((x) => String(x ?? '').trim()).filter(Boolean)
                 : [];
             if (!opts.length) {
-                opts = [""];
+                opts = [''];
             }
             return {
                 question: strOrEmpty(r.question),
@@ -93,17 +90,14 @@ const normalizeConfig = (fieldType, raw) => {
  * Используется при сборке payload и после загрузки из storage.
  */
 export const normalizeTaskFieldDefinitionItem = (item) => {
-    if (!item || typeof item !== "object") {
+    if (!item || typeof item !== 'object') {
         return null;
     }
     const ft = item.fieldType;
     if (!ft || !ALLOWED.has(ft)) {
         return null;
     }
-    const id =
-        typeof item.id === "string" && item.id.trim()
-            ? item.id.trim()
-            : uuidv4();
+    const id = typeof item.id === 'string' && item.id.trim() ? item.id.trim() : uuidv4();
     return {
         id,
         fieldType: ft,
@@ -135,17 +129,25 @@ export const normalizeTaskFieldDefinitions = (raw) => {
  */
 export const formatTaskFieldSummaryLine = (def) => {
     if (!def?.fieldType) {
-        return "";
+        return '';
     }
     const c = def.config ?? {};
     switch (def.fieldType) {
         case TASK_FIELD_TYPE.TEMPERATURE:
             // Одна строка: измеряемая величина + CCP. Где меряем — в строке оборудования/помещений выше, не дублируем `config.label`.
-            return tt('demo.task_field_summary.temperature_line', { min: c.minC ?? "—", max: c.maxC ?? "—" });
+            return tt('demo.task_field_summary.temperature_line', {
+                min: c.minC ?? '—',
+                max: c.maxC ?? '—',
+            });
         case TASK_FIELD_TYPE.SINGLE_CHOICE:
-            return tt('demo.task_field_summary.single_choice_line', { question: c.question || "—", count: Array.isArray(c.options) ? c.options.length : 0 });
+            return tt('demo.task_field_summary.single_choice_line', {
+                question: c.question || '—',
+                count: Array.isArray(c.options) ? c.options.length : 0,
+            });
         case TASK_FIELD_TYPE.TICKET:
-            return tt('demo.task_field_summary.ticket_line', { description: c.description || tt('demo.task_field_summary.ticket_no_desc') });
+            return tt('demo.task_field_summary.ticket_line', {
+                description: c.description || tt('demo.task_field_summary.ticket_no_desc'),
+            });
         default:
             return def.fieldType;
     }

@@ -6,7 +6,7 @@
  * @returns {boolean}
  */
 export function isGrainCoolingScenarioSuppressedForPath(pathname) {
-    if (typeof pathname !== "string" || pathname === "") {
+    if (typeof pathname !== 'string' || pathname === '') {
         return false;
     }
     if (/^\/batch(\/|$)/.test(pathname)) {

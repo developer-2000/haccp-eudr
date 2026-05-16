@@ -1,5 +1,5 @@
-import {EQUIPMENT_GROUPS} from "./demoChecklistEquipment";
-import {ROOM_GROUPS} from "./demoChecklistRooms";
+import { EQUIPMENT_GROUPS } from './demoChecklistEquipment';
+import { ROOM_GROUPS } from './demoChecklistRooms';
 
 /**
  * Одна инициализация на модуль — для подписей целей в модалках демо.

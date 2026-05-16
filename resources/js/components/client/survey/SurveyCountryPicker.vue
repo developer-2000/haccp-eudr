@@ -11,19 +11,19 @@
 </template>
 
 <script setup>
-import { SURVEY_ENGLISH_COUNTRY_SELECT_OPTIONS } from "../../../features/survey/surveyCountryOptions.js";
-import SurveyCountrySelect from "./SurveyCountrySelect.vue";
+import { SURVEY_ENGLISH_COUNTRY_SELECT_OPTIONS } from '../../../features/survey/surveyCountryOptions.js';
+import SurveyCountrySelect from './SurveyCountrySelect.vue';
 
 /**
  * Универсальный выбор страны: v-model — ISO alpha-2 или пустая строка (плейсхолдер в UI).
  * Список стран и combobox с поиском зашиты внутри; снаружи передаются только привязка значения и aria/id для шага формы.
  */
-defineOptions({ name: "SurveyCountryPicker" });
+defineOptions({ name: 'SurveyCountryPicker' });
 
 defineProps({
     modelValue: {
         type: String,
-        default: "",
+        default: '',
     },
     triggerId: {
         type: String,
@@ -44,6 +44,6 @@ defineProps({
 });
 
 defineEmits({
-    "update:modelValue": (v) => typeof v === "string",
+    'update:modelValue': (v) => typeof v === 'string',
 });
 </script>

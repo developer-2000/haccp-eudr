@@ -21,7 +21,7 @@
                             aria-hidden="true"
                         />
                         <span class="survey-main-flow__nav-back-text">
-                            {{ t("survey.nav.back") }}
+                            {{ t('survey.nav.back') }}
                         </span>
                     </button>
                 </div>
@@ -39,15 +39,15 @@
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
-import SurveyLayout from "../SurveyLayout.vue";
-import SurveyProgressBar from "../SurveyProgressBar.vue";
-import SurveyStepTransition from "../SurveyStepTransition.vue";
-import Icon from "../../../Icon.vue";
+import { useI18n } from 'vue-i18n';
+import SurveyLayout from '../SurveyLayout.vue';
+import SurveyProgressBar from '../SurveyProgressBar.vue';
+import SurveyStepTransition from '../SurveyStepTransition.vue';
+import Icon from '../../../Icon.vue';
 
-defineOptions({ name: "SurveyMainFlow" });
+defineOptions({ name: 'SurveyMainFlow' });
 
-const props = defineProps({
+defineProps({
     /** Текущий номер шага для прогресс-бара. */
     progressNumerator: {
         type: Number,
@@ -66,7 +66,7 @@ const props = defineProps({
     /** Aria-label для прогресс-бара. */
     progressBarAriaLabel: {
         type: String,
-        default: "",
+        default: '',
     },
     /** Доступна ли навигация назад. */
     canGoBack: {
@@ -90,13 +90,13 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(["go-back"]);
+const emit = defineEmits(['go-back']);
 
 const { t } = useI18n();
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .survey-main-flow__header-stack {
     display: flex;

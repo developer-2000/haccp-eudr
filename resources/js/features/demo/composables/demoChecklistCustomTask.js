@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-import { buildTaskFromPayload } from "@/features/demo/domain/checklistTaskModel";
+import { v4 as uuidv4 } from 'uuid';
+import { buildTaskFromPayload } from '@/features/demo/domain/checklistTaskModel';
 
 /**
  * Собирает объект пользовательской задачи CCP для вставки в `checklistsByNiche`.
@@ -9,6 +9,6 @@ export const buildChecklistTaskFromPayload = (niche, payload) =>
     buildTaskFromPayload({
         niche,
         payload,
-        source: "custom",
+        source: 'custom',
         idFactory: (targetNiche) => `custom-${targetNiche}-${uuidv4()}`,
     });

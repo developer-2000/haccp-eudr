@@ -29,23 +29,23 @@
 
 /** Экран контактов (аналог полей 14–17). */
 export const SURVEY_PAGE_LEAD = {
-    title: "survey.lead.title",
+    title: 'survey.lead.title',
     bullets: [
-        "survey.lead.bullet_discount",
-        "survey.lead.bullet_access",
-        "survey.lead.bullet_influence",
+        'survey.lead.bullet_discount',
+        'survey.lead.bullet_access',
+        'survey.lead.bullet_influence',
     ],
     /** П. 7.3: явное ожидание перед полями (после вопросов опросника). */
-    expectation: "survey.lead.expectation",
+    expectation: 'survey.lead.expectation',
 };
 
 /** Экран после отправки (п. 7.5: спокойно, без второго CTA в потоке). */
 export const SURVEY_PAGE_SUCCESS = {
-    title: "survey.success.title",
+    title: 'survey.success.title',
     /** Текст после заголовка; перенос после «песочницу),» — \\n + white-space: pre-line. */
-    bodyParagraphs: "survey.success.body",
-    reassurance: "survey.success.reassurance",
-    updateViaEmailHint: "survey.success.update_hint",
+    bodyParagraphs: 'survey.success.body',
+    reassurance: 'survey.success.reassurance',
+    updateViaEmailHint: 'survey.success.update_hint',
 };
 
 /**
@@ -89,7 +89,7 @@ export function getSurveyMainQuestionIds() {
  * @param {Record<string, object>} next
  */
 export function replaceSurveyQuestionsById(next) {
-    if (!next || typeof next !== "object") {
+    if (!next || typeof next !== 'object') {
         return;
     }
     if (Object.keys(next).length === 0) {
@@ -112,7 +112,7 @@ function rebuildDerivedData() {
 
     branchChildIds = new Set();
     for (const q of Object.values(surveyQuestionsByIdLive)) {
-        if (q.branches && typeof q.branches === "object") {
+        if (q.branches && typeof q.branches === 'object') {
             for (const childId of Object.values(q.branches)) {
                 branchChildIds.add(childId);
             }
@@ -128,7 +128,7 @@ function rebuildDerivedData() {
  */
 export function getSurveyBranchParentId() {
     for (const q of Object.values(surveyQuestionsByIdLive)) {
-        if (q.branches && typeof q.branches === "object" && Object.keys(q.branches).length > 0) {
+        if (q.branches && typeof q.branches === 'object' && Object.keys(q.branches).length > 0) {
             return q.id;
         }
     }
@@ -152,10 +152,7 @@ export function surveyQuestionAllOptions(question) {
     if (!question) {
         return [];
     }
-    if (
-        Array.isArray(question.option_groups) &&
-        question.option_groups.length > 0
-    ) {
+    if (Array.isArray(question.option_groups) && question.option_groups.length > 0) {
         const out = [];
         for (const g of question.option_groups) {
             if (Array.isArray(g.options)) {

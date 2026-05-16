@@ -4,9 +4,9 @@
  */
 
 export const TASK_SCOPE_TYPE = {
-    EQUIPMENT: "equipment",
-    ROOMS: "rooms",
-    STANDALONE: "standalone",
+    EQUIPMENT: 'equipment',
+    ROOMS: 'rooms',
+    STANDALONE: 'standalone',
 };
 
 /**
@@ -14,7 +14,7 @@ export const TASK_SCOPE_TYPE = {
  * Используется при сборке задачи и при загрузке старых записей без поля.
  */
 export const normalizeTaskScopeType = (raw) => {
-    const v = raw == null ? "" : String(raw);
+    const v = raw == null ? '' : String(raw);
     if (
         v === TASK_SCOPE_TYPE.EQUIPMENT ||
         v === TASK_SCOPE_TYPE.ROOMS ||
@@ -32,10 +32,10 @@ export const normalizeTaskScopeType = (raw) => {
 export const taskScopeTypeLabel = (scope) => {
     switch (normalizeTaskScopeType(scope)) {
         case TASK_SCOPE_TYPE.ROOMS:
-            return "Комнаты";
+            return 'Комнаты';
         case TASK_SCOPE_TYPE.STANDALONE:
-            return "Отдельная";
+            return 'Отдельная';
         default:
-            return "Оборудование";
+            return 'Оборудование';
     }
 };

@@ -3,30 +3,26 @@
  * (демо; не юридически обязательный документ).
  */
 
-import {
-    createDefaultState,
-    loadPersistedDemoState,
-} from "@/features/demo/composables/useDemoState";
+import { loadPersistedDemoState } from '@/features/demo/composables/useDemoState';
 import {
     firstPendingMeasurementTime,
     taskDisplayStatusKey,
     taskHasMultiSlotSchedule,
-} from "@/features/demo/domain/checklistTaskModel";
-import { getBatchPublicRecord } from "@/features/demo/data/eudrBatchPublic";
-import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
+} from '@/features/demo/domain/checklistTaskModel';
+import { getBatchPublicRecord } from '@/features/demo/data/eudrBatchPublic';
+import { resolveStaffFullName } from '@/features/demo/utils/demoStaff';
 
 const origin =
-    typeof window !== "undefined" && window.location?.origin
+    typeof window !== 'undefined' && window.location?.origin
         ? window.location.origin
-        : "https://haccpilot.eu";
-
+        : 'https://haccpilot.eu';
 
 /** День, для которого в демо заполнена полная выгрузка (совпадает с reportDayIso в state). */
 export const REPORT_REFERENCE_ISO = (() => {
     const d = new Date();
     const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
     return `${y}-${m}-${day}`;
 })();
 
@@ -41,7 +37,7 @@ export const buildDailyReportPublicUrl = (isoDate, locale = null) => {
     if (!isoDate) {
         return origin;
     }
-    if (locale && typeof locale === "string") {
+    if (locale && typeof locale === 'string') {
         return `${origin}/${locale}/report/${isoDate}`;
     }
     return `${origin}/report/${isoDate}`;
@@ -54,7 +50,7 @@ const ISO_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
  * @returns {string | null}
  */
 export const parseIsoDateSafe = (s) => {
-    if (typeof s !== "string" || !ISO_RE.test(s)) {
+    if (typeof s !== 'string' || !ISO_RE.test(s)) {
         return null;
     }
     const d = new Date(`${s}T12:00:00`);
@@ -65,11 +61,7 @@ export const parseIsoDateSafe = (s) => {
     const yi = Number(y);
     const mi = Number(m);
     const di = Number(day);
-    if (
-        d.getFullYear() !== yi ||
-        d.getMonth() + 1 !== mi ||
-        d.getDate() !== di
-    ) {
+    if (d.getFullYear() !== yi || d.getMonth() + 1 !== mi || d.getDate() !== di) {
         return null;
     }
     return s;
@@ -80,66 +72,65 @@ export const parseIsoDateSafe = (s) => {
  * @param {string} ru
  */
 export const ruDottedDateToIso = (ru) => {
-    if (typeof ru !== "string" || !/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(ru)) {
+    if (typeof ru !== 'string' || !/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(ru)) {
         return null;
     }
-    const [d, m, y] = ru.split(".");
-    return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
+    const [d, m, y] = ru.split('.');
+    return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
 };
 
 /**
  * @param {string} iso
  */
 export const formatIsoLongRu = (iso) => {
-    const [y, m, d] = iso.split("-").map(Number);
+    const [y, m, d] = iso.split('-').map(Number);
     const dt = new Date(y, m - 1, d);
-    return new Intl.DateTimeFormat("ru-RU", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
+    return new Intl.DateTimeFormat('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
     })
         .format(dt)
-        .replace(/\s+г\.?$/u, "")
+        .replace(/\s+г\.?$/u, '')
         .trim();
 };
 
 const NICHE_LABEL = {
-    coffee: "Coffee",
-    bakery: "Bakery",
-    meat: "Meat / EUDR",
+    coffee: 'Coffee',
+    bakery: 'Bakery',
+    meat: 'Meat / EUDR',
 };
 
 const fallbackStatus = (task) => {
     const key = taskDisplayStatusKey(task);
-    if (key === "ok") {
-        return "Within limits";
+    if (key === 'ok') {
+        return 'Within limits';
     }
-    if (key === "problem") {
-        return "Deviation";
+    if (key === 'problem') {
+        return 'Deviation';
     }
-    if (key === "repeat") {
-        return "Monitored (scheduled)";
+    if (key === 'repeat') {
+        return 'Monitored (scheduled)';
     }
-    return "—";
+    return '—';
 };
 
 const measurementStatus = (m) => {
-    const raw = String(m?.status ?? "").toLowerCase();
-    if (raw === "success") {
-        return { key: "ok", label: "success" };
+    const raw = String(m?.status ?? '').toLowerCase();
+    if (raw === 'success') {
+        return { key: 'ok', label: 'success' };
     }
-    if (raw === "problem") {
-        return { key: "problem", label: "problem" };
+    if (raw === 'problem') {
+        return { key: 'problem', label: 'problem' };
     }
-    if (raw === "pending") {
-        return { key: "review", label: "pending" };
+    if (raw === 'pending') {
+        return { key: 'review', label: 'pending' };
     }
-    return { key: "review", label: raw || "—" };
+    return { key: 'review', label: raw || '—' };
 };
 
 const hasAnyPendingMeasurement = (task) =>
-    Array.isArray(task?.measurements) &&
-    task.measurements.some((m) => m?.status === "pending");
+    Array.isArray(task?.measurements) && task.measurements.some((m) => m?.status === 'pending');
 
 /**
  * Статус для дневного отчёта:
@@ -150,24 +141,24 @@ const hasAnyPendingMeasurement = (task) =>
 const reportTaskStatus = (task) => {
     if (Array.isArray(task?.measurements) && task.measurements.length > 0) {
         return hasAnyPendingMeasurement(task)
-            ? { key: "review", label: "Pending" }
-            : { key: "ok", label: "Success" };
+            ? { key: 'review', label: 'Pending' }
+            : { key: 'ok', label: 'Success' };
     }
     const key = taskDisplayStatusKey(task);
-    if (key === "problem") {
-        return { key: "problem", label: fallbackStatus(task) };
+    if (key === 'problem') {
+        return { key: 'problem', label: fallbackStatus(task) };
     }
-    if (key === "repeat") {
-        return { key: "review", label: fallbackStatus(task) };
+    if (key === 'repeat') {
+        return { key: 'review', label: fallbackStatus(task) };
     }
-    return { key: "ok", label: fallbackStatus(task) };
+    return { key: 'ok', label: fallbackStatus(task) };
 };
 
-const NICHE_ORDER = ["coffee", "bakery", "meat"];
+const NICHE_ORDER = ['coffee', 'bakery', 'meat'];
 
 /**
  * Полная структура по нишам: все задачи, замеры, шаблоны корректирующих действий.
- * @param {ReturnType<typeof createDefaultState>} state
+ * @param {ReturnType<typeof import('@/features/demo/composables/useDemoState').createDefaultState>} state
  */
 const buildNicheSections = (state) =>
     NICHE_ORDER.map((nicheKey) => {
@@ -178,29 +169,26 @@ const buildNicheSections = (state) =>
             nicheLabel,
             tasks: tasks.map((task) => {
                 const reportStatus = reportTaskStatus(task);
-                return ({
-                id: task.id,
-                title: task.title,
-                value: firstPendingMeasurementTime(task) || "—",
-                statusPillKey: reportStatus.key,
-                statusLabel: reportStatus.label,
-                assigneeName: resolveStaffFullName(
-                    state.staff,
-                    task.assignedStaffId,
-                ),
-                measurements: Array.isArray(task.measurements)
-                    ? task.measurements.map((m) => ({
-                          time: m.time,
-                          value: m.value,
-                          status: m.status,
-                          resultPillKey: measurementStatus(m).key,
-                          resultLabel: measurementStatus(m).label,
-                      }))
-                    : null,
-                correctiveActions: Array.isArray(task.correctiveActions)
-                    ? [...task.correctiveActions]
-                    : null,
-            });
+                return {
+                    id: task.id,
+                    title: task.title,
+                    value: firstPendingMeasurementTime(task) || '—',
+                    statusPillKey: reportStatus.key,
+                    statusLabel: reportStatus.label,
+                    assigneeName: resolveStaffFullName(state.staff, task.assignedStaffId),
+                    measurements: Array.isArray(task.measurements)
+                        ? task.measurements.map((m) => ({
+                              time: m.time,
+                              value: m.value,
+                              status: m.status,
+                              resultPillKey: measurementStatus(m).key,
+                              resultLabel: measurementStatus(m).label,
+                          }))
+                        : null,
+                    correctiveActions: Array.isArray(task.correctiveActions)
+                        ? [...task.correctiveActions]
+                        : null,
+                };
             }),
         };
     });
@@ -208,20 +196,13 @@ const buildNicheSections = (state) =>
 /** Плоские строки CCP для таблицы отчёта. */
 const flattenCcpRows = (state) => {
     const rows = [];
-    for (const [niche, tasks] of Object.entries(
-        state.checklistsByNiche ?? {},
-    )) {
+    for (const [niche, tasks] of Object.entries(state.checklistsByNiche ?? {})) {
         const nicheLabel = NICHE_LABEL[niche] ?? niche;
         for (const task of tasks) {
             const reportStatus = reportTaskStatus(task);
-            let detail = firstPendingMeasurementTime(task) || "—";
-            if (
-                taskHasMultiSlotSchedule(task) &&
-                Array.isArray(task.measurements)
-            ) {
-                const last = [...task.measurements]
-                    .reverse()
-                    .find((m) => m.status !== "pending");
+            let detail = firstPendingMeasurementTime(task) || '—';
+            if (taskHasMultiSlotSchedule(task) && Array.isArray(task.measurements)) {
+                const last = [...task.measurements].reverse().find((m) => m.status !== 'pending');
                 if (last) {
                     detail = `${last.value} @ ${last.time}`;
                 }
@@ -231,10 +212,7 @@ const flattenCcpRows = (state) => {
                 niche: nicheLabel,
                 ccp: task.title,
                 detail,
-                assigneeName: resolveStaffFullName(
-                    state.staff,
-                    task.assignedStaffId,
-                ),
+                assigneeName: resolveStaffFullName(state.staff, task.assignedStaffId),
                 statusPillKey: reportStatus.key,
                 statusLabel: reportStatus.label,
             });
@@ -284,13 +262,13 @@ export const getDailyReportSnapshot = (dateIso) => {
         hasFullRecord: isReferenceDay,
         documentRef: `HACCPilot-DAILY-${safe}-DEMO`,
         establishment: {
-            legalName: "Piotr Bakery Sp. z o.o.",
-            address: "ul. Przykładowa 12, 00-001 Warszawa, Poland",
-            eori: "PL1234567890000",
+            legalName: 'Piotr Bakery Sp. z o.o.',
+            address: 'ul. Przykładowa 12, 00-001 Warszawa, Poland',
+            eori: 'PL1234567890000',
             fdaRegistration:
-                "Illustrative — U.S. FDA establishment identifier not applicable in this demo (FSMA recordkeeping narrative only).",
+                'Illustrative — U.S. FDA establishment identifier not applicable in this demo (FSMA recordkeeping narrative only).',
             competentAuthorityEu:
-                "Competent authority (illustrative): Chief Sanitary Inspectorate / PIH — demo placeholder.",
+                'Competent authority (illustrative): Chief Sanitary Inspectorate / PIH — demo placeholder.',
         },
         inspectionDateLabel: state.inspectionDate,
         companyShort: state.report.company,
@@ -300,7 +278,7 @@ export const getDailyReportSnapshot = (dateIso) => {
         supplyRows,
         supplyDetails,
         disclaimer:
-            "Demonstration document for inspection readiness review only. Not a legally binding EU DDS, FDA submission, or official regulatory record. Operational data are illustrative.",
+            'Demonstration document for inspection readiness review only. Not a legally binding EU DDS, FDA submission, or official regulatory record. Operational data are illustrative.',
         generatedAtUtcHint: new Date().toISOString(),
     };
 };

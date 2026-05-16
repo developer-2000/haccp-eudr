@@ -1,13 +1,10 @@
 <template>
     <div class="technical-section">
-
         <div class="message-pin-code">
             {{ t('survey.ui.pin_instruction') }}
         </div>
 
-        <div class="pin-header warning"
-             v-if="attemptsLeft > 0 && attemptsLeft < totalAttempts"
-        >
+        <div v-if="attemptsLeft > 0 && attemptsLeft < totalAttempts" class="pin-header warning">
             {{ t('survey.ui.pin_attempts_left', { used: attemptsLeft, total: totalAttempts }) }}
         </div>
 
@@ -28,20 +25,20 @@
                     @paste="onPaste($event, index)"
                     @keydown="onKeydown($event, index)"
                     @focus="onFocus(index)"
-                >
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
-import { useI18n } from "vue-i18n";
+import { ref, onMounted, nextTick } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-const digits = ref(["", "", "", ""]);
+const digits = ref(['', '', '', '']);
 const inputRefs = ref([null, null, null, null]);
 
-const props = defineProps({
+defineProps({
     attemptsLeft: {
         type: Number,
         required: true,
@@ -54,7 +51,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits({
-    complete: (pin) => typeof pin === "string" && /^\d{4}$/.test(pin),
+    complete: (pin) => typeof pin === 'string' && /^\d{4}$/.test(pin),
 });
 
 const { t } = useI18n();
@@ -64,7 +61,7 @@ const { t } = useI18n();
  * Используется при неверном вводе кода для сброса.
  */
 const clearDigits = () => {
-    digits.value = ["", "", "", ""];
+    digits.value = ['', '', '', ''];
     nextTick(() => {
         focusInput(0);
     });
@@ -96,16 +93,16 @@ onMounted(() => {
  * @param {string} value
  * @returns {string}
  */
-const normalizeDigit = (value) => value.replace(/\D/g, "").slice(0, 1);
+const normalizeDigit = (value) => value.replace(/\D/g, '').slice(0, 1);
 
 /**
  * Проверяет заполненность всех 4 полей и эмитит PIN-код родителю.
  * Используется для отправки кода верификации при готовности 4 цифр.
  */
 const emitPinIfComplete = () => {
-    const pin = digits.value.join("");
+    const pin = digits.value.join('');
     if (/^\d{4}$/.test(pin)) {
-        emit("complete", pin);
+        emit('complete', pin);
     }
 };
 
@@ -129,7 +126,7 @@ const focusInput = (index) => {
 const onInput = (index) => {
     digits.value[index] = normalizeDigit(digits.value[index]);
 
-    if (digits.value[index] !== "" && index < digits.value.length - 1) {
+    if (digits.value[index] !== '' && index < digits.value.length - 1) {
         focusInput(index + 1);
     }
 
@@ -145,8 +142,8 @@ const onInput = (index) => {
 const onPaste = (event, startIndex) => {
     event.preventDefault();
 
-    const clipboardText = event.clipboardData?.getData("text") ?? "";
-    const pastedDigits = clipboardText.replace(/\D/g, "").split("");
+    const clipboardText = event.clipboardData?.getData('text') ?? '';
+    const pastedDigits = clipboardText.replace(/\D/g, '').split('');
 
     if (!pastedDigits.length) {
         return;
@@ -179,18 +176,18 @@ const onPaste = (event, startIndex) => {
  * @param {number} index
  */
 const onKeydown = (event, index) => {
-    if (event.key === "Backspace" && digits.value[index] === "" && index > 0) {
+    if (event.key === 'Backspace' && digits.value[index] === '' && index > 0) {
         focusInput(index - 1);
         return;
     }
 
-    if (event.key === "ArrowLeft" && index > 0) {
+    if (event.key === 'ArrowLeft' && index > 0) {
         event.preventDefault();
         focusInput(index - 1);
         return;
     }
 
-    if (event.key === "ArrowRight" && index < digits.value.length - 1) {
+    if (event.key === 'ArrowRight' && index < digits.value.length - 1) {
         event.preventDefault();
         focusInput(index + 1);
     }
@@ -210,7 +207,7 @@ const onFocus = (index) => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .technical-section {
     display: flex;
@@ -220,7 +217,7 @@ const onFocus = (index) => {
     padding: 8px 0;
     min-height: 60vh;
 
-    .message-pin-code{
+    .message-pin-code {
         text-align: center;
         margin-bottom: 20px;
         font-weight: 500;
@@ -247,11 +244,13 @@ const onFocus = (index) => {
                 border-radius: 14px;
                 background: #ffffff;
                 text-align: center;
-                font-size: 26px!important;
+                font-size: 26px !important;
                 font-weight: 500;
                 line-height: 1;
                 color: #0f172a;
-                transition: border-color 0.18s ease, box-shadow 0.18s ease;
+                transition:
+                    border-color 0.18s ease,
+                    box-shadow 0.18s ease;
 
                 &:hover {
                     border-color: $accent-primary;

@@ -13,11 +13,11 @@
  */
 export function getCurrentMeasurementRowStatus(task, rowRef) {
     const rows = Array.isArray(task?.measurements) ? task.measurements : [];
-    const t = String(rowRef?.time ?? "").trim();
+    const t = String(rowRef?.time ?? '').trim();
     if (!t) {
         return null;
     }
-    const row = rows.find((r) => String(r?.time ?? "").trim() === t);
+    const row = rows.find((r) => String(r?.time ?? '').trim() === t);
     return row?.status != null ? String(row.status) : null;
 }
 
@@ -29,7 +29,7 @@ export function getCurrentMeasurementRowStatus(task, rowRef) {
  * @returns {boolean}
  */
 export function isCurrentMeasurementRowPending(task, rowRef) {
-    return getCurrentMeasurementRowStatus(task, rowRef) === "pending";
+    return getCurrentMeasurementRowStatus(task, rowRef) === 'pending';
 }
 
 /**
@@ -44,5 +44,5 @@ export function findMeasurementRowIndexByTime(task, rowRef) {
     if (!Array.isArray(rows) || !rowRef) {
         return -1;
     }
-    return rows.findIndex((row) => String(row?.time ?? "") === String(rowRef?.time ?? ""));
+    return rows.findIndex((row) => String(row?.time ?? '') === String(rowRef?.time ?? ''));
 }

@@ -17,11 +17,10 @@
             <p class="checklist-modal__assignee-label">{{ t('demo.task_assignee.label') }}</p>
             <template v-if="!task.assignedStaffId && !assigneePickerOpen">
                 <div class="checklist-modal__assignee-row">
-                    <span class="checklist-modal__assignee-empty">{{ t('demo.task_assignee.not_assigned') }}</span>
-                    <n-button
-                        type="primary"
-                        @click="assigneePickerOpen = true"
-                    >
+                    <span class="checklist-modal__assignee-empty">{{
+                        t('demo.task_assignee.not_assigned')
+                    }}</span>
+                    <n-button type="primary" @click="assigneePickerOpen = true">
                         {{ t('demo.task_assignee.assign') }}
                     </n-button>
                 </div>
@@ -40,12 +39,12 @@
 </template>
 
 <script setup>
-import {computed, ref, watch} from "vue";
-import {NButton, NSelect} from "naive-ui";
-import {useI18n} from "vue-i18n";
-import {NICHE_TO_SITE_ID, resolveStaffFullName} from "@/features/demo/utils/demoStaff";
+import { computed, ref, watch } from 'vue';
+import { NButton, NSelect } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+import { NICHE_TO_SITE_ID, resolveStaffFullName } from '@/features/demo/utils/demoStaff';
 
-const {t} = useI18n();
+const { t } = useI18n();
 
 const props = defineProps({
     task: {
@@ -58,11 +57,11 @@ const props = defineProps({
     },
     mode: {
         type: String,
-        default: "checklists",
+        default: 'checklists',
     },
     taskType: {
         type: String,
-        default: "ccp",
+        default: 'ccp',
     },
     /** Синхронизация с видимостью родительской модалки */
     modalShow: {
@@ -72,7 +71,7 @@ const props = defineProps({
 });
 
 const assigneePickerOpen = ref(false);
-const isHotMode = computed(() => props.mode === "hot");
+const isHotMode = computed(() => props.mode === 'hot');
 
 const siteIdForTask = computed(() => NICHE_TO_SITE_ID[props.taskType] ?? null);
 
@@ -91,10 +90,10 @@ const assigneeSelectOptions = computed(() => {
 const modalAssigneeDisplay = computed(() => {
     const t = props.task;
     if (!t?.assignedStaffId) {
-        return "";
+        return '';
     }
     const name = resolveStaffFullName(props.staff, t.assignedStaffId);
-    return name === "—" ? "" : name;
+    return name === '—' ? '' : name;
 });
 
 const onAssigneeUpdate = (value) => {
@@ -122,7 +121,7 @@ watch(
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklist-modal__assignee-block {
     display: flex;
@@ -186,4 +185,3 @@ watch(
     min-height: 44px;
 }
 </style>
-

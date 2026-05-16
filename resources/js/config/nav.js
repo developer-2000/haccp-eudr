@@ -1,27 +1,27 @@
 const navConfig = {
     logo: {
-        link: "/",
+        link: '/',
     },
     menu: [
         {
-            label: "header.menu.how_it_works",
-            link: "/how-it-works",
+            label: 'header.menu.how_it_works',
+            link: '/how-it-works',
             hasDropdown: false,
         },
         {
-            label: "header.menu.demo",
-            link: "/demo/dashboard",
-            activePathPrefix: "/demo",
+            label: 'header.menu.demo',
+            link: '/demo/dashboard',
+            activePathPrefix: '/demo',
             hasDropdown: false,
         },
         {
-            label: "header.menu.about",
-            link: "/about",
+            label: 'header.menu.about',
+            link: '/about',
             hasDropdown: false,
         },
         {
-            label: "header.menu.survey",
-            link: "/survey",
+            label: 'header.menu.survey',
+            link: '/survey',
             hasDropdown: false,
         },
     ],

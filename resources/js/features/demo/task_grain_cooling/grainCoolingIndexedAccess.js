@@ -1,12 +1,12 @@
-import { task_grain_cooling } from "./config";
-import { getGrainCoolingTaskFromDemoState } from "./resolveGrainCoolingTaskFromDemoState";
+import { task_grain_cooling } from './config';
+import { getGrainCoolingTaskFromDemoState } from './resolveGrainCoolingTaskFromDemoState';
 
 /**
  * Поля `task_grain_cooling`, в которых хранится индекс строки в `task.measurements`.
  */
 export const GRAIN_COOLING_MEASUREMENT_INDEX_FIELDS = Object.freeze([
-    "measurementIndex",
-    "lastProblemAppliedMeasurementIndex",
+    'measurementIndex',
+    'lastProblemAppliedMeasurementIndex',
 ]);
 
 /**
@@ -22,14 +22,11 @@ export const GRAIN_COOLING_MEASUREMENT_INDEX_FIELDS = Object.freeze([
  *   measurements: unknown[],
  * }}
  */
-export function getGrainCoolingTaskAndMeasurementByRowIndex(
-    demoStateRef,
-    measurementRowIndex,
-) {
+export function getGrainCoolingTaskAndMeasurementByRowIndex(demoStateRef, measurementRowIndex) {
     const task = getGrainCoolingTaskFromDemoState(demoStateRef);
     const measurements = Array.isArray(task?.measurements) ? task.measurements : [];
     const idx =
-        typeof measurementRowIndex === "number" &&
+        typeof measurementRowIndex === 'number' &&
         Number.isFinite(measurementRowIndex) &&
         measurementRowIndex >= 0
             ? measurementRowIndex
@@ -66,8 +63,7 @@ export function getGrainCoolingTaskAndMeasurementByRowIndex(
  */
 export function getGrainCoolingTaskAndMeasurementByConfigField(demoStateRef, indexField) {
     const raw = task_grain_cooling[indexField];
-    const idx =
-        typeof raw === "number" && Number.isFinite(raw) && raw >= 0 ? raw : -1;
+    const idx = typeof raw === 'number' && Number.isFinite(raw) && raw >= 0 ? raw : -1;
     if (idx < 0) {
         const task = getGrainCoolingTaskFromDemoState(demoStateRef);
         const measurements = Array.isArray(task?.measurements) ? task.measurements : [];

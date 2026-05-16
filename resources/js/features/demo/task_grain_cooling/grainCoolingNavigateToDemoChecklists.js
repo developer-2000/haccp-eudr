@@ -1,20 +1,20 @@
-import { router as inertiaRouter } from "@inertiajs/vue3";
-import { i18n } from "@/i18n";
-import { task_grain_cooling } from "./config";
-import { useGrainCoolingStore } from "./grainCoolingDemoEntry";
+import { router as inertiaRouter } from '@inertiajs/vue3';
+import { i18n } from '@/i18n';
+import { task_grain_cooling } from './config';
+import { useGrainCoolingStore } from './grainCoolingDemoEntry';
 
 /**
  * Достаёт локаль из URL-сегмента `/{locale}/...`. Fallback — текущая i18n-локаль или "en".
  * Используется для построения URL перехода на Demo без vue-router.
  */
 function resolveLocale() {
-    if (typeof window !== "undefined") {
-        const first = window.location.pathname.split("/").filter(Boolean)[0];
-        if (typeof first === "string" && first.length) {
+    if (typeof window !== 'undefined') {
+        const first = window.location.pathname.split('/').filter(Boolean)[0];
+        if (typeof first === 'string' && first.length) {
             return first;
         }
     }
-    return i18n.global.locale.value || "en";
+    return i18n.global.locale.value || 'en';
 }
 
 /**
@@ -37,7 +37,7 @@ export function navigateGrainCoolingToDemoChecklists(options = {}) {
     grain.requestOpenTaskOnChecklists(task_grain_cooling.id, task_grain_cooling.niche, {
         autoOpenPending: task_grain_cooling.deepLinkAutoOpenPending,
     });
-    if (typeof options.closeToast === "function") {
+    if (typeof options.closeToast === 'function') {
         options.closeToast();
     }
     const locale = resolveLocale();

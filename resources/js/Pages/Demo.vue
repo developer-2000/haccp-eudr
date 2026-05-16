@@ -8,10 +8,10 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent } from "vue";
-import SeoHead from "@/components/SeoHead.vue";
-import PublicLayout from "@/Layouts/PublicLayout.vue";
-import ClientOnly from "@/components/ClientOnly.vue";
+import { defineAsyncComponent } from 'vue';
+import SeoHead from '@/components/SeoHead.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
+import ClientOnly from '@/components/ClientOnly.vue';
 
 /**
  * Лениво загружаем naive-ui и всё дерево DemoPage ТОЛЬКО на клиенте — в чанках, которые
@@ -19,14 +19,12 @@ import ClientOnly from "@/components/ClientOnly.vue";
  * css-render (зависимость naive-ui) обращается к `window` на этапе импорта модуля.
  */
 const NMessageProvider = defineAsyncComponent(() =>
-    import("naive-ui").then((m) => m.NMessageProvider),
+    import('naive-ui').then((m) => m.NMessageProvider),
 );
-const DemoPage = defineAsyncComponent(
-    () => import("@/features/demo/page/DemoPage.vue"),
-);
+const DemoPage = defineAsyncComponent(() => import('@/features/demo/page/DemoPage.vue'));
 
 defineOptions({
-    name: "Demo",
+    name: 'Demo',
     layout: PublicLayout,
 });
 

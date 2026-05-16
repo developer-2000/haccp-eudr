@@ -17,21 +17,21 @@
 </template>
 
 <script setup>
-import Icon from "@/components/Icon.vue";
+import Icon from '@/components/Icon.vue';
 
 defineProps({
     taskScopeType: {
         type: String,
-        default: "",
+        default: '',
     },
     targetsLine: {
         type: String,
-        default: "",
+        default: '',
     },
 });
 </script>
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .rooms {
     margin-right: 7px;
@@ -74,4 +74,3 @@ defineProps({
     height: 25px;
 }
 </style>
-

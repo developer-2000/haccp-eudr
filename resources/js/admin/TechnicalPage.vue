@@ -2,8 +2,8 @@
     <div class="container">
         <h1>Technical Test Hub</h1>
         <p class="subtitle">
-            Единая страница для ручных технических тестов проекта.
-            Области разделены по типам проверок.
+            Единая страница для ручных технических тестов проекта. Области разделены по типам
+            проверок.
         </p>
 
         <div v-if="statusMessage" class="status">{{ statusMessage }}</div>
@@ -12,8 +12,8 @@
             <section class="card">
                 <h2>SMTP / Почта</h2>
                 <p>
-                    Проверка цепочки отправки письма через событие и очередь.
-                    Тестовый получатель фиксированный.
+                    Проверка цепочки отправки письма через событие и очередь. Тестовый получатель
+                    фиксированный.
                 </p>
                 <ul class="meta">
                     <li><strong>Получатель:</strong> {{ targetEmail }}</li>
@@ -23,11 +23,11 @@
                     <li><strong>Время запроса:</strong> {{ requestTime }}</li>
                 </ul>
                 <form method="POST" :action="mailSendUrl">
-                    <input type="hidden" name="_token" :value="csrfToken">
+                    <input type="hidden" name="_token" :value="csrfToken" />
                     <button class="btn" type="submit">Отправить тестовое письмо</button>
                 </form>
                 <form method="POST" :action="mailSendAllUrl" class="spacer-top">
-                    <input type="hidden" name="_token" :value="csrfToken">
+                    <input type="hidden" name="_token" :value="csrfToken" />
                     <button class="btn" type="submit" :disabled="!adminEmail">
                         Поставить в очередь все 6 писем → EMAIL_ADMIN
                     </button>
@@ -36,10 +36,7 @@
 
             <section class="card">
                 <h2>Очереди</h2>
-                <p>
-                    Зона под тесты worker, retry, failed jobs
-                    и времени обработки заданий.
-                </p>
+                <p>Зона под тесты worker, retry, failed jobs и времени обработки заданий.</p>
                 <span class="badge">Скоро</span>
                 <div class="spacer-top">
                     <button class="btn btn-secondary" type="button" disabled>Тест очереди</button>
@@ -49,8 +46,8 @@
             <section class="card">
                 <h2>События / Listener</h2>
                 <p>
-                    Область для проверки регистрации событий,
-                    listener-цепочек и диагностики payload.
+                    Область для проверки регистрации событий, listener-цепочек и диагностики
+                    payload.
                 </p>
                 <span class="badge">Скоро</span>
                 <div class="spacer-top">
@@ -60,22 +57,17 @@
 
             <section class="card">
                 <h2>Логи и диагностика</h2>
-                <p>
-                    Быстрый доступ к логам и проверкам ошибок
-                    после запуска тестовых сценариев.
-                </p>
+                <p>Быстрый доступ к логам и проверкам ошибок после запуска тестовых сценариев.</p>
                 <span class="badge">Скоро</span>
                 <div class="links">
                     <a :href="mailTestUrl">Совместимость: старый URL mail-test</a>
                 </div>
             </section>
         </div>
-
     </div>
 </template>
 
 <script setup>
-
 defineProps({
     targetEmail: {
         type: String,
@@ -83,7 +75,7 @@ defineProps({
     },
     adminEmail: {
         type: String,
-        default: "",
+        default: '',
     },
     mailer: {
         type: String,
@@ -111,7 +103,7 @@ defineProps({
     },
     statusMessage: {
         type: String,
-        default: "",
+        default: '',
     },
     csrfToken: {
         type: String,
@@ -121,7 +113,6 @@ defineProps({
 </script>
 
 <style scoped>
-
 .subtitle {
     margin: 0 0 20px;
     color: #4b5563;

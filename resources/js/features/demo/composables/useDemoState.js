@@ -1,17 +1,17 @@
-import { ref, watch } from "vue";
-import { v4 as uuidv4 } from "uuid";
-import { buildChecklistTaskFromPayload } from "@/features/demo/composables/demoChecklistCustomTask";
-import { createDefaultState } from "@/features/demo/composables/demoDefaultState";
-import { DEMO_CHECKLIST_NICHES } from "@/features/demo/composables/demoStateChecklistSeed";
+import { ref, watch } from 'vue';
+import { v4 as uuidv4 } from 'uuid';
+import { buildChecklistTaskFromPayload } from '@/features/demo/composables/demoChecklistCustomTask';
+import { createDefaultState } from '@/features/demo/composables/demoDefaultState';
+import { DEMO_CHECKLIST_NICHES } from '@/features/demo/composables/demoStateChecklistSeed';
 import {
     loadStateFromStorage,
     saveStateToStorage,
-} from "@/features/demo/composables/demoStatePersistence";
-import { seedChecklistsTemperatureAi } from "@/features/demo/ai/temperature/seedChecklistsTemperatureAi";
-import { clearAssigneeInChecklists } from "@/features/demo/utils/demoStaff";
+} from '@/features/demo/composables/demoStatePersistence';
+import { seedChecklistsTemperatureAi } from '@/features/demo/ai/temperature/seedChecklistsTemperatureAi';
+import { clearAssigneeInChecklists } from '@/features/demo/utils/demoStaff';
 
-export { createDefaultState } from "@/features/demo/composables/demoDefaultState";
-export { loadPersistedDemoState } from "@/features/demo/composables/demoStatePersistence";
+export { createDefaultState } from '@/features/demo/composables/demoDefaultState';
+export { loadPersistedDemoState } from '@/features/demo/composables/demoStatePersistence';
 
 const demoState = ref(loadStateFromStorage() ?? createDefaultState());
 watch(
@@ -43,8 +43,8 @@ export const useDemoState = () => {
         const next = {
             id,
             siteId: payload.siteId,
-            fullName: String(payload.fullName ?? "").trim(),
-            role: String(payload.role ?? "").trim(),
+            fullName: String(payload.fullName ?? '').trim(),
+            role: String(payload.role ?? '').trim(),
             phone: payload.phone ? String(payload.phone).trim() : undefined,
             email: payload.email ? String(payload.email).trim() : undefined,
             active: payload.active !== false,
@@ -72,10 +72,7 @@ export const useDemoState = () => {
             return false;
         }
         const prev = demoState.value.staff[idx];
-        const fullName =
-            patch.fullName != null
-                ? String(patch.fullName).trim()
-                : prev.fullName;
+        const fullName = patch.fullName != null ? String(patch.fullName).trim() : prev.fullName;
         const role = patch.role != null ? String(patch.role).trim() : prev.role;
         const siteId = patch.siteId != null ? patch.siteId : prev.siteId;
         if (!fullName || !role || !siteId) {
@@ -93,10 +90,7 @@ export const useDemoState = () => {
                     ? String(patch.email).trim()
                     : undefined
                 : prev.email;
-        const active =
-            patch.active !== undefined
-                ? patch.active !== false
-                : prev.active !== false;
+        const active = patch.active !== undefined ? patch.active !== false : prev.active !== false;
         const nextStaff = [...demoState.value.staff];
         nextStaff[idx] = {
             ...prev,
@@ -157,7 +151,7 @@ export const useDemoState = () => {
      * Используется секцией Checklists после подтверждения удаления на карточке CCP.
      */
     const removeChecklistTask = (niche, taskId) => {
-        if (!DEMO_CHECKLIST_NICHES.has(niche) || typeof taskId !== "string") {
+        if (!DEMO_CHECKLIST_NICHES.has(niche) || typeof taskId !== 'string') {
             return false;
         }
         const prev = demoState.value.checklistsByNiche[niche];

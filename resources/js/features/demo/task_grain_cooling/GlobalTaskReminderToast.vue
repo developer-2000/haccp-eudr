@@ -20,27 +20,27 @@
 </template>
 
 <script setup>
-import { darkTheme, NButton, NConfigProvider } from "naive-ui";
-import { i18n } from "@/i18n";
-import { task_grain_cooling } from "./config";
+import { darkTheme, NButton, NConfigProvider } from 'naive-ui';
+import { i18n } from '@/i18n';
+import { task_grain_cooling } from './config';
 
 const t = (...args) => i18n.global.t(...args);
-import { navigateGrainCoolingToDemoChecklists } from "./grainCoolingNavigateToDemoChecklists";
+import { navigateGrainCoolingToDemoChecklists } from './grainCoolingNavigateToDemoChecklists';
 
-defineOptions({ name: "GlobalTaskReminderToast" });
+defineOptions({ name: 'GlobalTaskReminderToast' });
 
 /** Шаблон использует поля из `task_grain_cooling` (config.js). */
 
 /** Тёмная тема Naive под фон тоста (#1a1f2e). */
 const naiveThemeOverrides = {
     common: {
-        bodyColor: "#1a1f2e",
-        cardColor: "#1a1f2e",
-        textColorBase: "#e8eaef",
-        textColor1: "#e8eaef",
-        textColor2: "rgba(232, 234, 239, 0.82)",
-        textColor3: "rgba(232, 234, 239, 0.55)",
-        borderColor: "rgba(255, 255, 255, 0.12)",
+        bodyColor: '#1a1f2e',
+        cardColor: '#1a1f2e',
+        textColorBase: '#e8eaef',
+        textColor1: '#e8eaef',
+        textColor2: 'rgba(232, 234, 239, 0.82)',
+        textColor3: 'rgba(232, 234, 239, 0.55)',
+        borderColor: 'rgba(255, 255, 255, 0.12)',
     },
 };
 
@@ -61,7 +61,7 @@ function handleClose() {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .global-task-reminder-toast {
     box-sizing: border-box;

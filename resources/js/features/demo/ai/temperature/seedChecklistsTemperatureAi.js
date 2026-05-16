@@ -1,13 +1,13 @@
-import { createTemperatureAiAnalyzer } from "./TemperatureAiAnalyzer";
+import { createTemperatureAiAnalyzer } from './TemperatureAiAnalyzer';
 import {
     mapTaskNicheToAnalyzerNiche,
     resolveTaskNicheForTemperatureAi,
     resolveTemperatureAiMode,
-} from "./taskTemperatureAiContext";
+} from './taskTemperatureAiContext';
 import {
     parseMeasurementTemperatureCAndSyncRowStatusToCcp,
     readTaskTemperatureMinMaxC,
-} from "@/features/demo/domain/checklistTaskModel";
+} from '@/features/demo/domain/checklistTaskModel';
 
 const analyzer = createTemperatureAiAnalyzer();
 
@@ -21,10 +21,10 @@ const analyzer = createTemperatureAiAnalyzer();
  */
 const measurementAiSnapshotMatchesValue = (row, currentC) => {
     const w = row?.aiWarning;
-    if (!w || typeof w !== "object") {
+    if (!w || typeof w !== 'object') {
         return false;
     }
-    if (typeof w.value !== "number" || !Number.isFinite(w.value)) {
+    if (typeof w.value !== 'number' || !Number.isFinite(w.value)) {
         return false;
     }
     return Math.round(w.value * 100) === Math.round(currentC * 100);
@@ -37,7 +37,7 @@ const measurementAiSnapshotMatchesValue = (row, currentC) => {
  * @returns {void}
  */
 export function seedChecklistsTemperatureAi(checklistsByNiche) {
-    if (!checklistsByNiche || typeof checklistsByNiche !== "object") {
+    if (!checklistsByNiche || typeof checklistsByNiche !== 'object') {
         return;
     }
     for (const nicheKey of Object.keys(checklistsByNiche)) {
@@ -46,7 +46,7 @@ export function seedChecklistsTemperatureAi(checklistsByNiche) {
             continue;
         }
         for (const task of list) {
-            if (!task || typeof task !== "object") {
+            if (!task || typeof task !== 'object') {
                 continue;
             }
             const limits = readTaskTemperatureMinMaxC(task);
@@ -60,13 +60,12 @@ export function seedChecklistsTemperatureAi(checklistsByNiche) {
             let lastDisplay = null;
             let lastAiMode = resolveTemperatureAiMode(task, analyzerNiche);
             for (const row of measurements) {
-                if (!row || typeof row !== "object") {
+                if (!row || typeof row !== 'object') {
                     continue;
                 }
-                const current =
-                    parseMeasurementTemperatureCAndSyncRowStatusToCcp(task, row);
+                const current = parseMeasurementTemperatureCAndSyncRowStatusToCcp(task, row);
                 if (current == null) {
-                    if (!Object.prototype.hasOwnProperty.call(row, "aiWarning")) {
+                    if (!Object.prototype.hasOwnProperty.call(row, 'aiWarning')) {
                         row.aiWarning = null;
                     }
                     continue;
@@ -88,7 +87,7 @@ export function seedChecklistsTemperatureAi(checklistsByNiche) {
                     equipmentTargetIds: task.equipmentTargetIds,
                 };
                 const display =
-                    row.status === "success"
+                    row.status === 'success'
                         ? analyzer.getHaccpInRangeDisplay(aiParams)
                         : analyzer.getHaccpWarning(aiParams);
                 row.aiWarning = display;
@@ -96,16 +95,16 @@ export function seedChecklistsTemperatureAi(checklistsByNiche) {
                     lastDisplay = display;
                 }
             }
-            if (task.aiContext && typeof task.aiContext === "object") {
+            if (task.aiContext && typeof task.aiContext === 'object') {
                 task.aiContext = {
                     ...task.aiContext,
                     niche: task.niche ?? taskNiche,
                     mode: lastAiMode,
-                    taskType: "temperature",
+                    taskType: 'temperature',
                     ccpMin: minC,
                     ccpMax: maxC,
-                    ccpLabel: lastDisplay?.ccpLabel || limitsLabel || task.aiContext.ccpLabel || "",
-                    engine: "temperature-v1",
+                    ccpLabel: lastDisplay?.ccpLabel || limitsLabel || task.aiContext.ccpLabel || '',
+                    engine: 'temperature-v1',
                     updatedAt: new Date().toISOString(),
                 };
             }

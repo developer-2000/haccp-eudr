@@ -1,21 +1,11 @@
 <template>
     <div class="checklists-section">
         <div class="checklists-toolbar">
-            <n-button
-                type="primary"
-                class="checklists-add-btn"
-                size="large"
-                @click="openAddModal"
-            >
+            <n-button type="primary" class="checklists-add-btn" size="large" @click="openAddModal">
                 {{ t('demo.checklists.add') }}
             </n-button>
         </div>
-        <n-tabs
-            v-model:value="activeNiche"
-            type="line"
-            class="checklists-section__tabs"
-            animated
-        >
+        <n-tabs v-model:value="activeNiche" type="line" class="checklists-section__tabs" animated>
             <n-tab-pane v-for="tab in nicheTabs" :key="tab.id" :name="tab.id">
                 <template #tab>
                     <span class="checklists-section__tab-label">
@@ -26,10 +16,7 @@
                     </span>
                 </template>
 
-                <div
-                    v-if="!tasksByNiche(tab.id).length"
-                    class="checklists-empty"
-                >
+                <div v-if="!tasksByNiche(tab.id).length" class="checklists-empty">
                     {{ t('demo.checklists.empty_state') }}
                 </div>
 
@@ -67,25 +54,25 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onActivated, ref } from "vue";
-import { NButton, NTabPane, NTabs } from "naive-ui";
-import { useI18n } from "vue-i18n";
-import CreateTaskModal from "@/features/demo/components/modals/create_task_modal/CreateTaskModal.vue";
-import ShowTaskModal from "@/features/demo/components/modals/show_task/ShowTaskModal.vue";
-import TaskCard from "@/features/demo/components/sections/TaskCard.vue";
-import { useDemoState } from "@/features/demo/composables/useDemoState";
-import { task_grain_cooling } from "@/features/demo/task_grain_cooling/config";
+import { computed, nextTick, onActivated, ref } from 'vue';
+import { NButton, NTabPane, NTabs } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+import CreateTaskModal from '@/features/demo/components/modals/create_task_modal/CreateTaskModal.vue';
+import ShowTaskModal from '@/features/demo/components/modals/show_task/ShowTaskModal.vue';
+import TaskCard from '@/features/demo/components/sections/TaskCard.vue';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
+import { task_grain_cooling } from '@/features/demo/task_grain_cooling/config';
 import {
     registerGrainCoolingChecklistsDeepLinkWatcher,
     useGrainCoolingStore,
-} from "@/features/demo/task_grain_cooling/grainCoolingDemoEntry";
+} from '@/features/demo/task_grain_cooling/grainCoolingDemoEntry';
 
-defineOptions({ name: "ChecklistsSection" });
+defineOptions({ name: 'ChecklistsSection' });
 
 const { t } = useI18n();
 const { demoState, removeChecklistTask } = useDemoState();
 
-const props = defineProps({
+defineProps({
     checklistsByNiche: {
         type: Object,
         required: true,
@@ -97,9 +84,9 @@ const props = defineProps({
 });
 
 const nicheTabs = computed(() => [
-    { id: "coffee", label: t('demo.checklists.niche_coffee') },
-    { id: "bakery", label: t('demo.checklists.niche_bakery') },
-    { id: "meat", label: t('demo.checklists.niche_meat') },
+    { id: 'coffee', label: t('demo.checklists.niche_coffee') },
+    { id: 'bakery', label: t('demo.checklists.niche_bakery') },
+    { id: 'meat', label: t('demo.checklists.niche_meat') },
 ]);
 
 function resetActiveNicheToFirst() {
@@ -107,16 +94,15 @@ function resetActiveNicheToFirst() {
 }
 
 const NICHE_EMOJI = {
-    coffee: "☕",
-    bakery: "🥐",
-    meat: "🥩",
+    coffee: '☕',
+    bakery: '🥐',
+    meat: '🥩',
 };
-const nicheEmoji = (nicheId) => NICHE_EMOJI[nicheId] ?? "";
+const nicheEmoji = (nicheId) => NICHE_EMOJI[nicheId] ?? '';
 
-const activeNiche = ref("coffee");
+const activeNiche = ref('coffee');
 const isModalOpen = ref(false);
-const tasksByNiche = (nicheId) =>
-    demoState.value.checklistsByNiche?.[nicheId] ?? [];
+const tasksByNiche = (nicheId) => demoState.value.checklistsByNiche?.[nicheId] ?? [];
 
 /** Не хранить ссылку на объект задачи: после иммутаций в `demoState` (напр. problem по таймеру) ссылка устаревает. */
 const selectedTaskId = ref(null);
@@ -124,7 +110,7 @@ const selectedNicheForModal = ref(null);
 const selectedTask = computed(() => {
     const id = selectedTaskId.value;
     const niche = selectedNicheForModal.value;
-    if (id == null || niche == null || niche === "") {
+    if (id == null || niche == null || niche === '') {
         return null;
     }
     const list = tasksByNiche(niche);
@@ -154,8 +140,8 @@ function openShowTaskModal(task) {
  */
 async function tryConsumePendingDeepLink() {
     if (!task_grain_cooling.scenarioProcessAllowed) {
-            return;
-        }
+        return;
+    }
     const grainCoolingStore = useGrainCoolingStore();
     if (!grainCoolingStore) {
         return;
@@ -216,9 +202,9 @@ const onConfirmRemoveTask = (taskId) => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
-.n-tabs.n-tabs--top .n-tab-pane{
+.n-tabs.n-tabs--top .n-tab-pane {
     padding-top: 20px;
 }
 
@@ -259,7 +245,6 @@ const onConfirmRemoveTask = (taskId) => {
         @media (max-width: 500px) {
             grid-template-columns: 1fr;
         }
-
     }
 }
 

@@ -29,18 +29,20 @@
                     :task-scope-type="viewTask.taskScopeType"
                     :targets-line="modalTargetsLine"
                 />
-                <TaskFieldSummarySection :lines="taskFieldSummaryLines"/>
+                <TaskFieldSummarySection :lines="taskFieldSummaryLines" />
                 <TaskMeasurementsTable
+                    v-model:expanded-action-row-key="expandedActionRowKey"
                     :task="viewTask"
                     :is-hot-mode="isHotMode"
                     :task-scheduled-for-future="taskScheduledForFuture"
-                    v-model:expanded-action-row-key="expandedActionRowKey"
-                    @open-pending="(row) => onOpenPending(row, 'click: pending badge in Status column')"
+                    @open-pending="
+                        (row) => onOpenPending(row, 'click: pending badge in Status column')
+                    "
                 />
             </div>
         </template>
 
-        <TaskExecutionPanelModal ref="pendingDrawerRef" :task="viewTask"/>
+        <TaskExecutionPanelModal ref="pendingDrawerRef" :task="viewTask" />
 
         <template #footer>
             <div class="checklist-modal__footer">
@@ -53,11 +55,7 @@
                     {{ tr('demo.show_task_modal.refresh') }}
                 </n-button>
                 <div v-else></div>
-                <n-button
-                    size="large"
-                    type="info"
-                    @click="onFooterCloseClick"
-                >
+                <n-button size="large" type="info" @click="onFooterCloseClick">
                     {{ tr('demo.show_task_modal.close') }}
                 </n-button>
             </div>
@@ -66,36 +64,31 @@
 </template>
 
 <script setup>
-import {computed, ref, watch} from "vue";
-import {NButton, NModal} from "naive-ui";
-import {useI18n} from "vue-i18n";
+import { computed, ref, watch } from 'vue';
+import { NButton, NModal } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
 import {
     formatTaskFieldSummaryLine,
     normalizeTaskFieldDefinitions,
     TASK_FIELD_TYPE,
-} from "@/features/demo/data/demoChecklistTaskFields";
-import {
-    equipmentTargetsSummary,
-} from "@/features/demo/data/demoChecklistEquipment";
-import {
-    normalizeRoomTargetIds,
-    ROOM_GROUPS,
-} from "@/features/demo/data/demoChecklistRooms";
-import CompleteTaskModalHeader from "./CompleteTaskModalHeader.vue";
-import TaskExecutionPanelModal from "../task_execution_panel/TaskExecutionPanelModal.vue";
-import TaskAssigneeSection from "./TaskAssigneeSection.vue";
-import TaskFieldSummarySection from "./TaskFieldSummarySection.vue";
-import TaskMeasurementsTable from "./TaskMeasurementsTable.vue";
-import TaskTargetsLine from "./TaskTargetsLine.vue";
-import {useDemoState} from "@/features/demo/composables/useDemoState";
+} from '@/features/demo/data/demoChecklistTaskFields';
+import { equipmentTargetsSummary } from '@/features/demo/data/demoChecklistEquipment';
+import { normalizeRoomTargetIds, ROOM_GROUPS } from '@/features/demo/data/demoChecklistRooms';
+import CompleteTaskModalHeader from './CompleteTaskModalHeader.vue';
+import TaskExecutionPanelModal from '../task_execution_panel/TaskExecutionPanelModal.vue';
+import TaskAssigneeSection from './TaskAssigneeSection.vue';
+import TaskFieldSummarySection from './TaskFieldSummarySection.vue';
+import TaskMeasurementsTable from './TaskMeasurementsTable.vue';
+import TaskTargetsLine from './TaskTargetsLine.vue';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
 import {
     useGrainCoolingShowTaskModalBridge,
     useGrainCoolingShowTaskModalViewTask,
-} from "@/features/demo/task_grain_cooling";
+} from '@/features/demo/task_grain_cooling';
 
-defineOptions({name: "ShowTaskModal"});
+defineOptions({ name: 'ShowTaskModal' });
 
-const {t: tr} = useI18n();
+const { t: tr } = useI18n();
 
 const props = defineProps({
     show: {
@@ -108,7 +101,7 @@ const props = defineProps({
     },
     taskType: {
         type: String,
-        default: "ccp",
+        default: 'ccp',
     },
     staff: {
         type: Array,
@@ -116,17 +109,17 @@ const props = defineProps({
     },
     mode: {
         type: String,
-        default: "checklists",
+        default: 'checklists',
     },
 });
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(['close']);
 
 const expandedActionRowKey = ref(null);
 const pendingDrawerRef = ref(null);
-const {demoState} = useDemoState();
+const { demoState } = useDemoState();
 const viewTask = useGrainCoolingShowTaskModalViewTask(props, demoState);
-const isHotMode = computed(() => props.mode === "hot");
+const isHotMode = computed(() => props.mode === 'hot');
 
 const startOfTodayTs = () => {
     const d = new Date();
@@ -135,7 +128,7 @@ const startOfTodayTs = () => {
 };
 
 const isTaskScheduledForFutureCheck = (task) =>
-    typeof task?.startDate === "number" &&
+    typeof task?.startDate === 'number' &&
     Number.isFinite(task.startDate) &&
     task.startDate > startOfTodayTs();
 
@@ -143,35 +136,36 @@ const taskScheduledForFuture = computed(() =>
     viewTask.value ? isTaskScheduledForFutureCheck(viewTask.value) : false,
 );
 
-const {onOpenPending, tryAutoOpenPendingDrawerAfterDeepLink} =
-    useGrainCoolingShowTaskModalBridge({
+const { onOpenPending, tryAutoOpenPendingDrawerAfterDeepLink } = useGrainCoolingShowTaskModalBridge(
+    {
         getShow: () => props.show,
         getTask: () => viewTask.value,
         taskScheduledForFuture,
         isHotMode,
         pendingDrawerRef,
-    });
+    },
+);
 
 const modalTargetsLine = computed(() => {
     const t = viewTask.value ?? null;
     if (!t) {
-        return "";
+        return '';
     }
-    if (t.taskScopeType === "equipment") {
+    if (t.taskScopeType === 'equipment') {
         const s = equipmentTargetsSummary(t.equipmentTargetIds);
-        return s || "";
+        return s || '';
     }
-    if (t.taskScopeType === "rooms") {
+    if (t.taskScopeType === 'rooms') {
         const ids = normalizeRoomTargetIds(t.roomTargetIds);
         if (!ids.length) {
-            return "";
+            return '';
         }
         const roomLabelById = new Map(
             ROOM_GROUPS.flatMap((g) => g.items.map((it) => [it.id, it.label])),
         );
-        return ids.map((id) => roomLabelById.get(id) ?? id).join(", ");
+        return ids.map((id) => roomLabelById.get(id) ?? id).join(', ');
     }
-    return "";
+    return '';
 });
 
 const taskFieldSummaryLines = computed(() => {
@@ -181,8 +175,8 @@ const taskFieldSummaryLines = computed(() => {
     }
     return normalizeTaskFieldDefinitions(t.taskFieldDefinitions).map((def) => {
         if (def?.fieldType === TASK_FIELD_TYPE.TICKET) {
-            const description = String(def?.config?.description ?? "").trim();
-            return tr('demo.show_task_modal.ticket_label', { description: description || "—" });
+            const description = String(def?.config?.description ?? '').trim();
+            return tr('demo.show_task_modal.ticket_label', { description: description || '—' });
         }
         return formatTaskFieldSummaryLine(def);
     });
@@ -191,14 +185,12 @@ const taskFieldSummaryLines = computed(() => {
 const NICHE_LABEL_KEYS = { coffee: 'niche_coffee', bakery: 'niche_bakery', meat: 'niche_meat' };
 
 const NICHE_EMOJI = {
-    coffee: "☕",
-    bakery: "🥐",
-    meat: "🥩",
+    coffee: '☕',
+    bakery: '🥐',
+    meat: '🥩',
 };
 
-const taskTypeDisplay = computed(
-    () => NICHE_EMOJI[props.taskType] ?? props.taskType,
-);
+const taskTypeDisplay = computed(() => NICHE_EMOJI[props.taskType] ?? props.taskType);
 
 const taskTypeAria = computed(() => {
     const key = NICHE_LABEL_KEYS[props.taskType];
@@ -209,7 +201,7 @@ const showModel = computed({
     get: () => props.show,
     set: (value) => {
         if (!value) {
-            emit("close");
+            emit('close');
         }
     },
 });
@@ -220,10 +212,10 @@ const applyDefaultCorrectiveActions = (task) => {
         return;
     }
     for (const m of task.measurements) {
-        if (m.status !== "problem") {
+        if (m.status !== 'problem') {
             continue;
         }
-        if (m.correctiveAction != null && m.correctiveAction !== "") {
+        if (m.correctiveAction != null && m.correctiveAction !== '') {
             continue;
         }
         m.correctiveAction = first;
@@ -237,36 +229,34 @@ watch(
             applyDefaultCorrectiveActions(task);
         }
     },
-    {immediate: true},
+    { immediate: true },
 );
 
 const onVisibilityChange = (visible) => {
     if (!visible) {
         expandedActionRowKey.value = null;
-        emit("close");
+        emit('close');
     }
 };
 
 const closeModal = () => {
     expandedActionRowKey.value = null;
-    emit("close");
+    emit('close');
 };
 
 const refreshTaskState = () => {
     const task = viewTask.value;
-    if (!task || typeof task !== "object") {
+    if (!task || typeof task !== 'object') {
         return;
     }
     /** Слоты дня и сброс строк — только из `measurements`, без `repeatTimes`. */
     const currentRows = Array.isArray(task.measurements) ? task.measurements : [];
-    const times = currentRows
-        .map((m) => String(m?.time ?? "").trim())
-        .filter(Boolean);
+    const times = currentRows.map((m) => String(m?.time ?? '').trim()).filter(Boolean);
 
     task.measurements = times.map((time) => ({
         time,
-        value: "-",
-        status: "pending",
+        value: '-',
+        status: 'pending',
         aiWarning: null,
         correctiveAction: null,
         comment: null,
@@ -290,7 +280,7 @@ defineExpose({
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .checklist-modal__content {
     display: flex;

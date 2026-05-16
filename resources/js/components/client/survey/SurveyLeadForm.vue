@@ -8,18 +8,11 @@
             {{ title }}
         </h2>
         <ul v-if="bullets?.length" class="survey-lead-form__bullets">
-            <li
-                v-for="(line, i) in bullets"
-                :key="'b' + i"
-                class="survey-lead-form__bullet"
-            >
+            <li v-for="(line, i) in bullets" :key="'b' + i" class="survey-lead-form__bullet">
                 {{ line }}
             </li>
         </ul>
-        <p
-            v-if="expectation"
-            class="survey-lead-form__expectation survey-page__text-wrap"
-        >
+        <p v-if="expectation" class="survey-lead-form__expectation survey-page__text-wrap">
             {{ expectation }}
         </p>
         <div class="survey-lead-form__fields">
@@ -34,9 +27,7 @@
             />
             <div class="survey-lead-form__row survey-lead-form__row--two">
                 <label class="survey-page__field">
-                    <span class="survey-page__field-label">{{
-                        t("survey.lead.field_name")
-                    }}</span>
+                    <span class="survey-page__field-label">{{ t('survey.lead.field_name') }}</span>
                     <input
                         v-model="answers.name"
                         type="text"
@@ -45,9 +36,9 @@
                     />
                 </label>
                 <label class="survey-page__field">
-                    <span class="survey-page__field-label"
-                        >{{ t("survey.lead.field_business_name") }}</span
-                    >
+                    <span class="survey-page__field-label">{{
+                        t('survey.lead.field_business_name')
+                    }}</span>
                     <input
                         v-model="answers.business_name"
                         type="text"
@@ -58,12 +49,10 @@
             </div>
             <label class="survey-page__field">
                 <span class="survey-page__field-label">
-                    {{ t("survey.lead.field_email") }}
-                    <span class="survey-lead-form__star" aria-hidden="true"
-                        >*</span
-                    >
+                    {{ t('survey.lead.field_email') }}
+                    <span class="survey-lead-form__star" aria-hidden="true">*</span>
                     <span class="survey-lead-form__sr-only">{{
-                        t("survey.lead.field_email_required_sr")
+                        t('survey.lead.field_email_required_sr')
                     }}</span>
                 </span>
                 <input
@@ -92,9 +81,7 @@
             </label>
             <div class="survey-lead-form__row survey-lead-form__row--three">
                 <label class="survey-page__field">
-                    <span class="survey-page__field-label">{{
-                        t("survey.lead.field_phone")
-                    }}</span>
+                    <span class="survey-page__field-label">{{ t('survey.lead.field_phone') }}</span>
                     <input
                         v-model="answers.phone"
                         type="tel"
@@ -106,7 +93,7 @@
                 </label>
                 <label class="survey-page__field">
                     <span class="survey-page__field-label">{{
-                        t("survey.lead.field_whatsapp")
+                        t('survey.lead.field_whatsapp')
                     }}</span>
                     <input
                         v-model="answers.whatsapp"
@@ -119,7 +106,7 @@
                 </label>
                 <label class="survey-page__field">
                     <span class="survey-page__field-label">{{
-                        t("survey.lead.field_telegram")
+                        t('survey.lead.field_telegram')
                     }}</span>
                     <input
                         v-model="answers.telegram"
@@ -132,11 +119,7 @@
                 </label>
             </div>
         </div>
-        <p
-            v-if="submitError"
-            class="survey-lead-form__submit-error"
-            role="alert"
-        >
+        <p v-if="submitError" class="survey-lead-form__submit-error" role="alert">
             {{ submitError }}
         </p>
         <footer class="survey-page__footer">
@@ -154,9 +137,9 @@
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 
-defineOptions({ name: "SurveyLeadForm" });
+defineOptions({ name: 'SurveyLeadForm' });
 const { t } = useI18n();
 
 defineProps({
@@ -176,11 +159,11 @@ defineProps({
     /** П. 7.3: короткий текст ожиданий перед полями (последний шаг, зачем контакты). */
     expectation: {
         type: String,
-        default: "",
+        default: '',
     },
     emailError: {
         type: String,
-        default: "",
+        default: '',
     },
     emailInputId: {
         type: String,
@@ -196,17 +179,17 @@ defineProps({
     },
     submitLabel: {
         type: String,
-        default: "",
+        default: '',
     },
     /** Текст ошибки сети/API под полями (п. 6.5). */
     submitError: {
         type: String,
-        default: "",
+        default: '',
     },
     /** id заголовка экрана для фокуса при переходе на lead. */
     stepHeadingId: {
         type: String,
-        default: "survey-step-heading",
+        default: 'survey-step-heading',
     },
 });
 
@@ -217,7 +200,7 @@ defineEmits({
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-lead-form {
     display: flex;

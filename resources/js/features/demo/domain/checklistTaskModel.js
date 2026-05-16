@@ -1,43 +1,33 @@
-import { v4 as uuidv4 } from "uuid";
-import { i18n } from "@/i18n";
+import { v4 as uuidv4 } from 'uuid';
+import { i18n } from '@/i18n';
 const tt = (...args) => i18n.global.t(...args);
 import {
     FREQUENCY_CODE,
     normalizeFrequency,
-} from "@/features/demo/data/demoChecklistTaskFrequency";
-import { normalizeEquipmentTargetIds } from "@/features/demo/data/demoChecklistEquipment";
-import { normalizeRoomTargetIds } from "@/features/demo/data/demoChecklistRooms";
+} from '@/features/demo/data/demoChecklistTaskFrequency';
+import { normalizeEquipmentTargetIds } from '@/features/demo/data/demoChecklistEquipment';
+import { normalizeRoomTargetIds } from '@/features/demo/data/demoChecklistRooms';
 import {
     normalizeTaskScopeType,
     TASK_SCOPE_TYPE,
-} from "@/features/demo/data/demoChecklistTaskScope";
-import { normalizeTaskFieldDefinitions } from "@/features/demo/data/demoChecklistTaskFields";
-import { parseTemperatureFromMeasurementValue } from "@/features/demo/ai/temperature/parseTemperatureFromMeasurementValue";
-import { resolveBreadRowForTaskMeasurement } from "@/features/demo/ai/temperature/breadBands";
-import { resolveCoffeeRowForTaskMeasurement } from "@/features/demo/ai/temperature/coffeeBands";
-import { resolveMeatRowForTaskMeasurement } from "@/features/demo/ai/temperature/meatBands";
+} from '@/features/demo/data/demoChecklistTaskScope';
+import { normalizeTaskFieldDefinitions } from '@/features/demo/data/demoChecklistTaskFields';
+import { parseTemperatureFromMeasurementValue } from '@/features/demo/ai/temperature/parseTemperatureFromMeasurementValue';
+import { resolveBreadRowForTaskMeasurement } from '@/features/demo/ai/temperature/breadBands';
+import { resolveCoffeeRowForTaskMeasurement } from '@/features/demo/ai/temperature/coffeeBands';
+import { resolveMeatRowForTaskMeasurement } from '@/features/demo/ai/temperature/meatBands';
 import {
     mapTaskNicheToAnalyzerNiche,
     resolveTaskNicheForTemperatureAi,
     resolveTemperatureAiMode,
-} from "@/features/demo/ai/temperature/taskTemperatureAiContext";
-import { DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE } from "@/features/demo/task_grain_cooling/config";
+} from '@/features/demo/ai/temperature/taskTemperatureAiContext';
+import { DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE } from '@/features/demo/task_grain_cooling/config';
 
-export const DEFAULT_TASK_ACTIVE_WEEKDAYS = Object.freeze([
-    "mon",
-    "tue",
-    "wed",
-    "thu",
-    "fri",
-]);
+export const DEFAULT_TASK_ACTIVE_WEEKDAYS = Object.freeze(['mon', 'tue', 'wed', 'thu', 'fri']);
 
-export const DEFAULT_TASK_REPEAT_TIMES = Object.freeze(["00:00"]);
+export const DEFAULT_TASK_REPEAT_TIMES = Object.freeze(['00:00']);
 
-const ALLOWED_MEASUREMENT_ROW_STATUSES = new Set([
-    "success",
-    "problem",
-    "pending",
-]);
+const ALLOWED_MEASUREMENT_ROW_STATUSES = new Set(['success', 'problem', 'pending']);
 
 /**
  * Статус строки замера в модалке «Детали задачи»: только success | problem | pending.
@@ -47,11 +37,11 @@ const ALLOWED_MEASUREMENT_ROW_STATUSES = new Set([
  * @returns {"success"|"problem"|"pending"}
  */
 export function normalizeMeasurementRowStatus(raw) {
-    const s = typeof raw === "string" ? raw.trim() : "";
+    const s = typeof raw === 'string' ? raw.trim() : '';
     if (ALLOWED_MEASUREMENT_ROW_STATUSES.has(s)) {
         return /** @type {"success"|"problem"|"pending"} */ (s);
     }
-    return "pending";
+    return 'pending';
 }
 
 /**
@@ -65,7 +55,7 @@ export function normalizeTaskMeasurementRowStatuses(task) {
         return;
     }
     for (const row of task.measurements) {
-        if (row && typeof row === "object") {
+        if (row && typeof row === 'object') {
             row.status = normalizeMeasurementRowStatus(row.status);
         }
     }
@@ -97,42 +87,42 @@ function isSameNormalizedTemperatureAiContext(current, next) {
  * @returns {void}
  */
 export function normalizeTaskAiFields(task, niche = null) {
-    if (!task || typeof task !== "object") {
+    if (!task || typeof task !== 'object') {
         return;
     }
 
-    if (typeof task.niche !== "string" || !task.niche.trim()) {
-        task.niche = typeof niche === "string" && niche.trim() ? niche.trim() : null;
+    if (typeof task.niche !== 'string' || !task.niche.trim()) {
+        task.niche = typeof niche === 'string' && niche.trim() ? niche.trim() : null;
     }
 
     const fieldType = task?.taskFieldDefinitions?.[0]?.fieldType ?? null;
-    const isTemperatureTask = fieldType === "temperature";
+    const isTemperatureTask = fieldType === 'temperature';
 
     if (isTemperatureTask) {
         const aiContext =
-            task.aiContext && typeof task.aiContext === "object" ? task.aiContext : {};
+            task.aiContext && typeof task.aiContext === 'object' ? task.aiContext : {};
         const nextAiContext = {
             ...DEMO_TEMPERATURE_TASK_AI_CONTEXT_SHAPE,
             niche: task.niche ?? null,
             mode: aiContext.mode ?? null,
             ccpMin:
-                typeof aiContext.ccpMin === "number" && Number.isFinite(aiContext.ccpMin)
+                typeof aiContext.ccpMin === 'number' && Number.isFinite(aiContext.ccpMin)
                     ? aiContext.ccpMin
                     : null,
             ccpMax:
-                typeof aiContext.ccpMax === "number" && Number.isFinite(aiContext.ccpMax)
+                typeof aiContext.ccpMax === 'number' && Number.isFinite(aiContext.ccpMax)
                     ? aiContext.ccpMax
                     : null,
-            ccpLabel: String(aiContext.ccpLabel ?? ""),
+            ccpLabel: String(aiContext.ccpLabel ?? ''),
             updatedAt:
-                typeof aiContext.updatedAt === "string" && aiContext.updatedAt.trim()
+                typeof aiContext.updatedAt === 'string' && aiContext.updatedAt.trim()
                     ? aiContext.updatedAt
                     : null,
         };
         const cur = task.aiContext;
         if (
             !cur ||
-            typeof cur !== "object" ||
+            typeof cur !== 'object' ||
             !isSameNormalizedTemperatureAiContext(cur, nextAiContext)
         ) {
             task.aiContext = nextAiContext;
@@ -146,25 +136,25 @@ export function normalizeTaskAiFields(task, niche = null) {
     }
 
     for (const row of task.measurements) {
-        if (!row || typeof row !== "object") {
+        if (!row || typeof row !== 'object') {
             continue;
         }
-        if (!Object.prototype.hasOwnProperty.call(row, "aiWarning")) {
+        if (!Object.prototype.hasOwnProperty.call(row, 'aiWarning')) {
             row.aiWarning = null;
         }
-        if (row.aiWarning && typeof row.aiWarning !== "object") {
+        if (row.aiWarning && typeof row.aiWarning !== 'object') {
             row.aiWarning = null;
         }
-        if (row.aiWarning && typeof row.aiWarning === "object") {
+        if (row.aiWarning && typeof row.aiWarning === 'object') {
             const w = row.aiWarning;
             if (
-                Object.prototype.hasOwnProperty.call(w, "severity") &&
-                !Object.prototype.hasOwnProperty.call(w, "ai_status")
+                Object.prototype.hasOwnProperty.call(w, 'severity') &&
+                !Object.prototype.hasOwnProperty.call(w, 'ai_status')
             ) {
                 w.ai_status = w.severity;
                 delete w.severity;
             }
-            if (Object.prototype.hasOwnProperty.call(w, "status")) {
+            if (Object.prototype.hasOwnProperty.call(w, 'status')) {
                 delete w.status;
             }
         }
@@ -178,7 +168,7 @@ export function normalizeTaskAiFields(task, niche = null) {
  * @returns {void}
  */
 export function normalizeAllChecklistTaskMeasurementStatuses(checklistsByNiche) {
-    if (!checklistsByNiche || typeof checklistsByNiche !== "object") {
+    if (!checklistsByNiche || typeof checklistsByNiche !== 'object') {
         return;
     }
     for (const niche of Object.keys(checklistsByNiche)) {
@@ -225,58 +215,48 @@ export const payloadUsesPresetMeasurementsBranch = (payload) => {
 export const taskDisplayStatusKey = (task) => {
     const multi = taskHasMultiSlotSchedule(task);
     const raw = task?.status;
-    if (raw === true || raw === "ok") {
-        return multi ? "repeat" : "ok";
+    if (raw === true || raw === 'ok') {
+        return multi ? 'repeat' : 'ok';
     }
-    if (
-        raw === false ||
-        raw === "repeat" ||
-        raw === "problem" ||
-        raw === "pending"
-    ) {
-        return multi ? "repeat" : "problem";
+    if (raw === false || raw === 'repeat' || raw === 'problem' || raw === 'pending') {
+        return multi ? 'repeat' : 'problem';
     }
-    return multi ? "repeat" : "ok";
+    return multi ? 'repeat' : 'ok';
 };
 
 /** Типовые «фактические» значения для холодового оборудования (демо). */
 const DEMO_COLD_EQ_VALUE = Object.freeze({
-    "eq-freezer": "-19 °C",
-    "eq-fridge-1": "4,2 °C",
-    "eq-fridge-2": "4,1 °C",
-    "eq-cold-storage": "3 °C",
-    "eq-cold-display": "5 °C",
-    "eq-frozen-storage": "-21 °C",
+    'eq-freezer': '-19 °C',
+    'eq-fridge-1': '4,2 °C',
+    'eq-fridge-2': '4,1 °C',
+    'eq-cold-storage': '3 °C',
+    'eq-cold-display': '5 °C',
+    'eq-frozen-storage': '-21 °C',
 });
 
 const DEMO_HEAT_PROCESS_EQ = new Set([
-    "eq-combi-oven",
-    "eq-stove",
-    "eq-fryer",
-    "eq-bain-marie",
-    "eq-immersion-circ",
+    'eq-combi-oven',
+    'eq-stove',
+    'eq-fryer',
+    'eq-bain-marie',
+    'eq-immersion-circ',
 ]);
 
-const DEMO_PROBE_EQ = new Set(["eq-probe-1", "eq-probe-2"]);
+const DEMO_PROBE_EQ = new Set(['eq-probe-1', 'eq-probe-2']);
 
-const DEMO_DRY_STORAGE_EQ = new Set([
-    "eq-dry-goods",
-    "eq-transport-box",
-    "eq-vacuum-packer",
-]);
+const DEMO_DRY_STORAGE_EQ = new Set(['eq-dry-goods', 'eq-transport-box', 'eq-vacuum-packer']);
 
 const DEMO_SURFACE_SANITARY_EQ = new Set([
-    "eq-countertop",
-    "eq-cutting-boards",
-    "eq-door-handles",
-    "eq-switches",
-    "eq-windows",
-    "eq-ceiling",
-    "eq-floors",
-    "eq-tables",
-    "eq-toilet",
+    'eq-countertop',
+    'eq-cutting-boards',
+    'eq-door-handles',
+    'eq-switches',
+    'eq-windows',
+    'eq-ceiling',
+    'eq-floors',
+    'eq-tables',
+    'eq-toilet',
 ]);
-
 
 /**
  * Демо: осмысленное значение колонки «Замер» для ok-задачи по названию и целям (оборудование/помещения).
@@ -285,10 +265,7 @@ const DEMO_SURFACE_SANITARY_EQ = new Set([
  * Определяет демо-значение замера для ok-задачи по стабильным ID оборудования/помещений.
  * Не зависит от языка title — работает с любой локалью.
  */
-const inferDefaultOkMeasurementDisplayValue = ({
-    equipmentTargetIds = [],
-    roomTargetIds = [],
-}) => {
+const inferDefaultOkMeasurementDisplayValue = ({ equipmentTargetIds = [], roomTargetIds = [] }) => {
     const eq = Array.isArray(equipmentTargetIds) ? equipmentTargetIds : [];
     const rooms = Array.isArray(roomTargetIds) ? roomTargetIds : [];
 
@@ -298,30 +275,30 @@ const inferDefaultOkMeasurementDisplayValue = ({
         }
     }
     if (eq.some((id) => DEMO_PROBE_EQ.has(id))) {
-        return "72 °C";
+        return '72 °C';
     }
     if (eq.some((id) => DEMO_HEAT_PROCESS_EQ.has(id))) {
-        return "185 °C";
+        return '185 °C';
     }
-    if (eq.includes("eq-coffee-roaster")) {
-        return "212 °C";
+    if (eq.includes('eq-coffee-roaster')) {
+        return '212 °C';
     }
-    if (eq.includes("eq-coffee-machine")) {
-        return "93 °C";
+    if (eq.includes('eq-coffee-machine')) {
+        return '93 °C';
     }
     if (eq.some((id) => DEMO_DRY_STORAGE_EQ.has(id))) {
-        return "21 °C";
+        return '21 °C';
     }
     if (
         eq.some((id) => DEMO_SURFACE_SANITARY_EQ.has(id)) ||
-        ["eq-handwash", "eq-sinks", "eq-dishwasher"].some((id) => eq.includes(id))
+        ['eq-handwash', 'eq-sinks', 'eq-dishwasher'].some((id) => eq.includes(id))
     ) {
         return tt('demo.ok_values.surfaces_normal');
     }
-    if (rooms.includes("room-cold-chamber")) {
-        return "7 °C";
+    if (rooms.includes('room-cold-chamber')) {
+        return '7 °C';
     }
-    if (rooms.includes("room-wash") || rooms.includes("room-wc-staff")) {
+    if (rooms.includes('room-wash') || rooms.includes('room-wc-staff')) {
         return tt('demo.ok_values.on_schedule');
     }
     if (rooms.length > 0 && eq.length === 0) {
@@ -346,14 +323,11 @@ export const toStartOfDayTimestamp = (dateLike = new Date()) => {
  * Используется как единый источник стартовых значений полей модалки.
  */
 export const createModalDraft = (_niche, context = {}) => ({
-    title: "",
+    title: '',
     taskScopeType: TASK_SCOPE_TYPE.EQUIPMENT,
     assignedStaffId: null,
     frequency: FREQUENCY_CODE.CUSTOM,
-    startDate:
-        typeof context.startDate === "number"
-            ? context.startDate
-            : toStartOfDayTimestamp(),
+    startDate: typeof context.startDate === 'number' ? context.startDate : toStartOfDayTimestamp(),
     repeatTimes: [...DEFAULT_TASK_REPEAT_TIMES],
     activeWeekdays: [...DEFAULT_TASK_ACTIVE_WEEKDAYS],
     equipmentTargetIds: [],
@@ -366,7 +340,7 @@ export const createModalDraft = (_niche, context = {}) => ({
 const toTimeString = (minutesTotal) => {
     const hours = Math.floor(minutesTotal / 60);
     const minutes = minutesTotal % 60;
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 };
 
 const buildRepeatTimesByCount = (count) => {
@@ -382,30 +356,26 @@ const buildRepeatTimesByCount = (count) => {
  * Используется при генерации fallback-id для дефолтных задач.
  */
 const toIdToken = (value) =>
-    String(value ?? "")
+    String(value ?? '')
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
 
 /**
  * Возвращает id задачи по единому правилу для default и custom источников.
  * Используется в `buildTaskFromPayload`, чтобы не расходились правила формирования id.
  */
 const resolveTaskId = ({ niche, payload, source, idFactory, context = {} }) => {
-    if (source !== "default") {
-        return typeof idFactory === "function"
-            ? idFactory(niche)
-            : `custom-${niche}-${uuidv4()}`;
+    if (source !== 'default') {
+        return typeof idFactory === 'function' ? idFactory(niche) : `custom-${niche}-${uuidv4()}`;
     }
-    const rawId = String(payload?.id ?? "").trim();
+    const rawId = String(payload?.id ?? '').trim();
     if (rawId) {
         return rawId;
     }
     const titleToken = toIdToken(payload?.title);
-    const fallbackToken = titleToken || "task";
-    const indexSuffix = Number.isInteger(context.index)
-        ? `-${context.index + 1}`
-        : "";
+    const fallbackToken = titleToken || 'task';
+    const indexSuffix = Number.isInteger(context.index) ? `-${context.index + 1}` : '';
     return `default-${niche}-${fallbackToken}${indexSuffix}`;
 };
 
@@ -414,20 +384,18 @@ const resolveTaskId = ({ niche, payload, source, idFactory, context = {} }) => {
  * Используется в `buildTaskFromPayload`, чтобы заголовок формировался синхронно.
  */
 const resolveTaskTitle = ({ payload, source, context = {} }) => {
-    const directTitle = String(payload?.title ?? "").trim();
+    const directTitle = String(payload?.title ?? '').trim();
     if (directTitle) {
         return directTitle;
     }
-    if (source !== "default") {
-        return "";
+    if (source !== 'default') {
+        return '';
     }
-    const fallbackValue = String(payload?.value ?? "").trim();
+    const fallbackValue = String(payload?.value ?? '').trim();
     if (fallbackValue) {
         return tt('demo.task_title.task_prefix', { value: fallbackValue });
     }
-    const indexSuffix = Number.isInteger(context.index)
-        ? ` #${context.index + 1}`
-        : "";
+    const indexSuffix = Number.isInteger(context.index) ? ` #${context.index + 1}` : '';
     return tt('demo.task_title.default_task', { suffix: indexSuffix });
 };
 
@@ -436,7 +404,7 @@ const resolveTaskTitle = ({ payload, source, context = {} }) => {
  */
 export const firstPendingMeasurement = (task) => {
     const list = Array.isArray(task?.measurements) ? task.measurements : [];
-    const pend = list.find((m) => m?.status === "pending");
+    const pend = list.find((m) => m?.status === 'pending');
     return pend ?? null;
 };
 
@@ -447,7 +415,7 @@ export const firstPendingMeasurement = (task) => {
 export const firstPendingMeasurementTime = (task) => {
     const pend = firstPendingMeasurement(task);
     const t = pend?.time;
-    return typeof t === "string" && t.trim() ? t.trim() : "";
+    return typeof t === 'string' && t.trim() ? t.trim() : '';
 };
 
 /**
@@ -462,13 +430,13 @@ const resolveTaskAggregateOk = ({ payload, source }) => {
     if (raw === false) {
         return false;
     }
-    if (raw === "ok") {
+    if (raw === 'ok') {
         return true;
     }
-    if (raw === "repeat" || raw === "problem" || raw === "pending") {
+    if (raw === 'repeat' || raw === 'problem' || raw === 'pending') {
         return false;
     }
-    if (source === "default") {
+    if (source === 'default') {
         return true;
     }
     return true;
@@ -478,14 +446,13 @@ const resolveTaskAggregateOk = ({ payload, source }) => {
  * Возвращает признак custom-задачи по единому правилу для default и custom источников.
  * Используется в `buildTaskFromPayload`, чтобы метка происхождения не вычислялась в UI.
  */
-const resolveTaskIsCustom = ({ source }) => source !== "default";
+const resolveTaskIsCustom = ({ source }) => source !== 'default';
 
 /**
  * Возвращает taskScopeType по единому правилу для default и custom источников.
  * Используется в `buildTaskFromPayload`, чтобы тип охвата всегда проходил одинаковую нормализацию.
  */
-const resolveTaskScopeType = ({ payload }) =>
-    normalizeTaskScopeType(payload?.taskScopeType);
+const resolveTaskScopeType = ({ payload }) => normalizeTaskScopeType(payload?.taskScopeType);
 
 /**
  * Возвращает assignedStaffId по единому правилу для default и custom источников.
@@ -493,7 +460,7 @@ const resolveTaskScopeType = ({ payload }) =>
  */
 const resolveTaskAssignedStaffId = ({ payload }) => {
     const raw = payload?.assignedStaffId;
-    return typeof raw === "string" && raw.trim() ? raw.trim() : null;
+    return typeof raw === 'string' && raw.trim() ? raw.trim() : null;
 };
 
 /**
@@ -508,7 +475,7 @@ const resolveTaskFrequency = ({ payload }) => normalizeFrequency(payload?.freque
  */
 const resolveTaskStartDate = ({ payload }) => {
     const raw = payload?.startDate;
-    return typeof raw === "number" && Number.isFinite(raw) ? raw : null;
+    return typeof raw === 'number' && Number.isFinite(raw) ? raw : null;
 };
 
 /**
@@ -518,7 +485,7 @@ const resolveTaskStartDate = ({ payload }) => {
 const resolveTaskRepeatTimes = ({ payload, slotCount }) => {
     const n = Number.isFinite(slotCount) ? Math.max(1, Math.trunc(slotCount)) : 1;
     const prepared = (Array.isArray(payload?.repeatTimes) ? payload.repeatTimes : [])
-        .map((time) => String(time ?? "").trim())
+        .map((time) => String(time ?? '').trim())
         .filter((time) => /^\d{2}:\d{2}$/.test(time))
         .slice(0, n);
     const generated = buildRepeatTimesByCount(n);
@@ -533,15 +500,11 @@ const resolveTaskRepeatTimes = ({ payload, slotCount }) => {
  * Используется в `buildTaskFromPayload`, чтобы дни недели были валидными и без дубликатов.
  */
 const resolveTaskActiveWeekdays = ({ payload }) => {
-    const raw = Array.isArray(payload?.activeWeekdays)
-        ? payload.activeWeekdays
-        : [];
+    const raw = Array.isArray(payload?.activeWeekdays) ? payload.activeWeekdays : [];
     const filtered = raw.filter((value) =>
-        ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].includes(value),
+        ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].includes(value),
     );
-    return filtered.length
-        ? Array.from(new Set(filtered))
-        : [...DEFAULT_TASK_ACTIVE_WEEKDAYS];
+    return filtered.length ? Array.from(new Set(filtered)) : [...DEFAULT_TASK_ACTIVE_WEEKDAYS];
 };
 
 /**
@@ -560,7 +523,7 @@ const resolveTaskFieldDefinitions = ({ payload }) =>
 
 const readTemperatureFieldFromDefinitions = (taskFieldDefinitions) => {
     const defs = Array.isArray(taskFieldDefinitions) ? taskFieldDefinitions : [];
-    return defs.find((def) => def?.fieldType === "temperature") ?? null;
+    return defs.find((def) => def?.fieldType === 'temperature') ?? null;
 };
 
 const readTemperatureLimitsFromDefinitions = (taskFieldDefinitions) => {
@@ -569,12 +532,12 @@ const readTemperatureLimitsFromDefinitions = (taskFieldDefinitions) => {
         return {
             ccpMin: null,
             ccpMax: null,
-            ccpLabel: "",
+            ccpLabel: '',
             taskType: null,
         };
     }
     const config =
-        temperatureDef.config && typeof temperatureDef.config === "object"
+        temperatureDef.config && typeof temperatureDef.config === 'object'
             ? temperatureDef.config
             : {};
     const minRaw = Number(config.minC);
@@ -586,13 +549,12 @@ const readTemperatureLimitsFromDefinitions = (taskFieldDefinitions) => {
         ccpMin = ccpMax;
         ccpMax = swap;
     }
-    const ccpLabel =
-        ccpMin != null && ccpMax != null ? `${ccpMin}..${ccpMax}°C` : "";
+    const ccpLabel = ccpMin != null && ccpMax != null ? `${ccpMin}..${ccpMax}°C` : '';
     return {
         ccpMin,
         ccpMax,
         ccpLabel,
-        taskType: "temperature",
+        taskType: 'temperature',
     };
 };
 
@@ -604,7 +566,7 @@ const readTemperatureLimitsFromDefinitions = (taskFieldDefinitions) => {
  */
 export const readTaskTemperatureMinMaxC = (task) => {
     const limits = readTemperatureLimitsFromDefinitions(task?.taskFieldDefinitions ?? []);
-    if (limits.taskType !== "temperature") {
+    if (limits.taskType !== 'temperature') {
         return null;
     }
     return {
@@ -623,7 +585,7 @@ export const readTaskTemperatureMinMaxC = (task) => {
  * @returns {number|null}
  */
 export const parseMeasurementTemperatureCAndSyncRowStatusToCcp = (task, row) => {
-    if (!task || !row || typeof row !== "object") {
+    if (!task || !row || typeof row !== 'object') {
         return null;
     }
     const limits = readTaskTemperatureMinMaxC(task);
@@ -642,46 +604,34 @@ export const parseMeasurementTemperatureCAndSyncRowStatusToCcp = (task, row) => 
     let statusOk = inRange;
     const taskNiche = resolveTaskNicheForTemperatureAi(task);
     const analyzerNiche = mapTaskNicheToAnalyzerNiche(taskNiche);
-    if (analyzerNiche === "bread") {
+    if (analyzerNiche === 'bread') {
         const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
-        const band = resolveBreadRowForTaskMeasurement(
-            current,
-            task?.equipmentTargetIds,
-            mode,
-        );
+        const band = resolveBreadRowForTaskMeasurement(current, task?.equipmentTargetIds, mode);
         if (band) {
-            statusOk = band.status === "normal";
+            statusOk = band.status === 'normal';
         }
     }
-    if (analyzerNiche === "meat") {
+    if (analyzerNiche === 'meat') {
         const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
-        const band = resolveMeatRowForTaskMeasurement(
-            current,
-            task?.equipmentTargetIds,
-            mode,
-        );
+        const band = resolveMeatRowForTaskMeasurement(current, task?.equipmentTargetIds, mode);
         if (band) {
-            statusOk = band.status === "normal";
+            statusOk = band.status === 'normal';
         }
     }
-    if (analyzerNiche === "coffee") {
+    if (analyzerNiche === 'coffee') {
         const mode = resolveTemperatureAiMode(task, analyzerNiche, current);
-        const band = resolveCoffeeRowForTaskMeasurement(
-            current,
-            task?.equipmentTargetIds,
-            mode,
-        );
+        const band = resolveCoffeeRowForTaskMeasurement(current, task?.equipmentTargetIds, mode);
         if (band) {
-            statusOk = band.status === "normal";
+            statusOk = band.status === 'normal';
         }
     }
-    row.status = statusOk ? "success" : "problem";
+    row.status = statusOk ? 'success' : 'problem';
     return current;
 };
 
 const buildTaskAiContext = ({ niche, taskFieldDefinitions }) => {
     const limits = readTemperatureLimitsFromDefinitions(taskFieldDefinitions);
-    if (limits.taskType !== "temperature") {
+    if (limits.taskType !== 'temperature') {
         return null;
     }
     return {
@@ -723,7 +673,7 @@ const resolveTaskRoomTargetIds = ({ payload, taskScopeType }) => {
  * Используется в `buildTaskFromPayload`, чтобы поле существовало только для `taskScopeType: standalone`.
  */
 const resolveTaskScope = ({ taskScopeType }) =>
-    taskScopeType === TASK_SCOPE_TYPE.STANDALONE ? "standalone" : null;
+    taskScopeType === TASK_SCOPE_TYPE.STANDALONE ? 'standalone' : null;
 
 /**
  * Замеры из payload для ветки предзаполненных многослотовых задач (сид).
@@ -743,12 +693,10 @@ const buildDefaultNonRepeatMeasurementsFromRepeatTimes = (
     measurementHintCtx,
 ) => {
     const list = Array.isArray(repeatTimes) ? repeatTimes : [];
-    const slotStatus = aggregateOk ? "success" : "problem";
-    const value = aggregateOk
-        ? inferDefaultOkMeasurementDisplayValue(measurementHintCtx)
-        : "-";
+    const slotStatus = aggregateOk ? 'success' : 'problem';
+    const value = aggregateOk ? inferDefaultOkMeasurementDisplayValue(measurementHintCtx) : '-';
     return list.map((time) => ({
-        time: String(time ?? "").trim() || "00:00",
+        time: String(time ?? '').trim() || '00:00',
         value,
         status: slotStatus,
         aiWarning: null,
@@ -759,18 +707,15 @@ const buildDefaultNonRepeatMeasurementsFromRepeatTimes = (
  * Строит строки замеров по слотам repeatTimes для кастомной задачи (статус не repeat).
  * В колонке «Замер» — ожидаемый тип значения по целям задачи, пока слот pending.
  */
-const buildCustomPendingMeasurementsFromRepeatTimes = (
-    repeatTimes,
-    measurementHintCtx,
-) => {
+const buildCustomPendingMeasurementsFromRepeatTimes = (repeatTimes, _measurementHintCtx) => {
     const list = Array.isArray(repeatTimes) ? repeatTimes : [];
     // Для созданной в модалке задачи не подставляем «ожидаемое» значение —
     // пока слот pending, значение должно быть пустым маркером.
-    const value = "-";
+    const value = '-';
     return list.map((time) => ({
-        time: String(time ?? "").trim() || "00:00",
+        time: String(time ?? '').trim() || '00:00',
         value,
-        status: "pending",
+        status: 'pending',
         aiWarning: null,
     }));
 };
@@ -781,12 +726,8 @@ const buildCustomPendingMeasurementsFromRepeatTimes = (
  * Для остальных статусов возвращает массив только если есть непустые строки, иначе `null` (поле не добавляем).
  */
 const resolveTaskCorrectiveActions = ({ payload, usePresetMeasurements }) => {
-    const raw = Array.isArray(payload?.correctiveActions)
-        ? payload.correctiveActions
-        : [];
-    const list = raw
-        .map((item) => String(item ?? "").trim())
-        .filter(Boolean);
+    const raw = Array.isArray(payload?.correctiveActions) ? payload.correctiveActions : [];
+    const list = raw.map((item) => String(item ?? '').trim()).filter(Boolean);
     if (usePresetMeasurements) {
         return list;
     }
@@ -802,68 +743,51 @@ export const normalizeModalDraft = (draft = {}) => {
     const frequency = normalizeFrequency(draft.frequency);
     const legacyRepeats = Number(draft.repeatsPerDay);
     const legacySlots =
-        Number.isFinite(legacyRepeats) && legacyRepeats >= 1
-            ? Math.trunc(legacyRepeats)
-            : null;
+        Number.isFinite(legacyRepeats) && legacyRepeats >= 1 ? Math.trunc(legacyRepeats) : null;
     let repeatTimes = (Array.isArray(draft.repeatTimes) ? draft.repeatTimes : [])
-        .map((time) => String(time ?? "").trim())
+        .map((time) => String(time ?? '').trim())
         .filter((time) => /^\d{2}:\d{2}$/.test(time));
-    const slotCount = Math.max(
-        1,
-        repeatTimes.length,
-        legacySlots ?? 0,
-    );
+    const slotCount = Math.max(1, repeatTimes.length, legacySlots ?? 0);
     const generatedRepeatTimes = buildRepeatTimesByCount(slotCount);
     while (repeatTimes.length < slotCount) {
         repeatTimes.push(generatedRepeatTimes[repeatTimes.length]);
     }
-    const activeWeekdaysRaw = Array.isArray(draft.activeWeekdays)
-        ? draft.activeWeekdays
-        : [];
+    const activeWeekdaysRaw = Array.isArray(draft.activeWeekdays) ? draft.activeWeekdays : [];
     const activeWeekdays = activeWeekdaysRaw.filter((value) =>
-        ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].includes(value),
+        ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].includes(value),
     );
     const uniqueWeekdays = activeWeekdays.length
         ? Array.from(new Set(activeWeekdays))
         : [...DEFAULT_TASK_ACTIVE_WEEKDAYS];
 
     const correctiveActionsFromRows = Array.isArray(draft.correctiveActionRows)
-        ? draft.correctiveActionRows
-              .map((row) => String(row?.text ?? "").trim())
-              .filter(Boolean)
+        ? draft.correctiveActionRows.map((row) => String(row?.text ?? '').trim()).filter(Boolean)
         : [];
     const correctiveActionsFromPayload = Array.isArray(draft.correctiveActions)
-        ? draft.correctiveActions
-              .map((item) => String(item ?? "").trim())
-              .filter(Boolean)
+        ? draft.correctiveActions.map((item) => String(item ?? '').trim()).filter(Boolean)
         : [];
     const correctiveActions = correctiveActionsFromRows.length
         ? correctiveActionsFromRows
         : correctiveActionsFromPayload;
 
     return {
-        title: String(draft.title ?? ""),
+        title: String(draft.title ?? ''),
         taskScopeType,
         assignedStaffId:
-            typeof draft.assignedStaffId === "string" &&
-            draft.assignedStaffId.trim()
+            typeof draft.assignedStaffId === 'string' && draft.assignedStaffId.trim()
                 ? draft.assignedStaffId.trim()
                 : null,
         frequency,
         startDate:
-            typeof draft.startDate === "number" && Number.isFinite(draft.startDate)
+            typeof draft.startDate === 'number' && Number.isFinite(draft.startDate)
                 ? draft.startDate
                 : null,
         repeatTimes,
         activeWeekdays: uniqueWeekdays,
         equipmentTargetIds: normalizeEquipmentTargetIds(draft.equipmentTargetIds),
         roomTargetIds: normalizeRoomTargetIds(draft.roomTargetIds),
-        taskFieldDefinitions: normalizeTaskFieldDefinitions(
-            draft.taskFieldDefinitions,
-        ),
-        allowAssigneeReportCorrections: Boolean(
-            draft.allowAssigneeReportCorrections,
-        ),
+        taskFieldDefinitions: normalizeTaskFieldDefinitions(draft.taskFieldDefinitions),
+        allowAssigneeReportCorrections: Boolean(draft.allowAssigneeReportCorrections),
         correctiveActions,
     };
 };
@@ -885,8 +809,7 @@ export const buildTaskPayloadFromDraft = (draft = {}) => {
         equipmentTargetIds: normalized.equipmentTargetIds,
         roomTargetIds: normalized.roomTargetIds,
         taskFieldDefinitions: normalized.taskFieldDefinitions,
-        allowAssigneeReportCorrections:
-            normalized.allowAssigneeReportCorrections,
+        allowAssigneeReportCorrections: normalized.allowAssigneeReportCorrections,
         correctiveActions: normalized.correctiveActions,
     };
 };
@@ -898,7 +821,7 @@ export const buildTaskPayloadFromDraft = (draft = {}) => {
 export const buildTaskFromPayload = ({
     niche,
     payload = {},
-    source = "custom",
+    source = 'custom',
     idFactory,
     context = {},
 }) => {
@@ -915,9 +838,7 @@ export const buildTaskFromPayload = ({
     if (usePresetMeasurements) {
         repeatMeasurements = readPresetMeasurementsPayload(payload);
         const slotCount = repeatsPerDayFromMeasurements(repeatMeasurements);
-        const timesFromM = repeatMeasurements.map((m) =>
-            String(m?.time ?? "").trim(),
-        );
+        const timesFromM = repeatMeasurements.map((m) => String(m?.time ?? '').trim());
         const allValid =
             repeatMeasurements.length > 0 &&
             timesFromM.length === repeatMeasurements.length &&
@@ -962,8 +883,9 @@ export const buildTaskFromPayload = ({
         startDate: resolveTaskStartDate({ payload: normalized }),
         repeatTimes,
         activeWeekdays,
-        allowAssigneeReportCorrections:
-            resolveTaskAllowAssigneeReportCorrections({ payload: normalized }),
+        allowAssigneeReportCorrections: resolveTaskAllowAssigneeReportCorrections({
+            payload: normalized,
+        }),
     };
     const aiContext = buildTaskAiContext({
         niche,
@@ -1009,13 +931,13 @@ export const buildTaskFromPayload = ({
         equipmentTargetIds: normalized.equipmentTargetIds,
         roomTargetIds: normalized.roomTargetIds,
     };
-    if (source === "default") {
+    if (source === 'default') {
         base.measurements = buildDefaultNonRepeatMeasurementsFromRepeatTimes(
             repeatTimes,
             aggregateOk,
             measurementHintCtx,
         );
-    } else if (source === "custom") {
+    } else if (source === 'custom') {
         base.measurements = buildCustomPendingMeasurementsFromRepeatTimes(
             repeatTimes,
             measurementHintCtx,
@@ -1032,7 +954,7 @@ const deriveDefaultRepeatScheduleFromMeasurements = (measurements) => {
     if (!Array.isArray(measurements) || measurements.length === 0) {
         return null;
     }
-    const repeatTimes = measurements.map((m) => String(m?.time ?? "").trim());
+    const repeatTimes = measurements.map((m) => String(m?.time ?? '').trim());
     if (!repeatTimes.every((t) => REPEAT_MEASUREMENT_TIME_RE.test(t))) {
         return null;
     }
@@ -1045,14 +967,14 @@ const deriveDefaultRepeatScheduleFromMeasurements = (measurements) => {
  * Fallback: назначает оборудование по нише, если задача создана без явного выбора.
  */
 const inferDefaultEquipmentTargetIdsForTask = (title, niche) => {
-    if (niche === "coffee") {
-        return ["eq-coffee-machine"];
+    if (niche === 'coffee') {
+        return ['eq-coffee-machine'];
     }
-    if (niche === "bakery") {
-        return ["eq-bread-proofing-cabinet"];
+    if (niche === 'bakery') {
+        return ['eq-bread-proofing-cabinet'];
     }
-    if (niche === "meat") {
-        return ["eq-fridge-1"];
+    if (niche === 'meat') {
+        return ['eq-fridge-1'];
     }
     return [];
 };
@@ -1069,9 +991,7 @@ export const buildDefaultTask = (baseTask, niche, context = {}) => {
         meat: TASK_SCOPE_TYPE.STANDALONE,
     };
     const taskScopeType = normalizeTaskScopeType(
-        baseTask.taskScopeType ??
-            fallbackScopeByNiche[niche] ??
-            TASK_SCOPE_TYPE.STANDALONE,
+        baseTask.taskScopeType ?? fallbackScopeByNiche[niche] ?? TASK_SCOPE_TYPE.STANDALONE,
     );
     const equipmentTargetIdsBase = Array.isArray(baseTask.equipmentTargetIds)
         ? baseTask.equipmentTargetIds
@@ -1080,9 +1000,7 @@ export const buildDefaultTask = (baseTask, niche, context = {}) => {
         taskScopeType === TASK_SCOPE_TYPE.EQUIPMENT && equipmentTargetIdsBase.length === 0
             ? inferDefaultEquipmentTargetIdsForTask(baseTask.title, niche)
             : equipmentTargetIdsBase;
-    const roomTargetIds = Array.isArray(baseTask.roomTargetIds)
-        ? baseTask.roomTargetIds
-        : [];
+    const roomTargetIds = Array.isArray(baseTask.roomTargetIds) ? baseTask.roomTargetIds : [];
     const repeatFromMeasurements = payloadUsesPresetMeasurementsBranch(baseTask)
         ? deriveDefaultRepeatScheduleFromMeasurements(baseTask.measurements)
         : null;
@@ -1091,16 +1009,14 @@ export const buildDefaultTask = (baseTask, niche, context = {}) => {
         : [...DEFAULT_TASK_REPEAT_TIMES];
     return buildTaskFromPayload({
         niche,
-        source: "default",
+        source: 'default',
         context,
         payload: {
             ...baseTask,
             taskScopeType,
             frequency: FREQUENCY_CODE.CUSTOM,
             startDate:
-                typeof context.startDate === "number"
-                    ? context.startDate
-                    : toStartOfDayTimestamp(),
+                typeof context.startDate === 'number' ? context.startDate : toStartOfDayTimestamp(),
             repeatTimes,
             activeWeekdays: [...DEFAULT_TASK_ACTIVE_WEEKDAYS],
             taskFieldDefinitions: Array.isArray(baseTask.taskFieldDefinitions)
@@ -1112,4 +1028,3 @@ export const buildDefaultTask = (baseTask, niche, context = {}) => {
         },
     });
 };
-

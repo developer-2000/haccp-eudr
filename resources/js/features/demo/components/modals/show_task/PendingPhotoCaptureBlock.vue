@@ -2,10 +2,7 @@
     <div class="box-bottom-panel-content pending-photo-capture-block">
         <div
             v-show="showCamera"
-            class="
-            pending-photo-capture-block__section
-            checklist-modal__pending-photo-row
-            checklist-modal__pending-photo-row--labeled"
+            class="pending-photo-capture-block__section checklist-modal__pending-photo-row checklist-modal__pending-photo-row--labeled"
         >
             <div class="label_for_element">{{ t('demo.photo_capture.take_photo') }}</div>
             <n-button
@@ -18,10 +15,7 @@
                     <AddAPhotoTwotone />
                 </n-icon>
             </n-button>
-            <ul
-                v-show="photoNames.length"
-                class="checklist-modal__pending-photo-list"
-            >
+            <ul v-show="photoNames.length" class="checklist-modal__pending-photo-list">
                 <li v-for="(name, idx) in photoNames" :key="`${name}-${idx}`">
                     {{ name }}
                 </li>
@@ -30,11 +24,7 @@
 
         <div
             v-show="showDocument"
-            class="
-            pending-photo-capture-block__section
-            checklist-modal__pending-photo-row
-            checklist-modal__pending-photo-row--labeled
-            checklist-modal__document"
+            class="pending-photo-capture-block__section checklist-modal__pending-photo-row checklist-modal__pending-photo-row--labeled checklist-modal__document"
         >
             <div class="label_for_element">{{ t('demo.photo_capture.report_document') }}</div>
             <n-button
@@ -46,18 +36,18 @@
                 {{ t('demo.photo_capture.attach_file') }}
             </n-button>
             <p class="checklist-modal__pending-photo-name">
-                {{ reportFileName || "" }}
+                {{ reportFileName || '' }}
             </p>
         </div>
     </div>
 </template>
 
 <script setup>
-import { NButton, NIcon } from "naive-ui";
-import { AddAPhotoTwotone } from "@vicons/material";
-import { useI18n } from "vue-i18n";
+import { NButton, NIcon } from 'naive-ui';
+import { AddAPhotoTwotone } from '@vicons/material';
+import { useI18n } from 'vue-i18n';
 
-defineOptions({ name: "PendingPhotoCaptureBlock" });
+defineOptions({ name: 'PendingPhotoCaptureBlock' });
 
 const { t } = useI18n();
 
@@ -68,7 +58,7 @@ defineProps({
     },
     reportFileName: {
         type: String,
-        default: "",
+        default: '',
     },
     showDocument: {
         type: Boolean,
@@ -80,18 +70,19 @@ defineProps({
     },
 });
 
-defineEmits(["camera", "attach-report"]);
+defineEmits(['camera', 'attach-report']);
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../../scss/variables" as *;
+@use '../../../../../../scss/variables' as *;
 
 .box-bottom-panel-content {
     flex-shrink: 0;
     margin-top: auto;
 }
 
-.box-bottom-panel-content.pending-photo-capture-block .pending-photo-capture-block__section
+.box-bottom-panel-content.pending-photo-capture-block
+    .pending-photo-capture-block__section
     :deep(.n-button) {
     width: 100%;
     min-height: 55px;

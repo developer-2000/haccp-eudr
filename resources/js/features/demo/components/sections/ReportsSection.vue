@@ -4,23 +4,13 @@
             <h3>{{ t('demo.reports.public_report') }}</h3>
             <div class="reports-public-link__row">
                 <code class="reports-public-link__url">
-                    <span class="reports-public-link__url-text">{{
-                        publicReportUrl
-                    }}</span>
+                    <span class="reports-public-link__url-text">{{ publicReportUrl }}</span>
                 </code>
                 <div class="reports-public-link__actions">
-                    <n-button
-                        type="success"
-                        size="large"
-                        @click="handleCopyLink"
-                    >
+                    <n-button type="success" size="large" @click="handleCopyLink">
                         {{ t('demo.reports.copy') }}
                     </n-button>
-                    <n-button
-                        type="info"
-                        size="large"
-                        @click="goToPublicReport"
-                    >
+                    <n-button type="info" size="large" @click="goToPublicReport">
                         {{ t('demo.reports.go_to') }}
                     </n-button>
                 </div>
@@ -65,39 +55,42 @@
                 </div>
             </div>
             <div class="report-preview__mobile">
-                <article
-                    v-for="row in taskPreviewRows"
-                    :key="row.id"
-                    class="report-preview-card"
-                >
+                <article v-for="row in taskPreviewRows" :key="row.id" class="report-preview-card">
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_date') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_date') }}:</span
+                        >
                         {{ row.date }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_point') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_point') }}:</span
+                        >
                         {{ row.point }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_value') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_value') }}:</span
+                        >
                         {{ row.value }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_assignee') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_assignee') }}:</span
+                        >
                         {{ row.assignee }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_photo') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_photo') }}:</span
+                        >
                         {{ row.photo }}
                     </p>
-                    <p
-                        class="report-preview-card__line report-preview-card__line--status"
-                    >
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_status') }}:</span>
-                        <span
-                            class="report-status"
-                            :class="`report-status--${row.statusKey}`"
+                    <p class="report-preview-card__line report-preview-card__line--status">
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_status') }}:</span
                         >
+                        <span class="report-status" :class="`report-status--${row.statusKey}`">
                             {{ row.statusLabel }}
                         </span>
                     </p>
@@ -137,35 +130,36 @@
                 </div>
             </div>
             <div class="report-preview__mobile">
-                <article
-                    v-for="row in batchPreviewRows"
-                    :key="row.id"
-                    class="report-preview-card"
-                >
+                <article v-for="row in batchPreviewRows" :key="row.id" class="report-preview-card">
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_date') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_date') }}:</span
+                        >
                         {{ row.date }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_point') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_point') }}:</span
+                        >
                         {{ row.point }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_value') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_value') }}:</span
+                        >
                         {{ row.value }}
                     </p>
                     <p class="report-preview-card__line">
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_photo') }}:</span>
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_photo') }}:</span
+                        >
                         {{ row.photo }}
                     </p>
-                    <p
-                        class="report-preview-card__line report-preview-card__line--status"
-                    >
-                        <span class="report-preview-card__label">{{ t('demo.reports.col_status') }}:</span>
-                        <span
-                            class="report-status"
-                            :class="`report-status--${row.statusKey}`"
+                    <p class="report-preview-card__line report-preview-card__line--status">
+                        <span class="report-preview-card__label"
+                            >{{ t('demo.reports.col_status') }}:</span
                         >
+                        <span class="report-status" :class="`report-status--${row.statusKey}`">
                             {{ row.statusLabel }}
                         </span>
                     </p>
@@ -174,11 +168,7 @@
         </div>
 
         <div class="reports-footer-actions">
-            <n-button
-                type="info"
-                size="large"
-                @click="goToPublicReport"
-            >
+            <n-button type="info" size="large" @click="goToPublicReport">
                 {{ t('demo.reports.go_to') }}
             </n-button>
         </div>
@@ -186,15 +176,15 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { NButton, useMessage } from "naive-ui";
-import { useI18n } from "vue-i18n";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
-import { buildDailyReportPublicUrl } from "@/features/demo/data/dailyReportPublic";
-import { taskDisplayStatusKey } from "@/features/demo/domain/checklistTaskModel";
-import { resolveStaffFullName } from "@/features/demo/utils/demoStaff";
+import { computed } from 'vue';
+import { NButton, useMessage } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
+import { buildDailyReportPublicUrl } from '@/features/demo/data/dailyReportPublic';
+import { taskDisplayStatusKey } from '@/features/demo/domain/checklistTaskModel';
+import { resolveStaffFullName } from '@/features/demo/utils/demoStaff';
 
-defineOptions({ name: "ReportsSection" });
+defineOptions({ name: 'ReportsSection' });
 
 const { t } = useI18n();
 const message = useMessage();
@@ -229,67 +219,61 @@ const nicheLabel = (niche) => {
 
 /** YYYY-MM-DD → DD.MM.YYYY */
 function isoToRuDots(iso) {
-    const [y, m, d] = String(iso).split("-");
+    const [y, m, d] = String(iso).split('-');
     if (!y || !m || !d) {
-        return "—";
+        return '—';
     }
-    return `${d.padStart(2, "0")}.${m}.${y}`;
+    return `${d.padStart(2, '0')}.${m}.${y}`;
 }
 
 function todayIso() {
     const d = new Date();
     const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
     return `${y}-${m}-${day}`;
 }
 
 function formatTaskValue(task) {
     if (Array.isArray(task.measurements) && task.measurements.length) {
-        const last = [...task.measurements]
-            .reverse()
-            .find((m) => m.status !== "pending");
+        const last = [...task.measurements].reverse().find((m) => m.status !== 'pending');
         if (last) {
             return `${last.value} (${last.time})`;
         }
-        const pend = task.measurements.find((m) => m.status === "pending");
+        const pend = task.measurements.find((m) => m.status === 'pending');
         if (pend) {
             return `${pend.time} — ${pend.value}`;
         }
     }
-    return "—";
+    return '—';
 }
 
 function taskPhotoLabel(task) {
     if (Array.isArray(task.measurements) && task.measurements.length) {
         return t('demo.reports.photo_yes');
     }
-    return "—";
+    return '—';
 }
 
 function taskStatusRow(task) {
     if (Array.isArray(task.measurements) && task.measurements.length > 0) {
-        const hasPending = task.measurements.some(
-            (m) => m.status === "pending",
-        );
+        const hasPending = task.measurements.some((m) => m.status === 'pending');
         if (hasPending) {
-            return { label: t('demo.reports.status_pending'), key: "review" };
+            return { label: t('demo.reports.status_pending'), key: 'review' };
         }
-        return { label: t('demo.reports.status_success'), key: "ok" };
+        return { label: t('demo.reports.status_success'), key: 'ok' };
     }
-    if (taskDisplayStatusKey(task) === "problem") {
-        return { label: t('demo.reports.status_deviation'), key: "problem" };
+    if (taskDisplayStatusKey(task) === 'problem') {
+        return { label: t('demo.reports.status_deviation'), key: 'problem' };
     }
-    return { label: t('demo.reports.status_ok'), key: "ok" };
+    return { label: t('demo.reports.status_ok'), key: 'ok' };
 }
 
 const taskPreviewRows = computed(() => {
     const dayLabel = isoToRuDots(props.report.reportDayIso ?? todayIso());
     const rows = [];
 
-    for (const [niche, tasks] of Object.entries(
-        props.checklistsByNiche ?? {},
-    )) {
+    for (const [niche, tasks] of Object.entries(props.checklistsByNiche ?? {})) {
         const nicheLbl = nicheLabel(niche);
         for (const task of tasks) {
             const st = taskStatusRow(task);
@@ -298,10 +282,7 @@ const taskPreviewRows = computed(() => {
                 date: dayLabel,
                 point: `${nicheLbl} — ${task.title}`,
                 value: formatTaskValue(task),
-                assignee: resolveStaffFullName(
-                    props.staff,
-                    task.assignedStaffId,
-                ),
+                assignee: resolveStaffFullName(props.staff, task.assignedStaffId),
                 photo: taskPhotoLabel(task),
                 statusLabel: st.label,
                 statusKey: st.key,
@@ -315,41 +296,38 @@ const taskPreviewRows = computed(() => {
 const batchPreviewRows = computed(() =>
     (props.batches ?? []).map((b) => ({
         id: `eudr-${b.id}`,
-        date: b.date ?? "—",
+        date: b.date ?? '—',
         point: `EUDR — ${b.product} (${b.id})`,
         value: `${b.supplier} · ${b.statusLabel}`,
         photo: t('demo.reports.photo_no'),
         statusLabel: b.statusLabel,
-        statusKey: b.status === "review" ? "review" : "ok",
+        statusKey: b.status === 'review' ? 'review' : 'ok',
     })),
 );
 
 /** URL из данных отчёта (дата → полный адрес с локалью из демо-роута). */
 const publicReportUrl = computed(() =>
-    buildDailyReportPublicUrl(
-        props.report.reportDayIso ?? todayIso(),
-        reportPageLocale.value,
-    ),
+    buildDailyReportPublicUrl(props.report.reportDayIso ?? todayIso(), reportPageLocale.value),
 );
 
 const goToPublicReport = () => {
     const url = publicReportUrl.value;
-    if (typeof window !== "undefined" && url) {
-        window.open(url, "_blank", "noopener,noreferrer");
+    if (typeof window !== 'undefined' && url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
     }
 };
 
 /** Буфер без Secure Context (http) — clipboard API часто недоступен. */
 function copyTextFallback(text) {
-    const ta = document.createElement("textarea");
+    const ta = document.createElement('textarea');
     ta.value = text;
-    ta.setAttribute("readonly", "");
-    ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0";
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
     document.body.appendChild(ta);
     ta.focus();
     ta.select();
     try {
-        return document.execCommand("copy");
+        return document.execCommand('copy');
     } finally {
         document.body.removeChild(ta);
     }
@@ -361,13 +339,10 @@ const handleCopyLink = async () => {
         reportPageLocale.value,
     );
     try {
-        if (
-            typeof navigator !== "undefined" &&
-            navigator.clipboard?.writeText
-        ) {
+        if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
             await navigator.clipboard.writeText(text);
         } else if (!copyTextFallback(text)) {
-            throw new Error("copy");
+            throw new Error('copy');
         }
         message.success(t('demo.reports.copy_success'));
     } catch {
@@ -378,11 +353,10 @@ const handleCopyLink = async () => {
         }
     }
 };
-
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .reports-section {
     display: flex;
@@ -390,7 +364,8 @@ const handleCopyLink = async () => {
     gap: $spacing-md;
 }
 
-.reports-public-link, .report-preview {
+.reports-public-link,
+.report-preview {
     background-color: $bg-style-white;
 }
 
@@ -586,5 +561,4 @@ h3 {
         display: flex;
     }
 }
-
 </style>

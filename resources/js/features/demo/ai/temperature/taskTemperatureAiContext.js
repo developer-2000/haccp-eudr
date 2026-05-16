@@ -1,23 +1,12 @@
-import {
-    getBreadModeCcpWindow,
-    taskHasBreadEquipment,
-} from "./breadBands";
-import {
-    MEAT_CHILLED_EQUIPMENT_IDS,
-    MEAT_FREEZER_EQUIPMENT_IDS,
-} from "./meatBands";
-import { readTaskTemperatureMinMaxC } from "@/features/demo/domain/checklistTaskModel";
+import { getBreadModeCcpWindow, taskHasBreadEquipment } from './breadBands';
+import { MEAT_CHILLED_EQUIPMENT_IDS, MEAT_FREEZER_EQUIPMENT_IDS } from './meatBands';
+import { readTaskTemperatureMinMaxC } from '@/features/demo/domain/checklistTaskModel';
 
 /**
  * Режимы хлеба по возрастанию типичной шкалы °C (охлаждение → … → выпечка).
  * Пересечение допуска задачи с эталонным окном + узкое окно при равном score.
  */
-const BREAD_MODE_INFER_ORDER = Object.freeze([
-    "cooling",
-    "sponge_mix",
-    "proofing",
-    "baking",
-]);
+const BREAD_MODE_INFER_ORDER = Object.freeze(['cooling', 'sponge_mix', 'proofing', 'baking']);
 
 /**
  * Режим по пересечению `[tmin, tmax]` с эталонными окнами `getBreadModeCcpWindow` (в т.ч. одна точка замера: tmin=tmax).
@@ -27,11 +16,7 @@ const BREAD_MODE_INFER_ORDER = Object.freeze([
  * @returns {'sponge_mix'|'proofing'|'baking'|'cooling'|null}
  */
 function inferBreadModeFromCcpRange(tmin, tmax) {
-    if (
-        !Number.isFinite(tmin) ||
-        !Number.isFinite(tmax) ||
-        tmin > tmax
-    ) {
+    if (!Number.isFinite(tmin) || !Number.isFinite(tmax) || tmin > tmax) {
         return null;
     }
     let best = null;
@@ -54,9 +39,7 @@ function inferBreadModeFromCcpRange(tmin, tmax) {
         if (
             score > bestScore ||
             (score === bestScore && refWidth < bestRefWidth) ||
-            (score === bestScore &&
-                refWidth === bestRefWidth &&
-                rmin < bestRmin)
+            (score === bestScore && refWidth === bestRefWidth && rmin < bestRmin)
         ) {
             bestScore = score;
             bestRefWidth = refWidth;
@@ -77,12 +60,7 @@ function inferBreadModeFromTaskCcp(task) {
     const limits = readTaskTemperatureMinMaxC(task);
     const tmin = limits?.minC;
     const tmax = limits?.maxC;
-    if (
-        tmin == null ||
-        tmax == null ||
-        !Number.isFinite(tmin) ||
-        !Number.isFinite(tmax)
-    ) {
+    if (tmin == null || tmax == null || !Number.isFinite(tmin) || !Number.isFinite(tmax)) {
         return null;
     }
     return inferBreadModeFromCcpRange(tmin, tmax);
@@ -108,23 +86,23 @@ export function inferBreadModeFromMeasurementC(t) {
  * @returns {string|null}
  */
 export function resolveTaskNicheForTemperatureAi(task) {
-    const niche = String(task?.niche ?? "").trim();
+    const niche = String(task?.niche ?? '').trim();
     if (niche) {
         return niche;
     }
-    const id = String(task?.id ?? "").trim();
-    if (id.startsWith("coffee-") || id.startsWith("default-coffee-")) {
-        return "coffee";
+    const id = String(task?.id ?? '').trim();
+    if (id.startsWith('coffee-') || id.startsWith('default-coffee-')) {
+        return 'coffee';
     }
     if (
-        id.startsWith("bakery-") ||
-        id.startsWith("default-bakery-") ||
-        id.startsWith("custom-bakery-")
+        id.startsWith('bakery-') ||
+        id.startsWith('default-bakery-') ||
+        id.startsWith('custom-bakery-')
     ) {
-        return "bakery";
+        return 'bakery';
     }
-    if (id.startsWith("meat-") || id.startsWith("default-meat-")) {
-        return "meat";
+    if (id.startsWith('meat-') || id.startsWith('default-meat-')) {
+        return 'meat';
     }
     return null;
 }
@@ -136,10 +114,10 @@ export function resolveTaskNicheForTemperatureAi(task) {
  * @returns {string|null}
  */
 export function mapTaskNicheToAnalyzerNiche(niche) {
-    if (niche === "bakery") {
-        return "bread";
+    if (niche === 'bakery') {
+        return 'bread';
     }
-    if (niche === "coffee" || niche === "meat" || niche === "bread") {
+    if (niche === 'coffee' || niche === 'meat' || niche === 'bread') {
         return niche;
     }
     return null;
@@ -155,62 +133,52 @@ export function mapTaskNicheToAnalyzerNiche(niche) {
  * @returns {string|null}
  */
 export function resolveTemperatureAiMode(task, analyzerNiche, measurementC) {
-    const explicitMode = String(task?.aiContext?.mode ?? "").trim();
-    if (analyzerNiche === "coffee") {
+    const explicitMode = String(task?.aiContext?.mode ?? '').trim();
+    if (analyzerNiche === 'coffee') {
         if (explicitMode) {
             return explicitMode;
         }
-        const targets = Array.isArray(task?.equipmentTargetIds)
-            ? task.equipmentTargetIds
-            : [];
-        if (
-            targets.includes("eq-coffee-roaster") ||
-            targets.includes("eq-coffee-destoner")
-        ) {
-            return "roasting";
+        const targets = Array.isArray(task?.equipmentTargetIds) ? task.equipmentTargetIds : [];
+        if (targets.includes('eq-coffee-roaster') || targets.includes('eq-coffee-destoner')) {
+            return 'roasting';
         }
         if (
-            targets.includes("eq-coffee-bean-cooler") ||
-            targets.includes("eq-coffee-shock-cooler")
+            targets.includes('eq-coffee-bean-cooler') ||
+            targets.includes('eq-coffee-shock-cooler')
         ) {
-            return "cooling";
+            return 'cooling';
         }
         if (
-            targets.includes("eq-coffee-vacuum-containers") ||
-            targets.includes("eq-coffee-warehouse-shelving") ||
-            targets.includes("eq-coffee-grain-canisters")
+            targets.includes('eq-coffee-vacuum-containers') ||
+            targets.includes('eq-coffee-warehouse-shelving') ||
+            targets.includes('eq-coffee-grain-canisters')
         ) {
-            return "storage";
+            return 'storage';
         }
-        return "storage";
+        return 'storage';
     }
-    if (analyzerNiche === "bread") {
-        const targets = Array.isArray(task?.equipmentTargetIds)
-            ? task.equipmentTargetIds
-            : [];
+    if (analyzerNiche === 'bread') {
+        const targets = Array.isArray(task?.equipmentTargetIds) ? task.equipmentTargetIds : [];
         if (
-            targets.includes("eq-bread-spiral-mixer") ||
-            targets.includes("eq-bread-preferment-vat")
+            targets.includes('eq-bread-spiral-mixer') ||
+            targets.includes('eq-bread-preferment-vat')
         ) {
-            return "sponge_mix";
+            return 'sponge_mix';
         }
         if (
-            targets.includes("eq-bread-proofing-cabinet") ||
-            targets.includes("eq-bread-proofing-trays")
+            targets.includes('eq-bread-proofing-cabinet') ||
+            targets.includes('eq-bread-proofing-trays')
         ) {
-            return "proofing";
+            return 'proofing';
+        }
+        if (targets.includes('eq-bread-rotary-oven') || targets.includes('eq-bread-crumb-probe')) {
+            return 'baking';
         }
         if (
-            targets.includes("eq-bread-rotary-oven") ||
-            targets.includes("eq-bread-crumb-probe")
+            targets.includes('eq-bread-cooling-conveyor') ||
+            targets.includes('eq-bread-ventilated-racks')
         ) {
-            return "baking";
-        }
-        if (
-            targets.includes("eq-bread-cooling-conveyor") ||
-            targets.includes("eq-bread-ventilated-racks")
-        ) {
-            return "cooling";
+            return 'cooling';
         }
         if (!taskHasBreadEquipment(targets)) {
             const mc =
@@ -230,7 +198,7 @@ export function resolveTemperatureAiMode(task, analyzerNiche, measurementC) {
             if (explicitMode) {
                 return explicitMode;
             }
-            return "proofing";
+            return 'proofing';
         }
         const inferred = inferBreadModeFromTaskCcp(task);
         if (inferred) {
@@ -247,41 +215,32 @@ export function resolveTemperatureAiMode(task, analyzerNiche, measurementC) {
         if (explicitMode) {
             return explicitMode;
         }
-        return "proofing";
+        return 'proofing';
     }
-    if (analyzerNiche === "meat") {
+    if (analyzerNiche === 'meat') {
         if (explicitMode) {
             return explicitMode;
         }
-        const targets = Array.isArray(task?.equipmentTargetIds)
-            ? task.equipmentTargetIds
-            : [];
-        const hasChilledEq = targets.some((id) =>
-            MEAT_CHILLED_EQUIPMENT_IDS.includes(id),
-        );
-        const hasFreezerEq = targets.some((id) =>
-            MEAT_FREEZER_EQUIPMENT_IDS.includes(id),
-        );
+        const targets = Array.isArray(task?.equipmentTargetIds) ? task.equipmentTargetIds : [];
+        const hasChilledEq = targets.some((id) => MEAT_CHILLED_EQUIPMENT_IDS.includes(id));
+        const hasFreezerEq = targets.some((id) => MEAT_FREEZER_EQUIPMENT_IDS.includes(id));
         if (hasFreezerEq && !hasChilledEq) {
-            return "freezer";
+            return 'freezer';
         }
         if (hasChilledEq && !hasFreezerEq) {
-            return "chilled";
+            return 'chilled';
         }
-        if (
-            targets.includes("eq-freezer") ||
-            targets.includes("eq-frozen-storage")
-        ) {
-            return "freezer";
+        if (targets.includes('eq-freezer') || targets.includes('eq-frozen-storage')) {
+            return 'freezer';
         }
         const mc =
             measurementC != null && Number.isFinite(Number(measurementC))
                 ? Number(measurementC)
                 : NaN;
         if (Number.isFinite(mc)) {
-            return mc < 0 ? "freezer" : "chilled";
+            return mc < 0 ? 'freezer' : 'chilled';
         }
-        return "chilled";
+        return 'chilled';
     }
     if (explicitMode) {
         return explicitMode;

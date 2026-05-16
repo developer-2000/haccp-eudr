@@ -21,11 +21,11 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 defineOptions({
-    name: "AdvantagesSection",
+    name: 'AdvantagesSection',
 });
 
 const { t } = useI18n();
@@ -36,7 +36,7 @@ const { t } = useI18n();
  */
 const advantageCategories = computed(() => [
     {
-        id: "setup-speed",
+        id: 'setup-speed',
         title: t('how_it_work.advantages.cat1_title'),
         points: [
             t('how_it_work.advantages.cat1_point_1'),
@@ -45,7 +45,7 @@ const advantageCategories = computed(() => [
         ],
     },
     {
-        id: "full-control",
+        id: 'full-control',
         title: t('how_it_work.advantages.cat2_title'),
         points: [
             t('how_it_work.advantages.cat2_point_1'),
@@ -54,7 +54,7 @@ const advantageCategories = computed(() => [
         ],
     },
     {
-        id: "smart-checklist",
+        id: 'smart-checklist',
         title: t('how_it_work.advantages.cat3_title'),
         points: [
             t('how_it_work.advantages.cat3_point_1'),
@@ -63,7 +63,7 @@ const advantageCategories = computed(() => [
         ],
     },
     {
-        id: "inspector-proof",
+        id: 'inspector-proof',
         title: t('how_it_work.advantages.cat4_title'),
         points: [
             t('how_it_work.advantages.cat4_point_1'),
@@ -72,7 +72,7 @@ const advantageCategories = computed(() => [
         ],
     },
     {
-        id: "pro-dashboard",
+        id: 'pro-dashboard',
         title: t('how_it_work.advantages.cat5_title'),
         points: [
             t('how_it_work.advantages.cat5_point_1'),
@@ -81,7 +81,7 @@ const advantageCategories = computed(() => [
         ],
     },
     {
-        id: "eudr-safe",
+        id: 'eudr-safe',
         title: t('how_it_work.advantages.cat6_title'),
         points: [
             t('how_it_work.advantages.cat6_point_1'),
@@ -93,7 +93,7 @@ const advantageCategories = computed(() => [
 </script>
 
 <style lang="scss" scoped>
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .advantages-section {
     padding: $spacing-2xl 0;

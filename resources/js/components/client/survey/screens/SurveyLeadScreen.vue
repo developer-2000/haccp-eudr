@@ -17,18 +17,18 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { createSurveyFieldTextTranslator } from "../../../../features/survey/surveyFieldText.js";
-import { SURVEY_PAGE_LEAD } from "../../../../features/survey/surveyQuestionsStub.js";
-import SurveyLeadForm from "../SurveyLeadForm.vue";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { createSurveyFieldTextTranslator } from '../../../../features/survey/surveyFieldText.js';
+import { SURVEY_PAGE_LEAD } from '../../../../features/survey/surveyQuestionsStub.js';
+import SurveyLeadForm from '../SurveyLeadForm.vue';
 
-defineOptions({ name: "SurveyLeadScreen" });
+defineOptions({ name: 'SurveyLeadScreen' });
 
-const EMAIL_INPUT_ID = "survey-lead-email";
-const EMAIL_ERROR_ID = "survey-lead-email-err";
+const EMAIL_INPUT_ID = 'survey-lead-email';
+const EMAIL_ERROR_ID = 'survey-lead-email-err';
 
-const props = defineProps({
+defineProps({
     /** Reactive-объект ответов опроса (v-model полей внутри SurveyLeadForm). */
     answers: {
         type: Object,
@@ -37,7 +37,7 @@ const props = defineProps({
     /** Текст ошибки валидации email. */
     emailError: {
         type: String,
-        default: "",
+        default: '',
     },
     /** Флаг отправки формы (блокировка кнопки, aria-busy). */
     loading: {
@@ -47,16 +47,16 @@ const props = defineProps({
     /** Текст кнопки отправки. */
     submitLabel: {
         type: String,
-        default: "",
+        default: '',
     },
     /** Текст ошибки отправки на сервер. */
     submitError: {
         type: String,
-        default: "",
+        default: '',
     },
 });
 
-const emit = defineEmits(["submit"]);
+const emit = defineEmits(['submit']);
 
 const { t } = useI18n();
 const tr = createSurveyFieldTextTranslator(t);

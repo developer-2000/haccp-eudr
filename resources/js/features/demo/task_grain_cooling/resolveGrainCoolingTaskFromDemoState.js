@@ -1,4 +1,4 @@
-import { task_grain_cooling } from "./config";
+import { task_grain_cooling } from './config';
 
 /**
  * Задача «Охлаждение зерна» только из `demoState` по `task_grain_cooling.id` / `niche` — единственный источник истины для замеров.

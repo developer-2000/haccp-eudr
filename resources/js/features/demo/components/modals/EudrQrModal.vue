@@ -58,11 +58,7 @@
                 </div>
 
                 <div class="eudr-qr-modal__code">
-                    <img
-                        v-if="qrImageUrl"
-                        :src="qrImageUrl"
-                        alt="EUDR QR code"
-                    />
+                    <img v-if="qrImageUrl" :src="qrImageUrl" alt="EUDR QR code" />
                 </div>
             </div>
         </template>
@@ -81,14 +77,14 @@
 </template>
 
 <script setup>
-import QRCode from "qrcode";
-import { computed, ref, watch } from "vue";
-import { NButton, NModal, useMessage } from "naive-ui";
-import { useI18n } from "vue-i18n";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
-import { buildBatchPublicUrl } from "@/features/demo/data/eudrBatchPublic";
+import QRCode from 'qrcode';
+import { computed, ref, watch } from 'vue';
+import { NButton, NModal, useMessage } from 'naive-ui';
+import { useI18n } from 'vue-i18n';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
+import { buildBatchPublicUrl } from '@/features/demo/data/eudrBatchPublic';
 
-defineOptions({ name: "EudrQrModal" });
+defineOptions({ name: 'EudrQrModal' });
 
 const { t } = useI18n();
 
@@ -103,25 +99,23 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(["close", "action"]);
+const emit = defineEmits(['close', 'action']);
 const message = useMessage();
-const qrImageUrl = ref("");
+const qrImageUrl = ref('');
 const copyField = ref(null);
 
 /** Локаль из URL `/{locale}/demo/...` через единый composable; fallback на "en". */
 const batchPageLocale = computed(() => useCurrentLocale());
 
 const displayedBatchUrl = computed(() =>
-    props.batch?.id
-        ? buildBatchPublicUrl(String(props.batch.id), batchPageLocale.value)
-        : "",
+    props.batch?.id ? buildBatchPublicUrl(String(props.batch.id), batchPageLocale.value) : '',
 );
 
 const showModel = computed({
     get: () => props.show,
     set: (value) => {
         if (!value) {
-            emit("close");
+            emit('close');
         }
     },
 });
@@ -132,7 +126,7 @@ watch(
         const id = tuple?.[0];
         const url = tuple?.[1];
         if (!id || !url) {
-            qrImageUrl.value = "";
+            qrImageUrl.value = '';
             return;
         }
         qrImageUrl.value = await QRCode.toDataURL(url, {
@@ -149,7 +143,7 @@ watch(
  */
 const onVisibilityChange = (visible) => {
     if (!visible) {
-        emit("close");
+        emit('close');
     }
 };
 
@@ -158,7 +152,7 @@ const onVisibilityChange = (visible) => {
  * Используется для обработки закрытия (legacy).
  */
 const emitAction = (action) => {
-    emit("action", action);
+    emit('action', action);
 };
 
 /**
@@ -166,7 +160,7 @@ const emitAction = (action) => {
  */
 const resolveAbsoluteBatchUrl = () => {
     if (!props.batch?.id) {
-        return "";
+        return '';
     }
     return displayedBatchUrl.value || buildBatchPublicUrl(props.batch.id, batchPageLocale.value);
 };
@@ -201,7 +195,7 @@ const copyPageUrl = async () => {
         el.select();
         el.setSelectionRange(0, href.length);
         try {
-            ok = document.execCommand("copy");
+            ok = document.execCommand('copy');
         } catch {
             ok = false;
         }
@@ -209,16 +203,15 @@ const copyPageUrl = async () => {
 
     if (ok) {
         message.success(t('demo.eudr_qr_modal.copy_success'));
-        setTimeout(() => emit("close"), 0);
+        setTimeout(() => emit('close'), 0);
     } else {
         message.error(t('demo.eudr_qr_modal.copy_error'));
     }
 };
-
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .eudr-qr-modal__copy-field {
     position: fixed;

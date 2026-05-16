@@ -3,14 +3,14 @@
 
     <div class="privacy-page">
         <div class="container">
-
             <div class="privacy-header">
                 <h1>{{ t('privacy_policy.page.title') }}</h1>
-                <p class="subtitle">{{ t('privacy_policy.page.subtitle', { name: siteConfig.name }) }}</p>
+                <p class="subtitle">
+                    {{ t('privacy_policy.page.subtitle', { name: siteConfig.name }) }}
+                </p>
             </div>
 
             <div class="privacy-content">
-
                 <section>
                     <h2>{{ t('privacy_policy.general.heading') }}</h2>
                     <p>{{ t('privacy_policy.general.text', { name: siteConfig.name }) }}</p>
@@ -79,21 +79,20 @@
                     <p>{{ t('privacy_policy.contacts.text') }}</p>
                     <p class="contact-email">{{ siteConfig.adminEmail }}</p>
                 </section>
-
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { usePage } from "@inertiajs/vue3";
-import SeoHead from "@/components/SeoHead.vue";
-import PublicLayout from "@/Layouts/PublicLayout.vue";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { usePage } from '@inertiajs/vue3';
+import SeoHead from '@/components/SeoHead.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineOptions({
-    name: "PrivacyPolicy",
+    name: 'PrivacyPolicy',
     layout: PublicLayout,
 });
 
@@ -115,7 +114,7 @@ const siteConfig = computed(() => page.props.siteConfig);
 </script>
 
 <style scoped lang="scss">
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .privacy-page {
     background: $bg-gray;
@@ -151,7 +150,7 @@ const siteConfig = computed(() => page.props.siteConfig);
             margin-bottom: 8px;
 
             @media (max-width: 768px) {
-                    font-size: 24px;
+                font-size: 24px;
             }
         }
 

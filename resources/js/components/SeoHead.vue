@@ -23,9 +23,9 @@
 </template>
 
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head } from '@inertiajs/vue3';
 
-defineOptions({ name: "SeoHead" });
+defineOptions({ name: 'SeoHead' });
 
 /**
  * Универсальный компонент-обёртка над Inertia <Head> для всех публичных страниц.

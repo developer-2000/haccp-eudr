@@ -1,5 +1,5 @@
-import { onBeforeUnmount, onMounted } from "vue";
-import apiAxios from "@/utils/apiAxios.js";
+import { onBeforeUnmount, onMounted } from 'vue';
+import apiAxios from '@/utils/apiAxios.js';
 
 /** Не дёргаем сервер при быстром переключении вкладок (30 сек) */
 const PING_THROTTLE_MS = 30_000;
@@ -8,11 +8,7 @@ const PING_THROTTLE_MS = 30_000;
  * Берёт текущий CSRF-токен из meta-тега, отрендеренного Blade-layout.
  */
 function readMetaCsrf() {
-    return (
-        document.head
-            .querySelector('meta[name="csrf-token"]')
-            ?.getAttribute("content") || ""
-    );
+    return document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 }
 
 /**
@@ -21,9 +17,9 @@ function readMetaCsrf() {
  */
 function writeMetaCsrf(token) {
     const el = document.head.querySelector('meta[name="csrf-token"]');
-    if (el) el.setAttribute("content", token);
+    if (el) el.setAttribute('content', token);
     if (window.axios?.defaults?.headers?.common) {
-        window.axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+        window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
     }
 }
 
@@ -56,11 +52,11 @@ export function useSessionGuard() {
         inflight = true;
 
         try {
-            const result = await apiAxios.get("/session/ping", {}, true);
+            const result = await apiAxios.get('/session/ping', {}, true);
             // Ошибка сети/сервера — apiAxios вернёт строку. Тихо игнорируем:
             // следующий реальный POST либо пройдёт (сессия жива), либо упадёт
             // в 419-handler (страница перезагрузится).
-            if (!result || typeof result === "string" || result?.status !== "success") {
+            if (!result || typeof result === 'string' || result?.status !== 'success') {
                 return;
             }
 
@@ -80,10 +76,10 @@ export function useSessionGuard() {
     };
 
     onMounted(() => {
-        document.addEventListener("visibilitychange", onVisibilityChange);
+        document.addEventListener('visibilitychange', onVisibilityChange);
     });
 
     onBeforeUnmount(() => {
-        document.removeEventListener("visibilitychange", onVisibilityChange);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
     });
 }

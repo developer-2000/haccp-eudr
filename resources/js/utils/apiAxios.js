@@ -1,5 +1,5 @@
-import axios from "axios";
-import { i18n } from "@/i18n";
+import axios from 'axios';
+import { i18n } from '@/i18n';
 
 /**
  * Разбор Laravel / типичного JSON с полем errors → одна строка (разделитель — перенос строки;
@@ -8,64 +8,48 @@ import { i18n } from "@/i18n";
  */
 export function getApiErrors(error) {
     const errorData =
-        error && typeof error === "object" && "response" in error
-            ? error.response?.data ?? {}
+        error && typeof error === 'object' && 'response' in error
+            ? (error.response?.data ?? {})
             : {};
-    let errorMessages = "";
+    let errorMessages = '';
 
-    if (typeof errorData.errors !== "undefined") {
+    if (typeof errorData.errors !== 'undefined') {
         if (errorData.errors) {
             if (Array.isArray(errorData.errors) && errorData.errors.length) {
-                if (
-                    errorData.errors.every(
-                        (item) => typeof item === "object" && item !== null,
-                    )
-                ) {
+                if (errorData.errors.every((item) => typeof item === 'object' && item !== null)) {
                     errorMessages = errorData.errors
-                        .map((obj) => Object.values(obj).join("\n"))
-                        .join("\n");
-                } else if (
-                    errorData.errors.every((item) => typeof item === "string")
-                ) {
-                    errorMessages = errorData.errors.join("\n");
+                        .map((obj) => Object.values(obj).join('\n'))
+                        .join('\n');
+                } else if (errorData.errors.every((item) => typeof item === 'string')) {
+                    errorMessages = errorData.errors.join('\n');
                 } else {
-                    errorMessages =
-                        errorData.message || "An unknown error occurred";
+                    errorMessages = errorData.message || 'An unknown error occurred';
                 }
-            } else if (
-                typeof errorData.errors === "object" &&
-                errorData.errors !== null
-            ) {
+            } else if (typeof errorData.errors === 'object' && errorData.errors !== null) {
                 const hasArrays = Object.values(errorData.errors).some(
                     (value) => Array.isArray(value) && value.length > 0,
                 );
                 if (hasArrays) {
                     errorMessages = Object.values(errorData.errors)
                         .flat()
-                        .map((item) =>
-                            Array.isArray(item) ? item.join("\n") : String(item),
-                        )
-                        .join("\n");
+                        .map((item) => (Array.isArray(item) ? item.join('\n') : String(item)))
+                        .join('\n');
                 } else {
                     errorMessages =
-                        Object.values(errorData.errors).flat().join("\n") ||
+                        Object.values(errorData.errors).flat().join('\n') ||
                         errorData.message ||
-                        "Validation failed";
+                        'Validation failed';
                 }
             } else {
-                errorMessages =
-                    errorData.message || "An unknown error occurred";
+                errorMessages = errorData.message || 'An unknown error occurred';
             }
-        } else if (
-            Array.isArray(errorData.errors) &&
-            !errorData.errors.length
-        ) {
-            errorMessages = errorData.message || "Validation failed";
+        } else if (Array.isArray(errorData.errors) && !errorData.errors.length) {
+            errorMessages = errorData.message || 'Validation failed';
         }
     } else {
         errorMessages =
-            (typeof errorData.message === "string" && errorData.message) ||
-            "An unknown error occurred";
+            (typeof errorData.message === 'string' && errorData.message) ||
+            'An unknown error occurred';
     }
 
     return errorMessages;
@@ -77,9 +61,9 @@ function isCanceledError(error) {
         return true;
     }
     return (
-        error?.code === "ERR_CANCELED" ||
-        error?.name === "CanceledError" ||
-        error?.name === "AbortError"
+        error?.code === 'ERR_CANCELED' ||
+        error?.name === 'CanceledError' ||
+        error?.name === 'AbortError'
     );
 }
 
@@ -88,16 +72,15 @@ export class ApiAxios {
      * Создает axios-клиент с базовым URL и общими заголовками.
      */
     constructor(options = {}) {
-
         this.options = { ...options };
 
         this.client = axios.create({
-            baseURL: this.options.baseURL ?? "",
+            baseURL: this.options.baseURL ?? '',
             withCredentials: this.options.withCredentials ?? false,
             validateStatus: (status) => status === 200,
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                Accept: "application/json",
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Accept: 'application/json',
                 ...this.options.headers,
             },
         });
@@ -108,7 +91,7 @@ export class ApiAxios {
             const locale = i18n?.global?.locale?.value;
             if (locale) {
                 config.headers = config.headers || {};
-                config.headers["X-Locale"] = locale;
+                config.headers['X-Locale'] = locale;
             }
             return config;
         });
@@ -119,16 +102,16 @@ export class ApiAxios {
         const controller = new AbortController();
         const onUnload = () => {
             try {
-                controller.abort(new DOMException("Page unloading", "AbortError"));
+                controller.abort(new DOMException('Page unloading', 'AbortError'));
             } catch {
                 controller.abort();
             }
         };
         if (useUnload) {
-            window.addEventListener("beforeunload", onUnload);
+            window.addEventListener('beforeunload', onUnload);
         }
         let signal = controller.signal;
-        if (userSignal && typeof AbortSignal !== "undefined" && AbortSignal.any) {
+        if (userSignal && typeof AbortSignal !== 'undefined' && AbortSignal.any) {
             signal = AbortSignal.any([userSignal, controller.signal]);
         } else if (userSignal) {
             signal = userSignal;
@@ -137,7 +120,7 @@ export class ApiAxios {
             signal,
             detach: () => {
                 if (useUnload) {
-                    window.removeEventListener("beforeunload", onUnload);
+                    window.removeEventListener('beforeunload', onUnload);
                 }
             },
         };
@@ -146,10 +129,7 @@ export class ApiAxios {
     /** Готовит конфиг запроса: выносит служебные флаги и добавляет `signal` для отмены. */
     _prepareConfig(config = {}) {
         const { unloadAbort, signal: userSignal, ...axiosConfig } = config;
-        const { signal, detach } = this._attachUnloadAbort(
-            userSignal,
-            unloadAbort !== false,
-        );
+        const { signal, detach } = this._attachUnloadAbort(userSignal, unloadAbort !== false);
         return { axiosConfig: { ...axiosConfig, signal }, detach };
     }
 
@@ -161,39 +141,30 @@ export class ApiAxios {
 
         const showToast = this.options.showToast;
 
-        if (error?.message === "Network Error") {
-            showToast?.(
-                "Error",
-                "No internet connection or the server is unavailable.",
-            );
-            return returnError ? "Network Error" : null;
+        if (error?.message === 'Network Error') {
+            showToast?.('Error', 'No internet connection or the server is unavailable.');
+            return returnError ? 'Network Error' : null;
         }
-        if (error?.code === "ECONNABORTED") {
-            showToast?.(
-                "Error",
-                "The request took too long, the server might be unavailable.",
-            );
-            return returnError ? "Timeout" : null;
+        if (error?.code === 'ECONNABORTED') {
+            showToast?.('Error', 'The request took too long, the server might be unavailable.');
+            return returnError ? 'Timeout' : null;
         }
 
-        const status = error?.response?.status ?? "Error";
+        const status = error?.response?.status ?? 'Error';
 
         // Session expired / CSRF mismatch (Laravel 419). Reactive safety net:
         // happens when the tab stayed open past SESSION_LIFETIME and the user
         // submits without a prior visibilitychange refresh. Reload picks up
         // the fresh CSRF token from the Blade meta tag.
         if (status === 419) {
-            showToast?.(
-                "Session expired",
-                "The page will reload to refresh the session.",
-            );
+            showToast?.('Session expired', 'The page will reload to refresh the session.');
             setTimeout(() => window.location.reload(), 1500);
-            return returnError ? "Session expired" : null;
+            return returnError ? 'Session expired' : null;
         }
 
         let errorMessages = getApiErrors(error);
-        if (typeof errorMessages !== "string") {
-            errorMessages = "An unknown error occurred.";
+        if (typeof errorMessages !== 'string') {
+            errorMessages = 'An unknown error occurred.';
         }
         if (returnError) {
             return errorMessages;
@@ -264,14 +235,13 @@ export class ApiAxios {
             detach();
         }
     }
-
 }
 
 /**
  * Инстанс по умолчанию (тот же origin, без тостов и редиректов). Для лёгких публичных GET-эндпоинтов.
  */
 const defaultApiAxios = new ApiAxios({
-    baseURL: "",
+    baseURL: '',
 });
 
 export default defaultApiAxios;

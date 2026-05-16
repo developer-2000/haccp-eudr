@@ -88,7 +88,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign({ name: "GlobalTaskReminderToast
       }, _attrs), {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<div class="global-task-reminder-toast" role="status" data-v-7a12a6e9${_scopeId}><p class="global-task-reminder-toast__title" data-v-7a12a6e9${_scopeId}>${ssrInterpolate(t(unref(task_grain_cooling).toastTitleKey))}</p><p class="global-task-reminder-toast__task-name" data-v-7a12a6e9${_scopeId}>${ssrInterpolate(t(unref(task_grain_cooling).toastTaskNameKey))}</p><div class="global-task-reminder-toast__actions" data-v-7a12a6e9${_scopeId}>`);
+            _push2(`<div class="global-task-reminder-toast" role="status" data-v-81e6de9f${_scopeId}><p class="global-task-reminder-toast__title" data-v-81e6de9f${_scopeId}>${ssrInterpolate(t(unref(task_grain_cooling).toastTitleKey))}</p><p class="global-task-reminder-toast__task-name" data-v-81e6de9f${_scopeId}>${ssrInterpolate(t(unref(task_grain_cooling).toastTaskNameKey))}</p><div class="global-task-reminder-toast__actions" data-v-81e6de9f${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Button), {
               type: "warning",
               onClick: handleClose
@@ -163,7 +163,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/features/demo/task_grain_cooling/GlobalTaskReminderToast.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const GlobalTaskReminderToast = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7a12a6e9"]]);
+const GlobalTaskReminderToast = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-81e6de9f"]]);
 export {
   GlobalTaskReminderToast as default
 };

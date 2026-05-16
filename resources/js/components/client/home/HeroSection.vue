@@ -2,24 +2,18 @@
     <div class="hero-section__content">
         <div class="hero-section__left">
             <h1>
-                {{ $t("home.hero.title_line1") }}
+                {{ $t('home.hero.title_line1') }}
             </h1>
             <p class="hero-section__description">
-                <strong>{{ $t("home.hero.description_prefix") }}</strong>
-                {{ $t("home.hero.description_emphasis") }}
+                <strong>{{ $t('home.hero.description_prefix') }}</strong>
+                {{ $t('home.hero.description_emphasis') }}
             </p>
             <div class="hero-section__buttons">
-                <button
-                    class="btn-client btn-success btn-success-hero"
-                    @click="goToSurvey"
-                >
-                    {{ $t("home.hero.tell_about_business") }}
+                <button class="btn-client btn-success btn-success-hero" @click="goToSurvey">
+                    {{ $t('home.hero.tell_about_business') }}
                 </button>
-                <button
-                    class="btn-client btn-outline-primary"
-                    @click="goToDemo"
-                >
-                    {{ $t("home.hero.view_demo") }}
+                <button class="btn-client btn-outline-primary" @click="goToDemo">
+                    {{ $t('home.hero.view_demo') }}
                 </button>
             </div>
         </div>
@@ -37,11 +31,11 @@
 
 <script setup>
 defineOptions({
-    name: "Hero",
+    name: 'Hero',
 });
 
-import { router as inertiaRouter } from "@inertiajs/vue3";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
+import { router as inertiaRouter } from '@inertiajs/vue3';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
 
 const goToSurvey = () => {
     inertiaRouter.visit(`/${useCurrentLocale()}/survey`);
@@ -53,7 +47,7 @@ const goToDemo = () => {
 </script>
 
 <style lang="scss" scoped>
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .hero-section__content {
     display: flex;

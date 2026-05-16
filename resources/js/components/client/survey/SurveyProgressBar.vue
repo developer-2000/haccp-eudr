@@ -8,19 +8,14 @@
             :aria-valuemax="denominator"
             :aria-label="ariaLabel"
         >
-            <div
-                class="survey-progress__fill"
-                :style="{ width: percent + '%' }"
-            />
+            <div class="survey-progress__fill" :style="{ width: percent + '%' }" />
         </div>
-        <p class="survey-progress__label" aria-hidden="true">
-            {{ Math.round(percent) }}%
-        </p>
+        <p class="survey-progress__label" aria-hidden="true">{{ Math.round(percent) }}%</p>
     </div>
 </template>
 
 <script setup>
-defineOptions({ name: "SurveyProgressBar" });
+defineOptions({ name: 'SurveyProgressBar' });
 
 defineProps({
     /** Текущее значение для aria (шаг). */
@@ -47,7 +42,7 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-progress {
     width: 100%;

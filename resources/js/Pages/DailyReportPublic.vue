@@ -1,9 +1,7 @@
 <template>
     <SeoHead :seo="seo" />
 
-    <div class="daily-report"
-        :class="{ 'daily-report--pdf-open': wantsAutoPrint }"
-    >
+    <div class="daily-report" :class="{ 'daily-report--pdf-open': wantsAutoPrint }">
         <div class="daily-report__toolbar no-print">
             <button type="button" class="btn-client btn-outline-primary" @click="close">
                 {{ t('demo.show_task_modal.close') }}
@@ -12,7 +10,7 @@
                 v-if="snapshot"
                 type="button"
                 class="daily-report__print btn-client btn-outline-primary"
-                @click="print"
+                @click="runPrint"
             >
                 {{ t('report.public.print_pdf') }}
             </button>
@@ -45,11 +43,15 @@
                 </p>
                 <div class="daily-report__refs">
                     <div>
-                        <span class="daily-report__label">{{ t('report.public.report_reference') }}</span>
+                        <span class="daily-report__label">{{
+                            t('report.public.report_reference')
+                        }}</span>
                         <strong>{{ snapshot.documentRef }}</strong>
                     </div>
                     <div>
-                        <span class="daily-report__label">{{ t('report.public.calendar_date_utc') }}</span>
+                        <span class="daily-report__label">{{
+                            t('report.public.calendar_date_utc')
+                        }}</span>
                         <strong>{{ snapshot.dateIso }}</strong>
                     </div>
                     <div>
@@ -111,31 +113,35 @@
                     </p>
                     <div class="daily-report__summary">
                         <div class="daily-report__summary-item">
-                            <span class="daily-report__label">{{ t('report.public.total_ccp_tasks') }}</span>
+                            <span class="daily-report__label">{{
+                                t('report.public.total_ccp_tasks')
+                            }}</span>
                             <strong>{{ snapshot.totalCcpTasks }}</strong>
                         </div>
                         <div class="daily-report__summary-item">
-                            <span class="daily-report__label">{{ t('report.public.reporting_date') }}</span>
+                            <span class="daily-report__label">{{
+                                t('report.public.reporting_date')
+                            }}</span>
                             <strong>{{ snapshot.inspectionDateLabel }}</strong>
                         </div>
                     </div>
-                    <div
-                        class="daily-report__table-wrap daily-report__table-wrap--mt"
-                    >
+                    <div class="daily-report__table-wrap daily-report__table-wrap--mt">
                         <p class="daily-report__register-caption-mobile">
                             {{ t('report.public.register_caption') }}
                         </p>
                         <div class="daily-report__register-desktop">
-                            <table
-                                class="daily-report__table daily-report__table--compact"
-                            >
+                            <table class="daily-report__table daily-report__table--compact">
                                 <caption class="daily-report__caption">
-                                    {{ t('report.public.register_caption') }}
+                                    {{
+                                        t('report.public.register_caption')
+                                    }}
                                 </caption>
                                 <thead>
                                     <tr>
                                         <th scope="col">{{ t('report.public.col_process') }}</th>
-                                        <th scope="col">{{ t('report.public.col_control_point') }}</th>
+                                        <th scope="col">
+                                            {{ t('report.public.col_control_point') }}
+                                        </th>
                                         <th scope="col">
                                             {{ t('report.public.col_recorded_value') }}
                                         </th>
@@ -144,10 +150,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr
-                                        v-for="row in snapshot.ccpRows"
-                                        :key="row.id"
-                                    >
+                                    <tr v-for="row in snapshot.ccpRows" :key="row.id">
                                         <td>{{ row.niche }}</td>
                                         <td>{{ row.ccp }}</td>
                                         <td>{{ row.detail }}</td>
@@ -171,25 +174,35 @@
                                 class="daily-report__register-card"
                             >
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label">{{ t('report.public.col_process') }}:</span>
+                                    <span class="daily-report__register-label"
+                                        >{{ t('report.public.col_process') }}:</span
+                                    >
                                     {{ row.niche }}
                                 </p>
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label">{{ t('report.public.col_control_point') }}:</span>
+                                    <span class="daily-report__register-label"
+                                        >{{ t('report.public.col_control_point') }}:</span
+                                    >
                                     {{ row.ccp }}
                                 </p>
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label">{{ t('report.public.col_recorded_value') }}:</span>
+                                    <span class="daily-report__register-label"
+                                        >{{ t('report.public.col_recorded_value') }}:</span
+                                    >
                                     {{ row.detail }}
                                 </p>
                                 <p class="daily-report__register-line">
-                                    <span class="daily-report__register-label">{{ t('report.public.col_assignee') }}:</span>
+                                    <span class="daily-report__register-label"
+                                        >{{ t('report.public.col_assignee') }}:</span
+                                    >
                                     {{ row.assigneeName }}
                                 </p>
                                 <p
                                     class="daily-report__register-line daily-report__register-line--status"
                                 >
-                                    <span class="daily-report__register-label">{{ t('report.public.col_status') }}:</span>
+                                    <span class="daily-report__register-label"
+                                        >{{ t('report.public.col_status') }}:</span
+                                    >
                                     <span
                                         class="daily-report__pill"
                                         :class="`daily-report__pill--${row.statusPillKey}`"
@@ -209,11 +222,11 @@
                 >
                     <h2 class="daily-report__h2-niche">
                         3.{{
-                            section.nicheKey === "coffee"
-                                ? "A"
-                                : section.nicheKey === "bakery"
-                                  ? "B"
-                                  : "C"
+                            section.nicheKey === 'coffee'
+                                ? 'A'
+                                : section.nicheKey === 'bakery'
+                                  ? 'B'
+                                  : 'C'
                         }}
                         {{ t('report.public.haccp_section_title', { label: section.nicheLabel }) }}
                     </h2>
@@ -242,7 +255,7 @@
                                 <dt>{{ t('report.public.control_point_id') }}</dt>
                                 <dd>
                                     <code class="daily-report__code">
-                                        {{task.id}}
+                                        {{ task.id }}
                                     </code>
                                 </dd>
                             </div>
@@ -263,27 +276,24 @@
                             <h4 class="daily-report__h4">
                                 {{ t('report.public.time_stamped_verification') }}
                             </h4>
-                            <div
-                                class="daily-report__table-wrap daily-report__table-wrap--meas"
-                            >
+                            <div class="daily-report__table-wrap daily-report__table-wrap--meas">
                                 <div class="daily-report__meas-desktop">
                                     <table class="daily-report__table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">{{ t('report.public.col_time') }}</th>
+                                                <th scope="col">
+                                                    {{ t('report.public.col_time') }}
+                                                </th>
                                                 <th scope="col">
                                                     {{ t('report.public.col_observed_value') }}
                                                 </th>
-                                                <th scope="col">{{ t('report.public.col_result') }}</th>
+                                                <th scope="col">
+                                                    {{ t('report.public.col_result') }}
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr
-                                                v-for="(
-                                                    m, idx
-                                                ) in task.measurements"
-                                                :key="idx"
-                                            >
+                                            <tr v-for="(m, idx) in task.measurements" :key="idx">
                                                 <td>{{ m.time }}</td>
                                                 <td>{{ m.value }}</td>
                                                 <td>
@@ -305,17 +315,23 @@
                                         class="daily-report__meas-card"
                                     >
                                         <p class="daily-report__meas-line">
-                                            <span class="daily-report__meas-label">{{ t('report.public.col_time') }}:</span>
+                                            <span class="daily-report__meas-label"
+                                                >{{ t('report.public.col_time') }}:</span
+                                            >
                                             {{ m.time }}
                                         </p>
                                         <p class="daily-report__meas-line">
-                                            <span class="daily-report__meas-label">{{ t('report.public.col_observed_value') }}:</span>
+                                            <span class="daily-report__meas-label"
+                                                >{{ t('report.public.col_observed_value') }}:</span
+                                            >
                                             {{ m.value }}
                                         </p>
                                         <p
                                             class="daily-report__meas-line daily-report__meas-line--result"
                                         >
-                                            <span class="daily-report__meas-label">{{ t('report.public.col_result') }}:</span>
+                                            <span class="daily-report__meas-label"
+                                                >{{ t('report.public.col_result') }}:</span
+                                            >
                                             <span
                                                 class="daily-report__pill daily-report__pill--sm"
                                                 :class="`daily-report__pill--${m.resultPillKey}`"
@@ -329,22 +345,14 @@
                         </div>
 
                         <div
-                            v-if="
-                                task.correctiveActions &&
-                                task.correctiveActions.length
-                            "
+                            v-if="task.correctiveActions && task.correctiveActions.length"
                             class="daily-report__subblock"
                         >
                             <h4 class="daily-report__h4">
                                 {{ t('report.public.corrective_actions_title') }}
                             </h4>
                             <ol class="daily-report__ol">
-                                <li
-                                    v-for="(
-                                        line, idx
-                                    ) in task.correctiveActions"
-                                    :key="idx"
-                                >
+                                <li v-for="(line, idx) in task.correctiveActions" :key="idx">
                                     {{ line }}
                                 </li>
                             </ol>
@@ -366,15 +374,17 @@
                         {{ t('report.public.no_eudr_intake') }}
                     </p>
                     <template v-else>
-                        <div
-                            class="daily-report__table-wrap daily-report__table-wrap--supply"
-                        >
+                        <div class="daily-report__table-wrap daily-report__table-wrap--supply">
                             <div class="daily-report__supply-desktop">
                                 <table class="daily-report__table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">{{ t('report.public.col_batch_id') }}</th>
-                                            <th scope="col">{{ t('report.public.col_product_list') }}</th>
+                                            <th scope="col">
+                                                {{ t('report.public.col_batch_id') }}
+                                            </th>
+                                            <th scope="col">
+                                                {{ t('report.public.col_product_list') }}
+                                            </th>
                                             <th scope="col">{{ t('report.public.col_status') }}</th>
                                             <th scope="col">
                                                 {{ t('report.public.col_public_disclosure') }}
@@ -382,10 +392,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr
-                                            v-for="b in snapshot.supplyRows"
-                                            :key="b.id"
-                                        >
+                                        <tr v-for="b in snapshot.supplyRows" :key="b.id">
                                             <td>
                                                 <strong>{{ b.id }}</strong>
                                             </td>
@@ -412,21 +419,29 @@
                                     class="daily-report__supply-card"
                                 >
                                     <p class="daily-report__supply-line">
-                                        <span class="daily-report__supply-label">{{ t('report.public.col_batch_id') }}:</span>
+                                        <span class="daily-report__supply-label"
+                                            >{{ t('report.public.col_batch_id') }}:</span
+                                        >
                                         <strong>{{ b.id }}</strong>
                                     </p>
                                     <p class="daily-report__supply-line">
-                                        <span class="daily-report__supply-label">{{ t('report.public.col_product_list') }}:</span>
+                                        <span class="daily-report__supply-label"
+                                            >{{ t('report.public.col_product_list') }}:</span
+                                        >
                                         {{ b.product }}
                                     </p>
                                     <p class="daily-report__supply-line">
-                                        <span class="daily-report__supply-label">{{ t('report.public.col_status') }}:</span>
+                                        <span class="daily-report__supply-label"
+                                            >{{ t('report.public.col_status') }}:</span
+                                        >
                                         {{ b.statusLabel }}
                                     </p>
                                     <p
                                         class="daily-report__supply-line daily-report__supply-line--url"
                                     >
-                                        <span class="daily-report__supply-label">{{ t('report.public.col_public_disclosure') }}:</span>
+                                        <span class="daily-report__supply-label"
+                                            >{{ t('report.public.col_public_disclosure') }}:</span
+                                        >
                                         <a
                                             class="daily-report__a"
                                             :href="b.url"
@@ -446,12 +461,15 @@
                             class="daily-report__eudr-detail"
                         >
                             <h3 class="daily-report__h3-eudr">
-                                {{ t('report.public.eudr_detail_title', { n: idx + 1, id: sd.listRow.id }) }}
+                                {{
+                                    t('report.public.eudr_detail_title', {
+                                        n: idx + 1,
+                                        id: sd.listRow.id,
+                                    })
+                                }}
                             </h3>
                             <template v-if="sd.eudr">
-                                <dl
-                                    class="daily-report__dl daily-report__dl--tight"
-                                >
+                                <dl class="daily-report__dl daily-report__dl--tight">
                                     <div>
                                         <dt>{{ t('report.public.dds_reference') }}</dt>
                                         <dd>{{ sd.eudr.ddsReference }}</dd>
@@ -484,9 +502,7 @@
                     </template>
                 </section>
 
-                <section
-                    class="daily-report__section daily-report__section--muted"
-                >
+                <section class="daily-report__section daily-report__section--muted">
                     <h2>{{ t('report.public.section_integrity') }}</h2>
                     <ul class="daily-report__checklist">
                         <li>{{ t('report.public.integrity_item_1') }}</li>
@@ -500,8 +516,14 @@
             <footer class="daily-report__footer">
                 <div class="daily-report__meta">
                     <span>{{ t('report.public.demo_inspection_preview') }}</span>
-                    <span>{{ t('report.public.inspection_date_label', { label: snapshot.inspectionDateLabel }) }}</span>
-                    <span class="no-print">{{ t('report.public.generated_client', { time: generatedAtFormatted }) }}</span>
+                    <span>{{
+                        t('report.public.inspection_date_label', {
+                            label: snapshot.inspectionDateLabel,
+                        })
+                    }}</span>
+                    <span class="no-print">{{
+                        t('report.public.generated_client', { time: generatedAtFormatted })
+                    }}</span>
                 </div>
                 <p class="daily-report__disclaimer">
                     {{ snapshot.disclaimer }}
@@ -534,19 +556,19 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { usePage } from "@inertiajs/vue3";
-import { useI18n } from "vue-i18n";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 import {
     buildDailyReportPublicUrl,
     getDailyReportSnapshot,
     parseIsoDateSafe,
     REPORT_REFERENCE_ISO,
-} from "@/features/demo/data/dailyReportPublic";
-import SeoHead from "@/components/SeoHead.vue";
+} from '@/features/demo/data/dailyReportPublic';
+import SeoHead from '@/components/SeoHead.vue';
 
 defineOptions({
-    name: "DailyReportPublic",
+    name: 'DailyReportPublic',
 });
 
 const props = defineProps({
@@ -583,21 +605,21 @@ const canonicalUrl = computed(() =>
 
 const generatedAtFormatted = computed(() => {
     if (!snapshot.value) {
-        return "";
+        return '';
     }
-    const localeTag = page.props.locale || "en";
+    const localeTag = page.props.locale || 'en';
     return new Intl.DateTimeFormat(localeTag, {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
     }).format(new Date(snapshot.value.generatedAtUtcHint));
 });
 
 const wantsAutoPrint = computed(() => props.print === true);
 
-const print = () => window.print();
+const runPrint = () => window.print();
 
 const close = () => {
     window.close();
@@ -611,38 +633,35 @@ const showToTop = ref(false);
 let scrollContainer = null;
 
 const getWindowScrollTop = () =>
-    window.scrollY ||
-    document.documentElement.scrollTop ||
-    document.body.scrollTop ||
-    0;
+    window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
 const onScroll = () => {
     const containerTop = scrollContainer ? scrollContainer.scrollTop : 0;
     const windowTop = getWindowScrollTop();
-    let height = Math.max(containerTop, windowTop)
+    let height = Math.max(containerTop, windowTop);
     showToTop.value = height > SCROLL_TOP_THRESHOLD;
 };
 
 const scrollTop = () => {
     if (scrollContainer) {
-        scrollContainer.scrollTo({ top: 0, behavior: "smooth" });
+        scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 onMounted(() => {
-    scrollContainer = document.querySelector(".main-content");
-    window.addEventListener("scroll", onScroll, { passive: true });
+    scrollContainer = document.querySelector('.main-content');
+    window.addEventListener('scroll', onScroll, { passive: true });
     if (scrollContainer) {
-        scrollContainer.addEventListener("scroll", onScroll, { passive: true });
+        scrollContainer.addEventListener('scroll', onScroll, { passive: true });
     }
     onScroll();
 });
 
 onBeforeUnmount(() => {
-    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener('scroll', onScroll);
     if (scrollContainer) {
-        scrollContainer.removeEventListener("scroll", onScroll);
+        scrollContainer.removeEventListener('scroll', onScroll);
     }
     scrollContainer = null;
 });
@@ -666,20 +685,16 @@ const runAutoPrint = () => {
 watch(
     () => [snapshot.value?.dateIso, props.print],
     () => runAutoPrint(),
-    { flush: "post", immediate: true },
+    { flush: 'post', immediate: true },
 );
 </script>
 
 <style scoped lang="scss">
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .daily-report {
     min-height: 100%;
-    background: linear-gradient(
-        180deg,
-        rgba($bg-light-grey, 0.35) 0%,
-        $bg-gray 40%
-    );
+    background: linear-gradient(180deg, rgba($bg-light-grey, 0.35) 0%, $bg-gray 40%);
     padding: $spacing-lg $spacing-md $spacing-2xl;
     position: relative;
 }

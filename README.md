@@ -4,10 +4,10 @@ Laravel 10 проект с Vue.js 3.4.0 и SCSS.
 
 ## Требования
 
-- PHP >= 8.2
+- PHP >= 8.1 (тестировалось на 8.3)
 - Composer
-- Node.js >= 16.x
-- npm или yarn
+- Node.js >= 18.x
+- npm
 - OpenServer (для Windows)
 
 ## Настройка окружения
@@ -73,7 +73,9 @@ php artisan sitemap:generate
 - Почта: [Почта](http://192.168.101.11:8025)
 
 ## Тестовая почта локально
+
 ### Запуск Mailpit
+
 1. Открой командную строку (Win + R → `cmd` → Enter)
    Перейди в папку Mailpit:
    cd /d D:\programm\Mailpit\mailpit-windows-amd64
@@ -82,117 +84,121 @@ php artisan sitemap:generate
 
 ## Технологии
 
-- **Backend**: Laravel 10
-- **Frontend**: Vue.js 3.4.0 (Options API)
-- **Сборщик**: Vite 4
+- **Backend**: Laravel 10 (PHP ^8.1)
+- **Frontend**: Vue.js 3.4 + Inertia.js v2 (Composition API через `<script setup>`)
+- **State**: Pinia 3
+- **i18n**: vue-i18n 11
+- **Сборщик**: Vite 5 (с SSR-сборкой через `vite build --ssr`)
 - **Стили**: SCSS
 
 ## Используемые пакеты, сервисы, инструменты
 
 - **Backend (PHP / Laravel):**
-  - `laravel/framework` (Laravel 10)
-  - `laravel/sanctum`
-  - `laravel/tinker`
-  - `guzzlehttp/guzzle`
+    - `laravel/framework` (Laravel 10)
+    - `laravel/sanctum`
+    - `laravel/tinker`
+    - `guzzlehttp/guzzle`
+    - `inertiajs/inertia-laravel` (адаптер Inertia для Laravel + SSR)
+    - `sentry/sentry-laravel` (error tracking)
 
 - **Frontend (Vue):**
-  - `vue` 3
-  - `vue-router`
-  - `pinia`
-  - `vue-i18n`
-  - `naive-ui`
-  - `vue3-toastify`
-  - `qrcode`
-  - `uuid`
-  - `libphonenumber-js`
-  - `i18n-iso-countries`
-  - `vue-tel-num-input`
+    - `vue` 3.4
+    - `@inertiajs/vue3` (SPA-навигация на Inertia)
+    - `pinia` 3
+    - `vue-i18n` 11
+    - `vue-router` 4
+    - `@unhead/vue` (управление `<head>` / SEO-meta)
+    - `naive-ui`
+    - `vue3-toastify` (на публичных страницах — основной toast)
+    - `qrcode`
+    - `uuid`
+    - `libphonenumber-js`
+    - `i18n-iso-countries`
+    - `vue-tel-num-input`
 
 - **Иконки:**
-  - `@heroicons/vue`
-  - `@tabler/icons-vue`
-  - `@carbon/icons-vue`
-  - `@vicons/*` (`antd`, `carbon`, `fluent`, `ionicons4`, `ionicons5`, `material`)
+    - `@heroicons/vue`
+    - `@tabler/icons-vue`
+    - `@carbon/icons-vue`
+    - `@vicons/*` (`antd`, `carbon`, `fluent`, `ionicons4`, `ionicons5`, `material`)
 
 - **Сборка и стили:**
-  - `vite`
-  - `@vitejs/plugin-vue`
-  - `laravel-vite-plugin`
-  - `sass` (SCSS)
+    - `vite` 5
+    - `@vitejs/plugin-vue`
+    - `laravel-vite-plugin`
+    - `sass` (SCSS)
+    - SSR-сборка: `npm run build` (= `vite build && vite build --ssr`)
 
 - **Качество кода и форматирование:**
-  - `eslint`
-  - `eslint-plugin-vue`
-  - `eslint-plugin-prettier`
-  - `prettier`
-  - `laravel/pint`
+    - `eslint`
+    - `eslint-plugin-vue`
+    - `eslint-plugin-prettier`
+    - `prettier`
+    - `laravel/pint`
+    - `larastan/larastan` (статический анализ, см. [PHPStan.md](Documents/developer/PHPStan.md))
 
 - **Тестирование и отладка:**
-  - `phpunit/phpunit`
-  - `nunomaduro/collision`
-  - `spatie/laravel-ignition`
-  - `fakerphp/faker`
-  - `mockery/mockery`
+    - `phpunit/phpunit`
+    - `nunomaduro/collision`
+    - `spatie/laravel-ignition`
+    - `fakerphp/faker`
+    - `mockery/mockery`
 
 - **Почта и очереди:**
-  - SMTP через `Mailgun` (`smtp.mailgun.org`)
-  - Laravel Queue (`database` driver)
-  - Worker: `php artisan queue:work`
+    - SMTP через `Mailgun` (`smtp.mailgun.org`)
+    - Laravel Queue (`database` driver)
+    - Worker: `php artisan queue:work`
 
 - **База данных и окружение:**
-  - `MySQL` (OpenServer / OSPanel)
-  - `PhpMyAdmin` для администрирования БД
-  - Локальный домен проекта: `http://haccpilot.local`
+    - `MySQL` (OpenServer / OSPanel)
+    - `PhpMyAdmin` для администрирования БД
+    - Локальный домен проекта: `http://haccpilot.local`
 
 ## Команды для работы с инструментами качества кода
 
-**Рекомендуется использовать:**
+**Основная команда:**
 
-- `npm run lint:format` — **основная команда** для авто исправления всех проблем (сначала ESLint, затем Prettier)
+- `npm run lint:format` — прогоняет ESLint `--fix`, затем Prettier `--write` по всему проекту.
 
-**Отдельные команды:**
+**ESLint** (логические ошибки + стилистические проблемы кода):
 
-**ESLint:**
+- `npm run lint` — проверка
+- `npm run lint:fix` — авто-исправление
 
-- `npm run lint` — проверка кода на ошибки и предупреждения
-- `npm run lint:fix` — проверка и автоматическое исправление ошибок кода
+Конфиг: [eslint.config.mjs](eslint.config.mjs) (flat-config, ESLint 9). Browser/Node globals подключаются через пакет [`globals`](https://www.npmjs.com/package/globals) (`globals.browser`, `globals.node`). Игнорируемые пути: `node_modules`, `vendor`, `public/build`, `storage`, `bootstrap/cache`, `bootstrap/ssr`, `Documents`, `*.config.{js,mjs}`.
 
-    Команда `lint:fix` исправляет:
-    - **Логические ошибки**: неиспользуемые переменные, недостижимый код, неправильное использование API
-    - **Стилистические**: пробелы, отступы, лишние/недостающие пробелы вокруг операторов
-    - **Кавычки**: одинарные/двойные кавычки (согласно правилам)
-    - **Точки с запятой**: лишние или недостающие точки с запятой
-    - **Импорты**: порядок и форматирование импортов
-    - **Vue.js**: правила форматирования компонентов (атрибуты, теги)
-    - **Prettier**: правила форматирования, интегрированные через eslint-plugin-prettier
+**Prettier** (форматирование: отступы, переносы, кавычки, trailing commas, длина строк):
 
-**Prettier:**
+- `npm run format` — авто-исправление
+- `npm run format:check` — проверка без изменений (под маской `**/*.{js,jsx,vue,json,css,scss,md}`)
 
-- `npm run format` — авто исправление форматирования кода (JavaScript, JSX, Vue, JSON, CSS, SCSS, Markdown файлы)
-- `npm run format:check` — проверка форматирования без изменений
+Конфиг: [.prettierrc.json](.prettierrc.json). Ключевые правила:
 
-    Команда `format` исправляет только форматирование:
-    - **Отступы и пробелы**: неправильные отступы, лишние/недостающие пробелы
-    - **Переносы строк**: длина строк, переносы длинных выражений
-    - **Кавычки**: одинарные/двойные кавычки (согласно настройкам)
-    - **Точки с запятой**: добавление/удаление точек с запятой
-    - **Скобки и запятые**: пробелы вокруг скобок, запятые в конце массивов/объектов
-    - **Стрелки функций**: форматирование стрелочных функций
-    - **HTML/Vue теги**: форматирование атрибутов, отступы в шаблонах
-    - **CSS/SCSS**: форматирование селекторов, свойств, значений
-    - **JSON**: форматирование структуры, отступы, запятые
+- `printWidth: 100`, `tabWidth: 4`, `useTabs: false`
+- `singleQuote: true`, `trailingComma: 'all'`, `semi: true`
+- `endOfLine: 'lf'`
+- Override для `*.{json,yml,yaml}` → `tabWidth: 2` (стандарт JSON/YAML)
+- Override для `*.md` → `proseWrap: 'preserve'` (не ломает ручные переносы)
 
-**Форматирование тегов (Vue `<template>`, разметка в `.vue`):**
+Игноры Prettier: [.prettierignore](.prettierignore) — `node_modules`, `vendor`, build-артефакты (`bootstrap/ssr`, `bootstrap/cache`, `public/build`, `public/hot`, `public/sitemap.xml`, `storage`), lock/env-файлы, `Documents/` (рукописные планы), `*.php` (его форматирует Pint).
 
-- Приводит в порядок **Prettier** — в проекте он запускается через `npm run format` (или точечно: `npx prettier --write "путь/к/файлу.vue"`).
-- Команда переписывает шаблон: переносы атрибутов, отступы вложенных тегов, разбиение длинных строк — по общим правилам Prettier для Vue.
-- Проверка без изменений файлов: `npm run format:check`.
-- Чтобы одновременно прогнать ESLint и затем Prettier по всему проекту: `npm run lint:format` (рекомендуется после правок в компонентах).
+**Pint** (PHP-форматирование):
+
+- `vendor/bin/pint` — авто-исправление PHP-файлов (`app/`, `routes/`, `database/`, `tests/`, `config/`).
+- `vendor/bin/pint --test` — проверка без изменений.
 
 **Разница:**
 
-- **ESLint** (`npm run lint:fix`) — исправляет логические ошибки и стилистические проблемы кода
-- **Prettier** (`npm run format`) — исправляет только форматирование (внешний вид кода)
-- **Комбинированная** (`npm run lint:format`) — исправляет всё сразу (рекомендуется)
+- **ESLint** — ловит ошибки логики и code style для JS/Vue (через `eslint-plugin-vue` + `eslint-plugin-prettier`)
+- **Prettier** — приводит формат файла к каноническому виду (только внешний вид)
+- **Pint** — то же самое, но для PHP-кода (на основе PHP-CS-Fixer)
 
+## Статический анализ PHP (PHPStan / Larastan)
 
+Конфиг: [phpstan.neon](phpstan.neon). Полная документация: [Documents/developer/PHPStan.md](Documents/developer/PHPStan.md).
+
+- `composer stan` — прогон анализа (`phpstan analyse --memory-limit=1G`), уровень 5, пути `app` и `routes`.
+- `vendor/bin/phpstan analyse app/Services/SurveyResponseService.php` — проверка одного файла.
+- `vendor/bin/phpstan --version` — версия установленного PHPStan.
+
+Ловит вызовы методов на `null`, неверные сигнатуры, несуществующие свойства/ключи массивов, типовые несостыковки. Уровень повышается постепенно (5 → 6 → 7) по мере чистки кода.

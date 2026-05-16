@@ -20,18 +20,12 @@
                             <td>{{ batch.supplier }}</td>
                             <td>{{ batch.date }}</td>
                             <td>
-                                <span
-                                    class="eudr-status"
-                                    :class="`eudr-status--${batch.status}`"
-                                >
+                                <span class="eudr-status" :class="`eudr-status--${batch.status}`">
                                     {{ batch.statusLabel }}
                                 </span>
                             </td>
                             <td>
-                                <n-button
-                                    type="info"
-                                    @click="openQrModal(batch)"
-                                >
+                                <n-button type="info" @click="openQrModal(batch)">
                                     {{ t('demo.eudr.show_qr') }}
                                 </n-button>
                             </td>
@@ -42,11 +36,7 @@
         </div>
 
         <div class="eudr-section__mobile">
-            <article
-                v-for="batch in props.batches"
-                :key="batch.id"
-                class="eudr-card"
-            >
+            <article v-for="batch in props.batches" :key="batch.id" class="eudr-card">
                 <p class="eudr-card__line">
                     <span class="eudr-card__label">{{ t('demo.eudr.col_id') }}:</span>
                     {{ batch.id }}
@@ -65,19 +55,12 @@
                 </p>
                 <p class="eudr-card__line eudr-card__line--status">
                     <span class="eudr-card__label">{{ t('demo.eudr.col_status') }}:</span>
-                    <span
-                        class="eudr-status"
-                        :class="`eudr-status--${batch.status}`"
-                    >
+                    <span class="eudr-status" :class="`eudr-status--${batch.status}`">
                         {{ batch.statusLabel }}
                     </span>
                 </p>
                 <div class="eudr-card__actions">
-                    <n-button
-                        type="info"
-                        block
-                        @click="openQrModal(batch)"
-                    >
+                    <n-button type="info" block @click="openQrModal(batch)">
                         {{ t('demo.eudr.show_qr') }}
                     </n-button>
                 </div>
@@ -94,12 +77,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { NButton } from "naive-ui";
-import EudrQrModal from "@/features/demo/components/modals/EudrQrModal.vue";
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { NButton } from 'naive-ui';
+import EudrQrModal from '@/features/demo/components/modals/EudrQrModal.vue';
 
-defineOptions({ name: "EudrSection" });
+defineOptions({ name: 'EudrSection' });
 
 const { t } = useI18n();
 
@@ -135,13 +118,13 @@ const closeQrModal = () => {
  * Обрабатывает действия из QR модалки.
  * Используется для mock-логики отправки, PDF и перехода в опрос.
  */
-const handleQrAction = (action) => {
+const handleQrAction = (_action) => {
     closeQrModal();
 };
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .eudr-section {
     display: flex;

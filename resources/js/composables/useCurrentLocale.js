@@ -1,4 +1,4 @@
-import { usePage } from "@inertiajs/vue3";
+import { usePage } from '@inertiajs/vue3';
 
 /**
  * Возвращает текущую локаль. Источник истины — `usePage().props.locale`
@@ -19,15 +19,15 @@ export function useCurrentLocale() {
         // Inertia-контекст недоступен (legacy SPA) — идём в URL-фолбэк.
     }
 
-    if (typeof window === "undefined") {
-        return "en";
+    if (typeof window === 'undefined') {
+        return 'en';
     }
 
-    const segments = window.location.pathname.split("/").filter(Boolean);
+    const segments = window.location.pathname.split('/').filter(Boolean);
     if (segments[0] && /^[a-z]{2}$/.test(segments[0])) {
         return segments[0];
     }
-    return "en";
+    return 'en';
 }
 
 /**
@@ -38,19 +38,19 @@ export function useCurrentLocale() {
 export function useCurrentPathWithoutLocale() {
     const locale = useCurrentLocale();
 
-    let path = "/";
-    if (typeof window !== "undefined") {
-        path = window.location.pathname || "/";
+    let path = '/';
+    if (typeof window !== 'undefined') {
+        path = window.location.pathname || '/';
     } else {
         try {
-            path = usePage()?.url || "/";
+            path = usePage()?.url || '/';
         } catch {
-            path = "/";
+            path = '/';
         }
     }
 
     if (path === `/${locale}` || path.startsWith(`/${locale}/`)) {
-        return path.slice(locale.length + 1) || "/";
+        return path.slice(locale.length + 1) || '/';
     }
-    return path || "/";
+    return path || '/';
 }

@@ -1,93 +1,93 @@
-@use "variables" as *;
+@use 'variables' as *;
 
 // ============================================
 // Локальные шрифты (см. public/fonts/{rubik,inter}/)
 // ============================================
 
 @font-face {
-    font-family: "Rubik";
+    font-family: 'Rubik';
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-300.woff2") format("woff2");
+    src: url('../fonts/rubik/rubik-v31-cyrillic_latin-300.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Rubik";
+    font-family: 'Rubik';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-regular.woff2") format("woff2");
+    src: url('../fonts/rubik/rubik-v31-cyrillic_latin-regular.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Rubik";
+    font-family: 'Rubik';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-500.woff2") format("woff2");
+    src: url('../fonts/rubik/rubik-v31-cyrillic_latin-500.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Rubik";
+    font-family: 'Rubik';
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-600.woff2") format("woff2");
+    src: url('../fonts/rubik/rubik-v31-cyrillic_latin-600.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Rubik";
+    font-family: 'Rubik';
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-700.woff2") format("woff2");
+    src: url('../fonts/rubik/rubik-v31-cyrillic_latin-700.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Rubik";
+    font-family: 'Rubik';
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: url("../fonts/rubik/rubik-v31-cyrillic_latin-800.woff2") format("woff2");
+    src: url('../fonts/rubik/rubik-v31-cyrillic_latin-800.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url("../fonts/inter/inter-v20-cyrillic_latin-300.woff2") format("woff2");
+    src: url('../fonts/inter/inter-v20-cyrillic_latin-300.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("../fonts/inter/inter-v20-cyrillic_latin-regular.woff2") format("woff2");
+    src: url('../fonts/inter/inter-v20-cyrillic_latin-regular.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("../fonts/inter/inter-v20-cyrillic_latin-500.woff2") format("woff2");
+    src: url('../fonts/inter/inter-v20-cyrillic_latin-500.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url("../fonts/inter/inter-v20-cyrillic_latin-600.woff2") format("woff2");
+    src: url('../fonts/inter/inter-v20-cyrillic_latin-600.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("../fonts/inter/inter-v20-cyrillic_latin-700.woff2") format("woff2");
+    src: url('../fonts/inter/inter-v20-cyrillic_latin-700.woff2') format('woff2');
 }
 @font-face {
-    font-family: "Inter";
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: url("../fonts/inter/inter-v20-cyrillic_latin-800.woff2") format("woff2");
+    src: url('../fonts/inter/inter-v20-cyrillic_latin-800.woff2') format('woff2');
 }
 
 // ============================================
@@ -261,7 +261,7 @@ body .n-base-close {
     text-align: center;
     padding: $spacing-2xl;
 }
-.elem-right{
+.elem-right {
     margin-left: auto;
     display: block;
 }
@@ -273,7 +273,9 @@ body .n-base-close {
 // Достаточно min 16px у самого input/textarea/select и у внутренних полей Naive UI (n-input задаёт 14px через тему).
 $ios-form-control-min-font: 16px;
 
-input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]):not([type="hidden"]),
+input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not(
+        [type='file']
+    ):not([type='image']):not([type='hidden']),
 textarea,
 select {
     font-size: max($ios-form-control-min-font, 1rem);
@@ -311,7 +313,7 @@ input.n-base-selection-input {
 .box-search-select {
     .n-form-item-label__text {
         &::after {
-            content: " (Input characters)";
+            content: ' (Input characters)';
             font-size: 0.75rem;
             color: $text-light-grey;
             font-weight: normal;
@@ -449,7 +451,6 @@ input.n-base-selection-input {
 }
 
 .n-modal {
-
     @media (max-width: 640px) {
         margin: 13px;
     }
@@ -461,7 +462,7 @@ input.n-base-selection-input {
     }
 }
 
-.point-dot-shadow{
+.point-dot-shadow {
     width: 8px;
     height: 8px;
     border-radius: $radius-full;

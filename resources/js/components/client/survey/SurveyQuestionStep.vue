@@ -33,9 +33,7 @@
             />
 
             <div
-                v-else-if="
-                    question.type === 'select' && question.country_iso_select
-                "
+                v-else-if="question.type === 'select' && question.country_iso_select"
                 class="survey-question-step__select-wrap"
             >
                 <SurveyCountryPicker
@@ -46,10 +44,7 @@
                 />
             </div>
 
-            <div
-                v-else-if="question.type === 'select'"
-                class="survey-question-step__select-wrap"
-            >
+            <div v-else-if="question.type === 'select'" class="survey-question-step__select-wrap">
                 <select
                     :id="selectId"
                     v-model="answers[stepId]"
@@ -58,12 +53,8 @@
                     :aria-describedby="selectAriaDescribedBy"
                     aria-required="true"
                 >
-                    <option disabled value="">{{ t("survey.ui.select_placeholder") }}</option>
-                    <option
-                        v-for="opt in question.options"
-                        :key="opt.value"
-                        :value="opt.value"
-                    >
+                    <option disabled value="">{{ t('survey.ui.select_placeholder') }}</option>
+                    <option v-for="opt in question.options" :key="opt.value" :value="opt.value">
                         {{ tr(opt.label) }}
                     </option>
                 </select>
@@ -80,10 +71,7 @@
                 @toggle="$emit('toggle-checkbox', $event)"
             />
 
-            <div
-                v-else-if="question.type === 'text'"
-                class="survey-question-step__text-wrap"
-            >
+            <div v-else-if="question.type === 'text'" class="survey-question-step__text-wrap">
                 <label class="survey-page__field" :for="openTextInputId">
                     <span
                         v-if="question.field_caption"
@@ -99,9 +87,7 @@
                         autocomplete="off"
                         :aria-label="tr(question.question_text)"
                         :aria-describedby="textFieldAriaDescribedBy"
-                        :aria-required="
-                            question.text_allow_empty ? undefined : 'true'
-                        "
+                        :aria-required="question.text_allow_empty ? undefined : 'true'"
                     />
                     <input
                         v-else
@@ -112,9 +98,7 @@
                         autocomplete="off"
                         :aria-label="tr(question.question_text)"
                         :aria-describedby="textFieldAriaDescribedBy"
-                        :aria-required="
-                            question.text_allow_empty ? undefined : 'true'
-                        "
+                        :aria-required="question.text_allow_empty ? undefined : 'true'"
                     />
                 </label>
             </div>
@@ -125,8 +109,7 @@
                 :for="otherTextareaId"
             >
                 <span class="survey-page__field-label">{{
-                    tr(question.other_detail_field_label) ||
-                    t("survey.ui.other_default_label")
+                    tr(question.other_detail_field_label) || t('survey.ui.other_default_label')
                 }}</span>
                 <textarea
                     :id="otherTextareaId"
@@ -135,9 +118,7 @@
                     rows="3"
                     autocomplete="off"
                     :aria-label="
-                        t('survey.ui.other_aria_prefix') +
-                        ' ' +
-                        tr(question.question_text)
+                        t('survey.ui.other_aria_prefix') + ' ' + tr(question.question_text)
                     "
                 />
             </label>
@@ -149,26 +130,24 @@
                 class="survey-question-step__next survey-primary-action"
                 :disabled="nextDisabled"
                 :aria-disabled="nextDisabled ? 'true' : 'false'"
-                :aria-label="
-                    nextDisabled ? t('survey.ui.next_disabled_aria') : undefined
-                "
+                :aria-label="nextDisabled ? t('survey.ui.next_disabled_aria') : undefined"
                 @click="$emit('next')"
             >
-                {{ t("survey.ui.next") }}
+                {{ t('survey.ui.next') }}
             </button>
         </footer>
     </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { createSurveyFieldTextTranslator } from "@/features/survey/surveyFieldText.js";
-import SurveyChoiceList from "./SurveyChoiceList.vue";
-import SurveyCountryPicker from "./SurveyCountryPicker.vue";
-import SurveyMultiChoice from "./SurveyMultiChoice.vue";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { createSurveyFieldTextTranslator } from '@/features/survey/surveyFieldText.js';
+import SurveyChoiceList from './SurveyChoiceList.vue';
+import SurveyCountryPicker from './SurveyCountryPicker.vue';
+import SurveyMultiChoice from './SurveyMultiChoice.vue';
 
-defineOptions({ name: "SurveyQuestionStep" });
+defineOptions({ name: 'SurveyQuestionStep' });
 
 const { t } = useI18n();
 const tr = createSurveyFieldTextTranslator(t);
@@ -212,15 +191,15 @@ const props = defineProps({
     /** id заголовка для переноса фокуса при смене шага. */
     stepHeadingId: {
         type: String,
-        default: "survey-step-heading",
+        default: 'survey-step-heading',
     },
 });
 
 defineEmits({
     /** Выбран вариант radio; родитель вызывает applyRadioAnswer. */
-    "pick-radio": (value) => typeof value === "string",
+    'pick-radio': (value) => typeof value === 'string',
     /** Переключён checkbox; родитель — toggleCheckboxOption. */
-    "toggle-checkbox": (value) => typeof value === "string",
+    'toggle-checkbox': (value) => typeof value === 'string',
     /** Переход на следующий шаг. */
     next: () => true,
 });
@@ -230,9 +209,7 @@ const checkboxSelected = computed(() => {
     return Array.isArray(arr) ? arr : [];
 });
 
-const questionSubtitleId = computed(
-    () => `survey-q-subtitle-${props.question.id}`,
-);
+const questionSubtitleId = computed(() => `survey-q-subtitle-${props.question.id}`);
 const fieldCaptionId = computed(() => `survey-field-caption-${props.question.id}`);
 const selectId = computed(() => `survey-select-${props.question.id}`);
 
@@ -241,7 +218,7 @@ const otherTextareaId = computed(() => `survey-other-${props.stepId}`);
 const openTextInputId = computed(() => `survey-open-text-${props.question.id}`);
 
 const textFieldAriaDescribedBy = computed(() => {
-    if (props.question.type !== "text" || !props.question.subtitle) {
+    if (props.question.type !== 'text' || !props.question.subtitle) {
         return undefined;
     }
     return questionSubtitleId.value;
@@ -255,12 +232,12 @@ const selectAriaDescribedBy = computed(() => {
     if (props.question.field_caption) {
         parts.push(fieldCaptionId.value);
     }
-    return parts.length ? parts.join(" ") : undefined;
+    return parts.length ? parts.join(' ') : undefined;
 });
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-question-step {
     display: flex;
@@ -324,8 +301,7 @@ const selectAriaDescribedBy = computed(() => {
                 min-height: 96px;
                 resize: vertical;
                 scroll-margin-bottom: calc(
-                    #{$spacing-2xl} + #{$spacing-md-lg} +
-                        env(safe-area-inset-bottom, 0px)
+                    #{$spacing-2xl} + #{$spacing-md-lg} + env(safe-area-inset-bottom, 0px)
                 );
             }
         }
@@ -337,8 +313,7 @@ const selectAriaDescribedBy = computed(() => {
                 min-height: 96px;
                 resize: vertical;
                 scroll-margin-bottom: calc(
-                    #{$spacing-2xl} + #{$spacing-md-lg} +
-                        env(safe-area-inset-bottom, 0px)
+                    #{$spacing-2xl} + #{$spacing-md-lg} + env(safe-area-inset-bottom, 0px)
                 );
             }
 

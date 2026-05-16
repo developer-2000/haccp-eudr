@@ -1,6 +1,6 @@
-import { task_grain_cooling } from "./config";
-import { finalizeGrainCoolingNotificationStorage } from "./grainCoolingSessionStorage";
-import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
+import { task_grain_cooling } from './config';
+import { finalizeGrainCoolingNotificationStorage } from './grainCoolingSessionStorage';
+import { useTaskGrainCoolingStore } from './taskGrainCoolingStore';
 
 const KEY = task_grain_cooling.sessionStorageKey;
 
@@ -13,7 +13,7 @@ const KEY = task_grain_cooling.sessionStorageKey;
  */
 export function isGrainCoolingScenarioStorageCompleted() {
     try {
-        if (typeof sessionStorage === "undefined") {
+        if (typeof sessionStorage === 'undefined') {
             return false;
         }
         const raw = sessionStorage.getItem(KEY);
@@ -21,7 +21,7 @@ export function isGrainCoolingScenarioStorageCompleted() {
             return false;
         }
         const data = JSON.parse(raw);
-        return data?.status === "completed";
+        return data?.status === 'completed';
     } catch {
         return false;
     }
@@ -37,7 +37,7 @@ export function isGrainCoolingScenarioStorageCompleted() {
  */
 export function markGrainCoolingScenarioStoredCompleted() {
     const cancel = task_grain_cooling.cancelGrainCoolingReminderTimers;
-    if (typeof cancel === "function") {
+    if (typeof cancel === 'function') {
         cancel();
         task_grain_cooling.cancelGrainCoolingReminderTimers = null;
     }
@@ -57,13 +57,13 @@ export function markGrainCoolingScenarioStoredCompleted() {
             notificationBannerActive: false,
             notificationCountdownCompleted: true,
             notificationLogicalCycleCompletedAt: completedAt,
-            status: "completed",
+            status: 'completed',
         });
     } catch {
         finalizeGrainCoolingNotificationStorage({
             notificationCountdownCompleted: true,
             notificationLogicalCycleCompletedAt: completedAt,
-            status: "completed",
+            status: 'completed',
         });
     }
 }

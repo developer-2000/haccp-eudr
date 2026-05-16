@@ -1,4 +1,4 @@
-import { createI18n } from "vue-i18n";
+import { createI18n } from 'vue-i18n';
 
 /**
  * Достаёт `{ locale, translations }` из Inertia `<script data-page>` ещё до
@@ -8,20 +8,20 @@ import { createI18n } from "vue-i18n";
  * файла) увидит пустой словарь и отрендерит сами i18n-ключи.
  */
 function readInertiaInitial() {
-    if (typeof document === "undefined") {
-        return { locale: "en", messages: {} };
+    if (typeof document === 'undefined') {
+        return { locale: 'en', messages: {} };
     }
     const el = document.querySelector('script[data-page="app"][type="application/json"]');
     if (!el?.textContent) {
-        return { locale: "en", messages: {} };
+        return { locale: 'en', messages: {} };
     }
     try {
         const page = JSON.parse(el.textContent);
-        const locale = page?.props?.locale || "en";
+        const locale = page?.props?.locale || 'en';
         const translations = page?.props?.translations || {};
         return { locale, messages: translations };
     } catch {
-        return { locale: "en", messages: {} };
+        return { locale: 'en', messages: {} };
     }
 }
 
@@ -34,7 +34,7 @@ const { locale, messages } = readInertiaInitial();
  * translations через shared-props. На рендере страницы словарь уже полный — warnings
  * просто шум в stdout `inertia:start-ssr`. На клиенте предупреждения остаются.
  */
-const isServer = typeof document === "undefined";
+const isServer = typeof document === 'undefined';
 
 export const i18n = createI18n({
     legacy: false,
@@ -45,7 +45,7 @@ export const i18n = createI18n({
      */
     globalInjection: true,
     locale,
-    fallbackLocale: "en",
+    fallbackLocale: 'en',
     messages,
     missingWarn: !isServer,
     fallbackWarn: !isServer,

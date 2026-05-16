@@ -28,23 +28,20 @@
             >
                 {{ tr(successCopy.updateViaEmailHint) }}
             </p>
-            <a
-                class="survey-page__success-home survey-primary-action"
-                :href="homeHref"
-            >
-                {{ t("survey.success.home_link") }}
+            <a class="survey-page__success-home survey-primary-action" :href="homeHref">
+                {{ t('survey.success.home_link') }}
             </a>
         </div>
     </div>
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
-import { createSurveyFieldTextTranslator } from "../../../../features/survey/surveyFieldText.js";
+import { useI18n } from 'vue-i18n';
+import { createSurveyFieldTextTranslator } from '../../../../features/survey/surveyFieldText.js';
 
-defineOptions({ name: "SurveySuccessScreen" });
+defineOptions({ name: 'SurveySuccessScreen' });
 
-const props = defineProps({
+defineProps({
     /** Объект копирайта: title, bodyParagraphs, reassurance, updateViaEmailHint. */
     successCopy: {
         type: Object,
@@ -62,7 +59,7 @@ const tr = createSurveyFieldTextTranslator(t);
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .survey-page__block {
     display: flex;

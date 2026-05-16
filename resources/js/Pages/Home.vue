@@ -27,15 +27,15 @@
 </template>
 
 <script setup>
-import SeoHead from "@/components/SeoHead.vue";
-import HeroSection from "@/components/client/home/HeroSection.vue";
-import MetricsSection from "@/components/client/home/MetricsSection.vue";
-import NichesSection from "@/components/client/home/NichesSection.vue";
-import SurveyCtaSection from "@/components/client/home/SurveyCtaSection.vue";
-import PublicLayout from "@/Layouts/PublicLayout.vue";
+import SeoHead from '@/components/SeoHead.vue';
+import HeroSection from '@/components/client/home/HeroSection.vue';
+import MetricsSection from '@/components/client/home/MetricsSection.vue';
+import NichesSection from '@/components/client/home/NichesSection.vue';
+import SurveyCtaSection from '@/components/client/home/SurveyCtaSection.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 
 defineOptions({
-    name: "Home",
+    name: 'Home',
     layout: PublicLayout,
 });
 
@@ -48,7 +48,7 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@use "../../scss/variables" as *;
+@use '../../scss/variables' as *;
 
 .section-container-home {
     padding: $font-size-4xl 0;

@@ -23,10 +23,7 @@
                     :aria-label="$t('header.nav.toggle_mobile_menu')"
                     @click="toggleMobileMenu"
                 >
-                    <Icon
-                        :name="isMobileMenuOpen ? 'close' : 'bars'"
-                        class="mobile-menu-icon"
-                    />
+                    <Icon :name="isMobileMenuOpen ? 'close' : 'bars'" class="mobile-menu-icon" />
                 </button>
                 <div
                     v-if="isMobile"
@@ -37,9 +34,7 @@
                 >
                     <div class="box-switch-lang-mobile-menu">
                         <div
-                            v-if="
-                                isLangSwitcherHidden && languagesList.length > 1
-                            "
+                            v-if="isLangSwitcherHidden && languagesList.length > 1"
                             class="mobile-menu__lang"
                             role="group"
                             :aria-label="$t('header.nav.language_group_aria')"
@@ -51,8 +46,7 @@
                                 :class="[
                                     'lang-switcher__btn',
                                     {
-                                        'lang-switcher__btn--active':
-                                            currentLocale === lang.code,
+                                        'lang-switcher__btn--active': currentLocale === lang.code,
                                     },
                                 ]"
                                 :aria-pressed="currentLocale === lang.code"
@@ -71,15 +65,8 @@
                         :key="`mobile-${item.label}-${item.link}`"
                         :item="item"
                         variant="mobile"
-                        :is-open="
-                            hasMobileDropdown(`${item.label}-${item.link}`)
-                        "
-                        :on-toggle="
-                            () =>
-                                toggleMobileDropdown(
-                                    `${item.label}-${item.link}`,
-                                )
-                        "
+                        :is-open="hasMobileDropdown(`${item.label}-${item.link}`)"
+                        :on-toggle="() => toggleMobileDropdown(`${item.label}-${item.link}`)"
                         :on-item-click="closeMobileMenu"
                     />
                 </div>
@@ -97,8 +84,7 @@
                             :class="[
                                 'lang-switcher__btn',
                                 {
-                                    'lang-switcher__btn--active':
-                                        currentLocale === lang.code,
+                                    'lang-switcher__btn--active': currentLocale === lang.code,
                                 },
                             ]"
                             :aria-pressed="currentLocale === lang.code"
@@ -112,11 +98,7 @@
                         type="button"
                         class="btn-client btn-primary nav-cta"
                         :class="{ 'nav-cta--icon-only': isCtaIconOnly }"
-                        :aria-label="
-                            isCtaIconOnly
-                                ? $t('header.cta.aria_icon_only')
-                                : undefined
-                        "
+                        :aria-label="isCtaIconOnly ? $t('header.cta.aria_icon_only') : undefined"
                         @click="goToSurvey"
                     >
                         <Icon
@@ -125,12 +107,10 @@
                             class="nav-cta-icon"
                         />
                         <template v-else>
-                            <span class="nav-cta-line">{{
-                                $t("header.cta.leave_request")
+                            <span class="nav-cta-line">{{ $t('header.cta.leave_request') }}</span>
+                            <span class="nav-cta-line nav-cta-line--accent">{{
+                                $t('header.cta.tell_about_business')
                             }}</span>
-                            <span
-                                class="nav-cta-line nav-cta-line--accent"
-                            >{{ $t("header.cta.tell_about_business") }}</span>
                         </template>
                     </button>
                 </div>
@@ -145,29 +125,22 @@
  * @typedef {import('./types/nav.types.js').NavConfig} NavConfig
  */
 defineOptions({
-    name: "Header",
+    name: 'Header',
 });
 
-import {
-    ref,
-    onMounted,
-    onBeforeUnmount,
-    computed,
-    watch,
-    shallowRef,
-} from "vue";
-import { Link, router as inertiaRouter, usePage } from "@inertiajs/vue3";
-import Icon from "../../Icon.vue";
+import { ref, onMounted, onBeforeUnmount, computed, watch, shallowRef } from 'vue';
+import { Link, router as inertiaRouter, usePage } from '@inertiajs/vue3';
+import Icon from '../../Icon.vue';
 /** @type {NavConfig} */
-import navConfig from "@/config/nav";
-import { useMobileMenu } from "./composables/useMobileMenu";
-import { useBreakpoint } from "./composables/useBreakpoint";
-import NavMenuItem from "./NavMenuItem.vue";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
-import axios from "axios";
+import navConfig from '@/config/nav';
+import { useMobileMenu } from './composables/useMobileMenu';
+import { useBreakpoint } from './composables/useBreakpoint';
+import NavMenuItem from './NavMenuItem.vue';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
+import axios from 'axios';
 
 const page = usePage();
-const siteConfig = computed(() => page.props.siteConfig || { name: "", adminEmail: "" });
+const siteConfig = computed(() => page.props.siteConfig || { name: '', adminEmail: '' });
 const languagesList = computed(() => page.props.switcherLocales || []);
 
 const {
@@ -200,22 +173,18 @@ async function setLocale(locale) {
     if (locale === currentLocale.value) return;
     const pathname = window.location.pathname;
     const allLocales = page.props.availableLocales || languagesList.value.map((l) => l.code);
-    const segments = pathname.split("/").filter(Boolean);
-    const rest = (
-        allLocales.includes(segments[0]) ? segments.slice(1) : segments
-    ).join("/");
-    const url = "/" + locale + (rest ? "/" + rest : "");
-    const csrf = document
-        .querySelector('meta[name="csrf-token"]')
-        ?.getAttribute("content");
+    const segments = pathname.split('/').filter(Boolean);
+    const rest = (allLocales.includes(segments[0]) ? segments.slice(1) : segments).join('/');
+    const url = '/' + locale + (rest ? '/' + rest : '');
+    const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
     try {
         await axios.post(
-            "/locale",
+            '/locale',
             { locale },
             {
                 headers: {
-                    Accept: "application/json",
-                    ...(csrf && { "X-CSRF-TOKEN": csrf }),
+                    Accept: 'application/json',
+                    ...(csrf && { 'X-CSRF-TOKEN': csrf }),
                 },
             },
         );
@@ -230,7 +199,7 @@ const goToSurvey = () => {
 };
 
 const defaultConfig = {
-    logo: { text: "", link: "/" },
+    logo: { text: '', link: '/' },
     menu: [],
     actions: { buttons: [] },
 };
@@ -249,11 +218,9 @@ const safeLogo = computed(() => {
     const logo = navConfigRef.value?.logo || defaultConfig.logo;
     const locale = currentLocale.value;
     const link =
-        logo.link === "/"
-            ? "/" + locale
-            : "/" +
-              locale +
-              (logo.link.startsWith("/") ? logo.link : "/" + logo.link);
+        logo.link === '/'
+            ? '/' + locale
+            : '/' + locale + (logo.link.startsWith('/') ? logo.link : '/' + logo.link);
     return { ...logo, link };
 });
 
@@ -266,17 +233,14 @@ const safeMenu = computed(() => {
     const locale = currentLocale.value;
     return (Array.isArray(menu) ? menu : []).map((item) => ({
         ...item,
-        link:
-            "/" +
-            locale +
-            (item.link.startsWith("/") ? item.link : "/" + item.link),
+        link: '/' + locale + (item.link.startsWith('/') ? item.link : '/' + item.link),
         activePathPrefix:
-            item.activePathPrefix != null && item.activePathPrefix !== ""
-                ? "/" +
+            item.activePathPrefix != null && item.activePathPrefix !== ''
+                ? '/' +
                   locale +
-                  (String(item.activePathPrefix).startsWith("/")
+                  (String(item.activePathPrefix).startsWith('/')
                       ? item.activePathPrefix
-                      : "/" + item.activePathPrefix)
+                      : '/' + item.activePathPrefix)
                 : null,
     }));
 });
@@ -288,22 +252,22 @@ onMounted(() => {
 // При открытом моб. меню — убираем скролл страницы и полосу прокрутки
 watch(isMobileMenuOpen, (open) => {
     if (open) {
-        document.documentElement.style.overflow = "hidden";
-        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
     } else {
-        document.documentElement.style.overflow = "";
-        document.body.style.overflow = "";
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
     }
 });
 
 onBeforeUnmount(() => {
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
 });
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 // Общий плейсхолдер для кнопок переключения языка (десктоп + мобилка)
 %lang-switcher-btn {
@@ -460,7 +424,7 @@ onBeforeUnmount(() => {
         height: 24px;
     }
 
-    &[aria-expanded="true"] .mobile-menu-icon {
+    &[aria-expanded='true'] .mobile-menu-icon {
         color: $text-red;
     }
 }

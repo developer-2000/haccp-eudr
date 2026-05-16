@@ -1,11 +1,6 @@
 <template>
     <template v-if="variant === 'desktop'">
-        <div
-            v-if="hasDropdown"
-            class="nav-dropdown"
-            role="button"
-            aria-haspopup="true"
-        >
+        <div v-if="hasDropdown" class="nav-dropdown" role="button" aria-haspopup="true">
             <Link
                 :href="itemLink"
                 class="nav-link"
@@ -17,17 +12,9 @@
                 "
             >
                 {{ $t(item.label) }}
-                <Icon
-                    name="chevron-down"
-                    class="nav-arrow"
-                    aria-hidden="true"
-                />
+                <Icon name="chevron-down" class="nav-arrow" aria-hidden="true" />
             </Link>
-            <DropdownMenu
-                v-if="itemDropdown"
-                :item="props.item"
-                variant="desktop"
-            />
+            <DropdownMenu v-if="itemDropdown" :item="props.item" variant="desktop" />
         </div>
         <Link
             v-else
@@ -56,11 +43,7 @@
                 @click="handleToggle"
             >
                 <span>{{ $t(item.label) }}</span>
-                <Icon
-                    name="chevron-down"
-                    class="mobile-menu-item-arrow"
-                    aria-hidden="true"
-                />
+                <Icon name="chevron-down" class="mobile-menu-item-arrow" aria-hidden="true" />
             </button>
             <div class="mobile-menu-item-content">
                 <DropdownMenu
@@ -89,18 +72,18 @@
  * @typedef {import('./types/nav.types.js').NavMenuItem} NavMenuItem
  */
 defineOptions({
-    name: "NavMenuItem",
+    name: 'NavMenuItem',
 });
-import { computed } from "vue";
-import { Link, usePage } from "@inertiajs/vue3";
-import Icon from "../../Icon.vue";
-import DropdownMenu from "./DropdownMenu.vue";
+import { computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import Icon from '../../Icon.vue';
+import DropdownMenu from './DropdownMenu.vue';
 
 const page = usePage();
 
 /** Реактивный путь без query/hash; обновляется на каждый Inertia-визит (Header — persistent layout, onMounted сработал бы один раз). */
 const currentPath = computed(() => {
-    const url = page.url || "/";
+    const url = page.url || '/';
     const qIdx = url.search(/[?#]/);
     return qIdx === -1 ? url : url.slice(0, qIdx);
 });
@@ -122,16 +105,16 @@ const props = defineProps({
         validator: (value) => {
             return (
                 value &&
-                typeof value === "object" &&
-                typeof value.label === "string" &&
-                typeof value.link === "string"
+                typeof value === 'object' &&
+                typeof value.label === 'string' &&
+                typeof value.link === 'string'
             );
         },
     },
     variant: {
         type: String,
-        default: "desktop",
-        validator: (value) => ["desktop", "mobile"].includes(value),
+        default: 'desktop',
+        validator: (value) => ['desktop', 'mobile'].includes(value),
     },
     isOpen: {
         type: Boolean,
@@ -148,7 +131,7 @@ const props = defineProps({
 });
 
 const hasDropdown = computed(() => Boolean(props.item?.hasDropdown));
-const itemLink = computed(() => props.item?.link || "#");
+const itemLink = computed(() => props.item?.link || '#');
 const itemDropdown = computed(() => props.item?.dropdown || null);
 
 /** Активная страница без хеша: только тогда подсвечиваем и делаем некликабельной (на /en не подсвечиваем якоря /en#...) */
@@ -159,10 +142,8 @@ const isExactPageLink = computed(() => {
         return path === prefix || path.startsWith(`${prefix}/`);
     }
     const link = itemLink.value;
-    const pathname = link.includes("#")
-        ? link.slice(0, link.indexOf("#"))
-        : link;
-    return path === pathname && !link.includes("#");
+    const pathname = link.includes('#') ? link.slice(0, link.indexOf('#')) : link;
+    return path === pathname && !link.includes('#');
 });
 
 const handleToggle = () => {
@@ -175,7 +156,7 @@ const handleItemClick = () => {
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 // Desktop стили
 .nav-dropdown {
@@ -183,7 +164,7 @@ const handleItemClick = () => {
 
     // Невидимый мост между кнопкой и dropdown для плавного перехода курсора
     &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 100%;
         left: 0;

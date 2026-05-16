@@ -1,12 +1,12 @@
-import { DEFAULT_TASK_ASSIGNEE_IDS } from "@/features/demo/data/demoPersonnel";
+import { DEFAULT_TASK_ASSIGNEE_IDS } from '@/features/demo/data/demoPersonnel';
 
 /**
  * Соответствие ниши демо чек-листа и площадки `sites` (для фильтра персонала по задаче).
  */
 export const NICHE_TO_SITE_ID = {
-    coffee: "site-coffee",
-    bakery: "site-bakery",
-    meat: "site-meat",
+    coffee: 'site-coffee',
+    bakery: 'site-bakery',
+    meat: 'site-meat',
 };
 
 /**
@@ -17,7 +17,7 @@ export const resolveAssigneeIdForNiche = (staff, niche, staffId) => {
     if (!Array.isArray(staff)) {
         return null;
     }
-    const sid = staffId == null ? "" : String(staffId).trim();
+    const sid = staffId == null ? '' : String(staffId).trim();
     if (!sid) {
         return null;
     }
@@ -25,9 +25,7 @@ export const resolveAssigneeIdForNiche = (staff, niche, staffId) => {
     if (!siteId) {
         return null;
     }
-    const m = staff.find(
-        (s) => s && s.id === sid && s.siteId === siteId && s.active !== false,
-    );
+    const m = staff.find((s) => s && s.id === sid && s.siteId === siteId && s.active !== false);
     return m ? m.id : null;
 };
 
@@ -39,11 +37,11 @@ export const resolveAssigneeIdForNiche = (staff, niche, staffId) => {
  * @returns {string}
  */
 export const formatStaffSurname = (fullName) => {
-    if (typeof fullName !== "string" || !fullName.trim()) {
-        return "";
+    if (typeof fullName !== 'string' || !fullName.trim()) {
+        return '';
     }
     const [first] = fullName.trim().split(/\s+/);
-    return first ?? "";
+    return first ?? '';
 };
 
 /**
@@ -55,13 +53,13 @@ export const formatStaffSurname = (fullName) => {
  */
 export const resolveStaffFullName = (staff, staffId) => {
     if (!staffId || !Array.isArray(staff)) {
-        return "—";
+        return '—';
     }
     const m = staff.find((s) => s && s.id === staffId);
-    if (typeof m?.fullName === "string" && m.fullName.trim()) {
+    if (typeof m?.fullName === 'string' && m.fullName.trim()) {
         return m.fullName.trim();
     }
-    return "—";
+    return '—';
 };
 
 /**
@@ -118,7 +116,7 @@ export const mergeSitesWithDefaults = (defaultSites, storedSites) => {
     /** @type {Map<string, DemoSite>} */
     const byId = new Map(defaultSites.map((s) => [s.id, { ...s }]));
     for (const raw of storedSites) {
-        if (!raw || typeof raw !== "object" || typeof raw.id !== "string") {
+        if (!raw || typeof raw !== 'object' || typeof raw.id !== 'string') {
             continue;
         }
         const cur = byId.get(raw.id);
@@ -152,7 +150,7 @@ export const mergeStaffWithDefaults = (defaultStaff, storedStaff) => {
     /** @type {Map<string, DemoStaffMember>} */
     const byId = new Map(defaultStaff.map((s) => [s.id, { ...s }]));
     for (const raw of storedStaff) {
-        if (!raw || typeof raw !== "object" || typeof raw.id !== "string") {
+        if (!raw || typeof raw !== 'object' || typeof raw.id !== 'string') {
             continue;
         }
         const cur = byId.get(raw.id);
@@ -188,15 +186,12 @@ export const mergeStaffWithDefaults = (defaultStaff, storedStaff) => {
  * @param {string} removedStaffId
  * @returns {Record<string, unknown[]>}
  */
-export const clearAssigneeInChecklists = (
-    checklistsByNiche,
-    removedStaffId,
-) => {
+export const clearAssigneeInChecklists = (checklistsByNiche, removedStaffId) => {
     return Object.fromEntries(
         Object.entries(checklistsByNiche).map(([niche, tasks]) => [
             niche,
             tasks.map((task) => {
-                if (!task || typeof task !== "object") {
+                if (!task || typeof task !== 'object') {
                     return task;
                 }
                 if (task.assignedStaffId === removedStaffId) {
@@ -213,18 +208,15 @@ export const sanitizeTaskAssignees = (
     staff,
     defaultByTaskId = DEFAULT_TASK_ASSIGNEE_IDS,
 ) => {
-    const valid = new Set(
-        staff.filter((m) => m && m.active !== false).map((m) => m.id),
-    );
+    const valid = new Set(staff.filter((m) => m && m.active !== false).map((m) => m.id));
     return Object.fromEntries(
         Object.entries(checklistsByNiche).map(([niche, tasks]) => [
             niche,
             tasks.map((task) => {
-                if (!task || typeof task !== "object") {
+                if (!task || typeof task !== 'object') {
                     return task;
                 }
-                let id =
-                    "assignedStaffId" in task ? task.assignedStaffId : null;
+                let id = 'assignedStaffId' in task ? task.assignedStaffId : null;
                 if (id != null && !valid.has(id)) {
                     id = null;
                 }

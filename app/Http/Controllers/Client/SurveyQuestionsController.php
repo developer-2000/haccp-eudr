@@ -16,7 +16,7 @@ class SurveyQuestionsController extends BaseController
     public function submitAnswersQuestions(SurveySubmitRequest $request, SurveyResponseService $surveyResponses): JsonResponse
     {
         $payload = $request->validated();
-        $startedAt = (int) $request->cookie('hp_started_at', 0);
+        $startedAt = (int) $request->cookie('hp_started_at', '0');
 
         // 1 Проверка скрытого поля и таймера для бота
         if ($this->isHoneypotTriggered($payload, $startedAt)) {

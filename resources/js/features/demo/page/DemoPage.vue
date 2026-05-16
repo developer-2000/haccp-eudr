@@ -52,10 +52,7 @@
             </div>
         </header>
 
-        <Link
-            :href="surveyPath"
-            class="btn-client btn-success demo-topbar-cta"
-        >
+        <Link :href="surveyPath" class="btn-client btn-success demo-topbar-cta">
             {{ t('demo.page.cta_survey') }}
         </Link>
 
@@ -67,21 +64,18 @@
                     :active-id="activeSectionId"
                     @select="setActiveSection"
                 />
-                <Link
-                    :href="surveyPath"
-                    class="btn-client btn-success demo-sidebar__cta"
-                >
+                <Link :href="surveyPath" class="btn-client btn-success demo-sidebar__cta">
                     {{ t('demo.page.cta_survey') }}
                 </Link>
             </aside>
 
             <main class="demo-main">
-                <section class="demo-section" :id="activeSectionConfig.id" >
+                <section :id="activeSectionConfig.id" class="demo-section">
                     <h1 class="demo-section__title">
                         {{ activeSectionConfig.title }}
                     </h1>
 
-                    <KeepAlive :max="sectionLinks.length" >
+                    <KeepAlive :max="sectionLinks.length">
                         <component
                             :is="activeSectionComponent"
                             :key="activeSectionId"
@@ -95,20 +89,20 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { Link, router as inertiaRouter } from "@inertiajs/vue3";
-import { useI18n } from "vue-i18n";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
-import DemoSectionNavigation from "@/features/demo/components/nav/DemoSectionNavigation.vue";
-import DashboardSection from "@/features/demo/components/sections/DashboardSection.vue";
-import ChecklistsSection from "@/features/demo/components/sections/ChecklistsSection.vue";
-import PersonnelSection from "@/features/demo/components/sections/PersonnelSection.vue";
-import EudrSection from "@/features/demo/components/sections/EudrSection.vue";
-import ReportsSection from "@/features/demo/components/sections/ReportsSection.vue";
-import { useDemoDashboardViewModel } from "@/features/demo/composables/useDemoDashboardViewModel";
-import { useDemoState } from "@/features/demo/composables/useDemoState";
+import { computed } from 'vue';
+import { Link, router as inertiaRouter } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
+import DemoSectionNavigation from '@/features/demo/components/nav/DemoSectionNavigation.vue';
+import DashboardSection from '@/features/demo/components/sections/DashboardSection.vue';
+import ChecklistsSection from '@/features/demo/components/sections/ChecklistsSection.vue';
+import PersonnelSection from '@/features/demo/components/sections/PersonnelSection.vue';
+import EudrSection from '@/features/demo/components/sections/EudrSection.vue';
+import ReportsSection from '@/features/demo/components/sections/ReportsSection.vue';
+import { useDemoDashboardViewModel } from '@/features/demo/composables/useDemoDashboardViewModel';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
 
-defineOptions({ name: "Demo" });
+defineOptions({ name: 'Demo' });
 
 const props = defineProps({
     section: {
@@ -120,13 +114,7 @@ const props = defineProps({
 const { t } = useI18n();
 
 /** Допустимые сегменты URL после `/demo/` — совпадают с `id` в sectionLinks. */
-const DEMO_SECTION_IDS = new Set([
-    "dashboard",
-    "checklists",
-    "personnel",
-    "eudr",
-    "reports",
-]);
+const DEMO_SECTION_IDS = new Set(['dashboard', 'checklists', 'personnel', 'eudr', 'reports']);
 
 const locale = computed(() => useCurrentLocale());
 
@@ -135,15 +123,15 @@ const { demoState } = useDemoState();
 const { dashboardPanelData } = useDemoDashboardViewModel(demoState);
 
 const activeSectionId = computed(() =>
-    DEMO_SECTION_IDS.has(props.section) ? props.section : "dashboard",
+    DEMO_SECTION_IDS.has(props.section) ? props.section : 'dashboard',
 );
 
 const sectionLinks = computed(() => [
-    { id: "dashboard", label: t('demo.page.section_dashboard'), svg: "laptop-mac-twotone" },
-    { id: "checklists", label: t('demo.page.section_checklists'), svg: "task-complete" },
-    { id: "personnel", label: t('demo.page.section_personnel'), svg: "people-community-24-filled" },
-    { id: "eudr", label: t('demo.page.section_eudr'), svg: "qr-code-twotone" },
-    { id: "reports", label: t('demo.page.section_reports'), svg: "report-search" },
+    { id: 'dashboard', label: t('demo.page.section_dashboard'), svg: 'laptop-mac-twotone' },
+    { id: 'checklists', label: t('demo.page.section_checklists'), svg: 'task-complete' },
+    { id: 'personnel', label: t('demo.page.section_personnel'), svg: 'people-community-24-filled' },
+    { id: 'eudr', label: t('demo.page.section_eudr'), svg: 'qr-code-twotone' },
+    { id: 'reports', label: t('demo.page.section_reports'), svg: 'report-search' },
 ]);
 
 const sectionComponentMap = {
@@ -155,23 +143,19 @@ const sectionComponentMap = {
 };
 
 const sectionConfigMap = computed(() => ({
-    dashboard: { id: "dashboard", title: t('demo.page.section_dashboard'), inlineTitle: false },
-    checklists: { id: "checklists", title: t('demo.page.section_checklists'), inlineTitle: false },
-    personnel: { id: "personnel", title: t('demo.page.section_personnel'), inlineTitle: false },
-    eudr: { id: "eudr", title: t('demo.page.section_eudr'), inlineTitle: false },
-    reports: { id: "reports", title: t('demo.page.section_reports'), inlineTitle: true },
+    dashboard: { id: 'dashboard', title: t('demo.page.section_dashboard'), inlineTitle: false },
+    checklists: { id: 'checklists', title: t('demo.page.section_checklists'), inlineTitle: false },
+    personnel: { id: 'personnel', title: t('demo.page.section_personnel'), inlineTitle: false },
+    eudr: { id: 'eudr', title: t('demo.page.section_eudr'), inlineTitle: false },
+    reports: { id: 'reports', title: t('demo.page.section_reports'), inlineTitle: true },
 }));
 
-const activeSectionComponent = computed(
-    () => sectionComponentMap[activeSectionId.value] ?? null,
-);
+const activeSectionComponent = computed(() => sectionComponentMap[activeSectionId.value] ?? null);
 
-const activeSectionConfig = computed(
-    () => sectionConfigMap.value[activeSectionId.value] ?? null,
-);
+const activeSectionConfig = computed(() => sectionConfigMap.value[activeSectionId.value] ?? null);
 
 const activeSectionProps = computed(() => {
-    if (activeSectionId.value === "dashboard") {
+    if (activeSectionId.value === 'dashboard') {
         return {
             metrics: dashboardPanelData.value.metrics,
             hotTasks: dashboardPanelData.value.hotTasks,
@@ -179,18 +163,18 @@ const activeSectionProps = computed(() => {
             staff: demoState.value.staff,
         };
     }
-    if (activeSectionId.value === "checklists") {
+    if (activeSectionId.value === 'checklists') {
         return {
             checklistsByNiche: demoState.value.checklistsByNiche,
             staff: demoState.value.staff,
         };
     }
-    if (activeSectionId.value === "eudr") {
+    if (activeSectionId.value === 'eudr') {
         return {
             batches: demoState.value.batches,
         };
     }
-    if (activeSectionId.value === "reports") {
+    if (activeSectionId.value === 'reports') {
         return {
             report: demoState.value.report,
             checklistsByNiche: demoState.value.checklistsByNiche,
@@ -218,24 +202,23 @@ const setActiveSection = (sectionId) => {
 const todayIso = computed(() => {
     const d = new Date();
     const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
     return `${y}-${m}-${day}`;
 });
 
 /** Дата в локализованном формате на основе текущей локали из URL. */
 const todayFormatted = computed(() => {
     return new Intl.DateTimeFormat(locale.value, {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
     }).format(new Date());
 });
-
 </script>
 
 <style lang="scss" scoped>
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .demo-page {
     position: relative;
@@ -290,7 +273,7 @@ const todayFormatted = computed(() => {
     }
 
     &::after {
-        content: "▾";
+        content: '▾';
         font-size: 20px;
         line-height: 1;
         opacity: 0.65;
@@ -359,6 +342,9 @@ const todayFormatted = computed(() => {
     margin-top: $spacing-md;
     width: 100%;
     justify-content: center;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
 }
 
 .demo-main {

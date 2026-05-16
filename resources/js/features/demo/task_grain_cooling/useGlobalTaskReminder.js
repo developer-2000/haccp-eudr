@@ -1,31 +1,28 @@
-import { defineAsyncComponent, h, onUnmounted, watch } from "vue";
-import { toast } from "vue3-toastify";
-import { useDemoState } from "@/features/demo/composables/useDemoState";
+import { defineAsyncComponent, h, onUnmounted, watch } from 'vue';
+import { toast } from 'vue3-toastify';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
 /**
  * Lazy: иначе naive-ui (зависимость GlobalTaskReminderToast) тянется в SSR-бандл и валит запуск
  * Node-процесса (`window` обращается css-render на этапе импорта). Reminder сам по себе срабатывает
  * только на клиенте через watch, так что отложенная загрузка ничего не ломает.
  */
-const GlobalTaskReminderToast = defineAsyncComponent(
-    () => import("./GlobalTaskReminderToast.vue"),
-);
+const GlobalTaskReminderToast = defineAsyncComponent(() => import('./GlobalTaskReminderToast.vue'));
 import {
     lockGrainCoolingMeasurementIndex,
     task_grain_cooling,
     unlockGrainCoolingMeasurementIndex,
-} from "./config";
+} from './config';
 /**
  * На демо цепочка запускается только из `grainCoolingDemoEntry.js` (`useGrainCoolingDemoEntry`); store здесь — напрямую, чтобы не плодить циклы импорта с обёрткой.
  * Перед входом в `useGlobalTaskReminder` уже выставлен `task_grain_cooling.scenarioProcessAllowed` из demoState и маршрута.
  */
-import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
+import { useTaskGrainCoolingStore } from './taskGrainCoolingStore';
 import {
     applyGrainCoolingProblemIfPending,
     getGrainCoolingFirstPendingMeasurementIndex,
     hasGrainCoolingPendingMeasurement,
     syncGrainCoolingPendingMeasurementTimeToUserLocal,
-} from "./applyGrainCoolingMeasurement";
-import { readGrainCoolingSessionStorage } from "./grainCoolingSessionStorage";
+} from './applyGrainCoolingMeasurement';
 
 /**
  * Один раз за сессию (пока не сработал sessionStorage): при наличии `pending` у целевой задачи —
@@ -51,10 +48,7 @@ export function useGlobalTaskReminder() {
             clearTimeout(problemTimerId);
             problemTimerId = null;
         }
-        if (
-            grainCoolingReminderToastId != null &&
-            toast.isActive(grainCoolingReminderToastId)
-        ) {
+        if (grainCoolingReminderToastId != null && toast.isActive(grainCoolingReminderToastId)) {
             toast.remove(grainCoolingReminderToastId);
         }
         grainCoolingReminderToastId = null;
@@ -108,19 +102,13 @@ export function useGlobalTaskReminder() {
                 unlockGrainCoolingMeasurementIndex();
                 return;
             }
-            const storageSnapshotBeforeToast = readGrainCoolingSessionStorage();
-            // console.log(
-            //     "Старая запись sessionStorage из прошлой сессии:",
-            //     storageSnapshotBeforeToast,
-            // );
             syncGrainCoolingPendingMeasurementTimeToUserLocal(demoState);
             grainStore.markNotificationLaunched();
             const problemDelayMs =
                 grainStore.notificationProblemWindowMs ??
                 task_grain_cooling.measurementProblemDelayMs;
             grainCoolingReminderToastId = toast(
-                ({ closeToast }) =>
-                    h(GlobalTaskReminderToast, { closeToast }),
+                ({ closeToast }) => h(GlobalTaskReminderToast, { closeToast }),
                 {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: false,
@@ -130,7 +118,7 @@ export function useGlobalTaskReminder() {
                     pauseOnHover: true,
                     draggable: false,
                     icon: false,
-                    theme: "dark",
+                    theme: 'dark',
                     toastClassName: task_grain_cooling.toastifyToastClassName,
                 },
             );

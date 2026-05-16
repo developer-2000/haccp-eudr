@@ -13,8 +13,7 @@
             role="radio"
             :aria-checked="selectedValue === opt.value"
             :class="{
-                'survey-choice-list__btn--selected':
-                    selectedValue === opt.value,
+                'survey-choice-list__btn--selected': selectedValue === opt.value,
             }"
             @click="$emit('pick', opt.value)"
         >
@@ -24,10 +23,10 @@
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
-import { createSurveyFieldTextTranslator } from "@/features/survey/surveyFieldText.js";
+import { useI18n } from 'vue-i18n';
+import { createSurveyFieldTextTranslator } from '@/features/survey/surveyFieldText.js';
 
-defineOptions({ name: "SurveyChoiceList" });
+defineOptions({ name: 'SurveyChoiceList' });
 
 const { t } = useI18n();
 const tr = createSurveyFieldTextTranslator(t);
@@ -52,12 +51,12 @@ defineProps({
 
 defineEmits({
     /** Выбор варианта одиночного ответа. */
-    pick: (value) => typeof value === "string",
+    pick: (value) => typeof value === 'string',
 });
 </script>
 
 <style scoped lang="scss">
-@use "../../../../scss/variables" as *;
+@use '../../../../scss/variables' as *;
 
 .survey-choice-list {
     .survey-choice-list__btn {

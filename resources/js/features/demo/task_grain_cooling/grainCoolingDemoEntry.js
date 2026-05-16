@@ -1,10 +1,10 @@
-import { onUnmounted, watch } from "vue";
-import { usePage } from "@inertiajs/vue3";
-import { useDemoState } from "@/features/demo/composables/useDemoState";
-import { syncGrainCoolingScenarioProcessAllowed } from "./applyGrainCoolingMeasurement";
-import { task_grain_cooling } from "./config";
-import { useTaskGrainCoolingStore } from "./taskGrainCoolingStore";
-import { useGlobalTaskReminder } from "./useGlobalTaskReminder";
+import { onUnmounted, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { useDemoState } from '@/features/demo/composables/useDemoState';
+import { syncGrainCoolingScenarioProcessAllowed } from './applyGrainCoolingMeasurement';
+import { task_grain_cooling } from './config';
+import { useTaskGrainCoolingStore } from './taskGrainCoolingStore';
+import { useGlobalTaskReminder } from './useGlobalTaskReminder';
 
 /** Флаг: `useGrainCoolingDemoEntry()` уже выполнен в текущей сессии SPA. */
 let demoGrainCoolingEntryActive = false;
@@ -29,11 +29,11 @@ export function useGrainCoolingDemoEntry() {
     const grainStore = useTaskGrainCoolingStore();
 
     function syncAndReact() {
-        const pathname = typeof window !== "undefined" ? window.location.pathname : page.url;
+        const pathname = typeof window !== 'undefined' ? window.location.pathname : page.url;
         syncGrainCoolingScenarioProcessAllowed(demoState, pathname);
         if (!task_grain_cooling.scenarioProcessAllowed) {
             grainStore.clearNotificationBanner();
-            if (typeof task_grain_cooling.cancelGrainCoolingReminderTimers === "function") {
+            if (typeof task_grain_cooling.cancelGrainCoolingReminderTimers === 'function') {
                 task_grain_cooling.cancelGrainCoolingReminderTimers();
             }
         }
@@ -41,11 +41,7 @@ export function useGrainCoolingDemoEntry() {
 
     syncAndReact();
 
-    watch(
-        () => [demoState.value, page.url],
-        syncAndReact,
-        { deep: true, immediate: false },
-    );
+    watch(() => [demoState.value, page.url], syncAndReact, { deep: true, immediate: false });
 
     useGlobalTaskReminder();
 
@@ -62,7 +58,7 @@ export function useGrainCoolingDemoEntry() {
 export function useGrainCoolingStore() {
     if (!demoGrainCoolingEntryActive) {
         throw new Error(
-            "[task_grain_cooling] useGrainCoolingStore: сначала useGrainCoolingDemoEntry() в PublicLayout.vue",
+            '[task_grain_cooling] useGrainCoolingStore: сначала useGrainCoolingDemoEntry() в PublicLayout.vue',
         );
     }
     if (!task_grain_cooling.scenarioProcessAllowed) {
@@ -101,7 +97,7 @@ export function registerGrainCoolingChecklistsDeepLinkWatcher(consumePendingDeep
                         void consumePendingDeepLink();
                     }
                 },
-                { flush: "post", immediate: true },
+                { flush: 'post', immediate: true },
             );
         },
         { immediate: true },

@@ -1392,83 +1392,83 @@
   ],
   "resources/js/Layouts/PublicLayout.vue": [],
   "resources/js/Pages/About.vue": [],
-  "resources/js/Pages/About.vue?vue&type=style&index=0&scoped=58da0643&lang.scss": [],
+  "resources/js/Pages/About.vue?vue&type=style&index=0&scoped=6ebbea98&lang.scss": [],
   "resources/js/Pages/BatchPublic.vue": [],
-  "resources/js/Pages/BatchPublic.vue?vue&type=style&index=0&scoped=fd02a8b6&lang.scss": [],
+  "resources/js/Pages/BatchPublic.vue?vue&type=style&index=0&scoped=2d92898d&lang.scss": [],
   "resources/js/Pages/Contact.vue": [],
-  "resources/js/Pages/Contact.vue?vue&type=style&index=0&scoped=0e8fa41c&lang.scss": [],
+  "resources/js/Pages/Contact.vue?vue&type=style&index=0&scoped=0a2f7b82&lang.scss": [],
   "resources/js/Pages/DailyReportPublic.vue": [],
-  "resources/js/Pages/DailyReportPublic.vue?vue&type=style&index=0&scoped=049cf019&lang.scss": [],
+  "resources/js/Pages/DailyReportPublic.vue?vue&type=style&index=0&scoped=58222b21&lang.scss": [],
   "resources/js/Pages/Demo.vue": [],
   "resources/js/Pages/Home.vue": [],
-  "resources/js/Pages/Home.vue?vue&type=style&index=0&scoped=d5bd1c45&lang.scss": [],
+  "resources/js/Pages/Home.vue?vue&type=style&index=0&scoped=17d8c4b0&lang.scss": [],
   "resources/js/Pages/HowWorks.vue": [],
-  "resources/js/Pages/HowWorks.vue?vue&type=style&index=0&scoped=828be139&lang.scss": [],
+  "resources/js/Pages/HowWorks.vue?vue&type=style&index=0&scoped=f221e4c3&lang.scss": [],
   "resources/js/Pages/PrivacyPolicy.vue": [],
-  "resources/js/Pages/PrivacyPolicy.vue?vue&type=style&index=0&scoped=6ea916b8&lang.scss": [],
+  "resources/js/Pages/PrivacyPolicy.vue?vue&type=style&index=0&scoped=d0d07cb5&lang.scss": [],
   "resources/js/Pages/Survey.vue": [],
-  "resources/js/Pages/Survey.vue?vue&type=style&index=0&scoped=e13ba245&lang.scss": [],
+  "resources/js/Pages/Survey.vue?vue&type=style&index=0&scoped=c4d7e4f8&lang.scss": [],
   "resources/js/components/ClientOnly.vue": [],
   "resources/js/components/Icon.vue": [],
   "resources/js/components/SeoHead.vue": [],
   "resources/js/components/client/consent/ConsentOverlay.vue": [
-    "/build/assets/ConsentOverlay-C2YbvSyu.js"
+    "/build/assets/ConsentOverlay-DG8aLeTM.js"
   ],
   "resources/js/components/client/consent/ConsentOverlay.vue?vue&type=style&index=0&lang.scss": [
-    "/build/assets/ConsentOverlay-C2YbvSyu.js"
+    "/build/assets/ConsentOverlay-DG8aLeTM.js"
   ],
   "resources/js/components/client/footer/Footer.vue": [],
-  "resources/js/components/client/footer/Footer.vue?vue&type=style&index=0&scoped=33e3cb7b&lang.scss": [],
+  "resources/js/components/client/footer/Footer.vue?vue&type=style&index=0&scoped=16885eea&lang.scss": [],
   "resources/js/components/client/header/DropdownMenu.vue": [],
-  "resources/js/components/client/header/DropdownMenu.vue?vue&type=style&index=0&scoped=06f250b6&lang.scss": [],
+  "resources/js/components/client/header/DropdownMenu.vue?vue&type=style&index=0&scoped=01759dc7&lang.scss": [],
   "resources/js/components/client/header/Header.vue": [],
-  "resources/js/components/client/header/Header.vue?vue&type=style&index=0&scoped=7318535f&lang.scss": [],
+  "resources/js/components/client/header/Header.vue?vue&type=style&index=0&scoped=d5b3b20c&lang.scss": [],
   "resources/js/components/client/header/NavMenuItem.vue": [],
-  "resources/js/components/client/header/NavMenuItem.vue?vue&type=style&index=0&scoped=f4d0ee2a&lang.scss": [],
+  "resources/js/components/client/header/NavMenuItem.vue?vue&type=style&index=0&scoped=e35a8f26&lang.scss": [],
   "resources/js/components/client/header/composables/useBreakpoint.js": [],
   "resources/js/components/client/header/composables/useMobileMenu.js": [],
   "resources/js/components/client/header/utils/dropdownHelpers.js": [],
   "resources/js/components/client/home/HeroSection.vue": [],
-  "resources/js/components/client/home/HeroSection.vue?vue&type=style&index=0&scoped=209d8e9d&lang.scss": [],
+  "resources/js/components/client/home/HeroSection.vue?vue&type=style&index=0&scoped=f9e36dd0&lang.scss": [],
   "resources/js/components/client/home/MetricsSection.vue": [],
-  "resources/js/components/client/home/MetricsSection.vue?vue&type=style&index=0&scoped=076c214d&lang.scss": [],
+  "resources/js/components/client/home/MetricsSection.vue?vue&type=style&index=0&scoped=52cdf282&lang.scss": [],
   "resources/js/components/client/home/NichesSection.vue": [],
-  "resources/js/components/client/home/NichesSection.vue?vue&type=style&index=0&scoped=72b0ae19&lang.scss": [],
+  "resources/js/components/client/home/NichesSection.vue?vue&type=style&index=0&scoped=fbfd243d&lang.scss": [],
   "resources/js/components/client/home/SurveyCtaSection.vue": [],
-  "resources/js/components/client/home/SurveyCtaSection.vue?vue&type=style&index=0&scoped=3b9f780b&lang.scss": [],
+  "resources/js/components/client/home/SurveyCtaSection.vue?vue&type=style&index=0&scoped=26fc5f9c&lang.scss": [],
   "resources/js/components/client/how-it-works/AdvantagesSection.vue": [],
-  "resources/js/components/client/how-it-works/AdvantagesSection.vue?vue&type=style&index=0&scoped=96a7cf29&lang.scss": [],
+  "resources/js/components/client/how-it-works/AdvantagesSection.vue?vue&type=style&index=0&scoped=5f48857f&lang.scss": [],
   "resources/js/components/client/how-it-works/StepsSection.vue": [],
-  "resources/js/components/client/how-it-works/StepsSection.vue?vue&type=style&index=0&scoped=4238c459&lang.scss": [],
+  "resources/js/components/client/how-it-works/StepsSection.vue?vue&type=style&index=0&scoped=ea9576d7&lang.scss": [],
   "resources/js/components/client/survey/SurveyChoiceList.vue": [],
-  "resources/js/components/client/survey/SurveyChoiceList.vue?vue&type=style&index=0&scoped=632520ce&lang.scss": [],
+  "resources/js/components/client/survey/SurveyChoiceList.vue?vue&type=style&index=0&scoped=c53daaa5&lang.scss": [],
   "resources/js/components/client/survey/SurveyCountryPicker.vue": [],
   "resources/js/components/client/survey/SurveyCountrySelect.vue": [],
-  "resources/js/components/client/survey/SurveyCountrySelect.vue?vue&type=style&index=0&scoped=a715e7e4&lang.scss": [],
+  "resources/js/components/client/survey/SurveyCountrySelect.vue?vue&type=style&index=0&scoped=79d94d6b&lang.scss": [],
   "resources/js/components/client/survey/SurveyDigitalCodeVerification.vue": [],
-  "resources/js/components/client/survey/SurveyDigitalCodeVerification.vue?vue&type=style&index=0&scoped=766728e1&lang.scss": [],
+  "resources/js/components/client/survey/SurveyDigitalCodeVerification.vue?vue&type=style&index=0&scoped=6a986e72&lang.scss": [],
   "resources/js/components/client/survey/SurveyLayout.vue": [],
-  "resources/js/components/client/survey/SurveyLayout.vue?vue&type=style&index=0&scoped=3167ecbd&lang.scss": [],
+  "resources/js/components/client/survey/SurveyLayout.vue?vue&type=style&index=0&scoped=c42bd8ce&lang.scss": [],
   "resources/js/components/client/survey/SurveyLeadForm.vue": [],
-  "resources/js/components/client/survey/SurveyLeadForm.vue?vue&type=style&index=0&scoped=a7756b97&lang.scss": [],
+  "resources/js/components/client/survey/SurveyLeadForm.vue?vue&type=style&index=0&scoped=3b2cbe2c&lang.scss": [],
   "resources/js/components/client/survey/SurveyMultiChoice.vue": [],
-  "resources/js/components/client/survey/SurveyMultiChoice.vue?vue&type=style&index=0&scoped=9db4f6c4&lang.scss": [],
+  "resources/js/components/client/survey/SurveyMultiChoice.vue?vue&type=style&index=0&scoped=68dc5720&lang.scss": [],
   "resources/js/components/client/survey/SurveyProgressBar.vue": [],
-  "resources/js/components/client/survey/SurveyProgressBar.vue?vue&type=style&index=0&scoped=a0446979&lang.scss": [],
+  "resources/js/components/client/survey/SurveyProgressBar.vue?vue&type=style&index=0&scoped=91913c79&lang.scss": [],
   "resources/js/components/client/survey/SurveyQuestionStep.vue": [],
-  "resources/js/components/client/survey/SurveyQuestionStep.vue?vue&type=style&index=0&scoped=8acfebc3&lang.scss": [],
+  "resources/js/components/client/survey/SurveyQuestionStep.vue?vue&type=style&index=0&scoped=6812c9d9&lang.scss": [],
   "resources/js/components/client/survey/SurveyStepTransition.vue": [],
-  "resources/js/components/client/survey/SurveyStepTransition.vue?vue&type=style&index=0&scoped=446b7dde&lang.scss": [],
+  "resources/js/components/client/survey/SurveyStepTransition.vue?vue&type=style&index=0&scoped=4255afc1&lang.scss": [],
   "resources/js/components/client/survey/SurveySubmittedState.vue": [],
-  "resources/js/components/client/survey/SurveySubmittedState.vue?vue&type=style&index=0&scoped=8f69a8b5&lang.scss": [],
+  "resources/js/components/client/survey/SurveySubmittedState.vue?vue&type=style&index=0&scoped=d93888cd&lang.scss": [],
   "resources/js/components/client/survey/screens/SurveyIntroScreen.vue": [],
-  "resources/js/components/client/survey/screens/SurveyIntroScreen.vue?vue&type=style&index=0&scoped=fab06fc9&lang.scss": [],
+  "resources/js/components/client/survey/screens/SurveyIntroScreen.vue?vue&type=style&index=0&scoped=63f91797&lang.scss": [],
   "resources/js/components/client/survey/screens/SurveyLeadScreen.vue": [],
-  "resources/js/components/client/survey/screens/SurveyLeadScreen.vue?vue&type=style&index=0&scoped=ebfae527&lang.scss": [],
+  "resources/js/components/client/survey/screens/SurveyLeadScreen.vue?vue&type=style&index=0&scoped=9fb3365c&lang.scss": [],
   "resources/js/components/client/survey/screens/SurveyMainFlow.vue": [],
-  "resources/js/components/client/survey/screens/SurveyMainFlow.vue?vue&type=style&index=0&scoped=86dae012&lang.scss": [],
+  "resources/js/components/client/survey/screens/SurveyMainFlow.vue?vue&type=style&index=0&scoped=febc752d&lang.scss": [],
   "resources/js/components/client/survey/screens/SurveySuccessScreen.vue": [],
-  "resources/js/components/client/survey/screens/SurveySuccessScreen.vue?vue&type=style&index=0&scoped=28045cf2&lang.scss": [],
+  "resources/js/components/client/survey/screens/SurveySuccessScreen.vue?vue&type=style&index=0&scoped=fced63e0&lang.scss": [],
   "resources/js/composables/useCurrentLocale.js": [],
   "resources/js/composables/useSessionGuard.js": [],
   "resources/js/config/nav.js": [],
@@ -1482,151 +1482,151 @@
   "resources/js/features/demo/ai/temperature/seedChecklistsTemperatureAi.js": [],
   "resources/js/features/demo/ai/temperature/taskTemperatureAiContext.js": [],
   "resources/js/features/demo/components/checklist/ChecklistTaskFieldsSection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/checklist/ChecklistTaskFieldsSection.vue?vue&type=style&index=0&scoped=7d34599d&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/checklist/ChecklistTaskFieldsSection.vue?vue&type=style&index=0&scoped=9f54bc37&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/EudrQrModal.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/EudrQrModal.vue?vue&type=style&index=0&scoped=29f303b3&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/EudrQrModal.vue?vue&type=style&index=0&scoped=31dccae0&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/create_edit_staff/CreateEditStaffModal.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/create_edit_staff/CreateEditStaffModal.vue?vue&type=style&index=0&scoped=e7e49f24&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/create_edit_staff/CreateEditStaffModal.vue?vue&type=style&index=0&scoped=3a009fd7&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/create_task_modal/CreateTaskModal.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/create_task_modal/CreateTaskModal.vue?vue&type=style&index=0&scoped=941f5eec&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/create_task_modal/CreateTaskModal.vue?vue&type=style&index=0&scoped=cbfe94b2&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/CompleteTaskModalHeader.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/show_task/CompleteTaskModalHeader.vue?vue&type=style&index=0&scoped=54d7f7d8&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/show_task/CompleteTaskModalHeader.vue?vue&type=style&index=0&scoped=96162d4b&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/PendingPhotoCaptureBlock.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/show_task/PendingPhotoCaptureBlock.vue?vue&type=style&index=0&scoped=fcd7dc0b&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/show_task/PendingPhotoCaptureBlock.vue?vue&type=style&index=0&scoped=89a321c8&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/ShowTaskModal.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/show_task/ShowTaskModal.vue?vue&type=style&index=0&scoped=dfc19919&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/show_task/ShowTaskModal.vue?vue&type=style&index=0&scoped=46d1e00f&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/TaskAssigneeSection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/show_task/TaskAssigneeSection.vue?vue&type=style&index=0&scoped=f25279a0&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/show_task/TaskAssigneeSection.vue?vue&type=style&index=0&scoped=4e0b8cdc&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/TaskFieldSummarySection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/show_task/TaskFieldSummarySection.vue?vue&type=style&index=0&scoped=61be1c73&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/show_task/TaskFieldSummarySection.vue?vue&type=style&index=0&scoped=81c8f39c&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/TaskMeasurementsTable.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/show_task/TaskMeasurementsTable.vue?vue&type=style&index=0&scoped=dfca90e7&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/show_task/TaskMeasurementsTable.vue?vue&type=style&index=0&scoped=bd852456&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/TaskTargetsLine.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/show_task/TaskTargetsLine.vue?vue&type=style&index=0&scoped=ec59e554&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/show_task/TaskTargetsLine.vue?vue&type=style&index=0&scoped=70de8bb2&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/show_task/utils.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionMetaBlock.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionMetaBlock.vue?vue&type=style&index=0&scoped=89e811a7&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionMetaBlock.vue?vue&type=style&index=0&scoped=2aa279cc&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionPanelModal.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionPanelModal.vue?vue&type=style&index=0&scoped=40d13446&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionPanelModal.vue?vue&type=style&index=0&scoped=0ff4c7cf&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionSingleChoicePanel.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionSingleChoicePanel.vue?vue&type=style&index=0&scoped=a5f720c2&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionSingleChoicePanel.vue?vue&type=style&index=0&scoped=795220d8&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTemperatureTimerPanel.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTemperatureTimerPanel.vue?vue&type=style&index=0&scoped=7d8ee883&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTemperatureTimerPanel.vue?vue&type=style&index=0&scoped=920f48d0&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTicketPanel.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTicketPanel.vue?vue&type=style&index=0&scoped=16af8ea9&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/modals/task_execution_panel/TaskExecutionTicketPanel.vue?vue&type=style&index=0&scoped=ab09e0f4&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/task_execution_panel/applyPendingMeasurementFromKeypadOk.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/modals/task_execution_panel/useTaskExecutionDrawerState.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/nav/DemoSectionNavigation.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/nav/DemoSectionNavigation.vue?vue&type=style&index=0&scoped=6cf63420&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/nav/DemoSectionNavigation.vue?vue&type=style&index=0&scoped=73938881&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/sections/ChecklistsSection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/sections/ChecklistsSection.vue?vue&type=style&index=0&scoped=bb0ad6b2&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/sections/ChecklistsSection.vue?vue&type=style&index=0&scoped=51d5a59a&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/sections/DashboardSection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/sections/DashboardSection.vue?vue&type=style&index=0&scoped=37c7b14c&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/sections/DashboardSection.vue?vue&type=style&index=0&scoped=158d5cd5&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/sections/EudrSection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/sections/EudrSection.vue?vue&type=style&index=0&scoped=becddf3b&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/sections/EudrSection.vue?vue&type=style&index=0&scoped=150ac51a&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/sections/PersonnelSection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/sections/PersonnelSection.vue?vue&type=style&index=0&scoped=41558d20&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/sections/PersonnelSection.vue?vue&type=style&index=0&scoped=c1028781&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/sections/ReportsSection.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/sections/ReportsSection.vue?vue&type=style&index=0&scoped=ea870366&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/sections/ReportsSection.vue?vue&type=style&index=0&scoped=9d7bf845&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/components/sections/TaskCard.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/components/sections/TaskCard.vue?vue&type=style&index=0&scoped=3c3e92fe&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/components/sections/TaskCard.vue?vue&type=style&index=0&scoped=df10fe32&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/composables/demoChecklistCustomTask.js": [],
   "resources/js/features/demo/composables/demoDefaultState.js": [],
@@ -1634,13 +1634,13 @@
   "resources/js/features/demo/composables/demoStateDateUtils.js": [],
   "resources/js/features/demo/composables/demoStatePersistence.js": [],
   "resources/js/features/demo/composables/useDemoDashboardViewModel.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/composables/useDemoState.js": [],
   "resources/js/features/demo/data/dailyReportPublic.js": [],
   "resources/js/features/demo/data/demoChecklistEquipment.js": [],
   "resources/js/features/demo/data/demoChecklistMaps.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/data/demoChecklistRooms.js": [],
   "resources/js/features/demo/data/demoChecklistTaskFields.js": [],
@@ -1650,43 +1650,43 @@
   "resources/js/features/demo/data/eudrBatchPublic.js": [],
   "resources/js/features/demo/domain/checklistTaskModel.js": [],
   "resources/js/features/demo/page/DemoPage.vue": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
-  "resources/js/features/demo/page/DemoPage.vue?vue&type=style&index=0&scoped=2c6b1c6b&lang.scss": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+  "resources/js/features/demo/page/DemoPage.vue?vue&type=style&index=0&scoped=61b836de&lang.scss": [
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/task_grain_cooling/GlobalTaskReminderToast.vue": [
-    "/build/assets/GlobalTaskReminderToast-BebLEOGt.js"
+    "/build/assets/GlobalTaskReminderToast-CAl4DcGv.js"
   ],
-  "resources/js/features/demo/task_grain_cooling/GlobalTaskReminderToast.vue?vue&type=style&index=0&scoped=7a12a6e9&lang.scss": [
-    "/build/assets/GlobalTaskReminderToast-BebLEOGt.js"
+  "resources/js/features/demo/task_grain_cooling/GlobalTaskReminderToast.vue?vue&type=style&index=0&scoped=81e6de9f&lang.scss": [
+    "/build/assets/GlobalTaskReminderToast-CAl4DcGv.js"
   ],
   "resources/js/features/demo/task_grain_cooling/GrainCoolingNotificationBanner.vue": [],
-  "resources/js/features/demo/task_grain_cooling/GrainCoolingNotificationBanner.vue?vue&type=style&index=0&scoped=1f8dc3e0&lang.scss": [],
+  "resources/js/features/demo/task_grain_cooling/GrainCoolingNotificationBanner.vue?vue&type=style&index=0&scoped=71fcb69f&lang.scss": [],
   "resources/js/features/demo/task_grain_cooling/applyGrainCoolingMeasurement.js": [],
   "resources/js/features/demo/task_grain_cooling/config.js": [],
   "resources/js/features/demo/task_grain_cooling/grainCoolingDemoEntry.js": [],
   "resources/js/features/demo/task_grain_cooling/grainCoolingIndexedAccess.js": [],
   "resources/js/features/demo/task_grain_cooling/grainCoolingMeasurementRow.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/task_grain_cooling/grainCoolingNavigateToDemoChecklists.js": [
-    "/build/assets/GlobalTaskReminderToast-BebLEOGt.js"
+    "/build/assets/GlobalTaskReminderToast-CAl4DcGv.js"
   ],
   "resources/js/features/demo/task_grain_cooling/grainCoolingPublicRoutes.js": [],
   "resources/js/features/demo/task_grain_cooling/grainCoolingSessionStorage.js": [],
   "resources/js/features/demo/task_grain_cooling/grainCoolingShowTaskModalPendingOpen.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/task_grain_cooling/grainCoolingStorageStatus.js": [],
   "resources/js/features/demo/task_grain_cooling/resolveGrainCoolingTaskFromDemoState.js": [],
   "resources/js/features/demo/task_grain_cooling/taskGrainCoolingStore.js": [],
   "resources/js/features/demo/task_grain_cooling/useGlobalTaskReminder.js": [],
   "resources/js/features/demo/task_grain_cooling/useGrainCoolingShowTaskModalBridge.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/task_grain_cooling/useGrainCoolingShowTaskModalViewTask.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ],
   "resources/js/features/demo/utils/demoStaff.js": [],
   "resources/js/features/survey/surveyCountryComboboxUtils.js": [],
@@ -1698,6 +1698,6 @@
   "resources/js/ssr.js": [],
   "resources/js/utils/apiAxios.js": [],
   "resources/js/utils/helpers.js": [
-    "/build/assets/DemoPage-qCAFukiH.js"
+    "/build/assets/DemoPage-Dtuh4qAE.js"
   ]
 }

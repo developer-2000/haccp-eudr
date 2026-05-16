@@ -5,9 +5,7 @@
                 <p class="metric-card__label metric-card__label--success">
                     {{ t('demo.dashboard.completed') }}
                 </p>
-                <p class="metric-card__value">
-                    {{ metrics.tasksDone }}/{{ metrics.tasksTotal }}
-                </p>
+                <p class="metric-card__value">{{ metrics.tasksDone }}/{{ metrics.tasksTotal }}</p>
             </article>
 
             <article class="metric-card metric-card--success">
@@ -51,10 +49,7 @@
             </div>
         </div>
 
-        <Link
-            class="dashboard-section__checklists-cta"
-            :href="checklistsDemoRoute"
-        >
+        <Link class="dashboard-section__checklists-cta" :href="checklistsDemoRoute">
             {{ t('demo.dashboard.checklists') }}
         </Link>
 
@@ -71,18 +66,18 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import { Link } from "@inertiajs/vue3";
-import { useI18n } from "vue-i18n";
-import { useCurrentLocale } from "@/composables/useCurrentLocale.js";
-import ShowTaskModal from "@/features/demo/components/modals/show_task/ShowTaskModal.vue";
-import TaskCard from "./TaskCard.vue";
+import { computed, ref } from 'vue';
+import { Link } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+import { useCurrentLocale } from '@/composables/useCurrentLocale.js';
+import ShowTaskModal from '@/features/demo/components/modals/show_task/ShowTaskModal.vue';
+import TaskCard from './TaskCard.vue';
 
 const { t } = useI18n();
 
 const checklistsDemoRoute = computed(() => `/${useCurrentLocale()}/demo/checklists`);
 
-defineOptions({ name: "DashboardSection" });
+defineOptions({ name: 'DashboardSection' });
 
 const props = defineProps({
     metrics: {
@@ -111,7 +106,7 @@ const selectedNiche = ref(null);
 const selectedTask = computed(() => {
     const id = selectedTaskId.value;
     const niche = selectedNiche.value;
-    if (id == null || niche == null || niche === "") {
+    if (id == null || niche == null || niche === '') {
         return null;
     }
     const list = props.checklistsByNiche?.[niche] ?? [];
@@ -137,11 +132,10 @@ const closeTaskModal = () => {
     selectedTaskId.value = null;
     selectedNiche.value = null;
 };
-
 </script>
 
 <style scoped lang="scss">
-@use "../../../../../scss/variables" as *;
+@use '../../../../../scss/variables' as *;
 
 .dashboard-section {
     display: flex;
@@ -203,7 +197,6 @@ const closeTaskModal = () => {
             border-color: rgba($accent-primary, 0.35);
             background-color: rgba($bg-light-grey, 0.5);
         }
-
     }
 
     .hot-tasks {
@@ -265,5 +258,4 @@ const closeTaskModal = () => {
         }
     }
 }
-
 </style>
